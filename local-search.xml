@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>奶块提帧</title>
+    <link href="/2025/03/12/%E5%A5%B6%E5%9D%97%E6%8F%90%E5%B8%A7/"/>
+    <url>/2025/03/12/%E5%A5%B6%E5%9D%97%E6%8F%90%E5%B8%A7/</url>
+    
+    <content type="html"><![CDATA[<h3 id="步骤一：设置奶块的图形首选项"><a href="#步骤一：设置奶块的图形首选项" class="headerlink" title="步骤一：设置奶块的图形首选项"></a>步骤一：设置奶块的图形首选项</h3><ol><li>打开 <strong>电脑设置</strong>，点击 <strong>系统</strong>，然后选择 <strong>显示</strong>。</li><li>在显示设置界面，向下滚动并选择 <strong>图形设置</strong>。</li><li>在 <strong>应用程序的自定义设置</strong> 中，点击 <strong>添加桌面应用</strong></li><li>添加 <strong>奶块</strong>，例如我的安装路径是：<code>E:\奶块\netcraft.exe</code>。</li><li>在奶块的 <strong>GPU 首选项</strong> 中，选择 <strong>高性能</strong>。</li></ol><hr><h3 id="步骤二：设置奶块的高帧率"><a href="#步骤二：设置奶块的高帧率" class="headerlink" title="步骤二：设置奶块的高帧率"></a>步骤二：设置奶块的高帧率</h3><ol><li>按 <strong>Win 键</strong>，搜索并打开 <strong>NVIDIA 控制面板</strong>。</li><li>在左侧栏中选择 <strong>管理 3D 设置</strong>。</li><li>在右侧的主内容框中，选择 <strong>程序设置</strong>。</li><li>同样的，找到并选择 <strong>奶块</strong>，例如我的安装路径是：<code>E:\奶块\netcraft.exe</code>。</li><li>设置 <strong>最大帧速率</strong>，例如我将其修改为 <strong>520 帧&#x2F;秒</strong>。</li><li>设置 <strong>虚拟现实预渲染帧数</strong>，选择 <strong>使用 3D 应用程序设置</strong>。</li><li>设置 <strong>首选刷新率</strong>，选择 <strong>最高可用</strong>。</li><li>最后点击 <strong>应用</strong> 保存设置。</li></ol><hr><h3 id="步骤三：重启奶块（或选择重启电脑）"><a href="#步骤三：重启奶块（或选择重启电脑）" class="headerlink" title="步骤三：重启奶块（或选择重启电脑）"></a>步骤三：重启奶块（或选择重启电脑）</h3><p>这样操作后，奶块的图形设置将得到优化，应该可以提升游戏的帧率表现。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>游戏</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>笔记：23种设计模式</title>
     <link href="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     <url>/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
