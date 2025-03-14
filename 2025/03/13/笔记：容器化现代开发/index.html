@@ -19,21 +19,27 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：秘钥管理">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%98%E9%92%A5%E7%AE%A1%E7%90%86/index.html">
+    <meta name="description" content="阿里云容器镜像服务自动化构建指南（结合GitHub仓库）1. 代码仓库结构要求1.1 Dockerfile 标准位置Dockerfile 必须位于代码仓库的根目录，或在 &#x2F;docker 目录下。例如： 123456your-repo&#x2F;├── src&#x2F;           # Java 源代码├── pom.xml        # Maven 配置├── Dockerfile     # 根目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：容器化现代开发">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="阿里云容器镜像服务自动化构建指南（结合GitHub仓库）1. 代码仓库结构要求1.1 Dockerfile 标准位置Dockerfile 必须位于代码仓库的根目录，或在 &#x2F;docker 目录下。例如： 123456your-repo&#x2F;├── src&#x2F;           # Java 源代码├── pom.xml        # Maven 配置├── Dockerfile     # 根目">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-12T12:45:42.972Z">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/image-20250313153333746.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/image-20250313160502385.png">
+<meta property="article:published_time" content="2025-03-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-13T08:05:04.405Z">
 <meta property="article:author" content="Ba Tian">
+<meta property="article:tag" content="文章标签">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/image-20250313153333746.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>笔记：秘钥管理 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：容器化现代开发 - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="笔记：秘钥管理"></span>
+            <span id="subtitle" data-typed-text="笔记：容器化现代开发"></span>
           
         </div>
 
@@ -221,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-12 00:00" pubdate>
-          March 12, 2025 am
+        <time datetime="2025-03-13 00:00" pubdate>
+          March 13, 2025 am
         </time>
       </span>
     
@@ -233,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          746 words
         
       </span>
     
@@ -244,7 +250,7 @@
         
         
         
-          1 mins
+          7 mins
         
       </span>
     
@@ -290,12 +296,75 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">笔记：秘钥管理</h1>
+            <h1 id="seo-header">笔记：容器化现代开发</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <p><img src="/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/image-20250313153333746.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/13/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%AE%B9%E5%99%A8%E5%8C%96%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/image-20250313160502385.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="阿里云容器镜像服务自动化构建指南（结合GitHub仓库）"><a href="#阿里云容器镜像服务自动化构建指南（结合GitHub仓库）" class="headerlink" title="阿里云容器镜像服务自动化构建指南（结合GitHub仓库）"></a>阿里云容器镜像服务自动化构建指南（结合GitHub仓库）</h2><h3 id="1-代码仓库结构要求"><a href="#1-代码仓库结构要求" class="headerlink" title="1. 代码仓库结构要求"></a>1. 代码仓库结构要求</h3><h4 id="1-1-Dockerfile-标准位置"><a href="#1-1-Dockerfile-标准位置" class="headerlink" title="1.1 Dockerfile 标准位置"></a>1.1 Dockerfile 标准位置</h4><p>Dockerfile 必须位于代码仓库的根目录，或在 <code>/docker</code> 目录下。例如：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nix">your-repo<span class="hljs-symbol">/</span><br>├── src<span class="hljs-symbol">/</span>           <span class="hljs-comment"># Java 源代码</span><br>├── pom.xml        <span class="hljs-comment"># Maven 配置</span><br>├── Dockerfile     <span class="hljs-comment"># 根目录（推荐）</span><br>└── docker<span class="hljs-symbol">/</span><br>    └── Dockerfile <span class="hljs-comment"># 可选目录</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="1-2-多阶段构建示例（Java-应用）"><a href="#1-2-多阶段构建示例（Java-应用）" class="headerlink" title="1.2 多阶段构建示例（Java 应用）"></a>1.2 多阶段构建示例（Java 应用）</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment"># 第一阶段：构建应用</span><br><span class="hljs-keyword">FROM</span> maven:<span class="hljs-number">3.8</span>.<span class="hljs-number">4</span>-jdk-<span class="hljs-number">17</span> AS build<br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> pom.xml .</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> mvn dependency:go-offline</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> src ./src</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> mvn package -DskipTests</span><br><br><span class="hljs-comment"># 第二阶段：生成最终镜像</span><br><span class="hljs-keyword">FROM</span> openjdk:<span class="hljs-number">17</span>-jdk-alpine<br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> --from=build /app/target/*.jar app.jar</span><br><span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;-jar&quot;</span>, <span class="hljs-string">&quot;app.jar&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-阿里云控制台配置步骤"><a href="#2-阿里云控制台配置步骤" class="headerlink" title="2. 阿里云控制台配置步骤"></a>2. 阿里云控制台配置步骤</h3><h4 id="2-1-创建镜像仓库"><a href="#2-1-创建镜像仓库" class="headerlink" title="2.1 创建镜像仓库"></a>2.1 创建镜像仓库</h4><ul>
+<li>进入阿里云容器镜像服务控制台 → 选择地域 → 新建仓库</li>
+<li>仓库类型：选择「镜像仓库」</li>
+<li>访问权限：根据需求选择私有或公开</li>
+</ul>
+<h4 id="2-2-绑定-GitHub-代码源"><a href="#2-2-绑定-GitHub-代码源" class="headerlink" title="2.2 绑定 GitHub 代码源"></a>2.2 绑定 GitHub 代码源</h4><ul>
+<li>在仓库详情页 → 选择「构建规则」→ 绑定代码源</li>
+<li>授权阿里云访问 GitHub 仓库（需生成 GitHub Personal Access Token）</li>
+<li>选择分支（如 <code>main</code>）</li>
+</ul>
+<h4 id="2-3-配置构建规则"><a href="#2-3-配置构建规则" class="headerlink" title="2.3 配置构建规则"></a>2.3 配置构建规则</h4><ul>
+<li><p><strong>Dockerfile 路径</strong>：根据实际位置填写（如 <code>Dockerfile</code> 或 <code>docker/Dockerfile</code>）</p>
+</li>
+<li><p><strong>构建上下文</strong>：代码仓库根目录（构建时会上传整个仓库到构建环境）</p>
+</li>
+<li><p><strong>镜像标签</strong>：支持动态标签（如 <code>$&#123;BRANCH&#125;</code> 自动对应分支名）</p>
+</li>
+<li><p><strong>构建参数（可选）</strong>：</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">build_args:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">JAVA_VERSION</span><br>    <span class="hljs-attr">value:</span> <span class="hljs-number">17</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="3-构建触发方式"><a href="#3-构建触发方式" class="headerlink" title="3. 构建触发方式"></a>3. 构建触发方式</h3><h4 id="3-1-手动触发"><a href="#3-1-手动触发" class="headerlink" title="3.1 手动触发"></a>3.1 手动触发</h4><p>在阿里云控制台 → 构建规则 → 立即构建</p>
+<h4 id="3-2-自动触发"><a href="#3-2-自动触发" class="headerlink" title="3.2 自动触发"></a>3.2 自动触发</h4><ul>
+<li><strong>Webhook</strong>：在 GitHub 仓库的 Settings → Webhooks 中添加阿里云提供的回调 URL</li>
+<li><strong>定期构建</strong>：配置 Cron 表达式（如每天凌晨 3 点构建）</li>
+</ul>
+<hr>
+<h3 id="4-常见问题与优化"><a href="#4-常见问题与优化" class="headerlink" title="4. 常见问题与优化"></a>4. 常见问题与优化</h3><h4 id="4-1-构建失败排查"><a href="#4-1-构建失败排查" class="headerlink" title="4.1 构建失败排查"></a>4.1 构建失败排查</h4><ul>
+<li>查看构建日志（控制台 → 构建历史 → 日志）</li>
+<li>检查 Dockerfile 语法（使用 <code>docker build</code> 本地验证）</li>
+<li>确认依赖是否存在（如 Maven&#x2F;Gradle 缓存问题）</li>
+</ul>
+<h4 id="4-2-优化构建速度"><a href="#4-2-优化构建速度" class="headerlink" title="4.2 优化构建速度"></a>4.2 优化构建速度</h4><ul>
+<li><p>使用多阶段构建减少镜像体积</p>
+</li>
+<li><p>利用构建缓存：</p>
+  <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> maven:<span class="hljs-number">3.8</span>.<span class="hljs-number">4</span>-jdk-<span class="hljs-number">17</span> AS build<br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> pom.xml .    <span class="hljs-comment"># 先复制 pom.xml，触发缓存</span></span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> mvn dependency:go-offline</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> src ./src    <span class="hljs-comment"># 后复制源代码，减少缓存失效</span></span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="4-3-安全增强"><a href="#4-3-安全增强" class="headerlink" title="4.3 安全增强"></a>4.3 安全增强</h4><ul>
+<li>启用镜像安全扫描（阿里云自动检测漏洞）</li>
+<li>限制代码源访问权限（仅允许可信分支触发构建）</li>
+</ul>
+<hr>
+<h3 id="5-验证构建结果"><a href="#5-验证构建结果" class="headerlink" title="5. 验证构建结果"></a>5. 验证构建结果</h3><p>构建成功后，可通过以下命令拉取镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker login --username=阿里云账号 registry.cn-hangzhou.aliyuncs.com<br>docker pull registry.cn-hangzhou.aliyuncs.com/your-namespace/your-repo:latest<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>通过绑定 GitHub 代码源和配置 Dockerfile 路径，阿里云容器镜像服务可以实现：</p>
+<ol>
+<li>代码提交自动触发镜像构建</li>
+<li>多阶段构建优化镜像体积</li>
+<li>集成安全扫描和 CI&#x2F;CD 流程</li>
+<li>与阿里云其他云服务（如 ACK&#x2F;Kubernetes）无缝对接</li>
+</ol>
+<p>根据项目复杂度，可选择在代码仓库根目录或专用目录管理 Dockerfile，并通过构建参数实现环境隔离（如开发&#x2F;测试&#x2F;生产环境使用不同配置）。</p>
+
                 
               </div>
             
@@ -313,7 +382,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/" class="category-chain-item">容器化</a>
   
   
 
@@ -325,6 +394,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%96%87%E7%AB%A0%E6%A0%87%E7%AD%BE/" class="print-no-link">#文章标签</a>
+      
+    </div>
+  
 </div>
 
 
@@ -333,8 +409,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>笔记：秘钥管理</div>
-      <div>https://wangjia5289.github.io/2025/03/12/笔记：秘钥管理/</div>
+      <div>笔记：容器化现代开发</div>
+      <div>https://wangjia5289.github.io/2025/03/13/笔记：容器化现代开发/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +422,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 12, 2025</div>
+          <div>March 13, 2025</div>
         </div>
       
       
@@ -378,18 +454,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%B8%B8%E8%A7%81%20Java%20%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/" title="笔记：Java 项目创建方式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Java 项目创建方式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="笔记：23种设计模式">
-                        <span class="hidden-mobile">笔记：23种设计模式</span>
+                      <a href="/2025/03/12/%E5%A5%B6%E5%9D%97%E6%8F%90%E5%B8%A7/" title="奶块提帧">
+                        <span class="hidden-mobile">奶块提帧</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
