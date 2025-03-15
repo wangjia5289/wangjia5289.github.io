@@ -27,8 +27,9 @@
 <meta property="og:description" content="一、理论0、导图：Map：Spring AI 1、Spring AI 概述Spring AI 是一个旨在简化 Java 开发者集成 AI 功能的框架，其提供统一的 API 接口，便于调用多种 AI 模型。它支持对话生成、文本生成、向量化处理、多模态交互等功能。  2、核心模型 API2.1、前言：了解 PromptPrompt 封装了一系列消息（Message），包括角色定义、用户指令和约束条件，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-14T02:43:26.042Z">
+<meta property="article:modified_time" content="2025-03-15T04:57:47.040Z">
 <meta property="article:author" content="Ba Tian">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -321,7 +322,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-2-2、StreamingChatModel"><a href="#2-2-2、StreamingChatModel" class="headerlink" title="2.2.2、StreamingChatModel"></a>2.2.2、StreamingChatModel</h5><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* StreamingChatModel 的 stream 方法：</span><br><span class="hljs-comment">* </span><br><span class="hljs-comment">* 1. stream(Prompt prompt)：该方法接受一个封装了消息序列的 Prompt 对象，并允许配置模型参数，适用于需要复杂对话管理的场景，例如多轮对话、角色扮演，或对AI模型行为的细致调控。</span><br><span class="hljs-comment">* 2. stream(String message)：最简化的调用方式，直接传入一条字符串作为用户的提问。内部会自动将该字符串转为包含单一用户消息的 Prompt 对象并发送给AI模型。适合基础的交互需求，例如简单的问答功能，且无需处理复杂的对话逻辑或个性化设置。</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-meta">@RestController  </span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/ai&quot;</span>)  <br><span class="hljs-keyword">public</span> <span class="hljs-title class_"><span class="hljs-keyword">class</span> <span class="hljs-title">StreamingChatModelTest</span> </span>&#123;  <br>    <span class="hljs-comment">// 1. 注入 StreamingChatModel    </span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> StreamingChatModel streamingChatModel;  <br>  <br>    <span class="hljs-keyword">public</span> StreamingChatModelTest(StreamingChatModel streamingChatModel) &#123;  <br>        <span class="hljs-built_in">this</span>.streamingChatModel = streamingChatModel;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/streamingChatModel&quot;</span>)  <br>    <span class="hljs-keyword">public</span> Flux&lt;<span class="hljs-keyword">String</span>&gt; chat(<span class="hljs-meta">@RequestParam String question) &#123;  </span><br>        <span class="hljs-comment">// 配置模型参数  </span><br>        ChatOptions chatOptions = ChatOptionsBuilder.builder()  <br>                .withModel(<span class="hljs-string">&quot;qwen-max-latest&quot;</span>)  <br>                .withTemperature(<span class="hljs-number">0.7</span>)  <br>                .build();  <br>  <br>        <span class="hljs-comment">// 定义消息序列  </span><br>        List&lt;Message&gt; messages = <span class="hljs-keyword">new</span><span class="hljs-type"></span> ArrayList&lt;Message&gt;();  <br>        messages.add(<span class="hljs-keyword">new</span><span class="hljs-type"></span> SystemMessage(<span class="hljs-string">&quot;你是一位资深Java架构师&quot;</span>)); <span class="hljs-comment">// 角色定义  </span><br>        messages.add(<span class="hljs-keyword">new</span><span class="hljs-type"></span> UserMessage(question)); <span class="hljs-comment">// 用户指令，例如：请设计一个高并发订单系统  </span><br>        messages.add(<span class="hljs-keyword">new</span><span class="hljs-type"></span> AssistantMessage(<span class="hljs-string">&quot;输出需包含架构图和核心代码&quot;</span>)); <span class="hljs-comment">// 约束条件  </span><br>  <br>        <span class="hljs-comment">// 2.将消息序列和模型参数封装为 prompt        Prompt prompt = new Prompt(messages,chatOptions);  </span><br>  <br>        <span class="hljs-comment">// 3. 调用 StreamingchatModel 的 stream 方法，并对返回结果进行处理  </span><br>        Flux&lt;ChatResponse&gt; stream = streamingChatModel.stream(prompt);  <br>        <span class="hljs-keyword">return</span> stream.map(chunk -&gt; chunk.getResult().getOutput().getContent());  <br>  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="2-2-2、StreamingChatModel"><a href="#2-2-2、StreamingChatModel" class="headerlink" title="2.2.2、StreamingChatModel"></a>2.2.2、StreamingChatModel</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* StreamingChatModel 的 stream 方法：</span><br><span class="hljs-comment">* </span><br><span class="hljs-comment">* 1. stream(Prompt prompt)：该方法接受一个封装了消息序列的 Prompt 对象，并允许配置模型参数，适用于需要复杂对话管理的场景，例如多轮对话、角色扮演，或对AI模型行为的细致调控。</span><br><span class="hljs-comment">* 2. stream(String message)：最简化的调用方式，直接传入一条字符串作为用户的提问。内部会自动将该字符串转为包含单一用户消息的 Prompt 对象并发送给AI模型。适合基础的交互需求，例如简单的问答功能，且无需处理复杂的对话逻辑或个性化设置。</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-meta">@RestController</span>  <br><span class="hljs-meta">@RequestMapping(&quot;/ai&quot;)</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StreamingChatModelTest</span> &#123;  <br>    <span class="hljs-comment">// 1. 注入 StreamingChatModel    </span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> StreamingChatModel streamingChatModel;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">StreamingChatModelTest</span><span class="hljs-params">(StreamingChatModel streamingChatModel)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.streamingChatModel = streamingChatModel;  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@GetMapping(&quot;/streamingChatModel&quot;)</span>  <br>    <span class="hljs-keyword">public</span> Flux&lt;String&gt; <span class="hljs-title function_">chat</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String question)</span> &#123;  <br>        <span class="hljs-comment">// 配置模型参数  </span><br>        <span class="hljs-type">ChatOptions</span> <span class="hljs-variable">chatOptions</span> <span class="hljs-operator">=</span> ChatOptionsBuilder.builder()  <br>                .withModel(<span class="hljs-string">&quot;qwen-max-latest&quot;</span>)  <br>                .withTemperature(<span class="hljs-number">0.7</span>)  <br>                .build();  <br>  <br>        <span class="hljs-comment">// 定义消息序列  </span><br>        List&lt;Message&gt; messages = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Message&gt;();  <br>        messages.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">SystemMessage</span>(<span class="hljs-string">&quot;你是一位资深Java架构师&quot;</span>)); <span class="hljs-comment">// 角色定义  </span><br>        messages.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">UserMessage</span>(question)); <span class="hljs-comment">// 用户指令，例如：请设计一个高并发订单系统  </span><br>        messages.add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">AssistantMessage</span>(<span class="hljs-string">&quot;输出需包含架构图和核心代码&quot;</span>)); <span class="hljs-comment">// 约束条件  </span><br>  <br>        <span class="hljs-comment">// 2.将消息序列和模型参数封装为 prompt       </span><br>		<span class="hljs-type">Prompt</span> <span class="hljs-variable">prompt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Prompt</span>(messages,chatOptions);  <br>  <br>        <span class="hljs-comment">// 3. 调用 StreamingchatModel 的 stream 方法，并对返回结果进行处理  </span><br>        Flux&lt;ChatResponse&gt; stream = streamingChatModel.stream(prompt);  <br>        <span class="hljs-keyword">return</span> stream.map(chunk -&gt; chunk.getResult().getOutput().getContent());  <br>  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -427,27 +428,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Spring/" class="category-chain-item">Spring</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
+        <a href="/tags/Spring/" class="print-no-link">#Spring</a>
+      
     </div>
-  
   
 </div>
 
@@ -502,9 +489,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/" title="笔记：Docker">
+                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AK8S/" title="笔记：K8S">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Docker</span>
+                        <span class="hidden-mobile">笔记：K8S</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -512,8 +499,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AK8S/" title="笔记：K8S">
-                        <span class="hidden-mobile">笔记：K8S</span>
+                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%B8%B8%E8%A7%81%20Java%20%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/" title="笔记：Java 项目创建方式">
+                        <span class="hidden-mobile">笔记：Java 项目创建方式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

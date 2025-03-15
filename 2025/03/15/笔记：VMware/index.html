@@ -19,24 +19,38 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="0、导图：Map：23种设计模式">
+    <meta name="description" content="1 网络设置1.1 Windows 启动 VMware NAT Service 服务  1.2 配置 VMware 软件的虚拟网络编译器1.&#x3D;&#x3D;点击 编辑 -&gt;-&gt;-&gt; 虚拟网络编译器&#x3D;&#x3D; &#x3D;&#x3D;2.记住此处子网IP&#x3D;&#x3D; &#x3D;&#x3D;3.记住 NAT 的网关 IP&#x3D;&#x3D;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：23种设计模式">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="笔记：VMware">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="0、导图：Map：23种设计模式">
+<meta property="og:description" content="1 网络设置1.1 Windows 启动 VMware NAT Service 服务  1.2 配置 VMware 软件的虚拟网络编译器1.&#x3D;&#x3D;点击 编辑 -&gt;-&gt;-&gt; 虚拟网络编译器&#x3D;&#x3D; &#x3D;&#x3D;2.记住此处子网IP&#x3D;&#x3D; &#x3D;&#x3D;3.记住 NAT 的网关 IP&#x3D;&#x3D;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-03-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-15T04:56:14.202Z">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102024363.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102523602.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102727828.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102806921.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102923234.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103044276.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103315818.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103335885.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103512620.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315104102514.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315104515867.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315121549400.png">
+<meta property="article:published_time" content="2025-03-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-15T04:58:28.536Z">
 <meta property="article:author" content="Ba Tian">
-<meta property="article:tag" content="Java基础">
+<meta property="article:tag" content="分布式">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102024363.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>笔记：23种设计模式 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：VMware - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="笔记：23种设计模式"></span>
+            <span id="subtitle" data-typed-text="笔记：VMware"></span>
           
         </div>
 
@@ -224,8 +238,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-03-11 00:00" pubdate>
-          March 11, 2025 am
+        <time datetime="2025-03-15 00:00" pubdate>
+          March 15, 2025 am
         </time>
       </span>
     
@@ -236,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          10 words
+          221 words
         
       </span>
     
@@ -247,7 +261,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -293,12 +307,44 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">笔记：23种设计模式</h1>
+            <h1 id="seo-header">笔记：VMware</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="0、导图：Map：23种设计模式"><a href="#0、导图：Map：23种设计模式" class="headerlink" title="0、导图：Map：23种设计模式"></a>0、导图：<a href="../../maps/Map%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.xmind">Map：23种设计模式</a></h3>
+                <h3 id="1-网络设置"><a href="#1-网络设置" class="headerlink" title="1 网络设置"></a>1 网络设置</h3><h4 id="1-1-Windows-启动-VMware-NAT-Service-服务"><a href="#1-1-Windows-启动-VMware-NAT-Service-服务" class="headerlink" title="1.1 Windows 启动 VMware NAT Service 服务"></a>1.1 Windows 启动 VMware NAT Service 服务</h4><p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102024363.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-2-配置-VMware-软件的虚拟网络编译器"><a href="#1-2-配置-VMware-软件的虚拟网络编译器" class="headerlink" title="1.2 配置 VMware 软件的虚拟网络编译器"></a>1.2 配置 VMware 软件的虚拟网络编译器</h4><p>1.&#x3D;&#x3D;点击 编辑 -&gt;-&gt;-&gt; 虚拟网络编译器&#x3D;&#x3D;<br><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.记住此处子网IP&#x3D;&#x3D;<br><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102523602.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;3.记住 NAT 的网关 IP&#x3D;&#x3D;<br><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102727828.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102806921.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;4.配置 NAT 模式&#x3D;&#x3D;<br><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102923234.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103044276.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-3-配置虚拟机的网络适配器"><a href="#1-3-配置虚拟机的网络适配器" class="headerlink" title="1.3 配置虚拟机的网络适配器"></a>1.3 配置虚拟机的网络适配器</h4><p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103315818.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103335885.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-4-Windows-配置-VMware-Network-Adapter-VMnet8"><a href="#1-4-Windows-配置-VMware-Network-Adapter-VMnet8" class="headerlink" title="1.4 Windows 配置 VMware Network Adapter VMnet8"></a>1.4 Windows 配置 VMware Network Adapter VMnet8</h4><p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315103512620.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315104102514.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-5-配置虚拟机的-Network"><a href="#1-5-配置虚拟机的-Network" class="headerlink" title="1.5 配置虚拟机的 Network"></a>1.5 配置虚拟机的 Network</h4><p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315104515867.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315121549400.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-6-安装并开启-SSH-服务"><a href="#1-6-安装并开启-SSH-服务" class="headerlink" title="1.6 安装并开启 SSH 服务"></a>1.6 安装并开启 SSH 服务</h4><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment"># 切换 root 用户</span><br>su root<br><br><br><span class="hljs-comment"># 安装和启动 SSH 服务</span><br>yum install -y openssh-server<br><span class="hljs-params">system</span>ctl start sshd<br><span class="hljs-params">system</span>ctl enable sshd<br><br><br><span class="hljs-comment"># 检查 SSH 服务是否正常运行</span><br><span class="hljs-params">system</span>ctl status sshd<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-7-配置虚拟机防火墙规则"><a href="#1-7-配置虚拟机防火墙规则" class="headerlink" title="1.7 配置虚拟机防火墙规则"></a>1.7 配置虚拟机防火墙规则</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 切换 root 用户</span><br>su root<br><br><br><span class="hljs-comment"># 启用 SSH 端口（默认端口为 22）</span><br>firewall-cmd <span class="hljs-params">--permanent</span> <span class="hljs-params">--add-service=ssh</span><br>firewall-cmd <span class="hljs-params">--reload</span><br></code></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果实在没有办法，可以选择关闭防火墙</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 停止 firwaller 服务</span><br><span class="hljs-built_in">sudo</span> systemctl stop firewalld<br><br><span class="hljs-comment"># 禁用 firewalld 服务（使防火墙在系统重启后不启动）</span><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> firewalld<br><br><span class="hljs-comment"># 检查防火墙状态</span><br><span class="hljs-built_in">sudo</span> systemctl status firewalld<br></code></pre></td></tr></table></figure>
+
+<hr>
+
                 
               </div>
             
@@ -310,7 +356,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Java%E5%9F%BA%E7%A1%80/" class="print-no-link">#Java基础</a>
+        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" class="print-no-link">#分布式</a>
       
     </div>
   
@@ -322,8 +368,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>笔记：23种设计模式</div>
-      <div>https://wangjia5289.github.io/2025/03/11/笔记：23种设计模式/</div>
+      <div>笔记：VMware</div>
+      <div>https://wangjia5289.github.io/2025/03/15/笔记：VMware/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +381,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 11, 2025</div>
+          <div>March 15, 2025</div>
         </div>
       
       
@@ -367,18 +413,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%98%E9%92%A5%E7%AE%A1%E7%90%86/" title="笔记：秘钥管理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：秘钥管理</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20AOP/" title="笔记：Spring AOP">
-                        <span class="hidden-mobile">笔记：Spring AOP</span>
+                      <a href="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/" title="笔记：Spring Cloud">
+                        <span class="hidden-mobile">笔记：Spring Cloud</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

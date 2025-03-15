@@ -31,13 +31,18 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313102408127.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313102336439.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313102619922.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314114830717.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314114816282.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314115025508.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314115830573.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313104542342.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313152548754.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313161532230.png">
 <meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-14T01:29:21.660Z">
+<meta property="article:modified_time" content="2025-03-15T04:57:17.802Z">
 <meta property="article:author" content="Ba Tian">
+<meta property="article:tag" content="分布式">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png">
   
@@ -245,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k words
+          6.4k words
         
       </span>
     
@@ -256,7 +261,7 @@
         
         
         
-          48 mins
+          54 mins
         
       </span>
     
@@ -440,7 +445,10 @@
 </li>
 </ol>
 <hr>
-<h5 id="5-3-2、通过-Docker-File-构建-Docker-镜像"><a href="#5-3-2、通过-Docker-File-构建-Docker-镜像" class="headerlink" title="5.3.2、通过 Docker File 构建 Docker 镜像"></a>5.3.2、通过 Docker File 构建 Docker 镜像</h5><h6 id="5-3-2-2、Docker-File-基础指令"><a href="#5-3-2-2、Docker-File-基础指令" class="headerlink" title="5.3.2.2、Docker File 基础指令"></a>5.3.2.2、Docker File 基础指令</h6><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment"># FROM：基于哪个镜像构建新镜像，一个阶段只能有一个 FROM（AS builder 表示此阶段命名为 builder，后续阶段可以使用 --from=builder 引用该阶段容器）</span><br><span class="hljs-keyword">FROM</span> ubuntu:<span class="hljs-number">20.04</span> AS builder<br><br><br><span class="hljs-comment"># LABEL：元数据，如作者、版本等信息。</span><br><span class="hljs-keyword">LABEL</span><span class="language-bash"> maintainer=<span class="hljs-string">&quot;yourname@example.com&quot;</span>                             <span class="hljs-comment"># 维护者</span></span><br><span class="hljs-keyword">LABEL</span><span class="language-bash"> version=<span class="hljs-string">&quot;1.0&quot;</span></span><br><br><br><span class="hljs-comment"># SHELL：指定当前阶段后续命令的 shell。默认使用轻量级的 /bin/sh -c，但在需要更强大功能（如复杂脚本、命令扩展、管道、数组操作等）时，可以切换为 /bin/bash -c</span><br><span class="hljs-keyword">SHELL</span><span class="language-bash"> [<span class="hljs-string">&quot;/bin/bash&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>] </span><br><br><br><span class="hljs-comment"># WORKDID：设置容器中的工作目录。后续的 RUN, Copy, CMD, ENTRYPOINT 等指令都会在这个目录下执行（若不存在此目录，将自动创建）</span><br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app </span><br><br><br><span class="hljs-comment"># RUN：执行 Shell 命令，通常用来在容器内安装软件包、配置文件、下载依赖等（容器里安装的软件和宿主机互不影响）</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y curl vim </span><br><br><br><span class="hljs-comment"># COPY：将宿主机中的文件或目录复制到镜像中的指定位置。</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> . /app                              <span class="hljs-comment"># 将 DocekerFile 所在目录的所有文件复制到镜像中的 /app 目录</span></span><br><br><br><span class="hljs-comment"># ADD：类似于 COPY，但是 ADD 除了可以复制文件，还能解压 tar 文件、下载网络资源（URL）。</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> myapp.tar.gz /app                    <span class="hljs-comment"># 将本地 tar 文件解压到镜像的 /app 目录</span></span><br><br><br><span class="hljs-comment"># VOLUME：创建挂载点，它会在容器运行时创建一个目录（通常是空目录），并且可以通过 Docker 挂载到主机上。</span><br><span class="hljs-keyword">VOLUME</span><span class="language-bash"> [<span class="hljs-string">&quot;/data&quot;</span>]                        <span class="hljs-comment"># 创建一个挂载点 /data</span></span><br><br><br><span class="hljs-comment"># ENTRYPOINT：指定容器启动后的执行命令，不可被覆盖，通常与 CMD 一起使用</span><br><span class="hljs-comment"># CMD：指定容器启动后的执行命令，可以在容器运行时被覆盖（CMD 可以有多个，但只会执行最后一个 CMD）</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;python3&quot;</span>] </span><br><span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;app.py&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+<h5 id="5-3-2、通过-Docker-File-构建-Docker-镜像"><a href="#5-3-2、通过-Docker-File-构建-Docker-镜像" class="headerlink" title="5.3.2、通过 Docker File 构建 Docker 镜像"></a>5.3.2、通过 Docker File 构建 Docker 镜像</h5><h6 id="5-3-2-1、Docker-File-概述"><a href="#5-3-2-1、Docker-File-概述" class="headerlink" title="5.3.2.1、Docker File 概述"></a>5.3.2.1、Docker File 概述</h6><p><code>Dockerfile</code> 是一个用于定义 Docker 容器镜像的文本文件，其中包含一组指令，指示 Docker 如何根据 <code>Dockerfile</code> 中的步骤构建一个 Docker 镜像</p>
+<p><code>Dockerfile</code> 就是一个普通的文本文件，保存在哪里都可以，只要在构建镜像时能访问到它就行</p>
+<hr>
+<h6 id="5-3-2-2、Docker-File-基础指令"><a href="#5-3-2-2、Docker-File-基础指令" class="headerlink" title="5.3.2.2、Docker File 基础指令"></a>5.3.2.2、Docker File 基础指令</h6><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment"># FROM：基于哪个镜像构建新镜像，一个阶段只能有一个 FROM（AS builder 表示此阶段命名为 builder，后续阶段可以使用 --from=builder 引用该阶段容器）</span><br><span class="hljs-keyword">FROM</span> ubuntu:<span class="hljs-number">20.04</span> AS builder<br><br><br><span class="hljs-comment"># LABEL：元数据，如作者、版本等信息。</span><br><span class="hljs-keyword">LABEL</span><span class="language-bash"> maintainer=<span class="hljs-string">&quot;yourname@example.com&quot;</span>                             <span class="hljs-comment"># 维护者</span></span><br><span class="hljs-keyword">LABEL</span><span class="language-bash"> version=<span class="hljs-string">&quot;1.0&quot;</span></span><br><br><br><span class="hljs-comment"># SHELL：指定当前阶段后续命令的 shell。默认使用轻量级的 /bin/sh -c，但在需要更强大功能（如复杂脚本、命令扩展、管道、数组操作等）时，可以切换为 /bin/bash -c</span><br><span class="hljs-keyword">SHELL</span><span class="language-bash"> [<span class="hljs-string">&quot;/bin/bash&quot;</span>, <span class="hljs-string">&quot;-c&quot;</span>] </span><br><br><br><span class="hljs-comment"># WORKDID：设置容器中的工作目录。后续的 RUN, Copy, CMD, ENTRYPOINT 等指令都会在这个目录下执行（若不存在此目录，将自动创建）</span><br><span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /app </span><br><br><br><span class="hljs-comment"># RUN：执行 Shell 命令，通常用来在容器内安装软件包、配置文件、下载依赖等（容器里安装的软件和宿主机互不影响）</span><br><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y curl vim </span><br><br><br><span class="hljs-comment"># COPY：将宿主机中的文件或目录复制到镜像中的指定位置。</span><br><span class="hljs-keyword">COPY</span><span class="language-bash"> . /app                              <span class="hljs-comment"># 将 DocekerFile 所在目录的所有文件复制到镜像中的 /app 目录</span></span><br><br><br><span class="hljs-comment"># ADD：类似于 COPY，但是 ADD 除了可以复制文件，还能解压 tar 文件、下载网络资源（URL）。</span><br><span class="hljs-keyword">ADD</span><span class="language-bash"> myapp.tar.gz /app                    <span class="hljs-comment"># 将本地 tar 文件解压到镜像的 /app 目录</span></span><br><br><br><span class="hljs-comment"># VOLUME：创建挂载点，它会在容器运行时创建一个目录（通常是空目录），并且可以通过 Docker 挂载到主机上。</span><br><span class="hljs-keyword">VOLUME</span><span class="language-bash"> [<span class="hljs-string">&quot;/data&quot;</span>]                        <span class="hljs-comment"># 创建一个挂载点 /data</span></span><br><br><br><span class="hljs-comment"># ENTRYPOINT：指定容器启动后的执行命令，不可被覆盖，通常与 CMD 一起使用</span><br><span class="hljs-comment"># CMD：指定容器启动后的执行命令，可以在容器运行时被覆盖（CMD 可以有多个，但只会执行最后一个 CMD）</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;python3&quot;</span>] </span><br><span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;app.py&quot;</span>]</span><br></code></pre></td></tr></table></figure>
 
 
 <blockquote>
@@ -476,9 +484,75 @@
 </ol>
 </blockquote>
 <hr>
+<h6 id="5-3-2-4、使用-Docker-File-构建镜像"><a href="#5-3-2-4、使用-Docker-File-构建镜像" class="headerlink" title="5.3.2.4、使用 Docker File 构建镜像"></a>5.3.2.4、使用 Docker File 构建镜像</h6><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 使用当前</span><br><span class="hljs-attribute">docker</span> build -t my-spring-app:<span class="hljs-number">1</span>.<span class="hljs-number">0</span> .<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314114830717.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314114816282.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314115025508.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="5-3-3、第三方自动构建-Docker-镜像"><a href="#5-3-3、第三方自动构建-Docker-镜像" class="headerlink" title="5.3.3、第三方自动构建 Docker 镜像"></a>5.3.3、第三方自动构建 Docker 镜像</h5><ol>
+<li>绑定 GitHub 代码源</li>
+</ol>
+<ul>
+<li><p><strong>登录控制台</strong><br>  进入阿里云容器镜像服务控制台，选择所需地域，在左侧导航栏中点击【实例列表】。</p>
+</li>
+<li><p><strong>选择实例并进入代码源设置</strong><br>  单击目标【个人版】或【企业版】实例，进入实例管理页面，然后在左侧菜单中选择【仓库管理】→【代码源】。</p>
+</li>
+<li><p><strong>绑定 GitHub</strong><br>  点击 GitHub 操作按钮，系统会跳转到 GitHub 登录页面。输入您的 GitHub 账号及密码，确认授权后返回控制台，此时页面会显示已成功绑定 GitHub 账号。</p>
+<blockquote>
+<p><strong>注意：</strong> 阿里云目前仅支持 GitHub 个人版。</p>
+</blockquote>
+</li>
+</ul>
+<ol start="2">
+<li>创建镜像仓库并配置代码源</li>
+</ol>
+<ul>
+<li><p><strong>创建镜像仓库</strong><br>  在【仓库管理】页面点击【创建镜像仓库】，填写命名空间、仓库名称和描述，并选择仓库类型（私有或公开）。</p>
+</li>
+<li><p><strong>配置代码源</strong><br>  在创建向导中，选择代码源为 GitHub，并从下拉列表中选择您要自动构建镜像的 GitHub 仓库。<br>  同时，建议开启“代码变更时自动构建镜像”的选项，这样每次代码提交后都会自动触发构建任务。</p>
+</li>
+</ul>
+<ol start="3">
+<li>设置构建规则</li>
+</ol>
+<ul>
+<li><p><strong>进入构建规则设置</strong><br>  在镜像仓库详情页面，点击右侧【管理】，再选择左侧导航栏的【构建】。</p>
+</li>
+<li><p><strong>添加构建规则</strong><br>  单击【添加规则】，在弹出的对话框中配置以下参数：</p>
+<ul>
+<li><strong>类型</strong>：选择触发类型（Branch 或 Tag）。</li>
+<li><strong>分支&#x2F;Tag</strong>：填写要触发构建的分支名称（例如 <code>main</code>）。</li>
+<li><strong>构建上下文目录</strong>：指定 Dockerfile 所在的目录（通常为项目根目录或特定子目录）。</li>
+<li><strong>Dockerfile 文件名</strong>：默认为 <code>Dockerfile</code>，如果您的文件名有变化，请自行填写。</li>
+<li><strong>镜像版本</strong>：填写构建后生成的镜像标签，例如 <code>latest</code> 或自定义版本号。</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>自动构建流程</li>
+</ol>
+<ul>
+<li><p><strong>自动触发构建</strong><br>  当您在 GitHub 仓库中提交代码时，系统会检测到代码变更，并根据配置的构建规则自动触发构建任务。</p>
+</li>
+<li><p><strong>查看构建日志</strong><br>  构建过程中，您可以在控制台的构建记录中查看日志，以确认构建是否成功。</p>
+</li>
+<li><p><strong>生成镜像</strong><br>  构建成功后，新的镜像版本会自动生成并存储在指定的镜像仓库中，您可以通过控制台查看所有镜像版本。</p>
+</li>
+</ul>
 <hr>
 <h3 id="6、Docker-Container（容器）"><a href="#6、Docker-Container（容器）" class="headerlink" title="6、Docker Container（容器）"></a>6、Docker Container（容器）</h3><h4 id="6-1、Docker-Container-概述"><a href="#6-1、Docker-Container-概述" class="headerlink" title="6.1、Docker Container 概述"></a>6.1、Docker Container 概述</h4><p>Docker Container 就是从镜像启动的“运行实例”，它是一个独立的小盒子，应用就在里面跑，可以理解为一个大 Linux 系统中的小 Linux 系统。容器可以随时启动、停止、销 毁，互不干扰。</p>
 <p><font color="#ff0000">Docker 官方推荐一个容器运行一个程序</font>，这样可以保持容器的简单性和高效性<br><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="5-3-3、第三方自动构建-Docker-镜像-1"><a href="#5-3-3、第三方自动构建-Docker-镜像-1" class="headerlink" title="5.3.3、第三方自动构建 Docker 镜像"></a>5.3.3、第三方自动构建 Docker 镜像</h6><p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250314115830573.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="6-2、Docker-Container-命令"><a href="#6-2、Docker-Container-命令" class="headerlink" title="6.2、Docker Container 命令"></a>6.2、Docker Container 命令</h4><h6 id="6-2-1、查看当前主机的容器"><a href="#6-2-1、查看当前主机的容器" class="headerlink" title="6.2.1、查看当前主机的容器"></a>6.2.1、查看当前主机的容器</h6><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 查看运行中的容器</span><br>docker ps<br><br><span class="hljs-comment"># 查看所有容器，包括已停止的容器</span><br>docker -<span class="hljs-keyword">a</span><br><br><span class="hljs-comment"># 查看所有容器，并只打印 IMAGE ID </span><br>docker -<span class="hljs-keyword">a</span> -q<br></code></pre></td></tr></table></figure>
 <p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313104542342.png" srcset="/img/loading.gif" lazyload></p>
@@ -542,6 +616,9 @@
 <h6 id="6-2-9、进入-退出容器"><a href="#6-2-9、进入-退出容器" class="headerlink" title="6.2.9、进入 &#x2F; 退出容器"></a>6.2.9、进入 &#x2F; 退出容器</h6><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 进入容器，并以 bash 命令行交互模式（最常用）</span><br>docker exec -it &lt;container-id or name&gt; <span class="hljs-regexp">/bin/</span>bash<br><br><span class="hljs-comment"># 退出容器</span><br><span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
 
 <hr>
+<h5 id="6-2-10、容器与宿主机之间的文件拷贝"><a href="#6-2-10、容器与宿主机之间的文件拷贝" class="headerlink" title="6.2.10、容器与宿主机之间的文件拷贝"></a>6.2.10、容器与宿主机之间的文件拷贝</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 宿主机文件拷贝到容器</span><br>docker cp <span class="hljs-regexp">/path/</span>on<span class="hljs-regexp">/host your-container-name:/</span>path<span class="hljs-regexp">/in/</span>container<br><br><span class="hljs-comment"># 容器文件拷贝到宿主机</span><br>docker cp your-container-name:<span class="hljs-regexp">/path/i</span>n<span class="hljs-regexp">/container /</span>path<span class="hljs-regexp">/on/</span>host<br></code></pre></td></tr></table></figure>
+
+<hr>
 <h4 id="3-5、Docker-Registry（仓库）"><a href="#3-5、Docker-Registry（仓库）" class="headerlink" title="3.5、Docker Registry（仓库）"></a>3.5、Docker Registry（仓库）</h4><h5 id="3-5-1、Docker-Registry-概述"><a href="#3-5-1、Docker-Registry-概述" class="headerlink" title="3.5.1、Docker Registry 概述"></a>3.5.1、Docker Registry 概述</h5><p>Docker Registry 是用于存储和分发 Docker 镜像的仓库，允许开发者可以方便地分享和下载容器镜像</p>
 <hr>
 <h5 id="3-5-2、DockerHub"><a href="#3-5-2、DockerHub" class="headerlink" title="3.5.2、DockerHub"></a>3.5.2、DockerHub</h5><p><a target="_blank" rel="noopener" href="https://hub.docker.com/">DockerHub</a> 是 Docker 官方出品的公共仓库，如果要像 DockerHub 上推送镜像，可以使用以下步骤：</p>
@@ -591,7 +668,7 @@
 <p>&#x3D;&#x3D;2.推送镜像到 阿里云镜像仓库&#x3D;&#x3D;</p>
 <p>点击已创建的镜像仓库中的<strong>管理</strong>，其中详细说明了如何将镜像推送到该仓库以及如何从该仓库下载镜像。<br><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313161532230.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1>
+
                 
               </div>
             
@@ -599,27 +676,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%AE%B9%E5%99%A8%E5%8C%96/" class="category-chain-item">容器化</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
+        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" class="print-no-link">#分布式</a>
+      
     </div>
-  
   
 </div>
 
@@ -684,8 +747,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20AI/" title="笔记：Spring AI">
-                        <span class="hidden-mobile">笔记：Spring AI</span>
+                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AK8S/" title="笔记：K8S">
+                        <span class="hidden-mobile">笔记：K8S</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
