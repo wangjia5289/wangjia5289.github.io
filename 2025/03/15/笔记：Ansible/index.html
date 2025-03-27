@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/huang1.jpg">
+  <link rel="icon" href="/img/huang1.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备 操作机和受控主机 网络配置（开启 SSH 服务） 操作机 镜像源配置（阿里云 YUM 源）   3. 配置 SSH 密钥对认证3.1.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Ansible">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备 操作机和受控主机 网络配置（开启 SSH 服务） 操作机 镜像源配置（阿里云 YUM 源）   3. 配置 SSH 密钥对认证3.1.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315163806382.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315174245349.png">
+<meta property="article:published_time" content="2025-03-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-15T12:20:22.470Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Ansible - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Ansible"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-03-15 00:00" pubdate>
+          March 15, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Ansible</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1-Ansible-概述"><a href="#1-Ansible-概述" class="headerlink" title="1. Ansible 概述"></a>1. Ansible 概述</h3><p>Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。</p>
+<hr>
+<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h3><ol>
+<li>操作机和受控主机 网络配置（开启 SSH 服务）</li>
+<li>操作机 镜像源配置（阿里云 YUM 源）</li>
+</ol>
+<hr>
+<h3 id="3-配置-SSH-密钥对认证"><a href="#3-配置-SSH-密钥对认证" class="headerlink" title="3. 配置 SSH 密钥对认证"></a>3. 配置 SSH 密钥对认证</h3><h4 id="3-1-SSH-密钥对认证概述"><a href="#3-1-SSH-密钥对认证概述" class="headerlink" title="3.1. SSH 密钥对认证概述"></a>3.1. SSH 密钥对认证概述</h4><p>在使用 Ansible 管理远程主机之前，推荐在控制节点上配置 SSH 密钥对认证，这样 Ansible 在自动化操作时就无需每次输入密码，确保了免密登录。</p>
+<hr>
+<h4 id="3-2-生成-SSH-密钥对"><a href="#3-2-生成-SSH-密钥对" class="headerlink" title="3.2. 生成 SSH 密钥对"></a>3.2. 生成 SSH 密钥对</h4><p>在控制机上执行以下命令生成 SSH 密钥对（如果尚未存在密钥对）。默认情况下，私钥和公钥分别保存在 <code>~/.ssh/id_rsa</code> 和 <code>~/.ssh/id_rsa.pub</code></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span>-keygen -t rsa -b <span class="hljs-number">4096</span> -C <span class="hljs-string">&quot;your_email@example.com&quot;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><code>ssh-keygen -t rsa -b 4096 -C &quot;wangjia5289@163.com&quot;</code>：<ol>
+<li>这个命令生成一个 RSA 类型的 SSH 密钥对，密钥长度为 4096 位，并为密钥加上注释 <code>&quot;wangjia5289@163.com&quot;</code>，通常用于标识密钥所属的用户</li>
+</ol>
+</li>
+<li><code>Enter file in which to save the key (/root/.ssh/id_rsa)</code>：<ol>
+<li>系统询问你希望将密钥保存到哪个文件路径。默认情况下，私钥将保存在 <code>/root/.ssh/id_rsa</code>，公钥保存在 <code>/root/.ssh/id_rsa.pub</code></li>
+<li>如果你直接按回车，密钥将保存在默认路径。如果你输入其他路径，则会将密钥保存到你指定的位置</li>
+</ol>
+</li>
+<li><code>Enter passphrase (empty for no passphrase)</code>：<ol>
+<li>系统询问你是否要为私钥设置密码短语（passphrase）</li>
+<li>如果设置了密码短语，每次使用密钥时都需要输入该密码，增加了安全性</li>
+<li>如果不想设置密码短语，可以直接按回车（即留空），表示没有密码</li>
+</ol>
+</li>
+<li><code>Enter same passphrase again</code>：<ol>
+<li>系统要求你再输入一次密码短语，以确保你输入正确</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="3-3-将公钥复制到受控主机"><a href="#3-3-将公钥复制到受控主机" class="headerlink" title="3.3. 将公钥复制到受控主机"></a>3.3. 将公钥复制到受控主机</h4><p>使用 <code>ssh-copy-id</code> 将公钥传送到受控主机（例如 IP 为 192.168.136.9）：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">ssh-<span class="hljs-keyword">copy</span><span class="language-bash">-<span class="hljs-built_in">id</span> -i ~/.ssh/id_rsa.pub root@192.168.136.9</span><br>ssh-<span class="hljs-keyword">copy</span><span class="language-bash">-<span class="hljs-built_in">id</span> -i ~/.ssh/id_rsa.pub root@192.168.136.10</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-4-测试-SSH-免密登录"><a href="#3-4-测试-SSH-免密登录" class="headerlink" title="3.4. 测试 SSH 免密登录"></a>3.4. 测试 SSH 免密登录</h4><p>测试控制机和受控主机之间是否能免密连接，若能直接登录则说明 SSH 密钥对认证配置成功。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">ssh root@<span class="hljs-number">192.168</span>.<span class="hljs-number">136.9</span><br><span class="hljs-keyword">exit</span><br><br>ssh root@<span class="hljs-number">192.168</span>.<span class="hljs-number">136.10</span><br><span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315163806382.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>ssh root@192.168.136.9</code> 是登录到该服务器，测试没问题要 <code>exit</code> 退出</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="4-安装-Ansible"><a href="#4-安装-Ansible" class="headerlink" title="4. 安装 Ansible"></a>4. 安装 Ansible</h3><p>在我们的控制机上安装 Ansible：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 Ansible</span><br><span class="hljs-comment"># 1.1 CentOS </span><br><span class="hljs-built_in">sudo</span> yum install epel-release -y<br><span class="hljs-built_in">sudo</span> yum install ansible -y<br><br><span class="hljs-comment"># 1.2 Ubuntu / Debian</span><br><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt install ansible -y<br><br><br><span class="hljs-comment"># 2. 验证安装</span><br>ansible --version<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-配置-Ansible-Inventory（主机清单）"><a href="#5-配置-Ansible-Inventory（主机清单）" class="headerlink" title="5. 配置 Ansible Inventory（主机清单）"></a>5. 配置 Ansible Inventory（主机清单）</h3><p>编辑控制机的 <code>/etc/ansible/hosts</code>（默认主机清单文件），把你的服务器信息加进去：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[servers]<br>server1 <span class="hljs-attribute">ansible_host</span>=192.168.136.9 <span class="hljs-attribute">ansible_user</span>=root<br>server2 <span class="hljs-attribute">ansible_host</span>=192.168.136.10 <span class="hljs-attribute">ansible_user</span>=root<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><code>server1</code>：<ol>
+<li>为主机指定别名，在执行 Ansible 任务时，可以使用 <code>server1</code> 代替 <code>192.168.1.101</code></li>
+<li>这样做的好处是提升可读性，如果 IP 发生变化，只需修改对应的 IP 地址即可</li>
+</ol>
+</li>
+<li><code>ansible_host=192.168.1.101</code>：<ol>
+<li>填写受控主机的 IP 地址</li>
+</ol>
+</li>
+<li><code>ansible_user=root</code>：<ol>
+<li>指定 SSH 的连接用户，这里是 <code>root</code> 用户</li>
+<li>如果受控主机不允许 <code>root</code> 直接 SSH 登录，你可能需要改成普通用户，比如 <code>ansible_user=admin</code></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>[servers]</code> 是组名，你可以用组来管理不同的服务器集群，例如：</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros">[webservers]<br>server1 <span class="hljs-attribute">ansible_host</span>=192.168.1.101 <span class="hljs-attribute">ansible_user</span>=root<br>server2 <span class="hljs-attribute">ansible_host</span>=192.168.1.102 <span class="hljs-attribute">ansible_user</span>=root<br><br>[dbservers]<br>server3 <span class="hljs-attribute">ansible_host</span>=192.168.1.201 <span class="hljs-attribute">ansible_user</span>=root<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="6-测试-SSH-连接"><a href="#6-测试-SSH-连接" class="headerlink" title="6. 测试 SSH 连接"></a>6. 测试 SSH 连接</h3><p>使用 Ansible 内置的 <code>ping</code> 模块测试所有主机的连通性：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">ansible <span class="hljs-attribute">all</span> -<span class="hljs-selector-tag">i</span> /etc/ansible/hosts -m ping -u root<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315174245349.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="7-远程执行命令"><a href="#7-远程执行命令" class="headerlink" title="7. 远程执行命令"></a>7. 远程执行命令</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">ansible serverName -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;各种 shell 命令&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这个命令仅在 <code>serverName</code> 组内的受控主机上执行，操作机自身不会执行。若希望操作机也参与执行，可使用 <code>&quot;localhost:serverName&quot;</code> 指定目标主机。</li>
+<li>如果有多个命令要执行，可以通过 &amp;&amp; 来连接：</li>
+</ol>
+</blockquote>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;shell命令1 &amp;&amp; shell命令2 &amp;&amp; shell命令3&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-使用-Ansible-为多服务器配置-YUM-源"><a href="#8-使用-Ansible-为多服务器配置-YUM-源" class="headerlink" title="8. 使用 Ansible 为多服务器配置 YUM 源"></a>8. 使用 Ansible 为多服务器配置 YUM 源</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 为 Centos7 受控主机配置阿里 YUM 源</span><br>ansible servers <span class="hljs-operator">-</span>m shell <span class="hljs-operator">-</span>a <span class="hljs-string">&quot;sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak&quot;</span><br><br><br><span class="hljs-comment"># 为 Centos7 受控主机创建新的 YUM 源并配置为阿里云的 YUM 镜像源</span><br>ansible servers <span class="hljs-operator">-</span>m shell <span class="hljs-operator">-</span>a <span class="hljs-string">&quot;echo -e &#x27;[base]<span class="hljs-char escape_">\n</span>name=CentOS-7 - Base - mirrors.aliyun.com<span class="hljs-char escape_">\n</span>baseurl=http://mirrors.aliyun.com/centos/7/os/x86_64/<span class="hljs-char escape_">\n</span>gpgcheck=1<span class="hljs-char escape_">\n</span>gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7<span class="hljs-char escape_">\n</span><span class="hljs-char escape_">\n</span>[updates]<span class="hljs-char escape_">\n</span>name=CentOS-7 - Updates - mirrors.aliyun.com<span class="hljs-char escape_">\n</span>baseurl=http://mirrors.aliyun.com/centos/7/updates/x86_64/<span class="hljs-char escape_">\n</span>gpgcheck=1<span class="hljs-char escape_">\n</span>gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7<span class="hljs-char escape_">\n</span><span class="hljs-char escape_">\n</span>[extras]<span class="hljs-char escape_">\n</span>name=CentOS-7 - Extras - mirrors.aliyun.com<span class="hljs-char escape_">\n</span>baseurl=http://mirrors.aliyun.com/centos/7/extras/x86_64/<span class="hljs-char escape_">\n</span>gpgcheck=1<span class="hljs-char escape_">\n</span>gpgkey=http://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7&#x27; | sudo tee /etc/yum.repos.d/CentOS-Base.repo&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="9-使用-Ansible-为多服务器安装-Docker"><a href="#9-使用-Ansible-为多服务器安装-Docker" class="headerlink" title="9. 使用 Ansible 为多服务器安装 Docker"></a>9. 使用 Ansible 为多服务器安装 Docker</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 为受控主机安装国内 Docker YUM 源</span><br>ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;sudo yum install -y yum-utils &amp;&amp; sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo&quot;</span><br><br><br><span class="hljs-comment"># 受控主机安装最新版本的 Docker</span><br>ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin&quot;</span><br><br><br><span class="hljs-comment"># 检查 Docker 的版本</span><br>ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;docker --version&quot;</span><br><br><br><span class="hljs-comment"># 启动 Docker 并设置开机自启</span><br>ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;systemctl enable --now docker&quot;</span><br><br><span class="hljs-comment"># 配置 Docker 加速器</span><br>ansible servers -m <span class="hljs-built_in">shell</span> -<span class="hljs-keyword">a</span> <span class="hljs-string">&quot;sudo mkdir -p /etc/docker &amp;&amp; echo &#x27;&#123;\&quot;registry-mirrors\&quot;: [\&quot;https://dh-mirror.gitverse.ru\&quot;]&#125;&#x27; | sudo tee /etc/docker/daemon.json &amp;&amp; sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker &amp;&amp; docker info&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Ansible</div>
+      <div>https://wangjia5289.github.io/2025/03/15/笔记：Ansible/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 15, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/03/18/%E7%AC%94%E8%AE%B0%EF%BC%9ABIND%20DNS/" title="笔记：BIND DNS">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：BIND DNS</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9ALinux/" title="笔记：Linux">
+                        <span class="hidden-mobile">笔记：Linux</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
