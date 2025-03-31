@@ -19,18 +19,18 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备 操作机和受控主机 网络配置（开启 SSH 服务） 操作机 镜像源配置（阿里云 YUM 源）   3. 配置 SSH 密钥对认证3.1.">
+    <meta name="description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置：  3. 配置 SSH 密钥对认证3.1. SSH 密钥对认证概述在使用 Ansible">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Ansible">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备 操作机和受控主机 网络配置（开启 SSH 服务） 操作机 镜像源配置（阿里云 YUM 源）   3. 配置 SSH 密钥对认证3.1.">
+<meta property="og:description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置：  3. 配置 SSH 密钥对认证3.1. SSH 密钥对认证概述在使用 Ansible">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315163806382.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315174245349.png">
 <meta property="article:published_time" content="2025-03-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-15T12:20:22.470Z">
+<meta property="article:modified_time" content="2025-03-31T15:12:44.983Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
@@ -250,7 +250,7 @@
         
         
         
-          12 mins
+          11 mins
         
       </span>
     
@@ -303,10 +303,7 @@
                 
                 <h3 id="1-Ansible-概述"><a href="#1-Ansible-概述" class="headerlink" title="1. Ansible 概述"></a>1. Ansible 概述</h3><p>Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。</p>
 <hr>
-<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h3><ol>
-<li>操作机和受控主机 网络配置（开启 SSH 服务）</li>
-<li>操作机 镜像源配置（阿里云 YUM 源）</li>
-</ol>
+<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h3><p>完成 Ubuntu 操作系统的安装和基本配置：</p>
 <hr>
 <h3 id="3-配置-SSH-密钥对认证"><a href="#3-配置-SSH-密钥对认证" class="headerlink" title="3. 配置 SSH 密钥对认证"></a>3. 配置 SSH 密钥对认证</h3><h4 id="3-1-SSH-密钥对认证概述"><a href="#3-1-SSH-密钥对认证概述" class="headerlink" title="3.1. SSH 密钥对认证概述"></a>3.1. SSH 密钥对认证概述</h4><p>在使用 Ansible 管理远程主机之前，推荐在控制节点上配置 SSH 密钥对认证，这样 Ansible 在自动化操作时就无需每次输入密码，确保了免密登录。</p>
 <hr>
@@ -421,8 +418,15 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">虚拟化、容器化与自动化</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%AE%B9%E5%99%A8%E5%8C%96/" class="category-chain-item">容器化</a>
+  
+  
+
   
 
       </span>
