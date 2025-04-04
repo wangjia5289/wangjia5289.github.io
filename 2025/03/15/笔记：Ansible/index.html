@@ -19,18 +19,18 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置：  3. 配置 SSH 密钥对认证3.1. SSH 密钥对认证概述在使用 Ansible">
+    <meta name="description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置见：Ubuntu 操作系统的安装和基本配置  3. 配置 SSH 密钥对认证3.1. SSH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Ansible">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置：  3. 配置 SSH 密钥对认证3.1. SSH 密钥对认证概述在使用 Ansible">
+<meta property="og:description" content="1. Ansible 概述Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。  2. 环境准备完成 Ubuntu 操作系统的安装和基本配置见：Ubuntu 操作系统的安装和基本配置  3. 配置 SSH 密钥对认证3.1. SSH">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315163806382.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315174245349.png">
 <meta property="article:published_time" content="2025-03-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-31T15:12:44.983Z">
+<meta property="article:modified_time" content="2025-03-31T15:18:27.848Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png">
@@ -250,7 +250,7 @@
         
         
         
-          11 mins
+          12 mins
         
       </span>
     
@@ -303,12 +303,12 @@
                 
                 <h3 id="1-Ansible-概述"><a href="#1-Ansible-概述" class="headerlink" title="1. Ansible 概述"></a>1. Ansible 概述</h3><p>Ansible 是一款强大的自动化运维工具，提供配置管理、应用部署和任务执行等多种功能。通过 Ansible，我们可以高效地管理和部署多个主机，实现例如一键配置 YUM 源、自动安装服务、快速部署 Docker 等操作。</p>
 <hr>
-<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h3><p>完成 Ubuntu 操作系统的安装和基本配置：</p>
+<h3 id="2-环境准备"><a href="#2-环境准备" class="headerlink" title="2. 环境准备"></a>2. 环境准备</h3><p>完成 Ubuntu 操作系统的安装和基本配置见：<a target="_blank" rel="noopener" href="https://blog.wangjia.xin/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9ALinux/">Ubuntu 操作系统的安装和基本配置</a></p>
 <hr>
 <h3 id="3-配置-SSH-密钥对认证"><a href="#3-配置-SSH-密钥对认证" class="headerlink" title="3. 配置 SSH 密钥对认证"></a>3. 配置 SSH 密钥对认证</h3><h4 id="3-1-SSH-密钥对认证概述"><a href="#3-1-SSH-密钥对认证概述" class="headerlink" title="3.1. SSH 密钥对认证概述"></a>3.1. SSH 密钥对认证概述</h4><p>在使用 Ansible 管理远程主机之前，推荐在控制节点上配置 SSH 密钥对认证，这样 Ansible 在自动化操作时就无需每次输入密码，确保了免密登录。</p>
 <hr>
 <h4 id="3-2-生成-SSH-密钥对"><a href="#3-2-生成-SSH-密钥对" class="headerlink" title="3.2. 生成 SSH 密钥对"></a>3.2. 生成 SSH 密钥对</h4><p>在控制机上执行以下命令生成 SSH 密钥对（如果尚未存在密钥对）。默认情况下，私钥和公钥分别保存在 <code>~/.ssh/id_rsa</code> 和 <code>~/.ssh/id_rsa.pub</code></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span>-keygen -t rsa -b <span class="hljs-number">4096</span> -C <span class="hljs-string">&quot;your_email@example.com&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> ssh-keygen -t rsa -b <span class="hljs-number">4096</span> -C <span class="hljs-string">&quot;your_email<span class="hljs-variable">@example</span>.com&quot;</span><br></code></pre></td></tr></table></figure>
 <p><img src="/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9AAnsible/image-20250315161627569.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li><code>ssh-keygen -t rsa -b 4096 -C &quot;wangjia5289@163.com&quot;</code>：<ol>
@@ -347,7 +347,7 @@
 </blockquote>
 <hr>
 <h3 id="4-安装-Ansible"><a href="#4-安装-Ansible" class="headerlink" title="4. 安装 Ansible"></a>4. 安装 Ansible</h3><p>在我们的控制机上安装 Ansible：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 Ansible</span><br><span class="hljs-comment"># 1.1 CentOS </span><br><span class="hljs-built_in">sudo</span> yum install epel-release -y<br><span class="hljs-built_in">sudo</span> yum install ansible -y<br><br><span class="hljs-comment"># 1.2 Ubuntu / Debian</span><br><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt install ansible -y<br><br><br><span class="hljs-comment"># 2. 验证安装</span><br>ansible --version<br></code></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-comment"># 1. 安装 Ansible</span><br>sudo apt install ansible -y<br><br><br><span class="hljs-comment"># 2. 验证安装</span><br>ansible <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="5-配置-Ansible-Inventory（主机清单）"><a href="#5-配置-Ansible-Inventory（主机清单）" class="headerlink" title="5. 配置 Ansible Inventory（主机清单）"></a>5. 配置 Ansible Inventory（主机清单）</h3><p>编辑控制机的 <code>/etc/ansible/hosts</code>（默认主机清单文件），把你的服务器信息加进去：</p>
