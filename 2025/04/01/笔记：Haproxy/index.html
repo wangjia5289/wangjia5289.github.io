@@ -19,29 +19,23 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556# 定义健康检查脚本，用于检查 HAProxy 是否健康# 检查 haproxy1 的健康状态vrrp_script chk_haproxy1 &#123;    # 使用 curl 请">
+    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Keepalived">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/04/01/Keepalived/index.html">
+<meta property="og:title" content="笔记：Haproxy">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/04/01/%E7%AC%94%E8%AE%B0%EF%BC%9AHaproxy/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556# 定义健康检查脚本，用于检查 HAProxy 是否健康# 检查 haproxy1 的健康状态vrrp_script chk_haproxy1 &#123;    # 使用 curl 请">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401142309972.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401143634907.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401143644691.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401144349080.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401190511360.png">
 <meta property="article:published_time" content="2025-03-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-01T11:05:12.223Z">
+<meta property="article:modified_time" content="2025-04-05T04:17:27.970Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/01/Keepalived/image-20250401142309972.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Keepalived - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：Haproxy - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Keepalived"></span>
+            <span id="subtitle" data-typed-text="笔记：Haproxy"></span>
           
         </div>
 
@@ -241,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          430 words
+          22 words
         
       </span>
     
@@ -252,7 +246,7 @@
         
         
         
-          4 mins
+          1 mins
         
       </span>
     
@@ -298,27 +292,25 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Keepalived</h1>
+            <h1 id="seo-header">笔记：Haproxy</h1>
             
             
-              <div class="markdown-body">
-                
-                <h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs pf"><span class="hljs-comment"># 定义健康检查脚本，用于检查 HAProxy 是否健康</span><br><br><span class="hljs-comment"># 检查 haproxy1 的健康状态</span><br>vrrp_script chk_haproxy1 &#123;<br>    <span class="hljs-comment"># 使用 curl 请求 HAProxy 的健康检查接口</span><br>    <span class="hljs-comment"># 如果请求失败（返回非 200 状态码），则退出并返回 1，表示 HAProxy 不健康</span><br>    <span class="hljs-comment"># 与haproxy 的健康端口要一致，他他的这个端口我们可以认为设置啊，无所谓，就8080了</span><br>    script <span class="hljs-string">&quot;curl -sSf http://192.168.136.14:8080/health || exit 1&quot;</span><br>    <span class="hljs-comment"># 检查间隔时间（单位：秒），每 2 秒检查一次</span><br>    interval <span class="hljs-number">2</span><br>	<span class="hljs-comment"># 如果 HAProxy 不健康，降低当前主机的优先级</span><br>    weight -<span class="hljs-number">2</span><br>&#125;<br><br><span class="hljs-comment"># 检查 haproxy2 的健康状态</span><br>vrrp_script chk_haproxy2 &#123;<br>    script <span class="hljs-string">&quot;curl -sSf http://192.168.136.15:8080/health || exit 1&quot;</span><br>    interval <span class="hljs-number">2</span><br>    weight -<span class="hljs-number">2</span><br>&#125;<br><br><span class="hljs-comment"># 定义 VRRP 实例</span><br>vrrp_instance VI_1 &#123;<br>    <span class="hljs-comment"># 设置当前节点的角色为 MASTER，表示当前节点为主节点</span><br>    <span class="hljs-keyword">state</span> MASTER<br>    <br>    <span class="hljs-comment"># 指定绑定的网络接口（网卡），通常是 eth0 或者ens33 其他网络接口名称</span><br>    interface ens33<br>    <br>    <span class="hljs-comment"># 设置 VRRP 组的 ID，所有参与 VRRP 的节点要保持一致</span><br>    virtual_router_id <span class="hljs-number">51</span><br>    <br>    <span class="hljs-comment"># 设置节点的优先级，数值越大表示优先级越高，主节点一般设置较高优先级</span><br>    priority <span class="hljs-number">100</span><br>    <br>    <span class="hljs-comment"># 设置 VRRP 的广告间隔（单位：秒），决定 VRRP 心跳包的发送频率</span><br>    advert_int <span class="hljs-number">1</span><br><br>    <span class="hljs-comment"># 配置身份验证，防止恶意节点加入 VRRP</span><br>    authentication &#123;<br>        auth_type PASS     <span class="hljs-comment"># 使用简单的密码验证</span><br>        auth_pass wq666666 <span class="hljs-comment"># 密码设置为 wq666666，主备节点必须一致</span><br>    &#125;<br><br>    <span class="hljs-comment"># 配置虚拟 IP 地址，所有参与 VRRP 的节点都共享该虚拟 IP</span><br>    virtual_ipaddress &#123;<br>        <span class="hljs-number">192.168</span>.<span class="hljs-number">136.100</span>/<span class="hljs-number">24</span> <span class="hljs-comment"># 设置虚拟 IP 为 192.168.136.100，子网掩码为 255.255.255.0</span><br>    &#125;<br><br>    <span class="hljs-comment"># 追踪健康检查脚本（如 HAProxy）</span><br>    track_script &#123;<br>        chk_haproxy1 <span class="hljs-comment"># 指定追踪的脚本，若该脚本失败，节点会降低优先级</span><br>        chk_haproxy2 <br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+              
+              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="bea3e8006aa8ced7ef902c911841dabb3f620553409436cd6263fddc1d824866">9ce4f525d51b2104a9972422eaedb147c7792ce6590f1ac4cff986439a25ec1f6de638f1068665ba7d06b283036ff6df5f65f40caacc848ab9e754c3d21aab48a5b148297dbf24e1586d0cf3e7108e5b53935fdc6b4d843d3abac187ad01d0394767edb140ed76424b3932bc0c48da253260acee6901f9847029246a2d956401d2bfc26f26cca5751d1fe069c5f2e996a56fded1c9aab431cf6530605fab0318db4b0106194d7fc378bec34ce9c130d1af863c168f6af4dbe6eb35cdd3698567a3c441c978075f131d1428e39f95cb622de20436a3463341d79ad8d4632c0018724fef8bad7bf2add9737e26b960ad48a5c0af85a0ec9fba842c0fa6cdd4252adc0553c901ed09a9591cf52a3ded0d2870355fd6925131f785cf3ff63b2739e20d9f140e74d25a303270f646814adbbc3dd5f2aca51f97968c11559dbed05de126391be12170c0ee0d50d4c93e1deed98e64fbb48fb2f6369036e66c994a4376d4d2433edcdb5cd27d8b2a8c3f61a30b0e4ae23840189e852735cfc0822baed30132eccb5e6879b14dbba573bc9baef1d6c12a8da70b1ff451b0519f9e74affe99ea983920e124aa7b08797dc36a8317f00bb0f86fbd3874afd83c0ece90751ddfbad9a3f4f2cdffa912ece2baaff38b7c4f4629990ce0cfbbbb55f2ff661b5c009888fde5b8994968dbb4ae0a0edd63aca9f1f9202d4b8d816dfe03d5805af2c658508e00256db6881b3ca563d65868fe0e547b9c781665f5c9e9667491a4d704ee69eed2719d906c4abb60da05145dec7130e2b6b63305fe8683f7886e9a33baadcf9112bd8c372b627e7b6dec4829082e2865a566a174ae9f4cbdcc58f3896d3f9b9a32f699cb305652dc71b21ba1fc0fc822ea79cd4b5fd7504cd16d53a19a572d442fc73bda2ac940350fde3f5e2c3b5b431dd05b156c5da74d16b0e68cfcddc8ee04a1efa3bffae9f940e1daf5863f8eb079ab1bd6891650c6922590647ef16c59348160242fd927b1a0ae58f34000a6dc14f3eea61059950dd25d94a2352d06a00085b737a30b3ae849f760286f0f4f7007a9b5aacf1016de5e1be0987849f8449a78b53eb1b4d067165ec8be19845e9d950abfa31e362ee7dc196c4cdf0a0059bd166f3de8931b15f3ffd61817dc2394a4b6b9bde8cf63f2394fbae07c356aca16077edfe345e9aef25802a246b8c8a33a99af464b6d0e37b4c3368947ef0bd17da88e06f6d9496ce16a66e85b38cf5f13b412a3bedaf97283453eb05370e3b7856180786d1bffcf0c4de29078e3ba9fac1b6e7883acd4e43cb39b68a3bde51bc94b47d22f5a563752138cad6b8a99a70d3b51f943d308c0a09c872cb9c7e18db2e7947df07b0aa3a74f712dd3c45e03540bce862d733cb84ff782b67239179598daab90a949dca99c48d1f85b857b75bde546461e6748ad057757fc3aa951cc0639819b55bdeef0329bb5944904345fbf688cdba32a14b4cbe1c9a03dca9f85d0f710400e9a86192cfd6e99a12ea8e7c812e31ea13ff514cbda5f2ef2cb18789c0fe981c9257e6a218cfa793da9eaf68ff32fe992ed041d4ddfd02bcec4c2bba9cf9c08e80f8aa919f3a3dd77b16a93baafa749c8e09574d6e77be8862e61cb948f2f0b4dd547211bfc76eb9210ccb03b1f1b6b0a71845aaefbdb773f8c8c417b3fcc173e242afc966bc5362411eb803e1e14fa70b160e0e96bc379659384fe72b54e1ee69687a3d35fd25b3f1df8182bd910fd6babcfeca3c523983dae5e3e72b68af59eeeda148885bad00cf875ad38fa51c616b9b3a4181bba13bbf7973d74f9c9c2eed1c39976babba605b07c01161cce864dea70477fcb77b847378627b841ee2c6f826d60bd8c637efdab79e3cf57bd3849c910ea76437f14e04099a3de5bf1d292ce7e0160a20a2cdc43c4722a2fc62933cd415ca1718df828b9afb57e3a2786441c2f9429d998757ffc3ea9d2f2551e403e7ab9fbeefbc94e2b338daba8657a46e1b01328c3429d634b70372b6b9f9542c5de688656a5d942de816d6b240581cf06ec994cc4db266f304395ef2565f3b25dc21dec4141f807ffc7716b845964b10bb4d4f0e4b86aa141d8db7f2064218395bf58ec49230eff3ccaddc80d72c0a8cffceae138765098eb481e501ef7022f7e26251958bfe98fd9f476d427cd351ea40a197a74fc3b0336cf8ede584ebb5e5562f30ef1baee9b92655700e9f00bc53fccee5481e86d1e52e7d1b8d6c8c27d80be1bf2cfaa670142bde17472cba9f3934ad959b80ce9c47355676e5589f394cdb516eadaedc550b10d069ad32b62109ebcb2f12848cf25c631cb5d7934f0b0fe102583a461c641281cf893a72db9f2ae81f522fd7c2d09c732120bc743935e31e2cceeb1ede98a2e183ec176948a6917c926b150db9cf1b221e59d148fc80299bc45fe281ce2cbec1842d894bd128b6a5671447f790291eb149b00eef0345dfac3abe383730a636b8a8f6c81c2848ebfa8263243a8c57f558f7b64790da65a65b1a713cbad7b462b4750f57add0fac79ab23c06eabe7b5babfd750823a94eebeb5a021342613223dcb4cd9ba649a6361b800c704e543157eb5b8cc1fc2eef1ae387e4ff6c3d50ee99c14ee67eb7af5114184170e5879492a5527b11468f0bad969d2084f0facd46d356cd95526c6970b7b931b2ee665</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+              
 
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>ifconfig 看网卡</li>
-</ol>
-</blockquote>
-<p><img src="/2025/04/01/Keepalived/image-20250401142309972.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/04/01/Keepalived/image-20250401143634907.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/04/01/Keepalived/image-20250401143644691.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/04/01/Keepalived/image-20250401144349080.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/04/01/Keepalived/image-20250401190511360.png" srcset="/img/loading.gif" lazyload></p>
-
-                
-              </div>
+              
             
             <hr/>
             <div>
@@ -354,8 +346,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Keepalived</div>
-      <div>https://wangjia5289.github.io/2025/04/01/Keepalived/</div>
+      <div>笔记：Haproxy</div>
+      <div>https://wangjia5289.github.io/2025/04/01/笔记：Haproxy/</div>
     </div>
     <div class="license-meta">
       
@@ -403,8 +395,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/01/Haproxy/" title="Haproxy">
-                        <span class="hidden-mobile">Haproxy</span>
+                      <a href="/2025/04/01/%E7%AC%94%E8%AE%B0%EF%BC%9AKeepalived/" title="笔记：Keepalived">
+                        <span class="hidden-mobile">笔记：Keepalived</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -559,6 +551,23 @@
   
 
 
+
+
+  
+  <script defer>
+    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
+      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
+        var hbePrefix = document.querySelector('hbe-prefix');
+        hbePrefix.parentElement.classList.add('markdown-body');
+        Fluid.utils.retry(function() {
+          if (Fluid.boot && Fluid.boot.refresh) {
+            Fluid.boot.refresh();
+            return true;
+          }
+        }, 100, 10);
+      })
+    }
+  </script>
 
 
   
