@@ -16,28 +16,26 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Ba Tian">
+  <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="不像redis，不强制读写分离，但推荐 Docker 安装 MySQL123456789101112docker pull mysql:latestdocker run --name mysql-container -e MYSQL_ROOT_PASSWORD&#x3D;mysql -d -p 3306:3306 mysql:latestdocker run --name mysql-container -">
+    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:title" content="笔记：MySQL">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="不像redis，不强制读写分离，但推荐 Docker 安装 MySQL123456789101112docker pull mysql:latestdocker run --name mysql-container -e MYSQL_ROOT_PASSWORD&#x3D;mysql -d -p 3306:3306 mysql:latestdocker run --name mysql-container -">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250406182807697.png">
-<meta property="article:published_time" content="2025-04-06T08:04:56.160Z">
-<meta property="article:modified_time" content="2025-04-06T10:28:09.275Z">
+<meta property="article:published_time" content="2025-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-06T13:45:03.372Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250406182807697.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：MySQL - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="笔记：MySQL"></span>
           
         </div>
 
@@ -225,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-06 16:04" pubdate>
-          April 6, 2025 pm
+        <time datetime="2025-04-06 00:00" pubdate>
+          April 6, 2025 am
         </time>
       </span>
     
@@ -294,12 +292,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">笔记：MySQL</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-06T18:28:09+08:00
+                    Last updated on 2025-04-06T21:45:03+08:00
                   
                   
 
@@ -307,34 +305,54 @@
               </p>
             
             
-              <div class="markdown-body">
-                
-                <p>不像redis，不强制读写分离，但推荐</p>
-<h3 id="Docker-安装-MySQL"><a href="#Docker-安装-MySQL" class="headerlink" title="Docker 安装 MySQL"></a>Docker 安装 MySQL</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:latest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mysql -d -p 3306:3306 mysql:latest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest</span><br><span class="line">- `--name mysql-container`：指定容器的名称为 `mysql-container`。</span><br><span class="line">- `-e MYSQL_ROOT_PASSWORD=my-secret-pw`：设置 MySQL 根用户的密码为 `my-secret-pw`。</span><br><span class="line">- `-d`：让容器在后台运行。</span><br><span class="line">- `mysql:latest`：指定要使用的 MySQL 镜像。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+              
+              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="4cc267ced45c92c69402de1524b7ecd08e344feb80c8b7a292af16774b8233da">9ce4f525d51b2104a9972422eaedb147201bc5d1ddd81c2dd56a5f9f44e3ab57e9a0ed8734ed33f65a0e6351a2900272d0702b82fc59d84a098af0d7dbd0b1e3a6f4f126591000ff80e887b9502b023d67dbe0cbdf9610cccb0fdcdab393545f718b422ad3061819a98136f5eba22a26a2514f92013fd4ffc7a0ca9423caae2c9bf01b0f605f51b23191021a607c7164fd19ee379de270fa7f90384a6440febf7038c32ed1a81585bdd7f37556179889944a0d26f5b1c29f7d41cca47b825c6204a99f2edfdc8907af35057f8345bd6d98c27fa993db88b2f64288273c408ea81a43b03707123a0196861af0ef4964862b68a4776fdbc614683f1fa7903adaddefbf8cb1753f8ced492d3a729e44a833f19f63ec1a76a9894099e80d7feb20ac5ea485f6cfd8b0102460ba227b015316b69b2cbec7f67c9738b8809f09fa4daa666ec0b7ec801d06cde7dac071cef1aaad4cc98260df8bea693ba2b1a626acd4517c8120c1f5dd0f89683a8cb0e147be9495abb067bba9c5dfdb46d076cfb042ef68cb6a5f24256d6f0d1deff90769994decf8e438db3a0824f2095bb28902c906f1b3e92b51c08fbe09cf9a08bc1688bbd38c46eb99fda0c5701b63a47f3e6e9570b510e56ee0d9e6d2e60bc13c7162f934f2801a1dc61745daca6f064f84c2b64ffeda55ae782365f08238022c85aca327a8886f39785179f6ef7fb9cfe5743ea3ba5a16b734c34dab784bd4a31175ca435dfbb61f0b7e3237cdd11a56ae208b5f0573a5e53b773e5bd16af6604ea75089d957140147dcabc6123215fbfb0480cfd48ec23daa98d38de3f3842f25beaa5cd70c2f53ca17203c4ef5d160534382549e858e33ce19038f06322b0af0bfaa124aa9b0638ff13a14179393697736ab0456d040f05b17f0a8bc7021274b5795f0f502672ba66f6cb9896c33f91684811f6289592d299453410d938a3c7fa352c2967037ed241d187e19101a41e54e5d3c6279d85729509c9f985c63040f88d17cda29d3e4dfc7f22da2746c040e27bb73b06cbaeb6c0052c36d92f909c6106a75351dcc72be79239963b8c2a995ce43e79bab94e9d9553dde2654961e4dd108d6baeed59d75cc45aba103f512d7ca417949e6da107465f182028feca38e01d2bf237462d59e599ca0fb588f80aa55083ceb3d992cede72f539038faf9f3964b0be76a95e05fef0e930123ffb904ed28ff08933fc558c5545197a3c4969b3d2801b149d41532877d3b60b312f6baedf2bdc3540f1e9592a7aaff3cd462d159a5dd6eb5e13dc03e07d7fea539576255e3de71facac40606fe18fc0b37fc7de1a0155f610810544b31f0ea2918a95dfe9c656f0a89500a69d9569a4a91be84d880d1444fca1e9f5a74235525febc3d4c240358ba5d3146d4b3d086b0dee7e77302c651dd1a4983ee0d031535530bfbbb116ca93a9da48be7b84b8588c56ad6e3b7e6ae29ba2617e75735c98a570ee5c8d4a4b22bffbcd37263c79f3db55faa2f7054494148cd22c98700bffa1b64c66da12fb8ecca18c4b6b0db7ede8223623d9a11986ef1c4bfdee6cdd24a9b4afa6165cc352538146ac226da15de95ca6f6498757a9d8f782d2a0cd2b484d62e8f7047745c5413c54def16b0007ac5e91b848af5ec577b47cd27ec9902f0e1f5f219d4f49450eaef48d5b592dda390920f45cd71cd4d111f6540bbaf9dfd224802cd381ca5090ef5773f7d74d0fa8f5a36e5f90a7aeb77e6d89d65df999140b30f6e4f004436f69c689fdaa5a55167f8cddcc5a0db643fb80ab1e25c3e53980e7c7907a244723fb0e77a9df51cb7de57d42ff39341218f7a567b88f771f58a30f22c565337b01b178a4ded7473467bc1b6c7f94ec4f1a5c0bf4c5f7f7d5abb593cc67e6a54586d0625d803187bc926480a19469be96b47e391b331f7ad333ea6fd162d1ab39fa1d94faa3a7492655d108f0b98625de1c37e51fdac011ae18d753a26412fa17fa6539a3544c4449e62b468c7940488ef0c1ae5b41022e7e3240b1ba056007d62deedd03afac74b99b67787f84b81c238d5aa4d108b4b937756cbba074663a0bb1efaab9c7ae2296d6c54d71a50b248fed8b405777eb77933baa1fc2d7936f7e68b7614d1ddec49d60337b52035e9a4866f17d6509d55b36386b7670b40c32f1c9028a98accf7f42ea917119b2e41d870144ec89fe98f7570e24dc3c69c84e58a11a452cfd8b62f6f17fd0144577e5cde6a0970cb069a97c06c8387fd3c6b72dc00600ab5db24fb05681eac8ba4e8480820fd94695d902a23e6f7c30ca0ed3c3261ccb0e581b6cba538ae4a9fa349993292737c80aac2950cb4b1b7511000f327887eee9e4d3429cad835ad63ce4291acdf2f30f96546d9d7ebf92e91d79b25838273f16722ad3b9b38ae2e1b9516116a1d804c4c1317d93e1ff79cebd2c36991afa9b36db518c9896b3ee931040f609e649d29ad2de039ef780699ef3d4609dc6cdbdaaba5f76747722e5dd1fef59bdd385a9a9985affa129a62059ef759ed3c7d14dd138469e0fe7cdf46fec5d14b06ecae4bb8e2794d05867b54700fcc58447961233d091f9f80a57edb9f42e4257cebc7649e1e3a49077367db54721f0914f316577d4bff98a7ad5bc6c76f9361d68e1a40a55d9e1fae36e82f20fefbfdf7277d5f5278ef420fdf44bd9d984391e4914914405accac0b4a8c87f02bd304be908bcef01e7dfd342dee8bea7428e764587ff8dfaab298a9ca4468db51fcb3e158f8cb59f588ababaa5d369a751fad57cb2aaec2b7470a34cc521974e44451b8f4aea1076a957e3b75a145248828362961a7bbefa7815b5ef3035e671c385723d2a355b8fcb969127d994fec7bc883d52213973315e36ff44a17d127517eb65a693d8d6ee6b3ab2772a777a0b6f21b8c91db5e8d05c2780b1ccbfc96a2b9b8cff413ca917a808fd24b02be681285a3b20b24a775807d20fda295b537969dc9e376d58cf0b52e1ed39332b2d5ff64e38dc7d21d5692ffb28c5d98addd206feb360b6f2e2ef9adc8882c87cbb6dd4015d2da4af0dcc1115da8a75794a2d69c94f15632fcfeefb7195f278cff98ed423070646793de1754e2d790c8138354c1050705be1998fc8cb84bf24d9375c045c3a85ff5d264692e086b94f7c22a256f680c082525ef6c1bb3a9d2ce9f2aef4be2fcbfc56a65b4fd2c03998aac5ccb38e382732647519f0d0225506cf472a1032d8e278913ac000b9369a6343baf1971dc359c5f44df8510aa82bd270d4f7b0443c5ce69b2250a1ff69e1e0a5cc5b34a2c762efcb64b09fc7b9e05d3ca2619b8e5cd95c64f25ecf83a7b0c55a4bf753bb1021932978958bc8992f1630b6deaeed01c60e295f44953538def45cf818328167286e21d4f8702b90220f68ad5cd109b3d7d6e16984dff6da4f598045f8a33f90e2e4d3b9b6052e4ed1ba9fe35a68af23285d48711f92cda50c76cad261b767496f0911363d4a33623741420c027f1e2aeaf8498609059eea84a76b0b843dfe81084d0424cf004472e3940fe963412f94dddc9bcf6f71febf0175bbec61d7a0d1eee42361c192a1e69e6735f83218547eac81436e0e4d470bb16e28e6954667039864a9f2a218221e05ff97d3faf2ed3f8ec01699ad43442097757f07acfa119e5fbbece764566ec40dda02934242bf52df814277f64b7342556d8800823e9682ff6cacaaa9b9b8993f9f0191f507f3e567bb7a0f7de4315f92e3a8acdd45029210d5f6a6b953b1a919ec8706d5ca3c8305b2bda1508b85f851991a8ad5ac05489061d99503709995afd97c68360e1fe54d266d9c1a07d1058fa9d76f2b7177fac6e4324d14b04c49501a8daeb2e671b2514c01cc2eb0f2d0c51ce1e3aba5f3367614d4b33a7f4a02dd185f35545bc758ed0f94b917b15f712be7ea7d425dff421a5861a6dff2e89ebb51b9190d4e58d148f9d30de5357c3b0ffca5ce25b78c8471cd86f0d8a826eba6ff2a72ad965290202e4ba7fc0aa8a59b3cd115877aa672df4c6764245cf04007908b8f6cd14d5a0e9e78832a2ea67d69f28d06d0745cd1dcd6a42596e183cdda63a3522a35b8b6eb4f35ea7899640cbe4c2f831bd48bb6de299ac110034db597c6bb2f4e39930156d051ee9ee337c0ba373ffd17e8b6d9fd60a7e45b60d957c982824aaf8cf16cb33638d722a58fb30c5a4d81cd37e89bc9e96168ea46c245af2a632578e3fbd40ba3fcf92a769059398ebe50d2407531c1264a11a822b64a0a67e93ec4a80480e748317e3777cb63756b7dfc6bdece3c235283e24e235318da794851345431598ce4da8c4523ecb7634e6e6b963e4a232d7ec4f6fd9f5230b09cb811baee47b8c5dffecf8cfdd3983af630a3ce9540149925bd5bbc2abfac81166c9192670326575620f9a9cec54a94357ff5d108e184070d8d241f0c180101830caf813e7430d2b1f5baa8a26eefa1cd4c971008edaed7a454bc7b8951843d0eb587034c0931ad6cb59dd17ea25491795841df6dad29f0fb02bd2ca6fd19a70bae8d615b181a2652fd1054f1306e2ffce5216837f9f744daa32dcbdb1a231cba91cb2d6b7a457e4866741f1c85fa15d1d5d53abf5011ec9a42e6d1e36d4b0062140ae630a81b32e7ce9f89ddcf77cedb1fcefd2190ad5a3fb4bc084a9706c35380b36dc95522c61041009ba6a510429191a136929496956a54ccf8b3f7102a4c1d311851f38ffacad004d7e06c3dcfe10c36653206b84a29bd9b4ee65eca9eeeca41db085b1cf28124cde6b6e5da7ce0330934a310a53ae3a0aced1332261fd6d9cefe1acad15f378e5d4d06e827a8875889c38072e42581ba06f968b2f91bb2a820fbced2eea66c53955824fc4868cfe8725aabe93683c59aa0bbfe3c2b7d64f8e9306fa9e7a88481b3bfd15233efd7c61b121395803236e3110ba1c25322255d7900cdc3a9a8a6483ffe63b9f56f8910374913861e39b527a4d4b21177ab2d078c130e52c740b1a769402edb300f8b725cd916b5a1d63e50516fdb8aba0f18a96185c221df5aaab3b66f018dd527b467eb92880cb3f8b7ec9f8a333ebfa6d36eabb6475864261d8033f87ac0365632947318cb2d7a59608925e11b17beb63bc5d1e28fbb6d2dd26ef6d818fa5064bcf86ffd1f3dc16a960dff923c4817f898668ffa71e714872ca3122708caf3b3131008b064e617037e5b4f11810d7c25cee0018800356afe888894f4c8b7e15bd348e26719ffa112b271e2b07908c4c9ea56dc40a25bb7508e54b7149d8254827e3a8e305f604a79506f07e92b7ab0ef84070bd4ea8dd863410586c63ac48e7c1d4b3dfd9367ded36f536ec8b1ce2887c292c2b61098c4f308fc1ea16f2a66fcdc24162f36d46573e008e6f45c2b5dd77a3b89e5830d677ed9e8e26d58749d54a1ef69404d9784e4f6fda92ae73554a8002afb7569e0c3e9bc4bb86270f5ee4e94ab313e45768e44b9a903a7d73ca131cfdda1a6f582424e6ae5e36d821f6ed988e6b290c9065cfcb8a9b8961f8c11d24e099f3ca2a5bbd86ca56c3fb8c412e6cb95a36c93491b452290e6a42e16f0a3d1c3ec938dbd84e3bcb5e69c5638f21e041a763deef866fc2c567e35fb3e1e55af7df088eeaa0beab42efc0d6ea56fd80f914748100063156328a283038322875240ecc3ef88e01ecc433cc41013015c24a446c5184bf4b137a8d7df347d44a5356ff9515ca2171049cef61098c51bf46c1ff1a0125ea9e162ac863d41a082fb7c46f7d6ea1e8e6385c3ae1bf5793f046835f5a09e59c849ae2e3593de1a2e52bc90049e34656cfe3d625ea1b8358caabb894d3c75cd913220a263efaa10ec6bc9b57129311975c4b26569534020d92f1131f7a8c04ca0ae6120242f87d763760e6d5ef6e62c5852e613f30a5a228c58c90619c4e47ecebcfd984a1b5279b4a420f78d74c04f187e3efc5c8873edb3f08db726b492a738eb18ce0f83eaee1ab8252ba1cae2c6ef3dd3896d680549893ffdd0a24f8bd13d88ac01ce845385adf56c04640a08f8e3d1a0d0710040bcf750a5c1e1111aa06a2785acf44e92010a7e61ba819523b5d3ffb3bd1971b14e18308bdac9c18246b4c57f78fa08546361c8eb19f2d312801806c8d4f4491646cbc129d9bfbab7c406b2b3c8c0ebe90e21d95ecf6bd78b99c1f05bdc4d93c2de0aaf5e2f84b491111042399f306a4e0a7b99b2b5d6f1946d36a5e2e3fc47963e0a1a80aeff2f1f861622407d7da4339834f80d6a7b9ab754f96aeaf986cbfb3c299088435f701bf5a6239711b4a9e3768216355fcdc08268006410e983eb8196172f502697e32ff1d1b8f6f35578b869a4358acfa65383fdc6d14f466f3eec7b0efdf3fecc18b27c8589b8593562bc214180442390a25e3ef7faeb5dfee3e9acecc5f8643f5e5f3284d81bdcb845a226bd4051792d520869762c8deaffd9613fd81ab387544c812b1a1fdc357192db0ecfc16ef6fc8e77a69cbc401d52dbced1032a514b91517526baf004fedfff5fe2070f9391b718221f828a96ad34648ebdbd77697384d2044b99e037a362c387e0d79934314da5f4aeee7011ac79e1de714bf5bd020f64473a4dd8824245421c9af9e2c76e1cb</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+              
 
-
-
-
-
-
-
-
-<h3 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h3><p><img src="/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250406182807697.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="MySQL-目录结构"><a href="#MySQL-目录结构" class="headerlink" title="MySQL 目录结构"></a>MySQL 目录结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">根目录 /</span><br><span class="line">|</span><br><span class="line">|-- var /</span><br><span class="line">|   |</span><br><span class="line">|   |-- lib /</span><br><span class="line">|   |   |</span><br><span class="line">|   |   |-- mysql /                               # 默认的数据目录       </span><br><span class="line">|   |</span><br><span class="line">|   |-- log /                                     # 存放日志（错误日志、慢查询日志等）</span><br><span class="line">|</span><br><span class="line">|-- etc /</span><br><span class="line">|   |</span><br><span class="line">|   |-- my.cnf                                    # 全局配置文件，定义 MySQL 基础参数</span><br><span class="line">|   |</span><br><span class="line">|   |-- my.cnf.d /                                # 存放独立配置文件，可以覆盖或扩展主配置</span><br><span class="line">|   | </span><br><span class="line">|   |-- mysql /</span><br><span class="line">|   |   |</span><br><span class="line">|   |   |-- conf.d /                              # 存放独立配置文件，可以覆盖或扩展配置文件</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!NOTE] 注意事项：配置文件的优先级</p>
-<ol>
-<li><code>/etc/my.cnf.d/*.cnf</code> &gt; <code>/etc/mysql/conf.d/*.cnf</code> &gt; <code>my.cnf</code></li>
-</ol>
-</blockquote>
-
-                
-              </div>
+              
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -345,14 +363,14 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
+      <div>笔记：MySQL</div>
       <div>https://wangjia5289.github.io/2025/04/06/笔记：MySQL/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>Ba Tian</div>
+          <div>霸天</div>
         </div>
       
       
@@ -592,6 +610,23 @@
     }
   });
 </script>
+
+
+  
+  <script defer>
+    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
+      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
+        var hbePrefix = document.querySelector('hbe-prefix');
+        hbePrefix.parentElement.classList.add('markdown-body');
+        Fluid.utils.retry(function() {
+          if (Fluid.boot && Fluid.boot.refresh) {
+            Fluid.boot.refresh();
+            return true;
+          }
+        }, 100, 10);
+      })
+    }
+  </script>
 
 
   

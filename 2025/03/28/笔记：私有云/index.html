@@ -19,20 +19,17 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我现在要在本地 K8S 集群中运行 MySQL、Redis、Kafka、ElasticSearch、MinIO。之前我问你，能否将这些服务的数据全部存放在 NFS 集群上，你不建议这么做，并推荐使用本地存储。 好，我接受这个建议，数据保存在本地。但我的担忧在于 Pod 迁移——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？ 所以，我需要一个完整的存储策略，确保即使 Pod 迁">
+    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：私有云">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="我现在要在本地 K8S 集群中运行 MySQL、Redis、Kafka、ElasticSearch、MinIO。之前我问你，能否将这些服务的数据全部存放在 NFS 集群上，你不建议这么做，并推荐使用本地存储。 好，我接受这个建议，数据保存在本地。但我的担忧在于 Pod 迁移——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？ 所以，我需要一个完整的存储策略，确保即使 Pod 迁">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/image-20250328172435014.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250328175359660.png">
 <meta property="article:published_time" content="2025-03-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-29T08:55:08.690Z">
+<meta property="article:modified_time" content="2025-04-06T14:50:29.611Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/image-20250328172435014.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -300,7 +297,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-03-29T16:55:08+08:00
+                    Last updated on 2025-04-06T22:50:29+08:00
                   
                   
 
@@ -308,17 +305,22 @@
               </p>
             
             
-              <div class="markdown-body">
-                
-                <p><img src="/image-20250328172435014.png" srcset="/img/loading.gif" lazyload></p>
-<p>我现在要在本地 K8S 集群中运行 <strong>MySQL、Redis、Kafka、ElasticSearch、MinIO</strong>。之前我问你，<strong>能否将这些服务的数据全部存放在 NFS 集群上</strong>，你不建议这么做，并推荐<strong>使用本地存储</strong>。</p>
-<p>好，我接受这个建议，数据保存在本地。但我的<strong>担忧在于 Pod 迁移</strong>——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？</p>
-<p>所以，我需要一个<strong>完整的存储策略</strong>，确保即使 Pod 迁移，也能<strong>正常访问数据</strong>。</p>
-<p>那就是搭建私有云</p>
-<p><img src="/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250328175359660.png" srcset="/img/loading.gif" lazyload></p>
+              
+              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="7905f528ce0cc9a699d4d6b3eab95f189d79cb68539b1daaa7273fdde888ed50">9ce4f525d51b2104a9972422eaedb147d2d1b6e469640c54e32e44c048a966931916fae2d49fff1ec7874fd797dd1f023c1d1003f7a173a3645a518d56937d256f103889fd1df45b483151e13e7634c3c8bcdf68bcb26fa0b3142d90e5df2ff34d82a30085f270868137deb8e55b652cd936cdf2986ae4180bf80ac7a634b6c3ecc274bf6ab5de1b0b47e98302aaafe676d30968e6e3ae4ff1224ffc710eb50d0da7c0c5a1cb60964bf42846e35bf8a04690427a2c973e39a34a49ad8df962b88242850f5fd1217ec88730ff6e4912e5a39f0ba4524f5102a4104e1de41e6d896c9e16c156376bde7c1b461758f96699dfd8498a26c0ad65f57d276db56a728b9f0938bbffd32c9f1ce3a77f7a69588f4aa5f0932f239d1ec8c32dda21f602d1a9e64a3744ee7aeaca497e169eb81bd07b582da917155085f6843c11e34e74608b95b563f61fdc9911a0905c250312be9f4dc9661bf3399db149e1fe4bf07a7e2437e6ba464b8f8a29dbd0c4bc35812b8f8139785b96dffd5bcd75c54269fdac80c90e9c210f653b1cbdd48ec978b9bb132bb875ca5c2d34807a1651f22b7c042456adf5de203c72dcca56078f1e4d1a136c5a682fc4ba7dfb9ce42c92bbc124ebd368768cf71a7406a1674e223fc531186cb338789ee9609731df6c4bbaa4756e90ec381c01995b4a10327b0e55a83622751caa08082120d0edb96582aa61bcb0f77bff3444495bdee97496ead1c12d94c00d66a66d334c1c680d8811b8983666d56dcd479e9a0a89b90b66880992dcb73331a59d078a8ab951821828386b0860a5e8e21f0831fddd246d81c53c10734ff3d30e9fa09a9e681bcc99636979f145d4a68c7c36b4712740f78d46d766f5e9021f9ff17a70d1a5a1be3229632b63c9335ecad39da2dfef44e3a99dbaaf5e4dba371e729ca1655ca11c05318b945182e986cbf625e6d9d549b3986304401cae213e52863980ab908bc279a7188189cf6dcba1f0475227f0bfc391044b8d7703fcda091cf63faee4609fed9cfd4199461d19b867089dd9a46c57dc4a42c145a24749beba0417e84eee3d3640c7cda08e7562dafa6c0b6ed900715e0fc2ab65a1c1b791d789a42bed7ce896d65dfad624b2b265fd9d445ce353ba161ccdec5218c7737d8e26d221b27ccf5ac5cd3199d5251e8bbaed1da9ccb2534805d09dbbc82ea8bc8ce23205e9cb9af1e96f84fb</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+              
 
-                
-              </div>
+              
             
             <hr/>
             <div>
@@ -607,6 +609,23 @@
     }
   });
 </script>
+
+
+  
+  <script defer>
+    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
+      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
+        var hbePrefix = document.querySelector('hbe-prefix');
+        hbePrefix.parentElement.classList.add('markdown-body');
+        Fluid.utils.retry(function() {
+          if (Fluid.boot && Fluid.boot.refresh) {
+            Fluid.boot.refresh();
+            return true;
+          }
+        }, 100, 10);
+      })
+    }
+  </script>
 
 
   
