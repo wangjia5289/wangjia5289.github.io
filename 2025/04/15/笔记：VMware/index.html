@@ -19,17 +19,38 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+    <meta name="description" content="1. 三种网络模式1.1. 前言当 VMware 软件安装完成之后，会在电脑上虚拟出三块虚拟交换机和两块虚拟网卡： &#x3D;&#x3D;1.虚拟交换机&#x3D;&#x3D; &#x3D;&#x3D;2.虚拟网卡&#x3D;&#x3D;  2. 桥接模式  3. Host-Only 模式3.1. Host-Only 模式概述Host-Only 模式 主要用于构建一个与外部网络隔离的虚拟网络环境">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：VMware">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="1. 三种网络模式1.1. 前言当 VMware 软件安装完成之后，会在电脑上虚拟出三块虚拟交换机和两块虚拟网卡： &#x3D;&#x3D;1.虚拟交换机&#x3D;&#x3D; &#x3D;&#x3D;2.虚拟网卡&#x3D;&#x3D;  2. 桥接模式  3. Host-Only 模式3.1. Host-Only 模式概述Host-Only 模式 主要用于构建一个与外部网络隔离的虚拟网络环境">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416081037992.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416081010029.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416104756062.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416102940107.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103052179.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103438010.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103242575.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103521709.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103617846.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103933146.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416091811203.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103059206.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416093922129.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094237485.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094344342.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094700930.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416101054447.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416100814721.png">
 <meta property="article:published_time" content="2025-04-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-16T02:48:05.693Z">
+<meta property="article:modified_time" content="2025-04-22T10:54:35.657Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416081037992.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -301,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-16T10:48:05+08:00
+                    Last updated on 2025-04-22T18:54:35+08:00
                   
                   
 
@@ -309,22 +330,68 @@
               </p>
             
             
-              
-              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="15b5e0b6ec0e347fe259235a8a9ccdb88268766be866031a5f290422f2bcbd64">9ce4f525d51b2104a9972422eaedb14797c2ad0eb6be38c295d65ad275a33a554b71641a7466fee9e062f310a2ca4928905f030ec96520635e7e8fa64f6717609e41909f757c206745e964cfc133a515161faf84d167fbcc23246fedd271f2028fc850a75421e515c7f0f45b50da50dc9e23a2929bb94f1698cc3fe4f3a35329929af9a1c68f103234d06da566e4ab70e91666bc74c7a69decd9487358a5a88e8b371f1639b8e70d14dc513246cc9e3d8945b9676fb2f9ed7193db1368ef9d873635bc0827b1b89786fd1ebefa294d080d17c76bd8056080ae870969918fad6a5622a6bf0428ad7107e2fab7e9a403b0d0321536f15e7129b4c3374ea3e98a05fffc43ee81015307c492e73ab8f6bbbbf98e123efaaac05a97d57bdbb5532970d1f6d040d8ad75b9958fe44e12ed64b44c68ab16a763849f56db67521caee1fd1f12d138ce5fd3fc54ec149cba9963102704370b2fe47b18a5535181ca5118376f08fb163df55cfd9da5b57732eb5d17f322faf15d36c8a67ea09ce483a705dfe0536e6b80b9e3e9e1267824aefa73d376f72c8f1ccb698a9cdcd825af3a9ff4c3bd2f94216437f13b7f17fd638f54c2e927137443048c9dad60217afb50dc4f1eaf48d0f288d633f014b9ceab8426e4acd0bff0eead15dd07ebb5f84fe8d67314807722189c572a9bbf7e6a31589b247403a6363896b3ee17dde2562a27b1fbea465c70779357e43effaa4c16b8f5013d6590ecdb8bd3dc91ca46171bd1283eb9ee75f94dbf842016955eb2658b9a4f947fa631f6592e8ef0ff7ad81996f94eedffdcac1b8ae0d4f4f4c424a1b67d6f65709e5e9035fbb0ab5261e2eaff842108653c000a957b11b1e60d10f89ced0f1267bcf149ccbe994746a0e7d80269cc8ea61fba70004a5a4261ce52a1798014b7dfde91e946f64a24d7bfdede6845154ae88f9df7129cad6bebb28e50a86eebf17020efbf5d1cb086f61b748f7a2aabcfa63bc7102692cb916c368545f1e08df02e60651b5efd4df9ddd885b834003531ea09b5ca736249de22324d2922b46dc461f4b0e5a5448f5ad4865262f74b05108facc46ee2a0ec38ce1cb59d5dfdc6434d6e87399081f9132a779cd9f55496b093ebe93612a9cc99b29900c8a04fcf3e963de90d4ff76b26c06edd0ff6c275d10b8b743f76d56c9bde19faa3d05c503e7a09e263d448f8faac3d0abebb08cc8089b836e378e4efd13d2340252ab92d14490e800fb5f9c7ca6f50b2c6f622057ce947e69ccbf7b35939a701f940fbfecf584f70a09e0899c890edada8cd40dd4f1ae82a54cdde63714f980f58cd91966ab321fb40e8d079d0bfc31e902fe7d52525ba8633d78a79f36dcb47fd546de5087f613d60feb219faa777014ebe99e63a179bf7fd4a97c048afdabdb4e7c1b8dc52af72d0d2c5a514bb00deaec4e7facb82e1b2a7bcd719ff0b63084b3b33329756b3cb32304d8cc451ee6729f85abba240308b309b49267f684f9f0eeeb5f939ab25092d9e4ac6eafefcec80e86a12f9f6cba7a1b8c79248d8eb46064e2174f20a799aab8175679ec78a5bbf815a00a38d344f75bac7d1915797b9800208a23b030558d394755c93ab80411604d17d5c18691b1fc4c6bb0df9105c1b9969c6679dcc74e8d8d1d6ad84e265181ad3b2aad945a130e905c011618dcb0140e53693ac8ca855e82b6f86ccb78bd5eb166bb3879e19670c8daf4098fc3c88a9e5809debd82727de4ae62c393c8165a960d4ba4b979594feff2d816080f667d5fdb7fc83c81b8a313e7dbcb341d46dc206fdeff14f5337d1f1957650264c3c606945f9919e953d1b20f7cc91349e452d8363846427e773166f4595bf9304dd87457a12baca79d1de6e84182ee93d760239d890888aaf65e7d66d0de7ed2c78432c131eb92a2c062cb90f8e396ba42ec9e8693f993f213753bbd57483bb528326ac155df15638eee26fa8101cd8a4efb8d6d46794ffb7134385b072e44edf8a8c69ab4b9dea2d6f0a35dc85961a60482528cf59aba364645a74d3445a4480d70e3ff65cb06cdcb596c0db0d0afe8476c5ca43cf5041767b8ce1e5045c5e05b6ebe0064fa1ad6016c9714df6f8b6fc753b6c49124fff2d973030521dde537f46f66de7ab0cae4bbc8a0f0acce91313ad4bf174f75caa703a868d1c824b786edb9d367bd379b56be0b3e3fcf78ae75f0fe2b7b7491050ba588f46805143baf85f85f6f55f57ba268145d635943ae2445f2e7dfce8152b601c7658329348e944abef1d5eb64681f75e1498841a9df55ba797763ce0e118b05235fec1ec64294658ade199923d194b9a1955bdf992b1cf6148d1578a2e48bde72727c8cca837ca0690205c4b2774771b28ee4d838cdbbbd0300dbcb9c1186f3655fb7410a95313d1d07cbba400e8e69536f28bf019406938f50d896d2ddfaea35cb028445d120a1f6b80a9aa9b4b45fc608af22d4579441029cb3c15374b04b0becfe6b539594d90d3de0fc222642470ac4988ac148a23eb54e850c4c551dbb0f2a1f09f6a8d080a7e71565afd79c22e895259bfc34ea2c72fd217ed1c064c7a45178c84e68fd9bc2b5727892a9e824e52b220c6ad43d6ac069321b98856b0d08f294b184f59b1c3f859a6a529b385783e42bc5fa2d1964a32f935242bdb1c0e18edaebb17ba51489e92f11f02a8ae7c8ba19c61698b51af84612ab7eb5ae5fcad45a70065e2231d8ccfebf4fed5921428e35ea653f7223a7c9c8f5d0ac0359150cb754291387ebdc6e446a9d36b706f78ef78d517786e7b4b7a0fa4ac2c82955558dfda61beffcf0fbdd66e34045d063d60535efa22d8cdcdb8209484e1d9b583fe457fd84ac3c9c5405bb289a951cbf5edab1e851897f3d1d3778a4d5ee89fa546861eea3732cc47b267dfbb0f46736719a57c8679718b38a6ca9aadaf931f2fe6f791e3c97815028366349791e2eee86dfd8508913101ebf7a8756acebb03ad23857ddf808957a1b859d33ae7b84c0c5caf539a45093ce8411da9753fad594c3718a3e82b6da93c8efe99f70e6f9c544caebc86b2958c817e18ea17d228e4dbb30b544624caa8704a10429e2dcab3efafc8c5753a9ed717f1d354e0e326d8e8ac2942357b69959f3e8337aef54d3b864afa0ca974a3fabd8f75ad5b187eb568f20e852dec88eaf9006ef63b6e6c0bd38b0460a9724b7dd6be6c202aa108ed25af8f4364ab345b12c95b23e9ea0828f130619b11219651c73f3fdf6f3ac50820b9b486300262701595c3572eec6838b11a3d708abcba885be9e7911112efbbd2c6f483f225bb7459c586d19559d059f3d7e3781ddc024196d7ddb7a4823ecff73373e1adf52d4f8489744b4d85950a9c625e512c95d3a7741d46918b6bf56939a62062b24ccc99d24b719fcaef07a84c46c1c0638af2b9c485ae488a3fc885ddebaa9f801a7577870cf7cb724bbb8c66e8949a2dca434c7fd4831c149955b459a591138fdb67bfa040ffe3d7cad63298378d58f5d0121d0234224bb2648eab569cb9f9b7bf5a26151cf1f478b9c037f566500ca0a46db1b99a5500be9ada2b8c367d9660d537c619a3a0e77be0ff29c6663d51f24cfc29c771204630a70ecd3624017df3caa7c2d1c922acf7354ef57528392348b5f864ccd5ababa5aca3851fb60c750e09c7610de407fa10512509244e06b8be5c0bf121b265decf9fb5ae78509bd8abcfd5826b82bd9f4e75b2ad01cbfd17964bbafbedc2e8b0c6c384c24380adf630963dc47c36e4786f1258fa83c00a6f5404bdc35c263ee3f77df47066a0967c557bd910c0f391bec2269d97c78b04d4e306ca7a35647ffd1b1fd045012502c5c793ea4b5e51b46c9b6620364c64aa0b3091c15f799773a2a1176530e17e263e640f4fc2cf9addca630ee7987a3dec5dcacbc0c5bf5bfee6928dd0390cbad79449d857cfdea86fb42ed25907719e3811effa13f5e36829f245f47ad8245717b1ff023b5a92d7429484ba0d08dafe024e6716343ce81da1ddddb3ef7ca9c9342292f959720f3c614ab7dfd67a175972cc5d1c4b61525dd1f8ca493d1307112cea9bde07a4907edd1442c50ea12b0496fd741cc92cbeb57e7abf4dc7b0280882950a685fefb35166f3ecf4d191cab317ab912ba42d67d55467309c857c6859ac74c205781f153342896b2aebbc08b9438eaefd38af52dca0086ad1feaa7f6e2b3f647444a2ab215e6212808c66ced40e4744f59d3d9d4bf918d9e5e58818e448ff423001d5ac625518e38c14605179f364c3bc9a6b55fca70cb0779d9488c4c504734df0d5e6f4b141a43b5b0e9c1d6bc9b2670500b779a5f71005affedbb191815ac8056d8adc4cd86fe77a151cefdd4f5f2138cdc4fc268defeb839c5a37493da8e9af8bff851424f02267195b2f0a11b01a38f8080ef39cbecf8f72fce4ad31bd4bdb5f26c400bc4cfbf194d2350b18a7a794bd92a08948a52538c9c5c02df17351e35dd2000e58c416eeaff1fd151f9b91ba45e8498baf414ad9c0de5f9a42e059acd20d01b541430c7cafbf1db1789839ef14bb40ba87b5580f00d2f1febcf59499317de94380e870733a2a6214753261a12ec77e6012c284917be67774460410bec8d038c91e18adab7aa8fa6bb4e33783103f9842201af63f0036caf8aa106eb11c181ce6f41ad566ac0e9af00119c99b1394446e4cefdcf7961c95524fefc378d04a369b19b3ded2817fbbb75126ce0c810c58384aa963c23123f99913f5a969c8517bde2767b5cd69a0662251acd01dc075aee7608af7599f9f32dd8854f3750a7bfa3faec485bf7e8d3c56f94bb7d69235105d5da9165bae4a06bb8ce3b45bcf09439a4c2c9f75d9d3017e03af7b8e340fb3fcc471b1d5e14c477e0a4ba438d585f21ca54584f29ae40ef947379ca8fd73e1c50c622c0bc5eec41d66520f74a21aa9d7bdc5b0f29eb1778668d885e990997f9b961a572d63cdc0026ca46369a624241a1a672f7feaeaef1cc02ee1773f2f3b6b243bf644caceaac993895f5dc3dbcc2d769cc555ce8ef6ed382e2d805ddef6dc9256a4285af5f3c75d82b56b9f287fe14d805cf59beac70dc3cc8872d867900a29a7d4f41fc062eb2147f3f7d828e1956fa33df6fbf496550df62d2eaedd257a33cf120a4f1da11ce104d3760b55a4fcfcc17141f05ba746873a200deafa871b492f4df70b668953166e4cdbd3db00c4565a7c4210404596e0b0d7000783fe0bd8e7de6e9816a49dbcb46a8f5a76d27332d4e62b0724505cec121cdaa9922e774ec5076e18aa1a2d559884454f50e446fa46b69b81d02be74f853e7f0662ae5969c24bcccaf3e33e95ae568b6e678562369c7dd35c34ae0ac95c245b897f88d483429fdb09cdacc4e6ff2875b7585e3e39d48fb938d33e8011acee44be15c45b367166605fcdab2bdc967d06e16ee29fff597da5cff3b03a2c3d592428d509fa1e0a29123e25a6d12f70e2f9f2a9e2a07ac39098001ad365428403889fa2dfb863d5cd41e149f1776fdafbb3b7ab65f7c9c7e67ad1bd72cef6c517ed6e90cd36bc9e862492d999772dc6f4f47cf6067206784e8648be981568494870950e903e617f8a7b968f8728c7ac340f2f867e9626ddeff754d148e876d60a04d7021420183c68616707ea09222f4ce3608ab461596995e95466d4cffa216d86b82fb2e36839b1ce3495bb03156b7f8f5578b98aebe7426b463abf555c272115e88c962f5c0a3b20578943b79e318be76569a666c4c5cb1348405ecbb3b474a142fe0dcd19de9f13ba9aee0c4d94f7d695e0fcd614387a5ac9203d9b59f7ca2a5068fdbc02f702a93e340e2ef1813425ec33e60f572e3b4b4fd5b200f30b419dfc9fb30fb0cecd6626f490d6c800ddddf9b898e409a0700807658851e484d0bda85969fe73c870bba3d9ac1bad5f6bd8f7baea59eca0af153d279cd30fb243ddd1ba6e62dd0591944e7991e26d74c6723c5e1dac697b4385fb68d5fb68a33dfb4074ba6572088683653bb0392040c44bce99941a623942f16e075bef30ebe6d24597c98738741ac807b548775fbf4e0650a858dbd67310ca15a08ef8fa9d9331fe269777ab4f7f38b265195e846e8a6272b8698f660c7cdfba2bf84135827c04c282791e06b332cca49a463c51def13d8880cea095831ac58568c7e6b725276a6ad3e6a9c10818c3db27d474818761e962ae9210581ee4587673748818a00160ff40906d1f6bcf255c8a0c13ec2b98f9bda1d75e99930c2a1d80a1f5edd8276effacc350f59da34a3b5ef55388d4af70d4af795fde77bf64d43f4d54f6f1db45cca1ce7d2f3bb088e5cfc9dcea7afd2cceb05d497bfb1d9746293faf4e9d124b7f99370a2cb6fc0bbd632d3273f0381dca365db70a322950dda2228a2f068d1a79558c1386ad72f452a47a4e9488b570cb833f23d377c392c6c385a35367a054086c53c0ca542061db70ce2ee6250f7a70038b743e9dce637c5512d7e36a81aad8f430e1166a192827b386d3f0727c4a0805dc665bdc5f19d58fc997e4235b864780a1de7a66adeccd629c9ff1d1388e922c4a2283d2535dffec45610c498f02dbd1f387c103a33e6fb37a62881e420a583100b5bd8ff16b0777893f77c78e262f64707a9f3dfedeb7b7b1cbdf24beb04abd24cd14d27ccaac226b1df0855af0396357b5264663d6480c2e71226c9caa04b86c3e4c6c0f48347cca7dc079d2885f071e29c7671eef67b8664affaed991b6f778eb015993c3f15fe400d886cb2dc5c8cf9597f23fcf356ac73f1697cfd4cb0b2db4c3b09d842f38961ad081a0cc3253a8de0dad498adf0530c461e90f0a104b6786db63b8a1feb87180acc3b1235db25744be55ed121c86969e060d516c2e3099bf7d49edc44aa02849b3fe4faa8ecb4887dfcaf331bf6859678e251861fa2e61f957b4a1dce1d7c68a31f4cba44ddeca2461470e73bc581c4181fe7e49cba63dd0011945f12075d69cc8481f58297ae466b8d8ab300ec56c5d8d74d72f91f0d0c2d64ec4bf32e87001c11d532e2fb4f7d0d27bdc72f155667338b422d970f7ea06387cf715c6ffb84dc5f9cca9cb0f4d817f8a6e9e7c5eb60231eaaccbbb70d7734cbd01208f22de7ec9086724c882143dcc8a6d8e9aec37ecdf9adec0aa7bbc76f74723e5394141e1974e94688d2da8cb1639db608222806ff5e8b94dafb998ea996c65f64eaa0febbd4c4115306dbbd36d8e6d1d8e0a003821d09d8fe45b93f449939c5cbdb6dacecfe5156cbf1c2110179925d7e5dd3fb640baf6ed3e00ad902e0c01e500ab895281242e941f0fd122e99c79d058a7f2c2f05e4f6d0363b5d8112580a34e3e1a48aaa30a79e67e90bd5d3158d9cb6a54669d12a21c9ce0525c8212b4d91d6561a243f771fc58c3c54d96e0ac5dc66b2d8e35556f61ca0d7999330a77bb945e3be4977dc4ce0d9d106de90ec0e433a04f0fa3cefba716e294ce5c52c98851e08a9aa74b39f762b1009cb7d3eaa082ffca95c0618d1973a33e59de8eda5e536ce3bfcf479180d40178fe4fd517800c0eb8aa3f7eea502cacaf178bb69535a5141fffe08f560d1d23e5a392b5372408950d33b0a53dc63f278a3ba09a87603dd08a52982f85f0f6703cbe92b9b1e9380258e8df33e8066c6a97930156ec8a07b4f00d2619780cf9080f3f07353dd19b6f89d1cbc8235d6585f8a9b9087192d4170264829df78b6648cc56d6254d49789675f9bd0cf04aa3d93b5e7eb8d7674deaad38774594afd2b468368d8bb9f238b821770fcee16e85d7605f2a09376ca6de77288e705aa0215add9779ab10c2567ea4e85a634950f6180edb9778b665e8fa12195e09c8780c435958c8d4e14f6ed5da0a89776c8d9970191a6d9022c81104230ad3a9e7b5f8b38ef82bef9f415827e672ad2ef6803db885a1b91a3a76c0e739880c1ea21cffa6d9dd3a987878c14b47698138f31c5e02e8149d4496035a0d600e946d54957002092f16f6bc3a80c97efd79487afb16fb3280b22fb150d6da0a5b293ba54c0924d97f6a9499f8805cd021327b2858f9dcf85abf5f45c452478faebd59c0648e134c7419ab6b9a072e6dd208ddb9865ae66c1a805b5e75f97c6e79ee550809399be6319f376ff58dc267ea6e079eb2422c20f2499c43b5d9d847e4edebe2211f121e252627f6b11cec3527caa52774bf48af15cd521f64e52063927caf95621bfe256c2bb665e01f092a7ba62432bb9b4176ad218064d04a2f3563884a4ffd126c9ae60262f116a1f92d25260e82069ebfdcba7185f5bf80baa19f8f13cb084e5ceeb16b04a47698cddc67b22e03a3dd46b03b4ab729577f375ee54ded4371162dfd5a9c5444f57798e80e761fd385d184c1f96d39317da518ff252209f37ba2a7529882c9b4f523764f0025b149e89b57b9b1cf1cc72929b78df5f49e290b2c1672098f2ce0352647717978302b2ae5480982c4ea6aa11a90bda688ed1a226e521fe1d3c2df021d06fba493bb7c071502d90de5b8b6522b70c83e6a24b9cbfadf9793060f3b882dcf3815363849e8a03dc53231a52876e4d7139c988b3c71e389cb251390c8d57818a5d3db418a18680eefd168c34a288068007fd58c83d7bab6c6d7388251d5a62aa31856de2276d21228a5ddac4bf78eb68798cb9753bcac542ddcdb270553f0a746f71d0363cdd6d3c108952a1f659aa268b5d85f4cee5b8eaa40c7cd2978b502c7cdc4897bd819b031d1eb6ba536a1629589e99f50260cb7562614e8fd1121840d08b3b7e172e240c69a1e0909674413103e5fabe17211d94ade1b4a6db627db44b0c2cc6b1c5e6890a25747c4a4e0a03e879aee5ac3bc8872f4e5e68eb6919a3d5db1ece6c92dbeb375e20925085ab3df85dbfbfc77c0ec798c861bda26bda7bb4192e4376f7d8ccd8b2dfef6ad7e50dd9abdd7c675fb71c02a6acb0ea5a2374332132e73af297431e70f87889b6ee0944cdef1e1051a54907572fba6ccc4a29cd335c6cbfffc938c6d4f4ad746cffe6e70dee402229f5e2d4ff5b11418a2be85a1bca89ceae117e40488dfd5c8d3d8c84a1c6ca632374cc30efbd23cb8a1e5177bce582986c87ec7ea63e2085955b09aae124c1609ac5330dc4bb1c91b02fbca536204457bf86a4d195b3285999beb29693ea63e674c3382192796888204629f684c235dbe7fc431e61b9ca91e91f6707aef0ff21a9eb19f82e095470d020c9a05cc9dd95d884abdd2aefb9c413e89c3980a33067f2ca7c53cacbf8a214179ce74ad7eb7fe266b921ffa768ad8f3f183581f33eb36d51d3b3ab84f7fe7c0d97265f9f121094d9ff534d31f0d347628be310cb2326be660465816db20bfc92059d8e02ab02788d239fdaf7c29c123e593b5c4c61c854175ef1b0f8209c8b4d01b404fdca17069b16524f0d1741f7a5ffb49203ee5d0a3edc5c69ce537514d53edbf590c04679505d3da4f8de87d0a9293673de592c8c7cff8426b53d4d823e9abb6b1af82d3e99c469ea6cdb57cb4417529378ad8f25857c22515a4ffb082de3d7cc58fe2e4e570fecc85270defd431273045d8c40e4abce9b675fa0edb8bf58c4702eebcdf5b490881e198659405209df1c85954988d7a42aaa4a3338d7bb869fb336f9274d5f564c671dbddb1cc52603592267aa6dac2f161ca19702ddbbfb06f367857ae27a45bc0d621849d692e351a59b6d1877047429cbe7c1fe13bbfb5aa1dee978df8251b21de31672f9035da25ef3ebc1f021729df02ea8ebc78461630548eaaed2422b2ecc904087f412243cb7aa30b67b300ceed0dd30f691c6ecfc776547bed63a40381126b9960ed14758d9a6493c8886e4471ff739366b37307e9975eafe76546bf3d6d6e6b7f6a78a32134081f2c059bb41d46db3fba89fa5e388b14541b8872a8c22f278cab442f62134a9859fba323364956af2ec7fc571c916afddb94bb421149d062c3fd9288403812bef916fafab3e58ebb402b0c83c93a51797a4b550182eff4fd7fc1696431b04eb4e2c4e9c94a29aada7e0ae0e3a3240e76bd9b1806ac86b5a6a3d8e3be0fc3a3761fb85cda5e7ad1d96062cf45a94d0f0e3134b85258a5e1998125eb27f6bf1a5ac026405d435d41751dbfe3ef837500aaa4353f5fdcb0a75332a0c5dbf605b136b58638587e5fb9e69d1537b053a41f4a5a5a1626f38cb86ef2136f514b40f287b6b51bf5874aee7501173d213e35e849610153ca14551743c2147c7dda2473f92e073b4f594a3dd6000c670d9241ffa509cbc2189d3606bccba974cb95cb7a3bcea3cfed1775ec3450bccd19aea429d3453be8c02c8fd0b587a51b3275d7346be2196a95421a202ef57cf92d40ec6124e8b8eedf2444</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-              
+              <div class="markdown-body">
+                
+                <h3 id="1-三种网络模式"><a href="#1-三种网络模式" class="headerlink" title="1. 三种网络模式"></a>1. 三种网络模式</h3><h4 id="1-1-前言"><a href="#1-1-前言" class="headerlink" title="1.1. 前言"></a>1.1. 前言</h4><p>当 VMware 软件安装完成之后，会在电脑上虚拟出三块虚拟交换机和两块虚拟网卡：</p>
+<p>&#x3D;&#x3D;1.虚拟交换机&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416081037992.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.虚拟网卡&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416081010029.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-桥接模式"><a href="#2-桥接模式" class="headerlink" title="2. 桥接模式"></a>2. 桥接模式</h3><p><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416104756062.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3-Host-Only-模式"><a href="#3-Host-Only-模式" class="headerlink" title="3. Host-Only 模式"></a>3. Host-Only 模式</h3><h4 id="3-1-Host-Only-模式概述"><a href="#3-1-Host-Only-模式概述" class="headerlink" title="3.1. Host-Only 模式概述"></a>3.1. Host-Only 模式概述</h4><p><strong>Host-Only 模式</strong> 主要用于构建一个与外部网络隔离的虚拟网络环境。</p>
+<p>在该模式下，虚拟机只能与宿主机及同样处于 Host-Only 网络中的其他虚拟机通信，<strong>但是虚拟机无法访问外网，外网也无法访问虚拟机</strong>。  </p>
+<p>这种模式非常适合用于搭建内网测试环境，尤其在不希望虚拟机连接互联网或被外部访问的场景中尤为实用。</p>
+<hr>
+<h4 id="3-2-Host-Only-模式流程"><a href="#3-2-Host-Only-模式流程" class="headerlink" title="3.2. Host-Only 模式流程"></a>3.2. Host-Only 模式流程</h4><ol>
+<li>&#x3D;&#x3D;主机访问虚拟机&#x3D;&#x3D;：<ol>
+<li>请求 -&gt; VMware Network Adapter VMnet1 网卡（192.168.62.4）-&gt; VMnet1 虚拟交换机 -&gt;具体虚拟机</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;虚拟机访问外部网络&#x3D;&#x3D;：<ol>
+<li>🚫很抱歉，Host-Only 模式下，虚拟机是无法访问互联网的。<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416102940107.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="3-3-实现-Host-Only-模式"><a href="#3-3-实现-Host-Only-模式" class="headerlink" title="3.3. 实现 Host-Only 模式"></a>3.3. 实现 Host-Only 模式</h4><h5 id="3-3-1-配置-Vment1-虚拟交换机"><a href="#3-3-1-配置-Vment1-虚拟交换机" class="headerlink" title="3.3.1. 配置 Vment1 虚拟交换机"></a>3.3.1. 配置 Vment1 虚拟交换机</h5><p>&#x3D;&#x3D;1.点击 编辑 -&gt;-&gt;-&gt; 虚拟网络编译器&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.进入虚拟网络编辑器设置&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103052179.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;3. 配置Host-Only&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103438010.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="3-3-2-配置-VMware-Network-Adapter-VMent1-网卡"><a href="#3-3-2-配置-VMware-Network-Adapter-VMent1-网卡" class="headerlink" title="3.3.2. 配置 VMware Network Adapter VMent1 网卡"></a>3.3.2. 配置 VMware Network Adapter VMent1 网卡</h5><p>&#x3D;&#x3D;1.进入 IPV4 属性配置&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103242575.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.配置 IPV4 属性&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103521709.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="3-3-3-配置虚拟机-ens33"><a href="#3-3-3-配置虚拟机-ens33" class="headerlink" title="3.3.3. 配置虚拟机 ens33"></a>3.3.3. 配置虚拟机 ens33</h5><p>&#x3D;&#x3D;1.为虚拟机添加 NAT 网卡（ens37）&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103617846.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.配置 ens37&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103933146.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="4-NAT-模式"><a href="#4-NAT-模式" class="headerlink" title="4. NAT 模式"></a>4. NAT 模式</h3><h4 id="4-1-NAT-模式概述"><a href="#4-1-NAT-模式概述" class="headerlink" title="4.1. NAT 模式概述"></a>4.1. NAT 模式概述</h4><p>在 NAT 模式下，虚拟机通过宿主机的网卡进行网络访问，实际上是通过宿主机充当一个<strong>反向代理</strong>。这样，外部网络能够访问虚拟机，同时虚拟机也能访问外部网络。</p>
+<hr>
+<h4 id="4-2-NAT-模式流程"><a href="#4-2-NAT-模式流程" class="headerlink" title="4.2. NAT 模式流程"></a>4.2. NAT 模式流程</h4><ol>
+<li>&#x3D;&#x3D;主机访问虚拟机&#x3D;&#x3D;：<ol>
+<li>请求 -&gt; VMware Network Adapter VMent8 网卡（192.168.62.4） -&gt; Vment8 虚拟交换机 -&gt; 具体虚拟机</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;虚拟机访问外部网络&#x3D;&#x3D;：<ol>
+<li>请求 -&gt; 网关（虚拟 NAT 设备，192.168.62.2）-&gt; 主机网卡</li>
+<li>也就是说，虚拟机的请求会先通过主机的 IP，再由主机访问外部网络，相当于主机做了个反向代理</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416091811203.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="4-3-实现-NAT"><a href="#4-3-实现-NAT" class="headerlink" title="4.3. 实现 NAT"></a>4.3. 实现 NAT</h4><h5 id="4-3-1-配置-Vment8-虚拟交换机"><a href="#4-3-1-配置-Vment8-虚拟交换机" class="headerlink" title="4.3.1. 配置 Vment8 虚拟交换机"></a>4.3.1. 配置 Vment8 虚拟交换机</h5><p>&#x3D;&#x3D;1.点击 编辑 -&gt;-&gt;-&gt; 虚拟网络编译器&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250315102345834.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.进入虚拟网络编辑器设置&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416103059206.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;3.进行 NAT 配置&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416093922129.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;4.配置 NAT 网关&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094237485.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="4-3-2-配置-VMware-Network-Adapter-VMent8-网卡"><a href="#4-3-2-配置-VMware-Network-Adapter-VMent8-网卡" class="headerlink" title="4.3.2. 配置 VMware Network Adapter VMent8 网卡"></a>4.3.2. 配置 VMware Network Adapter VMent8 网卡</h5><p>&#x3D;&#x3D;1.进入 IPV4 属性配置&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094344342.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.配置 IPV4 属性&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416094700930.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="4-3-3-配置虚拟机-ens33"><a href="#4-3-3-配置虚拟机-ens33" class="headerlink" title="4.3.3. 配置虚拟机 ens33"></a>4.3.3. 配置虚拟机 ens33</h5><p>&#x3D;&#x3D;1.为虚拟机添加 NAT 网卡（ens33）&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416101054447.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.配置 ens33&#x3D;&#x3D;<br><img src="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/image-20250416100814721.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
 
-              
+                
+              </div>
             
             <hr/>
             <div>
@@ -422,8 +489,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E7%94%9F%E6%80%81/" title="笔记：Git 生态">
-                        <span class="hidden-mobile">笔记：Git 生态</span>
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/" title="笔记：ElasticSearch">
+                        <span class="hidden-mobile">笔记：ElasticSearch</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -620,23 +687,6 @@
     }
   });
 </script>
-
-
-  
-  <script defer>
-    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
-      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
-        var hbePrefix = document.querySelector('hbe-prefix');
-        hbePrefix.parentElement.classList.add('markdown-body');
-        Fluid.utils.retry(function() {
-          if (Fluid.boot && Fluid.boot.refresh) {
-            Fluid.boot.refresh();
-            return true;
-          }
-        }, 100, 10);
-      })
-    }
-  </script>
 
 
   

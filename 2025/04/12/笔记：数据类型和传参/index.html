@@ -19,23 +19,25 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+    <meta name="description" content="考虑，具体该怎么传值 ES 数据类型 &#x3D;&#x3D;字符串&#x3D;&#x3D;： 可分词文本： text   精确值： keyword     &#x3D;&#x3D;数值&#x3D;&#x3D;： 整数类型： byte： 1 字节，-128 到 127   short： 2 字节，-32768 到 32767   integer： 4 字节，-2³¹ 到 2³¹-1   long：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：云计算四种服务模式">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/04/05/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%BA%91%E8%AE%A1%E7%AE%97%E5%9B%9B%E7%A7%8D%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="笔记：数据类型传参">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/04/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="考虑，具体该怎么传值 ES 数据类型 &#x3D;&#x3D;字符串&#x3D;&#x3D;： 可分词文本： text   精确值： keyword     &#x3D;&#x3D;数值&#x3D;&#x3D;： 整数类型： byte： 1 字节，-128 到 127   short： 2 字节，-32768 到 32767   integer： 4 字节，-2³¹ 到 2³¹-1   long：">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-05T09:14:29.707Z">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
+<meta property="article:published_time" content="2025-04-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-22T15:52:16.066Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>笔记：云计算四种服务模式 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：数据类型传参 - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="笔记：云计算四种服务模式"></span>
+            <span id="subtitle" data-typed-text="笔记：数据类型传参"></span>
           
         </div>
 
@@ -223,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-05 00:00" pubdate>
-          April 5, 2025 am
+        <time datetime="2025-04-12 00:00" pubdate>
+          April 12, 2025 am
         </time>
       </span>
     
@@ -235,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          841 words
+          1k words
         
       </span>
     
@@ -246,7 +248,7 @@
         
         
         
-          8 mins
+          9 mins
         
       </span>
     
@@ -296,12 +298,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">笔记：云计算四种服务模式</h1>
+            <h1 id="seo-header">笔记：数据类型传参</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-05T17:14:29+08:00
+                    Last updated on 2025-04-22T23:52:16+08:00
                   
                   
 
@@ -309,22 +311,280 @@
               </p>
             
             
-              
-              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="39cd01a7f5a12b74084dd7731868e79139fdb6a76cedce8c32d88231a047f74b">9ce4f525d51b2104a9972422eaedb147088178c2ec3a5082e17255bc2968cebea9ac505d49286f0b7bf195cfbf371cdbcf8b12b7591642b8acaa0d33105650ccb252aeaf2d8ad3675f6e572ca5664851697c5bf9260932b1ae474cf7833a3756c6974950a2c8c30e62ba65c68887ec07f9ac7b8d3a8b665989ee1f2a77648626706c273fd33a40c578b4d66be0334ce10bb3745bcad1a8c86a1bd1869907dab32a88a92f29d3e7ad7a9d6f4756268497b16fb2f50ad7947860a051ec9be37cbc2cd7894dd1316ff21b695f1032079968b6665767021b1e7bb3c56280fd04f667e576690f38b35448ef0d5c455af9f70a0b43c137b12c8f7384f3573180e2b3f5701c19d54b6cb1866393658977f0db0c3f88237ee1aa04fbcea3e84fe2370ed5b30b46b9b671b6225491f93224ea12b4584c7597e70a54c087b0033cc4ac8653491aa0a3e9a375201a1064d9e1fe669a03f43e7b9d19c96b2b1b62dafa6248b44aa6007adcce9c10cab3d68910897231b3e7d718d4ba3cbc1852242549d13e2d6cefcd745fe7c5c2355230ebfa4d22fc7f1ec6188c9ed45df70d91a36cb45f07e079f9f801448b6d6ca9cdf2960a36d0b40d049d631c2494e597cc2afb7b090848fff41351f33cf37ff9494403619c14f279b302911cc1b3fd94b661e8665f32acf2d50e24ffa23efcdad14a4001e65af6cf23c958c33281815cf4c6ba2647819c8d9ebf6418f10dcafec6c55092a182f066a5f04a2b4b8e3b5c6c878e89e158d91a625fd5ea34be4f3c0f807ba7f438a3f91c0ce70fe6eed0d95120895dca2d60cc65f4c6a4dc9054d1c8d75ebdee4b8eb58fed77b07d74b7667300dc69ef4bedffa3e4d484440d11d4cc576fba42addcb81cf2c94e84441ee7cbedf09b8df5abbeb124c59bbb3ed9410574c46d69af67aec191b10a8f02eccf1c00011598afd0dae7ac0f4b7349eaed22e50c4d579343d85064315f227c2bc0ef4a1ffb5bc67836652d2803b8de03000062c574bc293be10772c0f73bcca53721975f83fc7483fc17f1e3ce9fcf71a2e7a8733ed3d78108484ff916cfaf33157a7b232771a995526ce23360960984d93fbe085e7a8b075d64a8ee9825b6f6b23bcd36979b6c2d19ce14f3bab14efc7814fc4866cb62dcd43ebb980f1d04fcd9c2ca21fda44462778bfe83613db58665adfe40292ac952defcadd591ada8ac15e8cc30471949d09c0a3f6efea0138b2666b674e396ac570edd07c1e63c2ee34bcad703197f9b9f1271e1771f7d1da561d9a6f46fe2fbfc029168fab1f746191c8d1a3968d353f2e2a039b23f633e068dbe741310f84ba03f3067b45818aa567021885b2da1d02163924759b76d23086895653988b9db81485c76a7b39d657b6f589f09b47a06ee8675528be2d199a5c514123aa43ac93e6f67a1bc207a64ca7d80af1bbf37d8ae6934de0936895a48a9b3fca16492ed98e78c04220f15dd5ef567d97f0fab153dd98612c1c7949a225c3dd90b308bedff66711c4a3a85401feb4a8bbbfda99d25fe1607558bb9747ad908c91ca81d30aabc8d8fdaac2420d686c298c87dab522008e708cb7bdf91076727a556e3f0b3739109bc375f08f4c88066db458d88c3fc17675b660c39170f3d45caff04fdfe04ddc2baa1aeab974a0d419b3f2d16a0cb8f6aad45843bd57e79921d89de1ee0930ee6ac0afa4cdca91377f8d45ef6acd92204bd234bdcaec3e5f983baa648d5ff7dcb5291f46bd840a22e9a6cfab5eab6d2fc86516118639fdd251ff1ec3b6fa02cdad163aaade3140ce226c5aa664144b7f1256270f6eea8f459692bbd3ba4755901136619026cc5b91d54cbf03597a2f23b45424b7387f7d0c07b1f8fb0658c70a5c24479ddad1cfde6aa1418b8126a450080d1e0753e2991bdcb38139149aa8bd2023270488a99faae008d19f21a529798bc2c42b9a83ec5bd7c18e4b194d6a8a845b36d843b3e38b5da0eacee96ce31d767afe99a682e40c118613617e03d180e9938d8111cc8fe81b7f1c7f367d027c7af31935391e5e8a0f8a1829511c6a3e98354a86f3b1442d16812554ffa42ec161ba523e73989b1635ce9522929803a92e8b40fd28293c79f145c69ed1fbd5120d5f21b33176f4d5bb2a92a1513cf5bc8998dec26ae3d02fa495699fbc16ee25bb7b0ae5f65d7fba938ad348f43771466af9d24fe04b997dddec2375072a51024c3281f69058e9ade40675464eab2d42d20640d8eee02a567db6fcdda58993636271aa71a40c7990cc047015ee1b7772b31ddb1fdfed5c3268ac609db649e5bbce5fe6d7d7da3a6be57ec1ccde79ae47e23007fe4c992975b2be50ea6551f72d87c9c3fb51e3e84eeff1a5e7af9da15d3e1ca6923128ead34615c13f309d1e71358f59beb61c39ad9a138c98b88b0b134c611c5d6e8ea07dec61e91b560a24422552f296a1576958bc9959e7f5113a4542e26f0756d42dccc4e31caa6baed367f94c11deaf093758fcd94df2458d5aa27e2c3fe3bbc7b1d61e3a33c005af73b2e387b98dcf2f08b845f7317d8e4228ea3c8c39770acdf88fbd3e8d1d61de1ca9864ca34f05184a801804528f57b3951c136ed4ebb2e34c33011b920166616ef7f926904934e7721f44a4ffc2c82f3f4da67b14994753837ea0c4f0380247ed56dfd85172f0dbbc903b77d018206fd2f6941ff4b860fd96d4e719711e415d13068f482a198cea4f9d5281740b0efcf3bb0910755485b06343e00aca2473439dab33703cb2a601c83a7ffedbd2b4747e9589dcd733f1f331a5fa4047e73a058e5cf860220d5b50b12d10ebaa5bdd95d95f0cb9dc4151c6a5dc250bde4fa3fe781a824e5580ad16f5e27c20a58860b3ed88c91e8f685b02e239eddd8cc150f2fe7563fd9b3a59e07b326758867052023ec5ac4c0ca20cd844ff6f4d696e6208bfead66d27ff79d4e5b3bd18d952ec93661129e99df0a04578b32fccb9fd4c01982509372c870cd8ac2f6bc4611ed552c3adc19045a77c75cc5964d45e18e205791e95d252cacc292ebdd613e0695f4e46968999bcb64887d9d2dc41f02fd78dceaba90c8c57247f44d57975138d6111134a5caa0f01c96bb88e45cef0e4f3f5e78d1396eb8074a97dbb7b755a83dcbb6c507274d2bb50691f1b85a7553c9778a3a1307be9439922b95e7dacd6624783145bca5b160724bd03e88b97b42d3867d5c63cfdeabe426431b1f7948e5f74d6d5b107c8c66ba1d3f63cf94fbc653eb7942629fdd645057e90b2b402c75418287475ec75c241627902dca28271b9c968cddda95caf353beb024055c289804dc0e2416e0b71b93b6cf7ae209ee7390ff47a36f7f066fbdfca6aff28d0a288a9b638ff1e2cf067e0bd01ae2316543f33610c73d9aec49abaff0023b788ea124ac36b9723371f6d69e57a243020956f8997e080ab458989a426b715ca0057b21efcceaefc7eb2c84c86b38725f3c1870860766d9f79e4c197169d58ac9538400edd118cd84988a1d942104f901a11c053fd59daa103cf58518fb8a8de59f1f1501f431e6fa80457cdda94bd778d2e38bc99ff3915ebb8c92e39105090cc73b49dea9d911c6532916eaab89549e0eb10ee1d03403054a5421ce48b2d47cefcd3a9422dbc717d0729e7cdea0ad229e229d92bd3f41e87d9a9687607d02112cc1b11bb1d39410d70d8f0ca15be8e41d159c922b381ca923702ecd707baab40f05a779f87a07bb90b641b4877fdf75e4bf602f57e6d850db23a95fc55c2561800dcac88fb0fd8dd729230297fd4dd81147ab55bc754d4e54e2a281c1dd924e41ef2a6f235426d31e3bc33fab88f6fc6ed66138a1f483db083c83821d436394d528607f7d43db90512795abaa3af1082e405068452e21ce6995588c1731cee8b8617f5409754a6df7ad964602571aa6e27a574236e9aa4b598f71aa018bc6c56e392fdbf8067e36240612d980a5b99b76b7302303d7fa4248034dc3f8609fc8a10fbd851ae1e402159ca3d61ddfcb98d4d5d43c1ab47c676ae99013455e2ee998af7e107c98f9ddbd344ac67e62563fd2453b4ddd013b6c3cbbfa34b19c3139023c18f6ff88eb64be836bd7a6e8dd53a2413e3301787ad1736dd55a2781fc5ab24de2f3b5bc9b43cc65473d55bcd255f7f5f3e87b07cffa976edbc4463cfcbbbc016fb0629fe8a131a72a79806680348e52175d4b74dcee10de3314dfe74b6a683ad6166afa5a34cddba8fa5fc8e3f90b07f64810f897ac7994dc5d2dfaf65e290bf1ec57cf34e2bc4f9760d5288e36409c695b68286152e87a6dd4c63f3edce5f78c62798ad1b8fbb73ceadadc064b0301e60e190c5f8fe112a91d03d410ac3447027ea5f132a70e779d040428ecee79e7e18291153eba5e4520cc1a8b5385521cd0ce45b40c74d37ebca469f0dfa9a23702a26b685a4aa0c8d1178c67cef8fa77175b49c8df4398b1a673de1b694955ad94e27f425016bd3587f8601f3cd0c947668a46e9853212508d16925112e18f4fa0f44c03a74e3926275049e0aa1e8e1b7ada599d60a9d0becdf3c171846d578ea770</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-              
+              <div class="markdown-body">
+                
+                <p>考虑，具体该怎么传值</p>
+<h3 id="ES-数据类型"><a href="#ES-数据类型" class="headerlink" title="ES 数据类型"></a>ES 数据类型</h3><ol>
+<li>&#x3D;&#x3D;字符串&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">可分词文本</font>：<ol>
+<li>text</li>
+</ol>
+</li>
+<li><font color="#00b0f0">精确值</font>：<ol>
+<li>keyword</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;数值&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">整数类型</font>：<ol>
+<li><font color="#7030a0">byte</font>：<ul>
+<li>1 字节，-128 到 127</li>
+</ul>
+</li>
+<li><font color="#7030a0">short</font>：<ul>
+<li>2 字节，-32768 到 32767</li>
+</ul>
+</li>
+<li><font color="#7030a0">integer</font>：<ul>
+<li>4 字节，-2³¹ 到 2³¹-1</li>
+</ul>
+</li>
+<li><font color="#7030a0">long</font>：<ul>
+<li>8 字节，-2⁶³ 到 2⁶³-1</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><font color="#00b0f0">浮点数类型</font>：<ol>
+<li><font color="#7030a0">half_float</font>：<ul>
+<li>2字节，3~5 位十进制精度</li>
+</ul>
+</li>
+<li><font color="#7030a0">float</font>：<ul>
+<li>4字节，7 位十进制精度</li>
+</ul>
+</li>
+<li><font color="#7030a0">double</font>：<ul>
+<li>8字节，15~16 位十进制精度</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;布尔&#x3D;&#x3D;：<ol>
+<li>boolean</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;日期&#x3D;&#x3D;：<ol>
+<li>date</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;对象&#x3D;&#x3D;：<ol>
+<li>object</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;地理坐标&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">geo_point</font>：<ol>
+<li>由经度和纬度确定的一个点</li>
+<li>赋值时使用：<code>&quot;字段名&quot;: &quot;40.73, -73.93&quot;</code></li>
+</ol>
+</li>
+<li><font color="#00b0f0">geo_shape</font>：<ol>
+<li>由多个 <code>geo_point</code> 组成的复杂集合图形，例如直线、矩形等等</li>
+<li>赋值时：<ol>
+<li>点：<code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code></li>
+<li>矩形：<code> &quot;字段名&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code></li>
+<li>多边形：<code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;,&quot;coordinates&quot;: [ [[-73.93, 40.73], [-73.94, 40.74], [-73.95, 40.73], [-73.93, 40.73]] ] &#125;</code></li>
+<li>圆形：&#96;”字段名”: { “type”: “circle”,”coordinates”: [-73.93, 40.73],”radius”: “10km”}</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="Java-数据类型"><a href="#Java-数据类型" class="headerlink" title="Java 数据类型"></a>Java 数据类型</h3><h3 id="MySQL-数据类型"><a href="#MySQL-数据类型" class="headerlink" title="MySQL 数据类型"></a>MySQL 数据类型</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png" srcset="/img/loading.gif" lazyload></p>
+<p>简单类型、包装类、array、list、set、map、对象</p>
+<p>参数类型可以根据实际需求灵活选择，包括简单类型（主要使用）、包装类、数组（Array）、集合类（List、Set、Map）、实体类对象（主要使用）以及其他普通对象等，均可作为参数传入。</p>
+<p>无论方法中需要传递多少个参数，我们都<strong>推荐为每个参数显式使用 <code>@Param</code> 注解</strong>。这是 MyBatis 提供的注解，用于为传入 SQL 的参数命名，以确保 SQL 语句中能够准确引用对应参数，提升可读性和可维护性。</p>
+<h3 id="MySQL-ES"><a href="#MySQL-ES" class="headerlink" title="MySQL -&gt; ES"></a>MySQL -&gt; ES</h3><table>
+<thead>
+<tr>
+<th>MySQL 数据类型</th>
+<th>ES 数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>字节数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TINYINT</code></td>
+<td>1</td>
+<td>很小的整数，范围：有符号 <code>-128~127</code>，无符号 <code>0~255</code></td>
+</tr>
+<tr>
+<td><code>SMALLINT</code></td>
+<td>2</td>
+<td>小整数，有符号 <code>-32,768~32,767</code>，无符号 <code>0~65,535</code></td>
+</tr>
+<tr>
+<td><code>MEDIUMINT</code></td>
+<td>3</td>
+<td>中等整数，有符号 <code>-8,388,608~8,388,607</code>，无符号 <code>0~16,777,215</code></td>
+</tr>
+<tr>
+<td><code>INT</code> 或 <code>INTEGER</code></td>
+<td>4</td>
+<td>标准整数，有符号 <code>-2^31~2^31-1</code>，无符号 <code>0~2^32-1</code></td>
+</tr>
+<tr>
+<td><code>BIGINT</code></td>
+<td>8</td>
+<td>大整数，有符号 <code>-2^63~2^63-1</code>，无符号 <code>0~2^64-1</code></td>
+</tr>
+<tr>
+<td><code>FLOAT(M,D)</code></td>
+<td>4</td>
+<td>单精度浮点数，M 是总位数，D 是小数位数（精度约为 7 位十进制）</td>
+</tr>
+<tr>
+<td><code>DOUBLE(M,D)</code> 或 <code>REAL</code></td>
+<td>8</td>
+<td>双精度浮点数（精度约为 15 位十进制）</td>
+</tr>
+<tr>
+<td><code>DECIMAL(M,D)</code> 或 <code>NUMERIC(M,D)</code></td>
+<td>变长</td>
+<td>精确小数，不丢失精度，M 是总位数，D 是小数位（用于金融等）</td>
+</tr>
+</tbody></table>
+<p>&#x3D;&#x3D;2.字符串类型&#x3D;&#x3D;</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>字节数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CHAR(n)</code></td>
+<td>固定 n 字节（1 ≤ n ≤ 255）</td>
+<td>固定长度字符串，不足部分补空格，适合长度一致的数据</td>
+</tr>
+<tr>
+<td><code>VARCHAR(n)</code></td>
+<td>实际长度 + 1&#x2F;2 字节</td>
+<td>可变长度字符串，n ≤ 65,535（受行大小和字符集影响）</td>
+</tr>
+<tr>
+<td><code>TEXT</code></td>
+<td>最大 65,535 字节（64KB）</td>
+<td>大文本字段，不可创建索引（除非指定长度）</td>
+</tr>
+<tr>
+<td><code>TINYTEXT</code></td>
+<td>最大 255 字节</td>
+<td>小文本字段</td>
+</tr>
+<tr>
+<td><code>MEDIUMTEXT</code></td>
+<td>最大 16,777,215 字节（16MB）</td>
+<td>中文本字段</td>
+</tr>
+<tr>
+<td><code>LONGTEXT</code></td>
+<td>最大 4,294,967,295 字节（4GB）</td>
+<td>大文本字段</td>
+</tr>
+<tr>
+<td><code>BINARY(n)</code></td>
+<td>固定长度二进制数据</td>
+<td>类似 CHAR，但存储二进制数据</td>
+</tr>
+<tr>
+<td><code>VARBINARY(n)</code></td>
+<td>可变长度二进制数据</td>
+<td>类似 VARCHAR，但存储二进制数据</td>
+</tr>
+<tr>
+<td><code>BLOB</code></td>
+<td>二进制大对象，最大 64KB</td>
+<td>用于存储二进制数据，如图片、音频</td>
+</tr>
+<tr>
+<td><code>TINYBLOB</code></td>
+<td>最大 255 字节</td>
+<td>小二进制对象</td>
+</tr>
+<tr>
+<td><code>MEDIUMBLOB</code></td>
+<td>最大 16MB</td>
+<td>中等大小二进制对象</td>
+</tr>
+<tr>
+<td><code>LONGBLOB</code></td>
+<td>最大 4GB</td>
+<td>超大二进制对象</td>
+</tr>
+<tr>
+<td><code>ENUM</code></td>
+<td>1 或 2 字节</td>
+<td>枚举类型，取值需从预设的字符串中选（如 <code>&#39;male&#39;, &#39;female&#39;</code>）</td>
+</tr>
+<tr>
+<td><code>SET</code></td>
+<td>1~8 字节</td>
+<td>多选枚举（可同时选多个值）</td>
+</tr>
+</tbody></table>
+<p>&#x3D;&#x3D;3.时间和日期类型&#x3D;&#x3D;</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>字节数</th>
+<th>描述</th>
+<th>格式示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DATE</code></td>
+<td>3</td>
+<td>仅日期，范围：<code>1000-01-01 ~ 9999-12-31</code></td>
+<td><code>&#39;YYYY-MM-DD&#39;</code> → <code>2025-04-09</code></td>
+</tr>
+<tr>
+<td><code>TIME</code></td>
+<td>3</td>
+<td>仅时间，范围：<code>-838:59:59 ~ 838:59:59</code></td>
+<td><code>&#39;HH:MM:SS&#39;</code> → <code>14:23:59</code></td>
+</tr>
+<tr>
+<td><code>DATETIME</code></td>
+<td>8</td>
+<td>日期 + 时间，范围：<code>1000-01-01 00:00:00</code> ~ <code>9999-12-31 23:59:59</code></td>
+<td><code>&#39;YYYY-MM-DD HH:MM:SS&#39;</code> → <code>2025-04-09 14:23:59</code></td>
+</tr>
+<tr>
+<td><code>TIMESTAMP</code></td>
+<td>4</td>
+<td>UNIX 时间戳（UTC），1970年起的秒数，可自动更新时间</td>
+<td><code>&#39;YYYY-MM-DD HH:MM:SS&#39;</code> → <code>2025-04-09 06:23:59</code></td>
+</tr>
+<tr>
+<td><code>YEAR</code></td>
+<td>1</td>
+<td>表示年份，范围：<code>1901 ~ 2155</code></td>
+<td><code>&#39;YYYY&#39;</code> → <code>2025</code></td>
+</tr>
+</tbody></table>
 
-              
+                
+              </div>
             
             <hr/>
             <div>
@@ -340,12 +600,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%8E%E4%BA%91%E8%AE%A1%E7%AE%97/" class="category-chain-item">虚拟化、容器化、自动化与云计算</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96%E4%B8%8E%E4%BA%91%E8%AE%A1%E7%AE%97/%E4%BA%91%E8%AE%A1%E7%AE%97/" class="category-chain-item">云计算</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/" class="category-chain-item">数据类型和传参</a>
   
   
 
@@ -367,8 +627,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>笔记：云计算四种服务模式</div>
-      <div>https://wangjia5289.github.io/2025/04/05/笔记：云计算四种服务模式/</div>
+      <div>笔记：数据类型传参</div>
+      <div>https://wangjia5289.github.io/2025/04/12/笔记：数据类型和传参/</div>
     </div>
     <div class="license-meta">
       
@@ -380,7 +640,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 5, 2025</div>
+          <div>April 12, 2025</div>
         </div>
       
       
@@ -412,9 +672,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/05/%E7%AC%94%E8%AE%B0%EF%BC%9AMIME%20%E7%B1%BB%E5%9E%8B/" title="笔记：MIME 类型">
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/" title="笔记：文档框架">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：MIME 类型</span>
+                        <span class="hidden-mobile">笔记：文档框架</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -422,8 +682,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/05/%E7%AC%94%E8%AE%B0%EF%BC%9AWebmin/" title="笔记：Webmin">
-                        <span class="hidden-mobile">笔记：Webmin</span>
+                      <a href="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" title="笔记：Java 异常处理">
+                        <span class="hidden-mobile">笔记：Java 异常处理</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -620,23 +880,6 @@
     }
   });
 </script>
-
-
-  
-  <script defer>
-    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
-      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
-        var hbePrefix = document.querySelector('hbe-prefix');
-        hbePrefix.parentElement.classList.add('markdown-body');
-        Fluid.utils.retry(function() {
-          if (Fluid.boot && Fluid.boot.refresh) {
-            Fluid.boot.refresh();
-            return true;
-          }
-        }, 100, 10);
-      })
-    }
-  </script>
 
 
   
