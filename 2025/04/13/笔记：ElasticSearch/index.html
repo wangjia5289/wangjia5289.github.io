@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
+  <meta name="theme-color" content="#373737">
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418184335457.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418184408057.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-22T10:54:06.600Z">
+<meta property="article:modified_time" content="2025-04-24T07:04:12.288Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418190141210.png">
@@ -190,18 +190,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -327,7 +315,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-22T18:54:06+08:00
+                    Last updated on 2025-04-24T15:04:12+08:00
                   
                   
 
@@ -394,7 +382,7 @@
 
 
 <p>&#x3D;&#x3D;4.查询索引&#x3D;&#x3D;</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 1. 查询索引库</span><br><span class="hljs-built_in">GET</span> /&lt;索引库名称&gt;<br><br><br><span class="hljs-comment"># 2. 查询索引分片分布状态</span><br><span class="hljs-built_in">GET</span> /_cat/shards?v<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 1. 查询索引库</span><br><span class="hljs-built_in">GET</span> /&lt;索引库名称&gt;<br><br><br><span class="hljs-comment"># 2. 查询索引库详细信息</span><br><span class="hljs-built_in">GET</span> /_cat/shards?v<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h4 id="3-4-文档命令"><a href="#3-4-文档命令" class="headerlink" title="3.4. 文档命令"></a>3.4. 文档命令</h4><h5 id="3-4-1-创建文档"><a href="#3-4-1-创建文档" class="headerlink" title="3.4.1. 创建文档"></a>3.4.1. 创建文档</h5><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-comment"># 1. 模版</span><br>POST /<span class="hljs-variable">&lt;索引库名&gt;</span>/_doc/<span class="hljs-variable">&lt;文档 ID&gt;</span><br>&#123;<br>    <span class="hljs-string">&quot;字段1&quot;</span>: <span class="hljs-variable">&lt;值 1&gt;</span><br>    <span class="hljs-string">&quot;字段2&quot;</span>: <span class="hljs-variable">&lt;值 2&gt;</span><br>    <span class="hljs-string">&quot;字段3&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;子属性1&quot;</span>: <span class="hljs-variable">&lt;值 3&gt;</span><br>        <span class="hljs-string">&quot;子属性2&quot;</span>: <span class="hljs-variable">&lt;值 4&gt;</span><br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment"># 2. 示例</span><br>POST /user_index/_doc/1<br>&#123;<br>  <span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;张三&quot;</span>,<br>  <span class="hljs-string">&quot;email&quot;</span>: <span class="hljs-string">&quot;zhangsan@example.com&quot;</span>,<br>  <span class="hljs-string">&quot;profile&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;gender&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>,<br>    <span class="hljs-string">&quot;age&quot;</span>: 28<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>

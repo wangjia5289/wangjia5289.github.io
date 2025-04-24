@@ -15,20 +15,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
-  <meta name="theme-color" content="#2f4154">
+  <meta name="theme-color" content="#373737">
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="考虑，具体该怎么传值 ES 数据类型 &#x3D;&#x3D;字符串&#x3D;&#x3D;： 可分词文本： text   精确值： keyword     &#x3D;&#x3D;数值&#x3D;&#x3D;： 整数类型： byte： 1 字节，-128 到 127   short： 2 字节，-32768 到 32767   integer： 4 字节，-2³¹ 到 2³¹-1   long：">
+    <meta name="description" content="考虑，具体该怎么传值 ES 数据类型   名称 范围 描述 赋值示例    数值类型      byte 1字节，-128 ~ 127 小范围整数 “age”: 20   short 2 字节，-32768 ~ 32767 稍大范围整数 “small_order_count”: 300   integer 4 字节，-2^31 ~ 2^31 -1 常规整数 “sales_volume”: 1234">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：数据类型传参">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="考虑，具体该怎么传值 ES 数据类型 &#x3D;&#x3D;字符串&#x3D;&#x3D;： 可分词文本： text   精确值： keyword     &#x3D;&#x3D;数值&#x3D;&#x3D;： 整数类型： byte： 1 字节，-128 到 127   short： 2 字节，-32768 到 32767   integer： 4 字节，-2³¹ 到 2³¹-1   long：">
+<meta property="og:description" content="考虑，具体该怎么传值 ES 数据类型   名称 范围 描述 赋值示例    数值类型      byte 1字节，-128 ~ 127 小范围整数 “age”: 20   short 2 字节，-32768 ~ 32767 稍大范围整数 “small_order_count”: 300   integer 4 字节，-2^31 ~ 2^31 -1 常规整数 “sales_volume”: 1234">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
 <meta property="article:published_time" content="2025-04-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-22T15:52:16.066Z">
+<meta property="article:modified_time" content="2025-04-23T14:46:38.256Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
@@ -166,18 +166,6 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>About</span>
@@ -237,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k words
+          1.6k words
         
       </span>
     
@@ -248,7 +236,7 @@
         
         
         
-          9 mins
+          14 mins
         
       </span>
     
@@ -303,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-22T23:52:16+08:00
+                    Last updated on 2025-04-23T22:46:38+08:00
                   
                   
 
@@ -314,7 +302,209 @@
               <div class="markdown-body">
                 
                 <p>考虑，具体该怎么传值</p>
-<h3 id="ES-数据类型"><a href="#ES-数据类型" class="headerlink" title="ES 数据类型"></a>ES 数据类型</h3><ol>
+<h3 id="ES-数据类型"><a href="#ES-数据类型" class="headerlink" title="ES 数据类型"></a>ES 数据类型</h3><table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>范围</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>赋值示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数值类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>byte</code></td>
+<td>1字节，-128 ~ 127</td>
+<td>小范围整数</td>
+<td>“age”: 20</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>2 字节，-32768 ~ 32767</td>
+<td>稍大范围整数</td>
+<td>“small_order_count”: 300</td>
+</tr>
+<tr>
+<td><code>integer</code></td>
+<td>4 字节，-2^31 ~ 2^31 -1</td>
+<td>常规整数</td>
+<td>“sales_volume”: 1234567890123</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>8 字节，-2^63 ~ 2^63 -1</td>
+<td>非常大的整数</td>
+<td>“sales_volume”: 1234567890123</td>
+</tr>
+<tr>
+<td><code>half_float</code></td>
+<td>2 字节，± (2 - 2^(-10)) × 2^15</td>
+<td>半精度浮点数牺牲精度，节省空间</td>
+<td>“sensor_data”: 12.3</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4 字节，± (2 - 2^(-23)) × 2^127</td>
+<td>常规浮点数，精度较低</td>
+<td>“rating”: 4.5</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8 字节，± (2 - 2^(-52)) × 2^1023</td>
+<td>双精度浮点数，高精度，适合科学计算</td>
+<td>“measurement_value”: 0.000000123</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>字符串类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>keyword</code></td>
+<td></td>
+<td>精确匹配，不分词</td>
+<td>“status”: “published”</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td></td>
+<td>全文检索，分词处理</td>
+<td>“title”: “Elasticsearch Guide”</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>布尔类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td>true、false</td>
+<td></td>
+<td>“is_online”: true</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>日期与时间类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>支持从 1970-01-01T00:00:00Z 起的正负时间戳，实际范围取决于具体日期解析格式等</td>
+<td>存储日期时间信息</td>
+<td>“created_time”: “2025-04-04T10:30:00Z”</td>
+</tr>
+<tr>
+<td><code>date_nanos</code></td>
+<td>可存储到纳秒级别精度的日期时间，范围从 1970-01-01T00:00:00Z 起的正负纳秒时间戳</td>
+<td>对时间精度要求极高的场景，如金融交易的精确时间戳、高精度实验数据的时间记录等</td>
+<td>“trade_time”: “2025-04-04T10:30:00.123456789Z”</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>地理空间类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>geo_point</code></td>
+<td>经度范围 -180.0 ~ 180.0，纬度范围 -90.0 ~ 90.0</td>
+<td>存储地理坐标点</td>
+<td>“location”: { 39.9042, 116.4074 }</td>
+</tr>
+<tr>
+<td><code>geo_shape</code></td>
+<td>支持多种地理形状定义，如点、线、面、多边形等，坐标范围遵循地理坐标规则</td>
+<td>存储复杂的地理形状数据</td>
+<td><strong>点</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code><br><strong>矩形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code><br><strong>多边形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;, &quot;coordinates&quot;: [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]] &#125;</code><br><strong>圆形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;, &quot;coordinates&quot;: [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]] &#125;</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>复杂类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>二进制类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ol>
 <li>&#x3D;&#x3D;字符串&#x3D;&#x3D;：<ol>
 <li><font color="#00b0f0">可分词文本</font>：<ol>
 <li>text</li>
@@ -384,10 +574,22 @@
 <li><font color="#00b0f0">geo_shape</font>：<ol>
 <li>由多个 <code>geo_point</code> 组成的复杂集合图形，例如直线、矩形等等</li>
 <li>赋值时：<ol>
-<li>点：<code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code></li>
-<li>矩形：<code> &quot;字段名&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code></li>
-<li>多边形：<code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;,&quot;coordinates&quot;: [ [[-73.93, 40.73], [-73.94, 40.74], [-73.95, 40.73], [-73.93, 40.73]] ] &#125;</code></li>
-<li>圆形：&#96;”字段名”: { “type”: “circle”,”coordinates”: [-73.93, 40.73],”radius”: “10km”}</li>
+<li><font color="#7030a0">点</font>：<ol>
+<li><code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code></li>
+</ol>
+</li>
+<li><font color="#7030a0">矩形</font>：<ol>
+<li><code> &quot;字段名&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code></li>
+</ol>
+</li>
+<li><font color="#7030a0">多边形</font>：<ol>
+<li><code>&quot;字段名&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;,&quot;coordinates&quot;: [ [[-73.93, 40.73], [-73.94, 40.74], [-73.95, 40.73], [-73.93, 40.73]] ] &#125;</code></li>
+</ol>
+</li>
+<li><font color="#7030a0">圆形</font>：<ol>
+<li>&#96;”字段名”: { “type”: “circle”,”coordinates”: [-73.93, 40.73],”radius”: “10km”}</li>
+</ol>
+</li>
 </ol>
 </li>
 </ol>
@@ -400,7 +602,9 @@
 <p>简单类型、包装类、array、list、set、map、对象</p>
 <p>参数类型可以根据实际需求灵活选择，包括简单类型（主要使用）、包装类、数组（Array）、集合类（List、Set、Map）、实体类对象（主要使用）以及其他普通对象等，均可作为参数传入。</p>
 <p>无论方法中需要传递多少个参数，我们都<strong>推荐为每个参数显式使用 <code>@Param</code> 注解</strong>。这是 MyBatis 提供的注解，用于为传入 SQL 的参数命名，以确保 SQL 语句中能够准确引用对应参数，提升可读性和可维护性。</p>
-<h3 id="MySQL-ES"><a href="#MySQL-ES" class="headerlink" title="MySQL -&gt; ES"></a>MySQL -&gt; ES</h3><table>
+<h3 id="MySQL-ES"><a href="#MySQL-ES" class="headerlink" title="MySQL -&gt; ES"></a>MySQL -&gt; ES</h3><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">数值型 → <span class="hljs-type">byte</span> / <span class="hljs-type">short</span> / <span class="hljs-type">integer</span> / <span class="hljs-type">long</span> / float / <span class="hljs-type">double</span> / scaled_float<br>字符串型 → <span class="hljs-keyword">text</span> / keyword<br>布尔型 → <span class="hljs-type">boolean</span><br>时间型 → <span class="hljs-type">date</span><br>JSON型 → <span class="hljs-type">object</span> / nested<br>二进制 → <span class="hljs-keyword">binary</span><br>地理空间 → geo_point / geo_shape<br><br></code></pre></td></tr></table></figure>
+
+<table>
 <thead>
 <tr>
 <th>MySQL 数据类型</th>
@@ -580,6 +784,19 @@
 <td>1</td>
 <td>表示年份，范围：<code>1901 ~ 2155</code></td>
 <td><code>&#39;YYYY&#39;</code> → <code>2025</code></td>
+</tr>
+</tbody></table>
+<h3 id="——–"><a href="#——–" class="headerlink" title="——–"></a>——–</h3><h3 id="MySQL-数据类型-1"><a href="#MySQL-数据类型-1" class="headerlink" title="MySQL 数据类型"></a>MySQL 数据类型</h3><p>&#x3D;&#x3D;1.数值类型&#x3D;&#x3D;</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
 </tr>
 </tbody></table>
 
