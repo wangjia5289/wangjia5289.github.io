@@ -52,7 +52,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418184335457.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418184408057.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-24T07:04:12.288Z">
+<meta property="article:modified_time" content="2025-04-25T12:54:50.102Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418190141210.png">
@@ -249,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.4k words
+          6.1k words
         
       </span>
     
@@ -260,7 +260,7 @@
         
         
         
-          45 mins
+          51 mins
         
       </span>
     
@@ -315,7 +315,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-24T15:04:12+08:00
+                    Last updated on 2025-04-25T20:54:50+08:00
                   
                   
 
@@ -368,8 +368,66 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-3-索引命令"><a href="#3-3-索引命令" class="headerlink" title="3.3. 索引命令"></a>3.3. 索引命令</h4><p>&#x3D;&#x3D;1.创建索引&#x3D;&#x3D;<br>在创建索引时，需要重点考虑以下几个方面：<br>    1. 字段名<br>    2. 数据类型（type）<br>    3. 是否创建倒排索引（index）：<br>        1. 可以简单理解为：“是否需要被搜索 ➜ 决定是否需要倒排索引”。<br>        2. 如果字段不参与搜索，则可设置 <code>index: false</code>，节省存储空间和索引构建时间。<br>    4. 若参与搜索，是否进行分词：<br>        1. <code>text</code> 类型默认会进行分词，用于全文检索。<br>        2. 其他类型（如 <code>keyword</code>、<code>numeric</code>、<code>date</code>）默认不会分词，按整体值匹配。<br>    5. 若进行分词，使用的分词器是什么</p>
+<h4 id="3-3-索引命令"><a href="#3-3-索引命令" class="headerlink" title="3.3. 索引命令"></a>3.3. 索引命令</h4><p>&#x3D;&#x3D;1.创建索引&#x3D;&#x3D;<br>在创建索引时，需要重点考虑以下几个方面：</p>
+<ol>
+<li><font color="#00b0f0">字段名称是什么</font><ol>
+<li>通常与 MySQL 一致</li>
+</ol>
+</li>
+<li><font color="#00b0f0">字段的数据类型是什么</font><ol>
+<li>即 <code>type</code> 是什么</li>
+<li>参照 <a target="_blank" rel="noopener" href="https://blog.wangjia.xin/2025/04/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/#MySQL-ES">数据类型和传参</a></li>
+</ol>
+</li>
+<li><font color="#00b0f0">是否需要为该字段创建倒排索引</font>：<ol>
+<li>即 <code>index</code> 是什么</li>
+<li>可以简单理解为：“是否需要被搜索 ➜ 决定是否需要倒排索引”</li>
+<li>如果字段不参与搜索，则可设置 <code>index: false</code>，节省存储空间和索引构建时间</li>
+</ol>
+</li>
+<li><font color="#00b0f0">该字段使用的分词器是什么</font>：<ol>
+<li>分词器主要针对于 <code>text</code> 类型字段，因为只有该类型的字段在索引时会被默认进行分词处理。</li>
+<li>如果字段类型不是 <code>text</code>，则无需（也不能）指定分词器，且指定了也不会生效</li>
+</ol>
+</li>
+<li><font color="#00b0f0">其他 mapping 属性</font>：<ol>
+<li>见 <a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/mapping-params.html">ElasticSearch 文档</a></li>
+</ol>
+</li>
+</ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 模版</span><br>PUT /&lt;索引库名&gt;<br>&#123;<br>  <span class="hljs-string">&quot;mappings&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;字段名1&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,<br>        <span class="hljs-string">&quot;analyzer&quot;</span>: <span class="hljs-string">&quot;ik_smart&quot;</span><br>      &#125;,<br>      <span class="hljs-string">&quot;字段名2&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;keyword&quot;</span>,<br>        <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-literal">false</span><br>      &#125;,<br>      <span class="hljs-string">&quot;字段名3&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;子字段1&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;keyword&quot;</span><br>          &#125;,<br>          <span class="hljs-string">&quot;子字段2&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span><br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br><br><br><br><span class="hljs-comment"># 2. 示例</span><br>PUT /user_index<br>&#123;<br>  <span class="hljs-string">&quot;mappings&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;username&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,<br>        <span class="hljs-string">&quot;analyzer&quot;</span>: <span class="hljs-string">&quot;ik_smart&quot;</span><br>      &#125;,<br>      <span class="hljs-string">&quot;email&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;keyword&quot;</span>,<br>        <span class="hljs-string">&quot;index&quot;</span>: <span class="hljs-literal">false</span><br>      &#125;,<br>      <span class="hljs-string">&quot;profile&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;gender&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;keyword&quot;</span><br>          &#125;,<br>          <span class="hljs-string">&quot;age&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span><br>          &#125;<br>        &#125;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>不是一个索引库只存在一份倒排索引，而是每个字段都有可能独立创建一份倒排索引结构<ul>
+<li>每个字段在设置了 <code>index：true</code> 属性后，都会单独创建一份倒排索引<ul>
+<li>所有文档关于该字段中的内容会被收集到该索引。</li>
+</ul>
+</li>
+<li>所以，当我们搜索时，其实是去多个字段各自的倒排索引结构中分别查找的</li>
+</ul>
+</li>
+<li>为了避免搜索多个字段太麻烦，我们通常会使用 <code>copy_to</code> 将多个字段的内容复制到一个统一的字段中，比如命名为 <code>all</code> 字段，从而实现“一网打尽式”的搜索。但这也引出了几个问题：<ul>
+<li><font color="#00b0f0">不该分词的字段分词了</font>：<ul>
+<li>要知道 <code>all</code> 字段通常是 <code>text</code> 类型，会对内容进行分词。而如果我们把本不该分词的字段，如 <code>keyword</code> 类型字段也 <code>copy_to</code> 到了 <code>all</code> 字段，它的值在 <code>all</code> 中就会被分词，完全背离了它精确匹配的初衷</li>
+<li>为了规避这种混乱，我们可以：<ul>
+<li>仍然可以将 <code>keyword</code> 字段复制到 <code>all</code>，但别把它自己的索引关了，保持 <code>index: true</code></li>
+<li>精确查询时，就查原字段；全文搜索时，查 <code>all</code> 字段即可。两者“各司其职，互不干扰”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><font color="#00b0f0">索引浪费问题</font>：<ul>
+<li>如果在搜索时我们只使用 <code>all</code> 字段，而不打算对其他字段进行精确查询（如上文）</li>
+<li>那么可以将这些字段的 <code>index</code> 设置为 <code>false</code>，避免为每个字段建立独立的倒排索引</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> <span class="hljs-keyword">Copy</span> <span class="hljs-keyword">To</span> <span class="hljs-keyword">All</span>（）<br>PUT /user_index<br>&#123;<br>  &quot;mappings&quot;: &#123;<br>    &quot;properties&quot;: &#123;<br>      &quot;username&quot;: &#123;<br>        &quot;type&quot;: &quot;text&quot;,<br>        &quot;analyzer&quot;: &quot;ik_smart&quot;,<br>        &quot;copy_to&quot;: &quot;all&quot;<br>      &#125;,<br>      &quot;email&quot;: &#123;<br>        &quot;type&quot;: &quot;keyword&quot;,<br>        &quot;index&quot;: <span class="hljs-keyword">false</span>,<br>        &quot;copy_to&quot;: &quot;all&quot;<br>      &#125;,<br>      &quot;profile&quot;: &#123;<br>        &quot;properties&quot;: &#123;<br>          &quot;gender&quot;: &#123;<br>            &quot;type&quot;: &quot;keyword&quot;,<br>	        &quot;index&quot;: <span class="hljs-keyword">false</span>,                         // <span class="hljs-keyword">Object</span> 类型中的字段分别管理索引<br>            &quot;copy_to&quot;: &quot;all&quot;<br>          &#125;,<br>          &quot;age&quot;: &#123;<br>            &quot;type&quot;: &quot;integer&quot;,<br>			&quot;index&quot;: <span class="hljs-keyword">false</span>,<br>            &quot;copy_to&quot;: &quot;all&quot;<br>          &#125;<br>        &#125;<br>      &#125;,<br>      &quot;all&quot;: &#123;<br>        &quot;type&quot;: &quot;text&quot;,<br>        &quot;analyzer&quot;: &quot;ik_max_word&quot;<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br><br><br># <span class="hljs-number">2.</span> 使用 <span class="hljs-keyword">Copy</span> <span class="hljs-keyword">To</span> 之前的搜索<br><span class="hljs-keyword">GET</span> /user_index/_search<br>&#123;<br>  &quot;query&quot;: &#123;<br>    &quot;bool&quot;: &#123;<br>      &quot;should&quot;: [<br>        &#123; &quot;match&quot;: &#123; &quot;username&quot;: &quot;johndoe&quot; &#125; &#125;,<br>        &#123; &quot;match&quot;: &#123; &quot;profile.gender&quot;: &quot;male&quot; &#125; &#125;,<br>        &#123; &quot;match&quot;: &#123; &quot;profile.age&quot;: &quot;18&quot; &#125; &#125;<br>      ]<br>    &#125;<br>  &#125;<br>&#125;<br><br><br># <span class="hljs-number">3.</span> 使用 <span class="hljs-keyword">Copy</span> <span class="hljs-keyword">To</span> 之后的搜索<br><span class="hljs-keyword">GET</span> /user_index/_search<br>&#123;<br>  &quot;query&quot;: &#123;<br>    &quot;match&quot;: &#123;<br>      &quot;all&quot;: &quot;johndoe male 18&quot;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;2.删除索引&#x3D;&#x3D;</p>
@@ -378,7 +436,6 @@
 
 <p>&#x3D;&#x3D;3.修改索引&#x3D;&#x3D;<br>索引库和 Mapping 一旦创建就无法修改，只能添加<strong>新的字段</strong>：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk">PUT <span class="hljs-regexp">/&lt;索引库名&gt;/</span>_mapping<br>&#123;<br>    <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;新字段名&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;integer&quot;</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
 
 <p>&#x3D;&#x3D;4.查询索引&#x3D;&#x3D;</p>
@@ -401,27 +458,27 @@
 <h6 id="3-4-2-1-修改文档"><a href="#3-4-2-1-修改文档" class="headerlink" title="3.4.2.1. 修改文档"></a>3.4.2.1. 修改文档</h6><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 全量修改（删除旧文档，添加新文档，POST -&gt; PUT）</span><br>PUT <span class="hljs-regexp">/&lt;索引库名&gt;/</span>_doc/&lt;文档 ID&gt;<br>&#123;<br>    <span class="hljs-string">&quot;字段1&quot;</span>: &lt;值 <span class="hljs-number">1</span>&gt;<br>    <span class="hljs-string">&quot;字段2&quot;</span>: &lt;值 <span class="hljs-number">2</span>&gt;<br>    <span class="hljs-string">&quot;字段3&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;子属性1&quot;</span>: &lt;值 <span class="hljs-number">3</span>&gt;<br>        <span class="hljs-string">&quot;子属性2&quot;</span>: &lt;值 <span class="hljs-number">4</span>&gt;<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment"># 2. 增量修改（修改指定字段值）</span><br><span class="hljs-comment"># 2.1. 假设假设你有如下文档</span><br>&#123;<br>  <span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;张三&quot;</span>,<br>  <span class="hljs-string">&quot;email&quot;</span>: <span class="hljs-string">&quot;zhangsan@example.com&quot;</span>,<br>  <span class="hljs-string">&quot;profile&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;gender&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>,<br>    <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">28</span><br>  &#125;<br>&#125;<br><br><span class="hljs-comment"># 2.2. 进行增量修改</span><br>POST <span class="hljs-regexp">/user_index/</span>_update/<span class="hljs-number">1</span><br>&#123;<br>  <span class="hljs-string">&quot;script&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">      ctx._source.username = params.username;</span><br><span class="hljs-string">      ctx._source.profile.age = params.age;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>,<br>    <span class="hljs-string">&quot;params&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;username&quot;</span>: <span class="hljs-string">&quot;李四&quot;</span>,<br>      <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="3-4-3-查询文档"><a href="#3-4-3-查询文档" class="headerlink" title="3.4.3. 查询文档"></a>3.4.3. 查询文档</h5><h6 id="3-4-3-1-精确查找"><a href="#3-4-3-1-精确查找" class="headerlink" title="3.4.3.1. 精确查找"></a>3.4.3.1. 精确查找</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">GET/<span class="hljs-tag">&lt;<span class="hljs-name">索引库名</span>&gt;</span>/_doc/<span class="hljs-tag">&lt;<span class="hljs-name">文档</span> <span class="hljs-attr">ID</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h5 id="3-4-3-查询文档"><a href="#3-4-3-查询文档" class="headerlink" title="3.4.3. 查询文档"></a>3.4.3. 查询文档</h5><h6 id="3-4-3-1-根据-ID-精确查找文档"><a href="#3-4-3-1-根据-ID-精确查找文档" class="headerlink" title="3.4.3.1. 根据 ID 精确查找文档"></a>3.4.3.1. 根据 ID 精确查找文档</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">GET/<span class="hljs-tag">&lt;<span class="hljs-name">索引库名</span>&gt;</span>/_doc/<span class="hljs-tag">&lt;<span class="hljs-name">文档</span> <span class="hljs-attr">ID</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250422184124423.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
-<li>&#x3D;&#x3D;_index&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;index&#x3D;&#x3D;：<ol>
 <li>文档所在的索引库名称，这里是 <code>&quot;user_index&quot;</code></li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;_id&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;id&#x3D;&#x3D;：<ol>
 <li>文档 ID，这里是 <code>&quot;1&quot;</code>，你在插入时指定的</li>
 <li>如果没有指定，ES 会自动生成</li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;_version&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;version&#x3D;&#x3D;：<ol>
 <li>当前文档的版本号，每次更新文档时这个数字会加1（用于乐观锁）</li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;_seq_no&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;seq_no&#x3D;&#x3D;：<ol>
 <li>序列号，表示这个操作在主分片上的顺序编号（用于内部事务一致性处理）</li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;_primary_term&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;primary_term&#x3D;&#x3D;：<ol>
 <li>主分片当前的任期编号，用于实现高可用性和冲突检测</li>
 </ol>
 </li>
@@ -429,13 +486,13 @@
 <li>布尔值，表示是否找到了该文档。<code>true</code> 就是找到了，<code>false</code> 就是没找到</li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;_source&#x3D;&#x3D;：<ol>
+<li>&#x3D;&#x3D;source&#x3D;&#x3D;：<ol>
 <li>你当初插入的原始数据（也就是文档内容）</li>
 </ol>
 </li>
 </ol>
 <hr>
-<hr>
+<h6 id="查询所有文档"><a href="#查询所有文档" class="headerlink" title="查询所有文档"></a>查询所有文档</h6><hr>
 <p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250416192542363.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250416192834497.png" srcset="/img/loading.gif" lazyload></p>
 <p>有 ES 脑裂问题<br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250416194752833.png" srcset="/img/loading.gif" lazyload></p>
