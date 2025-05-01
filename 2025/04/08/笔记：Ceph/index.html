@@ -19,17 +19,24 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+    <meta name="description" content="Geph 组件 &#x3D;&#x3D;Monitors（监管）&#x3D;&#x3D;： Monitor负责监控集群状态并保持集群的一致性，确保每个节点（例如 OSD 或 MDS）都正常工作，如果出现问题，它会警告Managers，并协助修复。 它们维护一个关于整个集群的状态数据，保存关于集群配置、节点状态等信息。  Monitor 保存集群的状态信息（如各 OSD 节点、PG（Placemen">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Ceph">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="Geph 组件 &#x3D;&#x3D;Monitors（监管）&#x3D;&#x3D;： Monitor负责监控集群状态并保持集群的一致性，确保每个节点（例如 OSD 或 MDS）都正常工作，如果出现问题，它会警告Managers，并协助修复。 它们维护一个关于整个集群的状态数据，保存关于集群配置、节点状态等信息。  Monitor 保存集群的状态信息（如各 OSD 节点、PG（Placemen">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101551563.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101918985.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101837245.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409102406023.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409110737249.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409110924759.png">
 <meta property="article:published_time" content="2025-04-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-09T03:09:25.293Z">
+<meta property="article:modified_time" content="2025-05-01T03:06:28.248Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101551563.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -289,7 +296,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-09T11:09:25+08:00
+                    Last updated on 2025-05-01T11:06:28+08:00
                   
                   
 
@@ -297,22 +304,72 @@
               </p>
             
             
-              
-              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="e5eeb21ba4dff3559f7871415181fe396f2a833f3e1bff9f7197973f48e2d911">9ce4f525d51b2104a9972422eaedb14797c2ad0eb6be38c295d65ad275a33a55f58e21a7866d858481066c024c0c3c2e8ad93a5a547517680dca2701cec1e94bc1e9201c4e7d139697b594b45837918387a924abfb315e4dabdd032129982650f08f263207991a3969e968f1f87008b89dc41ab4407b36a52286ae66f28aa80db5fb639cf57e179c858e64c58ae84c9ea4900dd02b7d17bac690db73391b8557edfc145b5d7cafd29abc0852560e8ffa49f0d0afb04090722432e04f12c36c1d7cd2bf41e182ff60245ff7ea1aa02cd668ed1c70693ed0f8da3abfa621c5ee07dbd1db2355eaf00e75e6be9f0886cfd0551a635bd71744109d7e2cc10dd84e69d06fc629e37bae0056892efae8d49f35c670e3f826d288c5798e4a7350db6193d88c0abf4d3a40caa69608ba73f682c6ffcd718d29a3c2907ac064c289ea39e20339861a74b306af807e656d268f7394485490546a997624aa0b5f94fc4e97c01a91bebc73a34d14d68baa2974cb3902c7c0e1a33ca3bc3030cd47461a890def3db5132809aee5a2ff711e3ff7283914247e32bb4c81a092a2f886b73592706d4da0dd51ec578bafddd0971c6a25bc7ea0af946ac60ebb067722356e83866863cb65241f7d6dced393b334fa402c4e887722fca3a0540ea93f336e1ee793999f343d77db01fa8c903a3ebfabf8b22826275aba2bbde73867cc575647a5c005c48fa8fe5eff3d38872875dd5a612398459799152774629b315774e7f859fa6c39a04a2167b44cd74095dbc922076ee5391336b397062585a8f19b28742edee8ef9d5229e34af4faa3e6f7377d146118380bddf74a003fcb9c696c1400fce7e523dac198b5a2bde22a8282359fdac998d78d388fc5cc85fb9f9689ed00a3550bfc38a38583bdb1f22e74c5149cb0b2f396ba4760b40b249f51c617e2ffb7ac4c6730a844480578f071f71b0f0394cd180c6f905b786e8de7b362557e995ee6be02c1c1fabdb0a7500b0a107a41298f07bf18f35d3ac11267002d7d0c0ce6d91d22136f9d96333d71f7cee7dce29a1ca42c17a1e46c41cbdfb73564c39d496417accb7ef3fcf601d64d1e3f48308beb7f13591616e4767eeff40622753daa7c4a04a2a6f508fde307ff438a064e98f1b07d4516f1571e15bec2be142e897206ab5e7ba357d474f865f4f04280c1a7f583e417f815b586bb46c5f8347569f348f5775362e1de166d8a7a23c09fbdc74a89700a84076c06ebc46d74615d2ccdaade0d1208ea724c67f59e8f944462f4a222d90aa108c4c7900deffeb0a2da15690fd030c4646be4d65c5d6fa9d3cda3b5ab9a339cd1bbee215aaa19def849a11663ee5b2d50a4fabdd940915805d042c301e9da69fb5a219c7bd0df5ea4c1399a3583c7872bdafeb0e0e7d8eca28987117546e222a2ebb2bc429dee57016d7aa3f3584382617b3b4bf2c95708986e28b0f166603a177ae3cbc831f8f282f17375251c6dedca11c9bedf481e776aac75572c6fd292306bc4bd560835a254d22dc435051d5c4ff605d9e35871fb124937d5e75ba1e83ac7f830229173803a55a6c8bd7b1c3f48d83445b14acb1f6d54d120375ac6e9056c1b573704e9bf7e146b73b7b57a6ecffca80e31d4049008802f7592351f54a5206f2e036c655613b44001840fa5940f223af2e300ef58917eedc4dc210e856c64585d51d1d10b5dfef71e86d6e2cfbe6ec57db130042d1a9ea676aa3ae03b45bb9eba0755068629153e0588c8f1c51bf4c3c0e28bb4b2d75761460eec55bb282d9d7b7086a4021aba0dda233b0692426702351dd8610293701f4263c81ca172a1b8f5956a9ed466e306b5b5a4878ed1688a8410f0ebaedfd90a903941303c084182e58737bfba7277162165edd75aca255d97e1a8390830d11f46354613876f450f5f88dbca03aae7f86baef84e5459a948138563d29e9431258542237d2d8f5c411e5ee0598b8c7a93d6b9d5c6b1586d49a49c8480e5ccd264ef6c5c80111df82f807698c7c3c5ab3e90bc9f367b256d0fd0894538c842340b30bd0caa57034842daae9cb814b4d2625839e39b459c4fe55bb9abf66397190378da4adc76891bf705408cf9c01dea4375926a1601b1c9fc6c80530e4a044bca3621c53d872790db75265fd3dd9a8ffff08bb66e8cd61eb688f4754b39e4f5695ee056e220044138f9e6cc5625e60278ceda61cf5f7b0ea689c101492aa9202c05a4cddd0346a4420772cf936d8bf38c67eb04845736ac7d57de4f40355bd3a0df84c5bc1f7376daf288351ad2625c814593eb0ee1efe11b8041bbe340f4452992312d774dae931f23e76b054f9d3ee6900e9b568a474fd5f32f3de14e27be4843daa67eef9821cb51cf733b8177b379a178b709d21dee8702b92a9f0e8d95e57dfd4321ee13fc36542dfc1b0e2e8b528be3fd2b51344baab181330d17d97cd6aad7780b89a97bea7071f1064c9b423ca1047b90f244aa84b9d05d17b36437825934bad92e96467d2683666746ce287f1c4175ce496a6d17f930c6154025c5578cc8680c4785747e159d1f15e5c97b9287c5121acab061e417388934c8c81cbd5479702f2a3a538861fc7e668d6754453f859326a3fa6012db7f6779c0787b0423c7a5f2412a8ac08496d2d8a8b93c838d0d6c4af93a440517736d0d407a084fedd31abf000ca5da41c313d6b698619a2d46c2fe92d4a4bf2a1fb05d91e4c9b31b2c5c30ce67fee150adf1031eb53f379a2c99d818033c2916b70271dc6d023cf3cedd1a6c9c8ee267021e79966770d9ee4a9e31dd071585736ab1789f6957ed5733bdd74446dac8d6b5d2640e99c4155cbb9b83b588e3c5a32ff6c3d65cf83f28dcb6eb37a1ae7c3191aa11b0c90c1946a3716f8ed23d6dec1d013da422c8414d67fedd810155615dee83070c16e66994a7c539bc76fcf931602f1a091b4e021d3a4b1fb6befd4f07387f1c4cea5ca800a5b27175edcdf9813b1f7e087b89d5310c3b4e02b41bd0473084419682fc879931d6fc372f802cc35be78820c67deecaa525c50c8c013d3a02be7c2c2fdd5bb04250efaf65699b0114b97f992818ff34ad9f8bf895d69003e07c81d5a9d3962b4825bb5421109b5fa910a4a88f2af977d4d4801ccc98978f36bac9362a846bc7f7b49b788465963ac9d87c7b53930c694cdd4cbceab16ff7a843fa9cc8bc363dd4c0717fcfa8ea1be0f2c24a27f68b7c80d6472308fe897f73888d973702ba8a7e4609861d05da6451cefda7f607878978db0423ac7e02975f805c0b6f94d1e696cd57e1a0a46194058b9a8bce05d403b62084f6f9c6c35dd90f62af29271627c704652c955f16a1663fdeeb8fe246702fcdabed3f31e96dbb41f6cc3c59eec5b9ae373eacef7ce04749bcd4f938331ec89faa6e7220a262c2e688251f49f77ac544dfca4e7ed682c9b5ec778d5cdcd11ae6ddc5451b8930a05bbeafb84ac215c39da20c946e5ae11434a1ca8e6ccbe4380f1f1a2929cb90c0a438c194048e33dabb96ff32e563daf2c578c85588ee88f0f20102850ea43dc5702140c91f9e1ff24a1db808e6385a6662099aff8b533b2a9b2f10fd295321c9f85f268fc24b1c643e1d7de73ba79c9bfc6605c69e0797000496c10ede68a7a30b0f015e5a4abaf19e86a27d7dbe35444a159ab52a18959e440a47ec828a8aaeef4932aefa9df5cee67d828c2efaf529fbc81473ba3b7cdaf5391ea5f79258372b5ad4e791b6b522312a7a2e76b9bc8e866817bbfcb934ffbea9eeb23bcd349c795a8d2728833e21ddfb1a4cfaaf8471aa681cbbf6e1dabcbd1d086245b4b0c99c89c472336743940a4314749dba65d2c08c7c45654b641dd47aac880bad9e2452c37d96c07c03ef65d03a9ff38f11d2efcea8a4085cd668b5c7f05d3714dc620e57cf3d7b4655f80bc40f461092bf0c655afd4d6f6fc931f20036676d0cf6a03bbb8212e9cd6baf28db91c01b3c1edf6cfb76caa7d74aebe755e9b0d5c75591cd7e80535152f29c010450a576e249dd52d62740107fdc6a6b6785125d806799e36b7915e0ad9675704de878f2b4d928c5676c45bcc71d8e632a18bdbb4d0e9aeaaca9bc935d9989ecae890a8210c95ca740b8b74e568311b1276c2cc671ae53e71f15f247e737b858ddd60fec243e03820ecbc1d061f4a59896fa2324757316e554f107b3a1b2e5a7f851660bc4e9db47e5b21d0c61ddeb38beb312992a462150b31d081a3ae486c0cfcf3742833fab3d6843492a2f10474ee8734270da3fea88bb7a3e2ff1ffcf7abb43279238d7804e112da1e3de9f632c5e4efbd8f58c5bf7ea190c1e4512ad57f46c6145bbaf742f73afd6dbb15e6df872f4fc69df867f89474379c198bf21181b963c345be4ff68bd6ed3b4332ee6113db6da9820735fe99cacffd7620c2c1140200972ab2f59347b97b3e3ce04ebb8c07596fd21c2014a8fb87166fde91dd5f2491443ec980a5dcde47e9133318adfecb17f137d537b27468888f0e936ae3bc40a557d50ba529cd61d52dd4a46f821ecf0d99fbc1321dcdebd6256f4dd57bb578741886e3c1f1230853c281d96d6bd1072cb17df9969e4a9b20e60b41281481ad8b5ceef5c1c006df93da9d674a74952fea702bb894097ff273af72d40cbb01e97a61c9e2df13286cf4069d45a0d2aa2060bedd612879052c675b364796da5b970f91040af412af1e303ddf198185bbb6079080cd2f497d2e2e082912d3c64361fd08d56cc53ee5b7ed956cfb010094b95768f6064b20cc0c3d348d9980f18eceacafb1132fd98d653fadb24f9664bb501d5ce7983d4d70b0e3f7c6b366908732b686f08df33aeb8206731c0042e7da4b414a81b82727f7a7bbc0ddc577a36b8c0df38ea875e945b46ce844d2983e0bdb5c392ff4a59f51162c90ef648449197c3e01faa9553f96c061e735eff64f3dd9c6828152d25134a33ee8749e1373f9284ceb81b524572ff474cf8b0f7436f1a75f72893fea6c3090064f1283ad0c8ab70e932c79a40278a6e24533f88a044a9a06cf457aad4f04e5ee09bf4d003de80812c65ca3e492bf08aff5718c9501070f84bd4d6a886afddcfe120ea9c47816a78de5e55ef6237059cab7a0ce40f1614164398a506e3cd3095578bc41ded9bc4808ee75e5813484567deaa1b00589de30ad394a66e7012d466644c800e3ad1ccd4b01495e700bed817353b7e07f0d9cd7c4449d6dc365fac35a2e0629d8c4d01c85ea6a6f2b5a48959bd4e4d1921e51f008cb3311554f868ec513f129e59a4e159a04dd2bc9e8b19513f1a42d31c81297b530c9a152c4a2de0616d79c74c87762fb6f4a87da9e1918cd2061111168fe80d24ad70e9a2d9882d2fac7f13beb0f4dbf6ce10c393a718fd5dd623e228215bceaab8a6bdc507dea1994ca534bc85b546a9fe2bb45ddf4bd87c1d41c466698e02761ba80c3ef8173bb7222a192e5f917d41a8d1c54d173909ab7b702dfdbfe7b8665fb22dca902ef90d3c904a1f6d56b9d0970f9f78a13c90a32cfef5ba746b9d22084d0d557ed1c3291a8c927b981cfd0c0af8bbb9d5341d48d9b632bb20fac53c3b09922786b8a5c8bdf5027f50999f832a03e399730058b31dcb1f5c7346b1ba685a9345ad17de7a0ce2df2ff205a76fb76f8a3677ad9c0f3f3885f5d8fb0793ed2764630b2f40ad97982f6313d4aef9a5ff3d0421fc185a1e022eb6ba2755d84a7c3d81d9bd714506e18691be6f2656e8edf15b4a1bd76aa9fc035f0d7e0578bb30771d7c90bee7b2c15482406df3c036734023ed3d120e864b6a013775325b10e17396633ff6150a12302d46a00d5b7f92a7d60f923f4f15a3ed62c156a715f3fd307dc13a9a627d7f86642fe7ac45a36d25e964404bb62eef3376917a48b30c607c365eee02de448eeb5ab3e15a3077f0ef201496bdce446059720a5365c820f599b8645dd8e3aabda47d7bd1f371a898a25b5dcc998a9d00cec0cf51009dc098d924dfb48ec5c1aa64b5a780a732c0db615a14d41c8548fe22644130480c6298e3f711d37f3788d0cdda1b9a623fa8d268d2c9053ee5489bc069253f1e791e0716f08549ee844ed5d8bec1811f824a421b61f89682b7f80d15d95cc887e5d765cdc9953b35fce63107bbe7d95a3b7fbbddc03b685557fd1d983c0e83c49a791ccb3eefc40b21951640e5ad85237a7c14fa4ac16207ef064438e13d08c7fa664c5b7a32986d30ee9fa3313c2404bd759d58588200130ab3a6df882e86285e831370e1e6702d06370d39bab9fce131e6828f48ba22a7c95acd78877dcdf9b598a735ba9a166e3a4bc97544af004018c96b2c1f7de6fb65d93e2171d6e5cfc5a57014105b5531b262654c6b36e65d8e12fd02704337eb58a944a0e4c5778bbae68b4780de0d9932f711b733cbfc72eb4ec1c5f5398b7b21361e196544f580be812d0de534a805f7010159089a2a1bdc69b86c1b9b3a7e6734ec5e1d1c1d0ce71051eefe3f4a7bfc1690b48a51db8b09f53f78f9b1b2045f9d01ae11b57888fccda9537341e3a955e4ae473613b73bd5ad340868782642f4c170a3b8fa88b7e168d4cbcbf72bf9e27a462640cc292e4face97b2471e3fa72a7fbb44b776d1d83322cef66507e8f3e704aec8b5ee1342505cabb0fdc7872bf6aa4d931b33e5bef8618e66fb76992bf7ff632991141830e8bb8e63fe75d27435e501dbcc459e85d110f5cb38533915214d9935c1eace54e2462f05fb06626ccec7142af4e71af73cf87967a268fdcb5155484db2ab25e350556171e5c68ac2bec0aec9d39b9bc76aa48280757b8922525f8f3918aa000d98bbe6e996f5fdbea65b5b50ded99124298c3d24c5d07d12c3197e594f04c8515637cf914a8219c3a22b9cb0a6a9ecd11f02f676e9d3c365c1eedb9b562e2c6ab68854fd478689e5efa57507689626502c4246bc12773abff4a8c567e8a1c2e8af3a69380fa9db3c1c0299656f5d1537d94bb7277108b45b9ded734f76a8dc336c4dd2247e10b524922f908ad7f32f284c71edfa61e0794cfed1f605c0107a62c8d3ba00a44c69b97abaa580b3df510b34cadb1b21312487f296819b3b2eae0173ed4bb7b626ad6329869e263ea2a484d8e70294b3170d0a9c259624f22f0b68e334516a72a5f8af0b67b4ea0483a76edfef85ed02c1d27cf88ff7fb1079ede33d4cf26f361dd54ed2f47e90ae26cc45c6659ba76b453e32cc0077fc7c847f0dd750483e4737c20db1738a0360f5d1ef9168524a0dd18c27f0b8c7759cc5fe31d334835ffeb92104d6633e8facb53a7a9148a100d4f06244f05249f3740802d9ce7e8a17edf2c645e087b51b3f78be948620cd8c60705cca929a100379512424dcb1853a0931d45c01a1cc868797294987a7ff002c1b01c6aecbc1ebd87d7b9bfbca858a22c5a0cbe878b2414af9d84f03b941bdea33a563b8b5979243608b72b4ec3832a8816fc6922a4cf6c2b9310b312667402f3dd8e58d1108bc54a2ea7d4c9963489f16a474dca59ed5a0ae17f123691f116be471a7e3fb01a276a0968d0766cb5502bcda3289058d2eeda645b5c36a06aa2bf9adc201985942f1771fa38b2ee50914f23814eade39c26a7d32386af64e454bbab38ccdc3d61dbb44a38c3ffdec1f86eb906c43e8cb05f9215f405e71a2459adb03d3f1167e30d16fbaabbd8f93b8f7fab37bb36a5975149ac6d7dfbcd7f754dfe24c01953e3d44b36d5534adbd8fb58b0bd63a0e427ab085811aa6e27285517bea93d1341700df26a46b9e0e9adb8e226256af9c6467c001ef41f403362c0842c92975ab279ce0c3e165f7335478a0fecff466ac5818a556c0174cc911c3bcb7a37992762878f9204a549226411844df4a27cc975face64cce22a30375d706aa885c296b180656b6a3ab94c0ba94afee69cb0b253c2b09e4133e90a3e108718059f5277248baed6471061a52d0ba804a52065f1319bb83c803b8f4219626817fc10f0110c9029fc3f5fa6bb1fae251b1b1ff0e523a13669707bba7b8c71b18bbaf84b08cea5d1a45a0d729a6ccbea7aeb81972262483089f86745a93152ab03d47cbebed2ac4b242aba72b70c87ae61e9d94239edd3ee95da8d62aa7892a1f8c0ff3d362bd6281233d18b5d9329ca96f5975edb25a7898baf848c6188644716ee311c0622131988af43cc9a3745e404c5146257f14fd37df3ef2a6390ea7cd0d44352ae87b551b4ed51c250bc0f9a7a534bdd893c58d48ab304ba0b7d25df80b444ab212c03cad8422ff4c01af4d8a95ed07587bf57d8429d85309f0960961a13869399dbd54ce15b4628da6d74d816d5dd5fa3077e1fd93f604a1aac97ab032c16acce91824b0bddf0a33defa14fc3b77e45cdaf888765d9960ddd7166b9576a4870d41ea4d30c8009d67f1dbe3b9f9953bd58987f07e49108c044f5f8063c817e8b4702f510460983e8ea546d65ad2b155911a222f5b3b266c9489fb405fb6201c2b3bd16b90e27019ff40787f2dac3aefa57a892038b844e4ac7625c53d09207b20e2bb6b3909f321ce96ad97dcd70dc7fb2023f1358ff90b6a45345925fc1c9304056a221ca191d26139e4d1b74109c973b8fb95910b63dfd51bbcbc53c03569e317e95ecfc889363c957dcad41577830ba045d53df27626f1a78d4cfed304cdd7b5609240b20d474dc2cfc751cb19bbb8a9d1bd86ec08b4943ad0695b70b2d2ece0b57c9d86f06a110ba0614e10745f5abca2daa75f40c32c95ad633e6058217f78ed3476fed51f4d3e91a480efd4eba52eae2a66b58c516cb99dc2e81d961a69b9a0dd0937cc0fbc111e2ecad6d68714ce29fc44a12a8f997211d8518b3872ad04c329b02bcce8f02c903af1e122a4ea58c4dc282ff3601614baed74f3e6e467a8aae002c305297298cf55bf44ec6248bce1db53c634fbcec0477651c09d06102d18fa93c742cead8004b83fc97d2f70a5ff1720c0cbea800cc78a05f3a34290c594e24163cee8e229441a9f62e397d1812dd0e8ce7fd07662cf7d8f1ef511acbf2c83fbf5838d40359bad2e72e48ede30b718e570ad3d2dcde34919ffbdf0c35307a2ef8f9624d8c3106f3e00448b62d55f5271e001acf060691fac4fccf752c9033d30bf9bc1673435bf73972c6790dd784b33e83beaec736532d0b53c544db9b5638afd8e3a4c9f2f06d06f859ef9acf7c2bc98edad7cfaa69c528c90503ff3eccd8fda1536e5806dc19a6e42b6f8e999c9a85c429d66c6136211b2deec4c8ceb188ce251283bca33cd7ab4b0f2bf1be0d6902a76087e2d0682fbbfe05c7e46ba590627ec059052c6573a1621c0fe0c9aceded805a858334ae32942c4f9293dbafe049bf0d7e409abcb2b80273678c110c065a5f7f1c93fa31f58a8f8751c0bd6c6d229c1ea2eca911e9bb91f5206b64fb6912f28bd635291a1e35442785bd0b59e323ed562d2c61a4d07ea01b844524dc50881809fba610155d98f5792a44b245e4ff7957fc073e331a24b3c6fb1cd0e63543df8f54834a8f21726551b58d473aa8a09a8f1011476dd3b93da057d4e9551498df9d0e220d2144c36a86f7c96f003b297c5e4e99441f84cd59f790e3adb5c9cac2d3fb15f40a230c1012a8a0eb4e2d6db0f7d108b27397bc625e5ad1afd7471f0a3421431c629805cf17a4156b2a5858493f5ab2dcc80c6a9ac8a59c906eb6361fd881f0d7876f6e04b1869069f013f4cbde24822045a754199dadfb47e60b1c8b98d7f93e75f9063ce57b65c4b1f0d77a4c1db2534f92468696f6e607a0d5f0918ad0e450bf2f359e9fe5359895789183d034b2a2b3d62836dd5488e99b79e427dac1e375f6a31533e8e07c16641b6d933967a18c8be833e382099729ace36e9bbbbdf8651b7a25708c1f8251f4ab8a52c90a80792533817ea8ac9d4dea4f6b2824db0eace58d32f7c6feb8ce5046dd24d73afc1a0f5bd62dfcc2117ecca78a3344546e9937a309df0cec4bae17785901d2e8db4d4394a8ded151bee78962f2ba18698b38ed108ba10afaa8e5eace848206b1e137ee67800b33d9a799717701601523de5a5d3c2b796e2ce98887c4eb6f2c25173a1c27273db23c04316109aee2a8b13f2664e583e6adcce6431c3b53754cf07dc910e748b29b0b515f9a35499eecfe110c62ba3c3600079bf0040e64120f61d4ecacd880c4cbdeb8084bda32b742e1fa9c37a3dbd3edcfa9b8105f8a5afd31f8590b9ca80e53ea68c95fd13010aadf631c0300b1865fda1142adecd413c043a3c34d773cbe209f976f654ff5baa0a112be0fcfa2bc5eab17ccb2aaa4b8f3881b07567ecf975b5046c80640a5e6025ef536b6457675af34a655ab441fef2abcc87e1b2ed30582805379f7d6318e8a79b751d5a96b6fa0df31383cba8deb71342cf322f4562d1dbb3239adf51ec8a93a470366e4d78b54a02c028d47eb0ec7ef866f83e5faa369defed7280dac5e53bf3ed0b40529b6f47d5d1f1a0ee2e191c335dd668ed4f94a60133cc0a5b073ebea74905f5484d99d1e9b3b9cca940aee1e1b1e5a1aeaa113d6af76d85aafce4db9f261b189aeb14d58378f02b6ef27b0ac6037af4b93462fde0c029262a2262766d59087464e9532cdd3348d1512c6f1a2c2461be7bb6013a6bfa948d1a10a8eefa4df3a4cd853d911be41795ca7371772037e476a693f8677d9c66011e333080ca944151f8feed3bba163800b268a27549c7c6756db263752eac52d30014d4f522f9f35d2d6635d23074ad958b88ffdeacf6c691b15a786054822c300304e8fd93c4de1a92593d1e2c8336fdedbd2a27422aabad8227bc8c4ca0b5afc8caed08600933d8345520bb486268b54035feedef450a64c1511ab654cb503fd9b4167c5e90fcfc7c2b88ac04c9ab04b099d4f5cab78d5ba8db5740c1897ec28138b7ac520cc5e65e04b5f28d6cb60c9fd72c7d4556b2acd145fbf77cc92b2dc3a88ddf0e0a231fd8995485e414950993881a4fa6ac5377f9323d981fa55b66de3765f3902211d4b6488670d769c0653b8111948232e57d6631f7112b88338146ab6b8e078da4ee9bed154c23887987d7c21220fbee15c97b53e914302f48873a57f138b658ee59edaaa3ef77a61361979cffc30bcc8d7b06cc51dd63492b802ce793d75ebd596982d9a10d37315847883</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-              
+              <div class="markdown-body">
+                
+                <h3 id="Geph-组件"><a href="#Geph-组件" class="headerlink" title="Geph 组件"></a>Geph 组件</h3><ol>
+<li>&#x3D;&#x3D;Monitors（监管）&#x3D;&#x3D;：<ol>
+<li>Monitor负责监控集群状态并保持集群的一致性，确保每个节点（例如 OSD 或 MDS）都正常工作，如果出现问题，它会警告Managers，并协助修复。</li>
+<li>它们维护一个关于整个集群的状态数据，保存关于集群配置、节点状态等信息。</li>
+<li><ul>
+<li>Monitor 保存集群的状态信息（如各 OSD 节点、PG（Placement Group）和 CRUSH map 等），并确保集群的一致性。</li>
+</ul>
+</li>
+<li>Ceph Monitor (守护进程 ceph-mon) 维护集群状态的映射，包括监视器映射、管理器映射、OSD 映射、MDS 映射和 CRUSH 映射。这些映射是 Ceph 守护进程相互协调所需的关键集群状态。监视器还负责管理守护进程和客户端之间的身份验证。通常至少需要三个监视器才能实现冗余和高可用性。基于 paxos 协议实现节点间的信息同步。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;Managers（管理）&#x3D;&#x3D;：<ol>
+<li><strong>Manager</strong>（简称 MGR）是 Ceph 集群中的管理组件，提供集群的<strong>管理、监控、统计和配置功能</strong>。</li>
+<li>它们监控集群的性能、资源利用情况，并且管理集群的一些高级功能，比如扩展、修复和优化。</li>
+<li>通过 <strong>Manager</strong>，管理员可以查看集群的健康状态，并作出调整，甚至可以通过 <strong>Web 界面</strong>进行集群管理。</li>
+<li>Ceph 管理器 (守护进程 ceph-mgr) 负责跟踪运行时指标和 Ceph 集群的当前状态，包括存储利用率、当前性能指标和系统负载。Ceph 管理器守护进程还托管基于 Python 的模块来管理和公开 Ceph 集群信息，包括基于 Web 的 Ceph 仪表板和 REST API。高可用性通常至少需要两个管理器。基于 raft 协议实现节点间的信息同步。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;OSDs（存储工人）&#x3D;&#x3D;：<ol>
+<li>是负责宿主机上实际的数据存储和管理，其主要任务是存储数据对象并处理对这些数据对象的读写操作。</li>
+<li>还负责数据的副本管理、数据恢复、数据重新平衡等工作。</li>
+<li><ul>
+<li><strong>OSD</strong>（Object Storage Daemon）是 Ceph 存储的核心组件，负责数据的<strong>存储、读取、复制和恢复</strong>。</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>每个 OSD 进程管理一个磁盘（或磁盘的某一部分），并且会维护数据的副本，确保数据的冗余性和可靠性。</li>
+<li>当某个 OSD 发生故障时，其他 OSD 会自动修复数据的丢失，保持数据的高可用性。</li>
+<li>Ceph OSD (对象存储守护进程，ceph-osd) 存储数据，处理数据复制、恢复、重新平衡，并通过检查其他 Ceph OSD 守护进程的心跳来向 Ceph 监视器和管理器提供一些监控信息。通常至少需要 3 个 Ceph OSD 来实现冗余和高可用性。本质上 osd 就是一个个 host 主机上的存储磁盘。</li>
+</ul>
+</li>
+<li>&#x3D;&#x3D;MDSs（文件管理员）&#x3D;&#x3D;<ol>
+<li><strong>MDS</strong> 是 Ceph 文件系统（CephFS）的核心组件，负责存储和管理<strong>文件系统的元数据</strong>（如文件和目录的结构、权限等）。</li>
+<li>它确保 CephFS 文件系统的路径、文件名、目录结构和权限等信息的快速访问。</li>
+<li>每个 MDS 处理 CephFS 中的一部分元数据。多个 MDS 可以共同工作，来提高文件系统的性能。</li>
+<li>如果你把 Ceph 看作一个超级大文件系统，<strong>MDS</strong> 就像是<strong>文件管理员</strong>，负责管理文件目录的“标签”和“标签夹”，确保你能快速找到需要的文件并操作它们。</li>
+<li>Ceph 元数据服务器（MDS [Metadata Server]、ceph-mds）代表 Ceph 文件系统存储元数据。Ceph 元数据服务器允许 POSIX（为应用程序提供的接口标准）文件系统用户执行基本命令（如 ls、find 等），而不会给 Ceph 存储集群带来巨大负担。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;PGs（数据分组）&#x3D;&#x3D;<ol>
+<li><strong>PG</strong>（Placement Group）是 Ceph 中用于数据分布的基本单位。它们将存储数据的对象划分成多个组，每个 PG 包含多个数据对象</li>
+<li>每个 PG 会将数据分布到多个 OSD 上，这样可以提高存储的效率和容错性。</li>
+<li>PG 负责决定每个数据对象存储在哪些 OSD 上，并处理这些对象的副本。</li>
+<li>你可以把 PG 想象成 <strong>Ceph 中的数据分类箱</strong>。每个数据对象会被分配到一个或多个 PG 里面，然后这些 PG 会负责把数据分发到不同的 OSD 上。这样，数据既能高效存储，又能确保在故障时不丢失。</li>
+<li>简单来说，一个 PG 包含多个 OSD</li>
+<li>PG 全称 Placement Groups，是一个逻辑的概念，一个 PG 包含多个 OSD。引入 PG 这一层其实是为了更好的分配数据和定位数据。写数据的时候，写入主 osd，冗余两份。</li>
+<li>PG 会对数据自动进行备份？</li>
+</ol>
+</li>
+</ol>
+<h3 id="数据存储流程"><a href="#数据存储流程" class="headerlink" title="数据存储流程"></a>数据存储流程</h3><p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101551563.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101918985.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Ceph-数据冗余机制"><a href="#Ceph-数据冗余机制" class="headerlink" title="Ceph 数据冗余机制"></a>Ceph 数据冗余机制</h3><p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409101837245.png" srcset="/img/loading.gif" lazyload><br>PG 下的 OSD 也会选主，主要是为了磁盘之间的数据一致性同步和像 mon 报告自身状态，使用的是 Hash 算法将数据 object 对象到 PG，将 PG里面的数据分散到不同的OSD</p>
+<h4 id="Ceph-存储类型"><a href="#Ceph-存储类型" class="headerlink" title="Ceph 存储类型"></a>Ceph 存储类型</h4><p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409102406023.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="Ceph-存储原理"><a href="#Ceph-存储原理" class="headerlink" title="Ceph 存储原理"></a>Ceph 存储原理</h3><h3 id="ceph-版本选择"><a href="#ceph-版本选择" class="headerlink" title="ceph 版本选择"></a>ceph 版本选择</h3><p>cpeh 只有三种版本：x.0.z是开发版，x.1.z是候选版，x.2.z（稳定、修正版）</p>
+<h3 id="Ceph-实战"><a href="#Ceph-实战" class="headerlink" title="Ceph 实战"></a>Ceph 实战</h3><h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>在Ceph系统的搭建过程中，会出现各种意想不到或者预想到问题，其主要原因就是由于 ceph 快速更新和 底层操作系统的库文件、内核、gcc 版本之间的兼容性之间的问题，其实对 Ubuntu 的兼容性还号就算整个过程中每一步都没问题，还是会出现各<br>种问题，这些问题不仅仅在网上找不到，甚至在官网中找不到，甚至玩ceph数年的人都解决不了。</p>
+<p>尤其是，就算你第一次成功后，第二次重试就会出现问题。所以，如果出现问题怎么办？一步一步踏踏实实的进行<br>研究，分析解决问题，并进行总结并梳理成册就可以了。</p>
+<p>ceph的环境部署是非常繁琐的，所以，官方帮我们提供了很多的快捷部署方式。<br><a target="_blank" rel="noopener" href="https://docs.ceph.com/en/pacific/install/">https://docs.ceph.com/en/pacific/install/</a></p>
+<p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409110737249.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/image-20250409110924759.png" srcset="/img/loading.gif" lazyload></p>
 
-              
+                
+              </div>
             
             <hr/>
             <div>
@@ -601,23 +658,6 @@
     }
   });
 </script>
-
-
-  
-  <script defer>
-    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
-      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
-        var hbePrefix = document.querySelector('hbe-prefix');
-        hbePrefix.parentElement.classList.add('markdown-body');
-        Fluid.utils.retry(function() {
-          if (Fluid.boot && Fluid.boot.refresh) {
-            Fluid.boot.refresh();
-            return true;
-          }
-        }, 100, 10);
-      })
-    }
-  </script>
 
 
   

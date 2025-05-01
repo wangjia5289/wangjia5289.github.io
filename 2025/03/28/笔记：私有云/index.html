@@ -19,17 +19,21 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+    <meta name="description" content="我现在要在本地 K8S 集群中运行 MySQL、Redis、Kafka、ElasticSearch、MinIO。之前我问你，能否将这些服务的数据全部存放在 NFS 集群上，你不建议这么做，并推荐使用本地存储。 好，我接受这个建议，数据保存在本地。但我的担忧在于 Pod 迁移——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？ 所以，我需要一个完整的存储策略，确保即使 Pod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：私有云">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="我现在要在本地 K8S 集群中运行 MySQL、Redis、Kafka、ElasticSearch、MinIO。之前我问你，能否将这些服务的数据全部存放在 NFS 集群上，你不建议这么做，并推荐使用本地存储。 好，我接受这个建议，数据保存在本地。但我的担忧在于 Pod 迁移——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？ 所以，我需要一个完整的存储策略，确保即使 Pod">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250407142941992.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250328172435014.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250328175359660.png">
 <meta property="article:published_time" content="2025-03-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-07T06:29:42.890Z">
+<meta property="article:modified_time" content="2025-05-01T03:06:09.278Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250407142941992.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -289,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-07T14:29:42+08:00
+                    Last updated on 2025-05-01T11:06:09+08:00
                   
                   
 
@@ -297,22 +301,18 @@
               </p>
             
             
-              
-              <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="61b6625d01cf6d362ad736a52fba12c0fc32a335c94cd4879ba7d38217323664">9ce4f525d51b2104a9972422eaedb147d2d1b6e469640c54e32e44c048a9669392d60dc4f0c05dc9a6860988cb06e992e852c77a80409adff808bb4c45a036305631ad9c7a6312f6be7d83e9b97b047608ab9f6ab8041c7ecddde5c74a8909cb8654735565c94f8ce44bfb07821ba5819502044f7dc212a9d12351cb98cbd9ceb4cb741e177e23b6367054c9c284ed9886dd5c00bf8cb872a55e6d66b9a686020977e38c315c442e0fdfa60d4ae1fe338cc6cdf5f6b75d9747aaa771feabacdad4a41987c128084c02447aec5e4862d736f17f4d87b213b2fa3108d6fe4a1e0200a475264b60f75716e6f9ab8997dbee8ddb88da033f79e7c1a29a8f52281c302926f056b614e35c268c0f3b205db11216d27db45f475259456e4dfac0d6808e9a9a1fbe1fec56d28096030dc13788763f12b55d119f8bc753371a3380185aaaab3c31c360ab4e4589e037c5313383d48ddde2fce2c9451f515f409f00a30d4a0a0daedd383bde8f38c25b5661ede14e738e2cc92602df1e6982e702bc4d5620c1377b0ef2a590dfd21f46fa6e08848fe54476417166f6c6977b240b8ee37ad7aae11f7775e89ee1f36311946bc7d4bcf00c118c47151e1988de6d1e3a1cf0b4184fef45af65940241f31b9c2fb3f64276cb44a2d3460e92dafd2098feed4ceb00828bf0d91e3a55d982164f8a59af96be5e2e7ad0203f4aa44d11db1ca2d6057fb76564b5234c5dad22768332f4222518430a06ed79621f7c4edd2fba9054e15bd6ff39e571c8529a34c78d73e000ac3b639c9f24dee29ac31ba1e358f80d6bdf047f74e927c23a65055467b2cf3032d9985dea5e1aaf0fb4d34af497eb4d42e6c7cbc366c200455100cfbe4f4b3e0005c245162e040a83f2c262ffc687230e512d50166f9ddc34c76fc820e4a312bda0552533979d9c5fb27812ee733c0a8bbb28a760dc30cf37617f67df470e8498551d540c120dec333545e09b9d86a7af1816a1808107c0b0b1644d5386fb026633ebe7a56af65f0b2bd6de8c13702953fe1f2b410b437d8bbe2778bf1cb32320d972f3522a3618bf8f7e48b04ed75e664fd05d820beb45abdddb9d291f8f8562467477aaab35911ec4ced9612a8e9b8545fda0d8e4248a99ddfd43614cee638a055c87150341341bf17b2397d2f294181f2a6b08c1ecf7a0ff880fdf2c5c62ee3831c68e40c82e0a9078158a582d6fd7f234440d6abbba68c298beb17e3525487bbeee0883ffff3d3905df623e9ecb018259f87d8df86c18dbb8e5664d0dc358b5ffdab644da51af7c4ac33cb69b7a0b0b17904bab6ee22f42592aba449542c8720d3accbd0b6636561e2cfef2985b83153f585f3ff9f04115f73b0c68418a14</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-              
+              <div class="markdown-body">
+                
+                <p><img src="/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250407142941992.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/image-20250328172435014.png" srcset="/img/loading.gif" lazyload></p>
+<p>我现在要在本地 K8S 集群中运行 <strong>MySQL、Redis、Kafka、ElasticSearch、MinIO</strong>。之前我问你，<strong>能否将这些服务的数据全部存放在 NFS 集群上</strong>，你不建议这么做，并推荐<strong>使用本地存储</strong>。</p>
+<p>好，我接受这个建议，数据保存在本地。但我的<strong>担忧在于 Pod 迁移</strong>——如果 Pod 迁移到其他节点，那么本地存储的数据不就无法读取了吗？</p>
+<p>所以，我需要一个<strong>完整的存储策略</strong>，确保即使 Pod 迁移，也能<strong>正常访问数据</strong>。</p>
+<p>那就是搭建私有云</p>
+<p><img src="/2025/03/28/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%A7%81%E6%9C%89%E4%BA%91/image-20250328175359660.png" srcset="/img/loading.gif" lazyload></p>
 
-              
+                
+              </div>
             
             <hr/>
             <div>
@@ -601,23 +601,6 @@
     }
   });
 </script>
-
-
-  
-  <script defer>
-    if (document.getElementById('hbePass') || document.querySelector('hbe-prefix')) {
-      Fluid.utils.waitElementLoaded('hbe-prefix', function() {
-        var hbePrefix = document.querySelector('hbe-prefix');
-        hbePrefix.parentElement.classList.add('markdown-body');
-        Fluid.utils.retry(function() {
-          if (Fluid.boot && Fluid.boot.refresh) {
-            Fluid.boot.refresh();
-            return true;
-          }
-        }, 100, 10);
-      })
-    }
-  </script>
 
 
   

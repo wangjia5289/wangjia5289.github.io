@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
 <meta property="article:published_time" content="2025-04-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-25T07:29:42.381Z">
+<meta property="article:modified_time" content="2025-04-26T09:35:18.431Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-25T15:29:42+08:00
+                    Last updated on 2025-04-26T17:35:18+08:00
                   
                   
 
@@ -441,13 +441,13 @@
 <td><code>geo_point</code></td>
 <td>经度范围 -180.0 ~ 180.0，纬度范围 -90.0 ~ 90.0</td>
 <td>存储由经度和纬度确定的地理坐标点</td>
-<td><code>&quot;location&quot;: &#123; 39.9042, 116.4074 &#125;</code></td>
+<td><code>&quot;location&quot;: &#123; 39.9042, 116.4074 &#125;</code><br>（39.9042 是纬度，116.4074 是经度）</td>
 </tr>
 <tr>
 <td><code>geo_shape</code></td>
 <td></td>
 <td>存储由多个 <code>geo_point</code> 组成的复杂的地理形状数据，如点、线、面、多边形等</td>
-<td><strong>点</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code><br><strong>矩形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code><br><strong>多边形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;, &quot;coordinates&quot;: [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]] &#125;</code><br><strong>圆形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;, &quot;coordinates&quot;: [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]] &#125;</code></td>
+<td><strong>点</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;point&quot;, &quot;coordinates&quot;: [40.73, -73.93] &#125;</code><br><strong>矩形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;envelope&quot;,&quot;coordinates&quot;: [[-74, 40], [-73, 41]] &#125;</code><br><strong>圆形</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;circle&quot;, &quot;coordinates&quot;: [100.0, 0.0],   &quot;radius&quot;: &quot;100m“ &#125;</code><br><strong>任意形状</strong>：<code>&quot;area_shape&quot;: &#123; &quot;type&quot;: &quot;polygon&quot;, &quot;coordinates&quot;: [[ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0] ]] &#125;</code></td>
 </tr>
 <tr>
 <td></td>
