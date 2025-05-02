@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427165021312.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png">
 <meta property="article:published_time" content="2025-03-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-01T03:07:29.386Z">
+<meta property="article:modified_time" content="2025-05-02T02:22:05.077Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427142937834.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k words
+          1.4k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          10 mins
+          12 mins
         
       </span>
     
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-01T11:07:29+08:00
+                    Last updated on 2025-05-02T10:22:05+08:00
                   
                   
 
@@ -326,6 +326,7 @@
 <ol>
 <li><font color="#00b0f0">配置管理混乱</font>：<ol>
 <li>服务多到飞起，每个服务都要配置一堆地址，配置文件满天飞，一改就头大，发布流程慢得像蜗牛。</li>
+<li>有没有一种更清爽的方式？比如通用配置统一从一个固定位置拉取，大家只需要修改那个位置就行；而各服务的个性化配置则保留在各自的 <code>application.yml</code> 文件中，既集中管理，又保留灵活性。</li>
 </ol>
 </li>
 <li><font color="#00b0f0">安全通信复杂</font>：<ol>
@@ -357,7 +358,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="4-2-安装并启动-Consul"><a href="#4-2-安装并启动-Consul" class="headerlink" title="4.2. 安装并启动 Consul"></a>4.2. 安装并启动 Consul</h4><h5 id="4-2-1-高可用实现"><a href="#4-2-1-高可用实现" class="headerlink" title="4.2.1. 高可用实现"></a>4.2.1. 高可用实现</h5><h5 id="4-2-2-单体测试环境搭建"><a href="#4-2-2-单体测试环境搭建" class="headerlink" title="4.2.2. 单体测试环境搭建"></a>4.2.2. 单体测试环境搭建</h5><p>&#x3D;&#x3D;1.下载 Consul 安装包&#x3D;&#x3D;<br>从 <a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul/install">Consul 下载地址</a> 下载 Consul 安装包：<br><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427165021312.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-2-搭建-Consul-环境"><a href="#4-2-搭建-Consul-环境" class="headerlink" title="4.2. 搭建 Consul 环境"></a>4.2. 搭建 Consul 环境</h4><h5 id="4-2-1-高可用实现"><a href="#4-2-1-高可用实现" class="headerlink" title="4.2.1. 高可用实现"></a>4.2.1. 高可用实现</h5><h5 id="4-2-2-单体测试环境搭建"><a href="#4-2-2-单体测试环境搭建" class="headerlink" title="4.2.2. 单体测试环境搭建"></a>4.2.2. 单体测试环境搭建</h5><p>&#x3D;&#x3D;1.下载 Consul 安装包&#x3D;&#x3D;<br>从 <a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul/install">Consul 下载地址</a> 下载 Consul 安装包：<br><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427165021312.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -374,14 +375,14 @@
 
 
 <p>&#x3D;&#x3D;4.访问 Consul UI&#x3D;&#x3D;</p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//192.168.136.8:8500</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//192.168.136.200:8500</span><br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;5.补充：关闭 Consul&#x3D;&#x3D;</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 1. 查看 Consul 进程号</span><br><span class="hljs-attribute">ps</span> -ef | grep consul<br><br><br><span class="hljs-comment"># 2. 杀死 Consul</span><br><span class="hljs-attribute">kill</span> -<span class="hljs-number">9</span> <span class="hljs-number">641001</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="4-2-3-高可用集群搭建（非-K8S）"><a href="#4-2-3-高可用集群搭建（非-K8S）" class="headerlink" title="4.2.3. 高可用集群搭建（非 K8S）"></a>4.2.3. 高可用集群搭建（非 K8S）</h5><hr>
+<h5 id="4-2-3-高可用集群搭建（传统方案）"><a href="#4-2-3-高可用集群搭建（传统方案）" class="headerlink" title="4.2.3. 高可用集群搭建（传统方案）"></a>4.2.3. 高可用集群搭建（传统方案）</h5><hr>
 <h5 id="4-2-4-高可用集群搭建（K8S，推荐）"><a href="#4-2-4-高可用集群搭建（K8S，推荐）" class="headerlink" title="4.2.4. 高可用集群搭建（K8S，推荐）"></a>4.2.4. 高可用集群搭建（K8S，推荐）</h5><hr>
 <h4 id="4-3-使用-Spring-Cloud-Consul"><a href="#4-3-使用-Spring-Cloud-Consul" class="headerlink" title="4.3. 使用 Spring Cloud Consul"></a>4.3. 使用 Spring Cloud Consul</h4><h5 id="4-3-1-创建-Spring-Boot-项目"><a href="#4-3-1-创建-Spring-Boot-项目" class="headerlink" title="4.3.1. 创建 Spring Boot 项目"></a>4.3.1. 创建 Spring Boot 项目</h5><p>这里采用 IDEA 提供的脚手架创建 Spring Boot 项目，分别勾选：</p>
 <ol>
@@ -412,7 +413,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="4-3-2-配置注册信息"><a href="#4-3-2-配置注册信息" class="headerlink" title="4.3.2. 配置注册信息"></a>4.3.2. 配置注册信息</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
+<h5 id="4-3-2-进行项目配置"><a href="#4-3-2-进行项目配置" class="headerlink" title="4.3.2. 进行项目配置"></a>4.3.2. 进行项目配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
 <p><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="4-3-3-为主类标注-EnableDiscoveryClient"><a href="#4-3-3-为主类标注-EnableDiscoveryClient" class="headerlink" title="4.3.3. 为主类标注 @EnableDiscoveryClient"></a>4.3.3. 为主类标注 @EnableDiscoveryClient</h5><p><code>@EnableDiscoveryClient</code> 使得服务能够向注册中心（如 Eureka、Consul、Zookeeper 等）注册，并能够从注册中心发现其他服务。</p>
@@ -420,7 +421,48 @@
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@SpringBootApplication</span>  <br><span class="hljs-variable">@EnableDiscoveryClient</span>  <br>public class CloudApplication &#123;  <br>  <br>    <span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">static</span> <span class="hljs-selector-tag">void</span> <span class="hljs-selector-tag">main</span>(String[] args) &#123;  <br>        <span class="hljs-selector-tag">SpringApplication</span><span class="hljs-selector-class">.run</span>(CloudApplication.class, args);  <br>    &#125;  <br>  <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="5-补充"><a href="#5-补充" class="headerlink" title="5. 补充"></a>5. 补充</h3><h5 id="5-1-1-相关网站"><a href="#5-1-1-相关网站" class="headerlink" title="5.1.1. 相关网站"></a>5.1.1. 相关网站</h5><ol>
+<h4 id="补充：常见注册中心"><a href="#补充：常见注册中心" class="headerlink" title="补充：常见注册中心"></a>补充：常见注册中心</h4><h5 id="常见注册中心"><a href="#常见注册中心" class="headerlink" title="常见注册中心"></a>常见注册中心</h5><table>
+<thead>
+<tr>
+<th>注册中心</th>
+<th>开发语言</th>
+<th>CAP 架构</th>
+<th>对外暴露接口</th>
+<th>是否支持服务健康检查</th>
+<th>是否与 Spring Cloud 继承</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Eureka</strong></td>
+<td>Java</td>
+<td>AP</td>
+<td>可配置支持</td>
+<td>HTTP</td>
+<td>已集成</td>
+</tr>
+<tr>
+<td><strong>Consul</strong></td>
+<td>Go</td>
+<td>CP</td>
+<td>支持</td>
+<td>HTTP&#x2F;DNS</td>
+<td>已集成</td>
+</tr>
+<tr>
+<td><strong>Zookeeper</strong></td>
+<td>Java</td>
+<td>CP</td>
+<td>支持</td>
+<td>客户端</td>
+<td>已集成</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="CAP-理论是什么"><a href="#CAP-理论是什么" class="headerlink" title="CAP 理论是什么"></a>CAP 理论是什么</h5><h3 id="5-补充"><a href="#5-补充" class="headerlink" title="5. 补充"></a>5. 补充</h3><h5 id="5-1-1-相关网站"><a href="#5-1-1-相关网站" class="headerlink" title="5.1.1. 相关网站"></a>5.1.1. 相关网站</h5><ol>
+<li>&#x3D;&#x3D;Consul 官网&#x3D;&#x3D;：<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul">https://developer.hashicorp.com/consul</a></li>
+</ol>
+</li>
 <li>&#x3D;&#x3D;Consul 下载地址&#x3D;&#x3D;：<ol>
 <li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul/install">https://developer.hashicorp.com/consul/install</a></li>
 </ol>

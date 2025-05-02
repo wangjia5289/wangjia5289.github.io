@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9ALinux/image-20250404204208673.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/15/%E7%AC%94%E8%AE%B0%EF%BC%9ALinux/image-20250404165010104.png">
 <meta property="article:published_time" content="2025-03-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-29T09:06:52.322Z">
+<meta property="article:modified_time" content="2025-05-01T04:30:25.825Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/image-20250315102024363.png">
@@ -305,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-04-29T17:06:52+08:00
+                    Last updated on 2025-05-01T12:30:25+08:00
                   
                   
 
@@ -466,6 +466,12 @@
 
 
 <h3 id="同步时间"><a href="#同步时间" class="headerlink" title="同步时间"></a>同步时间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 chrony</span><br><span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt install -y chrony<br><br><br><span class="hljs-comment"># 2. 启动并开启自启动 chrony</span><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br><br><br><span class="hljs-comment"># 3. 查看当前时间同步源（NTP 服务器）的状态</span><br>chronyc sources<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="重启电脑"><a href="#重启电脑" class="headerlink" title="重启电脑"></a>重启电脑</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> reboot<br></code></pre></td></tr></table></figure>
+
+<h3 id="创建目录、文件"><a href="#创建目录、文件" class="headerlink" title="创建目录、文件"></a>创建目录、文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">创建目录<br><span class="hljs-built_in">mkdir</span> -p xxxx<br><br>创建文件<br><span class="hljs-built_in">touch</span> xxxx<br></code></pre></td></tr></table></figure>
                 
               </div>
             

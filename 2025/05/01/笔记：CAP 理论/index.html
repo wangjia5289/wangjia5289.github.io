@@ -19,21 +19,27 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：RabbitMQ">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/index.html">
+    <meta name="description" content="CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Avail">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：CAP 理论">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Avail">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-04-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-01T09:31:56.946Z">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191235422.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191351661.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191408958.png">
+<meta property="article:published_time" content="2025-04-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-01T11:19:54.786Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191235422.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>笔记：RabbitMQ - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：CAP 理论 - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="笔记：RabbitMQ"></span>
+            <span id="subtitle" data-typed-text="笔记：CAP 理论"></span>
           
         </div>
 
@@ -209,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-23 00:00" pubdate>
-          April 23, 2025 am
+        <time datetime="2025-05-01 00:00" pubdate>
+          May 1, 2025 am
         </time>
       </span>
     
@@ -221,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          548 words
         
       </span>
     
@@ -232,7 +238,7 @@
         
         
         
-          1 mins
+          5 mins
         
       </span>
     
@@ -282,12 +288,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">笔记：RabbitMQ</h1>
+            <h1 id="seo-header">笔记：CAP 理论</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-01T17:31:56+08:00
+                    Last updated on 2025-05-01T19:19:54+08:00
                   
                   
 
@@ -297,7 +303,46 @@
             
               <div class="markdown-body">
                 
-                
+                <h3 id="CAP-理论概述"><a href="#CAP-理论概述" class="headerlink" title="CAP 理论概述"></a>CAP 理论概述</h3><p>CAP 理论指出：<strong>一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性</strong>，最多只能同时较好地满足其中两项。</p>
+<ol>
+<li>&#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;：<ol>
+<li>所有节点在同一时间的数据完全一致。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;A（Availability）可用性&#x3D;&#x3D;：<ol>
+<li>系统始终能对外提供服务，且每次请求都能获得响应（不一定是最新的）。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;P（Partition Tolerance）分区容错性&#x3D;&#x3D;：<ol>
+<li>系统在遇到部分节点失联或网络分区时仍能继续运行。</li>
+</ol>
+</li>
+</ol>
+<p>基于 CAP 原则，架构大致可分为以下三类：</p>
+<ul>
+<li>&#x3D;&#x3D;CA 类型&#x3D;&#x3D;：<ul>
+<li>满足一致性和可用性，常见于单点集群系统，但扩展性有限。</li>
+</ul>
+</li>
+<li>&#x3D;&#x3D;CP 类型&#x3D;&#x3D;：<ul>
+<li>满足一致性和分区容错性，系统稳定性强，但可能牺牲一定可用性。</li>
+</ul>
+</li>
+<li>&#x3D;&#x3D;AP 类型&#x3D;&#x3D;：<ul>
+<li>满足可用性和分区容错性，响应速度快，但对一致性的要求相对宽松。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191235422.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="AP-架构"><a href="#AP-架构" class="headerlink" title="AP 架构"></a>AP 架构</h3><p>在网络分区发生时，<strong>为了保持系统可用性，系统B仍会响应请求，即使返回的是旧数据</strong>。</p>
+<p>例如：当A和B之间网络断开，某些注册信息只存在于节点B，此时请求节点A可能查询不到，但请求节点B则能获得结果。虽然数据不一致，但服务依然对外正常运行。</p>
+<p><strong>结论</strong>：为了保证可用性和分区容错性，牺牲了一致性，因此属于 <strong>AP 类型系统</strong>。<br><img src="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191351661.png" srcset="/img/loading.gif" lazyload>、</p>
+<hr>
+<h3 id="CP架构"><a href="#CP架构" class="headerlink" title="CP架构"></a>CP架构</h3><p>当系统发生网络分区时，<strong>如果要确保数据一致性，就必须拒绝部分请求</strong>，否则就可能出现数据冲突。</p>
+<p>Consul 就是典型的 CP 架构系统，它采用 Raft 算法来实现一致性，要求大多数节点写入成功，服务才算注册成功。例如：如果 leader 节点挂掉，新的 leader 选举完成前，系统会短暂不可用。</p>
+<p><strong>结论</strong>：该架构牺牲了可用性，换取一致性和分区容错性，因此属于 <strong>CP 类型系统</strong>。<br><img src="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9A23%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/mage-20250501191408958.png" srcset="/img/loading.gif" lazyload></p>
+
                 
               </div>
             
@@ -315,12 +360,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="category-chain-item">消息队列</a>
+  <a href="/categories/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
   
   
 
@@ -342,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>笔记：RabbitMQ</div>
-      <div>https://wangjia5289.github.io/2025/04/23/笔记：RabbitMQ/</div>
+      <div>笔记：CAP 理论</div>
+      <div>https://wangjia5289.github.io/2025/05/01/笔记：CAP 理论/</div>
     </div>
     <div class="license-meta">
       
@@ -355,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>April 23, 2025</div>
+          <div>May 1, 2025</div>
         </div>
       
       
@@ -387,9 +432,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/24/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99/" title="笔记：常用网站">
+                      <a href="/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/" title="笔记：Spring Boot">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：常用网站</span>
+                        <span class="hidden-mobile">笔记：Spring Boot</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -397,8 +442,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/22/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch-Java/" title="笔记：ElasticSearch-Java">
-                        <span class="hidden-mobile">笔记：ElasticSearch-Java</span>
+                      <a href="/2025/04/30/%E7%AC%94%E8%AE%B0%EF%BC%9AIP/" title="笔记：IP">
+                        <span class="hidden-mobile">笔记：IP</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
