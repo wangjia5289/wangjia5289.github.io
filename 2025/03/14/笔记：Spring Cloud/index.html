@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427165021312.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png">
 <meta property="article:published_time" content="2025-03-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-02T02:22:05.077Z">
+<meta property="article:modified_time" content="2025-05-03T02:54:11.046Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427142937834.png">
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-02T10:22:05+08:00
+                    Last updated on 2025-05-03T10:54:11+08:00
                   
                   
 
@@ -413,7 +413,8 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="4-3-2-进行项目配置"><a href="#4-3-2-进行项目配置" class="headerlink" title="4.3.2. 进行项目配置"></a>4.3.2. 进行项目配置</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
+<h5 id="4-3-2-进行项目配置"><a href="#4-3-2-进行项目配置" class="headerlink" title="4.3.2. 进行项目配置"></a>4.3.2. 进行项目配置</h5><h6 id="Spring-Boot-如何加载配置文件"><a href="#Spring-Boot-如何加载配置文件" class="headerlink" title="Spring Boot 如何加载配置文件"></a>Spring Boot 如何加载配置文件</h6><p>在项目配置之前，我们必须了解 Spring Boot 如何加载配置文件，详情见：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
 <p><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="4-3-3-为主类标注-EnableDiscoveryClient"><a href="#4-3-3-为主类标注-EnableDiscoveryClient" class="headerlink" title="4.3.3. 为主类标注 @EnableDiscoveryClient"></a>4.3.3. 为主类标注 @EnableDiscoveryClient</h5><p><code>@EnableDiscoveryClient</code> 使得服务能够向注册中心（如 Eureka、Consul、Zookeeper 等）注册，并能够从注册中心发现其他服务。</p>
@@ -493,6 +494,13 @@
     
   <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/Spring-Cloud/" class="category-chain-item">Spring Cloud</a>
+  
+  
+
   
 
   
