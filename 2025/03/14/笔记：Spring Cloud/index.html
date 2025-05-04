@@ -19,18 +19,18 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. 导图：Map：Spring Cloud 2. Spring Cloud 组件图  3. Spring Cloud 流程图 4. Spring Cloud Consul4.1. Consul 是什么&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;在微服务 A 调用微服务 B 的过程中，如果把 B 的 IP 和端口写死在 A 的代码里，就容易遇到一堆大麻烦：  服务发现困难：">
+    <meta name="description" content="一、理论1. 导图：Map：Spring Cloud 2. Spring Cloud 组件图  3. Spring Cloud 流程图 Spring Cloud LoadBalancer 是一种客户端负载均衡工具，用于在多个服务实例间分配请求。 OpenFeign 是一种声明式的 Web 服务客户端，简化 REST API 调用，可与 LoadBalancer 集成以实现负载均衡。 两者可配合使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring Cloud">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. 导图：Map：Spring Cloud 2. Spring Cloud 组件图  3. Spring Cloud 流程图 4. Spring Cloud Consul4.1. Consul 是什么&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;在微服务 A 调用微服务 B 的过程中，如果把 B 的 IP 和端口写死在 A 的代码里，就容易遇到一堆大麻烦：  服务发现困难：">
+<meta property="og:description" content="一、理论1. 导图：Map：Spring Cloud 2. Spring Cloud 组件图  3. Spring Cloud 流程图 Spring Cloud LoadBalancer 是一种客户端负载均衡工具，用于在多个服务实例间分配请求。 OpenFeign 是一种声明式的 Web 服务客户端，简化 REST API 调用，可与 LoadBalancer 集成以实现负载均衡。 两者可配合使用">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427142937834.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427165021312.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png">
 <meta property="article:published_time" content="2025-03-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-03T02:54:11.046Z">
+<meta property="article:modified_time" content="2025-05-03T07:36:26.741Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427142937834.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.6k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          12 mins
+          14 mins
         
       </span>
     
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-03T10:54:11+08:00
+                    Last updated on 2025-05-03T15:36:26+08:00
                   
                   
 
@@ -306,8 +306,13 @@
                 <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-导图：Map：Spring-Cloud"><a href="#1-导图：Map：Spring-Cloud" class="headerlink" title="1. 导图：Map：Spring Cloud"></a>1. 导图：<a href="../../maps/Map%EF%BC%9ASpringCloud.xmind">Map：Spring Cloud</a></h3><hr>
 <h3 id="2-Spring-Cloud-组件图"><a href="#2-Spring-Cloud-组件图" class="headerlink" title="2. Spring Cloud 组件图"></a>2. Spring Cloud 组件图</h3><p><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427142937834.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="3-Spring-Cloud-流程图"><a href="#3-Spring-Cloud-流程图" class="headerlink" title="3. Spring Cloud 流程图"></a>3. Spring Cloud 流程图</h3><hr>
-<h3 id="4-Spring-Cloud-Consul"><a href="#4-Spring-Cloud-Consul" class="headerlink" title="4. Spring Cloud Consul"></a>4. Spring Cloud Consul</h3><h4 id="4-1-Consul-是什么"><a href="#4-1-Consul-是什么" class="headerlink" title="4.1. Consul 是什么"></a>4.1. Consul 是什么</h4><p>&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;<br>在微服务 A 调用微服务 B 的过程中，如果把 B 的 IP 和端口写死在 A 的代码里，就容易遇到一堆大麻烦：</p>
+<h3 id="3-Spring-Cloud-流程图"><a href="#3-Spring-Cloud-流程图" class="headerlink" title="3. Spring Cloud 流程图"></a>3. Spring Cloud 流程图</h3><ul>
+<li>Spring Cloud LoadBalancer 是一种客户端负载均衡工具，用于在多个服务实例间分配请求。</li>
+<li>OpenFeign 是一种声明式的 Web 服务客户端，简化 REST API 调用，可与 LoadBalancer 集成以实现负载均衡。</li>
+<li>两者可配合使用：OpenFeign 定义客户端接口，LoadBalancer 处理请求分发。</li>
+</ul>
+<hr>
+<h3 id="4-Consul"><a href="#4-Consul" class="headerlink" title="4. Consul"></a>4. Consul</h3><h4 id="4-1-Consul-概述"><a href="#4-1-Consul-概述" class="headerlink" title="4.1. Consul 概述"></a>4.1. Consul 概述</h4><p>&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;<br>在微服务 A 调用微服务 B 的过程中，如果把 B 的 IP 和端口写死在 A 的代码里，就容易遇到一堆大麻烦：</p>
 <ol>
 <li><font color="#00b0f0">服务发现困难</font>：<ol>
 <li>微服务 B 的 IP 或端口一旦变更，A 就懵了，找不到 B，调用失败。</li>
@@ -384,7 +389,7 @@
 <hr>
 <h5 id="4-2-3-高可用集群搭建（传统方案）"><a href="#4-2-3-高可用集群搭建（传统方案）" class="headerlink" title="4.2.3. 高可用集群搭建（传统方案）"></a>4.2.3. 高可用集群搭建（传统方案）</h5><hr>
 <h5 id="4-2-4-高可用集群搭建（K8S，推荐）"><a href="#4-2-4-高可用集群搭建（K8S，推荐）" class="headerlink" title="4.2.4. 高可用集群搭建（K8S，推荐）"></a>4.2.4. 高可用集群搭建（K8S，推荐）</h5><hr>
-<h4 id="4-3-使用-Spring-Cloud-Consul"><a href="#4-3-使用-Spring-Cloud-Consul" class="headerlink" title="4.3. 使用 Spring Cloud Consul"></a>4.3. 使用 Spring Cloud Consul</h4><h5 id="4-3-1-创建-Spring-Boot-项目"><a href="#4-3-1-创建-Spring-Boot-项目" class="headerlink" title="4.3.1. 创建 Spring Boot 项目"></a>4.3.1. 创建 Spring Boot 项目</h5><p>这里采用 IDEA 提供的脚手架创建 Spring Boot 项目，分别勾选：</p>
+<h4 id="4-3-使用-Spring-Cloud-Consul"><a href="#4-3-使用-Spring-Cloud-Consul" class="headerlink" title="4.3. 使用 Spring Cloud Consul"></a>4.3. 使用 Spring Cloud Consul</h4><h5 id="4-3-1-创建-Spring-Boot-Consul-项目"><a href="#4-3-1-创建-Spring-Boot-Consul-项目" class="headerlink" title="4.3.1. 创建 Spring Boot Consul 项目"></a>4.3.1. 创建 Spring Boot Consul 项目</h5><p>这里采用 IDEA 提供的脚手架创建 Spring Boot 项目，分别勾选：</p>
 <ol>
 <li>&#x3D;&#x3D;Web&#x3D;&#x3D;<ol>
 <li>Spring Web</li>
@@ -413,16 +418,40 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="4-3-2-进行项目配置"><a href="#4-3-2-进行项目配置" class="headerlink" title="4.3.2. 进行项目配置"></a>4.3.2. 进行项目配置</h5><h6 id="Spring-Boot-如何加载配置文件"><a href="#Spring-Boot-如何加载配置文件" class="headerlink" title="Spring Boot 如何加载配置文件"></a>Spring Boot 如何加载配置文件</h6><p>在项目配置之前，我们必须了解 Spring Boot 如何加载配置文件，详情见：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
-<p><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-3-2-进行项目配置"><a href="#4-3-2-进行项目配置" class="headerlink" title="4.3.2. 进行项目配置"></a>4.3.2. 进行项目配置</h5><h6 id="4-3-2-1-Spring-Boot-如何加载配置文件"><a href="#4-3-2-1-Spring-Boot-如何加载配置文件" class="headerlink" title="4.3.2.1. Spring Boot 如何加载配置文件"></a>4.3.2.1. Spring Boot 如何加载配置文件</h6><p>在项目配置之前，我们必须了解 Spring Boot 如何加载配置文件，详情见：</p>
+<hr>
+<h6 id="4-3-2-2-创建配置文件"><a href="#4-3-2-2-创建配置文件" class="headerlink" title="4.3.2.2. 创建配置文件"></a>4.3.2.2. 创建配置文件</h6><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">first_test</span>                                <span class="hljs-comment"># 项目名称，一般也作为 Consul 注册的名称</span><br>  <span class="hljs-attr">cloud:</span>  <br>    <span class="hljs-attr">consul:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>                           <span class="hljs-comment"># Consul 节点的 IP 地址</span><br>      <span class="hljs-attr">port:</span> <span class="hljs-number">8500</span>                                    <span class="hljs-comment"># Consul 节点的端口号</span><br>      <span class="hljs-attr">discovery:</span>  <br>        <span class="hljs-attr">service-name:</span> <span class="hljs-string">$&#123;spring.application.name&#125;</span>    <span class="hljs-comment"># 本服务在 Consul 注册的名称，一般与 application.name 一致</span><br>        <span class="hljs-attr">prefer-ip-address:</span> <span class="hljs-literal">true</span>                     <span class="hljs-comment"># 以本服务所在 IP 地址优先，否则会自动使用主机名</span><br>      <span class="hljs-attr">config:</span>  <br>        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">false</span>  <br></code></pre></td></tr></table></figure>
+<p><img src="/2025/03/14/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud/image-20250427192909664.png" srcset="/img/loading.gif" lazyload alt="|475"></p>
 <hr>
 <h5 id="4-3-3-为主类标注-EnableDiscoveryClient"><a href="#4-3-3-为主类标注-EnableDiscoveryClient" class="headerlink" title="4.3.3. 为主类标注 @EnableDiscoveryClient"></a>4.3.3. 为主类标注 @EnableDiscoveryClient</h5><p><code>@EnableDiscoveryClient</code> 使得服务能够向注册中心（如 Eureka、Consul、Zookeeper 等）注册，并能够从注册中心发现其他服务。</p>
 <p>当你启动这个 Spring Boot 应用时，它会自动将服务信息注册到 Consul 中，包括服务的名称、IP 地址和端口等。Consul 会维护这个服务的注册信息，其他服务可以通过 Consul 来发现该服务。</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@SpringBootApplication</span>  <br><span class="hljs-variable">@EnableDiscoveryClient</span>  <br>public class CloudApplication &#123;  <br>  <br>    <span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">static</span> <span class="hljs-selector-tag">void</span> <span class="hljs-selector-tag">main</span>(String[] args) &#123;  <br>        <span class="hljs-selector-tag">SpringApplication</span><span class="hljs-selector-class">.run</span>(CloudApplication.class, args);  <br>    &#125;  <br>  <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="补充：常见注册中心"><a href="#补充：常见注册中心" class="headerlink" title="补充：常见注册中心"></a>补充：常见注册中心</h4><h5 id="常见注册中心"><a href="#常见注册中心" class="headerlink" title="常见注册中心"></a>常见注册中心</h5><table>
+<h3 id="LoadBalancer-OpenFeign"><a href="#LoadBalancer-OpenFeign" class="headerlink" title="LoadBalancer + OpenFeign"></a>LoadBalancer + OpenFeign</h3><h4 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h4><h5 id="创建并配置-OpenFeign-配置类"><a href="#创建并配置-OpenFeign-配置类" class="headerlink" title="创建并配置 OpenFeign 配置类"></a>创建并配置 OpenFeign 配置类</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="5-Spring-Cloud-LoadBalancer"><a href="#5-Spring-Cloud-LoadBalancer" class="headerlink" title="5. Spring Cloud LoadBalancer"></a>5. Spring Cloud LoadBalancer</h3><h4 id="5-1-Spring-Cloud-LoadBalancer-概述"><a href="#5-1-Spring-Cloud-LoadBalancer-概述" class="headerlink" title="5.1. Spring Cloud LoadBalancer 概述"></a>5.1. Spring Cloud LoadBalancer 概述</h4><ul>
+<li>Spring Cloud LoadBalancer 是一种客户端负载均衡工具，用于在多个服务实例间分配请求。</li>
+<li>OpenFeign 是一种声明式的 Web 服务客户端，简化 REST API 调用，可与 LoadBalancer 集成以实现负载均衡。</li>
+<li>两者可配合使用：OpenFeign 定义客户端接口，LoadBalancer 处理请求分发。</li>
+</ul>
+<hr>
+<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="6-1-1-相关网站"><a href="#6-1-1-相关网站" class="headerlink" title="6.1.1. 相关网站"></a>6.1.1. 相关网站</h3><ol>
+<li>&#x3D;&#x3D;Consul 官网&#x3D;&#x3D;：<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul">https://developer.hashicorp.com/consul</a></li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;Consul 下载地址&#x3D;&#x3D;：<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul/install">https://developer.hashicorp.com/consul/install</a></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="6-1-2-常见注册中心"><a href="#6-1-2-常见注册中心" class="headerlink" title="6.1.2. 常见注册中心"></a>6.1.2. 常见注册中心</h3><table>
 <thead>
 <tr>
 <th>注册中心</th>
@@ -458,17 +487,6 @@
 <td>已集成</td>
 </tr>
 </tbody></table>
-<hr>
-<h5 id="CAP-理论是什么"><a href="#CAP-理论是什么" class="headerlink" title="CAP 理论是什么"></a>CAP 理论是什么</h5><h3 id="5-补充"><a href="#5-补充" class="headerlink" title="5. 补充"></a>5. 补充</h3><h5 id="5-1-1-相关网站"><a href="#5-1-1-相关网站" class="headerlink" title="5.1.1. 相关网站"></a>5.1.1. 相关网站</h5><ol>
-<li>&#x3D;&#x3D;Consul 官网&#x3D;&#x3D;：<ol>
-<li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul">https://developer.hashicorp.com/consul</a></li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;Consul 下载地址&#x3D;&#x3D;：<ol>
-<li><a target="_blank" rel="noopener" href="https://developer.hashicorp.com/consul/install">https://developer.hashicorp.com/consul/install</a></li>
-</ol>
-</li>
-</ol>
 
                 
               </div>
