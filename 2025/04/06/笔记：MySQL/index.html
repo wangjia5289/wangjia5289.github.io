@@ -49,13 +49,15 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250409192001892.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250409223121020.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410100653127.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250406171345505.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250406155610051.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410104022257.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410104203864.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250406182807697.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141545381.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141924184.png">
 <meta property="article:published_time" content="2025-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-03T08:12:39.291Z">
+<meta property="article:modified_time" content="2025-05-04T03:33:26.960Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410141156407.png">
@@ -263,7 +265,7 @@
         
         
         
-          159 mins
+          161 mins
         
       </span>
     
@@ -318,7 +320,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-03T16:12:39+08:00
+                    Last updated on 2025-05-04T11:33:26+08:00
                   
                   
 
@@ -1210,7 +1212,63 @@
 
 <hr>
 <h3 id="2-高可用集群（非-K8S）"><a href="#2-高可用集群（非-K8S）" class="headerlink" title="2. 高可用集群（非 K8S）"></a>2. 高可用集群（非 K8S）</h3><hr>
-<h3 id="3-高可以集群（K8S）"><a href="#3-高可以集群（K8S）" class="headerlink" title="3. 高可以集群（K8S）"></a>3. 高可以集群（K8S）</h3><h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-MyCat2"><a href="#1-MyCat2" class="headerlink" title="1. MyCat2"></a>1. MyCat2</h3><h1 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h1><h3 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h3><ol>
+<h3 id="3-高可以集群（K8S）"><a href="#3-高可以集群（K8S）" class="headerlink" title="3. 高可以集群（K8S）"></a>3. 高可以集群（K8S）</h3><h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-MyCat2"><a href="#1-MyCat2" class="headerlink" title="1. MyCat2"></a>1. MyCat2</h3><h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="1-安装-MyCat2"><a href="#1-安装-MyCat2" class="headerlink" title="1. 安装 MyCat2"></a>1. 安装 MyCat2</h3><p>&#x3D;&#x3D;1.安装 JDK&#x3D;&#x3D;<br>使用MyCAT 2要安装JDK，因为MyCAT 是基于JDK1.8开发的</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt install openjdk-<span class="hljs-number">17</span>-jdk<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;2.创建存放 MyCat 的目录&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 常见 /tools</span><br><span class="hljs-built_in">mkdir</span> -p /tools<br><br><br><span class="hljs-comment"># 2. 进入 /tools</span><br><span class="hljs-built_in">cd</span> /tools<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;3.将 MyCat2 相关包拖过来&#x3D;&#x3D;<br>将 <code>mycat2-install-template-1.21.zip</code> 和 <code>mycat2-1.22-release-jar-with-dependencies.jar</code> 拖到 <code>/tools</code> 目录下</p>
+<p>&#x3D;&#x3D;4.解压 MyCat2 安装包&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 unzip 工具（需要解压 .zip 包）</span><br><span class="hljs-built_in">sudo</span> apt install unzip<br><br><br><span class="hljs-comment"># 2. 解压 MyCat2 安装包</span><br>unzip mycat2-install-template-1.21.zip<br><br><br><span class="hljs-comment"># 3. 增加对 /tools/mycat/bin 的执行权限</span><br><span class="hljs-built_in">cd</span> /tools/mycat/bin<br><br><span class="hljs-built_in">chmod</span> +x *<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;5.复制 jar 包到 &#x2F;tools&#x2F;mycat&#x2F;lib 目录&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /tools/mycat2-1.22-release-jar-with-dependencies.jar /tools/mycat/lib<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p>绕过 Linux 的用户名和密码，直接使用 MyCat2 的用户名和密码进行登录<br><img src="/image-20250406171345505.png" srcset="/img/loading.gif" lazyload></p>
+<p>启动有问题看日志：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">cat /tools/mycat/logs/<span class="hljs-keyword">wrapper</span>.<span class="hljs-keyword">log</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="三、补充"><a href="#三、补充" class="headerlink" title="三、补充"></a>三、补充</h1><h3 id="1-MyCat2-的目录结构"><a href="#1-MyCat2-的目录结构" class="headerlink" title="1. MyCat2 的目录结构"></a>1. MyCat2 的目录结构</h3><h4 id="1-1-目录总览"><a href="#1-1-目录总览" class="headerlink" title="1.1. 目录总览"></a>1.1. 目录总览</h4><p><img src="/image-20250406155610051.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>&#x3D;&#x3D;bin&#x3D;&#x3D;：<ol>
+<li>执行主要命令的目录</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;conf&#x3D;&#x3D;：<ol>
+<li>软件的配置文件</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;lib&#x3D;&#x3D;：<ol>
+<li>该软件的依赖包</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;logs&#x3D;&#x3D;：<ol>
+<li>该软件的日志包</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h1><h3 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h3><ol>
 <li>MyCat2 官方网站：<ol>
 <li><a target="_blank" rel="noopener" href="http://mycatone.top/">http://mycatone.top/</a></li>
 </ol>
@@ -2037,13 +2095,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/MySQL/" class="category-chain-item">MySQL</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88SQL%EF%BC%89/" class="category-chain-item">关系型数据库（SQL）</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88SQL%EF%BC%89/MySQL/" class="category-chain-item">MySQL</a>
+  
+  
+
   
 
   
@@ -2109,9 +2174,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMyCat2/" title="笔记：MyCat2">
+                      <a href="/2025/04/07/%E7%AC%94%E8%AE%B0%EF%BC%9AKeepalived/" title="笔记：Keepalived">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：MyCat2</span>
+                        <span class="hidden-mobile">笔记：Keepalived</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
