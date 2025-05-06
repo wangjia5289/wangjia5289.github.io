@@ -27,7 +27,7 @@
 <meta property="og:description" content="一、理论1. Spring WebFlux 概述&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;随着互联网应用的日益复杂和用户对实时性要求的提高，传统的基于阻塞 I&#x2F;O 的Web框架在处理高并发和大数据流时逐渐显现出瓶颈。 &#x3D;&#x3D;2.响应式编程解决方案&#x3D;&#x3D;基于以上问题，响应式编程模型应运而生，响应式编程是一种处理异步数据流、变化传播、非阻">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-03T10:47:53.371Z">
+<meta property="article:modified_time" content="2025-05-06T08:46:56.547Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.2k words
+          4k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          36 mins
+          34 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-03T18:47:53+08:00
+                    Last updated on 2025-05-06T16:46:56+08:00
                   
                   
 
@@ -301,193 +301,245 @@
                 
                 <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-Spring-WebFlux-概述"><a href="#1-Spring-WebFlux-概述" class="headerlink" title="1. Spring WebFlux 概述"></a>1. Spring WebFlux 概述</h3><p>&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;<br>随着互联网应用的日益复杂和用户对实时性要求的提高，传统的基于<strong>阻塞 I&#x2F;O</strong> 的Web框架在处理高并发和大数据流时逐渐显现出瓶颈。</p>
 <p>&#x3D;&#x3D;2.响应式编程解决方案&#x3D;&#x3D;<br>基于以上问题，响应式编程模型应运而生，响应式编程是一种<strong>处理异步数据流</strong>、<strong>变化传播</strong>、<strong>非阻塞</strong>的编程范式，在响应式编程中，数据被建模为流，操作以非阻塞方式执行，从而保持应用程序在高负载下的响应性。</p>
-<p>&#x3D;&#x3D;3.Spring WebFlux 是什么&#x3D;&#x3D;<br>Spring WebFlux，作为 Spring Framework 的响应式Web框架，基于 Reactive Streams 规范构建，采用非阻塞和事件驱动的架构设计，特别适合处理高并发、低延迟和 I&#x2F;O 密集型任务。</p>
+<p>&#x3D;&#x3D;3.Spring WebFlux 是什么&#x3D;&#x3D;<br>Spring WebFlux，作为 Spring Framework 的响应式Web框架，基于 Reactive Streams 规范构建，采用事件驱动 + 非阻塞 I&#x2F;O 的架构设计，特别适合处理高并发、低延迟和 I&#x2F;O 密集型任务。</p>
 <hr>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="创建-Spring-Web-项目"><a href="#创建-Spring-Web-项目" class="headerlink" title="创建 Spring Web 项目"></a>创建 Spring Web 项目</h3><hr>
-<h3 id="引入-Spring-WebFlux-依赖"><a href="#引入-Spring-WebFlux-依赖" class="headerlink" title="引入 Spring WebFlux 依赖"></a>引入 Spring WebFlux 依赖</h3><p>以追加 Spring Web 依赖的方式，勾选：</p>
+<h3 id="2-对-Spring-WebFlux-深入理解"><a href="#2-对-Spring-WebFlux-深入理解" class="headerlink" title="2. 对 Spring WebFlux 深入理解"></a>2. 对 Spring WebFlux 深入理解</h3><p>&#x3D;&#x3D;1.Spring Web（Servlet 栈）&#x3D;&#x3D;<br>Spring Web 采用传统的阻塞式编程模型，基于 Servlet API，默认使用 Servlet 容器（如 Tomcat）。其线程模型为每个请求分配一个线程，并在请求处理期间阻塞该线程，直到响应生成完毕（线程阻塞）。其缺乏内建的流式数据处理支持，且依赖多线程调度，其内存开销较大。在高并发场景下，受限于线程池大小和阻塞模型，吞吐量较低。然而，其延迟较低，适合传统的请求&#x2F;响应模型，尤其是 CPU 计算密集型 或 请求阻塞不明显 的传统 Web 应用开发。</p>
+<p>对线程阻塞的深入理解：</p>
 <ol>
-<li>&#x3D;&#x3D;Web&#x3D;&#x3D;<ol>
-<li>Spring Reactive Web</li>
+<li>一个请求通常由一个线程全程处理。当程序执行到某个耗时操作（如阻塞的网络请求、阻塞的数据库查询、文件读写、或 CPU 密集计算）时，这个线程会<strong>停下来等待</strong>，直到结果返回后才能继续往下执行。</li>
+<li>在这段等待时间里，线程既不做其他事，又无法释放，造成<strong>严重的资源浪费</strong>，系统吞吐量受限。</li>
+<li>虽然我们可以通过<strong>异步线程池</strong>来“解耦”这些耗时操作，把任务转交给其他线程执行，释放主线程，看起来像是实现“非阻塞”，但这其实只是<strong>线程的转移</strong>，本质上仍是阻塞，只不过阻塞发生在别的线程上。更糟的是：如果主线程还需要等待异步结果返回，等于主线程和工作线程<strong>两个线程都被卡住了</strong>，反而加重了系统开销。这种方式可以称为“<strong>伪非阻塞</strong>”。</li>
+</ol>
+<p>&#x3D;&#x3D;2.Spring WebFlux（Reactive 栈）&#x3D;&#x3D;<br>Spring WebFlux 基于 响应式编程模型，默认使用 Reactive 容器（如 Netty），通过 事件驱动 和 非阻塞 I&#x2F;O 实现高效处理。它借助 Reactor 库（Mono 和 Flux）实现异步操作，能够以较少的线程处理更多请求，资源消耗显著降低。在 I&#x2F;O 密集型 场景下，其吞吐量和响应速度表现优异，尽管响应链较长可能导致延迟略高。Spring WebFlux 特别适合 高并发 和 大量 I&#x2F;O 请求 的应用场景，例如聊天系统、实时通知和数据流处理等。</p>
+<p>对非阻塞 I&#x2F;O 的深入理解：</p>
+<ol>
+<li>Spring WebFlux 的非阻塞 I&#x2F;O 模型就不同了。它不是靠线程切换来“逃避阻塞”，而是通过一种事件驱动 + 回调机制来彻底规避阻塞。我们必须注意的是：“<font color="#ff0000">Spring WebFlux 只是提供了非阻塞的条件，但到底能不能做到非阻塞，还要看你具体的技术栈</font>”</li>
+<li>例如，当主线程遇到一个耗时操作时，如果这个操作是异步非阻塞的（比如非阻塞网络请求、非阻塞数据库查询），主线程执行之后不会傻乎乎地干等，而是注册一个事件和对应的回调函数，然后立刻去处理其他任务。如果有数据返回，比如 R2DBC 查询返回了一条数据，就会触发事件，执行回调函数。假如操作还没彻底完成，只是返回了部分数据，主线程会继续忙其他事，等下次再返回数据时再回调、再继续后续业务流程。</li>
+<li>但是，如果这个操作是同步简单操作、同步阻塞操作，那主线程还是要老老实实执行完这个步骤才能往下走，可是别忘了，我们的主 Reactive 线程是为成千上万个任务服务的，你让它在一个请求上耗太久，这显然是不行的，所以，<font color="#ff0000">我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，不得防止任何阻塞操作，只允许包含两类操作：同步简单操作、异步非阻塞</font></li>
+<li>那你可能询问，同步阻塞操作我们该怎么操作，对于这些操作，WebFlux 允许你把它们丢到一个专门的 “阻塞友好线程池” 里去执行。执行完后，结果会返回给主线程。但是这跟传统阻塞模型不一样，虽然异步线程仍然阻塞，但是主线程在这个过程中不会一直傻等，而是继续处理其他任务，等结果回来后再回来处理这个请求。这样可以避免主 Reactive 线程被长时间占用，保持它轻量、高效地应付大量请求。</li>
+<li>这样我们就可以实现，除了主 Reactive 线程执行同步简单操作时消耗点时间，执行异步阻塞、异步非阻塞操作时，都不会被阻塞，可以去执行其他任务，这样就能实现少量线程执行大量请求</li>
+</ol>
+<p>&#x3D;&#x3D;3.两者对比表&#x3D;&#x3D;</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>Spring Web（Tomcat）</th>
+<th>Spring WebFlux（Netty）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>并发模型</strong></td>
+<td>每请求一个线程（阻塞）</td>
+<td>单线程事件驱动，非阻塞处理</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>计算密集型 &#x2F; 阻塞不明显的中低并发场景</td>
+<td>高并发、I&#x2F;O 密集、实时响应</td>
+</tr>
+<tr>
+<td><strong>资源占用</strong></td>
+<td>多线程调度，线程上下文开销大</td>
+<td>少量线程处理大量请求，资源占用低</td>
+</tr>
+<tr>
+<td><strong>响应式支持</strong></td>
+<td>无响应式支持，流程阻塞</td>
+<td>原生响应式，支持流式数据处理</td>
+</tr>
+<tr>
+<td><strong>返回 JSON</strong></td>
+<td>使用 Jackson + HttpMessageConverter</td>
+<td>使用 Jackson + HttpMessageWriter</td>
+</tr>
+<tr>
+<td><strong>编程风格</strong></td>
+<td>命令式，流程清晰，开发简单</td>
+<td>响应式，链式调用，开发思维门槛高</td>
+</tr>
+<tr>
+<td><strong>学习曲线</strong></td>
+<td>低，传统经验易迁移</td>
+<td>高，需要理解响应式思想</td>
+</tr>
+<tr>
+<td><strong>吞吐量</strong></td>
+<td>中等，受限于线程池</td>
+<td>高，利用非阻塞机制提高并发处理能力</td>
+</tr>
+<tr>
+<td><strong>延迟（Latency）</strong></td>
+<td>低，线程直通，响应快速</td>
+<td>响应链长，调度复杂，延迟略高</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="1-Mono"><a href="#1-Mono" class="headerlink" title="1. Mono"></a>1. Mono</h3><h4 id="1-1-Mono-概述"><a href="#1-1-Mono-概述" class="headerlink" title="1.1. Mono 概述"></a>1.1. Mono 概述</h4><p><code>Mono</code> 表示一个可能包含 0 或 1 个元素 的异步数据流。它可以承载一个元素或一个空值，例如下面代码中， <code>Hello, World!</code> 就是一个元素；</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Mono&lt;String&gt; mono <span class="hljs-operator">=</span> Mono.just(<span class="hljs-string">&quot;Hello, World!&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>“元素”的概念是基于 <code>Mono&lt;T&gt;</code> 中的泛型类型来理解的。比如 <code>Mono&lt;String&gt;</code> 中一个 <code>String</code> 类型就是一个元素；如果是 <code>Mono&lt;Object&gt;</code>，那一个 <code>Object</code> 类型就是一个元素。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="1-2-Mono-相关方法"><a href="#1-2-Mono-相关方法" class="headerlink" title="1.2. Mono 相关方法"></a>1.2. Mono 相关方法</h4><h5 id="1-2-1-前言"><a href="#1-2-1-前言" class="headerlink" title="1.2.1. 前言"></a>1.2.1. 前言</h5><p>我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，不得放置任何阻塞操作，只允许包含两类操作：</p>
+<ol>
+<li>同步简单操作</li>
+<li>异步非阻塞操作</li>
+</ol>
+<p>对于 同步阻塞操作，必须通过 <code>mono.subscribeOn</code> 将其调度到 “阻塞友好线程” 中，因此，以后我们提到 “异步阻塞操作” ，实际上是指：<strong>将原本是同步阻塞的操作，调度到阻塞友好线程中执行</strong>，从而避免阻塞 Reactor 的工作线程，保持响应式流的非阻塞特性。</p>
+<hr>
+<h5 id="1-2-2-创建-Mono-实例"><a href="#1-2-2-创建-Mono-实例" class="headerlink" title="1.2.2. 创建 Mono 实例"></a>1.2.2. 创建 Mono 实例</h5><ol>
+<li><code>Mono.just(T data)</code>：<ol>
+<li>从一个确定且非 <code>null</code> 的值创建 Mono，直接发出该值</li>
+</ol>
+</li>
+<li><code>Mono.justOrEmpty(T data)</code>：<ol>
+<li>从一个可能为 <code>null</code> 的值创建 Mono，若为 <code>null</code> 则返回空 Mono</li>
+</ol>
+</li>
+<li><code>Mono.empty()</code>：<ol>
+<li>创建不发出任何元素且立即完成的空 Mono</li>
+</ol>
+</li>
+<li><code>Mono.fromCallable(Callable&lt;R&gt;)</code>：<ol>
+<li>从 <code>Callable</code> 创建 Mono，无论 <code>Callable</code> 返回值是什么，最终都将被包装为一个 Mono，适用于封装同步简单操作、异步阻塞操作、异步非阻塞操作</li>
+<li>这里异步阻塞操作指的是结合 <code>subscribeOn</code> 异步化阻塞操作（使成为异步阻塞操作），避免占用主 Reactive 线程过多时间<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. Mono.just(T data)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/just&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">just</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Hello&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Mono.justOrEmpty(T data)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/justOrEmpty&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">justOrEmpty</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span>(required = <span class="hljs-literal">false</span>) <span class="hljs-title class_">String</span> input</span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">justOrEmpty</span>(input);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 3. Mono.empty()</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/empty&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">empty</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">empty</span>();<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. Mono.fromCallable(Callable&lt;R&gt;)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/fromCallable&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">fromCallable</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">fromCallable</span>(() -&gt; &#123;<br>	        <span class="hljs-comment">// 模拟阻塞操作</span><br>            <span class="hljs-title class_">Thread</span>.<span class="hljs-title function_">sleep</span>(<span class="hljs-number">1000</span>); <br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;data from callable&quot;</span>;<br>        &#125;).<span class="hljs-title function_">subscribeOn</span>(<span class="hljs-title class_">Schedulers</span>.<span class="hljs-title function_">boundedElastic</span>());<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ol>
 <hr>
-<h2 id="Spring-WebFlux全面使用指南：从入门到精通"><a href="#Spring-WebFlux全面使用指南：从入门到精通" class="headerlink" title="Spring WebFlux全面使用指南：从入门到精通"></a>Spring WebFlux全面使用指南：从入门到精通</h2><h3 id="一、Spring-WebFlux核心概念与特性"><a href="#一、Spring-WebFlux核心概念与特性" class="headerlink" title="一、Spring WebFlux核心概念与特性"></a>一、Spring WebFlux核心概念与特性</h3><p>Spring WebFlux是Spring框架对响应式编程的支持实现，它基于Reactor库实现了Reactive Streams规范，支持非阻塞异步编程。</p>
-<p>WebFlux的响应式编程模型通过<code>Flux</code>和<code>Mono</code>两个核心组件来管理异步数据流，其中<code>Flux</code>表示包含0到多个元素的异步序列，<code>Mono</code>表示包含0或1个元素的异步序列。这种设计使得应用能够在处理大量并发请求时保持低内存占用，避免线程阻塞导致的性能问题。</p>
-<p>背压机制是WebFlux的核心特性之一，它允许下游消费者控制上游生产者的数据流速，防止资源耗尽。背压通过<code>SubmissionPublisher</code>和<code>Flow.Subscription</code>实现，订阅者可以通知发布者当前可处理的数据量。例如，可以通过<code>limitRate()</code>运算符限制预取数据量，或者使用<code>onBackpressureBuffer()</code>自定义缓冲区策略和溢出处理方式。这种机制确保在高负载情况下，应用可以使用固定的线程数和有限的内存资源来处理请求，避免了传统Web框架常见的线程池耗尽问题。</p>
-<p>WebFlux支持多种Web服务器，包括Servlet容器（如Tomcat 9.0+）和非阻塞服务器（如Netty、Undertow），并能够与HTTP&#x2F;2协议无缝集成。在性能方面，WebFlux基于Netty的事件循环模型，相比Tomcat的线程阻塞模型，在高并发场景下表现出色。例如，当并发用户达到1000时，WebFlux的99%请求响应时间仍能保持在150ms以内，而传统Spring MVC的响应时间可能飙升至500ms以上，甚至出现1000ms的极端情况。</p>
-<h3 id="二、两种编程模型：注解控制器与函数式端点"><a href="#二、两种编程模型：注解控制器与函数式端点" class="headerlink" title="二、两种编程模型：注解控制器与函数式端点"></a>二、两种编程模型：注解控制器与函数式端点</h3><p>WebFlux提供了两种主要的编程模型，以满足不同场景下的开发需求。</p>
-<p><strong>注解控制器模型</strong>与传统的Spring MVC非常相似，开发者可以使用熟悉的<code>@RestController</code>、<code>@GetMapping</code>等注解来定义控制器和处理方法。主要区别在于返回类型必须是响应式类型（如<code>Mono</code>或<code>Flux</code>），以保持非阻塞和响应式的行为。这种模型特别适合熟悉Spring MVC的开发者，或者需要处理复杂业务逻辑的场景。下面是一个简单的注解控制器示例：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/users&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/&#123;id&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Mono&lt;User&gt; getUserById(<span class="hljs-meta">@PathVariable</span> String id) &#123;<br>        <span class="hljs-keyword">return</span> userService.getUserById(id);<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping</span><br>    <span class="hljs-keyword">public</span> Flux&lt;User&gt; getAllUsers() &#123;<br>        <span class="hljs-keyword">return</span> userService.getAllUsers();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>函数式端点模型</strong>则采用更轻量级的函数式编程风格，通过<code>RouterFunction</code>和<code>HandlerFunction</code>来定义路由和处理逻辑。这种模型强调不变性和声明式编程，减少了样板代码，更适合构建轻量级API或事件流应用。函数式模型的配置通常在配置类中完成，如下所示：</p>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-variable">@Configuration</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RouteConfig</span> </span>&#123;<br>    <span class="hljs-variable">@Bean</span><br>    public RouterFunction&lt;ServerResponse&gt; route(ExampleHandler handler) &#123;<br>        <span class="hljs-keyword">return</span> RouterFunctions.route()<br>                .GET(<span class="hljs-string">&quot;/user/&#123;id&#125;&quot;</span>, <span class="hljs-keyword">accept</span>(APPLICATION_JSON), handler::specificUser)<br>                .GET(<span class="hljs-string">&quot;/user&quot;</span>, <span class="hljs-keyword">accept</span>(APPLICATION_JSON), handler::allUsers)<br>                .build();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>在两种模型的对比中，注解模型的优势在于代码结构直观、易于理解，且与传统Spring MVC兼容性好；而函数式模型则更加简洁、声明式，适合配置驱动型应用（如API网关）和轻量级服务。然而，随着路由复杂度增加，函数式模型的维护成本可能高于注解模型。<strong>选择哪种模型取决于团队熟悉程度、项目规模和具体需求</strong>，两者在底层都是基于相同的响应式基础构建的。</p>
-<h3 id="三、高并发场景下的WebFlux应用"><a href="#三、高并发场景下的WebFlux应用" class="headerlink" title="三、高并发场景下的WebFlux应用"></a>三、高并发场景下的WebFlux应用</h3><p>在高并发场景中，WebFlux的非阻塞架构展现出显著优势。基于Netty的事件循环模型，WebFlux能够通过少量线程处理大量并发请求，避免了传统Spring MVC中每个请求占用一个线程的资源浪费。例如，在实时风控系统中，通过链式响应式流处理，WebFlux能够实现低延迟的请求响应。</p>
-<p>在实际应用中，一个WebFlux应用在4核8G的环境中可以轻松处理5万以上的并发连接，远超传统Spring MVC基于Tomcat的架构。下表展示了不同服务器在高并发场景下的性能对比：</p>
-<table>
-<thead>
-<tr>
-<th>服务器</th>
-<th>请求处理模型</th>
-<th>最大连接数（4C8G）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Tomcat</td>
-<td>BIO&#x2F;NIO</td>
-<td>约5000</td>
-</tr>
-<tr>
-<td>Netty</td>
-<td>EventLoop</td>
-<td>约50000</td>
-</tr>
-<tr>
-<td>Undertow</td>
-<td>XNIO Worker</td>
-<td>约30000</td>
-</tr>
-</tbody></table>
-<p>为了最大化WebFlux的并发处理能力，开发者可以采取以下优化策略：</p>
-<ol>
-<li>使用<code>SubmissionPublisher</code>实现背压控制，确保生产者与消费者的速率匹配</li>
-<li>合理配置Netty线程池（如<code>spring.netty.threads=8</code>），根据系统资源调整线程数量</li>
-<li>选择合适的调度器（<code>Schedulers.boundedElastic()</code>用于I&#x2F;O密集型操作，<code>Schedulers.parallel()</code>用于CPU密集型任务）</li>
-<li>避免阻塞操作，确保所有处理环节都是非阻塞的</li>
+<h5 id="1-2-3-转换操作"><a href="#1-2-3-转换操作" class="headerlink" title="1.2.3. 转换操作"></a>1.2.3. 转换操作</h5><ol>
+<li><code>mono.map(Function&lt;T, R&gt; mapper)</code>：<ol>
+<li>将 <code>Mono</code> 中的元素映射为新值（同步转换），返回新 Mono</li>
 </ol>
-<p>此外，在高并发场景下，内存泄漏和无限流问题需要特别关注。通过<code>Hooks.onOperatorDebug()</code>增强日志记录，使用<code>Flux.using()</code>管理资源生命周期，为所有无限流添加<code>take()</code>或<code>timeout()</code>限制，可以有效防止这些问题。</p>
-<h3 id="四、IO密集型任务的响应式处理"><a href="#四、IO密集型任务的响应式处理" class="headerlink" title="四、IO密集型任务的响应式处理"></a>四、IO密集型任务的响应式处理</h3><p>对于I&#x2F;O密集型任务，WebFlux的响应式编程模型提供了强大的支持，使得开发者能够更高效地处理数据库查询、文件读写和外部API调用等操作。</p>
-<p><strong>数据库访问</strong>方面，WebFlux与Spring Data R2DBC紧密集成，允许开发者使用响应式数据访问库进行非阻塞查询。例如，通过R2dbcEntityTemplate实现异步查询：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> R2dbcEntityTemplate r2dbcEntityTemplate;<br><br>    <span class="hljs-keyword">public</span> UserService(R2dbcEntityTemplate r2dbcEntityTemplate) &#123;<br>        <span class="hljs-keyword">this</span>.r2dbcEntityTemplate = r2dbcEntityTemplate;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Mono&lt;User&gt; getUserByEmail(String email) &#123;<br>        <span class="hljs-keyword">return</span> r2dbcEntityTemplate.select(<br>                Query.query(Criteria.<span class="hljs-keyword">where</span>(<span class="hljs-string">&quot;email&quot;</span>).<span class="hljs-keyword">is</span>(email)),<br>                User.<span class="hljs-keyword">class</span><br>        ).singleOrEmpty();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>外部API调用</strong>则通过WebClient实现，支持非阻塞、异步的HTTP请求。WebClient相比传统的RestTemplate具有以下优势：</p>
-<ul>
-<li>非阻塞I&#x2F;O，适用于高并发场景</li>
-<li>函数式API风格，代码更简洁</li>
-<li>更好地支持流式传输</li>
-<li>改进的错误处理机制</li>
-</ul>
-<p>下面是一个使用WebClient调用外部API的示例：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Bean</span><br><span class="hljs-keyword">public</span> WebClient webClient(WebClient.Builder builder) &#123;<br>    <span class="hljs-keyword">return</span> builder.baseUrl(<span class="hljs-string">&quot;https://api.example.com&quot;</span>)<br>            .defaultHeader(<span class="hljs-string">&quot;Authorization&quot;</span>, <span class="hljs-string">&quot;Bearer your-token&quot;</span>)<br>            .exchangeStrategies(ExchangeStrategies.builder()<br>                    .codecs(configurer -&gt; configurer.defaultCodecs()<br>                            .maxInMemorySize(<span class="hljs-number">16</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>)) <span class="hljs-comment">// 设置最大内存限制为16MB</span><br>                    .build())<br>            .build();<br>&#125;<br><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ApiService</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> WebClient webClient;<br><br>    <span class="hljs-keyword">public</span> ApiService(WebClient webClient) &#123;<br>        <span class="hljs-keyword">this</span>.webClient = webClient;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Mono&lt;ApiResultDTO&gt; fetchData() &#123;<br>        <span class="hljs-keyword">return</span> webClient.<span class="hljs-keyword">get</span>()<br>                .uri(<span class="hljs-string">&quot;/data&quot;</span>)<br>                .retrieve()<br>                .bodyToMono(ApiResultDTO.<span class="hljs-keyword">class</span>)<br>                .timeout(Duration.ofSeconds(<span class="hljs-number">60</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>文件处理</strong>场景下，WebFlux支持流式读写，减少内存占用。例如，处理大文件时可以通过<code>Flux.from()</code>将文件内容分割为数据块，逐步处理：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs csharp">@GetMapping(<span class="hljs-string">&quot;/file&quot;</span>)<br><span class="hljs-function"><span class="hljs-keyword">public</span> Flux&lt;DataBuffer&gt; <span class="hljs-title">downloadFile</span>()</span> &#123;<br>    <span class="hljs-keyword">return</span> Flux.<span class="hljs-keyword">from</span>(<br>            DataBufferUtils.read(<br>                    <span class="hljs-keyword">new</span> ClassPathResource(<span class="hljs-string">&quot;largefile.txt&quot;</span>),<br>                    bufferFactory,<br>                    <span class="hljs-number">1024</span><br>            )<br>    );<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>这种流式处理方式特别适合处理大文件上传&#x2F;下载或实时数据流，相比传统同步方式，显著提高了资源利用率。</p>
-<h3 id="五、微服务架构中的WebFlux集成"><a href="#五、微服务架构中的WebFlux集成" class="headerlink" title="五、微服务架构中的WebFlux集成"></a>五、微服务架构中的WebFlux集成</h3><p>在微服务架构中，WebFlux能够与Spring Cloud生态无缝集成，提供高效的服务发现、通信和治理能力。</p>
-<p><strong>服务网关</strong>方面，Spring Cloud Gateway是官方推荐的API网关解决方案，它基于WebFlux和Reactor构建，支持动态路由、谓词匹配和过滤器链。以下是Spring Cloud Gateway的路由配置示例：</p>
-<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">spring</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">cloud</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-attribute">gateway</span><span class="hljs-punctuation">:</span><br>      <span class="hljs-attribute">routes</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">id: my-first-route</span><br>          <span class="hljs-attribute">uri</span><span class="hljs-punctuation">:</span> <span class="hljs-string">lb://user-service</span><br>          <span class="hljs-attribute">predicates</span><span class="hljs-punctuation">:</span><br>            <span class="hljs-bullet">-</span> <span class="hljs-string">Path=/users/**</span><br>          <span class="hljs-attribute">filters</span><span class="hljs-punctuation">:</span><br>            <span class="hljs-bullet">-</span> <span class="hljs-string">AddRequestHeader=X-Request-Foo, Bar</span><br>            <span class="hljs-bullet">-</span> <span class="hljs-string">CircuitBreaker=service-name</span><br></code></pre></td></tr></table></figure>
-
-<p>此配置将所有以<code>/users/</code>开头的请求路由到负载均衡的<code>user-service</code>实例，并添加自定义请求头和熔断保护。相比传统的Zuul网关，Spring Cloud Gateway基于WebFlux的非阻塞架构，提供了更高的性能和吞吐量。</p>
-<p><strong>服务通信</strong>中，WebClient替代了传统的RestTemplate，支持非阻塞、异步的服务间调用。与Spring Cloud LoadBalancer结合时，WebClient能够自动进行负载均衡：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@LoadBalanced</span><br><span class="hljs-keyword">public</span> WebClient.Builder webClientBuilder() &#123;<br>    <span class="hljs-keyword">return</span> WebClient.builder();<br>&#125;<br><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> WebClient.Builder webClientBuilder;<br><br>    <span class="hljs-keyword">public</span> OrderService(WebClient.Builder webClientBuilder) &#123;<br>        <span class="hljs-keyword">this</span>.webClientBuilder = webClientBuilder;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> Mono&lt;String&gt; fetchUser(String userId) &#123;<br>        <span class="hljs-keyword">return</span> webClientBuilder.build()<br>                .<span class="hljs-keyword">get</span>()<br>                .uri(<span class="hljs-string">&quot;http://user-service/users/&#123;id&#125;&quot;</span>, userId)<br>                .retrieve()<br>                .bodyToMono(String.<span class="hljs-keyword">class</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><strong>熔断与容错</strong>是微服务架构中的重要机制。通过Resilience4j与WebFlux的集成，可以实现服务调用的熔断、重试和限流。以下是WebClient与Resilience4j的熔断集成示例：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">Mono<span class="hljs-selector-class">.fromWebClient</span>()<br>    <span class="hljs-selector-class">.transformDeferred</span>(CircuitBreakerOperator<span class="hljs-selector-class">.of</span>(<span class="hljs-string">&quot;service-name&quot;</span>))<br>    <span class="hljs-selector-class">.onErrorResume</span>(ex -&gt; Mono<span class="hljs-selector-class">.error</span>(new <span class="hljs-built_in">CustomException</span>()))<br></code></pre></td></tr></table></figure>
-
-<p>此代码片段展示了如何为WebClient请求添加熔断保护，并在发生错误时进行恢复处理。熔断器会根据配置的阈值自动切换状态，提供强大的容错能力。</p>
-<h3 id="六、SSE实现与事件流处理"><a href="#六、SSE实现与事件流处理" class="headerlink" title="六、SSE实现与事件流处理"></a>六、SSE实现与事件流处理</h3><p>服务器发送事件（Server-Sent Events，SSE）是一种单向通信机制，允许服务器向客户端推送实时数据流。WebFlux提供了SSE的自然支持，能够轻松实现低延迟的实时数据推送。</p>
-<p>在<strong>函数式模型</strong>中，SSE可以通过<code>RouterFunction</code>返回<code>Flux&lt;String&gt;</code>实现，Spring会自动将其转换为事件流：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">@Bean<br><span class="hljs-built_in">public</span> RouterFunction&lt;ServerResponse&gt; route(ExampleHandler <span class="hljs-keyword">handler</span>) &#123;<br>    <span class="hljs-keyword">return</span> RouterFunctions.route()<br>            .<span class="hljs-keyword">GET</span>(&quot;/sse&quot;, <span class="hljs-keyword">handler</span>::simpleSse)<br>            .build();<br>&#125;<br><br><span class="hljs-built_in">public</span> Flux&lt;String&gt; simpleSse() &#123;<br>    <span class="hljs-keyword">return</span> Flux.interval(Duration.ofSeconds(<span class="hljs-number">1</span>))<br>            .map(<span class="hljs-keyword">sequence</span> -&gt; &quot;Current time: &quot; + <span class="hljs-built_in">LocalTime</span>.now());<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>在<strong>注解模型</strong>中，SSE则通过<code>@GetMapping</code>返回<code>Flux&lt;ServerSentEvent&lt;T&gt;&gt;</code>实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/sse/stream&quot;</span>, produces = MediaType.TEXT_EVENT_STREAM_VALUE)</span><br><span class="hljs-keyword">public</span> Flux&lt;ServerSentEvent&lt;String&gt;&gt; streamWithPing() &#123;<br>    <span class="hljs-keyword">return</span> Flux.interval(Duration.ofSeconds(<span class="hljs-number">1</span>))<br>            .map(sequence -&gt; &#123;<br>                <span class="hljs-keyword">if</span> (sequence % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-comment">// 每5秒发送一次心跳</span><br>                    <span class="hljs-keyword">return</span> ServerSentEvent.builder()<br>                            .comment(<span class="hljs-string">&quot;ping&quot;</span>)<br>                            .build();<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">return</span> ServerSentEvent.builder()<br>                            .<span class="hljs-keyword">data</span>(<span class="hljs-string">&quot;Current time: &quot;</span> + LocalTime.now())<br>                            .build();<br>                &#125;<br>            &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>此示例不仅返回实时时间信息，还通过<code>comment()</code>方法每5秒发送一次心跳，防止SSE连接因长时间无数据传输而被中断。</p>
-<p>SSE与WebSocket的主要区别在于：</p>
-<ul>
-<li>SSE是单向通信，仅支持服务器向客户端推送数据</li>
-<li>SSE基于HTTP协议，实现简单</li>
-<li>WebSocket是双向通信，支持更复杂的交互场景</li>
-</ul>
-<p>对于需要轻量级单向通信的场景，如股票价格更新、系统监控或推送通知，SSE是Spring WebFlux的首选方案。而在需要双向通信的场景，如实时聊天或在线游戏，则建议使用WebSocket。</p>
-<h3 id="七、错误处理机制"><a href="#七、错误处理机制" class="headerlink" title="七、错误处理机制"></a>七、错误处理机制</h3><p>WebFlux提供了多层次的错误处理机制，包括全局处理、控制器层处理和数据流处理。</p>
-<p><strong>全局错误处理</strong>通过实现<code>ErrorWebExceptionHandler</code>接口来实现，它能够捕获应用程序中未处理的异常并提供统一的错误响应：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GlobalErrorHandlerConfig</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@Order</span>(-<span class="hljs-number">2</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">ErrorWebExceptionHandler</span> <span class="hljs-title function_">globalErrorHandler</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GlobalErrorHandler</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GlobalErrorHandler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ErrorWebExceptionHandler</span> &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">Void</span>&gt; <span class="hljs-title function_">handle</span>(<span class="hljs-params"><span class="hljs-title class_">ServerWebExchange</span> exchange, <span class="hljs-title class_">Throwable</span> ex</span>) &#123;<br>            <span class="hljs-title class_">ServerRequest</span> request = <span class="hljs-title class_">ServerRequest</span>.<span class="hljs-title function_">create</span>(exchange, <span class="hljs-title class_">HandlerStrategies</span>.<span class="hljs-title function_">withDefaults</span>().<span class="hljs-title function_">messageReaders</span>());<br>            <span class="hljs-keyword">return</span> <span class="hljs-title function_">renderErrorResponse</span>(request, ex)<br>                    .<span class="hljs-title function_">flatMap</span>(response -&gt; response.<span class="hljs-title function_">writeTo</span>(exchange, <span class="hljs-title class_">HandlerStrategies</span>.<span class="hljs-title function_">withDefaults</span>()));<br>        &#125;<br><br>        <span class="hljs-keyword">private</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">ServerResponse</span>&gt; <span class="hljs-title function_">renderErrorResponse</span>(<span class="hljs-params"><span class="hljs-title class_">ServerRequest</span> request, <span class="hljs-title class_">Throwable</span> ex</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-title class_">ServerResponse</span>.<span class="hljs-title function_">status</span>(<span class="hljs-title class_">HttpStatus</span>.<span class="hljs-property">INTERNAL_SERVER_ERROR</span>)<br>                    .<span class="hljs-title function_">contentType</span>(<span class="hljs-title class_">MediaType</span>.<span class="hljs-property">APPLICATION_JSON</span>)<br>                    .<span class="hljs-title function_">bodyValue</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorResponse</span>(ex.<span class="hljs-title function_">getMessage</span>()));<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>此配置将所有未处理的异常统一返回500状态码的JSON错误响应。</p>
-<p><strong>数据流中的错误处理</strong>则通过Reactor提供的操作符实现，如<code>onErrorResume</code>、<code>onErrorReturn</code>和<code>retry</code>等。例如，在函数式路由中：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> RouterFunction&lt;ServerResponse&gt; <span class="hljs-title">routes</span>()</span> &#123;<br>    <span class="hljs-keyword">return</span> RouterFunctions.route(RequestPredicates.GET(<span class="hljs-string">&quot;/example&quot;</span>), request -&gt; <br>            Mono.error(<span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Something went wrong&quot;</span>))<br>                .onErrorResume(e -&gt; ServerResponse.ok()<br>                        .contentType(APPLICATION_JSON)<br>                        .bodyValue(<span class="hljs-string">&quot;Error occurred&quot;</span>))<br>    );<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>此示例展示了如何在函数式路由中捕获特定错误并返回自定义响应。</p>
-<p><strong>注解模型中的错误处理</strong>可以通过<code>@ControllerAdvice</code>实现，返回响应式类型：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@ControllerAdvice</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GlobalExceptionHandler</span> &#123;<br>    <span class="hljs-meta">@ExceptionHandler(value = &#123;ResponseStatusException.class&#125;)</span><br>    <span class="hljs-keyword">public</span> Mono&lt;ErrorResponse&gt; <span class="hljs-title function_">handleResponseStatusException</span><span class="hljs-params">(ResponseStatusException ex)</span> &#123;<br>        <span class="hljs-keyword">return</span> Mono.just(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorResponse</span>(ex.getStatusCode().value(), ex.getReason(), <span class="hljs-literal">null</span>));<br>    &#125;<br><br>    <span class="hljs-meta">@ExceptionHandler(value = &#123;Exception.class&#125;)</span><br>    <span class="hljs-keyword">public</span> Mono&lt;ErrorResponse&gt; <span class="hljs-title function_">handleException</span><span class="hljs-params">(Exception ex)</span> &#123;<br>        <span class="hljs-keyword">return</span> Mono.just(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorResponse</span>(HttpStatus.INTERNAL_SERVER_ERROR.value(), <span class="hljs-string">&quot;Internal Server Error&quot;</span>, ExceptionUtils.getStackTrace(ex)));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>此配置能够捕获不同类型的异常并返回相应的错误响应，适用于需要统一错误处理逻辑的场景。</p>
-<h3 id="八、性能优化策略"><a href="#八、性能优化策略" class="headerlink" title="八、性能优化策略"></a>八、性能优化策略</h3><p>为了充分发挥WebFlux的性能优势，开发者需要采取一系列优化策略。</p>
-<p><strong>背压优化</strong>是响应式应用的关键。默认缓冲区大小为256，可能不适合所有场景，可以根据数据特征调整：</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs scss">Flux<span class="hljs-selector-class">.range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1000</span>)<br>    <span class="hljs-selector-class">.onBackpressureBuffer</span>(<span class="hljs-number">500</span>, BufferOverflowStrategy.DROP_OLDEST)<br>    <span class="hljs-selector-class">.subscribe</span>(...);<br></code></pre></td></tr></table></figure>
-
-<p>此代码片段展示了如何为Flux数据流设置自定义缓冲区大小和溢出策略，防止下游消费者被上游生产者的数据淹没。</p>
-<p><strong>调度器配置</strong>对于优化资源利用率至关重要。WebFlux提供了多种调度器类型，适用于不同场景：</p>
-<table>
-<thead>
-<tr>
-<th>调度器类型</th>
-<th>适用场景</th>
-<th>配置建议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>parallel()</td>
-<td>CPU密集型任务</td>
-<td>核数+1</td>
-</tr>
-<tr>
-<td>boundedElastic()</td>
-<td>阻塞I&#x2F;O操作</td>
-<td>根据IO等待时间调整</td>
-</tr>
-<tr>
-<td>single()</td>
-<td>严格顺序要求</td>
-<td>单个线程</td>
-</tr>
-</tbody></table>
-<p>对于需要处理阻塞操作的场景（如同步数据库调用），应使用<code>boundedElastic()</code>调度器：</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livescript">Mono.fromCallable<span class="hljs-function"><span class="hljs-params">(() -&gt; &#123;</span></span><br><span class="hljs-params"><span class="hljs-function">    <span class="hljs-keyword">try</span> (<span class="hljs-keyword">var</span> executor = Executors.newVirtualThreadPerTaskExecutor()) &#123;</span></span><br><span class="hljs-params"><span class="hljs-function">        <span class="hljs-keyword">return</span> executor.submit(() -&gt; computeIntensiveTask()).get();</span></span><br><span class="hljs-params"><span class="hljs-function">    &#125;</span></span><br><span class="hljs-params"><span class="hljs-function">&#125;)</span></span><br><span class="hljs-function">.<span class="hljs-title">subscribeOn</span><span class="hljs-params">(Schedulers.boundedElastic())</span></span><br></code></pre></td></tr></table></figure>
-
-<p>此示例展示了如何结合Java 21的虚拟线程和WebFlux的调度器优化CPU密集型任务的处理。</p>
-<p><strong>WebClient优化</strong>包括连接池配置和超时设置：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">ConnectionProvider provider = ConnectionProvider.builder<span class="hljs-params">(&quot;custom&quot;)</span><br>        <span class="hljs-string">.maxConnections</span><span class="hljs-params">(100)</span><br>        <span class="hljs-string">.pendingAcquireTimeout</span><span class="hljs-params">(Duration.ofSeconds(30)</span>)<br>        <span class="hljs-string">.build</span><span class="hljs-params">()</span>;<br><br>WebClient webClient = WebClient.builder<span class="hljs-params">()</span><br>        <span class="hljs-string">.exchangeStrategies</span><span class="hljs-params">(ExchangeStrategies.builder()</span><br>                <span class="hljs-string">.codecs</span><span class="hljs-params">(configurer -&gt; configurer.defaultCodecs()</span><br>                        <span class="hljs-string">.maxInMemorySize</span><span class="hljs-params">(16 * 1024 * 1024)</span>) <span class="hljs-string">//</span> 设置最大内存限制为16MB<br>        <span class="hljs-string">.build</span><span class="hljs-params">()</span>)<br>        <span class="hljs-string">.build</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
-
-<p>这些配置优化了连接池的大小和等待超时时间，提高了WebClient的资源利用率和响应速度。</p>
-<h3 id="九、从入门到精通的学习路径"><a href="#九、从入门到精通的学习路径" class="headerlink" title="九、从入门到精通的学习路径"></a>九、从入门到精通的学习路径</h3><p>为了全面掌握Spring WebFlux，建议遵循以下学习路径：</p>
-<p><strong>入门阶段</strong>（1-2周）：</p>
-<ol>
-<li>理解响应式编程的基本概念和Reactive Streams规范</li>
-<li>学习Spring WebFlux的两种编程模型及其核心组件（Flux&#x2F;Mono）</li>
-<li>掌握基础路由配置和简单数据流处理</li>
-<li>熟悉WebFlux与传统Spring MVC的区别和优势</li>
+</li>
+<li><code>mono.flatMap(Function&lt;T, Mono&lt;R&gt;&gt; mapper)</code>：<ol>
+<li>将元素执行操作，映射为新的 Mono，适用于执行同步简单操作、异步阻塞操作、异步非阻塞操作</li>
 </ol>
-<p><strong>进阶阶段</strong>（2-4周）：</p>
-<ol>
-<li>深入理解背压机制及其在实际应用中的配置和优化</li>
-<li>学习与Spring Data R2DBC、Spring Cloud Gateway等生态组件的集成</li>
-<li>掌握SSE、WebClient等高级特性实现</li>
-<li>理解错误处理机制和响应式流中的异常传递</li>
+</li>
+<li><code>mono.cast(Class&lt;R&gt; type)</code>：<ol>
+<li>对元素进行强制类型转换</li>
 </ol>
-<p><strong>精通阶段</strong>（4-8周）：</p>
-<ol>
-<li>研究性能调优策略，包括线程模型优化、背压配置和内存管理</li>
-<li>探索与Spring Security、Spring Cloud Circuit Breaker等组件的深度集成</li>
-<li>学习响应式流的高级操作符和组合模式</li>
-<li>实践复杂应用场景，如实时数据处理、微服务网关和大规模并发系统</li>
+</li>
+<li><code>mono.ofType(Class&lt;R&gt; type)</code>：<ol>
+<li>过滤元素，仅当类型匹配时发出，否则返回空 Mono</li>
 </ol>
-<p><strong>学习资源推荐</strong>：</p>
-<ul>
-<li>官方文档：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring/docs/current/reference/html/web-reactive.html">https://docs.spring.io/spring/docs/current/reference/html/web-reactive.html</a></li>
-<li>Spring Guides：<a target="_blank" rel="noopener" href="https://spring.io/guides">https://spring.io/guides</a></li>
-<li>Baeldung教程：<a target="_blank" rel="noopener" href="https://www.baeldung.com/spring-webflux">https://www.baeldung.com/spring-webflux</a></li>
-<li>书籍：《Spring in Action, Sixth Edition》（涵盖WebFlux相关内容）</li>
-</ul>
-<h3 id="十、未来发展趋势与技术展望"><a href="#十、未来发展趋势与技术展望" class="headerlink" title="十、未来发展趋势与技术展望"></a>十、未来发展趋势与技术展望</h3><p>随着Java生态的不断演进，Spring WebFlux也将持续发展。Spring Framework 7.0引入了JSpecify的空值安全支持，提升了Kotlin开发体验。Spring Boot 3.5计划整合更多响应式优化，如对Java 21虚拟线程的深度支持，进一步简化响应式应用的开发和部署。</p>
-<p>在云原生和微服务架构趋势下，WebFlux正成为构建高并发、低延迟服务的核心选择。结合Spring Cloud Gateway、Resilience4j和Spring Boot Actuator等组件，开发者可以轻松构建具有强大监控和容错能力的响应式微服务系统。</p>
-<p>未来，随着HTTP&#x2F;3协议的普及和Java虚拟机技术的改进，WebFlux有望进一步提升性能表现，为开发者提供更高效的响应式编程体验。在企业级应用开发中，WebFlux将与传统Spring MVC并存，为不同场景提供最佳解决方案。</p>
-<p><strong>总结</strong>：Spring WebFlux通过响应式编程模型、非阻塞架构和背压机制，为构建高性能、高并发的现代Web应用提供了强大支持。两种编程模型（注解和函数式）各有所长，适用于不同场景。在微服务架构和实时数据处理领域，WebFlux展现出独特优势。通过理解其核心概念、掌握高级主题和持续优化，开发者可以充分发挥WebFlux的潜力，构建高效可靠的响应式应用系统。</p>
-<p>说明：报告内容由通义AI生成，仅供参考。</p>
+</li>
+<li><code>mono.switchIfEmpty(Mono&lt;? extends T&gt; fallback)</code>：<ol>
+<li>若 Mono 为空，切换到指定的备用 Mono。</li>
+</ol>
+</li>
+<li><code>mono.defaultIfEmpty(T defaultValue)</code>：<ol>
+<li>如果当前 Mono 为空，提供一个默认值作为替代<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoOperators</span> &#123;<br>	<br>    <span class="hljs-comment">// 1. mono.map(Function&lt;T, R&gt; mapper)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/map&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">map</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;hello&quot;</span>)<br>                                 .<span class="hljs-title function_">map</span>(value -&gt; value.<span class="hljs-title function_">toUpperCase</span>()); <span class="hljs-comment">// 转为大写</span><br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. mono.flatMap(Function&lt;T, Mono&lt;R&gt;&gt; mapper)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/flatMap&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">flatMap</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;hello&quot;</span>)<br>                                 .<span class="hljs-title function_">flatMap</span>(value -&gt; <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(value + <span class="hljs-string">&quot; world&quot;</span>));<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 3. mono.cast(Class&lt;R&gt; type)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/cast&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">Number</span>&gt; <span class="hljs-title function_">cast</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">Number</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-number">123</span>)<br>                                 .<span class="hljs-title function_">cast</span>(<span class="hljs-title class_">Number</span>.<span class="hljs-property">class</span>); <br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. mono.ofType(Class&lt;R&gt; type)</span><br>	<span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/ofType&quot;</span>)  <br>	<span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">ofType</span>(<span class="hljs-params"></span>) &#123;  <br>	    <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;I&#x27;m a string&quot;</span>)  <br>	            .<span class="hljs-title function_">ofType</span>(<span class="hljs-title class_">String</span>.<span class="hljs-property">class</span>);  <br>	    <span class="hljs-keyword">return</span> mono;  <br>	&#125;<br><br>    <span class="hljs-comment">// 5. mono.switchIfEmpty(Mono&lt;? extends T&gt; fallback)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/switchIfEmpty&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">switchIfEmpty</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">empty</span>()<br>                                .<span class="hljs-title function_">switchIfEmpty</span>(<span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Fallback value&quot;</span>)); <br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 6. mono.defaultIfEmpty(T defaultValue)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/defaultIfEmpty&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">defaultIfEmpty</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.&lt;<span class="hljs-title class_">String</span>&gt;<span class="hljs-title function_">empty</span>()<br>                                 .<span class="hljs-title function_">defaultIfEmpty</span>(<span class="hljs-string">&quot;Default value&quot;</span>); <br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="1-2-4-错误处理"><a href="#1-2-4-错误处理" class="headerlink" title="1.2.4. 错误处理"></a>1.2.4. 错误处理</h5><ol>
+<li><code>mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</code>：<ol>
+<li>用于处理 Mono 或 Flux 的错误信号，当上游发生异常时，返回一个替代的 Mono 以继续流程</li>
+</ol>
+</li>
+<li><code>mono.doOnError(Consumer&lt;Throwable&gt; onError)</code>：<ol>
+<li>当错误发生时执行副作用操作（如日志记录），与 <code>onErrorResume</code> 不同的是，只执行副作用，不影响数据流</li>
+</ol>
+</li>
+<li><code>mono.onErrorReturn(T fallbackValue)</code>：<ol>
+<li>出错时返回一个固定的默认值</li>
+</ol>
+</li>
+<li><code>mono.retry(long times)</code>：<ol>
+<li>出错时重试整个 Mono 流程 <code>times</code> 次（总共尝试 1 + times 次）<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoErrorHandling</span> &#123;<br><br>    <span class="hljs-comment">// 1. mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorResume&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorResume</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.&lt;<span class="hljs-title class_">String</span>&gt;<span class="hljs-title function_">fromCallable</span>(() -&gt; &#123;<br>	        <span class="hljs-comment">// 手动返回一个 RuntimeException 异常，异常信息为 Oops！</span><br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);<br>        &#125;).<span class="hljs-title function_">onErrorResume</span>(e -&gt; &#123;<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Caught error: &quot;</span> + e.<span class="hljs-title function_">getMessage</span>());<br>            <span class="hljs-keyword">return</span> <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Recovered from error&quot;</span>);<br>        &#125;);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. mono.doOnError(Consumer&lt;Throwable&gt; onError)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/doOnError&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">doOnError</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.&lt;<span class="hljs-title class_">String</span>&gt;<span class="hljs-title function_">fromCallable</span>(() -&gt; &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Something went wrong&quot;</span>);<br>        &#125;).<span class="hljs-title function_">doOnError</span>(e -&gt; &#123;<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">err</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Logging error: &quot;</span> + e.<span class="hljs-title function_">getMessage</span>());<br>        &#125;);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 3. mono.onErrorReturn(T fallbackValue)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorReturn&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorReturn</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.&lt;<span class="hljs-title class_">String</span>&gt;<span class="hljs-title function_">fromCallable</span>(() -&gt; &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Boom&quot;</span>);<br>        &#125;).<span class="hljs-title function_">onErrorReturn</span>(<span class="hljs-string">&quot;Default fallback value&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. mono.retry(long times)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/retry&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">retry</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.&lt;<span class="hljs-title class_">String</span>&gt;<span class="hljs-title function_">fromCallable</span>(() -&gt; &#123;<br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Trying...&quot;</span>);<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Still failing&quot;</span>);<br>        &#125;).<span class="hljs-title function_">retry</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// 总共尝试 3 次</span><br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="1-2-5-多流组合"><a href="#1-2-5-多流组合" class="headerlink" title="1.2.5. 多流组合"></a>1.2.5. 多流组合</h5><ol>
+<li><code>mono.zipWith(Mono&lt;? extends U&gt;other，BiFunction&lt;T，U，R&gt;combiner)</code>：<ol>
+<li>将当前 <code>Mono&lt;T&gt;</code> 与另一个 <code>Mono&lt;U&gt;</code> 组合，通过 <code>BiFunction</code> 合并为结果 <code>R</code>，返回 <code>Mono&lt;R&gt;</code></li>
+<li>任一 Mono 为空则返回空 Mono</li>
+</ol>
+</li>
+<li><code>Mono.zip(Mono&lt;? extends T1&gt; m1, Mono&lt;? extends T2&gt; m2, ...)</code>：<ol>
+<li>同上，打包多个 Mono 的结果为 <code>Tuple</code>，返回 <code>Mono&lt;TupleN&gt;</code></li>
+<li>任一 Mono 为空则返回空 Mono<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoZipExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. mono.zipWith(Mono&lt;? extends U&gt;other，BiFunction&lt;T，U，R&gt;combiner)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/zipWith&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">zipWith</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono1 = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Hello&quot;</span>);<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono2 = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;World&quot;</span>);<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = mono1.<span class="hljs-title function_">zipWith</span>(mono2, (a, b) -&gt; a + <span class="hljs-string">&quot; &quot;</span> + b);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Mono.zip(Mono&lt;? extends T1&gt; m1, Mono&lt;? extends T2&gt; m2, ...)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/zip&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">zip</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono1 = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;foo&quot;</span>);<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono2 = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;bar&quot;</span>);<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">zip</span>(mono1, mono2)<br>                                 .<span class="hljs-title function_">map</span>(tuple -&gt; tuple.<span class="hljs-title function_">getT1</span>() + <span class="hljs-string">&quot;-&quot;</span> + tuple.<span class="hljs-title function_">getT2</span>());<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="1-2-6-生命周期钩子"><a href="#1-2-6-生命周期钩子" class="headerlink" title="1.2.6. 生命周期钩子"></a>1.2.6. 生命周期钩子</h5><ol>
+<li><code>mono.doOnNext(Consumer&lt;? super T&gt; onNext)</code>：<ol>
+<li>在每次发出元素（onNext）时执行副作用操作</li>
+</ol>
+</li>
+<li><code>mono.doOnSubscribe(Consumer&lt;? super Subscription&gt; onSubscribe)</code><ol>
+<li>订阅发生时执行副作用</li>
+</ol>
+</li>
+<li><code>mono.doonSuccess(Consumer&lt;? super T&gt; onSuccess)</code><ol>
+<li>成功完成时执行副作用操作</li>
+</ol>
+</li>
+<li><code>mono.doFinally(Consumer&lt;SignalType&gt; onFinally)</code><ol>
+<li>在终止（完成、错误或取消）时执行副作用操作<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoSideEffectHooks</span> &#123;<br><br>    <span class="hljs-comment">// 1. mono.doOnNext(Consumer&lt;? super T&gt; onNext)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/doOnNext&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">doOnNext</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Data&quot;</span>)<br>                                 .<span class="hljs-title function_">doOnNext</span>(value -&gt; <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Emitted: &quot;</span> + value));<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. mono.doOnSubscribe(Consumer&lt;? super Subscription&gt; onSubscribe)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/doOnSubscribe&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">doOnSubscribe</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Start&quot;</span>)<br>                                 .<span class="hljs-title function_">doOnSubscribe</span>(subscription -&gt; <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Subscribed!&quot;</span>));<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 3. mono.doonSuccess(Consumer&lt;? super T&gt; onSuccess)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/doOnSuccess&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">doOnSuccess</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Done&quot;</span>)<br>                                 .<span class="hljs-title function_">doOnSuccess</span>(value -&gt; <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Success with: &quot;</span> + value));<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. mono.doFinally(Consumer&lt;SignalType&gt; onFinally)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/doFinally&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">doFinally</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Finish&quot;</span>)<br>                                 .<span class="hljs-title function_">doFinally</span>(signalType -&gt; <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Finally: &quot;</span> + signalType));<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="1-2-7-异步与调度"><a href="#1-2-7-异步与调度" class="headerlink" title="1.2.7. 异步与调度"></a>1.2.7. 异步与调度</h5><ol>
+<li>&#x3D;&#x3D;常见调度器&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">Schedulers.parallel()</font>：<ol>
+<li>适用于 CPU 密集型任务，使用固定大小线程池</li>
+</ol>
+</li>
+<li><font color="#00b0f0">Schedulers.boundedElastic()</font>：<ol>
+<li>适用于 I&#x2F;O 密集型任务（如数据库、网络、文件操作）</li>
+</ol>
+</li>
+<li><font color="#00b0f0">Schedulers.immediate()</font>：<ol>
+<li>在当前线程中执行</li>
+</ol>
+</li>
+<li><font color="#00b0f0">Schedulers.fromExecutor(Executor)</font>：<ol>
+<li>使用自定义线程池调度任务</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>mono.subscribeOn(Scheduler scheduler)</code>：<ol>
+<li>指定整个订阅过程在哪个调度器线程上运行（影响源的执行线程）</li>
+<li>多个 <code>subscribeOn</code> 只会生效第一个</li>
+</ol>
+</li>
+<li><code>mono.publishOn(Scheduler scheduler)</code>：<ol>
+<li>指定 <code>publishOn</code> 之后的操作在那个线程池执行</li>
+</ol>
+</li>
+<li><code>mono.delayElement(Duration delay)</code>：<ol>
+<li>延迟指定时间后再发出 Mono 元素，常用于模拟延迟</li>
+</ol>
+</li>
+<li><code>mono.timeout(Duration timeout)</code>：<ol>
+<li>在指定时间内未完成则抛出 <code>TimeoutException</code>，用于超时控制<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoSchedulers</span> &#123;<br><br>    <span class="hljs-comment">// 1. mono.subscribeOn(Scheduler scheduler)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/subscribeOn&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">subscribeOn</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;SubscribeOn Example&quot;</span>)<br>                                 .<span class="hljs-title function_">subscribeOn</span>(<span class="hljs-title class_">Schedulers</span>.<span class="hljs-title function_">boundedElastic</span>())<br>                                 .<span class="hljs-title function_">map</span>(value -&gt; value + <span class="hljs-string">&quot; processed after subscribeOn&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. mono.publishOn(Scheduler scheduler)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/publishOn&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">publishOn</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;PublishOn Example&quot;</span>)<br>                                 .<span class="hljs-title function_">map</span>(value -&gt; value + <span class="hljs-string">&quot; initial step&quot;</span>)<br>                                 .<span class="hljs-title function_">publishOn</span>(<span class="hljs-title class_">Schedulers</span>.<span class="hljs-title function_">parallel</span>()) <span class="hljs-comment">// switch to parallel scheduler</span><br>                                 .<span class="hljs-title function_">map</span>(value -&gt; value + <span class="hljs-string">&quot; processed on parallel&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 3. mono.delayElement(Duration delay)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/delay&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">delay</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Delayed task&quot;</span>)<br>                                 .<span class="hljs-title function_">delayElement</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofMillis</span>(<span class="hljs-number">500</span>)) <span class="hljs-comment">// Delay 500ms</span><br>                                 .<span class="hljs-title function_">map</span>(value -&gt; value + <span class="hljs-string">&quot; after delay&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 4. mono.timeout(Duration timeout)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/timeout&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">timeout</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Timeout task&quot;</span>)<br>                                 .<span class="hljs-title function_">delayElement</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofSeconds</span>(<span class="hljs-number">3</span>)) <span class="hljs-comment">// Simulate long task</span><br>                                 .<span class="hljs-title function_">timeout</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofSeconds</span>(<span class="hljs-number">2</span>)) <span class="hljs-comment">// Timeout after 2 seconds</span><br>                                 .<span class="hljs-title function_">onErrorReturn</span>(<span class="hljs-string">&quot;Timeout occurred&quot;</span>);<br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="1-2-8-订阅"><a href="#1-2-8-订阅" class="headerlink" title="1.2.8. 订阅"></a>1.2.8. 订阅</h5><ol>
+<li><code>mono.sunscribe()</code>：<ol>
+<li>仅触发流的执行，不处理返回值</li>
+</ol>
+</li>
+<li><code>mono.subscribe(Consumer, Consumer, Consumer)</code>：<ol>
+<li>既触发流的执行，也处理返回值<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/api&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MonoSubscribeExample</span> &#123;<br><br>    <span class="hljs-comment">// 1. mono.subscribe() </span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/subscribeNoParams&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Mono&lt;String&gt; subscribeNoParams() &#123;<br>        Mono&lt;String&gt; mono = Mono.just(<span class="hljs-string">&quot;Triggered flow without params&quot;</span>);<br>        mono.subscribe();  <span class="hljs-comment">// 仅触发流的执行，不处理返回值</span><br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br><br>    <span class="hljs-comment">// 2. mono.subscribe(Consumer, Consumer, Consumer) </span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/subscribeWithParams&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Mono&lt;String&gt; subscribeWithParams() &#123;<br>        Mono&lt;String&gt; mono = Mono.just(<span class="hljs-string">&quot;Triggered flow with params&quot;</span>);<br>        <br>        mono.subscribe(<br>            value -&gt; System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Received: &quot;</span> + value),  <span class="hljs-comment">// onNext</span><br>            error -&gt; System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Error occurred: &quot;</span> + error),  <span class="hljs-comment">// onError</span><br>            () -&gt; System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Flow completed!&quot;</span>)  <span class="hljs-comment">// onComplete</span><br>        );<br>        <br>        <span class="hljs-keyword">return</span> mono;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
 
                 
               </div>

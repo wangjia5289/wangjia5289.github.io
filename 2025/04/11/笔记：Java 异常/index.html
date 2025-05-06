@@ -19,15 +19,17 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="在 mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback) 中，Throwable 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 Exception 和 Error 类的基类。 详细解释： **Throwable**：  Throwable 是 Java 中的所有异常">
+<meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java 异常">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="在 mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback) 中，Throwable 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 Exception 和 Error 类的基类。 详细解释： **Throwable**：  Throwable 是 Java 中的所有异常">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224723236.png">
 <meta property="article:published_time" content="2025-04-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-04T03:29:36.046Z">
+<meta property="article:modified_time" content="2025-05-06T07:58:55.265Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png">
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.6k words
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          1 mins
+          14 mins
         
       </span>
     
@@ -290,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-04T11:29:36+08:00
+                    Last updated on 2025-05-06T15:58:55+08:00
                   
                   
 
@@ -300,8 +302,121 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png" srcset="/img/loading.gif" lazyload></p>
+                <p>在 <code>mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</code> 中，<code>Throwable</code> 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 <code>Exception</code> 和 <code>Error</code> 类的基类。</p>
+<h3 id="详细解释："><a href="#详细解释：" class="headerlink" title="详细解释："></a>详细解释：</h3><ol>
+<li><p>**<code>Throwable</code>**：</p>
+<ul>
+<li><p><code>Throwable</code> 是 Java 中的所有异常和错误的根类。</p>
+</li>
+<li><p>它分为两大类：</p>
+<ul>
+<li><p>**<code>Error</code>**：通常用于表示 JVM 内部的严重错误，如 <code>OutOfMemoryError</code>，这些一般不被捕获和处理。</p>
+</li>
+<li><p>**<code>Exception</code>**：表示程序中可以捕获和处理的异常。包括受检异常（如 <code>IOException</code>）和运行时异常（如 <code>NullPointerException</code>）。</p>
+</li>
+</ul>
+</li>
+<li><p>你可以把 <code>Throwable</code> 看作一个包含所有错误和异常的容器。</p>
+</li>
+</ul>
+</li>
+<li><p><strong><code>Throwable</code> 在 <code>onErrorResume</code> 中的作用</strong>：</p>
+<ul>
+<li><p><code>onErrorResume</code> 是一个错误处理操作符，它会在 <code>Mono</code> 或 <code>Flux</code> 流中遇到异常时执行。</p>
+</li>
+<li><p><code>Throwable</code> 作为参数传递给你提供的 <code>Function&lt;Throwable, Mono&lt;? extends T&gt;&gt;</code>，表示发生的错误或异常。</p>
+</li>
+<li><p>你可以在这个函数中处理该异常并返回一个替代的 <code>Mono</code>，从而避免流的失败（比如通过返回一个默认值的 <code>Mono</code>）。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="代码示例："><a href="#代码示例：" class="headerlink" title="代码示例："></a>代码示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">Mono&lt;String&gt; mono = Mono.fromCallable(() -&gt; &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);<br>&#125;);<br><br>mono.onErrorResume(throwable -&gt; &#123;<br>    System.out.println(<span class="hljs-string">&quot;Caught error: &quot;</span> + throwable.getMessage());<br>    <span class="hljs-keyword">return</span> Mono.just(<span class="hljs-string">&quot;Recovered from error&quot;</span>);<br>&#125;).subscribe(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>当 <code>Mono.fromCallable</code> 抛出 <code>RuntimeException</code> 时，<code>onErrorResume</code> 会捕获该异常（即 <code>throwable</code>），并执行提供的函数，返回一个新的 <code>Mono</code>，在该例中返回的是 <code>Mono.just(&quot;Recovered from error&quot;)</code>，从而避免了流的失败。</li>
+</ul>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
+<li><p><strong><code>Throwable</code></strong> 是一个非常广泛的基类，涵盖了所有异常和错误类型。</p>
+</li>
+<li><p>在 <code>onErrorResume</code> 中，**<code>Throwable</code>** 表示发生的错误或异常类型，你可以根据它来处理错误并返回一个替代的 <code>Mono</code>。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ul>
 <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224723236.png" srcset="/img/loading.gif" lazyload></p>
+<p>我来回答你的问题，分步骤解释清楚。</p>
+<h3 id="1-抛出一个-RuntimeException，异常消息为-“Oops-”"><a href="#1-抛出一个-RuntimeException，异常消息为-“Oops-”" class="headerlink" title="1. 抛出一个 RuntimeException，异常消息为 “Oops!”"></a>1. 抛出一个 RuntimeException，异常消息为 “Oops!”</h3><p>在 Java 中，抛出一个 <code>RuntimeException</code> 非常简单。你可以使用 <code>throw</code> 关键字，并创建一个 <code>RuntimeException</code> 实例，指定异常消息为 “Oops!”。代码示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>这段代码会在运行时抛出一个 <code>RuntimeException</code>，并带有消息 “Oops!”。由于 <code>RuntimeException</code> 是非受检异常（unchecked exception），你无需在方法声明中显式声明它，也无需用 <code>try-catch</code> 强制捕获。</p>
+<hr>
+<h3 id="2-常见的异常有哪些？"><a href="#2-常见的异常有哪些？" class="headerlink" title="2. 常见的异常有哪些？"></a>2. 常见的异常有哪些？</h3><p>Java 中有许多常见的异常，有些是开发者在日常编程中经常遇到的。下面列举一些常见的异常及其含义：</p>
+<h4 id="常见的非受检异常（RuntimeException-的子类）"><a href="#常见的非受检异常（RuntimeException-的子类）" class="headerlink" title="常见的非受检异常（RuntimeException 的子类）"></a>常见的非受检异常（RuntimeException 的子类）</h4><ul>
+<li><strong>NullPointerException</strong>：尝试对 <code>null</code> 对象进行操作时抛出，例如调用 <code>null</code> 对象的某个方法。</li>
+<li><strong>ArrayIndexOutOfBoundsException</strong>：访问数组时，索引超出数组范围（例如访问 <code>arr[5]</code> 而数组长度只有 3）。</li>
+<li><strong>IllegalArgumentException</strong>：传递给方法的参数不合法，例如传入负数给需要正数的方法。</li>
+<li><strong>ClassCastException</strong>：尝试将对象强制转换为不兼容的类型，例如将 <code>String</code> 转为 <code>Integer</code>。</li>
+<li><strong>ArithmeticException</strong>：算术运算出错，例如除以零（<code>1 / 0</code>）。</li>
+</ul>
+<h4 id="常见的受检异常（需要显式处理）"><a href="#常见的受检异常（需要显式处理）" class="headerlink" title="常见的受检异常（需要显式处理）"></a>常见的受检异常（需要显式处理）</h4><ul>
+<li><strong>IOException</strong>：输入输出操作出错，例如文件不存在、读取文件失败或权限不足。</li>
+<li><strong>SQLException</strong>：数据库操作出错，例如连接失败或 SQL 语法错误。</li>
+</ul>
+<p>这些异常只是冰山一角，但它们在开发中出现频率较高，值得特别关注。</p>
+<hr>
+<h3 id="3-这些异常都是-Java-自带的吗？还是框架有一些异常？"><a href="#3-这些异常都是-Java-自带的吗？还是框架有一些异常？" class="headerlink" title="3. 这些异常都是 Java 自带的吗？还是框架有一些异常？"></a>3. 这些异常都是 Java 自带的吗？还是框架有一些异常？</h3><ul>
+<li><strong>Java 自带的异常</strong>：上述提到的 <code>NullPointerException</code>、<code>ArrayIndexOutOfBoundsException</code>、<code>IllegalArgumentException</code>、<code>ClassCastException</code>、<code>ArithmeticException</code>、<code>IOException</code> 和 <code>SQLException</code> 都是 Java 标准库自带的，定义在 <code>java.lang</code>、<code>java.io</code> 或 <code>java.sql</code> 等包中。这些异常由 Java 核心 API 提供，适用于通用的编程场景。</li>
+<li><strong>框架特定的异常</strong>：除了 Java 自带的异常，许多框架会定义自己的异常类，以适应特定需求。例如：<ul>
+<li><strong>Spring 框架</strong>：提供了 <code>DataAccessException</code>，用于封装数据库操作中的异常。</li>
+<li><strong>Hibernate</strong>：有 <code>HibernateException</code>，用于处理 ORM（对象关系映射）相关的错误。<br>这些框架异常通常是对 Java 标准异常的扩展或封装，方便开发者在特定上下文中使用。</li>
+</ul>
+</li>
+</ul>
+<p>因此，异常来源可以分为两类：Java 自带的通用异常和框架定义的特定异常。</p>
+<hr>
+<h3 id="4-异常那么多，我怎么记啊？"><a href="#4-异常那么多，我怎么记啊？" class="headerlink" title="4. 异常那么多，我怎么记啊？"></a>4. 异常那么多，我怎么记啊？</h3><p>面对种类繁多的异常，记住所有异常确实不现实，也没必要。以下是一些实用的建议，帮助你掌握和记忆异常：</p>
+<h4 id="理解异常的分类和层次"><a href="#理解异常的分类和层次" class="headerlink" title="理解异常的分类和层次"></a>理解异常的分类和层次</h4><p>Java 的异常体系是一个树状结构：</p>
+<ul>
+<li><strong>Throwable</strong>：所有异常和错误的根类。<ul>
+<li><strong>Error</strong>：表示严重问题（如 <code>OutOfMemoryError</code>），通常不由程序处理。</li>
+<li><strong>Exception</strong>：表示可处理的异常。<ul>
+<li><strong>RuntimeException</strong>：非受检异常，运行时抛出。</li>
+<li><strong>其他 Exception</strong>：受检异常，编译时要求处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>理解这个层次结构，能帮助你快速定位异常的类型和处理方式。</p>
+<h4 id="重点记忆常见异常"><a href="#重点记忆常见异常" class="headerlink" title="重点记忆常见异常"></a>重点记忆常见异常</h4><p>优先记住开发中高频出现的异常，例如：</p>
+<ol>
+<li><code>NullPointerException</code>（空指针）</li>
+<li><code>ArrayIndexOutOfBoundsException</code>（数组越界）</li>
+<li><code>IllegalArgumentException</code>（非法参数）</li>
+<li><code>IOException</code>（输入输出错误）</li>
+<li><code>SQLException</code>（数据库错误）</li>
+</ol>
+<p>这些异常涵盖了大部分常见错误场景，熟悉它们就能应对大多数情况。</p>
+<h4 id="根据场景记忆"><a href="#根据场景记忆" class="headerlink" title="根据场景记忆"></a>根据场景记忆</h4><p>异常通常与特定操作相关联。例如：</p>
+<ul>
+<li>操作数组时，可能遇到 <code>ArrayIndexOutOfBoundsException</code>。</li>
+<li>访问数据库时，可能遇到 <code>SQLException</code>。</li>
+<li>处理文件时，可能遇到 <code>IOException</code>。</li>
+</ul>
+<p>在实际开发中，结合上下文理解异常的触发条件，记忆会更自然。</p>
+<h4 id="查阅文档和实践"><a href="#查阅文档和实践" class="headerlink" title="查阅文档和实践"></a>查阅文档和实践</h4><ul>
+<li><strong>Java 自带异常</strong>：查阅 Java API 文档（如 <code>java.lang.RuntimeException</code> 的子类列表）。</li>
+<li><strong>框架异常</strong>：使用框架时，阅读其官方文档，了解特定异常及其处理建议。</li>
+<li><strong>实践</strong>：通过编写代码、调试和处理异常，积累经验，逐渐熟悉。</li>
+</ul>
+<h4 id="不必强行记住所有异常"><a href="#不必强行记住所有异常" class="headerlink" title="不必强行记住所有异常"></a>不必强行记住所有异常</h4><p>异常种类繁多，且新框架可能引入新异常。关键是掌握异常处理的基本原则（捕获、抛出、日志记录等），遇到不熟悉的异常时，知道如何查资料和解决问题。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>抛出 <code>RuntimeException</code> 的代码是：<code>throw new RuntimeException(&quot;Oops!&quot;);</code>。</li>
+<li>常见异常包括 <code>NullPointerException</code>、<code>ArrayIndexOutOfBoundsException</code>、<code>IOException</code> 等。</li>
+<li>异常既有 Java 自带的，也有框架定义的。</li>
+<li>记忆异常的策略：理解分类、重点记忆常见异常、结合场景、查阅文档并通过实践积累经验。</li>
+</ul>
+<p>希望这些解答对你有帮助！如果还有疑问，欢迎继续提问。</p>
 
                 
               </div>
