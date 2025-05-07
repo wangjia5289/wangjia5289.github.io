@@ -27,7 +27,7 @@
 <meta property="og:description" content="一、理论1. Spring WebFlux 概述&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;随着互联网应用的日益复杂和用户对实时性要求的提高，传统的基于阻塞 I&#x2F;O 的Web框架在处理高并发和大数据流时逐渐显现出瓶颈。 &#x3D;&#x3D;2.响应式编程解决方案&#x3D;&#x3D;基于以上问题，响应式编程模型应运而生，响应式编程是一种处理异步数据流、变化传播、非阻">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-06T08:46:56.547Z">
+<meta property="article:modified_time" content="2025-05-07T09:40:36.632Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k words
+          9.2k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          34 mins
+          77 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-06T16:46:56+08:00
+                    Last updated on 2025-05-07T17:40:36+08:00
                   
                   
 
@@ -313,11 +313,11 @@
 <p>&#x3D;&#x3D;2.Spring WebFlux（Reactive 栈）&#x3D;&#x3D;<br>Spring WebFlux 基于 响应式编程模型，默认使用 Reactive 容器（如 Netty），通过 事件驱动 和 非阻塞 I&#x2F;O 实现高效处理。它借助 Reactor 库（Mono 和 Flux）实现异步操作，能够以较少的线程处理更多请求，资源消耗显著降低。在 I&#x2F;O 密集型 场景下，其吞吐量和响应速度表现优异，尽管响应链较长可能导致延迟略高。Spring WebFlux 特别适合 高并发 和 大量 I&#x2F;O 请求 的应用场景，例如聊天系统、实时通知和数据流处理等。</p>
 <p>对非阻塞 I&#x2F;O 的深入理解：</p>
 <ol>
-<li>Spring WebFlux 的非阻塞 I&#x2F;O 模型就不同了。它不是靠线程切换来“逃避阻塞”，而是通过一种事件驱动 + 回调机制来彻底规避阻塞。我们必须注意的是：“<font color="#ff0000">Spring WebFlux 只是提供了非阻塞的条件，但到底能不能做到非阻塞，还要看你具体的技术栈</font>”</li>
-<li>例如，当主线程遇到一个耗时操作时，如果这个操作是异步非阻塞的（比如非阻塞网络请求、非阻塞数据库查询），主线程执行之后不会傻乎乎地干等，而是注册一个事件和对应的回调函数，然后立刻去处理其他任务。如果有数据返回，比如 R2DBC 查询返回了一条数据，就会触发事件，执行回调函数。假如操作还没彻底完成，只是返回了部分数据，主线程会继续忙其他事，等下次再返回数据时再回调、再继续后续业务流程。</li>
-<li>但是，如果这个操作是同步简单操作、同步阻塞操作，那主线程还是要老老实实执行完这个步骤才能往下走，可是别忘了，我们的主 Reactive 线程是为成千上万个任务服务的，你让它在一个请求上耗太久，这显然是不行的，所以，<font color="#ff0000">我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，不得防止任何阻塞操作，只允许包含两类操作：同步简单操作、异步非阻塞</font></li>
-<li>那你可能询问，同步阻塞操作我们该怎么操作，对于这些操作，WebFlux 允许你把它们丢到一个专门的 “阻塞友好线程池” 里去执行。执行完后，结果会返回给主线程。但是这跟传统阻塞模型不一样，虽然异步线程仍然阻塞，但是主线程在这个过程中不会一直傻等，而是继续处理其他任务，等结果回来后再回来处理这个请求。这样可以避免主 Reactive 线程被长时间占用，保持它轻量、高效地应付大量请求。</li>
-<li>这样我们就可以实现，除了主 Reactive 线程执行同步简单操作时消耗点时间，执行异步阻塞、异步非阻塞操作时，都不会被阻塞，可以去执行其他任务，这样就能实现少量线程执行大量请求</li>
+<li>Spring WebFlux 的非阻塞 I&#x2F;O 模型有所不同。它不是通过线程切换来“回避阻塞”，而是以事件驱动 + 回调机制的方式从根本上规避阻塞。需要特别注意的是：“<font color="#ff0000">Spring WebFlux 仅提供非阻塞的能力，是否真正实现非阻塞，取决于你的整体技术栈，简单来说，Spring WebFlux + 异步非阻塞操作 &#x3D; 王炸</font>”。</li>
+<li>举个例子，当主线程遇到一个耗时操作，如果这个操作是异步非阻塞的（比如非阻塞网络请求、非阻塞数据库查询），主线程不会呆等结果返回，而是注册一个事件及其对应的回调函数，然后立刻去处理其他任务。一旦有数据返回，比如 R2DBC 查询返回结果，就会触发事件并执行回调。如果操作未完全完成，只返回了部分数据，主线程会继续处理其他任务，等下次数据返回后再继续回调、推进后续业务流程。</li>
+<li>但如果这个操作是同步简单操作或同步阻塞操作，主线程仍然必须等它执行完才能继续。要注意的是，主 Reactive 线程承担着成千上万个请求，如果它被某个操作长时间阻塞，显然是不可接受的。因此，<font color="#ff0000">我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，禁止执行任何阻塞操作，只允许出现两类操作：同步简单操作、异步非阻塞操作</font>。</li>
+<li>那么问题来了，如果必须执行同步阻塞操作怎么办？对于这类场景，WebFlux 支持将其转移到一个专门的“阻塞友好线程池”中去执行。执行完成后再将结果返回主线程。和传统的阻塞模型不同的是，虽然线程池中的线程仍是阻塞的，但主线程不会被挂起，而是继续处理其他任务，等结果回来后再处理该请求。这有效避免了主 Reactive 线程的长时间占用，使其保持轻量、高效。</li>
+<li>这样一来，除了主 Reactive 线程在执行同步简单操作时略有耗时，其它包括异步阻塞、异步非阻塞的操作都不会阻塞主线程。主线程可以继续处理更多任务，从而实现以少量线程支撑大量并发请求的目标。</li>
 </ol>
 <p>&#x3D;&#x3D;3.两者对比表&#x3D;&#x3D;</p>
 <table>
@@ -375,7 +375,64 @@
 </tr>
 </tbody></table>
 <hr>
-<h3 id="1-Mono"><a href="#1-Mono" class="headerlink" title="1. Mono"></a>1. Mono</h3><h4 id="1-1-Mono-概述"><a href="#1-1-Mono-概述" class="headerlink" title="1.1. Mono 概述"></a>1.1. Mono 概述</h4><p><code>Mono</code> 表示一个可能包含 0 或 1 个元素 的异步数据流。它可以承载一个元素或一个空值，例如下面代码中， <code>Hello, World!</code> 就是一个元素；</p>
+<h3 id="3-对-“流”-深入理解"><a href="#3-对-“流”-深入理解" class="headerlink" title="3. 对 “流” 深入理解"></a>3. 对 “流” 深入理解</h3><p>Reactor、Spring WebFlux 等框架的核心就是通过返回流（<code>Mono</code> 或 <code>Flux</code>）来管理异步操作的控制流。即便你在内部做的是阻塞操作，返回一个 <code>Mono</code> 或 <code>Flux</code> 也能保持与其他异步操作的协作性和合适的线程调度。</p>
+<p>也就是，能返回流就返回流，不管你是执行异步阻塞操作，还是异步非阻塞</p>
+<p>在 Spring WebFlux 中，真正的流式处理主要涉及两个方面：</p>
+<ol>
+<li>&#x3D;&#x3D;服务器接受流式数据&#x3D;&#x3D;：<ol>
+<li>通常涉及数据库查询、网络请求等外部数据源返回数据给服务器。对于这类操作，我们不能依赖同步阻塞或异步阻塞机制。比如，JDBC 会一次性拉取所有数据并返回，HttpClient 调用外部服务时也会等待所有响应返回，这种方式属于“阻塞”模式，不适合流式数据处理。</li>
+<li>为了实现真正的流式输出，我们需要采用异步非阻塞操作。例如，R2DBC 以逐行的方式从数据库返回数据，WebClient 也采用类似的机制。这也是为什么我们说：“Spring WebFlux + 异步非阻塞操作 &#x3D; 王炸”。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;服务器发送流式数据给客户端&#x3D;&#x3D;：<ol>
+<li>默认情况下，Spring WebFlux 的返回并不是流式的，要实现真正的流式响应，必须满足以下四个条件：</li>
+<li>使用 <code>Flux&lt;T&gt;</code> 返回多个元素</li>
+<li><code>Flux</code> 必须懒生成（☆☆☆）</li>
+<li>设置正确的 <code>Content-Type</code>（例如 <code>text/event-stream</code> 或 <code>application/stream+json</code>）</li>
+<li>客户端需要支持 chunked transfer 或 SSE（服务器推送事件）</li>
+<li>如果缺少任何一个条件，流式效果无法实现。例如，即使你使用了 <code>Flux</code>、懒加载，并且客户端支持，但如果没有正确设置 <code>Content-Type</code>，客户端会一直处于加载状态，直到最终一次性返回所有数据，这时数据会“哐哐”全部输出。</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><font color="#00b0f0">懒加载</font>：<ol>
+<li>Flux 或 Mono 在没有人订阅（subscribe）之前，它<strong>啥都不干</strong></li>
+<li>只有当你调用 <code>.subscribe()</code> 的时候，它才真的发数据，这叫懒加载</li>
+</ol>
+</li>
+<li><font color="#00b0f0">懒生成</font>：<ol>
+<li>数据不是一次性准备好的，而是<strong>边订阅边生成</strong>的。</li>
+<li>以 <code>Flux.just(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</code> 为例，一旦你订阅，虽然会按照 A -&gt; B -&gt; C 依次发出，但它把所有数据都已经准备好了，不是懒生成。</li>
+<li>再以 <code>Flux.interval(Duration.ofSeconds(1))</code> 为例，是边订阅边生成的：它每秒生成一个数，是真·懒生成。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p>Flux 依次发出数据</p>
+<hr>
+<h3 id="4-高并发环境下-WebFlux-性能表现"><a href="#4-高并发环境下-WebFlux-性能表现" class="headerlink" title="4. 高并发环境下 WebFlux 性能表现"></a>4. 高并发环境下 WebFlux 性能表现</h3><table>
+<thead>
+<tr>
+<th>服务器</th>
+<th>最大并发量（4核8G）</th>
+<th>最大并发量（4核16G）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tomcat</td>
+<td>5000 连接</td>
+<td>10000 连接</td>
+</tr>
+<tr>
+<td>Netty</td>
+<td>50000 连接</td>
+<td>100000 连接</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="5-Mono"><a href="#5-Mono" class="headerlink" title="5. Mono"></a>5. Mono</h3><h4 id="5-1-Mono-概述"><a href="#5-1-Mono-概述" class="headerlink" title="5.1. Mono 概述"></a>5.1. Mono 概述</h4><p><code>Mono</code> 表示一个可能包含 0 或 1 个元素 的异步数据流。它可以承载一个元素或一个空值，例如下面代码中， <code>Hello, World!</code> 就是一个元素；</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Mono&lt;String&gt; mono <span class="hljs-operator">=</span> Mono.just(<span class="hljs-string">&quot;Hello, World!&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
@@ -385,16 +442,16 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="1-2-Mono-相关方法"><a href="#1-2-Mono-相关方法" class="headerlink" title="1.2. Mono 相关方法"></a>1.2. Mono 相关方法</h4><h5 id="1-2-1-前言"><a href="#1-2-1-前言" class="headerlink" title="1.2.1. 前言"></a>1.2.1. 前言</h5><p>我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，不得放置任何阻塞操作，只允许包含两类操作：</p>
+<h4 id="5-2-Mono-相关方法"><a href="#5-2-Mono-相关方法" class="headerlink" title="5.2. Mono 相关方法"></a>5.2. Mono 相关方法</h4><h5 id="5-2-1-前言"><a href="#5-2-1-前言" class="headerlink" title="5.2.1. 前言"></a>5.2.1. 前言</h5><p>我们约定：在主 Reactive 流（如 <code>flatMap</code>、<code>doOnNext</code> 等操作符内部）中，不得放置任何阻塞操作，只允许包含两类操作：</p>
 <ol>
 <li>同步简单操作</li>
 <li>异步非阻塞操作</li>
 </ol>
 <p>对于 同步阻塞操作，必须通过 <code>mono.subscribeOn</code> 将其调度到 “阻塞友好线程” 中，因此，以后我们提到 “异步阻塞操作” ，实际上是指：<strong>将原本是同步阻塞的操作，调度到阻塞友好线程中执行</strong>，从而避免阻塞 Reactor 的工作线程，保持响应式流的非阻塞特性。</p>
 <hr>
-<h5 id="1-2-2-创建-Mono-实例"><a href="#1-2-2-创建-Mono-实例" class="headerlink" title="1.2.2. 创建 Mono 实例"></a>1.2.2. 创建 Mono 实例</h5><ol>
+<h5 id="5-2-2-创建-Mono-实例"><a href="#5-2-2-创建-Mono-实例" class="headerlink" title="5.2.2. 创建 Mono 实例"></a>5.2.2. 创建 Mono 实例</h5><ol>
 <li><code>Mono.just(T data)</code>：<ol>
-<li>从一个确定且非 <code>null</code> 的值创建 Mono，直接发出该值</li>
+<li>从一个确定且非 <code>null</code> 的值创建 Mono（可以为空字符串 <code>&quot;&quot;</code>），直接发出该值</li>
 </ol>
 </li>
 <li><code>Mono.justOrEmpty(T data)</code>：<ol>
@@ -412,7 +469,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-3-转换操作"><a href="#1-2-3-转换操作" class="headerlink" title="1.2.3. 转换操作"></a>1.2.3. 转换操作</h5><ol>
+<h5 id="5-2-3-转换操作"><a href="#5-2-3-转换操作" class="headerlink" title="5.2.3. 转换操作"></a>5.2.3. 转换操作</h5><ol>
 <li><code>mono.map(Function&lt;T, R&gt; mapper)</code>：<ol>
 <li>将 <code>Mono</code> 中的元素映射为新值（同步转换），返回新 Mono</li>
 </ol>
@@ -439,7 +496,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-4-错误处理"><a href="#1-2-4-错误处理" class="headerlink" title="1.2.4. 错误处理"></a>1.2.4. 错误处理</h5><ol>
+<h5 id="5-2-4-错误处理"><a href="#5-2-4-错误处理" class="headerlink" title="5.2.4. 错误处理"></a>5.2.4. 错误处理</h5><ol>
 <li><code>mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</code>：<ol>
 <li>用于处理 Mono 或 Flux 的错误信号，当上游发生异常时，返回一个替代的 Mono 以继续流程</li>
 </ol>
@@ -458,7 +515,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-5-多流组合"><a href="#1-2-5-多流组合" class="headerlink" title="1.2.5. 多流组合"></a>1.2.5. 多流组合</h5><ol>
+<h5 id="5-2-5-多流组合"><a href="#5-2-5-多流组合" class="headerlink" title="5.2.5. 多流组合"></a>5.2.5. 多流组合</h5><ol>
 <li><code>mono.zipWith(Mono&lt;? extends U&gt;other，BiFunction&lt;T，U，R&gt;combiner)</code>：<ol>
 <li>将当前 <code>Mono&lt;T&gt;</code> 与另一个 <code>Mono&lt;U&gt;</code> 组合，通过 <code>BiFunction</code> 合并为结果 <code>R</code>，返回 <code>Mono&lt;R&gt;</code></li>
 <li>任一 Mono 为空则返回空 Mono</li>
@@ -471,7 +528,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-6-生命周期钩子"><a href="#1-2-6-生命周期钩子" class="headerlink" title="1.2.6. 生命周期钩子"></a>1.2.6. 生命周期钩子</h5><ol>
+<h5 id="5-2-6-生命周期钩子"><a href="#5-2-6-生命周期钩子" class="headerlink" title="5.2.6. 生命周期钩子"></a>5.2.6. 生命周期钩子</h5><ol>
 <li><code>mono.doOnNext(Consumer&lt;? super T&gt; onNext)</code>：<ol>
 <li>在每次发出元素（onNext）时执行副作用操作</li>
 </ol>
@@ -490,7 +547,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-7-异步与调度"><a href="#1-2-7-异步与调度" class="headerlink" title="1.2.7. 异步与调度"></a>1.2.7. 异步与调度</h5><ol>
+<h5 id="5-2-7-异步与调度"><a href="#5-2-7-异步与调度" class="headerlink" title="5.2.7. 异步与调度"></a>5.2.7. 异步与调度</h5><ol>
 <li>&#x3D;&#x3D;常见调度器&#x3D;&#x3D;：<ol>
 <li><font color="#00b0f0">Schedulers.parallel()</font>：<ol>
 <li>适用于 CPU 密集型任务，使用固定大小线程池</li>
@@ -529,7 +586,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-8-订阅"><a href="#1-2-8-订阅" class="headerlink" title="1.2.8. 订阅"></a>1.2.8. 订阅</h5><ol>
+<h5 id="5-2-8-订阅"><a href="#5-2-8-订阅" class="headerlink" title="5.2.8. 订阅"></a>5.2.8. 订阅</h5><ol>
 <li><code>mono.sunscribe()</code>：<ol>
 <li>仅触发流的执行，不处理返回值</li>
 </ol>
@@ -540,7 +597,297 @@
 </li>
 </ol>
 <hr>
+<h3 id="6-Flux"><a href="#6-Flux" class="headerlink" title="6. Flux"></a>6. Flux</h3><h4 id="6-1-Flux-相关方法"><a href="#6-1-Flux-相关方法" class="headerlink" title="6.1. Flux 相关方法"></a>6.1. Flux 相关方法</h4><h5 id="6-1-1-Flux-实例创建方法"><a href="#6-1-1-Flux-实例创建方法" class="headerlink" title="6.1.1. Flux 实例创建方法"></a>6.1.1. Flux 实例创建方法</h5><p>&#x3D;&#x3D;1.从已有数据构建流&#x3D;&#x3D;<br>当你手头已经有数据（数组、集合、Stream 等），直接封装成 Flux 发出去。</p>
+<ol>
+<li><code>Flux.just(T... data)</code><ol>
+<li>从确定且非 <code>null</code> 的值创建 Flux（可以为空字符串 <code>&quot;&quot;</code>），<strong>依次</strong>发出各值所有元素，适合少量数据</li>
+</ol>
+</li>
+<li><code>Flux.fromArray(T[] array)</code><ol>
+<li>从 <code>Array</code> 数组创建 Flux</li>
+</ol>
+</li>
+<li><code>Flux.fromIterable(Iterable&lt;T&gt; it)</code>：<ol>
+<li>从 <code>Iterable</code>创建 Flux（List、Set、Queue），依次发出所有元素<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReactiveExample</span> &#123;<br><br>    <span class="hljs-comment">// 1. Flux.just(T... data)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/just&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">just</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Flux.fromArray(T[] array)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/fromArray&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">fromArray</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">String</span>[] arr = &#123;<span class="hljs-string">&quot;X&quot;</span>, <span class="hljs-string">&quot;Y&quot;</span>, <span class="hljs-string">&quot;Z&quot;</span>&#125;;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">fromArray</span>(arr);<br>    &#125;<br><br>    <span class="hljs-comment">// 3. Flux.fromIterable(Iterable&lt;T&gt; it)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/fromIterable&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">Integer</span>&gt; <span class="hljs-title function_">fromIterable</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Integer</span>&gt; list = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">fromIterable</span>(list);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>&#x3D;&#x3D;2.按规则动态生成数据&#x3D;&#x3D;<br>不依赖已有数据，而是代码里一个个“造”出来，适合序列、状态机等。</p>
+<ol>
+<li><code>Flux.range(int start, int count)</code><ol>
+<li>创建一个从 start 开始，连续发出 count 个整数的 Flux。</li>
+</ol>
+</li>
+<li><code>Flux.generate(Callable&lt;S&gt; stateSupplier，BiFunction&lt;S，SynchronousSink&lt;T&gt;，S&gt;generator)</code><ol>
+<li>动态生成元素，适合需要状态控制的场景。</li>
+</ol>
+</li>
+<li><code>Flux.defer(Supplier&lt;? extends Publisher&lt;T&gt;&gt; supplier)</code><ol>
+<li>延迟创建 <code>Flux</code>，每次订阅时重新生成数据<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs pf">@RestController<br>@RequestMapping(<span class="hljs-string">&quot;/api&quot;</span>)<br>public class ReactiveExample &#123;<br><br>    // <span class="hljs-number">1</span>. Flux.range(int start, int count)<br>    @GetMapping(<span class="hljs-string">&quot;/range&quot;</span>)<br>    public Flux<span class="hljs-variable">&lt;Integer&gt;</span> range() &#123;<br>        return Flux.range(<span class="hljs-number">1</span>, <span class="hljs-number">5</span>);<br>    &#125;<br><br>    // <span class="hljs-number">2</span>. Flux.generate(Callable<span class="hljs-variable">&lt;S&gt;</span> <span class="hljs-keyword">state</span>Supplier, BiFunction<span class="hljs-variable">&lt;S, SynchronousSink&lt;T&gt;</span>, S&gt; generator)<br>    @GetMapping(<span class="hljs-string">&quot;/generate&quot;</span>)<br>    public Flux<span class="hljs-variable">&lt;Integer&gt;</span> generate() &#123;<br>        return Flux.generate(<br>            () -&gt; <span class="hljs-number">0</span>,<br>            (<span class="hljs-keyword">state</span>, sink) -&gt; &#123;<br>                sink.next(<span class="hljs-keyword">state</span>);<br>                if (<span class="hljs-keyword">state</span> &gt;= <span class="hljs-number">4</span>) sink.complete();<br>                return <span class="hljs-keyword">state</span> + <span class="hljs-number">1</span>;<br>            &#125;<br>        );<br>    &#125;<br><br>    // <span class="hljs-number">3</span>. Flux.defer(Supplier<span class="hljs-variable">&lt;? extends Publisher&lt;T&gt;</span>&gt; supplier)<br>    @GetMapping(<span class="hljs-string">&quot;/defer&quot;</span>)<br>    public Flux<span class="hljs-variable">&lt;Long&gt;</span> defer() &#123;<br>        return Flux.defer(() -&gt; Flux.just(System.currentTimeMillis()));<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>&#x3D;&#x3D;3.基于异步回调的数据流&#x3D;&#x3D;<br>数据来自外部事件、回调、异步任务，推模式为主。</p>
+<ol>
+<li><code>Flux.create(Consumer&lt;FluxSink&lt;T&gt;&gt;emitter)</code><ol>
+<li>提供更灵活的控制，适合异步或外部事件驱动的场景。<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@RestController</span><br><span class="hljs-variable">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br>public class ReactiveExample &#123;<br><br>    <span class="hljs-comment">// 1. Flux.create(Consumer&lt;FluxSink&lt;T&gt;&gt; emitter)</span><br>    <span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/create&quot;</span>)<br>    public Flux&lt;String&gt; <span class="hljs-built_in">create</span>() &#123;<br>        <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">Flux</span><span class="hljs-selector-class">.create</span>(emitter -&gt; &#123;<br>            <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">Thread</span>(() -&gt; &#123;<br>                <span class="hljs-selector-tag">emitter</span><span class="hljs-selector-class">.next</span>(<span class="hljs-string">&quot;async-1&quot;</span>);<br>                <span class="hljs-selector-tag">emitter</span><span class="hljs-selector-class">.next</span>(<span class="hljs-string">&quot;async-2&quot;</span>);<br>                <span class="hljs-selector-tag">emitter</span><span class="hljs-selector-class">.complete</span>();<br>            &#125;)<span class="hljs-selector-class">.start</span>();<br>        &#125;);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>&#x3D;&#x3D;4.基于时间调度创建流&#x3D;&#x3D;<br>按照固定时间间隔发出数据，用于轮询、心跳、定时任务等。</p>
+<ol>
+<li><code>Flux.interval(Duration period)</code><ol>
+<li>按固定时间间隔发出递增的长整型数字（从 0 开始）</li>
+</ol>
+</li>
+<li><code>Flux.interval(Duration delay, Duration period)</code><ol>
+<li>指定初始延迟和间隔时间<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/api&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReactiveExample</span> &#123;<br><br>    <span class="hljs-comment">// 1. Flux.interval(Duration period)</span><br>    <span class="hljs-meta">@GetMapping(value = <span class="hljs-string">&quot;/interval&quot;</span>, produces = MediaType.TEXT_EVENT_STREAM_VALUE)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;<span class="hljs-built_in">Long</span>&gt; interval() &#123;<br>        <span class="hljs-keyword">return</span> Flux.interval(Duration.ofSeconds(<span class="hljs-number">1</span>));<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Flux.interval(Duration delay, Duration period)</span><br>    <span class="hljs-meta">@GetMapping(value = <span class="hljs-string">&quot;/intervalWithDelay&quot;</span>, produces = MediaType.TEXT_EVENT_STREAM_VALUE)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;<span class="hljs-built_in">Long</span>&gt; intervalWithDelay() &#123;<br>        <span class="hljs-keyword">return</span> Flux.interval(Duration.ofSeconds(<span class="hljs-number">3</span>), Duration.ofSeconds(<span class="hljs-number">1</span>));<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>&#x3D;&#x3D;5.控制型流（空流、异常、无限挂起）&#x3D;&#x3D;<br>不发真实数据，用于流程控制、占位、异常测试等。</p>
+<ol>
+<li><code>Flux.empty()</code><ol>
+<li>创建一个不发出任何元素直接完成的 &#96;Flux</li>
+</ol>
+</li>
+<li><code>Flux.error(Throwable throwable)</code><ol>
+<li>创建一个发出错误信号的 <code>Flux</code>。</li>
+</ol>
+</li>
+<li><code>Flux.never()</code><ol>
+<li>创建一个不发出任何信号（不发出元素、不完成、不出错）的 <code>Flux</code>。<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReactiveExample</span> &#123;<br><br>    <span class="hljs-comment">// 1. Flux.empty()</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/empty&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">empty</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">empty</span>();<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Flux.error(Throwable throwable)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/error&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">error</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Something went wrong&quot;</span>));<br>    &#125;<br><br>    <span class="hljs-comment">// 3. Flux.never()</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/never&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">never</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">never</span>();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p>&#x3D;&#x3D;6.组合多个流&#x3D;&#x3D;<br>不生成新数据，而是对多个已有 Flux 进行组合或转换。</p>
+<ol>
+<li><code>Flux.from(Publisher&lt;? extends T&gt; source)</code><ol>
+<li>从另一个 <code>Publisher</code>（如 <code>Mono</code> 或其他 <code>Flux</code>）创建 <code>Flux</code>。</li>
+</ol>
+</li>
+<li><code>Flux.concat(Publisher&lt;? extends T&gt;... sources)</code><ol>
+<li>按顺序连接多个 <code>Publisher</code>，依次发出它们的元素</li>
+</ol>
+</li>
+<li><code>Flux.merge(Publisher&lt;? extends T&gt;... sources)</code><ol>
+<li>合并多个 <code>Publisher</code>，异步发出元素（不保证顺序)）</li>
+</ol>
+</li>
+<li><code>Flux.zip(Publisher&lt;? extends T1&gt; source1, Publisher&lt;? extends T2&gt; source2, ...)</code><ol>
+<li>将多个 <code>Publisher</code> 的元素组合成元组。<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReactiveExample</span> &#123;<br><br>    <span class="hljs-comment">// 1. Flux.from(Publisher&lt;? extends T&gt; source)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/fromPublisher&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">fromPublisher</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Mono</span>&lt;<span class="hljs-title class_">String</span>&gt; mono = <span class="hljs-title class_">Mono</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Mono data&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">from</span>(mono);<br>    &#125;<br><br>    <span class="hljs-comment">// 2. Flux.concat(Publisher&lt;? extends T&gt;... sources)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/concat&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">concat</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>);<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">concat</span>(flux1, flux2);<br>    &#125;<br><br>    <span class="hljs-comment">// 3. Flux.merge(Publisher&lt;? extends T&gt;... sources)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/merge&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">merge</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>);<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">merge</span>(flux1, flux2);<br>    &#125;<br><br>    <span class="hljs-comment">// 4. Flux.zip(Publisher&lt;? extends T1&gt; source1, Publisher&lt;? extends T2&gt; source2, ...)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/zip&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">zip</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>);<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">zip</span>(flux1, flux2, (s1, s2) -&gt; s1 + s2);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="6-1-2-flux-对象实例方法"><a href="#6-1-2-flux-对象实例方法" class="headerlink" title="6.1.2. flux 对象实例方法"></a>6.1.2. flux 对象实例方法</h5><h6 id="6-1-2-1-实例方法一览表"><a href="#6-1-2-1-实例方法一览表" class="headerlink" title="6.1.2.1. 实例方法一览表"></a>6.1.2.1. 实例方法一览表</h6><table>
+<thead>
+<tr>
+<th><strong>实例方法</strong></th>
+<th><strong>功能描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>转换与映射方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>map(Function&lt;? super T, ? extends R&gt; mapper)</code></td>
+<td>对流中每个元素应用提供的函数（同步简单操作），将它从类型 T 变换成类型 R<br>与 <code>flatMap</code> 不同点在于：<code>map</code> 是同步操作，结果通常是原始类型转换，没有异步流</td>
+</tr>
+<tr>
+<td><code>flatMap(Function&lt;? super T, ? extends Publisher&lt;? extends R&gt;&gt; mapper)</code></td>
+<td>对每个元素执行一个异步操作（异步阻塞、异步非阻塞），返回一个新的异步流，并将所有这些异步流与元素合并成一个流<br>我们常说“展平”的意思：就是有多个流，我们把他们合成一个流</td>
+</tr>
+<tr>
+<td><code>cast(Class&lt;R&gt; clazz)</code></td>
+<td>将流中元素强制转换为类型 R；若元素类型与 R 无继承或实现关系（即类型不兼容），将抛出 ClassCastException 异常。</td>
+</tr>
+<tr>
+<td><code>ofType(Class&lt;U&gt; clazz)</code></td>
+<td>仅保留属于指定类型 U 的元素，过滤掉其他类型的元素</td>
+</tr>
+<tr>
+<td><strong>过滤方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>filter(Predicate&lt;? super T&gt; predicate)</code></td>
+<td>对每个元素执行断言函数，仅保留返回 <code>true</code> 的元素，返回 <code>false</code> 的元素将被过滤掉（满足条件的保留）</td>
+</tr>
+<tr>
+<td><code>distinct()</code></td>
+<td>去重操作，移除重复元素，确保每个元素在流中只出现一次（对整个流去重，不论是否分批加载）<br>核心机制：维护一个 <code>HashSet</code> 来记录已发出的元素。每当一个新元素准备推送时，都会先检查是否已存在于集合中。若处理的数据流非常大（如百万级），这个集合可能迅速膨胀，占用大量内存。</td>
+</tr>
+<tr>
+<td><strong>收集与聚合方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>collectList()</code></td>
+<td>等到整个流执行完毕（无论是否分批加载），所有元素会被收集进一个 <code>List</code>，并最终通过 <code>Mono&lt;List&gt;</code> 一次性发送。<br>例如：<code>Flux.just(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;).collectList();</code> 会返回 <code>[&quot;A&quot;, &quot;B&quot;, &quot;C&quot;]</code>。你可能会问：为什么只看到合并后的 List，A、B、C 发哪里去了？可以理解为，它们被“发进了这个 List 中”。</td>
+</tr>
+<tr>
+<td><code>collectMultimap(Function&lt;T, K&gt; keyMapper)</code></td>
+<td>使用 keyMapper 为每个元素生成键，将元素本身作为值，汇聚到一个 <code>Map&lt;k, Collection&lt;V&gt;&gt;</code> 里，并封装成 <code>Mono&lt;Map&lt;K,Collection&lt;V&gt;&gt;&gt;</code> 返回，就像按标签分门别类地整理档案。</td>
+</tr>
+<tr>
+<td><code>reduce(BiFunction&lt;T, T, T&gt; aggregator)</code></td>
+<td>对流中元素进行两两累积，将前一次计算结果与下一个元素交给 aggregator 处理，最终合成一个值并通过 Mono 发出。常用于求和、拼接字符串、数据汇总等。</td>
+</tr>
+<tr>
+<td><code>scan(BiFunction&lt;T, T, T&gt; accumulator)</code></td>
+<td>类似 reduce，但每遇到一个新元素就会「打卡」一次，立刻把当前的累积结果发出来——就好比你在跑步时，每跑一公里就看一次手表，实时掌握进度。</td>
+</tr>
+<tr>
+<td><strong>合并与组合方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mergeWith(Publisher&lt;? extends T&gt; other)</code></td>
+<td>并行地把另一个流的元素插入当前流，不保证顺序——就像把两条河的水汇入同一个大江，水流混杂而不分先后。</td>
+</tr>
+<tr>
+<td><code>concatWith(Publisher&lt;? extends T&gt; other)</code></td>
+<td>先发完当前流所有元素，再按顺序接入另一个流，保证完全的先后顺序，就像礼貌地排队，前面的人走完后才轮到后面。</td>
+</tr>
+<tr>
+<td><code>zipWith(Publisher&lt;? extends U&gt; other)</code></td>
+<td>两个流按索引位置逐个配对生成 <code>Tuple2&lt;T, U&gt;</code>，如 flux1 的第一个元素配 flux2 的第一个元素，当任一流提前结束，组合流也会结束》<br>适用于必须 一 一对应 的场景。</td>
+</tr>
+<tr>
+<td><code>combineLatest(Publisher&lt;? extends U&gt; other, BiFunction&lt;T, U, R&gt; combinator)</code></td>
+<td>订阅两个流，并在任一流发出新元素时，取对方最新值一起合并发出。</td>
+</tr>
+<tr>
+<td><strong>限制与截取方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>take(long n)</code></td>
+<td>只接收前 n 个元素，下游收到 n 个后就主动完成，适合取样或分页场景。</td>
+</tr>
+<tr>
+<td><code>takeLast(int n)</code></td>
+<td>缓存发出的所有元素，等整个流执行完毕才一次性发出最后 n 个元素；<br>常用于需要尾部数据的情况，但要注意内存开销。</td>
+</tr>
+<tr>
+<td><code>skip(long n)</code></td>
+<td>忽略前 n 个元素，直接跳过，再把剩余元素发给下游；</td>
+</tr>
+<tr>
+<td><code>skipLast(int n)</code></td>
+<td>缓存发出的所有元素，等整个流执行完毕后丢弃最后 n 个元素，再把剩下的一起发出；</td>
+</tr>
+<tr>
+<td><strong>错误处理方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>onErrorReturn(T fallback)</code></td>
+<td>一旦发生错误，就发出一个默认值（可以是流也可以不是流），不再传递错误信号，</td>
+</tr>
+<tr>
+<td><code>onErrorMap(Function&lt;Throwable, ? extends Throwable&gt; mapper)</code></td>
+<td>捕获异常并将其包装或转换为另一种更具语义的异常类型，然后重新发出错误信号，便于统一上层错误处理策略。<br>简单来说：异常 A -&gt; 异常 X，上层统一处理异常 X</td>
+</tr>
+<tr>
+<td><code>onErrorResume(Function&lt;Throwable, ? extends Publisher&lt;? extends T&gt;&gt; fallback)</code></td>
+<td>错误发生时，切换到备用的 Publisher 继续发出元素，避免整个流被中断，可用于降级、重试或备用数据源。</td>
+</tr>
+<tr>
+<td><code>onErrorContinue(BiConsumer&lt;Throwable, Object&gt; errorConsumer)</code></td>
+<td>对单个元素处理出错时只执行指定副作用（如记录日志），并跳过该元素继续后续处理，下游不会收到错误；相当于「有容错的流水线」。</td>
+</tr>
+<tr>
+<td><code>retry(long times)</code></td>
+<td>出错时将重试整个 Flux 上游 <code>times</code> 次（总共尝试 1 + times 次）</td>
+</tr>
+<tr>
+<td><strong>缓冲与分组方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>buffer(int maxSize)</code></td>
+<td>将元素分批打包，每批大小不超过 maxSize ，以下游接收 List 形式发出，常用于批量写库、分批请求等场景。</td>
+</tr>
+<tr>
+<td><code>buffer(Duration timespan)</code></td>
+<td>按固定时间窗口收集元素，定时将窗口内所有元素打包发出，就像定时邮件发送，把这一段时间的消息一次性推送。</td>
+</tr>
+<tr>
+<td><code>groupBy(Function&lt;? super T, ? extends K&gt; keyMapper)</code></td>
+<td>按 keyMapper 提取的键值对元素分组，每个分组都会变成一个 GroupedFlux&lt;K,T&gt;，可以对不同组分别处理；就像把学生按班级分流。</td>
+</tr>
+<tr>
+<td><code>window(int maxSize)</code></td>
+<td>类似 buffer 按数量分组，但每组以 Flux 的形式发出，方便在每个子流内部继续做流式操作；把大流切成小流，各自独立。</td>
+</tr>
+<tr>
+<td><strong>延迟与调度方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>delayElements(Duration delay)</code></td>
+<td>给每个元素之间插入固定延迟，模拟节流或人为降速，就像每隔一秒钟才放一个包裹。</td>
+</tr>
+<tr>
+<td><code>subscribeOn(Scheduler scheduler)</code></td>
+<td>指定上游发起订阅和执行的线程池（Scheduler），决定数据「从哪里来」，常用于将耗时操作分配给专用线程。</td>
+</tr>
+<tr>
+<td><code>publishOn(Scheduler scheduler)</code></td>
+<td>指定下游后续操作的线程池，决定数据「往哪里去」，灵活切换执行环境以避免阻塞。</td>
+</tr>
+<tr>
+<td><strong>其他实用方法</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>doOnNext(Consumer&lt;? super T&gt; onNext)</code></td>
+<td>每当流发出一个元素时执行指定副作用（如日志、指标统计），但不改变元素本身；就像在传送带上做一次检查打标。</td>
+</tr>
+<tr>
+<td><code>doOnError(Consumer&lt;? super Throwable&gt; onError)</code></td>
+<td>流遇到错误时执行副作用（如记录日志、告警），然后再把错误继续抛给下游；适合在错误点插入埋点或监控。</td>
+</tr>
+<tr>
+<td><code>doOnComplete(Runnable onComplete)</code></td>
+<td>在流正常走完所有元素后执行一次副作用，如资源释放或完成通知；就像闭环操作中的收尾仪式。</td>
+</tr>
+<tr>
+<td><code>log()</code></td>
+<td>自动在控制台打印 Flux 的信号轨迹，包括订阅、请求、发出元素、完成和错误，帮你像放监控摄像头一样随时看流水线状态。</td>
+</tr>
+<tr>
+<td><code>cache()</code></td>
+<td>将流转换为可重放的热流，缓存所有元素，后续订阅者会立刻看到之前的数据，无需再次执行上游逻辑；适合昂贵操作的结果复用。</td>
+</tr>
+<tr>
+<td><code>share()</code></td>
+<td>也会把 Cold Flux 变成 Hot Flux，但不缓存旧数据，所有订阅者共享同一份数据流，适合广播式分发；就像把演唱会直播送给多个观众同时观看。</td>
+</tr>
+</tbody></table>
+<hr>
+<h6 id="6-1-2-2-转换与映射方法"><a href="#6-1-2-2-转换与映射方法" class="headerlink" title="6.1.2.2. 转换与映射方法"></a>6.1.2.2. 转换与映射方法</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/api/operators&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OperatorExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. map(Function&lt;? super T, ? extends R&gt; mapper)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/map&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; mapExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>)<br>                   .map(Integer::parseInt); <span class="hljs-comment">// 将 String 类型转换成 Integer 类型</span><br>    &#125;<br><br>    <span class="hljs-comment">// 2. flatMap(Function&lt;? super T, ? extends Publisher&lt;? extends R&gt;&gt; mapper)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/flatMap&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;String&gt; flatMapExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;user1&quot;</span>, <span class="hljs-string">&quot;user2&quot;</span>)<br>                   .flatMap(userId -&gt; Mono.just(<span class="hljs-string">&quot;Profile of &quot;</span> + userId)); <span class="hljs-comment">// 模拟异步调用</span><br>    &#125;<br><br>    <span class="hljs-comment">// cast(Class&lt;R&gt; clazz)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/cast&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Number&gt; castExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-number">1</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">3L</span>)<br>                   .cast(Number.<span class="hljs-keyword">class</span>); <span class="hljs-comment">// 所有元素都可以被安全地转为 Number 类型</span><br>    &#125;<br><br>    <span class="hljs-comment">// ofType(Class&lt;U&gt; clazz)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/ofType&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; ofTypeExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;two&quot;</span>, <span class="hljs-number">3</span>, <span class="hljs-string">&quot;four&quot;</span>)<br>                   .ofType(Integer.<span class="hljs-keyword">class</span>); <span class="hljs-comment">// 只保留 Integer 类型的元素</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<hr>
+<h6 id="6-1-2-3-过滤方法"><a href="#6-1-2-3-过滤方法" class="headerlink" title="6.1.2.3. 过滤方法"></a>6.1.2.3. 过滤方法</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/api/operators&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OperatorExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. filter(Predicate&lt;? super T&gt; predicate)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/filter&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;String&gt; filterExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;cherry&quot;</span>, <span class="hljs-string">&quot;date&quot;</span>)<br>                   .filter(fruit -&gt; fruit.startsWith(<span class="hljs-string">&quot;a&quot;</span>)); <span class="hljs-comment">// 只保留以 &quot;a&quot; 开头的元素</span><br>    &#125;<br><br>    <span class="hljs-comment">// 2. distinct()</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/distinct&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;String&gt; distinctExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;cherry&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>)<br>                   .distinct(); <span class="hljs-comment">// 去除重复元素，确保每个元素只出现一次</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="6-1-2-4-收集与聚合方法"><a href="#6-1-2-4-收集与聚合方法" class="headerlink" title="6.1.2.4. 收集与聚合方法"></a>6.1.2.4. 收集与聚合方法</h6><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript">@RestController<br>@RequestMapping(<span class="hljs-string">&quot;/api/operators&quot;</span>)<br>public <span class="hljs-keyword">class</span> <span class="hljs-title class_">OperatorExamples</span> &#123;<br><br>    <span class="hljs-regexp">//</span> <span class="hljs-number">1.</span> collectList()<br>    @GetMapping(<span class="hljs-string">&quot;/collectList&quot;</span>)<br>    public Mono&lt;List&lt;<span class="hljs-built_in">String</span>&gt;&gt; collectListExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .collectList(); <span class="hljs-regexp">//</span> 返回：[<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-string">&quot;C&quot;</span>]<br>    &#125;<br><br>    <span class="hljs-regexp">//</span> <span class="hljs-number">2.</span> collectMultiMap(<span class="hljs-built_in">Function</span>&lt;? super T, ? <span class="hljs-keyword">extends</span> K&gt; keyMapper)<br>	@GetMapping(<span class="hljs-string">&quot;/collectMap&quot;</span>)  <br>	public Mono&lt;<span class="hljs-built_in">Map</span>&lt;Character, Collection&lt;<span class="hljs-built_in">String</span>&gt;&gt;&gt; collectMapExample() &#123;  <br>	    <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;apricot&quot;</span>)  <br>            .collectMultimap(word -&gt; word.charAt(<span class="hljs-number">0</span>)); <span class="hljs-regexp">//</span> 用每个单词的首字母作为 key，返回：&#123;<span class="hljs-string">&quot;a&quot;</span>:[<span class="hljs-string">&quot;apple&quot;</span>,<span class="hljs-string">&quot;apricot&quot;</span>],<span class="hljs-string">&quot;b&quot;</span>:[<span class="hljs-string">&quot;banana&quot;</span>]&#125;<br>	&#125;<br>	<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">3.</span> reduce(BiFunction&lt;T, T, T&gt; aggregator)<br>    @GetMapping(<span class="hljs-string">&quot;/reduce&quot;</span>)<br>    public Mono&lt;<span class="hljs-built_in">String</span>&gt; reduceExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .reduce(<span class="hljs-function"><span class="hljs-params">(a, b)</span> -&gt;</span> a + b); <span class="hljs-regexp">//</span> 累加成一个字符串，返回：<span class="hljs-string">&quot;ABC&quot;</span><br>    &#125;<br><br>    <span class="hljs-regexp">//</span> <span class="hljs-number">4.</span> scan(BiFunction&lt;T, T, T&gt; accumulator)<br>    @GetMapping(<span class="hljs-string">&quot;/scan&quot;</span>)<br>    public Flux&lt;<span class="hljs-built_in">String</span>&gt; scanExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.just(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .scan(<span class="hljs-function"><span class="hljs-params">(a, b)</span> -&gt;</span> a + b); <span class="hljs-regexp">//</span> 实时输出，返回：<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;AB&quot;</span>, <span class="hljs-string">&quot;ABC&quot;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="合并与组合方法"><a href="#合并与组合方法" class="headerlink" title="合并与组合方法"></a>合并与组合方法</h6><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api/operators&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OperatorExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. mergeWith(Publisher&lt;? extends T&gt; other)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/mergeWith&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">mergeWithExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>).<span class="hljs-title function_">delayElements</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofMillis</span>(<span class="hljs-number">100</span>));<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>).<span class="hljs-title function_">delayElements</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofMillis</span>(<span class="hljs-number">50</span>));<br>        <span class="hljs-keyword">return</span> flux1.<span class="hljs-title function_">mergeWith</span>(flux2); <span class="hljs-comment">// 并行混合输出，不保证顺序</span><br>    &#125;<br><br>    <span class="hljs-comment">// 2. concatWith(Publisher&lt;? extends T&gt; other)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/concatWith&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">concatWithExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>);<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>);<br>        <span class="hljs-keyword">return</span> flux1.<span class="hljs-title function_">concatWith</span>(flux2); <span class="hljs-comment">// 先发 flux1，再发 flux2，严格按顺序来</span><br>    &#125;<br><br>    <span class="hljs-comment">// 3. zipWith(Publisher&lt;? extends U&gt; other)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/zipWith&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">zipWithExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>);<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>);<br>        <span class="hljs-keyword">return</span> flux1.<span class="hljs-title function_">zipWith</span>(flux2) <span class="hljs-comment">// 执行结果：[&#123;&quot;t1&quot;:&quot;A&quot;,&quot;t2&quot;:&quot;1&quot;&#125;,&#123;&quot;t1&quot;:&quot;B&quot;,&quot;t2&quot;:&quot;2&quot;&#125;]</span><br>                    .<span class="hljs-title function_">map</span>(tuple -&gt; tuple.<span class="hljs-title function_">getT1</span>() + tuple.<span class="hljs-title function_">getT2</span>()); <span class="hljs-comment">// 输出 &quot;A1&quot;, &quot;B2&quot;</span><br>    &#125;<br><br>    <span class="hljs-comment">// 4. combineLatest(Publisher&lt;? extends U&gt; other, BiFunction&lt;T, U, R&gt; combinator)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/combineLatest&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">combineLatestExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux1 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>).<span class="hljs-title function_">delayElements</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofMillis</span>(<span class="hljs-number">100</span>));<br>        <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; flux2 = <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>).<span class="hljs-title function_">delayElements</span>(<span class="hljs-title class_">Duration</span>.<span class="hljs-title function_">ofMillis</span>(<span class="hljs-number">50</span>));<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">combineLatest</span>(flux1, flux2, (s1, s2) -&gt; s1 + s2); <span class="hljs-comment">// 总是用“最新”组合，返回：A1A2A3B3</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="限制与截取方法"><a href="#限制与截取方法" class="headerlink" title="限制与截取方法"></a>限制与截取方法</h6><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/api/operators&quot;</span>)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OperatorExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. take(long n)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/take&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; takeExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)<br>                   .take(<span class="hljs-number">3</span>); <span class="hljs-comment">// 只取前 3 个元素，输出：1, 2, 3</span><br>    &#125;<br><br>    <span class="hljs-comment">// 2. takeLast(int n)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/takeLast&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; takeLastExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)<br>                   .takeLast(<span class="hljs-number">3</span>); <span class="hljs-comment">// 等所有元素发完后再输出最后 3 个，输出：8, 9, 10</span><br>    &#125;<br><br>    <span class="hljs-comment">// 3. skip(long n)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/skip&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; skipExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)<br>                   .skip(<span class="hljs-number">4</span>); <span class="hljs-comment">// 跳过前 4 个，输出：5, 6, 7, 8, 9, 10</span><br>    &#125;<br><br>    <span class="hljs-comment">// 4. skipLast(int n)</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/skipLast&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> Flux&lt;Integer&gt; skipLastExample() &#123;<br>        <span class="hljs-keyword">return</span> Flux.range(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>)<br>                   .skipLast(<span class="hljs-number">4</span>); <span class="hljs-comment">// 丢弃最后 4 个，输出：1, 2, 3, 4, 5, 6</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h6><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/api/operators&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ErrorHandlingExamples</span> &#123;<br><br>    <span class="hljs-comment">// 1. onErrorReturn(T fallback)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorReturn&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorReturnExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .<span class="hljs-title function_">concatWith</span>(<span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Boom!&quot;</span>)))<br>                   .<span class="hljs-title function_">onErrorReturn</span>(<span class="hljs-string">&quot;Fallback&quot;</span>); <span class="hljs-comment">// 出错时返回默认值：&quot;Fallback&quot;</span><br>    &#125;<br><br>    <span class="hljs-comment">// 2. onErrorMap(Function&lt;Throwable, ? extends Throwable&gt; mapper)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorMap&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorMapExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .<span class="hljs-title function_">concatWith</span>(<span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Invalid input&quot;</span>)))<br>                   .<span class="hljs-title function_">onErrorMap</span>(e -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">CustomException</span>(<span class="hljs-string">&quot;Mapped: &quot;</span> + e.<span class="hljs-title function_">getMessage</span>()));<br>    &#125;<br><br>    <span class="hljs-comment">// 3. onErrorResume(Function&lt;Throwable, ? extends Publisher&lt;? extends T&gt;&gt; fallback)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorResume&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorResumeExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .<span class="hljs-title function_">concatWith</span>(<span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Service down&quot;</span>)))<br>                   .<span class="hljs-title function_">onErrorResume</span>(e -&gt; <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;Switched to backup&quot;</span>, <span class="hljs-string">&quot;Another item&quot;</span>)); <span class="hljs-comment">// 切换到备用 Flux</span><br>    &#125;<br><br>    <span class="hljs-comment">// 4. onErrorContinue(BiConsumer&lt;Throwable, Object&gt; errorConsumer)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/onErrorContinue&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">onErrorContinueExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;two&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>)<br>                   .<span class="hljs-title function_">map</span>(<span class="hljs-title class_">Integer</span>::<span class="hljs-built_in">parseInt</span>)<br>                   .<span class="hljs-title function_">onErrorContinue</span>((e, value) -&gt;<br>                       <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;Skipping &#x27;&quot;</span> + value + <span class="hljs-string">&quot;&#x27; due to: &quot;</span> + e.<span class="hljs-title function_">getMessage</span>()));<br>        <span class="hljs-comment">// &quot;two&quot; 转换失败被跳过，继续处理 &quot;3&quot;</span><br>    &#125;<br><br>    <span class="hljs-comment">// 5. retry(long times)</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/retry&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Flux</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">retryExample</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">just</span>(<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>)<br>                   .<span class="hljs-title function_">concatWith</span>(<span class="hljs-title class_">Flux</span>.<span class="hljs-title function_">error</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Temporary failure&quot;</span>)))<br>                   .<span class="hljs-title function_">retry</span>(<span class="hljs-number">3</span>) <span class="hljs-comment">// 错误信号会被 retry(3) 捕获并重试最多 3 次</span><br>                   .<span class="hljs-title function_">onErrorReturn</span>(<span class="hljs-string">&quot;After retries, fallback&quot;</span>); <span class="hljs-comment">// 若仍然失败，则返回默认值</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1>
                 
               </div>
             
