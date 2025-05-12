@@ -19,15 +19,15 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. HTTPS 概述HTTPS（HyperText Transfer Protocol Secure，超文本传输安全协议）是 HTTP 的安全版本，它通过 SSL&#x2F;TLS 加密传输数据，防止被窃听、篡改和劫持。  2. HTTPS 工作流程（从申请 HTTPS 证书到 HTTPS 通信完整流程）&#x3D;&#x3D;1.登录网站服务器&#x3D;&#x3D;登录你的网站服务器（Lin">
+    <meta name="description" content="1. HTTPS 概述HTTPS（HyperText Transfer Protocol Secure，超文本传输安全协议）是 HTTP 的安全版本，它通过 SSL&#x2F;TLS 加密传输数据，防止被窃听、篡改和劫持。 其实也不用把 HTTPS 看得太神，它的主要作用就是在你和目标服务器之间建立加密通信，防止中间人窃听数据，或者偷偷把你的请求导向一台恶意服务器。比如，你要访问的服务跑在 192">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：HTTPS协议">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/24/%E7%AC%94%E8%AE%B0%EF%BC%9AHTTPS%20%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="1. HTTPS 概述HTTPS（HyperText Transfer Protocol Secure，超文本传输安全协议）是 HTTP 的安全版本，它通过 SSL&#x2F;TLS 加密传输数据，防止被窃听、篡改和劫持。  2. HTTPS 工作流程（从申请 HTTPS 证书到 HTTPS 通信完整流程）&#x3D;&#x3D;1.登录网站服务器&#x3D;&#x3D;登录你的网站服务器（Lin">
+<meta property="og:description" content="1. HTTPS 概述HTTPS（HyperText Transfer Protocol Secure，超文本传输安全协议）是 HTTP 的安全版本，它通过 SSL&#x2F;TLS 加密传输数据，防止被窃听、篡改和劫持。 其实也不用把 HTTPS 看得太神，它的主要作用就是在你和目标服务器之间建立加密通信，防止中间人窃听数据，或者偷偷把你的请求导向一台恶意服务器。比如，你要访问的服务跑在 192">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-01T03:06:42.227Z">
+<meta property="article:modified_time" content="2025-05-10T07:24:45.039Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k words
+          3.9k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          27 mins
+          33 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-01T11:06:42+08:00
+                    Last updated on 2025-05-10T15:24:45+08:00
                   
                   
 
@@ -300,6 +300,8 @@
               <div class="markdown-body">
                 
                 <h3 id="1-HTTPS-概述"><a href="#1-HTTPS-概述" class="headerlink" title="1. HTTPS 概述"></a>1. HTTPS 概述</h3><p>HTTPS（HyperText Transfer Protocol Secure，超文本传输安全协议）是 HTTP 的安全版本，它通过 <strong>SSL&#x2F;TLS</strong> 加密传输数据，防止被窃听、篡改和劫持。</p>
+<p>其实也不用把 HTTPS 看得太神，它的主要作用就是在你和目标服务器之间建立加密通信，防止中间人窃听数据，或者偷偷把你的请求导向一台恶意服务器。比如，你要访问的服务跑在 <code>192.168.136.8</code> 上，HTTPS 证书中也明确写了 <code>192.168.136.8</code> 是可信地址。这时通信是安全的。但如果有中间人把流量引导到一台伪装的服务器，比如 <code>10.10.2.3</code>，而这个地址并没有出现在证书中，浏览器就会识别出不匹配并给出安全警告。</p>
+<p>一个常见的误区是以为 HTTPS 能帮你判断哪个网站是“好人”、哪个是“坏人”，其实它根本不负责做价值判断。它只负责把你和“证书里写明的那个服务器”之间的通信加密，至于那个服务器本身是不是邪恶的，它并不关心。</p>
 <hr>
 <h3 id="2-HTTPS-工作流程（从申请-HTTPS-证书到-HTTPS-通信完整流程）"><a href="#2-HTTPS-工作流程（从申请-HTTPS-证书到-HTTPS-通信完整流程）" class="headerlink" title="2. HTTPS 工作流程（从申请 HTTPS 证书到 HTTPS 通信完整流程）"></a>2. HTTPS 工作流程（从申请 HTTPS 证书到 HTTPS 通信完整流程）</h3><p>&#x3D;&#x3D;1.登录网站服务器&#x3D;&#x3D;<br>登录你的网站服务器（Linux 系统），后续操作将在服务器上进行。</p>
 <p>&#x3D;&#x3D;2.安装 OpenSSL 服务&#x3D;&#x3D;<br>在 <code>Ubuntu</code> 系统上，可执行以下命令安装 OpenSSL：</p>
@@ -340,6 +342,13 @@
 </ol>
 </li>
 </ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然多个节点可以共用一份 HTTPS 证书，只需在 <code>alt_names</code> 中添加所有节点的 IP（如：<code>ip.1 = 192.168.136.8</code>、<code>ip.2 = 192.168.136.9</code>、<code>ip.3 = 192.168.136.10</code>），这样无论通过 <code>https://192.168.136.8:5601</code> 还是 <code>https://192.168.136.9:5601</code> 访问 Kibana，证书中都能匹配对应 IP，避免中间人将流量引导至其他服务器。然而，这种方式的缺点是：如果集群后续新增节点（如 <code>192.168.136.11</code>），就必须重新生成包含新 IP 的证书。因此，严格来说，这不算真正的“多个节点共用一份证书”。此外，共用证书意味着共用私钥，一旦某个节点被攻破，攻击者便可窃取私钥，从而伪造或解密集群中的通信。因此 <strong>不推荐</strong>这种做法，建议每个节点使用只包含自身 IP 的独立证书。</li>
+<li>相比之下，使用域名方式更为灵活。即使新增多个节点，只需将新节点 IP 添加到域名解析中，原证书依然有效，无需重新生成。因此，在使用域名时，我们推荐多个节点共用一份证书。但仍需注意，一旦证书或私钥被伪造或破解，整个集群都可能受到影响。</li>
+</ol>
+</blockquote>
 <p>&#x3D;&#x3D;5.向 CA 递交 CSR 并申请证书&#x3D;&#x3D;<br>将生成的 <code>server.csr</code> 文件提交给受信任的证书颁发机构（CA），如 DigiCert、Let’s Encrypt 等。</p>
 <p>&#x3D;&#x3D;6.CA 验证你的身份&#x3D;&#x3D;<br>CA 会对域名所有权、组织身份等进行验证，验证通过后进入下一步；</p>
 <p>&#x3D;&#x3D;7.CA 签署 HTTPS 证书&#x3D;&#x3D;<br>当你的身份验证通过后，证书颁发机构（CA）会使用它的 <strong>私钥</strong> 对你的证书签名请求（CSR）进行数字签名。</p>
@@ -377,7 +386,7 @@
 <li>例如你访问<code>https://192.168.136.8</code> ，他会去 SAN 列表中查找 <code>192.168.136.8</code></li>
 </ul>
 </li>
-<li>这个主要是防止中间人把流量导到另一台危险服务器上，保证，我访问的这台服务器，证书里面也有，那说明这台服务器是安全的，如果你访问的这台服务器，证书里面没有，那你就要小心了</li>
+<li>这个主要是<font color="#ff0000">防止中间人把流量导到另一台危险服务器上</font>，保证，我访问的这台服务器，证书里面也有，那说明这台服务器是安全的，如果你访问的这台服务器，证书里面没有，那你就要小心了</li>
 <li>这个字段就是告诉客户端或浏览器，这个证书对那些域名或ip 有效</li>
 <li>检查证书中绑定的域名是否与你当前访问的网站域名一致。</li>
 </ul>
@@ -406,6 +415,21 @@
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># 1. 使用 RSA 算法生成受 AES-256 加密保护的 2048 位私钥</span><br>openssl genpkey -algorithm RSA -<span class="hljs-keyword">out</span> <span class="hljs-keyword">private</span>.key -pkeyopt rsa_keygen_bits:<span class="hljs-number">2048</span> -aes256<br><br><br><span class="hljs-meta"># 2. 从私钥中导出对应的公钥</span><br>openssl rsa -<span class="hljs-keyword">in</span> <span class="hljs-keyword">private</span>.key -pubout -<span class="hljs-keyword">out</span> <span class="hljs-keyword">public</span>.key<br></code></pre></td></tr></table></figure>
 
 
+<p>&#x3D;&#x3D;15.补充：客户端证书&#x3D;&#x3D;<br>HTTPS 可以要求客户端上传证书，常用于：</p>
+<ol>
+<li>企业内部应用：<ol>
+<li>当只有特定的设备或员工才能访问某些系统时，可以使用客户端证书进行身份验证。</li>
+</ol>
+</li>
+<li>API 调用验证：<ol>
+<li>一些需要保护的 API 接口可能会要求客户端通过证书来证明自己的身份。</li>
+</ol>
+</li>
+<li>金融服务：<ol>
+<li>例如，在线银行或支付系统，客户端证书可以增加安全性，防止非法访问。</li>
+</ol>
+</li>
+</ol>
 <hr>
 <h3 id="3-HTTPS-证书"><a href="#3-HTTPS-证书" class="headerlink" title="3. HTTPS 证书"></a>3. HTTPS 证书</h3><h4 id="3-1-HTTPS-证书-概述"><a href="#3-1-HTTPS-证书-概述" class="headerlink" title="3.1. HTTPS 证书 概述"></a>3.1. HTTPS 证书 概述</h4><p>HTTPS 证书就是 SSL&#x2F;TLS 证书，最初，HTTPS 使用的是 SSL（Secure Sockets Layer，安全套接字层） 进行加密，但 SSL 3.0 已被淘汰，现在主要使用 TLS（Transport Layer Security，传输层安全协议）。</p>
 <table>
@@ -484,7 +508,7 @@
 </ol>
 </li>
 <li><code>-signkey private.key</code>：<ol>
-<li>指定用于生成自签名证书文件的秘钥文件</li>
+<li>指定用于生成自签名证书文件的秘钥文件（CA 私钥）</li>
 </ol>
 </li>
 <li><code>-out server.crt</code>：<ol>

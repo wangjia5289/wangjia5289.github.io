@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313104542342.png">
 <meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-04T03:21:55.105Z">
+<meta property="article:modified_time" content="2025-05-12T02:31:09.241Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png">
@@ -299,7 +299,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-04T11:21:55+08:00
+                    Last updated on 2025-05-12T10:31:09+08:00
                   
                   
 
@@ -554,7 +554,7 @@
 <p><font color="#ff0000">Docker 官方推荐一个容器运行一个程序</font>，这样可以保持容器的简单性和高效性<br><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313103856946.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="6-2-Docker-Container-命令"><a href="#6-2-Docker-Container-命令" class="headerlink" title="6.2. Docker Container 命令"></a>6.2. Docker Container 命令</h4><p>&#x3D;&#x3D;1.查看容器&#x3D;&#x3D;</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 查看运行中的容器</span><br>docker ps<br><br><br><span class="hljs-comment"># 2. 查看所有容器，包括已停止的容器</span><br>docker ps <span class="hljs-operator">-</span>a<br><br><br><span class="hljs-comment"># 3. 查看所有容器，并只打印 IMAGE ID（常用于一键删除所有容器）</span><br>docker ps <span class="hljs-operator">-</span>a <span class="hljs-operator">-</span>q<br><br><br><span class="hljs-comment"># 4. 查看容器详细信息</span><br>docker inspect <span class="hljs-symbol">&lt;container-id&gt;</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">&lt;container-name&gt;</span> <br><br><br><span class="hljs-comment"># 5. 查看容器日志</span><br>docker logs <span class="hljs-symbol">&lt;container-id&gt;</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">&lt;container-name&gt;</span> <br></code></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 查看运行中的容器</span><br>docker ps<br>docker ps <span class="hljs-operator">-</span>-format <span class="hljs-string">&quot;table &#123;&#123;.Names&#125;&#125;<span class="hljs-char escape_">\t</span>&#123;&#123;.Image&#125;&#125;<span class="hljs-char escape_">\t</span>&#123;&#123;.Ports&#125;&#125;&quot;</span><br><br><span class="hljs-comment"># 2. 查看所有容器，包括已停止的容器</span><br>docker ps <span class="hljs-operator">-</span>a<br><br><br><span class="hljs-comment"># 3. 查看所有容器，并只打印 IMAGE ID（常用于一键删除所有容器）</span><br>docker ps <span class="hljs-operator">-</span>a <span class="hljs-operator">-</span>q<br><br><br><span class="hljs-comment"># 4. 查看容器详细信息</span><br>docker inspect <span class="hljs-symbol">&lt;container-id&gt;</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">&lt;container-name&gt;</span> <br><br><br><span class="hljs-comment"># 5. 查看容器日志</span><br>docker logs <span class="hljs-symbol">&lt;container-id&gt;</span> <span class="hljs-symbol">/</span> <span class="hljs-symbol">&lt;container-name&gt;</span> <br></code></pre></td></tr></table></figure>
 <p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9ADocker/image-20250313104542342.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>&#x3D;&#x3D;CONTAINER ID&#x3D;&#x3D;：<ol>
@@ -831,8 +831,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AK8S/" title="笔记：K8S">
-                        <span class="hidden-mobile">笔记：K8S</span>
+                      <a href="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%80%E5%8F%91%E7%B1%BB%E5%9E%8B%E5%92%8C%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA/" title="笔记：Java 开发类型和项目创建">
+                        <span class="hidden-mobile">笔记：Java 开发类型和项目创建</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

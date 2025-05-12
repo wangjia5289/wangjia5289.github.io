@@ -19,15 +19,27 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
+<meta property="og:type" content="article">
 <meta property="og:title" content="笔记：RabbitMQ">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/PixPin_2025-05-09_15-09-55.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250510173743688.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250511112907036.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250511112921622.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510215227990.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510215558278.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510220812312.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250510194722644.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250511104732641.png">
 <meta property="article:published_time" content="2025-04-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-04T03:34:56.836Z">
+<meta property="article:modified_time" content="2025-05-12T01:26:48.299Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/PixPin_2025-05-09_15-09-55.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -221,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          956 words
         
       </span>
     
@@ -232,7 +244,7 @@
         
         
         
-          1 mins
+          8 mins
         
       </span>
     
@@ -287,7 +299,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-04T11:34:56+08:00
+                    Last updated on 2025-05-12T09:26:48+08:00
                   
                   
 
@@ -297,7 +309,162 @@
             
               <div class="markdown-body">
                 
-                
+                <p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/PixPin_2025-05-09_15-09-55.png" srcset="/img/loading.gif" lazyload></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>RabbitMQ</th>
+<th>Kafka</th>
+<th>RocketMQ</th>
+<th>ActiveMQ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>消息队列（AMQP）</td>
+<td>分布式日志系统</td>
+<td>分布式消息中间件</td>
+<td>传统 JMS 消息队列</td>
+</tr>
+<tr>
+<td>语言</td>
+<td>Erlang</td>
+<td>Scala&#x2F;Java</td>
+<td>Java</td>
+<td>Java</td>
+</tr>
+<tr>
+<td>吞吐</td>
+<td>中等</td>
+<td>极高</td>
+<td>高</td>
+<td>中等偏低</td>
+</tr>
+<tr>
+<td>延迟</td>
+<td>低</td>
+<td>中</td>
+<td>低</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>消息顺序</td>
+<td>支持（某种程度）</td>
+<td>分区内有序</td>
+<td>原生强顺序（可配置）</td>
+<td>有序（但不稳定）</td>
+</tr>
+<tr>
+<td>消息追踪</td>
+<td>无原生支持</td>
+<td>有 offset 可控</td>
+<td>✅ 原生消息轨迹追踪</td>
+<td>❌ 不完善</td>
+</tr>
+<tr>
+<td>消息回溯</td>
+<td>复杂</td>
+<td>✅ 易（offset 回溯）</td>
+<td>✅ 类似 Kafka 的 offset 模型</td>
+<td>❌ 基本不支持</td>
+</tr>
+<tr>
+<td>分布式支持</td>
+<td>集群可配但不天然</td>
+<td>✅ 天然分布式</td>
+<td>✅ 天然支持</td>
+<td>❌ 集群弱，主备为主</td>
+</tr>
+<tr>
+<td>死信队列</td>
+<td>✅ 支持</td>
+<td>需自建逻辑</td>
+<td>✅ 原生支持</td>
+<td>✅ 支持</td>
+</tr>
+<tr>
+<td>社区活跃度</td>
+<td>🔥🔥🔥</td>
+<td>🔥🔥🔥🔥🔥</td>
+<td>🔥🔥</td>
+<td>❄️（Apache 里冷门）</td>
+</tr>
+</tbody></table>
+<h1 id="实操：搭建-RabbitMQ-环境"><a href="#实操：搭建-RabbitMQ-环境" class="headerlink" title="实操：搭建 RabbitMQ 环境"></a>实操：搭建 RabbitMQ 环境</h1><h3 id="单机测试环境搭建"><a href="#单机测试环境搭建" class="headerlink" title="单机测试环境搭建"></a>单机测试环境搭建</h3><h4 id="1-安装-RabbitMQ"><a href="#1-安装-RabbitMQ" class="headerlink" title="1. 安装 RabbitMQ"></a>1. 安装 RabbitMQ</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>--name rabbitmq <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">5672</span>:<span class="hljs-number">5672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">15672</span>:<span class="hljs-number">15672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_USER=guest <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_PASS=<span class="hljs-number">123456</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>rabbitmq:<span class="hljs-number">3</span>.<span class="hljs-number">13</span>-management<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-访问后台管理"><a href="#2-访问后台管理" class="headerlink" title="2. 访问后台管理"></a>2. 访问后台管理</h3><p>访问服务器节点： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="虚拟空间"><a href="#虚拟空间" class="headerlink" title="虚拟空间"></a>虚拟空间</h3><p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250511112907036.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250511112921622.png" srcset="/img/loading.gif" lazyload></p>
+<p>不同消息队列根据路由键进行分配到队列</p>
+<p>起名：<br>exchange.direct.order</p>
+<p>exchange.direct.order.backup<br>queue.direct.order.backup</p>
+<p>这个能直接发布信息<br><img src="/image-20250510215227990.png" srcset="/img/loading.gif" lazyload></p>
+<p>对这个图<br><img src="/image-20250510215558278.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/image-20250510220812312.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/image-20250510194722644.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="—"><a href="#—" class="headerlink" title="—-"></a>—-</h1><h4 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h4><ol>
+<li>&#x3D;&#x3D;系统要求&#x3D;&#x3D;：<ol>
+<li>Ubuntu 22.04</li>
+<li>开放 5672、15672、4369、25672 TCP端口</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;软件要求&#x3D;&#x3D;：<ol>
+<li>RabbitMQ 4.0.1</li>
+<li>Erlang 26.2</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="2-8-开放-5672、15672、4369、25672-TCP端口"><a href="#2-8-开放-5672、15672、4369、25672-TCP端口" class="headerlink" title="2.8. 开放 5672、15672、4369、25672 TCP端口"></a>2.8. 开放 5672、15672、4369、25672 TCP端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">5672</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">15672</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">4369</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">25672</span>/tcp<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>TCP 端口就是我们常说的 HTTP 端口</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="安装-Erlang（RabbitMQ-的运行强依赖）"><a href="#安装-Erlang（RabbitMQ-的运行强依赖）" class="headerlink" title="安装 Erlang（RabbitMQ 的运行强依赖）"></a>安装 Erlang（RabbitMQ 的运行强依赖）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 设置临时代理</span><br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br><span class="hljs-comment"># 2. 安装必要工具</span><br><span class="hljs-built_in">sudo</span> apt-get install -y curl gnupg apt-transport-https<br><br><br><span class="hljs-comment"># 3. 添加 RabbitMQ 包签名</span><br>curl -fsSL https://packagecloud.io/rabbitmq/erlang/gpgkey | <span class="hljs-built_in">sudo</span> gpg --dearmor -o /etc/apt/trusted.gpg.d/rabbitmq_erlang.gpg &amp;&amp; curl -fsSL https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey | <span class="hljs-built_in">sudo</span> gpg --dearmor -o /etc/apt/trusted.gpg.d/rabbitmq_server.gpg<br><br><br><span class="hljs-comment"># 4. 添加 APT 源</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packagecloud.io/rabbitmq/erlang/ubuntu/ <span class="hljs-subst">$(lsb_release -sc)</span> main&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/rabbitmq_erlang.list &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ <span class="hljs-subst">$(lsb_release -sc)</span> main&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/rabbitmq_server.list<br><br><br><span class="hljs-comment"># 5. 更新索引</span><br><span class="hljs-built_in">sudo</span> apt-get update<br><br><br><br><span class="hljs-comment"># 2. 添加 Erlang 仓库</span><br>wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | <span class="hljs-built_in">sudo</span> apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packages.erlang-solutions.com/ubuntu <span class="hljs-subst">$(lsb_release -sc)</span> contrib&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/erlang.list<br><br><br><span class="hljs-comment"># 2. 更新并安装 Erlang</span><br><span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt install erlang -y<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="RabbitMQ-后台管理"><a href="#RabbitMQ-后台管理" class="headerlink" title="RabbitMQ 后台管理"></a>RabbitMQ 后台管理</h3><h1 id="四、补充："><a href="#四、补充：" class="headerlink" title="四、补充："></a>四、补充：</h1><h3 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h3><ol>
+<li>&#x3D;&#x3D;Erlang 与 RabbitMQ 版本兼容&#x3D;&#x3D;<ol>
+<li><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/docs/which-erlang">https://www.rabbitmq.com/docs/which-erlang</a></li>
+</ol>
+</li>
+</ol>
+<p><img src="/image-20250511104732641.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-消息可以被其他消费者读取吗？"><a href="#2-消息可以被其他消费者读取吗？" class="headerlink" title="2. 消息可以被其他消费者读取吗？"></a>2. <strong>消息可以被其他消费者读取吗？</strong></h3><ul>
+<li><p><strong>默认行为</strong>：如果消费者没有确认消息（没有发送 ACK），那么消息会继续被认为是处于未确认（unacked）状态。在 RabbitMQ 中，这条消息不会被其他消费者读取，直到消息超时或者消费者确认（ACK）或者拒绝（NACK）该消息。</p>
+</li>
+<li><p><strong>消息重试</strong>：如果消费者崩溃或连接断开，RabbitMQ 会检测到该消费者没有确认消息（ACK），然后将该消息重新放回队列，待其他消费者处理。这种机制保证了消息的可靠性，即使消费者出现问题，消息也不会丢失。</p>
+</li>
+</ul>
+<h3 id="3-如何控制消息的重新投递？"><a href="#3-如何控制消息的重新投递？" class="headerlink" title="3. 如何控制消息的重新投递？"></a>3. <strong>如何控制消息的重新投递？</strong></h3><ul>
+<li><strong>消息超时机制</strong>（<code>time-to-live</code>）：RabbitMQ 不会自动对未确认消息进行超时处理，除非设置了超时机制。但可以设置 <strong>消费者确认超时</strong> 或通过某些机制来控制消息的重试。</li>
+</ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="交换机、队列命名"><a href="#交换机、队列命名" class="headerlink" title="交换机、队列命名"></a>交换机、队列命名</h3><p>命名模版：&#96;[项目名].[业务名].[功能名].[类型]</p>
+<p>常见类型：</p>
+<ol>
+<li>主交换机：<code>exchange</code></li>
+<li>主队列：<code>queue</code></li>
+<li>死信交换机：<code>dlx.exchange</code></li>
+<li>死信队列：<code>dlx.queue</code></li>
+<li>备份交换机：<code>backup.exchange</code></li>
+<li>备份队列：<code>backup.queue</code></li>
+</ol>
+<p>举例说明：</p>
+<ol>
+<li>支付创建：<code>payment.create.exchange</code></li>
+<li>支付超时取消：<code>payment.timeout.exchange</code></li>
+<li>支付回调通知：<code>payment.notify.exchange</code></li>
+</ol>
+
                 
               </div>
             

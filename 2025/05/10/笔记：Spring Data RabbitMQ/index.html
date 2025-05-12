@@ -1,0 +1,1116 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Spring Data RabbitMQ">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134249151.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134458564.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511143235475.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511151430144.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512162811598.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511171953565.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511173010389.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510221058008.png">
+<meta property="og:image" content="https://wangjia5289.github.io/PixPin_2025-05-12_09-16-53%201.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511103811397.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104005312.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104106123.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104123191.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104218010.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512165603672.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512170407701.png">
+<meta property="article:published_time" content="2025-05-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-12T09:09:58.728Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Spring Data RabbitMQ - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/lan.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Spring Data RabbitMQ"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-10 00:00" pubdate>
+          May 10, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Spring Data RabbitMQ</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-05-12T17:09:58+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-导图：Map：Spring-Data-RabbitMQ"><a href="#1-导图：Map：Spring-Data-RabbitMQ" class="headerlink" title="1. 导图：Map：Spring Data RabbitMQ"></a>1. 导图：<a href="Map%EF%BC%9ASpringDataRabbitMQ.xmind">Map：Spring Data RabbitMQ</a></h3><hr>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><h4 id="1-1-创建-Spring-Web-项目并添加-RabbitMQ-相关依赖"><a href="#1-1-创建-Spring-Web-项目并添加-RabbitMQ-相关依赖" class="headerlink" title="1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖"></a>1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖</h4><ol>
+<li>&#x3D;&#x3D;Web&#x3D;&#x3D;<ol>
+<li>Spring Web</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;Messaging&#x3D;&#x3D;<ol>
+<li>Spring for RabbitMQ</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="1-2-配置-RabbitMQ-连接"><a href="#1-2-配置-RabbitMQ-连接" class="headerlink" title="1.2. 配置 RabbitMQ 连接"></a>1.2. 配置 RabbitMQ 连接</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml">spring:  <br>  rabbitmq:  <br>    host: 192.168.136.7  <br>    port: 5672                     # 不要写 15672<br>    username: guest  <br>    password: 123456  <br>    virtual-host: /                # RabbitMQ 的虚拟空间<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-3-创建交换机和队列"><a href="#1-3-创建交换机和队列" class="headerlink" title="1.3. 创建交换机和队列"></a>1.3. 创建交换机和队列</h4><h5 id="1-3-1-创建交换机"><a href="#1-3-1-创建交换机" class="headerlink" title="1.3.1. 创建交换机"></a>1.3.1. 创建交换机</h5><p>这里创建的交换机名称为：<code>test.exchange</code>：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="1-3-2-创建队列"><a href="#1-3-2-创建队列" class="headerlink" title="1.3.2. 创建队列"></a>1.3.2. 创建队列</h5><p>这里创建的队列名称为：<code>test.queue</code>：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134249151.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="1-3-3-将队列与交换机绑定"><a href="#1-3-3-将队列与交换机绑定" class="headerlink" title="1.3.3. 将队列与交换机绑定"></a>1.3.3. 将队列与交换机绑定</h5><p>将 <code>queue.direct.test</code> 队列与 <code>exchange.direct.test</code> 交换机绑定，使用路由键 <code>test</code>。这样，发送到 <code>exchange.direct.test</code> 且路由键为 <code>test</code> 的消息会被转发到 <code>queue.direct.test</code>。</p>
+<p>注意：<strong>一个交换机可以绑定多个队列，一个队列也可以绑定多个交换机</strong></p>
+<p>点击消息队列，进入其配置：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134458564.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-4-编写生产者代码"><a href="#1-4-编写生产者代码" class="headerlink" title="1.4. 编写生产者代码"></a>1.4. 编写生产者代码</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitMQProduce</span> &#123;  <br><br>    <span class="hljs-comment">// 交换机  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">EXCHANGE_DIRECT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;exchange.direct.test&quot;</span>;  <br>    <br>    <span class="hljs-comment">// 路由键  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROUTING_KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test&quot;</span>;  <br>  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@GetMapping(&quot;/sendMessage&quot;)</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sendMessage</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.convertAndSend(<br>		        EXCHANGE_DIRECT,  <br>                ROUTING_KEY,  <br>                <span class="hljs-string">&quot;first sent message!&quot;</span>,  <br>                message -&gt; &#123;  <br>	                <span class="hljs-comment">// 设置消息属性</span><br>	                .......<br>                    <span class="hljs-keyword">return</span> message;  <br>                &#125;,  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">CorrelationData</span>(<span class="hljs-string">&quot;123456&quot;</span>));  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;发送成功&quot;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-编写消费者代码"><a href="#1-5-编写消费者代码" class="headerlink" title="1.5. 编写消费者代码"></a>1.5. 编写消费者代码</h4><p>需要注意的是：一个消费者可以监听多个队列</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitMWListener</span> &#123;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">QUEUE_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;queue.direct.test&quot;</span>;  <br>  <br>    <span class="hljs-meta">@RabbitListener(queues = &#123;QUEUE_NAME&#125;)</span>  <br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processMessage</span><span class="hljs-params">(String dataString, Message message,Channel channel)</span>&#123;  <br>            System.out.println(<span class="hljs-string">&quot;消息的 dataString:&quot;</span> + dataString);  <br>            System.out.println(<span class="hljs-string">&quot;消息的 message:&quot;</span> + message);  <br>            System.out.println(<span class="hljs-string">&quot;消息的 channel:&quot;</span> + channel);  <br>	&#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol>
+<li><code>String dataString</code>：<ol>
+<li>表示消息的正文内容（也叫消息体）</li>
+<li>Spring AMQP 会根据你的参数类型，自动把原始消息内容转换成相应类型。比如你写的是 <code>String</code>，它就把消息体转成字符串给你。</li>
+</ol>
+</li>
+<li><code>Message message</code>：<ol>
+<li>封装了整个消息的元信息（meta 信息）</li>
+<li>主要包括：<ol>
+<li><font color="#00b0f0">消息体</font>：<ol>
+<li><code>byte[] body = message.getBody();</code> 可获取原始字节数组</li>
+</ol>
+</li>
+<li><font color="#00b0f0">消息属性</font>：<ol>
+<li><code>MessageProperties messageProperties = message.getMessageProperties();</code> 可获取消息属性对象。</li>
+<li>可进一步提取具体属性，例如：<ol>
+<li><font color="#7030a0">内容类型</font>：<ol>
+<li><code>String contentType = message.getMessageProperties().getContentType();</code></li>
+</ol>
+</li>
+<li><font color="#7030a0">投递标签</font>：<ol>
+<li><code>long deliveryTag = message.getMessageProperties().getDeliveryTag();</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>来自 <code>org.springframework.amqp.core</code></li>
+</ol>
+</li>
+<li><code>Channel channel</code>：<ol>
+<li>用于与 RabbitMQ 进行底层通信，主要用于执行 <strong>手动消息确认（manual ack）</strong>、<strong>拒收（nack）</strong>、<strong>消息重回队列</strong> 等操作。</li>
+<li>在需要手动控制消息消费流程时尤为重要。</li>
+<li>来自 <code>com.rabbitmq.client</code></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2-业务处理"><a href="#2-业务处理" class="headerlink" title="2. 业务处理"></a>2. 业务处理</h3><h4 id="2-1-消息可靠性投递"><a href="#2-1-消息可靠性投递" class="headerlink" title="2.1. 消息可靠性投递"></a>2.1. 消息可靠性投递</h4><h5 id="2-1-1-消息可靠性投递常见故障"><a href="#2-1-1-消息可靠性投递常见故障" class="headerlink" title="2.1.1. 消息可靠性投递常见故障"></a>2.1.1. 消息可靠性投递常见故障</h5><p>在正常的下单流程中，当订单信息成功写入消息队列后，系统通常会立即向用户返回“操作完成”的响应。  </p>
+<p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511143235475.png" srcset="/img/loading.gif" lazyload></p>
+<p>但在实际生产环境中，由于各种原因，可能会出现不同类型的故障。针对这些故障，我们也有相应的解决方案：</p>
+<ol>
+<li>&#x3D;&#x3D;故障1&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">描述</font>：<ol>
+<li>消息在生产端未成功发送到消息队列中，可能卡在了中间环节。</li>
+</ol>
+</li>
+<li><font color="#00b0f0">后果</font>：<ol>
+<li>消费者无法接收到消息，导致对应业务流程未执行，最终引发数据异常或业务功能缺失。</li>
+</ol>
+</li>
+<li><font color="#00b0f0">解决思路</font><ol>
+<li><font color="#7030a0">思路1</font>：<ol>
+<li>在生产者端启用确认机制：</li>
+<li>消息成功发送到交换机后，由交换机返回确认响应</li>
+<li>消息成功路由到队列后，由队列返回确认响应</li>
+<li>双重确认，确保消息投递链路全程可控</li>
+</ol>
+</li>
+<li><font color="#7030a0">思路2</font>：<ol>
+<li>为目标交换机配置一个备份交换机，当消息无法被正常路由到目标队列时，自动转发至备份交换机，再进入备份队列</li>
+<li>备份队列的消费者可以与主业务消费者一致，但推荐用于日志记录或告警通知，由运维或开发及时排查主队列的问题。</li>
+<li>我们可以把备份队列的消费者的业务与主队列的消费者的业务一致，但是一般建议是日志记录，是报警，让我们的运维人员赶快修复主队列才是王道</li>
+<li>需要注意的是，消息必须首先到达目标交换机，只有在目标交换机无法将其路由到任何队列时，才会将消息转发至备份交换机。换句话说，备份交换机的触发前提，是目标交换机已被正确命中，但消息未能成功投递至队列。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;故障2&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">描述</font>：<ol>
+<li>消息已经成功写入队列，但由于消息队列服务器宕机，未持久化的消息（仍在内存中）丢失</li>
+</ol>
+</li>
+<li><font color="#00b0f0">后果</font>：<ol>
+<li>消息无法被消费，相关业务功能未被执行，可能导致数据不一致。</li>
+</ol>
+</li>
+<li><font color="#00b0f0">解决思路</font>：<ol>
+<li>启用消息持久化（Durability），将消息设置为持久化存储，写入磁盘而非仅保存在内存中，即使服务器重启或崩溃，消息也不会丢失</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;故障3&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">描述</font>：<ol>
+<li>消息已成功写入队列，但消费端发生异常，如宕机、代码抛错等</li>
+</ol>
+</li>
+<li><font color="#00b0f0">后果</font>：<ol>
+<li>业务流程执行失败，造成功能缺失或数据错误。</li>
+</ol>
+</li>
+<li><font color="#00b0f0">解决思路</font>：<ol>
+<li>在消费端使用手动确认模式。</li>
+<li>消费端处理完业务逻辑后，向队列返回 ACK，消息随即从队列中移除</li>
+<li>消费失败时，向队列返回 NACK，并将消息重新标记为待消费状态，使其能够再次被消费，进行重试</li>
+<li>对于上图，“更新购物车”、“更新库存”、“更新积分”等多个下游模块，不建议多个消费者直接抢占一个队列的消息再进行 NACK 重试。更合适的做法是采用广播模式（Publish&#x2F;Subscribe），将消息分别路由到多个业务队列中，由各业务模块独立消费、独立处理，互不干扰。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="2-1-2-解决故障1（思路1）"><a href="#2-1-2-解决故障1（思路1）" class="headerlink" title="2.1.2. 解决故障1（思路1）"></a>2.1.2. 解决故障1（思路1）</h5><h6 id="2-1-2-1-开启双重确认"><a href="#2-1-2-1-开启双重确认" class="headerlink" title="2.1.2.1. 开启双重确认"></a>2.1.2.1. 开启双重确认</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml">server:  <br>  rabbitmq:  <br>    host: 192.168.136.7  <br>    port: 5672  <br>    username: guest  <br>    password: 123456  <br>    virtual-host: /  <br>    publisher-confirm-type: correlated    # 开启交换机确认<br>    publisher-returns: true    # 开启队列确认<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>确认模式（Publisher Confirms）和事务模式（Transaction）不能在同一个通道中混用，通常我们推荐使用确认模式</li>
+<li>不是简单地不加 <code>@Transactional</code> 就完事了，还需要将配置类中相关的两个设置一并去除，才能彻底禁用事务模式</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-1-2-2-创建-RabbitMQ-确定模式配置类，实现-rabbitTemplate-的-ConfirmCallback-与-ReturnsCallback-回调接口"><a href="#2-1-2-2-创建-RabbitMQ-确定模式配置类，实现-rabbitTemplate-的-ConfirmCallback-与-ReturnsCallback-回调接口" class="headerlink" title="2.1.2.2. 创建 RabbitMQ 确定模式配置类，实现 rabbitTemplate 的 ConfirmCallback 与 ReturnsCallback 回调接口"></a>2.1.2.2. 创建 RabbitMQ 确定模式配置类，实现 rabbitTemplate 的 ConfirmCallback 与 ReturnsCallback 回调接口</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitCallBackConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">RabbitTemplate</span>.ConfirmCallback, RabbitTemplate.ReturnsCallback &#123;  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@PostConstruct</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">initRabbitTemplate</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.setConfirmCallback(<span class="hljs-built_in">this</span>);  <br>        rabbitTemplate.setReturnsCallback(<span class="hljs-built_in">this</span>);  <br>    &#125;  <br>    <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">confirm</span><span class="hljs-params">(CorrelationData correlationData, <span class="hljs-type">boolean</span> ack, String cause)</span> &#123;  <br>        <span class="hljs-comment">// 当消息发送到交换机 成功或失败 时，会调用这个方法  </span><br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印CorrelationData：&quot;</span>+correlationData);  <br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印ack：&quot;</span>+ack);  <br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印cause：&quot;</span>+cause);  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">returnedMessage</span><span class="hljs-params">(ReturnedMessage returnedMessage)</span> &#123;  <br>        <span class="hljs-comment">// 当消息发送到队列 失败时，才会调用这个方法  </span><br>        System.out.println(<span class="hljs-string">&quot;消息主体: &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(returnedMessage.getMessage().getBody()));  <br>        System.out.println(<span class="hljs-string">&quot;应答码: &quot;</span> + returnedMessage.getReplyCode());  <br>        System.out.println(<span class="hljs-string">&quot;描述: &quot;</span> + returnedMessage.getReplyText());  <br>        System.out.println(<span class="hljs-string">&quot;消息使用的交换器 exchange : &quot;</span> + returnedMessage.getExchange());  <br>        System.out.println(<span class="hljs-string">&quot;消息使用的路由键 routing : &quot;</span> + returnedMessage.getRoutingKey());  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<ol>
+<li><code>confirm(CorrelationData correlationData, boolean ack, String cause)</code>：<ol>
+<li><code>correlationData</code>：<ol>
+<li>这是你发送消息时<strong>可选附带</strong>的消息唯一标识，用于追踪该消息的确认情况。</li>
+<li>举个例子：你这样发送消息——<code>rabbitTemplate.convertAndSend(exchange, routingKey, message, new CorrelationData(&quot;123456&quot;));</code>，那么这个 <code>&quot;123456&quot;</code> 会作为标识，在 <code>correlationData</code> 中被打印出来，方便你知道这条消息的 ack 状态和失败原因。</li>
+<li>如果你没手动设置这个标识，那这里会是 <code>null</code>。</li>
+<li>注意不要和 <code>deliveryTag</code> 混淆——<code>correlationData</code> 是你业务代码中的追踪工具，不是 RabbitMQ 协议层面的内容。</li>
+</ol>
+</li>
+<li><code>ack</code>：<ol>
+<li>一个布尔值，表示消息是否成功到达交换机。</li>
+<li><code>true</code> 表示成功送达交换机（但不保证路由成功，也不保证被队列接收）；</li>
+<li><code>false</code> 表示没送达交换机，可能是交换机名写错、RabbitMQ 宕机、网络断了等。</li>
+</ol>
+</li>
+<li><code>cause</code>：<ol>
+<li>如果 <code>ack = false</code>，这里会返回具体的失败原因，帮助你排查问题。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>returnedMessage(ReturnedMessage returnedMessage)</code>：<ol>
+<li>表示消息成功送达交换机但未能路由到任何队列，于是被退回；</li>
+<li>这个对象中包含了退回消息的内容、错误码、错误原因、交换机名称、使用的路由键等信息。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="2-1-2-3-对-rabbitTemplate-进行增强"><a href="#2-1-2-3-对-rabbitTemplate-进行增强" class="headerlink" title="2.1.2.3. 对 rabbitTemplate 进行增强"></a>2.1.2.3. 对 rabbitTemplate 进行增强</h6><p>在上述配置类中通过 <code>initRabbitTemplate()</code> 方法设置 <code>ConfirmCallback</code> 和 <code>ReturnsCallback</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitCallBackConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">RabbitTemplate</span>.ConfirmCallback, RabbitTemplate.ReturnsCallback &#123;  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@PostConstruct</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">initRabbitTemplate</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.setConfirmCallback(<span class="hljs-built_in">this</span>);  <br>        rabbitTemplate.setReturnsCallback(<span class="hljs-built_in">this</span>);  <br>    &#125;  <br>    <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">confirm</span><span class="hljs-params">(CorrelationData correlationData, <span class="hljs-type">boolean</span> ack, String cause)</span> &#123;  <br>        <span class="hljs-comment">// 当消息发送到交换机 成功或失败 时，会调用这个方法  </span><br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印 CorrelationData：&quot;</span>+ correlationData);  <br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印 ack：&quot;</span>+ack);  <br>        System.out.println(<span class="hljs-string">&quot;confirm（）回调函数打印 cause：&quot;</span>+cause);  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">returnedMessage</span><span class="hljs-params">(ReturnedMessage returnedMessage)</span> &#123;  <br>        <span class="hljs-comment">// 当消息发送到队列 失败时，才会调用这个方法  </span><br>        System.out.println(<span class="hljs-string">&quot;消息主体: &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(returnedMessage.getMessage().getBody()));  <br>        System.out.println(<span class="hljs-string">&quot;应答码: &quot;</span> + returnedMessage.getReplyCode());  <br>        System.out.println(<span class="hljs-string">&quot;描述: &quot;</span> + returnedMessage.getReplyText());  <br>        System.out.println(<span class="hljs-string">&quot;消息使用的交换器 exchange : &quot;</span> + returnedMessage.getExchange());  <br>        System.out.println(<span class="hljs-string">&quot;消息使用的路由键 routing : &quot;</span> + returnedMessage.getRoutingKey());  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<ol>
+<li><code>confirm(CorrelationData correlationData, boolean ack, String cause)</code>：<ol>
+<li><code>correlationData</code>：<ol>
+<li>这是你发送消息时<strong>可选附带</strong>的消息唯一标识，用于追踪该消息的确认情况。</li>
+<li>举个例子：你这样发送消息——<code>rabbitTemplate.convertAndSend(exchange, routingKey, message, new CorrelationData(&quot;123456&quot;));</code>，那么这个 <code>&quot;123456&quot;</code> 会作为标识，在 <code>correlationData</code> 中被打印出来，方便你知道这条消息的 ack 状态和失败原因。</li>
+<li>如果你没手动设置这个标识，那这里会是 <code>null</code>。</li>
+<li>注意不要和 <code>deliveryTag</code> 混淆——<code>correlationData</code> 是你业务代码中的追踪工具，不是 RabbitMQ 协议层面的内容。</li>
+</ol>
+</li>
+<li><code>ack</code>：<ol>
+<li>一个布尔值，表示消息是否成功到达交换机。</li>
+<li><code>true</code> 表示成功送达交换机（但不保证路由成功，也不保证被队列接收）；</li>
+<li><code>false</code> 表示没送达交换机，可能是交换机名写错、RabbitMQ 宕机、网络断了等。</li>
+</ol>
+</li>
+<li><code>cause</code>：<ol>
+<li>如果 <code>ack = false</code>，这里会返回具体的失败原因，帮助你排查问题。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>returnedMessage(ReturnedMessage returnedMessage)</code>：<ol>
+<li>表示消息成功送达交换机但未能路由到任何队列，于是被退回；</li>
+<li>这个对象中包含了退回消息的内容、错误码、错误原因、交换机名称、使用的路由键等信息。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="2-1-3-解决故障1（思路2）"><a href="#2-1-3-解决故障1（思路2）" class="headerlink" title="2.1.3. 解决故障1（思路2）"></a>2.1.3. 解决故障1（思路2）</h5><h6 id="2-1-3-1-备份交换机的原理"><a href="#2-1-3-1-备份交换机的原理" class="headerlink" title="2.1.3.1. 备份交换机的原理"></a>2.1.3.1. 备份交换机的原理</h6><p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511151430144.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-1-3-2-创建备份交换机、备份队列，将两者绑定"><a href="#2-1-3-2-创建备份交换机、备份队列，将两者绑定" class="headerlink" title="2.1.3.2. 创建备份交换机、备份队列，将两者绑定"></a>2.1.3.2. 创建备份交换机、备份队列，将两者绑定</h6><p>交换机必须设置为 <code>fanout</code> 类型，因为当消息从主交换机转发到备份交换机时，并不会携带路由键，只能通过广播的方式进行分发，名称为：<code>test.backup.exchange</code>。队列正常创建，名称为：<code>test.backup.queue</code>。没有路由键</p>
+<hr>
+<h6 id="2-1-3-3-创建主交换机、主队列，将两者绑定"><a href="#2-1-3-3-创建主交换机、主队列，将两者绑定" class="headerlink" title="2.1.3.3. 创建主交换机、主队列，将两者绑定"></a>2.1.3.3. 创建主交换机、主队列，将两者绑定</h6><p>交换机需要通过 <code>Arguments</code> 参数设置 <code>alternate-exchage</code>，用于指定备份交换机，名称为：<code>test.exchange</code>。队列正常创建，名称为：<code>test.queue</code>。路由键为：<code>test</code><br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512162811598.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-1-3-4-编写备份队列消费者代码"><a href="#2-1-3-4-编写备份队列消费者代码" class="headerlink" title="2.1.3.4. 编写备份队列消费者代码"></a>2.1.3.4. 编写备份队列消费者代码</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BackupQueueListener</span> &#123;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">BACKUP_QUEUE_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;queue.direct.test.backup&quot;</span>;  <br>  <br>    <span class="hljs-meta">@RabbitListener(queues = &#123;BACKUP_QUEUE_NAME&#125;)</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processMessage</span><span class="hljs-params">(String dataString, Message message, Channel channel)</span> &#123;  <br>        <span class="hljs-comment">// 1. 日志记录  </span><br>  <br>        <span class="hljs-comment">// 2. 发送邮件  </span><br>  <br>        <span class="hljs-comment">// 3. 把消息持久化到数据库，方便 “回溯处理”  </span><br>  <br>        <span class="hljs-comment">// 4. 手动 ack，避免消息重回到队列  </span><br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-1-4-解决故障2"><a href="#2-1-4-解决故障2" class="headerlink" title="2.1.4. 解决故障2"></a>2.1.4. 解决故障2</h5><p>在 RabbitMQ 中，所有消息，无论是否持久化，都会首先存入内存。对于持久化消息，生产者发送后，RabbitMQ 会立即将消息追加到相应的存储文件，并随后向生产者确认 ACK，确保即使发生宕机也不会丢失数据。而对于非持久化消息，RabbitMQ 只有在内存压力较小的情况下才会将其写入存储文件。</p>
+<p>虽然消息分为持久化和非持久化两类，最终所有消息都会持久化到某种存储介质中，只是持久化的时机不同。如果需要强一致性，可以选择使用持久化消息；若对一致性要求不那么严格，则可以使用非持久化消息。需要注意的是，即便消息本身是持久化的，交换机和队列也必须设置为持久化，只有这样才能确保数据不会丢失。</p>
+<p>如果需要确保一致性，可以将数据设置为持久化，因为默认情况下，发送的消息是非持久化的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;/sendMessage&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">sendMessage</span><span class="hljs-params">()</span> &#123;<br>    rabbitTemplate.convertAndSend(<br>        EXCHANGE_DIRECT,<br>        ROUTING_KEY,<br>        <span class="hljs-string">&quot;first sent message!&quot;</span>,<br>        message -&gt; &#123;<br>            <span class="hljs-comment">// 设置消息持久化</span><br>            message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);<br>            <span class="hljs-keyword">return</span> message;<br>        &#125;,<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">CorrelationData</span>(<span class="hljs-string">&quot;123456&quot;</span>)<br>    );<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;发送成功&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-1-5-解决故障3"><a href="#2-1-5-解决故障3" class="headerlink" title="2.1.5. 解决故障3"></a>2.1.5. 解决故障3</h5><h6 id="2-1-5-1-消费端三种确认模式"><a href="#2-1-5-1-消费端三种确认模式" class="headerlink" title="2.1.5.1. 消费端三种确认模式"></a>2.1.5.1. 消费端三种确认模式</h6><ol>
+<li>&#x3D;&#x3D;自动确认模式（默认、auto）&#x3D;&#x3D;：<ol>
+<li>只要消息被消费者方法接收到，不管是否成功处理，RabbitMQ 都会认为消息已消费成功，立刻从队列删除</li>
+<li>万一你的消费端发生异常，如宕机、代码跑错等，消息就丢了</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;手动确认模式（manual）&#x3D;&#x3D;：<ol>
+<li>你需要再自己在代码里调用 <code>channel.basicAck()</code>、<code>channel.basicNack()</code> 或 <code>channel.basicReject()</code> 来告诉 RabbitMQ：这条消息我处理好了（或处理失败）。</li>
+<li><code>channel.basicAck()</code> 是返回 ACK 信息</li>
+<li><code>channel.basicNack()</code> 返回 NACK 信息</li>
+<li><code>channel.basicReject()</code> 同样是返回 NACK 信息，但是我们一般不用这个</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;无确认模式（none）&#x3D;&#x3D;：<ol>
+<li>完全不确认，RabbitMQ 将消息从队列投递给消费者之后，就认为 “消费完成了”，强烈不推荐</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="2-1-5-2-交付标签机制"><a href="#2-1-5-2-交付标签机制" class="headerlink" title="2.1.5.2. 交付标签机制"></a>2.1.5.2. 交付标签机制</h6><p><code>deliveryTag</code> 是 RabbitMQ 为每个 Channel 中发送的消息分配的唯一编号，每发送出一条消息，这个编号就会自动递增。它的作用是标记这条消息的“身份”。  </p>
+<p>在手动确认模式下，你只需要把这个 <code>deliveryTag</code> 传回去，RabbitMQ 就能准确知道你确认的是哪一条消息 —— 即使你并不知道这条消息是从哪个队列来的，然后他就能处理是删除信息、重新排队还是标记为死信等等</p>
+<p>调用 <code>basicAck</code> 表示确认处理成功，RabbitMQ 会将这条消息从队列中移除；调用 <code>basicNack</code> 则表示处理失败，你可以决定这条消息是否需要重新回到队列中。</p>
+<hr>
+<h6 id="2-1-5-3-开启手动确认模式"><a href="#2-1-5-3-开启手动确认模式" class="headerlink" title="2.1.5.3. 开启手动确认模式"></a>2.1.5.3. 开启手动确认模式</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml">server:  <br>  port: 8080  <br>spring:  <br>  application:  <br>    name: RabbitMQ  <br>  rabbitmq:  <br>    host: 192.168.136.7  <br>    port: 5672  <br>    username: guest  <br>    password: 123456  <br>    virtual-host: /  <br>    listener:  <br>      simple:  <br>        acknowledge-mode: manual    # 开启手动确认模式<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="2-1-5-4-手动返回-ACK-和-NACK"><a href="#2-1-5-4-手动返回-ACK-和-NACK" class="headerlink" title="2.1.5.4. 手动返回 ACK 和 NACK"></a>2.1.5.4. 手动返回 ACK 和 NACK</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyMessageListener</span> &#123;  <br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">QUEUE_NAME</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;queue.order&quot;</span>;  <br>  <br>    <span class="hljs-meta">@RabbitListener(queues = &#123;QUEUE_NAME&#125;)</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processMessage</span><span class="hljs-params">(String dataString, Message message, Channel channel)</span> <span class="hljs-keyword">throws</span> IOException &#123;  <br>  <br>        <span class="hljs-comment">// 获取当前消息的 deliveryTag        </span><br>        <span class="hljs-type">long</span> <span class="hljs-variable">deliveryTag</span> <span class="hljs-operator">=</span> message.getMessageProperties().getDeliveryTag();  <br>  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            <span class="hljs-comment">// 核心操作  </span><br>            System.out.println(<span class="hljs-string">&quot;消费端 消息内容: &quot;</span> + dataString);  <br>  <br>            <span class="hljs-comment">// 核心操作成功: 返回 ACK 信息  </span><br>            channel.basicAck(deliveryTag, <span class="hljs-literal">false</span>);  <br>  <br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;  <br>	        <br>            <span class="hljs-comment">// 判断该消息是否为重复投递。如果不是重复的，可以选择重新投递；如果是重复的，则可以考虑不再投递，避免死循环或资源浪费</span><br>            <span class="hljs-type">Boolean</span> <span class="hljs-variable">redelivered</span> <span class="hljs-operator">=</span> message.getMessageProperties().getRedelivered();  <br>  <br>            <span class="hljs-keyword">if</span> (redelivered)&#123;  <br>                channel.basicNack(deliveryTag, <span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>);  <br>            &#125;<span class="hljs-keyword">else</span> &#123;  <br>                channel.basicNack(deliveryTag,<span class="hljs-literal">false</span>,<span class="hljs-literal">false</span>);  <br>            &#125;  <br>            <br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><font color="#00b0f0">第一个参数</font>：<ol>
+<li>用于指定要处理的消息的 <code>deliveryTag</code></li>
+</ol>
+</li>
+<li><font color="#00b0f0">第二个参数</font>：<ol>
+<li>指定是否进行批量处理</li>
+<li>如果为 <code>true</code>，表示从最早的消息到当前这个 <code>deliveryTag</code> 之间的所有消息都会一起处理</li>
+<li>如果为 <code>false</code>，则仅处理当前指定的这条消息</li>
+</ol>
+</li>
+<li><font color="#00b0f0">第三个参数</font>：<ol>
+<li>表示是否将该消息重新投递</li>
+<li>如果为 <code>true</code>，表示将消息重新放回队列，由 broker 再次投递</li>
+<li>如果未 <code>false</code>，表示不再投递，broker 会直接丢弃该消息。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511171953565.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-2-削峰限流（消费端限流）"><a href="#2-2-削峰限流（消费端限流）" class="headerlink" title="2.2. 削峰限流（消费端限流）"></a>2.2. 削峰限流（消费端限流）</h4><h5 id="2-2-1-削峰限流概述"><a href="#2-2-1-削峰限流概述" class="headerlink" title="2.2.1. 削峰限流概述"></a>2.2.1. 削峰限流概述</h5><p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511173010389.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-2-2-实现削峰限流"><a href="#2-2-2-实现削峰限流" class="headerlink" title="2.2.2. 实现削峰限流"></a>2.2.2. 实现削峰限流</h5><p>假设队列中有一万条数据，我们可以设置消费端每次最多从队列中取回 1000 条数据。设置起来也很简单，只需在配置中调整一个参数：<code>prefetch</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">application:</span>  <br>    <span class="hljs-attr">name:</span> <span class="hljs-string">RabbitMQ</span>  <br>  <span class="hljs-attr">rabbitmq:</span>  <br>    <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.7</span>  <br>    <span class="hljs-attr">port:</span> <span class="hljs-number">5672</span>  <br>    <span class="hljs-attr">username:</span> <span class="hljs-string">guest</span>  <br>    <span class="hljs-attr">password:</span> <span class="hljs-number">123456</span>  <br>    <span class="hljs-attr">virtual-host:</span> <span class="hljs-string">/</span>  <br>    <span class="hljs-attr">listener:</span>  <br>      <span class="hljs-attr">simple:</span>  <br>        <span class="hljs-attr">acknowledge-mode:</span> <span class="hljs-string">manual</span>  <br>        <span class="hljs-attr">prefetch:</span> <span class="hljs-number">1000</span>    <span class="hljs-comment"># 每次最多从消息队列取回 1000 条数据</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-消息超时"><a href="#2-3-消息超时" class="headerlink" title="2.3. 消息超时"></a>2.3. 消息超时</h4><h5 id="2-3-1-消息超时概述"><a href="#2-3-1-消息超时概述" class="headerlink" title="2.3.1. 消息超时概述"></a>2.3.1. 消息超时概述</h5><p>消息一直没被取走也不能一直留在消息队列中，我们给消息设定一个过期时间，超过这个时间没有被取走的消息就会被删除，我们可以从两个层面来给消息设定过期时间：</p>
+<ol>
+<li>&#x3D;&#x3D;队列层面&#x3D;&#x3D;：<ol>
+<li>在队列级别设置统一的过期时间，该队列中所有消息都会使用相同的过期时间。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;消息层面&#x3D;&#x3D;：<ol>
+<li>发送消息时，为某一条消息单独指定过期时间</li>
+</ol>
+</li>
+<li>需要注意的是：如果两个层面都设置了过期时间，以较短的那个时间为准，优先生效。</li>
+</ol>
+<hr>
+<h5 id="2-3-2-队列层面设置"><a href="#2-3-2-队列层面设置" class="headerlink" title="2.3.2. 队列层面设置"></a>2.3.2. 队列层面设置</h5><p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510221058008.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-3-Java-代码进行消息层面设置"><a href="#2-3-3-Java-代码进行消息层面设置" class="headerlink" title="2.3.3. Java 代码进行消息层面设置"></a>2.3.3. Java 代码进行消息层面设置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitMQProduce</span> &#123;  <br><br>    <span class="hljs-comment">// 交换机  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">EXCHANGE_DIRECT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test.exchange&quot;</span>;  <br>    <br>    <span class="hljs-comment">// 路由键  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROUTING_KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test&quot;</span>;  <br>  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@GetMapping(&quot;/sendMessage&quot;)</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sendMessage</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.convertAndSend(  <br>                EXCHANGE_DIRECT,  <br>                ROUTING_KEY,  <br>                <span class="hljs-string">&quot;first sent message!&quot;</span>,  <br>                message -&gt; &#123;  <br>                    <span class="hljs-comment">// 消息层面设置超时时间，以毫秒为单位  </span><br>                    message.getMessageProperties().setExpiration(<span class="hljs-string">&quot;7000&quot;</span>);  <br>                    message.getMessageProperties().setPriority(<span class="hljs-number">4</span>);  <br>                    message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);  <br>  <br>                    <span class="hljs-keyword">return</span> message;  <br>                &#125;,  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">CorrelationData</span>(<span class="hljs-string">&quot;123456&quot;</span>)  <br>        );  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;发送成功&quot;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-4-死信处理"><a href="#2-4-死信处理" class="headerlink" title="2.4. 死信处理"></a>2.4. 死信处理</h4><h5 id="2-4-1-死信概述"><a href="#2-4-1-死信概述" class="headerlink" title="2.4.1. 死信概述"></a>2.4.1. 死信概述</h5><p>上文说 “我们给消息设定一个过期时间，超过这个时间没有被取走的消息就会被删除” 其实不太准确，应该是 “超过这个时间没有被取走的消息就会成为死信，默认被抛弃”</p>
+<p>死信产生的原因：</p>
+<ol>
+<li>&#x3D;&#x3D;拒绝投递&#x3D;&#x3D;：<ol>
+<li>消费者显式拒绝消息（调用 <code>basicReject()</code> 或 <code>basicNack()</code>），并且设置 <code>requeue=false</code>，表示不重新投回原队列，消息因此被丢弃为死信。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;队列溢出&#x3D;&#x3D;：<ol>
+<li>队列达到最大容量限制。例如一个队列最多只能容纳 10 条消息，当已有 10 条消息时再投递新消息，会导致最早的一条消息被挤出，成为死信（遵循先进先出原则）</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;超时未消费&#x3D;&#x3D;：<ol>
+<li>消息设置了过期时间，如果在指定时间内没有被消费，就会过期，变为死信。</li>
+</ol>
+</li>
+</ol>
+<p>死信常见处理方式：</p>
+<ol>
+<li>&#x3D;&#x3D;直接丢弃（默认）&#x3D;&#x3D;：<ol>
+<li>适用于业务上不重要的消息，无需额外处理。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;入库保存&#x3D;&#x3D;：<ol>
+<li>将死信记录入数据库，便于后续人工或定时任务处理。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;死信进入死信队列（推荐）&#x3D;&#x3D;：<ol>
+<li>配置死信队列（DLX）并由消费者监听，专门对死信消息进行分析和补偿处理，是较常用的做法。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="2-4-2-死信进入死信队列"><a href="#2-4-2-死信进入死信队列" class="headerlink" title="2.4.2. 死信进入死信队列"></a>2.4.2. 死信进入死信队列</h5><h6 id="2-4-2-1-创建死信交换机、死信队列，将两者绑定"><a href="#2-4-2-1-创建死信交换机、死信队列，将两者绑定" class="headerlink" title="2.4.2.1. 创建死信交换机、死信队列，将两者绑定"></a>2.4.2.1. 创建死信交换机、死信队列，将两者绑定</h6><p>死信交换机名称为：<code>test.dlx.exchange</code>，死信队列名称为：<code>test.dlx.queue</code>，路由键为 <code>test</code></p>
+<hr>
+<h6 id="2-4-2-2-创建主交换机、主队列，将两者绑定"><a href="#2-4-2-2-创建主交换机、主队列，将两者绑定" class="headerlink" title="2.4.2.2. 创建主交换机、主队列，将两者绑定"></a>2.4.2.2. 创建主交换机、主队列，将两者绑定</h6><p>主交换机名称为：<code>test.exchange</code>。队列限制较多，详细看图，名称为：<code>test.queue</code>。路由键为：<code>test</code></p>
+<p><img src="/PixPin_2025-05-12_09-16-53%201.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-4-2-3-编写死信队列消费者代码"><a href="#2-4-2-3-编写死信队列消费者代码" class="headerlink" title="2.4.2.3. 编写死信队列消费者代码"></a>2.4.2.3. 编写死信队列消费者代码</h6><p>根据业务需求自己发挥</p>
+<hr>
+<h4 id="2-5-延迟队列"><a href="#2-5-延迟队列" class="headerlink" title="2.5. 延迟队列"></a>2.5. 延迟队列</h4><h5 id="2-5-1-延迟队列概述"><a href="#2-5-1-延迟队列概述" class="headerlink" title="2.5.1. 延迟队列概述"></a>2.5.1. 延迟队列概述</h5><p>类似于电商网站中的提示：“订单已提交，请在 23 时 59 分 47 秒内完成支付”，我们希望在订单创建后<strong>延迟 24 小时</strong>再进行未支付订单的关闭处理。</p>
+<p>我们的解决思路有以下两种：</p>
+<ol>
+<li>&#x3D;&#x3D;消息超时 + 死信队列&#x3D;&#x3D;：<ol>
+<li>将消息发送到一个设置了 TTL（过期时间）的普通队列，不对该队列进行消费。</li>
+<li>当消息在队列中存满 24 小时后未被消费，它会自动过期并被转发到 死信队列（DLQ）</li>
+<li>我们只监听死信队列，待消息进入后再触发订单关闭逻辑</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;使用 RabbitMQ 延迟消息插件（推荐）&#x3D;&#x3D;<ol>
+<li>借助 RabbitMQ 的 <strong>延迟队列插件</strong>（<code>rabbitmq-delayed-message-exchange</code>），可精确控制消息的延迟时间；</li>
+<li>注意事项：该插件支持的最大延迟时间为 两天（48 小时）</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="2-5-2-使用-RabbitMQ-延迟消息插件"><a href="#2-5-2-使用-RabbitMQ-延迟消息插件" class="headerlink" title="2.5.2. 使用 RabbitMQ 延迟消息插件"></a>2.5.2. 使用 RabbitMQ 延迟消息插件</h5><p>回来看35级，如何在手动安装的情况下安装插件<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511103811397.png" srcset="/img/loading.gif" lazyload></p>
+<p>队列就正常建就行<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104005312.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后是消费者<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104106123.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104123191.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104218010.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-6-事务消息"><a href="#2-6-事务消息" class="headerlink" title="2.6. 事务消息"></a>2.6. 事务消息</h4><h5 id="2-6-1-事务消息概述"><a href="#2-6-1-事务消息概述" class="headerlink" title="2.6.1. 事务消息概述"></a>2.6.1. 事务消息概述</h5><p>所谓的事务消息，其实并不是多牛的分布式事务，而是 Java 自己在本地搞的小动作：先把消息留在内存里，等你整个流程都 OK 了才发出去；要是中间出事了，干脆就不发了直接回滚。不过要注意，哪怕发出去了，也不一定真到交换机或者队列里。所以说到底，这套事务控制是“应用层面自娱自乐”，别指望它替你搞定消息可靠投递那一套。<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512165603672.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-6-2-创建-RabbitMQ-事务模式配置类，并配置事务消息"><a href="#2-6-2-创建-RabbitMQ-事务模式配置类，并配置事务消息" class="headerlink" title="2.6.2. 创建 RabbitMQ 事务模式配置类，并配置事务消息"></a>2.6.2. 创建 RabbitMQ 事务模式配置类，并配置事务消息</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitTransactionConfig</span> &#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RabbitTransactionManager <span class="hljs-title function_">transactionManager</span><span class="hljs-params">(CachingConnectionFactory connectionFactory)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RabbitTransactionManager</span>(connectionFactory);<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RabbitTemplate <span class="hljs-title function_">rabbitTemplate</span><span class="hljs-params">(CachingConnectionFactory connectionFactory)</span> &#123;<br>        <span class="hljs-type">RabbitTemplate</span> <span class="hljs-variable">rabbitTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RabbitTemplate</span>(connectionFactory);<br>        rabbitTemplate.setChannelTransacted(<span class="hljs-literal">true</span>);<br>        <span class="hljs-keyword">return</span> rabbitTemplate;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-6-3-编写生产者代码时，标注-Transactional"><a href="#2-6-3-编写生产者代码时，标注-Transactional" class="headerlink" title="2.6.3. 编写生产者代码时，标注 @Transactional"></a>2.6.3. 编写生产者代码时，标注 @Transactional</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span>  <br><span class="hljs-meta">@Transactional</span> <span class="hljs-comment">// 使用 Spring 提供的事务管理，开启事务消息（MyBatis 中涉及）  </span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitMQProduce</span> &#123;  <br><br>    <span class="hljs-comment">// 交换机  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">EXCHANGE_DIRECT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;exchange.direct.test&quot;</span>;  <br>    <br>    <span class="hljs-comment">// 路由键  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROUTING_KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test&quot;</span>;  <br>  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@GetMapping(&quot;sendMessage&quot;)</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sendMessage</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, <span class="hljs-string">&quot;first sent message!&quot;</span>);  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;发送成功&quot;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-7-优先消息"><a href="#2-7-优先消息" class="headerlink" title="2.7. 优先消息"></a>2.7. 优先消息</h4><h5 id="2-7-1-优先消息概述"><a href="#2-7-1-优先消息概述" class="headerlink" title="2.7.1. 优先消息概述"></a>2.7.1. 优先消息概述</h5><p>默认情况下，队列遵循先进先出（FIFO）原则，先入队的消息优先被投递；但当我们为消息设置了优先级后，优先级较高的消息将优先于低优先级消息进行投递。</p>
+<hr>
+<h5 id="2-7-2-创建主交换机、主队列，将两者绑定"><a href="#2-7-2-创建主交换机、主队列，将两者绑定" class="headerlink" title="2.7.2. 创建主交换机、主队列，将两者绑定"></a>2.7.2. 创建主交换机、主队列，将两者绑定</h5><p>主交换机名称为：<code>test.exchange</code>。主队列需要用 <code>x-max-priority</code> 指定队列中消息最高的优先级，名称为：<code>test.queue</code>。路由键为：<code>test</code><br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512170407701.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>消息优先级取值范围为：1 ~ 255</li>
+<li>RabbitMQ 官方建议在 1 ~ 5 之间取值，因为优先级越高，占用 CPU、内存等资源越多</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-7-3-Java-代码指定消息优先级"><a href="#2-7-3-Java-代码指定消息优先级" class="headerlink" title="2.7.3. Java 代码指定消息优先级"></a>2.7.3. Java 代码指定消息优先级</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RabbitMQProduce</span> &#123;  <br>    <span class="hljs-comment">// 交换机  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">EXCHANGE_DIRECT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test.exchange&quot;</span>;  <br>    <span class="hljs-comment">// 路由键  </span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">ROUTING_KEY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;test&quot;</span>;  <br>  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">private</span> RabbitTemplate rabbitTemplate;  <br>  <br>    <span class="hljs-meta">@GetMapping(&quot;/sendMessage&quot;)</span>  <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">sendMessage</span><span class="hljs-params">()</span> &#123;  <br>        rabbitTemplate.convertAndSend(  <br>                EXCHANGE_DIRECT,  <br>                ROUTING_KEY,  <br>                <span class="hljs-string">&quot;first sent message!&quot;</span>,  <br>                message -&gt; &#123;  <br>                    <span class="hljs-comment">// 指定消息优先级，不得超过 x-max-priority                    message.getMessageProperties().setPriority(4);  </span><br>                    message.getMessageProperties().setExpiration(<span class="hljs-string">&quot;7000&quot;</span>);  <br>                    message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);  <br>  <br>                    <span class="hljs-keyword">return</span> message;  <br>                &#125;,  <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">CorrelationData</span>(<span class="hljs-string">&quot;123456&quot;</span>)  <br>        );  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;发送成功&quot;</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="category-chain-item">消息队列</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Spring Data RabbitMQ</div>
+      <div>https://wangjia5289.github.io/2025/05/10/笔记：Spring Data RabbitMQ/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 10, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9AOllama/" title="笔记：Ollama">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Ollama</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/07/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20SE/" title="笔记：Java SE">
+                        <span class="hidden-mobile">笔记：Java SE</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>
