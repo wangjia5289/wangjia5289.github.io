@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512165603672.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512170407701.png">
 <meta property="article:published_time" content="2025-05-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-12T09:09:58.728Z">
+<meta property="article:modified_time" content="2025-05-12T12:29:09.087Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k words
+          5.9k words
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          47 mins
+          50 mins
         
       </span>
     
@@ -307,7 +307,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-12T17:09:58+08:00
+                    Last updated on 2025-05-12T20:29:09+08:00
                   
                   
 
@@ -332,9 +332,26 @@
 <h4 id="1-2-配置-RabbitMQ-连接"><a href="#1-2-配置-RabbitMQ-连接" class="headerlink" title="1.2. 配置 RabbitMQ 连接"></a>1.2. 配置 RabbitMQ 连接</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml">spring:  <br>  rabbitmq:  <br>    host: 192.168.136.7  <br>    port: 5672                     # 不要写 15672<br>    username: guest  <br>    password: 123456  <br>    virtual-host: /                # RabbitMQ 的虚拟空间<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="1-3-创建交换机和队列"><a href="#1-3-创建交换机和队列" class="headerlink" title="1.3. 创建交换机和队列"></a>1.3. 创建交换机和队列</h4><h5 id="1-3-1-创建交换机"><a href="#1-3-1-创建交换机" class="headerlink" title="1.3.1. 创建交换机"></a>1.3.1. 创建交换机</h5><p>这里创建的交换机名称为：<code>test.exchange</code>：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="1-3-创建交换机和队列"><a href="#1-3-创建交换机和队列" class="headerlink" title="1.3. 创建交换机和队列"></a>1.3. 创建交换机和队列</h4><h5 id="1-3-1-创建交换机"><a href="#1-3-1-创建交换机" class="headerlink" title="1.3.1. 创建交换机"></a>1.3.1. 创建交换机</h5><p>这里创建的交换机名称为：<code>test.exchange</code>：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
 <hr>
 <h5 id="1-3-2-创建队列"><a href="#1-3-2-创建队列" class="headerlink" title="1.3.2. 创建队列"></a>1.3.2. 创建队列</h5><p>这里创建的队列名称为：<code>test.queue</code>：<br><img src="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134249151.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>一致性是指多节点之间的数据一致</li>
+<li>使用 <code>Stream</code> 还不如使用 <code>kafka</code></li>
+<li><code>Classic</code> 和 <code>Quorum</code> 队列的区别：<ol>
+<li><code>Classic</code> 队列的数据实际存储在一个节点上，虽然我们可以开启 镜像（mirrored queue） 模式，让它同步到其他节点，但这个机制是老的、高延迟的，并且不推荐再用了。</li>
+<li><code>Quorum</code> 默认会有 3 个副本（可以配置），分布在不同节点上，所有写入操作必须经过 leader 副本，并复制给其他副本因此具有强一致性<ol>
+<li>此外还能自动故障转移，不需要人工干预，但写性能会比 classic 低（因为需要复制和一致性保障）。</li>
+<li>如果 Leader 宕机，会使用 <code>Raft</code> 协议自动从剩下的存活副本中重新选出一个新的 <code>Leader</code></li>
+<li>假设你有 3 个副本：只要有 2 个副本存活，就能继续工作并选出新的 Leader。如果只剩下 1 个副本存活，对不起，不能选 Leader，队列就会挂起，直到 quorum 恢复。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
 <hr>
 <h5 id="1-3-3-将队列与交换机绑定"><a href="#1-3-3-将队列与交换机绑定" class="headerlink" title="1.3.3. 将队列与交换机绑定"></a>1.3.3. 将队列与交换机绑定</h5><p>将 <code>queue.direct.test</code> 队列与 <code>exchange.direct.test</code> 交换机绑定，使用路由键 <code>test</code>。这样，发送到 <code>exchange.direct.test</code> 且路由键为 <code>test</code> 的消息会被转发到 <code>queue.direct.test</code>。</p>
 <p>注意：<strong>一个交换机可以绑定多个队列，一个队列也可以绑定多个交换机</strong></p>

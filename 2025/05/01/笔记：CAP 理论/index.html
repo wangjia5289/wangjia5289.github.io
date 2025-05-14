@@ -19,18 +19,18 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Avail">
+    <meta name="description" content="1. CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Av">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：CAP 理论">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Avail">
+<meta property="og:description" content="1. CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Av">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191408958.png">
 <meta property="article:published_time" content="2025-04-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-01T11:19:54.786Z">
+<meta property="article:modified_time" content="2025-05-12T13:04:32.546Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          548 words
+          551 words
         
       </span>
     
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-01T19:19:54+08:00
+                    Last updated on 2025-05-12T21:04:32+08:00
                   
                   
 
@@ -303,7 +303,7 @@
             
               <div class="markdown-body">
                 
-                <h3 id="CAP-理论概述"><a href="#CAP-理论概述" class="headerlink" title="CAP 理论概述"></a>CAP 理论概述</h3><p>CAP 理论指出：<strong>一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性</strong>，最多只能同时较好地满足其中两项。</p>
+                <h3 id="1-CAP-理论概述"><a href="#1-CAP-理论概述" class="headerlink" title="1. CAP 理论概述"></a>1. CAP 理论概述</h3><p>CAP 理论指出：<strong>一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性</strong>，最多只能同时较好地满足其中两项。</p>
 <ol>
 <li>&#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;：<ol>
 <li>所有节点在同一时间的数据完全一致。</li>
@@ -335,11 +335,11 @@
 </ul>
 <p><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="AP-架构"><a href="#AP-架构" class="headerlink" title="AP 架构"></a>AP 架构</h3><p>在网络分区发生时，<strong>为了保持系统可用性，系统B仍会响应请求，即使返回的是旧数据</strong>。</p>
+<h3 id="2-AP-架构"><a href="#2-AP-架构" class="headerlink" title="2. AP 架构"></a>2. AP 架构</h3><p>在网络分区发生时，<strong>为了保持系统可用性，系统B仍会响应请求，即使返回的是旧数据</strong>。</p>
 <p>例如：当A和B之间网络断开，某些注册信息只存在于节点B，此时请求节点A可能查询不到，但请求节点B则能获得结果。虽然数据不一致，但服务依然对外正常运行。</p>
 <p><strong>结论</strong>：为了保证可用性和分区容错性，牺牲了一致性，因此属于 <strong>AP 类型系统</strong>。<br><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png" srcset="/img/loading.gif" lazyload>、</p>
 <hr>
-<h3 id="CP架构"><a href="#CP架构" class="headerlink" title="CP架构"></a>CP架构</h3><p>当系统发生网络分区时，<strong>如果要确保数据一致性，就必须拒绝部分请求</strong>，否则就可能出现数据冲突。</p>
+<h3 id="3-CP架构"><a href="#3-CP架构" class="headerlink" title="3. CP架构"></a>3. CP架构</h3><p>当系统发生网络分区时，<strong>如果要确保数据一致性，就必须拒绝部分请求</strong>，否则就可能出现数据冲突。</p>
 <p>Consul 就是典型的 CP 架构系统，它采用 Raft 算法来实现一致性，要求大多数节点写入成功，服务才算注册成功。例如：如果 leader 节点挂掉，新的 leader 选举完成前，系统会短暂不可用。</p>
 <p><strong>结论</strong>：该架构牺牲了可用性，换取一致性和分区容错性，因此属于 <strong>CP 类型系统</strong>。<br><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191408958.png" srcset="/img/loading.gif" lazyload></p>
 
@@ -360,13 +360,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">分布式、虚拟化、容器化、自动化</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/" class="category-chain-item">分布式设计原理</a>
+  
+  
+
   
 
   
