@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 线程安全问题1.1. 线程安全问题概述在 Spring 中，我们通常会将某个类声明为 Bean，并通过依赖注入的方式在其他地方调用它的方法。也就是说，不管有多少个调用，最终操作的都是这个单例 Bean 的同一个实例。那么现在问题来了，如果我们将下面这段代码声明为 Bean： 1234567891011121314@Service  public class CounterService &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：JUC">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="1. 线程安全问题1.1. 线程安全问题概述在 Spring 中，我们通常会将某个类声明为 Bean，并通过依赖注入的方式在其他地方调用它的方法。也就是说，不管有多少个调用，最终操作的都是这个单例 Bean 的同一个实例。那么现在问题来了，如果我们将下面这段代码声明为 Bean： 1234567891011121314@Service  public class CounterService &amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-18T07:28:34.718Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：JUC - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/lan.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：JUC"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-18 00:00" pubdate>
+          May 18, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：JUC</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-05-18T15:28:34+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1-线程安全问题"><a href="#1-线程安全问题" class="headerlink" title="1. 线程安全问题"></a>1. 线程安全问题</h3><h4 id="1-1-线程安全问题概述"><a href="#1-1-线程安全问题概述" class="headerlink" title="1.1. 线程安全问题概述"></a>1.1. 线程安全问题概述</h4><p>在 Spring 中，我们通常会将某个类声明为 Bean，并通过依赖注入的方式在其他地方调用它的方法。也就是说，不管有多少个调用，最终操作的都是这个单例 Bean 的同一个实例。那么现在问题来了，如果我们将下面这段代码声明为 Bean：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs axapta">@Service  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CounterService</span> &#123;  <br>  <br>    <span class="hljs-comment">// 成员变量 totalCount</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">int</span> totalCount = <span class="hljs-number">0</span>;  <br><br>	<span class="hljs-comment">// 参数 count</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> addCount(<span class="hljs-built_in">int</span> <span class="hljs-keyword">count</span>) &#123;  <br>	    <span class="hljs-comment">// 局部变量 c</span><br>	    <span class="hljs-built_in">int</span> c = <span class="hljs-number">10</span>;<br>        totalCount += <span class="hljs-keyword">count</span>;  <br>        <span class="hljs-keyword">return</span> totalCount;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>并在其他组件中注入并调用它的方法：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@RestController</span><br><span class="hljs-variable">@RequestMapping</span>(<span class="hljs-string">&quot;/counter&quot;</span>)<br>public class CounterController &#123;<br>	<br>    <span class="hljs-variable">@Autowired</span><br>    private CounterService counterService;<br><br>    <span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/add&quot;</span>)<br>    public int <span class="hljs-built_in">addCount</span>(<span class="hljs-variable">@RequestParam</span> int value) &#123;<br>        <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">counterService</span><span class="hljs-selector-class">.addCount</span>(value);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在传统的 Tomcat 服务器中，每个 HTTP 请求会由一个独立的线程处理，当这个线程调用 <code>addCount()</code> 方法时：</p>
+<ol>
+<li>方法参数 <code>count</code> 和局部变量 <code>c</code> 是线程私有的，分配在各自线程的栈内存中，每个线程都有独立副本，互不干扰，因此天然线程安全</li>
+<li>而 <code>totalCount</code> 是 Bean 的成员变量，存放在堆内存中，为所有线程所共享，因此存在并发读写的风险。</li>
+</ol>
+<p>因此，一旦多个请求同时调用该方法，就会触发<strong>竞态条件</strong>：线程们在没有排队的情况下同时抢着修改 <code>totalCount</code>，导致返回的结果不可靠、不确定、不可预测，产生严重的数据错误。</p>
+<p>举个例子：A 线程读取到 <code>totalCount = 10</code>，打算加 5；B 线程同样读取到 10，打算加 7。它们各自完成加法并写回后，可能的结果包括：A 返回 15，B 返回 17；或者 A 返回 17，B 返回 15；甚至 A 返回 17，B 返回 22。注意，这还只是两个线程的情况，在高并发下，<code>totalCount</code> 的最终值将更加不可预测，容易造成严重的数据混乱。</p>
+<p><font color="#ff0000">所以这就是为什么我们的大多数服务和组件都设计为无状态的——也就是说，不在 Bean 中存放可变的成员变量。（不是不放成员变量，而是不放可变的成员变量）</font></p>
+<hr>
+<h4 id="1-2-解决普通服务线程安全问题"><a href="#1-2-解决普通服务线程安全问题" class="headerlink" title="1.2. 解决普通服务线程安全问题"></a>1.2. 解决普通服务线程安全问题</h4><p>为了解决线程安全问题，最理想的做法就是避免在 Bean 中存放可变的成员变量，而是将变量限定为线程私有。但如果业务上确实需要使用成员变量，我们也可以采取以下措施：<br>&#x3D;&#x3D;1.使用线程安全的数据结构（推荐）&#x3D;&#x3D;<br>这些数据结构内部采用了复杂的机制，保证每次更新都是原子操作，同时避免线程阻塞和锁竞争，性能远超 <code>synchronized</code>。</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CounterService</span> </span>&#123;<br><br>    <span class="hljs-comment">// 使用 AtomicInteger 保证线程安全</span><br>    <span class="hljs-keyword">private</span> AtomicInteger totalCount = <span class="hljs-keyword">new</span> AtomicInteger(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">addCount</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>&#123;<br>        <span class="hljs-function"><span class="hljs-keyword">return</span> totalCount.<span class="hljs-title">addAndGet</span><span class="hljs-params">(count)</span></span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;2.方法加锁&#x3D;&#x3D;<br>给方法加 <code>synchronized</code> 锁后，所有调用都会排队，导致性能下降。比如下面这个例子：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-meta">@Service</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CounterService</span> </span>&#123;  <br>  <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> totalCount = <span class="hljs-number">0</span>;  <br><br>    <span class="hljs-comment">// 给方法加 synchronized 锁住整个方法</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">addCount</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>&#123;  <br>        <span class="hljs-keyword">int</span> c = <span class="hljs-number">10</span>;<br>        totalCount += count;  <br>        <span class="hljs-keyword">return</span> totalCount;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当一个线程调用 <code>addCount</code> 方法时，整个实例对象（即 <code>this</code>）会被锁定。也就是说，该对象内所有被 <code>synchronized</code> 修饰的实例方法都会被阻塞，直到锁释放。但如果对象内存在未加锁的方法，则不会受到影响，仍可正常调用。</p>
+<p>因此，我们建议只对修改共享成员变量的公共方法加锁，不涉及共享状态的其他方法则尽量避免加锁，以减少性能损耗。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>普通实例方法加 <code>synchronized</code> 时，锁的是当前对象实例（<code>this</code>）</li>
+<li>静态方法加 <code>synchronized static</code> 时，锁的是该类的 Class 对象，所有实例共享同一把锁，所有实例都被锁了，但没加锁的方法，都不会被阻塞，照样可以调用</li>
+</ol>
+</blockquote>
+<p>&#x3D;&#x3D;3.代码块加锁&#x3D;&#x3D;<br>它不是给整个方法加锁，而是在方法内部用一对大括号包裹的代码块，加上 <code>synchronized</code> 关键字，只锁本对象的代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CounterService</span> &#123;  <br>  <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">totalCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;  <br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();  <span class="hljs-comment">// 自定义锁对象</span><br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">addCount</span><span class="hljs-params">(<span class="hljs-type">int</span> count)</span> &#123;  <br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br><br>        <span class="hljs-keyword">synchronized</span> (lock) &#123;  <span class="hljs-comment">// 只锁住对共享变量的操作</span><br>            totalCount += count;  <br>        &#125;<br><br>        <span class="hljs-keyword">return</span> totalCount;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;4.可变状态放到外部系统（推荐）&#x3D;&#x3D;<br>我们将可变状态甩给外部系统，比如数据库、Redis、消息队列等，从而避免在 Java 服务内部处理线程安全问题。你可能会疑惑：把状态交给它们后，难道外部系统就不会有线程安全问题吗？</p>
+<p>实际上，这些外部系统天生具备强大的并发控制能力，能够帮我们确保状态的一致性。以数据库为例，它天然支持事务和行级锁，即使有上千个线程同时写入，也能通过行锁、MVCC（多版本并发控制）和隔离级别等机制，有效地管理并发访问，保证数据安全和一致。</p>
+<hr>
+<h4 id="1-3-解决外部连接服务线程安全问题"><a href="#1-3-解决外部连接服务线程安全问题" class="headerlink" title="1.3. 解决外部连接服务线程安全问题"></a>1.3. 解决外部连接服务线程安全问题</h4><p>上文我们讲完了普通服务中的线程安全问题和解决方案，但如果该服务涉及外部连接（如数据库、FTP、Redis 等），情况就会变得更复杂，比如：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SharedJedisClient</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Jedis</span> jedis = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6379</span>);<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getValue</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> key</span>) &#123;<br>        <span class="hljs-keyword">return</span> jedis.<span class="hljs-title function_">get</span>(key);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setValue</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> key, <span class="hljs-title class_">String</span> value</span>) &#123;<br>        jedis.<span class="hljs-title function_">set</span>(key, value);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个 Bean 在初始化时就创建了一个 TCP 连接，之后的方法直接使用这个连接执行操作。表面上看，这个 Bean 并没有定义可变的成员变量，连接对象也没在方法中被修改，似乎一切很安全对吧？</p>
+<p>但其实存在严重的线程安全隐患。因为多个线程如果同时调用这个 Bean 中的方法，它们会共享同一个连接对象，导致线程之间对连接的操作交叉进行，可能发生数据错乱、粘包拆包、读写冲突等问题。</p>
+<p>你可能会想，那我不共享连接，每个方法里都 <code>new</code> 一个连接，岂不就天然线程安全了？确实，这样做可以保证线程隔离，但代价也很高。频繁地创建和销毁连接（尤其是 TCP 连接）会造成巨大的性能开销，严重影响系统吞吐量，并不是理想的做法。</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-title class_"><span class="hljs-keyword">class</span> <span class="hljs-title">NewPerCallJedisClient</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getValue(<span class="hljs-keyword">String</span> key) &#123;<br>        <span class="hljs-keyword">try</span> (Jedis jedis = <span class="hljs-keyword">new</span><span class="hljs-type"></span> Jedis(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6379</span>)) &#123;<br>            <span class="hljs-keyword">return</span> jedis.<span class="hljs-keyword">get</span>(key);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> void setValue(<span class="hljs-keyword">String</span> key, <span class="hljs-keyword">String</span> value) &#123;<br>        <span class="hljs-keyword">try</span> (Jedis jedis = <span class="hljs-keyword">new</span><span class="hljs-type"></span> Jedis(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6379</span>)) &#123;<br>            jedis.<span class="hljs-keyword">set</span>(key, value);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果我们尝试套用前面解决普通服务线程安全问题的那四种方法，虽然能避免线程冲突，但往往会带来额外的性能开销，尤其是在涉及连接操作时，代价更高。</p>
+<p>其实，我们还有一种更高效的解决方案 —— 连接池。连接池被我们设置为公用的成员变量，所有调用该 Bean 的线程都可以使用它。在每次方法调用时，线程会从连接池中借出一个连接，执行完操作后再归还池中。</p>
+<p>这样既能做到多线程各用自己的连接，避免线程安全问题，又能通过连接复用来减少频繁创建&#x2F;销毁连接的开销，兼顾了线程安全与系统性能。</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-title class_"><span class="hljs-keyword">class</span> <span class="hljs-title">PooledJedisClient</span> </span>&#123;<br>    <span class="hljs-comment">// 在应用启动时创建连接池</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> JedisPool pool = <span class="hljs-keyword">new</span><span class="hljs-type"></span> JedisPool(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">6379</span>);<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> getValue(<span class="hljs-keyword">String</span> key) &#123;<br>        <span class="hljs-comment">// 从池里借一个 Jedis 实例，操作完自动归还</span><br>        <span class="hljs-keyword">try</span> (Jedis jedis = pool.getResource()) &#123;<br>            <span class="hljs-keyword">return</span> jedis.<span class="hljs-keyword">get</span>(key);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> void setValue(<span class="hljs-keyword">String</span> key, <span class="hljs-keyword">String</span> value) &#123;<br>        <span class="hljs-keyword">try</span> (Jedis jedis = pool.getResource()) &#123;<br>            jedis.<span class="hljs-keyword">set</span>(key, value);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Netty</code> 好像也能处理这个事情，Redis 就是使用的这个方式，还维护自己的一套nid 线程池？不理解不理解</li>
+</ol>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java 基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E5%9F%BA%E7%A1%80/JUC/" class="category-chain-item">JUC</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：JUC</div>
+      <div>https://wangjia5289.github.io/2025/05/18/笔记：JUC/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 18, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/20/%E7%AC%94%E8%AE%B0%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE/" title="笔记：HTTP 协议">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：HTTP 协议</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/" title="笔记：Spring Security">
+                        <span class="hidden-mobile">笔记：Spring Security</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>

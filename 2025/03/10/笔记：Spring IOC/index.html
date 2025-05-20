@@ -19,17 +19,23 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论0、导图：Map：Spring IOC 1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向对象编程中，类与类之间的依赖关系通常是直接创建的。这种直接依赖会导致代码高度耦合，使得系统的维护和测试变得困难。 尤其是在三层架构中，虽然层与层之间通过接口衔接，但直接依赖仍然存在。如果上层依赖下层，且下层发生改变时，上层也需">
+    <meta name="description" content="Spring 可以通过字段注入（反射）注入依赖，但这种方式不能用在final字段上，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。  一、理论0、导图：Map：Spring IOC   1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring IOC">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论0、导图：Map：Spring IOC 1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向对象编程中，类与类之间的依赖关系通常是直接创建的。这种直接依赖会导致代码高度耦合，使得系统的维护和测试变得困难。 尤其是在三层架构中，虽然层与层之间通过接口衔接，但直接依赖仍然存在。如果上层依赖下层，且下层发生改变时，上层也需">
+<meta property="og:description" content="Spring 可以通过字段注入（反射）注入依赖，但这种方式不能用在final字段上，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。  一、理论0、导图：Map：Spring IOC   1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160340948.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160346033.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518162951182.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518163131432.png">
 <meta property="article:published_time" content="2025-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-04T03:36:15.884Z">
+<meta property="article:modified_time" content="2025-05-19T08:03:47.329Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.2k words
+          8.3k words
         
       </span>
     
@@ -289,7 +295,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-04T11:36:15+08:00
+                    Last updated on 2025-05-19T16:03:47+08:00
                   
                   
 
@@ -299,7 +305,12 @@
             
               <div class="markdown-body">
                 
-                <h3 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h3><h3 id="0、导图：Map：Spring-IOC"><a href="#0、导图：Map：Spring-IOC" class="headerlink" title="0、导图：Map：Spring IOC"></a>0、导图：<a href="../../maps/Map%EF%BC%9ASpringIoC.xmind">Map：Spring IOC</a></h3><hr>
+                <p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png" srcset="/img/loading.gif" lazyload></p>
+<p>Spring 可以通过字段注入（反射）注入依赖，但这种方式<strong>不能用在final字段上</strong>，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。<br><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160340948.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160346033.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h3><h3 id="0、导图：Map：Spring-IOC"><a href="#0、导图：Map：Spring-IOC" class="headerlink" title="0、导图：Map：Spring IOC"></a>0、导图：<a href="../../maps/Map%EF%BC%9ASpringIoC.xmind">Map：Spring IOC</a></h3><hr>
+<p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518162951182.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518163131432.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="1、Spring-IoC"><a href="#1、Spring-IoC" class="headerlink" title="1、Spring IoC"></a>1、Spring IoC</h3><h4 id="1-1、IoC-概述"><a href="#1-1、IoC-概述" class="headerlink" title="1.1、IoC 概述"></a>1.1、IoC 概述</h4><p>&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;<br>在传统的面向对象编程中，类与类之间的依赖关系通常是直接创建的。这种直接依赖会导致代码高度耦合，使得系统的维护和测试变得困难。</p>
 <p>尤其是在三层架构中，虽然层与层之间通过接口衔接，但直接依赖仍然存在。如果上层依赖下层，且下层发生改变时，上层也需要进行相应更改，这违背了软件开发中的开闭原则（OCP）和依赖倒转原则（DIP），例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 在 Service 层中直接实例化 Dao 层的对象  </span><br><span class="hljs-keyword">private</span> <span class="hljs-type">UserDao</span> <span class="hljs-variable">userDao</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserDaoImplForMySQL</span>();  <br>​  <br><span class="hljs-comment">// 在 Web 层中直接实例化 Service 层的对象  </span><br><span class="hljs-keyword">private</span> <span class="hljs-type">UserService</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserServiceImpl</span>();<br></code></pre></td></tr></table></figure>
@@ -582,7 +593,7 @@
 <ul>
 <li><code>@Component</code>：标注通用组件</li>
 <li><code>@Service</code>：标注业务逻辑层（service 层）</li>
-<li><code>@Repository</code>：标注数据访问层（dao 层）</li>
+<li><code>@Repository</code>：标注数据访问层（dao 层、mapper 层）</li>
 <li><code>@Controller</code>：标注表现层（Web 层）</li>
 <li><code>@RestController</code>：<code>@RestController</code> &#x3D; <code>@Controller</code> + <code>@ResponseBody</code> ，使得每个方法的返回值都直接作为 HTTP 响应体返回。<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Component</span>(<span class="hljs-string">&quot;myBean1&quot;</span>) <span class="hljs-comment">// 必填项，标注 Bean 类和指定 ID，若未指定 ID，默认为类名的首字母小写形式（不是全类名）</span><br><span class="hljs-variable">@Scope</span>(<span class="hljs-string">&quot;prototype&quot;</span>)   <span class="hljs-comment">// 指定作用域，默认为单例(singleton)</span><br><span class="hljs-variable">@Lazy</span>                 <span class="hljs-comment">// 延迟加载，默认不开启，设置为 true 则会在第一次访问时创建 Bean</span><br><span class="hljs-variable">@DependsOn</span>(<span class="hljs-string">&quot;myBean2&quot;</span>) <span class="hljs-comment">// 指定依赖的其他 Bean，确保 myBean2 初始化完成后再实例化当前 Bean</span><br><span class="hljs-variable">@Primary</span>              <span class="hljs-comment">// 根据类型装配时，若有多个实现，该 Bean 为主要候选者</span><br>public class MyBean &#123;<br><br>    <span class="hljs-comment">// @PostConstruct：初始化方法，依赖注入完成后自动调用</span><br>    <span class="hljs-variable">@PostConstruct</span><br>    public void <span class="hljs-built_in">initMethod</span>() &#123;<br>        <span class="hljs-selector-tag">System</span><span class="hljs-selector-class">.out</span><span class="hljs-selector-class">.println</span>(<span class="hljs-string">&quot;MyBean initialized with all dependencies.&quot;</span>);<br>        <span class="hljs-comment">// 可以在这里放置资源初始化逻辑</span><br>    &#125;<br><br>    <span class="hljs-comment">// @PreDestroy：销毁方法，在 Bean 被容器销毁前调用</span><br>    @<span class="hljs-selector-tag">PreDestroy</span><br>    <span class="hljs-selector-tag">public</span> <span class="hljs-selector-tag">void</span> <span class="hljs-selector-tag">cleanup</span>() &#123;<br>        <span class="hljs-selector-tag">System</span><span class="hljs-selector-class">.out</span><span class="hljs-selector-class">.println</span>(<span class="hljs-string">&quot;MyBean is being destroyed. Cleaning up resources.&quot;</span>);<br>        <span class="hljs-comment">// 可以在这里执行清理操作</span><br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>

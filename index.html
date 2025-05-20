@@ -228,15 +228,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/" target="_self">
-          笔记：Minio
+        <a href="/2025/05/20/%E7%AC%94%E8%AE%B0%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE/" target="_self">
+          笔记：HTTP 协议
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/20/%E7%AC%94%E8%AE%B0%EF%BC%9AHTTP%20%E5%8D%8F%E8%AE%AE/" target="_self">
         <div>
-          一、理论Minio 核心概念&#x3D;&#x3D;1.Bucket&#x3D;&#x3D;Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹 &#x3D;&#x3D;2.Object&#x3D;&#x3D;Object 是存储到 Minio 中的基本对象，对用户而言，相当于文件  环境搭建单机测试环境搭建安装 Min
+          HTTP 请求HTTP 请求概述HTTP请求通常包含以下几个部分：  &#x3D;&#x3D;请求行&#x3D;&#x3D; ： 包含请求方法、请求目标和HTTP版本   &#x3D;&#x3D;请求头&#x3D;&#x3D; ： 包含关于客户端和请求的附加信息   &#x3D;&#x3D;空白行&#x3D;&#x3D;： 请求头和请求体之间有一个空行，表示请求头的结束   &#x3D;&#x3D
         </div>
       </a>
 
@@ -244,8 +244,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-13 00:00" pubdate>
-              2025-05-13
+            <time datetime="2025-05-20 00:00" pubdate>
+              2025-05-20
             </time>
           </div>
         
@@ -260,17 +260,17 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1/" class="category-chain-item">网络服务</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="category-chain-item">对象存储</a>
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1/HTTP-HTTPS-%E5%8D%8F%E8%AE%AE/" class="category-chain-item">HTTP / HTTPS 协议</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/Minio/" class="category-chain-item">Minio</a>
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1/HTTP-HTTPS-%E5%8D%8F%E8%AE%AE/HTTP/" class="category-chain-item">HTTP</a>
   
   
 
@@ -296,15 +296,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AObsidian%20%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/" target="_self">
-          笔记：Obsidian 插件制作（自用）
+        <a href="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/" target="_self">
+          笔记：JUC
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AObsidian%20%E6%8F%92%E4%BB%B6%E5%88%B6%E4%BD%9C%EF%BC%88%E8%87%AA%E7%94%A8%EF%BC%89/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/" target="_self">
         <div>
-          新建 Obsidian 仓库我们先创建一个叫“插件”的新仓库，专门用来做测试，避免误操作影响原有内容。此外别忘了在设置中启用“开发者模式”（设置 &gt; 第三方插件 &gt; 关闭安全模式）。  克隆 Obsidian 插件模板创建 ob_plugin 目录，并在该目录执行以下代码后，使用 VS 打开 my-obsidian-plugin 目录： 1git clone https://githu
+          1. 线程安全问题1.1. 线程安全问题概述在 Spring 中，我们通常会将某个类声明为 Bean，并通过依赖注入的方式在其他地方调用它的方法。也就是说，不管有多少个调用，最终操作的都是这个单例 Bean 的同一个实例。那么现在问题来了，如果我们将下面这段代码声明为 Bean： 1234567891011121314@Service  public class CounterService &#
         </div>
       </a>
 
@@ -312,163 +312,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-13 00:00" pubdate>
-              2025-05-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="category-chain-item">博客</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20%E6%95%B4%E5%90%88%20Minio/" target="_self">
-          笔记：Spring 整合 Minio
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20%E6%95%B4%E5%90%88%20Minio/" target="_self">
-        <div>
-          一、理论1. minio 核心 API2. MinioClient 线程安全问题关于 MinIO Client（MinIO Java SDK） 是否线程安全的问题，以下是详细分析：  3. 官方文档的说明根据 MinIO 官方文档和社区讨论，MinIO Java SDK 的 MinioClient 实例是线程安全的。这意味着：  你可以将同一个 MinioClient 实例在多个线程中共享使用，无
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-13 00:00" pubdate>
-              2025-05-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="category-chain-item">对象存储</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/Minio/" class="category-chain-item">Minio</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/" target="_self">
-          
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/" target="_self">
-        <div>
-          
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-12 17:20" pubdate>
-              2025-05-12
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%B5%8B%E8%AF%95/" target="_self">
-          笔记：Java 测试
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%B5%8B%E8%AF%95/" target="_self">
-        <div>
-          12345678910111213@Test@Transactional@Rollback(value = false) // juint 默认回滚事务，所以想提交事务就设置为false这是在juint 中，其他的可以不用public void testSendMessageInTx() &#123;    // 1、发送第一条消息    rabbitTemplate.convertAndSend
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-12 00:00" pubdate>
-              2025-05-12
+            <time datetime="2025-05-18 00:00" pubdate>
+              2025-05-18
             </time>
           </div>
         
@@ -488,181 +333,12 @@
   
     <span>></span>
     
-  <a href="/categories/Java/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/" class="category-chain-item">测试框架</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMD%20%E2%86%92%20Xmind%20%E7%A5%9E%E5%99%A8/" target="_self">
-          笔记：MD → Xmind 神器
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMD%20%E2%86%92%20Xmind%20%E7%A5%9E%E5%99%A8/" target="_self">
-        <div>
-          编写 Py 代码创建 markdown_title_extractor.py 并编写代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-12 00:00" pubdate>
-              2025-05-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="category-chain-item">博客</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9APython/" target="_self">
-          笔记：Python
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9APython/" target="_self">
-        <div>
-          1C:\Users\ASUS\AppData\Local\Programs\Python\Python39  更换 Python 版本可以通过多种方式实现，具体取决于你的操作系统和个人偏好。以下是几种常见的方法： 方法一：使用 pyenv 管理多个 Python 版本pyenv 是一个非常流行的工具，可以让你在同一台机器上轻松切换不同的 Python 版本。 安装 pyenv Windows: 使
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-12 00:00" pubdate>
-              2025-05-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Python/" class="category-chain-item">Python</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9ARaft%20%E5%8D%8F%E8%AE%AE/" target="_self">
-          笔记：Raft 协议
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/12/%E7%AC%94%E8%AE%B0%EF%BC%9ARaft%20%E5%8D%8F%E8%AE%AE/" target="_self">
-        <div>
-          1. Raft 协议概述Raft 是一种 分布式一致性协议，用于在多台服务器（或节点）之间 保持数据一致性，即便有部分节点发生故障。它的出现是为了解决一个经典的问题：“我们有多个节点，如果有一个客户端对系统发起写入请求，我们怎么保证这些节点最终看到的是同一份数据？怎么能保证即使部分节点宕机，整个集群依然能保持数据一致、服务不中断。”  2. Raft 协议三个核心角色 &#x3D;&#x3D;Fo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-12 00:00" pubdate>
-              2025-05-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">分布式、虚拟化、容器化、自动化</a>
+  <a href="/categories/Java/Java-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Java 基础</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE/" class="category-chain-item">分布式一致性协议</a>
+  <a href="/categories/Java/Java-%E5%9F%BA%E7%A1%80/JUC/" class="category-chain-item">JUC</a>
   
   
 
@@ -688,15 +364,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9AOllama/" target="_self">
-          笔记：Ollama
+        <a href="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/" target="_self">
+          笔记：Spring Security
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9AOllama/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/" target="_self">
         <div>
-          从 Ollama 官方网站 https://ollama.com/  下载 Ollama，模型都在这个里面，好好找找就行 下载 Chatbox https://github.com/chatboxai/chatbox/releases
+          一、理论1. 导图： 2. Spring Security 概述Spring Security 是一个专为基于 Spring 的应用程序设计的强大安全框架。它主要提供用户认证（如登录）、基于权限的访问控制（限制用户访问特定资源或方法）、“记住我”功能（实现登录状态的持久化），以及多种安全防护机制，用于抵御常见攻击。  3. Spring Security 核心图示  4. Spring Secur
         </div>
       </a>
 
@@ -704,8 +380,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-10 00:00" pubdate>
-              2025-05-10
+            <time datetime="2025-05-18 00:00" pubdate>
+              2025-05-18
             </time>
           </div>
         
@@ -720,13 +396,20 @@
     
       <span class="category-chain">
         
-  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/AI/Ollama/" class="category-chain-item">Ollama</a>
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/Spring-Security/" class="category-chain-item">Spring Security</a>
+  
+  
+
   
 
   
@@ -749,15 +432,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/" target="_self">
-          笔记：Spring Data RabbitMQ
+        <a href="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" target="_self">
+          笔记：Redis
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" target="_self">
         <div>
-          一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ
+          二、实操环境搭建单机测试环境搭建&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D; 1mkdir -p /mystudy/data/redis   &#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D; 123456789101112docker run -d \  --name redis \  -p 6379:6379 \  -v /mystudy/
         </div>
       </a>
 
@@ -765,8 +448,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-10 00:00" pubdate>
-              2025-05-10
+            <time datetime="2025-05-17 00:00" pubdate>
+              2025-05-17
             </time>
           </div>
         
@@ -786,12 +469,462 @@
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="category-chain-item">消息队列</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/" class="category-chain-item">非关系型数据库（NoSQL）</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E9%94%AE%E5%80%BC%E5%9E%8B/" class="category-chain-item">键值型</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E9%94%AE%E5%80%BC%E5%9E%8B/Redis/" class="category-chain-item">Redis</a>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20Redis/" target="_self">
+          笔记：Spring Data Redis
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20Redis/" target="_self">
+        <div>
+          实操1. 基本使用1.1. 创建 Spring Web 项目，添加 Redis 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;NoSQL&#x3D;&#x3D; Spring Data Redis     1.2. 进行 Redis 相关配置1.2.1. 通用配置123456789101112131415161718192021
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-17 00:00" pubdate>
+              2025-05-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/" class="category-chain-item">非关系型数据库（NoSQL）</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E9%94%AE%E5%80%BC%E5%9E%8B/" class="category-chain-item">键值型</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E9%94%AE%E5%80%BC%E5%9E%8B/Redis/" class="category-chain-item">Redis</a>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9AMongoDB/" target="_self">
+          笔记：MongoDB
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9AMongoDB/" target="_self">
+        <div>
+          二、实操环境搭建单机测试环境搭建123456docker run --rm -d \  --name secure-mongo \  -p 27017:27017 \  -e MONGO_INITDB_ROOT_USERNAME=admin \  -e MONGO_INITDB_ROOT_PASSWORD=wq666666 \  mongo:latest
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-16 00:00" pubdate>
+              2025-05-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/" class="category-chain-item">非关系型数据库（NoSQL）</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E6%96%87%E6%A1%A3%E5%9E%8B/" class="category-chain-item">文档型</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88NoSQL%EF%BC%89/%E6%96%87%E6%A1%A3%E5%9E%8B/MongoDB/" class="category-chain-item">MongoDB</a>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9Amall%20%E5%95%86%E5%9F%8E/" target="_self">
+          笔记：mall 商城
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9Amall%20%E5%95%86%E5%9F%8E/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-16 00:00" pubdate>
+              2025-05-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/%E9%A1%B9%E7%9B%AE/mall-%E5%95%86%E5%9F%8E/" class="category-chain-item">mall 商城</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%8B%B1%E8%AF%AD%E5%8F%A5%E5%AD%90/" target="_self">
+          笔记：英语句子
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%8B%B1%E8%AF%AD%E5%8F%A5%E5%AD%90/" target="_self">
+        <div>
+          Part of the challenge of communication is that we all have very different styles and expectations
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-16 00:00" pubdate>
+              2025-05-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/" class="category-chain-item">英语</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E5%8F%A5%E5%AD%90/" class="category-chain-item">英语句子</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/15/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%80%E7%BA%A7%E5%8D%95%E8%AF%8D/" target="_self">
+          笔记：一级单词
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/15/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%80%E7%BA%A7%E5%8D%95%E8%AF%8D/" target="_self">
+        <div>
+          triumph bother religious conjunction statue status state remedy vocabulary visualize exhibition exhibit inhibition durable inhibitant permanent parliament prominent season reason phenomenon prince pr
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-15 00:00" pubdate>
+              2025-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/" class="category-chain-item">英语</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D/" class="category-chain-item">英语单词</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/05/15/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%89%E7%BA%A7%E5%8D%95%E8%AF%8D/" target="_self">
+          笔记：三级单词
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/15/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%89%E7%BA%A7%E5%8D%95%E8%AF%8D/" target="_self">
+        <div>
+          sector imperialism legislation democratic drastic intervention mechanic technician substitute attribute perceive immense distribute principal perception reception philosophy irony dedicate provoke sc
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-05-15 00:00" pubdate>
+              2025-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/" class="category-chain-item">英语</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D/" class="category-chain-item">英语单词</a>
   
   
 
@@ -815,7 +948,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

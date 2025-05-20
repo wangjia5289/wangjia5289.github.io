@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="编写 Py 代码版本1（发光单词）预览图  代码创建 核心单词小工具.py 并编写代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：核心单词小工具">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/05/14/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="编写 Py 代码版本1（发光单词）预览图  代码创建 核心单词小工具.py 并编写代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/14/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%B7%A5%E5%85%B7/image-20250515202958185.png">
+<meta property="article:published_time" content="2025-05-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-05-17T14:39:39.594Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/14/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%B7%A5%E5%85%B7/image-20250515202958185.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：核心单词小工具 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/lan.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：核心单词小工具"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-14 00:00" pubdate>
+          May 14, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：核心单词小工具</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-05-17T22:39:39+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="编写-Py-代码"><a href="#编写-Py-代码" class="headerlink" title="编写 Py 代码"></a>编写 Py 代码</h3><h4 id="版本1（发光单词）"><a href="#版本1（发光单词）" class="headerlink" title="版本1（发光单词）"></a>版本1（发光单词）</h4><h5 id="预览图"><a href="#预览图" class="headerlink" title="预览图"></a>预览图</h5><p><img src="/2025/05/14/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%A0%B8%E5%BF%83%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%B7%A5%E5%85%B7/image-20250515202958185.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><p>创建 <code>核心单词小工具.py</code> 并编写代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog, messagebox<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">WordViewer</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, root</span>):<br>        <span class="hljs-variable language_">self</span>.root = root<br>        <span class="hljs-variable language_">self</span>.root.title(<span class="hljs-string">&quot;Markdown Word Viewer&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.words = []<br>        <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>        <span class="hljs-variable language_">self</span>.displayed_words = []<br><br>        <span class="hljs-comment"># Default folder path</span><br>        <span class="hljs-variable language_">self</span>.default_path = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\单词&quot;</span><br><br>        <span class="hljs-comment"># Set window size and center it</span><br>        window_width = <span class="hljs-number">565</span><br>        window_height = <span class="hljs-number">380</span>  <span class="hljs-comment"># Increased height to accommodate new button</span><br>        screen_width = root.winfo_screenwidth()<br>        screen_height = root.winfo_screenheight()<br>        x = (screen_width - window_width) // <span class="hljs-number">2</span><br>        y = (screen_height - window_height) // <span class="hljs-number">2</span><br>        <span class="hljs-variable language_">self</span>.root.geometry(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;window_width&#125;</span>x<span class="hljs-subst">&#123;window_height&#125;</span>+<span class="hljs-subst">&#123;x&#125;</span>+<span class="hljs-subst">&#123;y&#125;</span>&quot;</span>)<br><br>        <span class="hljs-comment"># Bind keyboard shortcuts</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Right&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_next_word())  <span class="hljs-comment"># Right arrow for next word</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Left&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_previous_word())  <span class="hljs-comment"># Left arrow for previous word</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Control-c&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.copy_word())  <span class="hljs-comment"># Ctrl+C for copying word</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Up&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.record_word())  <span class="hljs-comment"># Up arrow for recording word</span><br><br>        <span class="hljs-comment"># Create GUI components</span><br>        <span class="hljs-variable language_">self</span>.create_widgets()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_widgets</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Create and arrange GUI components.&quot;&quot;&quot;</span><br>        <span class="hljs-comment"># File selection button</span><br>        <span class="hljs-variable language_">self</span>.select_file_button = tk.Button(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;选择Markdown文件&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">14</span>), width=<span class="hljs-number">20</span>, height=<span class="hljs-number">2</span>, command=<span class="hljs-variable language_">self</span>.load_file)<br>        <span class="hljs-variable language_">self</span>.select_file_button.grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">0</span>, columnspan=<span class="hljs-number">4</span>, pady=<span class="hljs-number">20</span>)<br><br>        <span class="hljs-comment"># Word display area</span><br>        <span class="hljs-variable language_">self</span>.word_label = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">36</span>))<br>        <span class="hljs-variable language_">self</span>.word_label.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">0</span>, columnspan=<span class="hljs-number">4</span>, pady=<span class="hljs-number">30</span>)<br><br>        <span class="hljs-comment"># Progress display</span><br>        <span class="hljs-variable language_">self</span>.progress_label = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;0/0&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">16</span>))<br>        <span class="hljs-variable language_">self</span>.progress_label.grid(row=<span class="hljs-number">2</span>, column=<span class="hljs-number">0</span>, columnspan=<span class="hljs-number">4</span>, pady=<span class="hljs-number">10</span>)<br><br>        <span class="hljs-comment"># Navigation buttons</span><br>        <span class="hljs-variable language_">self</span>.prev_button = tk.Button(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;上一个&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">14</span>), width=<span class="hljs-number">10</span>, height=<span class="hljs-number">2</span>, command=<span class="hljs-variable language_">self</span>.show_previous_word)<br>        <span class="hljs-variable language_">self</span>.prev_button.grid(row=<span class="hljs-number">3</span>, column=<span class="hljs-number">0</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">20</span>)<br><br>        <span class="hljs-variable language_">self</span>.copy_button = tk.Button(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;复制&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">14</span>), width=<span class="hljs-number">10</span>, height=<span class="hljs-number">2</span>, command=<span class="hljs-variable language_">self</span>.copy_word)<br>        <span class="hljs-variable language_">self</span>.copy_button.grid(row=<span class="hljs-number">3</span>, column=<span class="hljs-number">1</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">20</span>)<br><br>        <span class="hljs-variable language_">self</span>.next_button = tk.Button(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;下一个&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">14</span>), width=<span class="hljs-number">10</span>, height=<span class="hljs-number">2</span>, command=<span class="hljs-variable language_">self</span>.show_next_word)<br>        <span class="hljs-variable language_">self</span>.next_button.grid(row=<span class="hljs-number">3</span>, column=<span class="hljs-number">2</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">20</span>)<br><br>        <span class="hljs-variable language_">self</span>.record_button = tk.Button(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">&quot;记录&quot;</span>, font=(<span class="hljs-string">&quot;Arial&quot;</span>, <span class="hljs-number">14</span>), width=<span class="hljs-number">10</span>, height=<span class="hljs-number">2</span>, command=<span class="hljs-variable language_">self</span>.record_word)<br>        <span class="hljs-variable language_">self</span>.record_button.grid(row=<span class="hljs-number">3</span>, column=<span class="hljs-number">3</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">20</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_file</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load a Markdown file and extract words encased in == ==.&quot;&quot;&quot;</span><br>        file_path = filedialog.askopenfilename(initialdir=<span class="hljs-variable language_">self</span>.default_path, title=<span class="hljs-string">&quot;选择Markdown文件&quot;</span>,<br>                                               filetypes=((<span class="hljs-string">&quot;Markdown files&quot;</span>, <span class="hljs-string">&quot;*.md&quot;</span>), (<span class="hljs-string">&quot;all files&quot;</span>, <span class="hljs-string">&quot;*.*&quot;</span>)))<br>        <span class="hljs-keyword">if</span> file_path:<br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>                    content = file.read()<br>                    <span class="hljs-comment"># Extract words enclosed in == ==</span><br>                    <span class="hljs-variable language_">self</span>.words = re.findall(<span class="hljs-string">r&#x27;==(\w+)==&#x27;</span>, content)<br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>                        messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;未找到被== ==包围的单词&quot;</span>)<br>                        <span class="hljs-keyword">return</span><br>                    <span class="hljs-variable language_">self</span>.displayed_words = []<br>                    <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>                    <span class="hljs-variable language_">self</span>.show_next_word()<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;加载文件失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_next_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the next random word.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.words):<br>            word = random.choice(<span class="hljs-variable language_">self</span>.words)<br>            <span class="hljs-keyword">while</span> word <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.displayed_words:<br>                word = random.choice(<span class="hljs-variable language_">self</span>.words)<br>            <span class="hljs-variable language_">self</span>.displayed_words.append(word)<br>            <span class="hljs-variable language_">self</span>.current_index += <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;所有单词已展示完毕&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_previous_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the previous word.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.current_index -= <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;已经是第一个单词&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">copy_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Copy the current word to clipboard.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.root.clipboard_clear()<br>            <span class="hljs-variable language_">self</span>.root.clipboard_append(word)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">record_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Append the current word to the difficult words file with incremental numbering.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            output_file = <span class="hljs-string">r&quot;D:\文件集合\好难的单词.md&quot;</span><br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-comment"># Ensure the directory exists</span><br>                os.makedirs(os.path.dirname(output_file), exist_ok=<span class="hljs-literal">True</span>)<br>                <br>                <span class="hljs-comment"># Check if file exists and count existing entries</span><br>                entry_count = <span class="hljs-number">0</span><br>                <span class="hljs-keyword">if</span> os.path.exists(output_file):<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        lines = f.readlines()<br>                        <span class="hljs-comment"># Count lines that match the format &quot;number. word&quot;</span><br>                        entry_count = <span class="hljs-built_in">sum</span>(<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines <span class="hljs-keyword">if</span> re.<span class="hljs-keyword">match</span>(<span class="hljs-string">r&#x27;^\d+\.\s+\w+$&#x27;</span>, line.strip()))<br>                <br>                <span class="hljs-comment"># Append new word with next number</span><br>                <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;a&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                    f.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;entry_count + <span class="hljs-number">1</span>&#125;</span>. <span class="hljs-subst">&#123;word&#125;</span>\n&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;记录单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_display</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Update the word display and progress label.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.word_label.config(text=word)<br>            <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;self.current_index + <span class="hljs-number">1</span>&#125;</span>/<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.words)&#125;</span>&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    root = tk.Tk()<br>    app = WordViewer(root)<br>    root.mainloop()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="版本2（三级单词）"><a href="#版本2（三级单词）" class="headerlink" title="版本2（三级单词）"></a>版本2（三级单词）</h4><h5 id="一级单词"><a href="#一级单词" class="headerlink" title="一级单词"></a>一级单词</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="二级单词"><a href="#二级单词" class="headerlink" title="二级单词"></a>二级单词</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog, messagebox<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> ttk<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">WordViewer</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, root</span>):<br>        <span class="hljs-variable language_">self</span>.root = root<br>        <span class="hljs-variable language_">self</span>.root.title(<span class="hljs-string">&quot;Markdown Word Viewer&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.words = []<br>        <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>        <span class="hljs-variable language_">self</span>.displayed_words = []<br>        <span class="hljs-variable language_">self</span>.log_file = <span class="hljs-string">&quot;wordviewer_log.txt&quot;</span><br><br>        <span class="hljs-comment"># Default file path</span><br>        <span class="hljs-variable language_">self</span>.default_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：二级单词.md&quot;</span><br>        <span class="hljs-variable language_">self</span>.default_path = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts&quot;</span><br><br>        <span class="hljs-comment"># Set window size and center it</span><br>        window_width = <span class="hljs-number">700</span><br>        window_height = <span class="hljs-number">450</span><br>        screen_width = root.winfo_screenwidth()<br>        screen_height = root.winfo_screenheight()<br>        x = (screen_width - window_width) // <span class="hljs-number">2</span><br>        y = (screen_height - window_height) // <span class="hljs-number">2</span><br>        <span class="hljs-variable language_">self</span>.root.geometry(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;window_width&#125;</span>x<span class="hljs-subst">&#123;window_height&#125;</span>+<span class="hljs-subst">&#123;x&#125;</span>+<span class="hljs-subst">&#123;y&#125;</span>&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.root.configure(bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br><br>        <span class="hljs-comment"># Bind keyboard shortcuts</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Right&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_next_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Left&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_previous_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Control-c&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.copy_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Up&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.record_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Delete&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.delete_word())<br><br>        <span class="hljs-comment"># Apply style</span><br>        <span class="hljs-variable language_">self</span>.style = ttk.Style()<br>        <span class="hljs-variable language_">self</span>.style.configure(<span class="hljs-string">&quot;TButton&quot;</span>, font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), padding=<span class="hljs-number">10</span>)<br>        <span class="hljs-variable language_">self</span>.style.<span class="hljs-built_in">map</span>(<span class="hljs-string">&quot;TButton&quot;</span>, <br>                      background=[(<span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-string">&#x27;#45a049&#x27;</span>)],<br>                      foreground=[(<span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-string">&#x27;white&#x27;</span>)])<br><br>        <span class="hljs-comment"># Create GUI components</span><br>        <span class="hljs-variable language_">self</span>.create_widgets()<br><br>        <span class="hljs-comment"># Initialize log</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;WordViewer 初始化&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">log</span>(<span class="hljs-params">self, message</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Write debug information to log file.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-variable language_">self</span>.log_file, <span class="hljs-string">&#x27;a&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>            f.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;datetime.now()&#125;</span>: <span class="hljs-subst">&#123;message&#125;</span>\n&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_widgets</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Create and arrange GUI components.&quot;&quot;&quot;</span><br>        main_frame = tk.Frame(<span class="hljs-variable language_">self</span>.root, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        main_frame.pack(pady=<span class="hljs-number">20</span>, padx=<span class="hljs-number">20</span>, fill=<span class="hljs-string">&quot;both&quot;</span>, expand=<span class="hljs-literal">True</span>)<br><br>        file_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        file_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">10</span>)<br><br>        <span class="hljs-variable language_">self</span>.load_default_button = ttk.Button(file_frame, text=<span class="hljs-string">&quot;加载默认文件&quot;</span>, <br>                                            command=<span class="hljs-variable language_">self</span>.load_default_file, <br>                                            style=<span class="hljs-string">&quot;TButton&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.load_default_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.select_file_button = ttk.Button(file_frame, text=<span class="hljs-string">&quot;选择其他文件&quot;</span>, <br>                                           command=<span class="hljs-variable language_">self</span>.load_file, <br>                                           style=<span class="hljs-string">&quot;TButton&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.select_file_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        word_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;white&quot;</span>, relief=<span class="hljs-string">&quot;raised&quot;</span>, bd=<span class="hljs-number">2</span>)<br>        word_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">20</span>, padx=<span class="hljs-number">20</span>)<br>        <br>        <span class="hljs-variable language_">self</span>.word_label = tk.Label(word_frame, text=<span class="hljs-string">&quot;&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">36</span>, <span class="hljs-string">&quot;bold&quot;</span>), <br>                                 bg=<span class="hljs-string">&quot;white&quot;</span>, <br>                                 fg=<span class="hljs-string">&quot;#333333&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.word_label.pack(pady=<span class="hljs-number">30</span>)<br><br>        <span class="hljs-variable language_">self</span>.progress_label = tk.Label(main_frame, text=<span class="hljs-string">&quot;0/0&quot;</span>, <br>                                     font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">14</span>), <br>                                     bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>, <br>                                     fg=<span class="hljs-string">&quot;#666666&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.progress_label.pack(pady=<span class="hljs-number">10</span>)<br><br>        button_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        button_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">20</span>)<br><br>        button_style = &#123;<span class="hljs-string">&quot;style&quot;</span>: <span class="hljs-string">&quot;TButton&quot;</span>, <span class="hljs-string">&quot;width&quot;</span>: <span class="hljs-number">12</span>&#125;<br>        <br>        <span class="hljs-variable language_">self</span>.prev_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;上一个&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.show_previous_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.prev_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.copy_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;复制&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.copy_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.copy_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.next_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;下一个&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.show_next_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.next_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.record_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;记录&quot;</span>, <br>                                      command=<span class="hljs-variable language_">self</span>.record_word, <br>                                      **button_style)<br>        <span class="hljs-variable language_">self</span>.record_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.delete_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;删除&quot;</span>, <br>                                      command=<span class="hljs-variable language_">self</span>.delete_word, <br>                                      **button_style)<br>        <span class="hljs-variable language_">self</span>.delete_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_default_file</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load the default Markdown file.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.load_markdown_file(<span class="hljs-variable language_">self</span>.default_file)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_file</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load a user-selected Markdown file.&quot;&quot;&quot;</span><br>        file_path = filedialog.askopenfilename(initialdir=<span class="hljs-variable language_">self</span>.default_path, <br>                                             title=<span class="hljs-string">&quot;选择Markdown文件&quot;</span>,<br>                                             filetypes=((<span class="hljs-string">&quot;Markdown files&quot;</span>, <span class="hljs-string">&quot;*.md&quot;</span>), <br>                                                       (<span class="hljs-string">&quot;all files&quot;</span>, <span class="hljs-string">&quot;*.*&quot;</span>)))<br>        <span class="hljs-keyword">if</span> file_path:<br>            <span class="hljs-variable language_">self</span>.load_markdown_file(file_path)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_markdown_file</span>(<span class="hljs-params">self, file_path</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load a Markdown file and extract words in the format &#x27;number. word&#x27;.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>                content = file.read()<br>                lines = content.splitlines()<br>                matched_words = []<br>                unmatched_lines = []<br>                <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>                    <span class="hljs-keyword">match</span> = re.<span class="hljs-keyword">match</span>(<span class="hljs-string">r&#x27;^\s*\d+\.\s*([a-zA-Z\&#x27;-]+)&#x27;</span>, line)<br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span>:<br>                        matched_words.append(<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>))<br>                    <span class="hljs-keyword">elif</span> line.strip():  <span class="hljs-comment"># Ignore empty lines</span><br>                        unmatched_lines.append(line)<br>                <br>                <span class="hljs-comment"># Remove duplicates (case-insensitive)</span><br>                word_dict = &#123;word.lower(): word <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> matched_words&#125;<br>                <span class="hljs-variable language_">self</span>.words = <span class="hljs-built_in">list</span>(word_dict.values())<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;加载文件: <span class="hljs-subst">&#123;file_path&#125;</span>&quot;</span>)<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;总行数: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(lines)&#125;</span>, 匹配单词数: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(matched_words)&#125;</span>, 去重后: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.words)&#125;</span>&quot;</span>)<br>                <span class="hljs-keyword">if</span> unmatched_lines:<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;未匹配的行 (<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(unmatched_lines)&#125;</span>):\n&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span>.join(unmatched_lines))<br>                <br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>                    messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;未找到符合格式的单词&quot;</span>)<br>                    <span class="hljs-keyword">return</span><br>                <br>                <span class="hljs-variable language_">self</span>.displayed_words = []<br>                <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>                <span class="hljs-variable language_">self</span>.show_next_word()<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;加载文件失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;加载文件失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_next_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the next word or navigate through displayed words.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;点击下一个, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span>:<br>            <span class="hljs-variable language_">self</span>.current_index += <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.words):<br>            <span class="hljs-comment"># Get list of undisplayed words</span><br>            undisplayed = [w <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.words <span class="hljs-keyword">if</span> w <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.displayed_words]<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> undisplayed:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;未找到未显示的单词，可能存在逻辑错误&quot;</span>)<br>                messagebox.showwarning(<span class="hljs-string">&quot;警告&quot;</span>, <span class="hljs-string">&quot;无法找到新的单词&quot;</span>)<br>                <span class="hljs-keyword">return</span><br>            word = random.choice(undisplayed)<br>            <span class="hljs-variable language_">self</span>.displayed_words.append(word)<br>            <span class="hljs-variable language_">self</span>.current_index = <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;添加新单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;所有单词已展示完毕&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_previous_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the previous word.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;点击上一个, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.current_index -= <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;已经是第一个单词&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">copy_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Copy the current word to clipboard.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.root.clipboard_clear()<br>            <span class="hljs-variable language_">self</span>.root.clipboard_append(word)<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;复制单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">record_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Append the current word to the difficult words file if not already present.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            output_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：三级单词.md&quot;</span><br>            <span class="hljs-keyword">try</span>:<br>                os.makedirs(os.path.dirname(output_file), exist_ok=<span class="hljs-literal">True</span>)<br>                <br>                word_exists = <span class="hljs-literal">False</span><br>                existing_words = []<br>                <span class="hljs-keyword">if</span> os.path.exists(output_file):<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        content = f.read()<br>                        existing_words = [<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">in</span> re.finditer(<span class="hljs-string">r&#x27;^\s*\d+\.\s*([a-zA-Z\&#x27;-]+)&#x27;</span>, content, re.MULTILINE)]<br>                        <span class="hljs-keyword">if</span> word.lower() <span class="hljs-keyword">in</span> [w.lower() <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> existing_words]:<br>                            word_exists = <span class="hljs-literal">True</span><br>                <br>                <span class="hljs-keyword">if</span> word_exists:<br>                    msg = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">f&quot;单词 &#x27;<span class="hljs-subst">&#123;word&#125;</span>&#x27; 已存在！&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), fg=<span class="hljs-string">&quot;red&quot;</span>, <br>                                 bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>                    msg.pack(pady=<span class="hljs-number">5</span>)<br>                    <span class="hljs-variable language_">self</span>.root.after(<span class="hljs-number">2000</span>, msg.destroy)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;单词已存在: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;a&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        f.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(existing_words) + <span class="hljs-number">1</span>&#125;</span>. <span class="hljs-subst">&#123;word&#125;</span>\n&quot;</span>)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;记录单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;记录单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;记录单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">delete_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Delete the current word from the Markdown file and update the display.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            output_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：二级单词.md&quot;</span><br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-keyword">if</span> os.path.exists(output_file):<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        lines = f.readlines()<br>                    <br>                    new_lines = []<br>                    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>                        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> re.<span class="hljs-keyword">match</span>(<span class="hljs-string">rf&#x27;^\s*\d+\.\s*<span class="hljs-subst">&#123;re.escape(word)&#125;</span>\s*$&#x27;</span>, line.strip()):<br>                            new_lines.append(line)<br>                    <br>                    i = <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">for</span> idx, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(new_lines):<br>                        <span class="hljs-keyword">if</span> re.<span class="hljs-keyword">match</span>(<span class="hljs-string">r&#x27;^\s*\d+\.\s*[a-zA-Z\&#x27;-]+&#x27;</span>, line.strip()):<br>                            new_lines[idx] = re.sub(<span class="hljs-string">r&#x27;^\s*\d+\.&#x27;</span>, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;i&#125;</span>.&quot;</span>, line)<br>                            i += <span class="hljs-number">1</span><br>                    <br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        f.writelines(new_lines)<br>                    <br>                    <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.words:<br>                        <span class="hljs-variable language_">self</span>.words.remove(word)<br>                    <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.displayed_words:<br>                        <span class="hljs-variable language_">self</span>.displayed_words.remove(word)<br>                        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &gt;= <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>                            <span class="hljs-variable language_">self</span>.current_index = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span>)<br>                    <br>                    msg = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">f&quot;单词 &#x27;<span class="hljs-subst">&#123;word&#125;</span>&#x27; 已删除！&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), fg=<span class="hljs-string">&quot;green&quot;</span>, <br>                                 bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>                    msg.pack(pady=<span class="hljs-number">5</span>)<br>                    <span class="hljs-variable language_">self</span>.root.after(<span class="hljs-number">2000</span>, msg.destroy)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;删除单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>                    <br>                    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.displayed_words:<br>                        <span class="hljs-variable language_">self</span>.update_display()<br>                    <span class="hljs-keyword">else</span>:<br>                        <span class="hljs-variable language_">self</span>.word_label.config(text=<span class="hljs-string">&quot;&quot;</span>)<br>                        <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">&quot;0/0&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;删除单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;删除单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_display</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Update the word display and progress label.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;更新显示, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.word_label.config(text=word)<br>            <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;self.current_index + <span class="hljs-number">1</span>&#125;</span>/<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.word_label.config(text=<span class="hljs-string">&quot;&quot;</span>)<br>            <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">&quot;0/0&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    root = tk.Tk()<br>    app = WordViewer(root)<br>    root.mainloop()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="三级单词"><a href="#三级单词" class="headerlink" title="三级单词"></a>三级单词</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog, messagebox<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> ttk<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">WordViewer</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, root</span>):<br>        <span class="hljs-variable language_">self</span>.root = root<br>        <span class="hljs-variable language_">self</span>.root.title(<span class="hljs-string">&quot;Markdown Word Viewer&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.words = []<br>        <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>        <span class="hljs-variable language_">self</span>.displayed_words = []<br>        <span class="hljs-variable language_">self</span>.log_file = <span class="hljs-string">&quot;wordviewer_log.txt&quot;</span><br><br>        <span class="hljs-comment"># Default file path</span><br>        <span class="hljs-variable language_">self</span>.default_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：三级单词.md&quot;</span><br>        <span class="hljs-variable language_">self</span>.default_path = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts&quot;</span><br><br>        <span class="hljs-comment"># Set window size and center it</span><br>        window_width = <span class="hljs-number">700</span><br>        window_height = <span class="hljs-number">450</span><br>        screen_width = root.winfo_screenwidth()<br>        screen_height = root.winfo_screenheight()<br>        x = (screen_width - window_width) // <span class="hljs-number">2</span><br>        y = (screen_height - window_height) // <span class="hljs-number">2</span><br>        <span class="hljs-variable language_">self</span>.root.geometry(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;window_width&#125;</span>x<span class="hljs-subst">&#123;window_height&#125;</span>+<span class="hljs-subst">&#123;x&#125;</span>+<span class="hljs-subst">&#123;y&#125;</span>&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.root.configure(bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br><br>        <span class="hljs-comment"># Bind keyboard shortcuts</span><br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Right&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_next_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Left&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.show_previous_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Control-c&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.copy_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Up&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.record_word())<br>        <span class="hljs-variable language_">self</span>.root.bind(<span class="hljs-string">&#x27;&lt;Delete&gt;&#x27;</span>, <span class="hljs-keyword">lambda</span> event: <span class="hljs-variable language_">self</span>.delete_word())<br><br>        <span class="hljs-comment"># Apply style</span><br>        <span class="hljs-variable language_">self</span>.style = ttk.Style()<br>        <span class="hljs-variable language_">self</span>.style.configure(<span class="hljs-string">&quot;TButton&quot;</span>, font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), padding=<span class="hljs-number">10</span>)<br>        <span class="hljs-variable language_">self</span>.style.<span class="hljs-built_in">map</span>(<span class="hljs-string">&quot;TButton&quot;</span>, <br>                      background=[(<span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-string">&#x27;#45a049&#x27;</span>)],<br>                      foreground=[(<span class="hljs-string">&#x27;active&#x27;</span>, <span class="hljs-string">&#x27;white&#x27;</span>)])<br><br>        <span class="hljs-comment"># Create GUI components</span><br>        <span class="hljs-variable language_">self</span>.create_widgets()<br><br>        <span class="hljs-comment"># Initialize log</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;WordViewer 初始化&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">log</span>(<span class="hljs-params">self, message</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Write debug information to log file.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-variable language_">self</span>.log_file, <span class="hljs-string">&#x27;a&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>            f.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;datetime.now()&#125;</span>: <span class="hljs-subst">&#123;message&#125;</span>\n&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_widgets</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Create and arrange GUI components.&quot;&quot;&quot;</span><br>        main_frame = tk.Frame(<span class="hljs-variable language_">self</span>.root, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        main_frame.pack(pady=<span class="hljs-number">20</span>, padx=<span class="hljs-number">20</span>, fill=<span class="hljs-string">&quot;both&quot;</span>, expand=<span class="hljs-literal">True</span>)<br><br>        file_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        file_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">10</span>)<br><br>        <span class="hljs-variable language_">self</span>.load_default_button = ttk.Button(file_frame, text=<span class="hljs-string">&quot;加载默认文件&quot;</span>, <br>                                            command=<span class="hljs-variable language_">self</span>.load_default_file, <br>                                            style=<span class="hljs-string">&quot;TButton&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.load_default_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.select_file_button = ttk.Button(file_frame, text=<span class="hljs-string">&quot;选择其他文件&quot;</span>, <br>                                           command=<span class="hljs-variable language_">self</span>.load_file, <br>                                           style=<span class="hljs-string">&quot;TButton&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.select_file_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        word_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;white&quot;</span>, relief=<span class="hljs-string">&quot;raised&quot;</span>, bd=<span class="hljs-number">2</span>)<br>        word_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">20</span>, padx=<span class="hljs-number">20</span>)<br>        <br>        <span class="hljs-variable language_">self</span>.word_label = tk.Label(word_frame, text=<span class="hljs-string">&quot;&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">36</span>, <span class="hljs-string">&quot;bold&quot;</span>), <br>                                 bg=<span class="hljs-string">&quot;white&quot;</span>, <br>                                 fg=<span class="hljs-string">&quot;#333333&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.word_label.pack(pady=<span class="hljs-number">30</span>)<br><br>        <span class="hljs-variable language_">self</span>.progress_label = tk.Label(main_frame, text=<span class="hljs-string">&quot;0/0&quot;</span>, <br>                                     font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">14</span>), <br>                                     bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>, <br>                                     fg=<span class="hljs-string">&quot;#666666&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.progress_label.pack(pady=<span class="hljs-number">10</span>)<br><br>        button_frame = tk.Frame(main_frame, bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>        button_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=<span class="hljs-number">20</span>)<br><br>        button_style = &#123;<span class="hljs-string">&quot;style&quot;</span>: <span class="hljs-string">&quot;TButton&quot;</span>, <span class="hljs-string">&quot;width&quot;</span>: <span class="hljs-number">12</span>&#125;<br>        <br>        <span class="hljs-variable language_">self</span>.prev_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;上一个&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.show_previous_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.prev_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.copy_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;复制&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.copy_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.copy_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.next_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;下一个&quot;</span>, <br>                                    command=<span class="hljs-variable language_">self</span>.show_next_word, <br>                                    **button_style)<br>        <span class="hljs-variable language_">self</span>.next_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.record_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;记录&quot;</span>, <br>                                      command=<span class="hljs-variable language_">self</span>.record_word, <br>                                      **button_style)<br>        <span class="hljs-variable language_">self</span>.record_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>        <span class="hljs-variable language_">self</span>.delete_button = ttk.Button(button_frame, text=<span class="hljs-string">&quot;删除&quot;</span>, <br>                                      command=<span class="hljs-variable language_">self</span>.delete_word, <br>                                      **button_style)<br>        <span class="hljs-variable language_">self</span>.delete_button.pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">5</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_default_file</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load the default Markdown file.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.load_markdown_file(<span class="hljs-variable language_">self</span>.default_file)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_file</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load a user-selected Markdown file.&quot;&quot;&quot;</span><br>        file_path = filedialog.askopenfilename(initialdir=<span class="hljs-variable language_">self</span>.default_path, <br>                                             title=<span class="hljs-string">&quot;选择Markdown文件&quot;</span>,<br>                                             filetypes=((<span class="hljs-string">&quot;Markdown files&quot;</span>, <span class="hljs-string">&quot;*.md&quot;</span>), <br>                                                       (<span class="hljs-string">&quot;all files&quot;</span>, <span class="hljs-string">&quot;*.*&quot;</span>)))<br>        <span class="hljs-keyword">if</span> file_path:<br>            <span class="hljs-variable language_">self</span>.load_markdown_file(file_path)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_markdown_file</span>(<span class="hljs-params">self, file_path</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Load a Markdown file and extract words in the format &#x27;number. word&#x27;.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>                content = file.read()<br>                lines = content.splitlines()<br>                matched_words = []<br>                unmatched_lines = []<br>                <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>                    <span class="hljs-keyword">match</span> = re.<span class="hljs-keyword">match</span>(<span class="hljs-string">r&#x27;^\s*\d+\.\s*([a-zA-Z\&#x27;-]+)&#x27;</span>, line)<br>                    <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span>:<br>                        matched_words.append(<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>))<br>                    <span class="hljs-keyword">elif</span> line.strip():  <span class="hljs-comment"># Ignore empty lines</span><br>                        unmatched_lines.append(line)<br>                <br>                <span class="hljs-comment"># Remove duplicates (case-insensitive)</span><br>                word_dict = &#123;word.lower(): word <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> matched_words&#125;<br>                <span class="hljs-variable language_">self</span>.words = <span class="hljs-built_in">list</span>(word_dict.values())<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;加载文件: <span class="hljs-subst">&#123;file_path&#125;</span>&quot;</span>)<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;总行数: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(lines)&#125;</span>, 匹配单词数: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(matched_words)&#125;</span>, 去重后: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.words)&#125;</span>&quot;</span>)<br>                <span class="hljs-keyword">if</span> unmatched_lines:<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;未匹配的行 (<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(unmatched_lines)&#125;</span>):\n&quot;</span> + <span class="hljs-string">&quot;\n&quot;</span>.join(unmatched_lines))<br>                <br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>                    messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;未找到符合格式的单词&quot;</span>)<br>                    <span class="hljs-keyword">return</span><br>                <br>                <span class="hljs-variable language_">self</span>.displayed_words = []<br>                <span class="hljs-variable language_">self</span>.current_index = -<span class="hljs-number">1</span><br>                <span class="hljs-variable language_">self</span>.show_next_word()<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;加载文件失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;加载文件失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_next_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the next word or navigate through displayed words.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.words:<br>            <span class="hljs-keyword">return</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;点击下一个, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span>:<br>            <span class="hljs-variable language_">self</span>.current_index += <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.words):<br>            <span class="hljs-comment"># Get list of undisplayed words</span><br>            undisplayed = [w <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.words <span class="hljs-keyword">if</span> w <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.displayed_words]<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> undisplayed:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;未找到未显示的单词，可能存在逻辑错误&quot;</span>)<br>                messagebox.showwarning(<span class="hljs-string">&quot;警告&quot;</span>, <span class="hljs-string">&quot;无法找到新的单词&quot;</span>)<br>                <span class="hljs-keyword">return</span><br>            word = random.choice(undisplayed)<br>            <span class="hljs-variable language_">self</span>.displayed_words.append(word)<br>            <span class="hljs-variable language_">self</span>.current_index = <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;添加新单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;所有单词已展示完毕&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_previous_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Show the previous word.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;点击上一个, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.current_index -= <span class="hljs-number">1</span><br>            <span class="hljs-variable language_">self</span>.update_display()<br>        <span class="hljs-keyword">else</span>:<br>            messagebox.showinfo(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;已经是第一个单词&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">copy_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Copy the current word to clipboard.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.root.clipboard_clear()<br>            <span class="hljs-variable language_">self</span>.root.clipboard_append(word)<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;复制单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">record_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Append the current word to the difficult words file if not already present.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            output_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：三级单词.md&quot;</span><br>            <span class="hljs-keyword">try</span>:<br>                os.makedirs(os.path.dirname(output_file), exist_ok=<span class="hljs-literal">True</span>)<br>                <br>                word_exists = <span class="hljs-literal">False</span><br>                existing_words = []<br>                <span class="hljs-keyword">if</span> os.path.exists(output_file):<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        content = f.read()<br>                        existing_words = [<span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">in</span> re.finditer(<span class="hljs-string">r&#x27;^\s*\d+\.\s*([a-zA-Z\&#x27;-]+)&#x27;</span>, content, re.MULTILINE)]<br>                        <span class="hljs-keyword">if</span> word.lower() <span class="hljs-keyword">in</span> [w.lower() <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> existing_words]:<br>                            word_exists = <span class="hljs-literal">True</span><br>                <br>                <span class="hljs-keyword">if</span> word_exists:<br>                    msg = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">f&quot;单词 &#x27;<span class="hljs-subst">&#123;word&#125;</span>&#x27; 已存在！&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), fg=<span class="hljs-string">&quot;red&quot;</span>, <br>                                 bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>                    msg.pack(pady=<span class="hljs-number">5</span>)<br>                    <span class="hljs-variable language_">self</span>.root.after(<span class="hljs-number">2000</span>, msg.destroy)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;单词已存在: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;a&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        f.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(existing_words) + <span class="hljs-number">1</span>&#125;</span>. <span class="hljs-subst">&#123;word&#125;</span>\n&quot;</span>)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;记录单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;记录单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;记录单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">delete_word</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Delete the current word from the Markdown file and update the display.&quot;&quot;&quot;</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            output_file = <span class="hljs-string">r&quot;E:\1、办公\4、博客\myNote\source\_posts\笔记：三级单词.md&quot;</span><br>            <span class="hljs-keyword">try</span>:<br>                <span class="hljs-keyword">if</span> os.path.exists(output_file):<br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        lines = f.readlines()<br>                    <br>                    new_lines = []<br>                    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> lines:<br>                        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> re.<span class="hljs-keyword">match</span>(<span class="hljs-string">rf&#x27;^\s*\d+\.\s*<span class="hljs-subst">&#123;re.escape(word)&#125;</span>\s*$&#x27;</span>, line.strip()):<br>                            new_lines.append(line)<br>                    <br>                    i = <span class="hljs-number">1</span><br>                    <span class="hljs-keyword">for</span> idx, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(new_lines):<br>                        <span class="hljs-keyword">if</span> re.<span class="hljs-keyword">match</span>(<span class="hljs-string">r&#x27;^\s*\d+\.\s*[a-zA-Z\&#x27;-]+&#x27;</span>, line.strip()):<br>                            new_lines[idx] = re.sub(<span class="hljs-string">r&#x27;^\s*\d+\.&#x27;</span>, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;i&#125;</span>.&quot;</span>, line)<br>                            i += <span class="hljs-number">1</span><br>                    <br>                    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                        f.writelines(new_lines)<br>                    <br>                    <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.words:<br>                        <span class="hljs-variable language_">self</span>.words.remove(word)<br>                    <span class="hljs-keyword">if</span> word <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.displayed_words:<br>                        <span class="hljs-variable language_">self</span>.displayed_words.remove(word)<br>                        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.current_index &gt;= <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>                            <span class="hljs-variable language_">self</span>.current_index = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words) - <span class="hljs-number">1</span>)<br>                    <br>                    msg = tk.Label(<span class="hljs-variable language_">self</span>.root, text=<span class="hljs-string">f&quot;单词 &#x27;<span class="hljs-subst">&#123;word&#125;</span>&#x27; 已删除！&quot;</span>, <br>                                 font=(<span class="hljs-string">&quot;Helvetica&quot;</span>, <span class="hljs-number">12</span>), fg=<span class="hljs-string">&quot;green&quot;</span>, <br>                                 bg=<span class="hljs-string">&quot;#f0f2f5&quot;</span>)<br>                    msg.pack(pady=<span class="hljs-number">5</span>)<br>                    <span class="hljs-variable language_">self</span>.root.after(<span class="hljs-number">2000</span>, msg.destroy)<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;删除单词: <span class="hljs-subst">&#123;word&#125;</span>&quot;</span>)<br>                    <br>                    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.displayed_words:<br>                        <span class="hljs-variable language_">self</span>.update_display()<br>                    <span class="hljs-keyword">else</span>:<br>                        <span class="hljs-variable language_">self</span>.word_label.config(text=<span class="hljs-string">&quot;&quot;</span>)<br>                        <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">&quot;0/0&quot;</span>)<br>            <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;删除单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>                messagebox.showerror(<span class="hljs-string">&quot;错误&quot;</span>, <span class="hljs-string">f&quot;删除单词失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_display</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;Update the word display and progress label.&quot;&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;更新显示, current_index: <span class="hljs-subst">&#123;self.current_index&#125;</span>, displayed_words: <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.displayed_words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-number">0</span> &lt;= <span class="hljs-variable language_">self</span>.current_index &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.displayed_words):<br>            word = <span class="hljs-variable language_">self</span>.displayed_words[<span class="hljs-variable language_">self</span>.current_index]<br>            <span class="hljs-variable language_">self</span>.word_label.config(text=word)<br>            <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;self.current_index + <span class="hljs-number">1</span>&#125;</span>/<span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(self.words)&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.word_label.config(text=<span class="hljs-string">&quot;&quot;</span>)<br>            <span class="hljs-variable language_">self</span>.progress_label.config(text=<span class="hljs-string">&quot;0/0&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    root = tk.Tk()<br>    app = WordViewer(root)<br>    root.mainloop()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="打包为可执行文件"><a href="#打包为可执行文件" class="headerlink" title="打包为可执行文件"></a>打包为可执行文件</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 安装打包工具</span><br>pip install pyinstaller<br><br><br><span class="hljs-comment"># 2. 打包代码</span><br>pyinstaller <span class="hljs-operator">-</span>-onefile <span class="hljs-operator">-</span>-windowed <span class="hljs-operator">-</span>-distpath D:\文件集合\ D:\文件集合\加光单词.py<br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. --onefile</span><br><span class="hljs-string">	1. 打包为单个 .exe 文件。</span><br><span class="hljs-string">2. --windowed</span><br><span class="hljs-string">	1. 确保 GUI 程序无控制台窗口</span><br><span class="hljs-string">3. --distpath D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\核</span>心单词小工具.py</span><br><span class="hljs-string">	1. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>是输出位置</span><br><span class="hljs-string">	2. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\核</span>心单词小工具.py 是输入位置</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/" class="category-chain-item">英语</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%80%83%E7%A0%94/%E8%8B%B1%E8%AF%AD/%E8%8B%B1%E8%AF%AD%E5%8D%95%E8%AF%8D/" class="category-chain-item">英语单词</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：核心单词小工具</div>
+      <div>https://wangjia5289.github.io/2025/05/14/笔记：核心单词小工具/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 14, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/14/%E7%AC%94%E8%AE%B0%EF%BC%9AKafka/" title="笔记：Kafka">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Kafka</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/" title="笔记：Minio">
+                        <span class="hidden-mobile">笔记：Minio</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>

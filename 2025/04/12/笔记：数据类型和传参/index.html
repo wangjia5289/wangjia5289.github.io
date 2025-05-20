@@ -27,9 +27,10 @@
 <meta property="og:description" content="1. 导图：Map：数据类型和传参 2. ES 数据类型   名称 范围 描述 赋值示例    数值类型      byte 1字节，-128 ~ 127 小范围整数 &quot;age&quot;: 20   short 2 字节，-32768 ~ 32767 稍大范围整数 &quot;small_order_count&quot;: 300   integer 4 字节，-2^31 ~ 2^3">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/mermaid-202556%20182836.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250519204423459.png">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
 <meta property="article:published_time" content="2025-04-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-13T08:43:59.948Z">
+<meta property="article:modified_time" content="2025-05-19T12:44:24.637Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/mermaid-202556%20182836.png">
@@ -226,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k words
+          5.9k words
         
       </span>
     
@@ -237,7 +238,7 @@
         
         
         
-          48 mins
+          50 mins
         
       </span>
     
@@ -292,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-13T16:43:59+08:00
+                    Last updated on 2025-05-19T20:44:24+08:00
                   
                   
 
@@ -511,7 +512,7 @@
 </tr>
 <tr>
 <td><code>INT</code></td>
-<td>4 字节，-2^31 ~ 2^31 - 1</td>
+<td>4 字节，-2^31 ~ 2^31 - 1（21 亿）</td>
 <td>常规整数</td>
 <td><code>INSERT INTO table (int_column) VALUES (1000000);</code></td>
 </tr>
@@ -626,12 +627,12 @@
 <tr>
 <td><code>TIMESTAMP</code></td>
 <td>1970-01-01 00:00:01 ~ 2038-01-19 03:14:07 UTC</td>
-<td>自动记录当前时间戳</td>
+<td>自动记录当前时间戳（非 Unix 中的时间戳，而是：YYYY-MM-DD HH:MM:SS）</td>
 <td><code>INSERT INTO table (timestamp_column) VALUES (CURRENT_TIMESTAMP);</code></td>
 </tr>
 </tbody></table>
 <hr>
-<h3 id="4-Java-数据类型"><a href="#4-Java-数据类型" class="headerlink" title="4. Java 数据类型"></a>4. Java 数据类型</h3><h4 id="4-1-基本数据类型"><a href="#4-1-基本数据类型" class="headerlink" title="4.1. 基本数据类型"></a>4.1. 基本数据类型</h4><table>
+<h3 id="Redis-数据类型"><a href="#Redis-数据类型" class="headerlink" title="Redis 数据类型"></a>Redis 数据类型</h3><h3 id="4-Java-数据类型"><a href="#4-Java-数据类型" class="headerlink" title="4. Java 数据类型"></a>4. Java 数据类型</h3><h4 id="4-1-基本数据类型"><a href="#4-1-基本数据类型" class="headerlink" title="4.1. 基本数据类型"></a>4.1. 基本数据类型</h4><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -755,6 +756,26 @@
 </tr>
 </tbody></table>
 <hr>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs arcade">        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();<br>        <span class="hljs-built_in">Random</span> <span class="hljs-built_in">random</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Random</span>(); <span class="hljs-comment">// 创建一个随机数生成器</span><br>        <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">6</span>; i++) &#123;<br>            sb.append(<span class="hljs-built_in">random</span>.nextInt(<span class="hljs-number">10</span>));<br>        &#125;<br><br><br><br><br>- <span class="hljs-string">`StringBuilder`</span> 是一个可变字符串容器，用来高效地拼接字符串。<br>    <br>- 比 <span class="hljs-string">`String`</span> 拼接性能更好，适合在循环中反复追加内容。<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h4 id="4-2-类（Class-层）"><a href="#4-2-类（Class-层）" class="headerlink" title="4.2. 类（Class 层）"></a>4.2. 类（Class 层）</h4><h5 id="4-2-1-具体类"><a href="#4-2-1-具体类" class="headerlink" title="4.2.1. 具体类"></a>4.2.1. 具体类</h5><h6 id="4-2-1-1-普通类"><a href="#4-2-1-1-普通类" class="headerlink" title="4.2.1.1. 普通类"></a>4.2.1.1. 普通类</h6><h6 id="4-2-1-2-包装类"><a href="#4-2-1-2-包装类" class="headerlink" title="4.2.1.2. 包装类"></a>4.2.1.2. 包装类</h6><p>Java 是一门面向对象的语言，但它的基本数据类型（如 <code>int</code>、<code>char</code> 等）并不是对象。为了让这些基本类型也能在需要“对象”的场景中使用，Java 提供了对应的包装类。</p>
 <p>包装类是为基本类型提供了“对象化”的封装，使它们能够享受面向对象编程的各种特性和便利。</p>
 <table>
@@ -928,7 +949,8 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">sync_to_es</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-comment"># 1. 定义 MySQL 表名与 ES 索引名的映射</span><br>    table_map = &#123;<br>        <span class="hljs-string">&#x27;medical&#x27;</span>:   (<span class="hljs-string">&#x27;medical_docs&#x27;</span>,   <span class="hljs-string">&#x27;medical&#x27;</span>),<br>        <span class="hljs-string">&#x27;education&#x27;</span>: (<span class="hljs-string">&#x27;education_docs&#x27;</span>, <span class="hljs-string">&#x27;education&#x27;</span>),<br>        <span class="hljs-string">&#x27;tech&#x27;</span>:      (<span class="hljs-string">&#x27;tech_docs&#x27;</span>,      <span class="hljs-string">&#x27;tech&#x27;</span>)<br>    &#125;<br>    mysql_table, es_index = table_map[<span class="hljs-variable language_">self</span>.category]<br><br>    <span class="hljs-comment"># 2. 从 MySQL 读取 id, title, content</span><br>    <span class="hljs-keyword">with</span> <span class="hljs-variable language_">self</span>.conn.cursor() <span class="hljs-keyword">as</span> cursor:<br>        cursor.execute(<span class="hljs-string">f&quot;SELECT id, title, content FROM <span class="hljs-subst">&#123;mysql_table&#125;</span>&quot;</span>)<br>        rows = cursor.fetchall()<br><br>    <span class="hljs-comment"># 3. 构建 bulk actions，同步到对应索引</span><br>    actions = [<br>        &#123;<br>            <span class="hljs-string">&quot;_index&quot;</span>: es_index,<br>            <span class="hljs-string">&quot;_id&quot;</span>:    row[<span class="hljs-number">0</span>],                    <span class="hljs-comment"># 用 MySQL 自增 ID 做 ES _id</span><br>            <span class="hljs-string">&quot;_source&quot;</span>: &#123;<br>                <span class="hljs-string">&quot;title&quot;</span>:   row[<span class="hljs-number">1</span>],<br>                <span class="hljs-string">&quot;content&quot;</span>: row[<span class="hljs-number">2</span>]<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> rows<br>    ]<br><br>    <span class="hljs-comment"># 4. 执行 bulk 同步</span><br>    bulk(<span class="hljs-variable language_">self</span>.es, actions)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;已同步 <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(actions)&#125;</span> 条记录到 Elasticsearch 索引 `<span class="hljs-subst">&#123;es_index&#125;</span>`&quot;</span>)<br><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="Java-数据类型"><a href="#Java-数据类型" class="headerlink" title="Java 数据类型"></a>Java 数据类型</h1><table>
+<h1 id="Java-数据类型"><a href="#Java-数据类型" class="headerlink" title="Java 数据类型"></a>Java 数据类型</h1><p><img src="/2025/04/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250519204423459.png" srcset="/img/loading.gif" lazyload></p>
+<table>
 <thead>
 <tr>
 <th>基本类型</th>
@@ -1023,7 +1045,10 @@
 </li>
 </ul>
 <hr>
-<h2 id="📦-四、DTO、VO、BO、DO-等（顺带提一下）"><a href="#📦-四、DTO、VO、BO、DO-等（顺带提一下）" class="headerlink" title="📦 四、DTO、VO、BO、DO 等（顺带提一下）"></a>📦 四、DTO、VO、BO、DO 等（顺带提一下）</h2><p>这些都是架构层面的“角色分类”，虽然本质上也是 POJO，但各自的职责不同：</p>
+<h2 id="📦-四、DTO、VO、BO、DO-等（顺带提一下）"><a href="#📦-四、DTO、VO、BO、DO-等（顺带提一下）" class="headerlink" title="📦 四、DTO、VO、BO、DO 等（顺带提一下）"></a>📦 四、DTO、VO、BO、DO 等（顺带提一下）</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// 登录请求 DTO</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoginRequest</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> username;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> password;<br><br>    <span class="hljs-comment">// getter 和 setter</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getUsername</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> username; &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setUsername</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> username</span>) &#123; <span class="hljs-variable language_">this</span>.<span class="hljs-property">username</span> = username; &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getPassword</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> password; &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setPassword</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> password</span>) &#123; <span class="hljs-variable language_">this</span>.<span class="hljs-property">password</span> = password; &#125;<br>&#125;<br><br><span class="hljs-comment">// 登录响应 DTO</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoginResponse</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> message;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> username;<br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Collection</span>&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GrantedAuthority</span>&gt; authorities;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">LoginResponse</span>(<span class="hljs-title class_">String</span> message, <span class="hljs-title class_">String</span> username, <span class="hljs-title class_">Collection</span>&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GrantedAuthority</span>&gt; authorities) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">message</span> = message;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">username</span> = username;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">authorities</span> = authorities;<br>    &#125;<br><br>    <span class="hljs-comment">// getter</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getMessage</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> message; &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getUsername</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> username; &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Collection</span>&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">GrantedAuthority</span>&gt; <span class="hljs-title function_">getAuthorities</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> authorities; &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>这些都是架构层面的“角色分类”，虽然本质上也是 POJO，但各自的职责不同：</p>
 <table>
 <thead>
 <tr>
@@ -1545,9 +1570,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/" title="笔记：文档框架">
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/" title="笔记：ElasticSearch">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：文档框架</span>
+                        <span class="hidden-mobile">笔记：ElasticSearch</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     

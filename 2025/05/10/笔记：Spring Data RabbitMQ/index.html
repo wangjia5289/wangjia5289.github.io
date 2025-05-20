@@ -19,12 +19,12 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
+    <meta name="description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目，添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring Data RabbitMQ">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
+<meta property="og:description" content="一、理论1. 导图：Map：Spring Data RabbitMQ 二、实操1. 基本使用1.1. 创建 Spring Web 项目，添加 RabbitMQ 相关依赖 &#x3D;&#x3D;Web&#x3D;&#x3D; Spring Web   &#x3D;&#x3D;Messaging&#x3D;&#x3D; Spring for RabbitMQ     1.2. 配置 RabbitMQ">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511134249151.png">
@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512165603672.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250512170407701.png">
 <meta property="article:published_time" content="2025-05-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-12T12:29:09.087Z">
+<meta property="article:modified_time" content="2025-05-17T12:26:33.204Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511133233350.png">
@@ -307,7 +307,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-12T20:29:09+08:00
+                    Last updated on 2025-05-17T20:26:33+08:00
                   
                   
 
@@ -318,7 +318,7 @@
               <div class="markdown-body">
                 
                 <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-导图：Map：Spring-Data-RabbitMQ"><a href="#1-导图：Map：Spring-Data-RabbitMQ" class="headerlink" title="1. 导图：Map：Spring Data RabbitMQ"></a>1. 导图：<a href="Map%EF%BC%9ASpringDataRabbitMQ.xmind">Map：Spring Data RabbitMQ</a></h3><hr>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><h4 id="1-1-创建-Spring-Web-项目并添加-RabbitMQ-相关依赖"><a href="#1-1-创建-Spring-Web-项目并添加-RabbitMQ-相关依赖" class="headerlink" title="1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖"></a>1.1. 创建 Spring Web 项目并添加 RabbitMQ 相关依赖</h4><ol>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h3><h4 id="1-1-创建-Spring-Web-项目，添加-RabbitMQ-相关依赖"><a href="#1-1-创建-Spring-Web-项目，添加-RabbitMQ-相关依赖" class="headerlink" title="1.1. 创建 Spring Web 项目，添加 RabbitMQ 相关依赖"></a>1.1. 创建 Spring Web 项目，添加 RabbitMQ 相关依赖</h4><ol>
 <li>&#x3D;&#x3D;Web&#x3D;&#x3D;<ol>
 <li>Spring Web</li>
 </ol>

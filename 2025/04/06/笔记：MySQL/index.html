@@ -19,12 +19,12 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. 导图：Map：MySQL 2. MySQL 最佳实践 3. MySQL 语法3.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   3.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   3.3. DDL（库、表、列）3.3.1. 库 操作&#x3D;&#x3D;1.创建数据库&amp;">
+    <meta name="description" content="一、理论1. 导图：Map：MySQL 数据库核心数据库管理系统、数据库、表  2. MySQL 最佳实践 3. MySQL 语法3.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   3.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   3.3. DDL（库、表、列）3.3.1. 库 操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：MySQL">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. 导图：Map：MySQL 2. MySQL 最佳实践 3. MySQL 语法3.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   3.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   3.3. DDL（库、表、列）3.3.1. 库 操作&#x3D;&#x3D;1.创建数据库&amp;">
+<meta property="og:description" content="一、理论1. 导图：Map：MySQL 数据库核心数据库管理系统、数据库、表  2. MySQL 最佳实践 3. MySQL 语法3.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   3.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   3.3. DDL（库、表、列）3.3.1. 库 操作">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410141156407.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410141156407.png">
@@ -49,6 +49,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250409192001892.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250409223121020.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410100653127.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250519144517641.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250406171345505.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250406155610051.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410104022257.png">
@@ -57,7 +58,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141545381.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141924184.png">
 <meta property="article:published_time" content="2025-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-11T02:52:58.565Z">
+<meta property="article:modified_time" content="2025-05-19T06:45:24.128Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410141156407.png">
@@ -254,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          20k words
+          18k words
         
       </span>
     
@@ -265,7 +266,7 @@
         
         
         
-          163 mins
+          150 mins
         
       </span>
     
@@ -320,7 +321,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-11T10:52:58+08:00
+                    Last updated on 2025-05-19T14:45:24+08:00
                   
                   
 
@@ -331,6 +332,8 @@
               <div class="markdown-body">
                 
                 <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-导图：Map：MySQL"><a href="#1-导图：Map：MySQL" class="headerlink" title="1. 导图：Map：MySQL"></a>1. 导图：<a href="../../maps/Map%EF%BC%9AMySQL.xmind">Map：MySQL</a></h3><hr>
+<h3 id="数据库核心"><a href="#数据库核心" class="headerlink" title="数据库核心"></a>数据库核心</h3><p>数据库管理系统、数据库、表</p>
+<hr>
 <h3 id="2-MySQL-最佳实践"><a href="#2-MySQL-最佳实践" class="headerlink" title="2. MySQL 最佳实践"></a>2. MySQL 最佳实践</h3><hr>
 <h3 id="3-MySQL-语法"><a href="#3-MySQL-语法" class="headerlink" title="3. MySQL 语法"></a>3. MySQL 语法</h3><h4 id="3-1-语法要求"><a href="#3-1-语法要求" class="headerlink" title="3.1. 语法要求"></a>3.1. 语法要求</h4><ol>
 <li>SQL 语句可以单行或多行，但要以分号（<code>;</code>）结尾</li>
@@ -367,7 +370,7 @@
 
 <hr>
 <h5 id="3-3-2-表-操作"><a href="#3-3-2-表-操作" class="headerlink" title="3.3.2. 表 操作"></a>3.3.2. 表 操作</h5><p>&#x3D;&#x3D;1.创建表&#x3D;&#x3D;</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explation for this column&#x27;</span>],<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=字符集] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;id-<span class="hljs-keyword">column</span>&gt; &lt;数据类型&gt; AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span> [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>]<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=&lt;字符集&gt;] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explanation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;2.删除表&#x3D;&#x3D;</p>
@@ -692,7 +695,24 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="4-5-事务隔离性问题"><a href="#4-5-事务隔离性问题" class="headerlink" title="4.5. 事务隔离性问题"></a>4.5. 事务隔离性问题</h4><p>以下这三种现象看似与 <strong>查询操作</strong> 相关，但它们本质上是由于 <strong>事务隔离性</strong> 不足，导致<strong>并发事务</strong>之间在数据访问和修改时发生 <strong>冲突</strong>。<br>    1. &#x3D;&#x3D;脏读&#x3D;&#x3D;：<br>        1. 假设事务 A 正在对某些数据进行增删改操作，但尚未提交，事务 B 需要读取这些数据。如果事务 B 正好读取了事务 A 正在修改的数据，则事务 B 读取到的数据就是 “脏” 的。<br>        2. 这些数据被称为“脏数据”，因为事务 A 可能在后续回滚或再次修改，导致事务 B 读取到的数据实际上未被最终提交，可能会导致错误的业务逻辑，尤其是事务 B 后续依赖这些数据时。<br>    2. &#x3D;&#x3D;不可重复读&#x3D;&#x3D;：<br>        1. 发生在 <strong>同一事务</strong> 内 <strong>多次查询</strong> <strong>同一行数据</strong> 时。<br>        2. 例如，事务 B 初次查询某行数据，然后事务 A 对这行数据进行了<strong>修改</strong>或<strong>删除</strong>。如果事务 B 再次查询同一行数据，会发现读取到的数据发生了变化，导致 <strong>不可重复读</strong>。<br>    3. &#x3D;&#x3D;幻读&#x3D;&#x3D;：<br>        1. 发生在 <strong>同一事务</strong> 内 <strong>多次查询</strong> <strong>结果集</strong> 时<br>        2. 例如，事务 B 查询某个条件范围的数据（如 <code>age &gt; 50</code>），然后事务 A 向该范围内<strong>插入</strong>数据。事务 B 再次查询时，发现数据集发生了变化，查询结果与第一次查询不同，这就是 <strong>幻读</strong>。（只有插入才会导致幻读，更新、删除不会导致幻读）</p>
+<h4 id="4-5-事务隔离性问题"><a href="#4-5-事务隔离性问题" class="headerlink" title="4.5. 事务隔离性问题"></a>4.5. 事务隔离性问题</h4><p>以下这三种现象看似与 <strong>查询操作</strong> 相关，但它们本质上是由于 <strong>事务隔离性</strong> 不足，导致<strong>并发事务</strong>之间在数据访问和修改时发生 <strong>冲突</strong>。</p>
+<ol>
+<li>&#x3D;&#x3D;脏读&#x3D;&#x3D;：<ol>
+<li>假设事务 A 正在对某些数据进行增删改操作，但尚未提交，事务 B 需要读取这些数据。如果事务 B 正好读取了事务 A 正在修改的数据，则事务 B 读取到的数据就是 “脏” 的。</li>
+<li>这些数据被称为“脏数据”，因为事务 A 可能在后续回滚或再次修改，导致事务 B 读取到的数据实际上未被最终提交，可能会导致错误的业务逻辑，尤其是事务 B 后续依赖这些数据时。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;不可重复读&#x3D;&#x3D;：<ol>
+<li>发生在 <strong>同一事务</strong> 内 <strong>多次查询</strong> <strong>同一行数据</strong> 时。</li>
+<li>例如，事务 B 初次查询某行数据，然后事务 A 对这行数据进行了<strong>修改</strong>或<strong>删除</strong>。如果事务 B 再次查询同一行数据，会发现读取到的数据发生了变化，导致 <strong>不可重复读</strong>。</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;幻读&#x3D;&#x3D;：<ol>
+<li>发生在 <strong>同一事务</strong> 内 <strong>多次查询</strong> <strong>结果集</strong> 时</li>
+<li>例如，事务 B 查询某个条件范围的数据（如 <code>age &gt; 50</code>），然后事务 A 向该范围内<strong>插入</strong>数据。事务 B 再次查询时，发现数据集发生了变化，查询结果与第一次查询不同，这就是 <strong>幻读</strong>。（只有插入才会导致幻读，更新、删除不会导致幻读）</li>
+</ol>
+</li>
+</ol>
 <hr>
 <h4 id="4-6-事务隔离级别"><a href="#4-6-事务隔离级别" class="headerlink" title="4.6. 事务隔离级别"></a>4.6. 事务隔离级别</h4><h5 id="4-6-1-READ-UNCOMMITTED（读未提交）"><a href="#4-6-1-READ-UNCOMMITTED（读未提交）" class="headerlink" title="4.6.1. READ UNCOMMITTED（读未提交）"></a>4.6.1. READ UNCOMMITTED（读未提交）</h5><ol>
 <li>&#x3D;&#x3D;执行 查询 语句&#x3D;&#x3D;：<ol>
@@ -896,6 +916,13 @@
 <p>假设有 <code>Student</code>（学生表）和 <code>Course</code>（课程表），一个学生可以选修多门课程，而每门课程可以有多个学生选修。我们需要一个中间表 <code>Enrollment</code> 来记录学生与课程之间的关系。</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Student 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student (<br>    StudentID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> Course 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Course (<br>    CourseID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    CourseName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">3.</span> Enrollment 表（从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Enrollment (<br>    StudentID <span class="hljs-type">INT</span>,<br>    CourseID <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">PRIMARY KEY</span> (StudentID, CourseID),<br>    <span class="hljs-keyword">FOREIGN KEY</span> (StudentID) <span class="hljs-keyword">REFERENCES</span> Student(StudentID),<br>    <span class="hljs-keyword">FOREIGN KEY</span> (CourseID) <span class="hljs-keyword">REFERENCES</span> Course(CourseID)<br>);<br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>据库设计推荐在这种“纯粹中间表”里省略 id 字段，因为我们PRIMARY KEY (StudentID, CourseID),作为<strong>联合主键</strong>，这已经能唯一标识每一行数据了。</li>
+<li>需要插三次，先左再右后中间</li>
+</ol>
+</blockquote>
 <hr>
 <h5 id="6-3-5-外键约束下的删除与更新行为"><a href="#6-3-5-外键约束下的删除与更新行为" class="headerlink" title="6.3.5. 外键约束下的删除与更新行为"></a>6.3.5. 外键约束下的删除与更新行为</h5><table>
 <thead>
@@ -1179,35 +1206,18 @@
 </ol>
 </li>
 </ol>
-<h1 id="二、实操（搭建-MySQL）"><a href="#二、实操（搭建-MySQL）" class="headerlink" title="二、实操（搭建 MySQL）"></a>二、实操（搭建 MySQL）</h1><h3 id="1-简单测试搭建"><a href="#1-简单测试搭建" class="headerlink" title="1. 简单测试搭建"></a>1. 简单测试搭建</h3><p>&#x3D;&#x3D;1.创建宿主机配置文件挂载目录&#x3D;&#x3D;</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -p <span class="hljs-regexp">/data/my</span>sql<span class="hljs-regexp">/var/</span>lib<br>mkdir -p <span class="hljs-regexp">/data/my</span>sql<span class="hljs-regexp">/var/</span>log<br>mkdir -p <span class="hljs-regexp">/data/my</span>sql<span class="hljs-regexp">/etc/my</span>sql<br></code></pre></td></tr></table></figure>
+<h1 id="二、实操（搭建-MySQL）"><a href="#二、实操（搭建-MySQL）" class="headerlink" title="二、实操（搭建 MySQL）"></a>二、实操（搭建 MySQL）</h1><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="1-单机测试环境搭建"><a href="#1-单机测试环境搭建" class="headerlink" title="1. 单机测试环境搭建"></a>1. 单机测试环境搭建</h4><p>&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/mysql<br></code></pre></td></tr></table></figure>
 
 
-<p>&#x3D;&#x3D;2.随便运行一个 MySQL Docker 容器&#x3D;&#x3D;</p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d <span class="hljs-string">\</span><br>  --name mysql-temp <span class="hljs-string">\</span>                                   <span class="hljs-comment"># 容器的名称</span><br>  -p <span class="hljs-number">3306</span>:<span class="hljs-number">3306</span> <span class="hljs-string">\</span><br>  -e MYSQL_ROOT_PASSWORD=wq666666 <span class="hljs-string">\</span>                     <span class="hljs-comment"># Root 用户密码</span><br>  mysql:<span class="hljs-number">8.0</span> <span class="hljs-string">\</span>                                           <span class="hljs-comment"># MySQL 的镜像</span><br>  --character-set-server=utf8mb4 <span class="hljs-string">\</span>                      <span class="hljs-comment"># 字符集</span><br>  --collation-server=utf8mb4_unicode_ci                 <span class="hljs-comment"># 字符排列顺序</span><br></code></pre></td></tr></table></figure>
+<p>&#x3D;&#x3D;2.启动 MySQL 容器&#x3D;&#x3D;</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name my_mysql <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">3306</span>:<span class="hljs-number">3306</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MYSQL_ROOT_PASSWORD=wq666666 <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/mysql:/var/lib/mysql <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  mysql:<span class="hljs-number">8</span>.<span class="hljs-number">0</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --character-set-server=utf8mb4 <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --collation-server=utf8mb4_unicode_ci<br></code></pre></td></tr></table></figure>
 
 
-<p>&#x3D;&#x3D;3.复制元数据到宿主机&#x3D;&#x3D;</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker cp mysql-temp:<span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/mysql /</span>data<span class="hljs-regexp">/mysql/</span>var<span class="hljs-regexp">/lib/my</span>sql     <span class="hljs-comment"># MySQL 数据目录</span><br>docker cp mysql-temp:<span class="hljs-regexp">/etc/my</span>sql<span class="hljs-regexp">/conf.d /</span>data<span class="hljs-regexp">/mysql/</span>etc/mysql      <span class="hljs-comment"># MySQL 追加配置目录</span><br></code></pre></td></tr></table></figure>
-
-
-<p>&#x3D;&#x3D;4.运行正式测试 MySQL Docker 容器&#x3D;&#x3D;</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs swift">docker run <span class="hljs-operator">-</span>d \<br>  <span class="hljs-operator">--</span>name mysql \<br>  <span class="hljs-operator">-</span>p <span class="hljs-number">3306</span>:<span class="hljs-number">3306</span> \<br>  <span class="hljs-operator">-</span>e <span class="hljs-type">MYSQL_ROOT_PASSWORD</span><span class="hljs-operator">=</span>wq666666 \<br>  <span class="hljs-operator">-</span>v <span class="hljs-regexp">/data/</span>mysql<span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/mysql:/</span><span class="hljs-keyword">var</span><span class="hljs-regexp">/lib/</span>mysql \<br>  <span class="hljs-operator">-</span>v <span class="hljs-regexp">/data/</span>mysql<span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/mysql:/</span><span class="hljs-keyword">var</span><span class="hljs-regexp">/log/</span>mysql \<br>  <span class="hljs-operator">-</span>v <span class="hljs-regexp">/data/</span>mysql<span class="hljs-regexp">/etc/</span>mysql<span class="hljs-regexp">/conf.d:/</span>etc<span class="hljs-regexp">/mysql/</span>conf.d \<br>  mysql:<span class="hljs-number">8.0</span> \<br>  <span class="hljs-operator">--</span>character<span class="hljs-operator">-</span><span class="hljs-keyword">set</span><span class="hljs-operator">-</span>server<span class="hljs-operator">=</span>utf8mb4 \<br>  <span class="hljs-operator">--</span>collation<span class="hljs-operator">-</span>server<span class="hljs-operator">=</span>utf8mb4_unicode_ci<br></code></pre></td></tr></table></figure>
-
-
-<p>&#x3D;&#x3D;5.建测试库&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;5.创建测试库&#x3D;&#x3D;</p>
 <figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span> test;<br></code></pre></td></tr></table></figure>
 
-
-<p>&#x3D;&#x3D;6.建测试表&#x3D;&#x3D;</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> characters (<br>    id <span class="hljs-type">INT</span> AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    <span class="hljs-keyword">alias</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    title <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    affiliation <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    power_level <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>),<br>    description <span class="hljs-type">TEXT</span>,<br>    status <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>)<br>);<br></code></pre></td></tr></table></figure>
-
-
-<p>&#x3D;&#x3D;7.添加测试数据&#x3D;&#x3D;</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> characters (<span class="hljs-type">name</span>, <span class="hljs-keyword">alias</span>, title, affiliation, power_level, description, status)<br><span class="hljs-keyword">VALUES</span><br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是封神演义中的重要人物，辅佐周武王推翻商朝，封神榜上位列仙班&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;哪吒&#x27;</span>, <span class="hljs-string">&#x27;哪吒三太子&#x27;</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;托塔天王&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;哪吒是托塔天王李靖的儿子，拥有强大的战斗力，勇猛善战&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;雷震子&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;雷震子是截教门下的法力高强者，参与了封神大战&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;杨戬&#x27;</span>, <span class="hljs-string">&#x27;二郎神&#x27;</span>, <span class="hljs-string">&#x27;神将&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;杨戬是截教的二郎神，拥有三只眼，神通广大的战士&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;闻仲&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大将军&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;闻仲是商朝的大将军，忠诚且力量强大&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;苏妲己&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;王后&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;妖姬&#x27;</span>, <span class="hljs-string">&#x27;苏妲己是商纣王的宠妃，后来变成妖怪，致使商朝覆灭&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;雷震子&#x27;</span>, <span class="hljs-string">&#x27;雷公&#x27;</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;雷震子是截教的法力高强者，勇猛善战，后为神仙&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是辅佐周武王推翻商朝的智者，封神后为天尊&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;妲己&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;妖后&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;妖精&#x27;</span>, <span class="hljs-string">&#x27;妲己是商纣王的宠妃，掌控权力和妖术，是导致商朝灭亡的原因之一&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;金灵圣母&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;女仙&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;金灵圣母是截教的女仙之一，极具法力&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;黄飞虎&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大元帅&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;黄飞虎是商朝的著名将领，后来投降了周朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;杨戬&#x27;</span>, <span class="hljs-string">&#x27;二郎神&#x27;</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;杨戬是阐教的重要人物，三只眼神通广大&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是封神演义中的重要人物，辅佐周武王推翻商朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;纣王&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;帝王&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;纣王是商朝的最后一任君王，以暴虐著称，最后被周武王推翻&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;姬发&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;周武王&#x27;</span>, <span class="hljs-string">&#x27;周朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姬发是周朝的创立者，推翻了商朝的暴政&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是封神演义中的重要人物，辅佐周武王推翻商朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;李靖&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;托塔天王&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;李靖是截教的高手，儿子哪吒是著名的神仙人物&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;哪吒&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;三太子&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;哪吒是阐教的三太子，勇猛善战&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是封神演义中的重要人物，辅佐周武王推翻商朝，封神榜上位列仙班&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;太乙真人&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;元神&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;太乙真人是阐教中的重要人物，法力无边&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;太师傅&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大贤&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;太师傅是商朝的贤者之一，知人善任，辅佐商朝君王&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;冯浚&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;神将&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;冯浚是截教的一名神将，参战封神之战&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;妲己&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;妖姬&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;妖精&#x27;</span>, <span class="hljs-string">&#x27;妲己是纣王宠爱的妖精，影响了商朝的命运&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;黄飞虎&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;黄飞虎是商朝著名的将领，转投周朝后封神&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;阐教圣母&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;女仙&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;阐教的圣母，法力高强&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;雷震子&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;神将&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;雷震子是截教的神将，法力强大&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;申公豹&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大妖&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;妖族&#x27;</span>, <span class="hljs-string">&#x27;申公豹是截教门下的大妖，心术不正，最后导致覆灭&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;邓九公&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;将军&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;邓九公是商朝的将军，后投降周朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙协助周武王推翻商朝，封神之后封为天尊&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;雷震子&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大元帅&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;雷震子是截教的元帅，具有极强的法力&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;哪吒&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;三太子&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;哪吒在三界有极高的威望&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;周文王&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;国君&#x27;</span>, <span class="hljs-string">&#x27;周朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;周文王是周朝的创建者，推动了周朝的兴起&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;比干&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;忠臣&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;比干是商朝的忠臣，因忠诚遭遇悲惨命运&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;雷震子&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大元帅&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;雷震子身手不凡，是截教的元帅之一&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;妲己&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;妖后&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;妖精&#x27;</span>, <span class="hljs-string">&#x27;妲己是商朝的王后，掌控商纣王，最终导致商朝灭亡&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙是周武王的智囊，最终封神为天尊&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;钟馗&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;神将&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;钟馗是阐教的神将之一，以捉妖为职能&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;秦琼&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大元帅&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;秦琼是商朝的元帅，后来投降了周朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;王天君&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;女仙&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;王天君是截教的女仙之一，拥有强大的法力&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;小龙女&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;女神&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;小龙女是阐教中的女神，法力无边&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;林青霞&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;仙女&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;林青霞是截教中的仙女，拥有强大的法力&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;周武王&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;国君&#x27;</span>, <span class="hljs-string">&#x27;周朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;周武王是周朝的国君，成功推翻商朝暴政&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;杨戬&#x27;</span>, <span class="hljs-string">&#x27;二郎神&#x27;</span>, <span class="hljs-string">&#x27;神将&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;杨戬是阐教的大神，法力非凡&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;黄飞虎&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;大将军&#x27;</span>, <span class="hljs-string">&#x27;商朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;黄飞虎是商朝的大将军，后来投降周朝&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;哪吒&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;三太子&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;哪吒是阐教的三太子，勇猛善战&#x27;</span>, <span class="hljs-string">&#x27;在世&#x27;</span>),<br>(<span class="hljs-string">&#x27;姜子牙&#x27;</span>, <span class="hljs-string">&#x27;吕尚&#x27;</span>, <span class="hljs-string">&#x27;太师&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;姜子牙协助周武王推翻商朝，最终封为天尊&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;木兰&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;勇士&#x27;</span>, <span class="hljs-string">&#x27;截教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;木兰是截教的勇士之一，法力高强，勇猛善战&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;周姬&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;贤后&#x27;</span>, <span class="hljs-string">&#x27;周朝&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;周姬是周朝的贤后，协助周文王建立伟业&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;杨戬&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;元帅&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;神仙&#x27;</span>, <span class="hljs-string">&#x27;杨戬是阐教的重要人物，拥有三只眼，神通广大&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;封神榜&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;神册&#x27;</span>, <span class="hljs-string">&#x27;阐教&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;封神榜是神仙之册，记载了诸多封神之事&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>),<br>(<span class="hljs-string">&#x27;女娲&#x27;</span>, <span class="hljs-keyword">NULL</span>, <span class="hljs-string">&#x27;创世女神&#x27;</span>, <span class="hljs-string">&#x27;混沌&#x27;</span>, <span class="hljs-string">&#x27;天尊&#x27;</span>, <span class="hljs-string">&#x27;女娲是中国古代神话中的创世女神，修补天空&#x27;</span>, <span class="hljs-string">&#x27;已死&#x27;</span>);<br></code></pre></td></tr></table></figure>
-
-
-<p>&#x3D;&#x3D;8.百万测试数据&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;8.创建百万数据测试表&#x3D;&#x3D;</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 创建表<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `app_user`(<br>	`id` <span class="hljs-type">INT</span>  <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;主键&#x27;</span>,<br>	`<span class="hljs-type">name</span>` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;用户名称&#x27;</span>,<br>	`email` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;邮箱&#x27;</span>,<br>	`phone` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">20</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;手机号&#x27;</span>,<br>	`gender` TINYINT <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;性别（0-男  ： 1-女）&#x27;</span>,<br>	`<span class="hljs-keyword">password</span>` <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;密码&#x27;</span>,<br>	`age` TINYINT <span class="hljs-keyword">DEFAULT</span> <span class="hljs-string">&#x27;0&#x27;</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;年龄&#x27;</span>,<br>	`create_time` DATETIME <span class="hljs-keyword">DEFAULT</span> NOW(),<br>	`update_time` DATETIME <span class="hljs-keyword">DEFAULT</span> NOW(),<br>	<span class="hljs-keyword">PRIMARY KEY</span> (`id`) <br>)ENGINE = INNODB <span class="hljs-keyword">DEFAULT</span> CHARSET = utf8 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;app用户表&#x27;</span><br><br><br># <span class="hljs-number">2.</span> 启用 log_bin_trust_function_creators 选项<br><span class="hljs-keyword">SET</span> <span class="hljs-keyword">GLOBAL</span> log_bin_trust_function_creators=<span class="hljs-keyword">TRUE</span>;<br><br><br># <span class="hljs-number">3.</span> 更改分隔符<br><span class="hljs-keyword">DELIMITER</span> $$<span class="language-pgsql"></span><br><span class="language-pgsql"></span><br><span class="language-pgsql"></span><br><span class="language-pgsql"># <span class="hljs-number">4.</span> 常见 mock_data 函数</span><br><span class="language-pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">FUNCTION</span> mock_data()        </span><br><span class="language-pgsql"><span class="hljs-keyword">RETURNS</span> <span class="hljs-type">INT</span>                       </span><br><span class="language-pgsql"><span class="hljs-keyword">BEGIN</span>                              </span><br><span class="language-pgsql">    <span class="hljs-keyword">DECLARE</span> num <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">1000000</span>;   </span><br><span class="language-pgsql">    <span class="hljs-keyword">DECLARE</span> i <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>; </span><br><span class="language-pgsql">   </span><br><span class="language-pgsql">    <span class="hljs-keyword">WHILE</span> i &lt; num <span class="hljs-keyword">DO</span>                   </span><br><span class="language-pgsql">        <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> app_user(`<span class="hljs-type">name</span>`, `email`, `phone`, `gender`, `<span class="hljs-keyword">password</span>`, `age`) </span><br><span class="language-pgsql">        <span class="hljs-keyword">VALUES</span>(CONCAT(<span class="hljs-string">&#x27;用户&#x27;</span>, i), <span class="hljs-string">&#x27;2548928007qq.com&#x27;</span>, </span><br><span class="language-pgsql">               CONCAT(<span class="hljs-string">&#x27;18&#x27;</span>, FLOOR(RAND() * ((<span class="hljs-number">999999999</span> - <span class="hljs-number">100000000</span>) + <span class="hljs-number">1000000000</span>))), </span><br><span class="language-pgsql">               FLOOR(RAND() * <span class="hljs-number">2</span>), <span class="hljs-type">UUID</span>(), FLOOR(RAND() * <span class="hljs-number">100</span>));</span><br><span class="language-pgsql">        <span class="hljs-keyword">SET</span> i = i + <span class="hljs-number">1</span>;                    </span><br><span class="language-pgsql">    <span class="hljs-keyword">END</span> <span class="hljs-keyword">WHILE</span>;                            </span><br><span class="language-pgsql">    <span class="hljs-keyword">RETURN</span> i;                             </span><br><span class="language-pgsql"><span class="hljs-keyword">END</span>$$</span><br><br><br># <span class="hljs-number">5.</span> 恢复分隔符<br><span class="hljs-keyword">DELIMITER</span> ;<br><br><br># <span class="hljs-number">6.</span> 调用 mock_data 函数<br><span class="hljs-keyword">SELECT</span> mock_data();<br></code></pre></td></tr></table></figure>
 
 <hr>
@@ -1267,6 +1277,8 @@
 <td>模拟一段看起来有逻辑的文本</td>
 </tr>
 </tbody></table>
+<h3 id="DataGrip"><a href="#DataGrip" class="headerlink" title="DataGrip"></a>DataGrip</h3><h4 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h4><p><img src="/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250519144517641.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
 <h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="1-安装-MyCat2"><a href="#1-安装-MyCat2" class="headerlink" title="1. 安装 MyCat2"></a>1. 安装 MyCat2</h3><p>&#x3D;&#x3D;1.安装 JDK&#x3D;&#x3D;<br>使用MyCAT 2要安装JDK，因为MyCAT 是基于JDK1.8开发的</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt install openjdk-<span class="hljs-number">17</span>-jdk<br></code></pre></td></tr></table></figure>
 
@@ -1291,19 +1303,8 @@
 <p>启动有问题看日志：</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">cat /tools/mycat/logs/<span class="hljs-keyword">wrapper</span>.<span class="hljs-keyword">log</span><br></code></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<h1 id="三、补充"><a href="#三、补充" class="headerlink" title="三、补充"></a>三、补充</h1><h3 id="1-MyCat2-的目录结构"><a href="#1-MyCat2-的目录结构" class="headerlink" title="1. MyCat2 的目录结构"></a>1. MyCat2 的目录结构</h3><h4 id="1-1-目录总览"><a href="#1-1-目录总览" class="headerlink" title="1.1. 目录总览"></a>1.1. 目录总览</h4><p><img src="/image-20250406155610051.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="安全管理"><a href="#安全管理" class="headerlink" title="安全管理"></a>安全管理</h3><h1 id="三、补充"><a href="#三、补充" class="headerlink" title="三、补充"></a>三、补充</h1><h3 id="1-MyCat2-的目录结构"><a href="#1-MyCat2-的目录结构" class="headerlink" title="1. MyCat2 的目录结构"></a>1. MyCat2 的目录结构</h3><h4 id="1-1-目录总览"><a href="#1-1-目录总览" class="headerlink" title="1.1. 目录总览"></a>1.1. 目录总览</h4><p><img src="/image-20250406155610051.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>&#x3D;&#x3D;bin&#x3D;&#x3D;：<ol>
 <li>执行主要命令的目录</li>
@@ -1693,7 +1694,100 @@
 <td>返回起始时间expr1与结束时间expr2之间的天数</td>
 <td>SELECT DATEDIFF(‘2023-10-15’, ‘2023-10-10’) AS diff_days; – 结果：5</td>
 </tr>
+<tr>
+<td>CURRENT_TIMESTAMP</td>
+<td>返回当前的时间，格式是 YYYY-MM-DD HH:MM:SS</td>
+<td></td>
+</tr>
 </tbody></table>
+<p>你这个格式非常清晰，下面我就照你这套格式，补充一些 <strong>常用的 MySQL 日期时间函数</strong>，非常实用：</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>函数&#x2F;表达式名</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CURRENT_TIMESTAMP</code></td>
+<td>返回当前的时间，格式是 <code>YYYY-MM-DD HH:MM:SS</code></td>
+<td><code>SELECT CURRENT_TIMESTAMP;</code> → <code>2025-05-19 17:45:00</code></td>
+</tr>
+<tr>
+<td><code>NOW()</code></td>
+<td>返回当前时间，等价于 <code>CURRENT_TIMESTAMP</code></td>
+<td><code>SELECT NOW();</code> → <code>2025-05-19 17:45:00</code></td>
+</tr>
+<tr>
+<td><code>CURDATE()</code></td>
+<td>返回当前日期，格式是 <code>YYYY-MM-DD</code></td>
+<td><code>SELECT CURDATE();</code> → <code>2025-05-19</code></td>
+</tr>
+<tr>
+<td><code>CURTIME()</code></td>
+<td>返回当前时间（不含日期），格式是 <code>HH:MM:SS</code></td>
+<td><code>SELECT CURTIME();</code> → <code>17:45:00</code></td>
+</tr>
+<tr>
+<td><code>UNIX_TIMESTAMP()</code></td>
+<td>返回当前的 Unix 时间戳（秒数）</td>
+<td><code>SELECT UNIX_TIMESTAMP();</code> → <code>1747647900</code></td>
+</tr>
+<tr>
+<td><code>FROM_UNIXTIME(unix_timestamp)</code></td>
+<td>将 Unix 时间戳转换为可读时间格式</td>
+<td><code>SELECT FROM_UNIXTIME(1747647900);</code> → <code>2025-05-19 17:45:00</code></td>
+</tr>
+<tr>
+<td><code>DATEDIFF(date1, date2)</code></td>
+<td>返回两个日期相差的“天数”（date1 - date2）</td>
+<td><code>SELECT DATEDIFF(&#39;2023-10-15&#39;, &#39;2023-10-10&#39;);</code> → <code>5</code></td>
+</tr>
+<tr>
+<td><code>TIMEDIFF(time1, time2)</code></td>
+<td>返回两个时间之间的差值（格式是 HH:MM:SS）</td>
+<td><code>SELECT TIMEDIFF(&#39;10:30:00&#39;, &#39;08:00:00&#39;);</code> → <code>02:30:00</code></td>
+</tr>
+<tr>
+<td><code>DATE_ADD(date, INTERVAL n unit)</code></td>
+<td>在日期上加时间间隔</td>
+<td><code>SELECT DATE_ADD(&#39;2025-05-19&#39;, INTERVAL 5 DAY);</code> → <code>2025-05-24</code></td>
+</tr>
+<tr>
+<td><code>DATE_SUB(date, INTERVAL n unit)</code></td>
+<td>在日期上减时间间隔</td>
+<td><code>SELECT DATE_SUB(&#39;2025-05-19&#39;, INTERVAL 7 DAY);</code> → <code>2025-05-12</code></td>
+</tr>
+<tr>
+<td><code>YEAR(date)</code></td>
+<td>提取年份</td>
+<td><code>SELECT YEAR(&#39;2025-05-19&#39;);</code> → <code>2025</code></td>
+</tr>
+<tr>
+<td><code>MONTH(date)</code></td>
+<td>提取月份</td>
+<td><code>SELECT MONTH(&#39;2025-05-19&#39;);</code> → <code>5</code></td>
+</tr>
+<tr>
+<td><code>DAY(date)</code> 或 <code>DAYOFMONTH(date)</code></td>
+<td>提取日（几号）</td>
+<td><code>SELECT DAY(&#39;2025-05-19&#39;);</code> → <code>19</code></td>
+</tr>
+<tr>
+<td><code>HOUR(datetime)</code></td>
+<td>提取小时数</td>
+<td><code>SELECT HOUR(&#39;2025-05-19 17:45:00&#39;);</code> → <code>17</code></td>
+</tr>
+<tr>
+<td><code>MINUTE(datetime)</code></td>
+<td>提取分钟数</td>
+<td><code>SELECT MINUTE(&#39;2025-05-19 17:45:00&#39;);</code> → <code>45</code></td>
+</tr>
+</tbody></table>
+<hr>
+<p>需要我单独为你做一张“开发中常用时间函数速查表”PDF或 Markdown 表格版本吗？可以贴在项目文档里当工具书用 😎</p>
 <p>&#x3D;&#x3D;3.流程函数&#x3D;&#x3D;</p>
 <table>
 <thead>
@@ -2132,6 +2226,73 @@
 
 
 <hr>
+<h1 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h1><p>MySQL 就不一样了——<strong>默认就必须设置密码，否则容器启动会失败</strong>（官方镜像的要求）。</p>
+<hr>
+<h3 id="🚀-快速启动一个不保存数据的-MySQL-容器"><a href="#🚀-快速启动一个不保存数据的-MySQL-容器" class="headerlink" title="🚀 快速启动一个不保存数据的 MySQL 容器"></a>🚀 快速启动一个不保存数据的 MySQL 容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run --<span class="hljs-built_in">rm</span> -d \<br>  --name temp-mysql \<br>  -e MYSQL_ROOT_PASSWORD=root123 \<br>  -p 3306:3306 \<br>  mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="解释一下各参数："><a href="#解释一下各参数：" class="headerlink" title="解释一下各参数："></a>解释一下各参数：</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--rm</code></td>
+<td>容器停止后自动删除，数据不保留 ✅</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>后台运行</td>
+</tr>
+<tr>
+<td><code>--name temp-mysql</code></td>
+<td>给容器取个名字</td>
+</tr>
+<tr>
+<td><code>-e MYSQL_ROOT_PASSWORD=xxx</code></td>
+<td><strong>必须的！MySQL 要求设置 root 密码</strong></td>
+</tr>
+<tr>
+<td><code>-p 3306:3306</code></td>
+<td>映射端口</td>
+</tr>
+<tr>
+<td><code>mysql</code></td>
+<td>使用官方 MySQL 镜像（最新版）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="连接方法示例："><a href="#连接方法示例：" class="headerlink" title="连接方法示例："></a>连接方法示例：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql -h 127.0.0.1 -P 3306 -u root -p<br><span class="hljs-comment"># 然后输入你设置的密码：root123</span><br></code></pre></td></tr></table></figure>
+
+<p>或者用 URI：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mysql://root:root123@localhost:3306<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="✅-临时但有密码-vs-永久带-volume："><a href="#✅-临时但有密码-vs-永久带-volume：" class="headerlink" title="✅ 临时但有密码 vs 永久带 volume："></a>✅ 临时但有密码 vs 永久带 volume：</h3><table>
+<thead>
+<tr>
+<th>场景</th>
+<th>用途说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>你这个命令</td>
+<td>临时测试用，很干净，不留痕</td>
+</tr>
+<tr>
+<td>想保留数据</td>
+<td>就要加 <code>-v</code> 挂载 volume</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="进阶小贴士：要初始化数据库-表结构？"><a href="#进阶小贴士：要初始化数据库-表结构？" class="headerlink" title="进阶小贴士：要初始化数据库&#x2F;表结构？"></a>进阶小贴士：要初始化数据库&#x2F;表结构？</h3><p>可以加个 volume 挂载 SQL 脚本到 <code>/docker-entrypoint-initdb.d/</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">-v $(<span class="hljs-built_in">pwd</span>)/init.sql:/docker-entrypoint-initdb.d/init.sql<br></code></pre></td></tr></table></figure>
+
+<p>MySQL 会自动执行里面的 SQL 脚本一次（只执行一次，适用于初始化）。</p>
+<hr>
+<p>要不要我也给你写个带认证的 Mongo + MySQL 的 docker-compose？一键启动，不落地数据？😏</p>
 
                 
               </div>
