@@ -19,15 +19,15 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="二、实操环境搭建单机测试环境搭建123456docker run --rm -d \  --name secure-mongo \  -p 27017:27017 \  -e MONGO_INITDB_ROOT_USERNAME&#x3D;admin \  -e MONGO_INITDB_ROOT_PASSWORD&#x3D;wq666666 \  mongo:latest">
+    <meta name="description" content="MongoDB 语法库操作&#x3D;&#x3D;1.创建数据库&#x3D;&#x3D; 12# 1. 如果数据库不存在，则创建数据库，否则切换到指定数据库。use &lt;repository-name&gt;   [!NOTE] 注意事项  MongoDB 很“懒”，它不像 MySQL 那样执行 CREATE DATABASE 后立刻就把文件写好。 如果你用 use runoob 切换了数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：MongoDB">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/16/%E7%AC%94%E8%AE%B0%EF%BC%9AMongoDB/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="二、实操环境搭建单机测试环境搭建123456docker run --rm -d \  --name secure-mongo \  -p 27017:27017 \  -e MONGO_INITDB_ROOT_USERNAME&#x3D;admin \  -e MONGO_INITDB_ROOT_PASSWORD&#x3D;wq666666 \  mongo:latest">
+<meta property="og:description" content="MongoDB 语法库操作&#x3D;&#x3D;1.创建数据库&#x3D;&#x3D; 12# 1. 如果数据库不存在，则创建数据库，否则切换到指定数据库。use &lt;repository-name&gt;   [!NOTE] 注意事项  MongoDB 很“懒”，它不像 MySQL 那样执行 CREATE DATABASE 后立刻就把文件写好。 如果你用 use runoob 切换了数据库">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-17T11:02:25.741Z">
+<meta property="article:modified_time" content="2025-05-21T03:21:19.606Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          28 words
+          1.1k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          1 mins
+          10 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-17T19:02:25+08:00
+                    Last updated on 2025-05-21T11:21:19+08:00
                   
                   
 
@@ -299,7 +299,92 @@
             
               <div class="markdown-body">
                 
-                <h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="单机测试环境搭建"><a href="#单机测试环境搭建" class="headerlink" title="单机测试环境搭建"></a>单机测试环境搭建</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run --rm -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name secure-mongo <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">27017</span>:<span class="hljs-number">27017</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MONGO_INITDB_ROOT_USERNAME=admin <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MONGO_INITDB_ROOT_PASSWORD=wq666666 <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  mongo:latest<br></code></pre></td></tr></table></figure>
+                <h3 id="MongoDB-语法"><a href="#MongoDB-语法" class="headerlink" title="MongoDB 语法"></a>MongoDB 语法</h3><h4 id="库操作"><a href="#库操作" class="headerlink" title="库操作"></a>库操作</h4><p>&#x3D;&#x3D;1.创建数据库&#x3D;&#x3D;</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-comment"># 1. 如果数据库不存在，则创建数据库，否则切换到指定数据库。</span><br><span class="hljs-keyword">use</span> &lt;repository-name&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>MongoDB 很“懒”，它不像 MySQL 那样执行 <code>CREATE DATABASE</code> 后立刻就把文件写好。</li>
+<li>如果你用 <code>use runoob</code> 切换了数据库，它并不会立即创建这个数据库，只有你真正<strong>往这个数据库的集合里插入了数据</strong>，MongoDB 才会真的在磁盘上“认认真真”把数据库搞出来；</li>
+<li>所以这就是我们使用 <code>show dbs</code> 查不出来的原因，我们可以先创建集合，插入一些数据</li>
+</ol>
+</blockquote>
+<p>&#x3D;&#x3D;2.删除数据库&#x3D;&#x3D;</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-comment"># 1. 切换到要删除数据库</span><br><span class="hljs-keyword">use</span> myDatabase<br><br><br><span class="hljs-comment"># 2. 删除数据库</span><br>db.dropDatabase()<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;3.修改数据库&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;4.查询数据库&#x3D;&#x3D;</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 1. 查询所有数据库</span><br><span class="hljs-keyword">show</span> dbs<br><br><br><span class="hljs-meta"># 2. 查看当前使用的数据库</span><br>db<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;5.使用数据库&#x3D;&#x3D;</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-comment"># 1. 如果数据库不存在，则创建数据库，否则切换到指定数据库。</span><br><span class="hljs-keyword">use</span> &lt;repository-name&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h4><h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>我们对集合进行任何操作之前，都要先用 <code>use 库名</code> 指定数据库，否则就会默认使用 <code>test</code> 数据库</p>
+<hr>
+<h5 id="创建集合（☆）"><a href="#创建集合（☆）" class="headerlink" title="创建集合（☆）"></a>创建集合（☆）</h5><h6 id="创建集合模版"><a href="#创建集合模版" class="headerlink" title="创建集合模版"></a>创建集合模版</h6><figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs d"># <span class="hljs-number">1.</span> 使用指定数据库（如果未使用 use 命令切换到其他数据库，则会默认使用 test 数据库）<br>use myDatabase<br><br><br># <span class="hljs-number">2.</span> 创建集合（db 代表当前使用的数据库）<br>db.createCollection(<span class="hljs-string">&quot;&lt;collection-name&gt;&quot;</span>, &#123;&lt;options&gt;&#125;)<br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. options：</span><br><span class="hljs-string">	1. capped：</span><br><span class="hljs-string">	    1. 是否创建一个固定大小的集合。</span><br><span class="hljs-string">	    2. 示例值：capped: true</span><br><span class="hljs-string">	2. size：</span><br><span class="hljs-string">	    1. 集合的最大大小（以字节为单位，仅在 capped 为 true 时有效）</span><br><span class="hljs-string">	    2. 示例值：size: 10485760（10MB）</span><br><span class="hljs-string">	3. max：</span><br><span class="hljs-string">	    1. 集合中允许的最大文档数（仅在 capped 为 true 时有效）</span><br><span class="hljs-string">	    2. 示例值：max: 5000 </span><br><span class="hljs-string">	4. validator：</span><br><span class="hljs-string">	    1. 用于文档验证的表达式，阻止不符合要求的数据插入或更新我们的文档。</span><br><span class="hljs-string">	    2. 示例值：见下文</span><br><span class="hljs-string">	5. validationLevel：</span><br><span class="hljs-string">	    1. 指定文档验证的严格程度。</span><br><span class="hljs-string">	    2. 示例值：validationLevel: &quot;</span>strict<span class="hljs-string">&quot;</span><br><span class="hljs-string">		    1. &quot;</span>off<span class="hljs-string">&quot;：不进行验证；</span><br><span class="hljs-string">		    2. &quot;</span>strict<span class="hljs-string">&quot;（默认）：插入和更新操作都必须通过验证；</span><br><span class="hljs-string">		    3. &quot;</span>moderate<span class="hljs-string">&quot;：仅更新现有文档时验证，插入新文档不验证。</span><br><span class="hljs-string">	6. validationAction：</span><br><span class="hljs-string">	    1. 指定文档验证失败时的操作。</span><br><span class="hljs-string">	    2. 示例值：validationAction: &quot;</span>erro<span class="hljs-string">r&quot;</span><br><span class="hljs-string">		    1. &quot;</span>erro<span class="hljs-string">r&quot;（默认）：阻止插入或更新；</span><br><span class="hljs-string">		    2. &quot;w</span>arn<span class="hljs-string">&quot;：允许插入或更新，但会发出警告。</span><br><span class="hljs-string">	7. storageEngine：</span><br><span class="hljs-string">	    1. 为集合指定存储引擎配置。</span><br><span class="hljs-string">	    2. 示例值：见下文</span><br><span class="hljs-string">	8. collation：</span><br><span class="hljs-string">	    1. 指定集合的默认排序规则。</span><br><span class="hljs-string">	    2. 示例值：collation: &#123; locale: &quot;</span>en<span class="hljs-string">&quot;, strength: 2 &#125;</span><br><span class="hljs-string">2. 示例：</span><br><span class="hljs-string">db.createCollection(&quot;</span>myComplexCollection<span class="hljs-string">&quot;, &#123;</span><br><span class="hljs-string">  capped: true,</span><br><span class="hljs-string">  size: 10485760,</span><br><span class="hljs-string">  max: 5000,</span><br><span class="hljs-string">  validator: &#123; $jsonSchema: &#123;</span><br><span class="hljs-string">    bsonType: &quot;</span>object<span class="hljs-string">&quot;,</span><br><span class="hljs-string">    required: [&quot;</span>name<span class="hljs-string">&quot;, &quot;</span>email<span class="hljs-string">&quot;],</span><br><span class="hljs-string">    properties: &#123;</span><br><span class="hljs-string">      name: &#123;</span><br><span class="hljs-string">        bsonType: &quot;</span><span class="hljs-built_in">string</span><span class="hljs-string">&quot;,</span><br><span class="hljs-string">        description: &quot;</span>必须为字符串且为必填项<span class="hljs-string">&quot;</span><br><span class="hljs-string">      &#125;,</span><br><span class="hljs-string">      email: &#123;</span><br><span class="hljs-string">        bsonType: &quot;</span><span class="hljs-built_in">string</span><span class="hljs-string">&quot;,</span><br><span class="hljs-string">        pattern: &quot;</span>^.+@.+$<span class="hljs-string">&quot;,</span><br><span class="hljs-string">        description: &quot;</span>必须为有效的电子邮件地址<span class="hljs-string">&quot;</span><br><span class="hljs-string">      &#125;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">  &#125;&#125;,</span><br><span class="hljs-string">  validationLevel: &quot;</span>strict<span class="hljs-string">&quot;,</span><br><span class="hljs-string">  validationAction: &quot;</span>erro<span class="hljs-string">r&quot;,</span><br><span class="hljs-string">  storageEngine: &#123;</span><br><span class="hljs-string">    wiredTiger: &#123; configString: &quot;</span>block_compressor=zstd<span class="hljs-string">&quot; &#125;</span><br><span class="hljs-string">  &#125;,</span><br><span class="hljs-string">  collation: &#123; locale: &quot;</span>en<span class="hljs-string">&quot;, strength: 2 &#125;</span><br><span class="hljs-string">&#125;);</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果未使用 use 命令切换到其他数据库，则会默认使用 test 数据库</li>
+<li><code>db</code> 代表当前数据库</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="validator"><a href="#validator" class="headerlink" title="validator"></a>validator</h6><hr>
+<h6 id="storageEngine"><a href="#storageEngine" class="headerlink" title="storageEngine"></a>storageEngine</h6><hr>
+<h6 id="collation"><a href="#collation" class="headerlink" title="collation"></a>collation</h6><hr>
+<h5 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h5><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">db</span>.collection.<span class="hljs-keyword">drop</span>()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="修改集合"><a href="#修改集合" class="headerlink" title="修改集合"></a>修改集合</h5><hr>
+<h5 id="查询集合"><a href="#查询集合" class="headerlink" title="查询集合"></a>查询集合</h5><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 1. 查看当前使用的数据库所有集合</span><br><span class="hljs-keyword">show</span> collections<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="文档操作"><a href="#文档操作" class="headerlink" title="文档操作"></a>文档操作</h4><p>&#x3D;&#x3D;1.插入文档&#x3D;&#x3D;</p>
+<p>2.删除文档</p>
+<p>3.修改文档</p>
+<p>4.查询文档</p>
+<h3 id="MongoDB-存储引擎"><a href="#MongoDB-存储引擎" class="headerlink" title="MongoDB 存储引擎"></a>MongoDB 存储引擎</h3><table>
+<thead>
+<tr>
+<th><strong>引擎</strong></th>
+<th><strong>特点</strong></th>
+<th><strong>适合场景</strong></th>
+<th><strong>当前状况</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>WiredTiger（默认）</strong></td>
+<td>- 文档级并发控制<br>- 支持 zlib、snappy、zstd 等多种压缩，节省磁盘空间<br>- 支持多文档事务<br>- 可配置缓存大小</td>
+<td>日常生产环境、对并发和事务有要求的应用，既要性能又要稳定</td>
+<td>MongoDB 默认引擎，功能强大，适合大多数场景，最推荐</td>
+</tr>
+<tr>
+<td><strong>MMAPv1（废弃）</strong></td>
+<td></td>
+<td></td>
+<td>自 MongoDB 4.0 起已废弃，不再维护，不推荐使用</td>
+</tr>
+<tr>
+<td><strong>In-Memory</strong></td>
+<td>- 数据完全保存在内存中，读写极快，但重启丢失所有数据</td>
+<td></td>
+<td>直接上 Redis</td>
+</tr>
+<tr>
+<td><strong>Encrypted</strong></td>
+<td>- 基于 WiredTiger，是其增强版本<br>- 支持数据文件加密</td>
+<td>适用于对数据安全有要求的场景（如金融、医疗、政府等）</td>
+<td>对安全要求高的场景强烈推荐使用</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="单机测试环境搭建"><a href="#单机测试环境搭建" class="headerlink" title="单机测试环境搭建"></a>单机测试环境搭建</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run --rm -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name secure-mongo <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">27017</span>:<span class="hljs-number">27017</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MONGO_INITDB_ROOT_USERNAME=admin <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MONGO_INITDB_ROOT_PASSWORD=wq666666 <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  mongo:latest<br></code></pre></td></tr></table></figure>
 
 <hr>
 

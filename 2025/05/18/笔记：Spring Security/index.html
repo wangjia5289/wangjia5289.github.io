@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250519165451890.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250520105139572.png">
 <meta property="article:published_time" content="2025-05-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-20T03:02:28.354Z">
+<meta property="article:modified_time" content="2025-05-21T01:13:58.061Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250519155802069.png">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.5k words
+          9.7k words
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          79 mins
+          81 mins
         
       </span>
     
@@ -298,7 +298,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-20T11:02:28+08:00
+                    Last updated on 2025-05-21T09:13:58+08:00
                   
                   
 
@@ -903,6 +903,47 @@
 <p>&#x3D;&#x3D;5.服务器接收到 Token&#x3D;&#x3D;<br>解码 Header 和 Payload，提取其中的用户信息；验证签名：使用服务器的密钥检查 Token 是否被篡改；接着确认 Token 是否在有效期内。  </p>
 <p>如果所有验证都通过，服务器便可基于 Payload 中的数据处理请求；若验证失败，则返回错误信息，通常会要求用户重新登录。</p>
 <p>我们这里只把用户名封进 Token，每次操作再去查一次数据库——反正有 Redis 托底，不虚。</p>
+<hr>
+<h3 id="RBAC"><a href="#RBAC" class="headerlink" title="RBAC"></a>RBAC</h3><p>RBAC 的核心思想就是：“不直接给用户分配权限，而是把权限分配给角色，再把用户加入到相应角色”</p>
+<ol>
+<li>&#x3D;&#x3D;用户（User）&#x3D;&#x3D;：<ol>
+<li>系统中的操作主体，比如某个登录系统的人。</li>
+<li>命名方式：<ol>
+<li>直接使用用户账号 &#x2F; 用户名，例如：</li>
+<li>alice、bob、zhangsan</li>
+<li>user_001、admin_001</li>
+<li>alice@example、1386524789等等</li>
+</ol>
+</li>
+<li>注意事项：<ol>
+<li>唯一性是关键，用户名不能重复</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;角色（Role）&#x3D;&#x3D;：<ol>
+<li>一组权限的集合，代表一种职责，比如“管理员”“编辑”“普通用户”。</li>
+<li>命名方式：<ol>
+<li>按照 职责 &#x2F; 岗位 的方式进行命名，例如：</li>
+<li>ceo（首席执行官）</li>
+<li>admin（管理员）</li>
+<li>editor（编辑）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;权限（Permission）&#x3D;&#x3D;：<ol>
+<li>对系统中资源的访问权，比如“读数据”“改配置”“删用户”等。</li>
+<li>命名方式：<ol>
+<li>按照 模块_操作 的方式进行命名，例如：</li>
+<li>user_read（读取用户信息）</li>
+<li>order_delete（删除订单）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
 
                 
               </div>
