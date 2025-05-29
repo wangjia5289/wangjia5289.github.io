@@ -59,7 +59,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250416192834497.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250416194752833.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-23T07:24:07.214Z">
+<meta property="article:modified_time" content="2025-05-26T04:46:23.927Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/image-20250418190141210.png">
@@ -322,7 +322,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-23T15:24:07+08:00
+                    Last updated on 2025-05-26T12:46:23+08:00
                   
                   
 
@@ -1208,7 +1208,7 @@
 <hr>
 <h5 id="1-3-4-为-Kibana-生成-HTTPS-证书"><a href="#1-3-4-为-Kibana-生成-HTTPS-证书" class="headerlink" title="1.3.4. 为 Kibana 生成 HTTPS 证书"></a>1.3.4. 为 Kibana 生成 HTTPS 证书</h5><p>由于我们需要通过浏览器访问 Kibana，并要以 HTTPS 的方式进行安全访问，因此需要为 Kibana 配置 HTTPS 证书。</p>
 <p>如果 kibana 和 es 在同一台服务器上，我们完全可以服用es 的https 证书，当然，如果 es 和 kibana 不在同一服务器上，我们需要为 kibana 整一个https 证书，我们可以使用es 提供的ca签发https 证书，也可以使用自己的方式签发 https 证书，这都无所谓，因为是我们客户端访问kibana，无需ca 一致，当然这是私网，如果公网访问还是要正儿八经去权威ca申请https 证书</p>
-<p>但是建议 ca 一致，- 如果 Kibana 使用的证书和 Elasticsearch 使用的证书都来自同一个 CA，Elasticsearch 会默认信任来自 Kibana 的请求（如果开启了 <code>xpack.security</code> 和 <code>ssl</code>）。</p>
+<p>但是建议 ca 一致，如果 Kibana 使用的证书和 Elasticsearch 使用的证书都来自同一个 CA，Elasticsearch 会默认信任来自 Kibana 的请求（如果开启了 <code>xpack.security</code> 和 <code>ssl</code>）。</p>
 <p>那我们用 ca 证书签一个吧，一般在 ca 服务器上，因为有es 提供的cert 工具</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/es/elasticsearch<br><br>bin/elasticsearch-certutil cert \<br>  --name kibana1 \<br>  --ip 192.168.136.8 \<br>  --ca config/certs/elastic-stack-ca.p12 \<br>  --pem \<br>  --out kibana1-certs.zip<br><br><br><br>拿到 kibana1-certs.zip<br><br>解压文件<br>unzip kibana1-certs.zip<br><br><br><span class="hljs-comment"># 4. 将解压后的文件移动到 kibana 的 config 目录</span><br><span class="hljs-built_in">cd</span> /mystudy/kibana/kibana/config<br><br><span class="hljs-built_in">mv</span> kibana/kibana.csr kibana/kibana.key /mystudy/kibana/kibana/config/<br></code></pre></td></tr></table></figure>
 

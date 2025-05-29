@@ -19,17 +19,19 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="二、实操环境搭建单机测试环境搭建&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D; 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;redis   &#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D; 123456789101112docker run -d \  --name redis \  -p 6379:6379 \  -v &#x2F;mystudy&#x2F;">
+    <meta name="description" content="理论Redis 语法实操环境搭建单机测试&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D; 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;redis   &#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D; 12345678910111213docker run -d \  --name redis \  -p 6379:6379 \  -v &#x2F;my">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Redis">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="二、实操环境搭建单机测试环境搭建&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D; 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;redis   &#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D; 123456789101112docker run -d \  --name redis \  -p 6379:6379 \  -v &#x2F;mystudy&#x2F;">
+<meta property="og:description" content="理论Redis 语法实操环境搭建单机测试&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D; 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;redis   &#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D; 12345678910111213docker run -d \  --name redis \  -p 6379:6379 \  -v &#x2F;my">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/edis/image-20250529142510438.png">
 <meta property="article:published_time" content="2025-05-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-17T12:01:30.592Z">
+<meta property="article:modified_time" content="2025-05-29T07:58:20.628Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/edis/image-20250529142510438.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          198 words
+          761 words
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          2 mins
+          7 mins
         
       </span>
     
@@ -289,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-17T20:01:30+08:00
+                    Last updated on 2025-05-29T15:58:20+08:00
                   
                   
 
@@ -299,24 +301,84 @@
             
               <div class="markdown-body">
                 
-                <h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="单机测试环境搭建"><a href="#单机测试环境搭建" class="headerlink" title="单机测试环境搭建"></a>单机测试环境搭建</h4><p>&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D;</p>
+                <h1 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h1><h2 id="Redis-语法"><a href="#Redis-语法" class="headerlink" title="Redis 语法"></a>Redis 语法</h2><h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="单机测试"><a href="#单机测试" class="headerlink" title="单机测试"></a>单机测试</h3><p>&#x3D;&#x3D;1.创建宿主机数据挂载目录&#x3D;&#x3D;</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/redis<br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;2.启动 Redis 容器&#x3D;&#x3D;</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker run -d \<br>  --name redis \<br>  -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> \<br>  -v <span class="hljs-regexp">/mystudy/</span>data<span class="hljs-regexp">/redis:/</span>data \<br>  redis:latest \<br>  redis-server --appendonly yes --bind <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span> --requirepass wq666666<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. --appendonly yes</span><br><span class="hljs-string">	1. 开启 AOF（Append Only File）持久化模式，简单可靠，适合这个场景</span><br><span class="hljs-string">2. --bind 0.0.0.0</span><br><span class="hljs-string">	1. 监听所有网卡（Redis 默认只监听 127.0.0.1）</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker run -d \<br>  --name redis \<br>  -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> \<br>  -v <span class="hljs-regexp">/mystudy/</span>data<span class="hljs-regexp">/redis:/</span>data \<br>  redis:latest \<br>  redis-server --appendonly yes --bind <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span> --requirepass wq666666<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. --appendonly yes</span><br><span class="hljs-string">	1. 开启 AOF（Append Only File）持久化模式，简单可靠，适合这个场景</span><br><span class="hljs-string">2. --bind 0.0.0.0</span><br><span class="hljs-string">	1. 监听所有网卡</span><br><span class="hljs-string">	2. Redis 默认只监听 127.0.0.1，也就是说只有通过本机地址 127.0.0.1:6379 才能访问它，哪怕你用本机的其他 IP（比如 192.168.136.8:6379）也无法连接。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="其他业务"><a href="#其他业务" class="headerlink" title="其他业务"></a>其他业务</h3><h4 id="Redis-持久化"><a href="#Redis-持久化" class="headerlink" title="Redis 持久化"></a>Redis 持久化</h4><h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><h3 id="Redis-Insight"><a href="#Redis-Insight" class="headerlink" title="Redis Insight"></a>Redis Insight</h3><h3 id="Redis-Commander"><a href="#Redis-Commander" class="headerlink" title="Redis Commander"></a>Redis Commander</h3><p>这是一个轻量级的 Redis Web 管理器，支持通过 Docker 快速启动。启动后，只需打开浏览器访问 <a target="_blank" rel="noopener" href="http://192.168.136.8:8081/">http://192.168.136.8:8081</a> ，配置 Redis 地址，即可轻松实现可视化操作。</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sqf">docker run -d --<span class="hljs-built_in">name</span> redis-<span class="hljs-built_in">commander</span> -p <span class="hljs-number">8081</span>:<span class="hljs-number">8081</span> rediscommander/redis-<span class="hljs-built_in">commander</span><br></code></pre></td></tr></table></figure>
+<h3 id="主从集群"><a href="#主从集群" class="headerlink" title="主从集群"></a>主从集群</h3><h4 id="集群概述"><a href="#集群概述" class="headerlink" title="集群概述"></a>集群概述</h4><h4 id="集群特性"><a href="#集群特性" class="headerlink" title="集群特性"></a>集群特性</h4><h5 id="数据同步（单体一致性）"><a href="#数据同步（单体一致性）" class="headerlink" title="数据同步（单体一致性）"></a>数据同步（单体一致性）</h5><p>采用的是异步复制——主节点在写入成功后会立即返回；如果此时主节点宕机，而从节点尚未完成同步却被提升为主节点，就会导致数据丢失。这与 MySQL 类似，同样最多只能保障 <strong>单体一致性</strong>，实现 <strong>最终一致性</strong>，无法满足真正的分布式一致性要求。</p>
+<p>尽管在很多使用场景下，相比 MySQL，我们对 Redis 中数据的“是否存在”或“是否最新”已经更宽容一些，但对于诸如金融交易、秒杀等对一致性要求极高的业务场景，这种宽容是不可接受的，我们仍然必须追求严格的分布式一致性。</p>
+<hr>
+<h4 id="一主多从架构"><a href="#一主多从架构" class="headerlink" title="一主多从架构"></a>一主多从架构</h4><h5 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h5><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.136.8</td>
+<td></td>
+<td>master</td>
+</tr>
+<tr>
+<td>192.168.136.9</td>
+<td></td>
+<td>slave</td>
+</tr>
+<tr>
+<td>192.168.136.10</td>
+<td></td>
+<td>slave</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h5><h6 id="查看-Ubuntu-版本"><a href="#查看-Ubuntu-版本" class="headerlink" title="查看 Ubuntu 版本"></a>查看 Ubuntu 版本</h6><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="相关网站"><a href="#相关网站" class="headerlink" title="相关网站"></a>相关网站</h3><ol>
-<li>Redis、Redis Insight 下载<ol>
-<li><a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">https://redis.io/downloads/#software</a></li>
+<h6 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h6><p>在 <a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">Redis 官方下载地址</a> 下载 Redis 安装包（<code>redislabs-7.22.0-95-jammy-amd64.tar</code>）<br><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/edis/image-20250529142510438.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="时间同步"><a href="#时间同步" class="headerlink" title="时间同步"></a>时间同步</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 安装 chrony</span><br><span class="hljs-built_in">sudo</span> apt install -y chrony<br><br><br><span class="hljs-comment"># 2. 启动并开启自启动 chrony</span><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. 开放 6379 ~ 6381、16379 ~ 16381 TCP 端口</span><br>sudo ufw allow proto tcp <span class="hljs-keyword">from</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.0</span>/<span class="hljs-number">24</span> to <span class="hljs-built_in">any</span> port <span class="hljs-number">6379</span>:<span class="hljs-number">6381</span>,<span class="hljs-number">16379</span>:<span class="hljs-number">16381</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. proto tcp from 192.168.136.0/24</span><br><span class="hljs-string">	1. 仅允许来自 192.168.136.0/24 网段的机器访问这些端口</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于我们只有三台服务器，因此只需开放端口至 6381 和 16381。若有四台，则需开放至 6382 和 16382，依此类推</li>
 </ol>
-</li>
-</ol>
+</blockquote>
+<hr>
+<h6 id="关闭-Swap-分区"><a href="#关闭-Swap-分区" class="headerlink" title="关闭 Swap 分区"></a>关闭 Swap 分区</h6><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 将 内容注释</span><br>vim <span class="hljs-regexp">/etc/</span>fstab<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">## 将此内容进行注释</span><br><span class="hljs-string">## /swap.img       none    swap    sw      0       0</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 立即关闭 Swap 分区</span><br>swapoff -a<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h5><p>&#x3D;&#x3D;1.创建 &#x2F;mystudy&#x2F;redis 目录并进入&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/redis<br><br><br><span class="hljs-built_in">cd</span> /mystudy/redis<br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;2.上传安装包&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;3.解压安装包&#x3D;&#x3D;</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo tar -xvf redislabs-<span class="hljs-number">7.22</span>.<span class="hljs-number">0</span>-<span class="hljs-number">95</span>-jammy-amd64.tar<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. redislabs_7.22.0-95~jammy_amd64.deb：</span><br><span class="hljs-string">	1. Redis Enterprise 的主安装包（Debian/Ubuntu 专用）</span><br><span class="hljs-string">2. install.sh：</span><br><span class="hljs-string">	1. 官方方提供的安装脚本，用来安装 .deb 包，并做初始化配置</span><br><span class="hljs-string">3. rlec_rest_api.tar.gz：</span><br><span class="hljs-string">	1. 提供 REST API 示例、工具或 SDK（可选）</span><br><span class="hljs-string">4. rlec_upgrade_tmpdir：</span><br><span class="hljs-string">	1. 升级时的临时目录，解压出来后可能是缓存或预处理脚本</span><br><span class="hljs-string">5. rlec_install_utils_tmpdir：</span><br><span class="hljs-string">	1. 安装时的工具依赖目录，供 install.sh 使用</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<p>&#x3D;&#x3D;4.执行安装脚本&#x3D;&#x3D;</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ./install.sh<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
 
                 
               </div>

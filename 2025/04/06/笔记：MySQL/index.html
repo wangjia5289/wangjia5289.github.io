@@ -69,7 +69,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141545381.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250408141924184.png">
 <meta property="article:published_time" content="2025-04-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-23T08:14:18.262Z">
+<meta property="article:modified_time" content="2025-05-25T07:59:38.581Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/06/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/image-20250410141156407.png">
@@ -266,7 +266,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          19k words
+          20k words
         
       </span>
     
@@ -277,7 +277,7 @@
         
         
         
-          162 mins
+          164 mins
         
       </span>
     
@@ -332,7 +332,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-23T16:14:18+08:00
+                    Last updated on 2025-05-25T15:59:38+08:00
                   
                   
 
@@ -381,7 +381,7 @@
 
 <hr>
 <h5 id="4-3-2-表-操作"><a href="#4-3-2-表-操作" class="headerlink" title="4.3.2. 表 操作"></a>4.3.2. 表 操作</h5><p>&#x3D;&#x3D;1.创建表&#x3D;&#x3D;</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;id-<span class="hljs-keyword">column</span>&gt; &lt;数据类型&gt; AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span> [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>]<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=&lt;字符集&gt;] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explanation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;id-<span class="hljs-keyword">column</span>&gt; &lt;数据类型&gt; AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span> [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>]<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=&lt;字符集&gt;] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explanation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;2.删除表&#x3D;&#x3D;</p>
@@ -576,7 +576,7 @@
 
 <hr>
 <h6 id="一对一查询"><a href="#一对一查询" class="headerlink" title="一对一查询"></a>一对一查询</h6><p>我们上面讲的内连接、左连接、右连接都很适合进行一对一查询。以 <code>Employee</code> 表和 <code>WorkCard</code> 表为例，<code>Employee</code> 表中的每个员工都有一个唯一的 <code>EmpID</code>，而 <code>WorkCard</code> 表中的每个工作证都对应一个唯一的员工。</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Employee 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employee (<br>    EmpID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> WorkCard 表（从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> WorkCard (<br>    CardID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    EmpID <span class="hljs-type">INT</span>, // 从表的外键字段 -&gt; 主表的字段（一般命名相同）<br>    IssueDate <span class="hljs-type">DATE</span>,<br>    <span class="hljs-keyword">FOREIGN KEY</span> (EmpID) <span class="hljs-keyword">REFERENCES</span> Employee(EmpID)<br>);<br><br><br># <span class="hljs-number">3.</span> 一对一查询（以内连接为例）<br><span class="hljs-keyword">SELECT</span> <br>  e.EmpID,<br>  e.Name,<br>  w.CardID,<br>  w.IssueDate<br><span class="hljs-keyword">FROM</span> <br>  Employee e<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <br>  WorkCard w<br><span class="hljs-keyword">ON</span> <br>  e.EmpID = w.EmpID;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Employee 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employee (<br>    EmpID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> WorkCard 表（从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> WorkCard (<br>    CardID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    EmpID <span class="hljs-type">INT</span>, // 从表的外键字段 -&gt; 主表的字段（一般命名相同）<br>    IssueDate <span class="hljs-type">DATE</span>,<br>    <span class="hljs-keyword">FOREIGN KEY</span> (EmpID) <span class="hljs-keyword">REFERENCES</span> Employee(EmpID)<br>);<br><br><br># <span class="hljs-number">3.</span> 一对一查询（以内连接为例）<br><span class="hljs-keyword">SELECT</span> <br>  e.EmpID,<br>  e.Name,<br>  w.CardID,<br>  w.IssueDate<br><span class="hljs-keyword">FROM</span> <br>  WorkCard w<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <br>  Employee e // <span class="hljs-keyword">FROM</span> 从 <span class="hljs-keyword">JOIN</span> 主<br><span class="hljs-keyword">ON</span> <br>  e.EmpID = w.EmpID;<br></code></pre></td></tr></table></figure>
 <p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/ySQL/image-20250521211043750.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/ySQL/image-20250521211108505.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
@@ -597,6 +597,68 @@
 </ol>
 </blockquote>
 <hr>
+<h5 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h5><p>子查询可以出现在 SQL 的三个位置。现在你只需要先记住最常见的一种用法：写在 <code>WHERE</code> 后面，用于筛选数据。</p>
+<table>
+<thead>
+<tr>
+<th>放置位置</th>
+<th>示例</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>WHERE</code> 后</td>
+<td><code>WHERE id IN (SELECT id FROM ...)</code></td>
+<td>筛选数据</td>
+</tr>
+<tr>
+<td><code>SELECT</code> 中</td>
+<td><code>SELECT (SELECT AVG(score) ...) AS avg_score</code></td>
+<td>字段值计算</td>
+</tr>
+<tr>
+<td><code>FROM</code> 中</td>
+<td><code>FROM (SELECT ...) AS temp</code></td>
+<td>临时表、组合逻辑</td>
+</tr>
+</tbody></table>
+<p>当你看到以下几种场景时，通常意味着可能要用到子查询了：</p>
+<ol>
+<li>&#x3D;&#x3D;存在性判断&#x3D;&#x3D;：<ol>
+<li>关键词：<ol>
+<li>存在、不存在、是否在，</li>
+<li>简单来说，就是在问 “<strong>有没有？</strong>”</li>
+</ol>
+</li>
+<li>例如示例：<ol>
+<li>哪些项目没有使用红色零件？</li>
+<li>找出未使用红色零件的项目</li>
+</ol>
+</li>
+<li>注意事项：<ol>
+<li>如果是“有”的情况（如：某些项目使用了红色零件），通常 直连 即可。</li>
+<li>如果是“没有”的情况（如：哪些项目没有使用红色零件），大概率需要用 子查询 来排除。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;极值查询&#x3D;&#x3D;：<ol>
+<li>关键词：<ol>
+<li>最大、最小、前几名</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;集合比较&#x3D;&#x3D;：<ol>
+<li>关键词：<ol>
+<li>全部、至少、包含</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;字段间的比较用到全表的动态值&#x3D;&#x3D;：</li>
+</ol>
+<hr>
 <h4 id="4-6-DCL（用户、角色管理）"><a href="#4-6-DCL（用户、角色管理）" class="headerlink" title="4.6. DCL（用户、角色管理）"></a>4.6. DCL（用户、角色管理）</h4><h5 id="4-6-1-用户管理"><a href="#4-6-1-用户管理" class="headerlink" title="4.6.1. 用户管理"></a>4.6.1. 用户管理</h5><p>&#x3D;&#x3D;1.创建用户&#x3D;&#x3D;</p>
 <figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs ceylon">create user <span class="hljs-string">&#x27;&lt;用户名&gt;&#x27;</span>@<span class="hljs-string">&#x27;&lt;主机地址&gt;&#x27;</span> identified <span class="hljs-meta">by</span> <span class="hljs-string">&#x27;密码&#x27;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. 主机地址：</span><br><span class="hljs-string">	1. 主机地址可以为 %，允许该用户从任何主机连接到 MySQL 数据库</span><br><span class="hljs-string">	2. 例如：&#x27;user&#x27;@&#x27;%&#x27;，表示无论什么 IP，只要你是 user 用户，就都能连接到数据库</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 
@@ -606,7 +668,7 @@
 
 
 <p>&#x3D;&#x3D;3.更新用户&#x3D;&#x3D;</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;用户名&#x27;</span>@<span class="hljs-string">&#x27;主机地址&#x27;</span> identified <span class="hljs-keyword">with</span> mysql_native_password <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;新密码&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 修改用户密码<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;用户名&#x27;</span>@<span class="hljs-string">&#x27;主机地址&#x27;</span> identified <span class="hljs-keyword">with</span> mysql_native_password <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;新密码&#x27;</span>;<br></code></pre></td></tr></table></figure>
 
 
 <p>&#x3D;&#x3D;4.查询用户&#x3D;&#x3D;</p>
@@ -676,7 +738,7 @@
 </ol>
 </li>
 <li>&#x3D;&#x3D;一致性&#x3D;&#x3D;：<ol>
-<li>务执行前后，数据库都处于一致的状态。</li>
+<li>事务执行前后，数据库都处于一致的状态。</li>
 <li>也就是说，事务执行前后，数据库的状态应该满足所有的定义约束、触发器、级联操作等。</li>
 </ol>
 </li>
@@ -692,7 +754,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="5-2-事务提交的方式"><a href="#5-2-事务提交的方式" class="headerlink" title="5.2. 事务提交的方式"></a>5.2. 事务提交的方式</h4><p>一句话：我不管你是<strong>一次操作批量插入</strong>还是<strong>多次操作大量插入</strong>，只要涉及到多个数据，就给我开启自动提交：</p>
+<h4 id="5-2-事务提交的方式"><a href="#5-2-事务提交的方式" class="headerlink" title="5.2. 事务提交的方式"></a>5.2. 事务提交的方式</h4><p>一句话：我不管你是<strong>一次操作批量插入</strong>还是<strong>多次操作大量插入</strong>，只要涉及到多个数据，就给我开启手动提交：</p>
 <ol>
 <li>&#x3D;&#x3D;自动提交&#x3D;&#x3D;：<ol>
 <li>在 MySQL 中，默认情况下，每条 SQL 语句都被视为一个独立的事务，并在执行后立即自动提交。</li>
@@ -914,7 +976,7 @@
 <td>用于为列设置默认值，如果插入数据时没有指定该列的值，数据库将自动使用默认值。</td>
 </tr>
 </tbody></table>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 唯一约束（☆☆☆）<br># <span class="hljs-number">1.1</span>. 添加唯一约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">unique</span> (&lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;);<br><br># <span class="hljs-number">1.2</span>. 删除唯一约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt;;<br><br><br># <span class="hljs-number">2.</span> 检查约束<br># <span class="hljs-number">2.1</span>. 添加检查约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">check</span> (&lt;condition&gt;);<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">check</span> (&lt;column1-<span class="hljs-type">name</span>&gt; &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> &lt;column2-<span class="hljs-type">name</span>&gt; &lt; <span class="hljs-number">100</span>);<br><br># <span class="hljs-number">2.2</span>. 删除检查约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">check</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt;;<br><br><br># <span class="hljs-number">3.</span> 非空约束<br># <span class="hljs-number">3.1</span>. 添加非空约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; modify &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;data-<span class="hljs-keyword">type</span>&gt; <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br># <span class="hljs-number">3.2</span>. 删除非空约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;modify &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;data-<span class="hljs-keyword">type</span>&gt; <span class="hljs-keyword">null</span>;<br><br><br># <span class="hljs-number">4.</span> 默认值约束<br># <span class="hljs-number">4.1</span>. 添加默认值约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">alter</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">set</span> <span class="hljs-keyword">default</span> &lt;<span class="hljs-keyword">default</span>-<span class="hljs-keyword">value</span>&gt;;<br><br># <span class="hljs-number">4.2</span>. 删除默认值约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">alter</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">default</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 唯一约束（☆☆☆）<br># <span class="hljs-number">1.1</span>. 添加唯一约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">unique</span> (&lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;);<br><br># <span class="hljs-number">1.2</span>. 删除唯一约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">index</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt;;<br><br><br># <span class="hljs-number">2.</span> 检查约束<br># <span class="hljs-number">2.1</span>. 添加检查约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">check</span> (&lt;condition&gt;);<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">check</span> (&lt;column1-<span class="hljs-type">name</span>&gt; &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> &lt;column2-<span class="hljs-type">name</span>&gt; &lt; <span class="hljs-number">100</span>);<br><br># <span class="hljs-number">2.2</span>. 删除检查约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">check</span> &lt;<span class="hljs-keyword">constraint</span>-<span class="hljs-type">name</span>&gt;;<br><br><br># <span class="hljs-number">3.</span> 非空约束<br># <span class="hljs-number">3.1</span>. 添加非空约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; modify &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;data-<span class="hljs-keyword">type</span>&gt; <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br><br># <span class="hljs-number">3.2</span>. 删除非空约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;modify &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;data-<span class="hljs-keyword">type</span>&gt; <span class="hljs-keyword">null</span>;<br><br><br># <span class="hljs-number">4.</span> 默认值约束<br># <span class="hljs-number">4.1</span>. 添加默认值约束<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; modify &lt;<span class="hljs-built_in">column_name</span>&gt; &lt;data_type&gt; <span class="hljs-keyword">default</span> &lt;default_value&gt;;<br><br># <span class="hljs-number">4.2</span>. 删除默认值约束<br>allter <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; modify &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;data_type&gt;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -1073,7 +1135,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="8-3-索引相关命令"><a href="#8-3-索引相关命令" class="headerlink" title="8.3. 索引相关命令"></a>8.3. 索引相关命令</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs pf"><span class="hljs-comment"># 1. 创建索引</span><br><span class="hljs-comment"># 1.1. 主键索引</span><br>通过创建主键约束来自动生成主键索引。<br><br><span class="hljs-comment"># 1.2. 唯一索引</span><br>create unique index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.3. 普通索引</span><br>create index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.4. 全文索引</span><br>create fulltext index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.5. 复合索引</span><br>create index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column1&gt;</span>, <span class="hljs-variable">&lt;column2&gt;</span>, ...);<br><br><br><span class="hljs-comment"># 2. 删除索引</span><br><span class="hljs-keyword">drop</span> index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span>;<br><br><br><span class="hljs-comment"># 3. 查询索引</span><br>show index <span class="hljs-keyword">from</span> <span class="hljs-variable">&lt;table-name&gt;</span>;<br></code></pre></td></tr></table></figure>
+<h4 id="8-3-索引相关命令"><a href="#8-3-索引相关命令" class="headerlink" title="8.3. 索引相关命令"></a>8.3. 索引相关命令</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs pf"><span class="hljs-comment"># 1. 添加索引</span><br><span class="hljs-comment"># 1.1. 主键索引</span><br>通过创建主键约束来自动生成主键索引。<br><br><span class="hljs-comment"># 1.2. 唯一索引</span><br>create unique index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.3. 普通索引</span><br>create index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.4. 全文索引</span><br>create fulltext index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column-name&gt;</span>);<br><br><span class="hljs-comment"># 1.5. 复合索引</span><br>create index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span> (<span class="hljs-variable">&lt;column1&gt;</span>, <span class="hljs-variable">&lt;column2&gt;</span>, ...);<br><br><br><span class="hljs-comment"># 2. 删除索引</span><br><span class="hljs-keyword">drop</span> index <span class="hljs-variable">&lt;index-name&gt;</span> <span class="hljs-keyword">on</span> <span class="hljs-variable">&lt;table-name&gt;</span>;<br><br><br><span class="hljs-comment"># 3. 查询索引</span><br>show index <span class="hljs-keyword">from</span> <span class="hljs-variable">&lt;table-name&gt;</span>;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
