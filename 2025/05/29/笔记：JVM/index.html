@@ -19,16 +19,16 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么">
+    <meta name="description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问—— “我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？” 换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问： “我做了一个 Java&amp;#x2F">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JVM">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么">
+<meta property="og:description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问—— “我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？” 换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问： “我做了一个 Java&amp;#x2F">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/VM/image-20250529103837116.png">
 <meta property="article:published_time" content="2025-05-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-29T04:59:48.167Z">
+<meta property="article:modified_time" content="2025-06-05T03:40:48.376Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/VM/image-20250529103837116.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15 words
+          941 words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          1 mins
+          8 mins
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-29T12:59:48+08:00
+                    Last updated on 2025-06-05T11:40:48+08:00
                   
                   
 
@@ -303,7 +303,38 @@
                 
                 <h2 id="JVM-概述"><a href="#JVM-概述" class="headerlink" title="JVM 概述"></a>JVM 概述</h2><h3 id="Java-从编码到执行的流程"><a href="#Java-从编码到执行的流程" class="headerlink" title="Java 从编码到执行的流程"></a>Java 从编码到执行的流程</h3><p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/VM/image-20250529103837116.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="JVM-是什么"><a href="#JVM-是什么" class="headerlink" title="JVM 是什么"></a>JVM 是什么</h3>
+<h3 id="JVM-是什么"><a href="#JVM-是什么" class="headerlink" title="JVM 是什么"></a>JVM 是什么</h3><p>我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问——</p>
+<p>“我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？”</p>
+<p>换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问：</p>
+<p>“我做了一个 Java&#x2F;Web 项目，我怎么知道它运行的时候大概要占多少内存？”</p>
+<p>⸻</p>
+<p>那我重新整理、直接回答你这个问题：</p>
+<p>⸻</p>
+<p>✅ 一个程序到底占多少内存？这取决于三部分：<br>    1.	静态资源大小（类、字节码、常量池等）<br>    •	这是编译生成后的 .class 文件所占空间，加载后会占用 JVM 的元空间。<br>    •	比如，你有 1000 个类，每个类字节码几 KB，那么运行时大概就会占用几 MB 的元空间。<br>    2.	运行时对象的内存占用（堆）<br>    •	这包括你 new 出来的所有对象、集合、缓存等等。<br>    •	数量和结构不确定，取决于：访问量、业务逻辑、缓存策略等。<br>    3.	线程、栈帧、JNI、本地资源等<br>    •	每个线程都要一个线程栈，默认大概 512 KB ~ 1 MB。<br>    •	如果你用到了很多并发，或者底层库（如 Netty、Redis 客户端）还会分配额外内存。</p>
+<p>⸻</p>
+<p>✅ 那你怎么知道“整个程序”会占多少内存？</p>
+<p>这不是靠“看代码”或者“加总类字段”能算出来的 —— Java 程序的内存是运行时才知道的。</p>
+<p>所以现实中有两种办法来掌握这件事：</p>
+<p>⸻</p>
+<p>🔍 方法一：运行实测（推荐）</p>
+<p>这是最靠谱的方式，尤其是你做 Web 项目的话：<br>    •	部署程序后，用以下方式实时观察内存使用：</p>
+<p>工具	功能<br>jps + jstat &#x2F; jmap	看 JVM 堆内存分布、类占用<br>VisualVM &#x2F; JConsole	图形化查看堆、类加载、线程等<br>JFR（Java Flight Recorder）	更深入的事件和内存追踪<br>Prometheus + Micrometer	生产上用来监控服务内存使用<br>top &#x2F; ps aux &#x2F; docker stats	直接看整个进程占了多少物理内存</p>
+<p>这样你可以知道：<br>    •	程序启动时占多少内存<br>    •	并发访问时内存增长情况<br>    •	有无内存泄漏、频繁 GC 等问题</p>
+<p>⸻</p>
+<p>📊 方法二：静态预估（用于部署前做预算）</p>
+<p>你可以基于经验做粗略估算：<br>    •	项目启动初期：一个中等 Spring Boot Web 项目，启动后常驻内存约 150MB~500MB<br>    •	平稳运行期：根据并发用户量、数据量、缓存策略，动态增长<br>    •	配置 JVM 参数限制最大堆：比如 -Xmx1024m</p>
+<p>示例配置：</p>
+<p>java -Xms512m -Xmx1024m -XX:MaxMetaspaceSize&#x3D;256m -jar myapp.jar</p>
+<p>这就相当于你告诉操作系统：“我这个程序最多会占用 1.25 GB 左右的内存”，超了就 OutOfMemory。</p>
+<p>⸻</p>
+<p>✍️ 所以你现在问的是：</p>
+<p>💬“我开发了一个很大的项目，有很多类，有很多对象，那它到底运行时会占多大？”</p>
+<p>那答案就是：</p>
+<p>✅ 你无法静态知道它到底占多少内存，但你可以通过运行实测 + JVM 参数控制 + 历史经验来掌握和约束它的内存使用。</p>
+<p>⸻</p>
+<p>如果你愿意我可以：<br>    •	给你写个小 demo，让你看到对象和类的真实内存占用；<br>    •	或者教你用 VisualVM 连上你的 Java 程序，看看它现在占了多少内存；<br>    •	或者我们一起估算一下你项目中的几个典型组件（如缓存、线程池）大概会吃多少堆空间。</p>
+<p>你想具体看哪部分？我可以陪你一步步操作。</p>
+
                 
               </div>
             
