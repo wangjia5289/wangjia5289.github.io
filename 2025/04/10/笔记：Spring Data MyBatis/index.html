@@ -30,8 +30,11 @@
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250517142511693.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250517142611270.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250413094940754.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617163656683.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175958685.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175835700.png">
 <meta property="article:published_time" content="2025-04-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T07:20:54.696Z">
+<meta property="article:modified_time" content="2025-06-28T08:49:32.303Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250413092353572.png">
@@ -228,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k words
+          13k words
         
       </span>
     
@@ -239,7 +242,7 @@
         
         
         
-          99 mins
+          105 mins
         
       </span>
     
@@ -294,7 +297,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-19T15:20:54+08:00
+                    Last updated on 2025-06-28T16:49:32+08:00
                   
                   
 
@@ -689,7 +692,7 @@
 
 
 <p>&#x3D;&#x3D;2.编写分页方法&#x3D;&#x3D;<br>需要注意的是，分页逻辑应写在 Service 层，因为插件是通过拦截 Mapper 方法（如 <code>umsResourceDao.selectListByCategoryId</code>）来修改底层 SQL，自动添加 <code>LIMIT</code> 和 <code>COUNT(*)</code> 语句，我们得再包一层才行。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">PageInfo</span>&lt;<span class="hljs-type">UmsResource</span>&gt; page(<span class="hljs-type">Integer</span> pageNum, <span class="hljs-type">Integer</span> pageSize, <span class="hljs-type">Long</span> categoryId) &#123;<br>    <span class="hljs-comment">// 1. 告诉 PageHelper 你想要第几页，每页几条</span><br>    <span class="hljs-type">PageHelper</span>.startPage(pageNum, pageSize);<br><br>    <span class="hljs-comment">// 2. 写你的正常查询逻辑（PageHelper 会拦截这个查询）</span><br>    <span class="hljs-type">List</span>&lt;<span class="hljs-type">UmsResource</span>&gt; resourceList <span class="hljs-operator">=</span> umsResourceDao.selectListByCategoryId(categoryId);<br><br>    <span class="hljs-comment">// 3. 把结果用 PageInfo 包装，里面有分页的各种信息</span><br>    <span class="hljs-keyword">return</span> new <span class="hljs-type">PageInfo</span>&lt;&gt;(resourceList);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">PageInfo</span>&lt;<span class="hljs-type">UmsResource</span>&gt; page(<span class="hljs-type">Integer</span> pageNum, <span class="hljs-type">Integer</span> pageSize, <span class="hljs-type">Long</span> categoryId) &#123;<br>    <span class="hljs-comment">// 1. 告诉 PageHelper 你想要第几页，每页几条</span><br>    <span class="hljs-type">PageHelper</span>.startPage(pageNum, pageSize);<br><br>    <span class="hljs-comment">// 2. 写你的正常查询逻辑（PageHelper 会拦截这个查询）</span><br>    <span class="hljs-type">List</span>&lt;<span class="hljs-type">UmsResource</span>&gt; resourceList <span class="hljs-operator">=</span> umsResourceDao.selectListByCategoryId(categoryId);<br><br>    <span class="hljs-comment">// 3. 把结果用 PageInfo 包装，里面有分页的各种信息</span><br>    <span class="hljs-keyword">return</span> new <span class="hljs-type">PageInfo</span>&lt;&gt;(resourceList);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-MyBatisX-插件"><a href="#1-MyBatisX-插件" class="headerlink" title="1. MyBatisX 插件"></a>1. MyBatisX 插件</h3><p>IDEA 中的 MyBatisX 插件可以帮助我们：一键生成 Entity Pojo、Mapper 接口和 Mapper XML 映射文件</p>
@@ -934,7 +937,43 @@
 <hr>
 <h3 id="8-List-如何处理"><a href="#8-List-如何处理" class="headerlink" title="8. List &lt;Map&lt;String,Object&gt;&gt; 如何处理"></a>8. List &lt;Map&lt;String,Object&gt;&gt; 如何处理</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">UserService</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">UserMapper</span> userMapper;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt;&gt; <span class="hljs-title function_">getUserById</span>(<span class="hljs-params">int id</span>) &#123;<br>        <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt;&gt; users = userMapper.<span class="hljs-title function_">getUserById</span>(id);<br><br>        <span class="hljs-comment">// 终端遍历输出查询到的数据</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; user : users) &#123;<br>            <span class="hljs-comment">// 根据列名获取值</span><br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;User ID: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;id&quot;</span>) <br>                    + <span class="hljs-string">&quot;, FirstName: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;first_name&quot;</span>) <br>                    + <span class="hljs-string">&quot;, LastName: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;last_name&quot;</span>));<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> users;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt;&gt; <span class="hljs-title function_">getAllUsers</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt;&gt; users = userMapper.<span class="hljs-title function_">getAllUsers</span>();<br><br>        <span class="hljs-comment">// 终端遍历输出查询到的数据</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Object</span>&gt; user : users) &#123;<br>            <span class="hljs-comment">// 根据列名获取值</span><br>            <span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-string">&quot;User ID: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;id&quot;</span>)<br>                    + <span class="hljs-string">&quot;, FirstName: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;first_name&quot;</span>) <br>                    + <span class="hljs-string">&quot;, LastName: &quot;</span> + user.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;last_name&quot;</span>));<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> users;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h1 id="有意思"><a href="#有意思" class="headerlink" title="有意思"></a>有意思</h1><p>之所以 <code>UsersMapper</code> 能“开箱即用”而你的 <code>AuditsCyfhMapper</code> 会拿不到 Bean，关键就在于接口方法签名和 XML 配置完全对上了：</p>
+<ol>
+<li><p><strong>方法参数与 <code>parameterType</code> 一致</strong></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 接口</span><br>Users <span class="hljs-title function_">findUserWithAuthoritieByUserName</span><span class="hljs-params">(String username)</span>;<br></code></pre></td></tr></table></figure>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- XML --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findUserWithAuthoritieByUserName&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;string&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;BaseResultMap&quot;</span>&gt;</span><br>  …<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p> 这里接口只要一个 <code>String</code> 参数，XML 里也声明 <code>parameterType=&quot;string&quot;</code>，MyBatis 就能顺利为该方法生成代理，Spring 也就能把它当 Bean 注入。</p>
+</li>
+<li><p><strong>返回值和 <code>resultMap</code> 匹配</strong><br> 接口返回的是单一的 <code>Users</code> 对象，XML 用 <code>&lt;resultMap&gt;</code> 把查询列一一映射到 <code>Users</code> 的属性上，流程一气呵成。</p>
+</li>
+</ol>
+<hr>
+<h3 id="对比你的-AuditsCyfhMapper"><a href="#对比你的-AuditsCyfhMapper" class="headerlink" title="对比你的 AuditsCyfhMapper"></a>对比你的 <code>AuditsCyfhMapper</code></h3><ul>
+<li><p><strong>接口却写成了</strong></p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer <span class="hljs-title function_">insertAuditsCyfh</span><span class="hljs-params">(<span class="hljs-type">int</span> userId, String title, String content)</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>XML 却声明</strong></p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertAuditsCyfh&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;com.example.db.entity.AuditsCyfh&quot;</span>&gt;</span><br>   …<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>  这样 MyBatis 就找不到签名匹配的映射——它在 XML 里看不到三个独立参数应该怎么装配到 <code>AuditsCyfh</code> 对象上，所以根本不会为 <code>insertAuditsCyfh(int,String,String)</code> 生成代理，Spring 在启动时也就没法注入 <code>auditsCyfhMapper</code>，导致它在 Controller 里一直是 <code>null</code>。</p>
+</li>
+</ul>
+<hr>
+<h4 id="如何让两者“同样没事”？"><a href="#如何让两者“同样没事”？" class="headerlink" title="如何让两者“同样没事”？"></a>如何让两者“同样没事”？</h4><p>你要么</p>
+<ol>
+<li><p><strong>统一成「传实体」的方式</strong></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 接口</span><br>Integer <span class="hljs-title function_">insertAuditsCyfh</span><span class="hljs-params">(AuditsCyfh record)</span>;<br></code></pre></td></tr></table></figure>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- XML --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertAuditsCyfh&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;com.example.db.entity.AuditsCyfh&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">useGeneratedKeys</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">keyProperty</span>=<span class="hljs-string">&quot;articleId&quot;</span>&gt;</span><br>  INSERT INTO Audits_cyfh (user_id,title,content)<br>  VALUES (#&#123;userId&#125;,#&#123;title&#125;,#&#123;content&#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>要么<br>2. <strong>改成「独立参数 + map」的方式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 接口</span><br>Integer <span class="hljs-title function_">insertAuditsCyfh</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;userId&quot;)</span> <span class="hljs-type">int</span> userId,</span><br><span class="hljs-params">                         <span class="hljs-meta">@Param(&quot;title&quot;)</span>  String title,</span><br><span class="hljs-params">                         <span class="hljs-meta">@Param(&quot;content&quot;)</span>String content)</span>;<br></code></pre></td></tr></table></figure>
 
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- XML --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertAuditsCyfh&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;map&quot;</span> <span class="hljs-attr">useGeneratedKeys</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">keyProperty</span>=<span class="hljs-string">&quot;articleId&quot;</span>&gt;</span><br>  INSERT INTO Audits_cyfh (user_id,title,content)<br>  VALUES (#&#123;userId&#125;,#&#123;title&#125;,#&#123;content&#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>把签名和 <code>parameterType</code> 对齐之后，MyBatis 就能给 <code>AuditsCyfhMapper</code> 生成代理，Spring 也能正常注入，你就不会再拿到 <code>null</code> 了。<br><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617163656683.png" srcset="/img/loading.gif" lazyload></p>
+<p>因为其实Controller 的返回值是返回给客户端的，我门随意返回都无所谓，但是在 Mapper 接口中，我们的返回值必须好好的整一整，因为我们执行 SQL 语句他返回的值肯定是固定的</p>
+<p>然后 Mapper 传入的参数也需要好好搞一搞，因为是需要传入我们 SQL 与的</p>
+<h1 id="很有意思"><a href="#很有意思" class="headerlink" title="很有意思"></a>很有意思</h1><p>我们平常都是select all 对吧，就是不管我们知道是根据 ID 只查一条也是selec all 因为你懒得取搞那么多烦人的事情，但是我们一般也会用到一条的时候，例如这种情况对吧，然后我们就可以使用实体类，然后get（0）就算是获取他的第一条了，但是这个也很有问题，就是你查全区get0，如果这个id有还好，让你查到了，没查到也罢，会给你提示，但是如果你是直接查全文，那么如果已经没有3了，就会拿到4，就和你想的不一样<br><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175958685.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175835700.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -953,22 +992,22 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">关系型数据库</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/Spring-Data/" class="category-chain-item">Spring Data</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" class="category-chain-item">MySQL</a>
   
   
     <span>></span>
     
-  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/Spring-Data/Spring-Data-MyBatis/" class="category-chain-item">Spring Data MyBatis</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/Spring-Data-MyBatis/" class="category-chain-item">Spring Data MyBatis</a>
   
   
 
@@ -1039,9 +1078,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJDBC/" title="笔记：JDBC">
+                      <a href="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AMVC%20%E4%B8%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84/" title="笔记：MVC 与三层架构">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：JDBC</span>
+                        <span class="hidden-mobile">笔记：MVC 与三层架构</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -1049,8 +1088,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph/" title="笔记：Ceph">
-                        <span class="hidden-mobile">笔记：Ceph</span>
+                      <a href="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83/" title="笔记：JDBC 规范">
+                        <span class="hidden-mobile">笔记：JDBC 规范</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

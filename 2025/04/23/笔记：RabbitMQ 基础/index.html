@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：RabbitMQ 基础">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215227990.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215558278.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510220812312.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104732641.png">
+<meta property="article:published_time" content="2025-04-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-28T11:12:00.249Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：RabbitMQ 基础 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1%E7%BE%8E%E5%AD%A6-%E5%90%8A%E5%B8%A6%E8%A3%99.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：RabbitMQ 基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-23 00:00" pubdate>
+          April 23, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：RabbitMQ 基础</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-06-28T19:12:00+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png" srcset="/img/loading.gif" lazyload></p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>RabbitMQ</th>
+<th>Kafka</th>
+<th>RocketMQ</th>
+<th>ActiveMQ</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>消息队列（AMQP）</td>
+<td>分布式日志系统</td>
+<td>分布式消息中间件</td>
+<td>传统 JMS 消息队列</td>
+</tr>
+<tr>
+<td>语言</td>
+<td>Erlang</td>
+<td>Scala&#x2F;Java</td>
+<td>Java</td>
+<td>Java</td>
+</tr>
+<tr>
+<td>吞吐</td>
+<td>中等</td>
+<td>极高</td>
+<td>高</td>
+<td>中等偏低</td>
+</tr>
+<tr>
+<td>延迟</td>
+<td>低</td>
+<td>中</td>
+<td>低</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>消息顺序</td>
+<td>支持（某种程度）</td>
+<td>分区内有序</td>
+<td>原生强顺序（可配置）</td>
+<td>有序（但不稳定）</td>
+</tr>
+<tr>
+<td>消息追踪</td>
+<td>无原生支持</td>
+<td>有 offset 可控</td>
+<td>✅ 原生消息轨迹追踪</td>
+<td>❌ 不完善</td>
+</tr>
+<tr>
+<td>消息回溯</td>
+<td>复杂</td>
+<td>✅ 易（offset 回溯）</td>
+<td>✅ 类似 Kafka 的 offset 模型</td>
+<td>❌ 基本不支持</td>
+</tr>
+<tr>
+<td>分布式支持</td>
+<td>集群可配但不天然</td>
+<td>✅ 天然分布式</td>
+<td>✅ 天然支持</td>
+<td>❌ 集群弱，主备为主</td>
+</tr>
+<tr>
+<td>死信队列</td>
+<td>✅ 支持</td>
+<td>需自建逻辑</td>
+<td>✅ 原生支持</td>
+<td>✅ 支持</td>
+</tr>
+<tr>
+<td>社区活跃度</td>
+<td>🔥🔥🔥</td>
+<td>🔥🔥🔥🔥🔥</td>
+<td>🔥🔥</td>
+<td>❄️（Apache 里冷门）</td>
+</tr>
+</tbody></table>
+<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h3 id="1-单机测试环境搭建"><a href="#1-单机测试环境搭建" class="headerlink" title="1. 单机测试环境搭建"></a>1. 单机测试环境搭建</h3><h4 id="1-1-安装-RabbitMQ"><a href="#1-1-安装-RabbitMQ" class="headerlink" title="1.1. 安装 RabbitMQ"></a>1.1. 安装 RabbitMQ</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>--name rabbitmq <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">5672</span>:<span class="hljs-number">5672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">15672</span>:<span class="hljs-number">15672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_USER=guest <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_PASS=<span class="hljs-number">123456</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>rabbitmq:<span class="hljs-number">3</span>.<span class="hljs-number">13</span>-management<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-2-访问-RabbitMQ-控制台"><a href="#1-2-访问-RabbitMQ-控制台" class="headerlink" title="1.2. 访问 RabbitMQ 控制台"></a>1.2. 访问 RabbitMQ 控制台</h4><p>访问 RabbitMQ 控制台： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-高可用集群搭建"><a href="#2-高可用集群搭建" class="headerlink" title="2. 高可用集群搭建"></a>2. 高可用集群搭建</h3><h4 id="2-1-架构说明"><a href="#2-1-架构说明" class="headerlink" title="2.1. 架构说明"></a>2.1. 架构说明</h4><hr>
+<h4 id="2-2-环境准备"><a href="#2-2-环境准备" class="headerlink" title="2.2. 环境准备"></a>2.2. 环境准备</h4><hr>
+<h4 id="2-3-节点列表"><a href="#2-3-节点列表" class="headerlink" title="2.3. 节点列表"></a>2.3. 节点列表</h4><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>主机名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.136.8</td>
+<td>rbmq-node1</td>
+</tr>
+<tr>
+<td>192.168.136.9</td>
+<td>rbmq-node2</td>
+</tr>
+<tr>
+<td>192.168.136.10</td>
+<td>rbmq-node3</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-4-时间同步"><a href="#2-4-时间同步" class="headerlink" title="2.4. 时间同步"></a>2.4. 时间同步</h4><hr>
+<h4 id="2-5-开放-5672、15672、4369、25672-TCP端口"><a href="#2-5-开放-5672、15672、4369、25672-TCP端口" class="headerlink" title="2.5. 开放 5672、15672、4369、25672 TCP端口"></a>2.5. 开放 5672、15672、4369、25672 TCP端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">5672</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">15672</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">4369</span>/tcp &amp;&amp; sudo ufw <span class="hljs-literal">allow</span> <span class="hljs-number">25672</span>/tcp<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>TCP 端口就是我们常说的 HTTP 端口</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-6-设置主机名、主机名互相解析"><a href="#2-6-设置主机名、主机名互相解析" class="headerlink" title="2.6. 设置主机名、主机名互相解析"></a>2.6. 设置主机名、主机名互相解析</h4><p>必须设置，因为后续节点加入集群，需要根据主机名找到中间人，不能根据 IP 地址</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 1. 设置主机名</span><br><span class="hljs-comment"># 1.1. 192.168.136.8</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">rbmq-node1</span><br><br><span class="hljs-comment"># 1.2. 192.168.136.9</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">rbmq-node2</span><br><br><span class="hljs-comment"># 1.3. 192.168.136.10</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">rbmq-node3</span><br><br><br><span class="hljs-comment"># 2. 设置主机名互相解析</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">vim</span> /<span class="hljs-string">etc</span>/<span class="hljs-string">hosts</span><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">192.168.136.8 rbmq-node1</span><br><span class="hljs-string">192.168.136.9 rbmq-node2</span><br><span class="hljs-string">192.168.136.10 rbmq-node3</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-7-安装-RabbitMQ"><a href="#2-7-安装-RabbitMQ" class="headerlink" title="2.7. 安装 RabbitMQ"></a>2.7. 安装 RabbitMQ</h4><p>根据 <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/docs/install-debian">RabbitMQ 安装文档</a>，选择合适的版本（3.13），并在每个节点上进行安装。安装方式可选用 <code>Apt with Cloudsmith Mirrors: a Quick Start Script</code> 或 <code>Using Apt with Cloudsmith Mirrors</code>。随后，使用 <code>Debian Package Version and Repository Pinning</code> 限定只从 RabbitMQ 提供的 Cloudsmith 镜像源安装 Erlang，并锁定特定版本的 Erlang 和 RabbitMQ。</p>
+<p>在开始之前，我们先设置一下局部代理，然后开启一下 VM NAT：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://192.168.68.4:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://192.168.68.4:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
+
+<p>然后删除一下之前的 <code>packagecloud.io</code> 和 <code>erlang-solutions.com</code> 的源：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 查找所有涉及 packagecloud.io 和 erlang-solutions.com 的源</span><br>grep -R <span class="hljs-string">&quot;packagecloud\.io\|erlang-solutions\.com&quot;</span> <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list /</span>etc<span class="hljs-regexp">/apt/</span>sources.list.d/*.list<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">root@user-VMware-Virtual-Platform:~# grep -R &quot;packagecloud\.io\|erlang-solutions\.com&quot; /etc/apt/sources.list /etc/apt/sources.list.d/*.list</span><br><span class="hljs-string">/etc/apt/sources.list.d/erlang.list:deb https://packages.erlang-solutions.com/ubuntu noble contrib</span><br><span class="hljs-string">/etc/apt/sources.list.d/rabbitmq_erlang.list:deb https://packagecloud.io/rabbitmq/erlang/ubuntu/ jammy main</span><br><span class="hljs-string">/etc/apt/sources.list.d/rabbitmq_server.list:deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ jammy main</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 2. 删除这些源</span><br>sudo rm <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>erlang.list \<br>        <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>rabbitmq_erlang.list \<br>        <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>rabbitmq_server.list<br></code></pre></td></tr></table></figure>
+
+<p>然后进行 RabbitMQ 的安装：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png" srcset="/img/loading.gif" lazyload></p>
+<p>以下情况，无需在意，实际上它已经创建了主目录：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-8-启用管理界面插件"><a href="#2-8-启用管理界面插件" class="headerlink" title="2.8. 启用管理界面插件"></a>2.8. 启用管理界面插件</h4><p>就是启用我们的后台管理： <a target="_blank" rel="noopener" href="http://192.168.136.8:15672/">http://192.168.136.8:15672</a></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">rabbitmq-plugins <span class="hljs-built_in">enable</span> rabbitmq_management<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-9-启动第一个节点"><a href="#2-9-启动第一个节点" class="headerlink" title="2.9. 启动第一个节点"></a>2.9. 启动第一个节点</h4><h5 id="2-9-1-启动第一个节点"><a href="#2-9-1-启动第一个节点" class="headerlink" title="2.9.1. 启动第一个节点"></a>2.9.1. 启动第一个节点</h5><p>第一个节点非常重要，后续节点可以通过这个节点作为中间人，从而加入到集群：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta"># 1. 启动 RabbitMQ 服务</span><br>systemctl start  rabbitmq-<span class="hljs-keyword">server</span><br><br><br><span class="hljs-meta"># 2. 开机自启动 RabbitMQ 服务</span><br>systemctl enable rabbitmq-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-9-2-进行-RabbitMQ-集群基础配置"><a href="#2-9-2-进行-RabbitMQ-集群基础配置" class="headerlink" title="2.9.2. 进行 RabbitMQ 集群基础配置"></a>2.9.2. 进行 RabbitMQ 集群基础配置</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. 新增登录账号密码</span><br>rabbitmqctl add_user batian wq666666<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">注意：默认账号密码是 guest，不过出于安全考虑，它在配置里被限制为 只能通过 localhost（也就是 127.0.0.1 或 ::1）来连接，所以我们需要新建登录账号密码</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 2. 设置登录账号权限</span><br>rabbitmqctl set_user_tags batian administrator<br><br>rabbitmqctl set_permissions -p / batian <span class="hljs-string">&quot;.*&quot;</span> <span class="hljs-string">&quot;.*&quot;</span> <span class="hljs-string">&quot;.*&quot;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. set_user_tags：</span><br><span class="hljs-string">	1. 给 batian 这个用户打上一个或多个 标签（tags）。</span><br><span class="hljs-string">	2. administrator：</span><br><span class="hljs-string">		1. 管理员权限，能在 Management UI 和 HTTP API 中进行所有管理操作（增删用户、队列、交换机、权限、策略等）</span><br><span class="hljs-string">	3. monitoring：</span><br><span class="hljs-string">		1. 监控权限，只能查看运行时状态（队列长度、连接、通道、消息速率等），无法做写入或配置操作</span><br><span class="hljs-string">	4. policymaker：</span><br><span class="hljs-string">		1. 策略管理权限，允许创建、修改和删除策略（policies），但不具备完整的管理或监控权限。</span><br><span class="hljs-string">2. set_permissions：</span><br><span class="hljs-string">	1. 给用户在某个 “虚拟主机”（vhost）上的 权限。</span><br><span class="hljs-string">	2. -p /：</span><br><span class="hljs-string">		1. 表示默认的 “根” vhost（大多数场景都使用 `/`）</span><br><span class="hljs-string">	3. &quot;.*&quot; 三个正则：</span><br><span class="hljs-string">		1. configure-regex：</span><br><span class="hljs-string">			1. 控制“声明”操作（declare/删除队列、交换机、绑定、quorum queue 等）</span><br><span class="hljs-string">			2. 例如 ^amq\. 禁止用户操作内建的 amq.* 资源，或者 ^$ 直接不允许任何声明</span><br><span class="hljs-string">		2. write-regex：</span><br><span class="hljs-string">			1. 控制“写入”操作（publish 消息到交换机或默认交换机）</span><br><span class="hljs-string">			2. 例如 ^logs\. 只允许向以 logs. 开头的交换机发送消息</span><br><span class="hljs-string">		3. read-regex：</span><br><span class="hljs-string">			1. 控制“读取”操作（从队列消费消息、使用 HTTP API 读取队列/交换机信息）</span><br><span class="hljs-string">			2. 例如 ^tasks$ 只允许从名为 tasks 的队列中读取消息。</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 3. 启用所有稳定功能 flag 启用</span><br>rabbitmqctl enable_feature_flag <span class="hljs-built_in">all</span><br><br><br><span class="hljs-comment"># 4. 重启RabbitMQ服务生效</span><br>systemctl restart rabbitmq-server<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-10-启动其他节点"><a href="#2-10-启动其他节点" class="headerlink" title="2.10. 启动其他节点"></a>2.10. 启动其他节点</h4><h5 id="2-10-1-查看集群内正常节点的-Erlang-Cookie-值-并记录"><a href="#2-10-1-查看集群内正常节点的-Erlang-Cookie-值-并记录" class="headerlink" title="2.10.1. 查看集群内正常节点的 Erlang Cookie 值 并记录"></a>2.10.1. 查看集群内正常节点的 Erlang Cookie 值 并记录</h5><p>若后续需要将新节点加入集群，只需从当前集群中的任一正常节点获取 Erlang Cookie，并在新节点中使用相同的 Cookie 即可完成身份验证。</p>
+<p>这里我们集群中只有第一个节点，所以查看第一个节点的 Erlang Cookie 值</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 查看 Cookie 值</span><br>vim <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/rabbitmq/</span>.erlang.cookie <br><br><br><span class="hljs-comment"># 2. 记录 Cookie 值</span><br>VAWCBDXAIOWOXLZSBRYS<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-10-2-加入集群并启动节点"><a href="#2-10-2-加入集群并启动节点" class="headerlink" title="2.10.2. 加入集群并启动节点"></a>2.10.2. 加入集群并启动节点</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 如果开启了 RabbitMQ 服务，先关闭服务</span><br>sudo systemctl stop rabbitmq-server<br><br><br><span class="hljs-comment"># 2. 修改 Erlang Cookie 值，强制保存（w! 和 q!）</span><br>vim <span class="hljs-regexp">/var/</span>lib<span class="hljs-regexp">/rabbitmq/</span>.erlang.cookie<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">输入刚才记录的 Cookie 值：VAWCBDXAIOWOXLZSBRYS</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 启动 RabbitMQ 服务</span><br>sudo systemctl start rabbitmq-server<br><br><br><span class="hljs-comment"># 2. 停止、重置、加入、启动</span><br><span class="hljs-comment"># 2.1. 停止</span><br>rabbitmqctl stop_app<br><br><span class="hljs-comment"># 2.2. 重置</span><br>rabbitmqctl reset<br><br><span class="hljs-comment"># 2.3. 加入</span><br>rabbitmqctl join_cluster rabbit@rbmq-node1<br><br><span class="hljs-comment"># 2.4. 启动</span><br>rabbitmqctl start_app<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. rabbitmqctl stop_app：</span><br><span class="hljs-string">	1. 停止 RabbitMQ 的应用（注意不是停止整个服务），防止在运行中加入集群导致冲突</span><br><span class="hljs-string">2. rabbitmqctl reset：</span><br><span class="hljs-string">	1. 清空本节点的元数据，包括已有的集群状态，这一步是必须的</span><br><span class="hljs-string">3. rabbitmqctl join_cluster rabbit@rbmq-node1</span><br><span class="hljs-string">	1. 将当前节点加入名为 rabbit@node01 的 RabbitMQ 集群</span><br><span class="hljs-string">	2. rbmp-node1 为中间人，只能写主机名，不能写 IP：</span><br><span class="hljs-string">4. rabbitmqctl start_app：</span><br><span class="hljs-string">	1. 启动 RabbitMQ 应用，正式生效，开始作为集群成员工作</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 3. 开机自启动 RabbitMQ 服务</span><br>systemctl enable rabbitmq-server<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-10-3-检查集群状态"><a href="#2-10-3-检查集群状态" class="headerlink" title="2.10.3. 检查集群状态"></a>2.10.3. 检查集群状态</h5><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">rabbitmqctl cluster_status</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="—"><a href="#—" class="headerlink" title="—-"></a>—-</h1><h4 id="0-1-虚拟空间"><a href="#0-1-虚拟空间" class="headerlink" title="0.1. 虚拟空间"></a>0.1. 虚拟空间</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png" srcset="/img/loading.gif" lazyload></p>
+<p>不同消息队列根据路由键进行分配到队列</p>
+<p>起名：<br>exchange.direct.order</p>
+<p>exchange.direct.order.backup<br>queue.direct.order.backup</p>
+<p>这个能直接发布信息<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215227990.png" srcset="/img/loading.gif" lazyload></p>
+<p>对这个图<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215558278.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510220812312.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="0-2-环境要求"><a href="#0-2-环境要求" class="headerlink" title="0.2. 环境要求"></a>0.2. 环境要求</h4><ol>
+<li>&#x3D;&#x3D;系统要求&#x3D;&#x3D;：<ol>
+<li>Ubuntu 22.04</li>
+<li>开放 5672、15672、4369、25672 TCP端口</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;软件要求&#x3D;&#x3D;：<ol>
+<li>RabbitMQ 4.0.1</li>
+<li>Erlang 26.2</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="0-3"><a href="#0-3" class="headerlink" title="0.3."></a>0.3.</h4><hr>
+<h3 id="1-安装-Erlang（RabbitMQ-的运行强依赖）"><a href="#1-安装-Erlang（RabbitMQ-的运行强依赖）" class="headerlink" title="1. 安装 Erlang（RabbitMQ 的运行强依赖）"></a>1. 安装 Erlang（RabbitMQ 的运行强依赖）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 设置临时代理</span><br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br><span class="hljs-comment"># 2. 安装必要工具</span><br><span class="hljs-built_in">sudo</span> apt-get install -y curl gnupg apt-transport-https<br><br><br><span class="hljs-comment"># 3. 添加 RabbitMQ 包签名</span><br>curl -fsSL https://packagecloud.io/rabbitmq/erlang/gpgkey | <span class="hljs-built_in">sudo</span> gpg --dearmor -o /etc/apt/trusted.gpg.d/rabbitmq_erlang.gpg &amp;&amp; curl -fsSL https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey | <span class="hljs-built_in">sudo</span> gpg --dearmor -o /etc/apt/trusted.gpg.d/rabbitmq_server.gpg<br><br><br><span class="hljs-comment"># 4. 添加 APT 源</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packagecloud.io/rabbitmq/erlang/ubuntu/ <span class="hljs-subst">$(lsb_release -sc)</span> main&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/rabbitmq_erlang.list &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ <span class="hljs-subst">$(lsb_release -sc)</span> main&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/rabbitmq_server.list<br><br><br><span class="hljs-comment"># 5. 更新索引</span><br><span class="hljs-built_in">sudo</span> apt-get update<br><br><br><br><span class="hljs-comment"># 2. 添加 Erlang 仓库</span><br>wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | <span class="hljs-built_in">sudo</span> apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packages.erlang-solutions.com/ubuntu <span class="hljs-subst">$(lsb_release -sc)</span> contrib&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/erlang.list<br><br><br><span class="hljs-comment"># 2. 更新并安装 Erlang</span><br><span class="hljs-built_in">sudo</span> apt update &amp;&amp; <span class="hljs-built_in">sudo</span> apt install erlang -y<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-RabbitMQ-控制台"><a href="#1-RabbitMQ-控制台" class="headerlink" title="1. RabbitMQ 控制台"></a>1. RabbitMQ 控制台</h3><h4 id="1-1-访问方式"><a href="#1-1-访问方式" class="headerlink" title="1.1. 访问方式"></a>1.1. 访问方式</h4><p>当我们部署完 RabbitMQ 后，可以访问服务器节点： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="四、补充："><a href="#四、补充：" class="headerlink" title="四、补充："></a>四、补充：</h1><h3 id="1-相关网站"><a href="#1-相关网站" class="headerlink" title="1. 相关网站"></a>1. 相关网站</h3><ol>
+<li>&#x3D;&#x3D;Erlang 与 RabbitMQ 版本兼容&#x3D;&#x3D;<ol>
+<li><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/docs/which-erlang">https://www.rabbitmq.com/docs/which-erlang</a></li>
+</ol>
+</li>
+</ol>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104732641.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-消息可以被其他消费者读取吗？"><a href="#2-消息可以被其他消费者读取吗？" class="headerlink" title="2. 消息可以被其他消费者读取吗？"></a>2. <strong>消息可以被其他消费者读取吗？</strong></h3><ul>
+<li><p><strong>默认行为</strong>：如果消费者没有确认消息（没有发送 ACK），那么消息会继续被认为是处于未确认（unacked）状态。在 RabbitMQ 中，这条消息不会被其他消费者读取，直到消息超时或者消费者确认（ACK）或者拒绝（NACK）该消息。</p>
+</li>
+<li><p><strong>消息重试</strong>：如果消费者崩溃或连接断开，RabbitMQ 会检测到该消费者没有确认消息（ACK），然后将该消息重新放回队列，待其他消费者处理。这种机制保证了消息的可靠性，即使消费者出现问题，消息也不会丢失。</p>
+</li>
+</ul>
+<h3 id="3-如何控制消息的重新投递？"><a href="#3-如何控制消息的重新投递？" class="headerlink" title="3. 如何控制消息的重新投递？"></a>3. <strong>如何控制消息的重新投递？</strong></h3><ul>
+<li><strong>消息超时机制</strong>（<code>time-to-live</code>）：RabbitMQ 不会自动对未确认消息进行超时处理，除非设置了超时机制。但可以设置 <strong>消费者确认超时</strong> 或通过某些机制来控制消息的重试。</li>
+</ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="1-常见网站"><a href="#1-常见网站" class="headerlink" title="1. 常见网站"></a>1. 常见网站</h3><ol>
+<li>RabbitMQ 官网</li>
+<li>RabbitMQ 安装文档<ol>
+<li><a target="_blank" rel="noopener" href="https://www.rabbitmq.com/docs/install-debian">https://www.rabbitmq.com/docs/install-debian</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="2-交换机、队列命名"><a href="#2-交换机、队列命名" class="headerlink" title="2. 交换机、队列命名"></a>2. 交换机、队列命名</h3><p>命名模版：&#96;[项目名].[业务名].[功能名].[类型]</p>
+<p>常见类型：</p>
+<ol>
+<li>主交换机：<code>exchange</code></li>
+<li>主队列：<code>queue</code></li>
+<li>死信交换机：<code>dlx.exchange</code></li>
+<li>死信队列：<code>dlx.queue</code></li>
+<li>备份交换机：<code>backup.exchange</code></li>
+<li>备份队列：<code>backup.queue</code></li>
+</ol>
+<p>举例说明：</p>
+<ol>
+<li>支付创建：<code>payment.create.exchange</code></li>
+<li>支付超时取消：<code>payment.timeout.exchange</code></li>
+<li>支付回调通知：<code>payment.notify.exchange</code></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="category-chain-item">消息队列</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/RabbitMQ/" class="category-chain-item">RabbitMQ</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/RabbitMQ/RabbitMQ-%E5%9F%BA%E7%A1%80/" class="category-chain-item">RabbitMQ 基础</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：RabbitMQ 基础</div>
+      <div>https://wangjia5289.github.io/2025/04/23/笔记：RabbitMQ 基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 23, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/27/%E7%AC%94%E8%AE%B0%EF%BC%9AMac/" title="笔记：Mac">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Mac</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/22/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20Elasticsearch/" title="笔记：Spring Data Elasticsearch">
+                        <span class="hidden-mobile">笔记：Spring Data Elasticsearch</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>

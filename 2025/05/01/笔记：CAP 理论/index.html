@@ -27,10 +27,11 @@
 <meta property="og:description" content="1. CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Av">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/AP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191408958.png">
 <meta property="article:published_time" content="2025-04-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-12T13:04:32.546Z">
+<meta property="article:modified_time" content="2025-06-28T09:29:14.211Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png">
@@ -227,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          551 words
+          2k words
         
       </span>
     
@@ -238,7 +239,7 @@
         
         
         
-          5 mins
+          17 mins
         
       </span>
     
@@ -293,7 +294,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-12T21:04:32+08:00
+                    Last updated on 2025-06-28T17:29:14+08:00
                   
                   
 
@@ -335,6 +336,7 @@
 </ul>
 <p><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/AP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="2-AP-架构"><a href="#2-AP-架构" class="headerlink" title="2. AP 架构"></a>2. AP 架构</h3><p>在网络分区发生时，<strong>为了保持系统可用性，系统B仍会响应请求，即使返回的是旧数据</strong>。</p>
 <p>例如：当A和B之间网络断开，某些注册信息只存在于节点B，此时请求节点A可能查询不到，但请求节点B则能获得结果。虽然数据不一致，但服务依然对外正常运行。</p>
 <p><strong>结论</strong>：为了保证可用性和分区容错性，牺牲了一致性，因此属于 <strong>AP 类型系统</strong>。<br><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png" srcset="/img/loading.gif" lazyload>、</p>
@@ -342,6 +344,228 @@
 <h3 id="3-CP架构"><a href="#3-CP架构" class="headerlink" title="3. CP架构"></a>3. CP架构</h3><p>当系统发生网络分区时，<strong>如果要确保数据一致性，就必须拒绝部分请求</strong>，否则就可能出现数据冲突。</p>
 <p>Consul 就是典型的 CP 架构系统，它采用 Raft 算法来实现一致性，要求大多数节点写入成功，服务才算注册成功。例如：如果 leader 节点挂掉，新的 leader 选举完成前，系统会短暂不可用。</p>
 <p><strong>结论</strong>：该架构牺牲了可用性，换取一致性和分区容错性，因此属于 <strong>CP 类型系统</strong>。<br><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191408958.png" srcset="/img/loading.gif" lazyload></p>
+<p>这个问题问得非常好，而且很“前瞻性”！<br>整个分布式系统世界里，“集群”并不只有一种，有各种不同的架构设计理念，各自适用于不同的业务场景和一致性需求。我们可以从几个维度来系统地梳理一下。</p>
+<hr>
+<h2 id="🧭-一、从架构角色来看，常见的集群类型包括："><a href="#🧭-一、从架构角色来看，常见的集群类型包括：" class="headerlink" title="🧭 一、从架构角色来看，常见的集群类型包括："></a>🧭 一、从架构角色来看，常见的集群类型包括：</h2><table>
+<thead>
+<tr>
+<th>集群类型</th>
+<th>简要描述</th>
+<th>常见代表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ <strong>主从集群（Master-Slave）</strong></td>
+<td>一个主节点写，从节点读，通过复制保持数据同步</td>
+<td>MySQL 主从、Redis Sentinel</td>
+</tr>
+<tr>
+<td>✅ <strong>主主集群（Multi-Master）</strong></td>
+<td>所有节点都能读写，冲突通过同步解决</td>
+<td>MongoDB Sharded Cluster、CouchDB、ActiveMQ</td>
+</tr>
+<tr>
+<td>✅ <strong>对等集群（Peer-to-Peer）</strong></td>
+<td>所有节点角色平等，数据自动分布和协调</td>
+<td>Elasticsearch、Cassandra、BitTorrent</td>
+</tr>
+<tr>
+<td>✅ <strong>仲裁集群（Quorum-based）</strong></td>
+<td>多数节点投票选举决定状态，提升容错能力</td>
+<td>Kafka、ZooKeeper、etcd、MongoDB 副本集</td>
+</tr>
+<tr>
+<td>✅ <strong>调度型集群（Scheduler-based）</strong></td>
+<td>核心是任务分配、调度与资源协调</td>
+<td>Kubernetes、Mesos、YARN</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧩-二、从一致性模型分类（CAP-理论）"><a href="#🧩-二、从一致性模型分类（CAP-理论）" class="headerlink" title="🧩 二、从一致性模型分类（CAP 理论）"></a>🧩 二、从一致性模型分类（CAP 理论）</h2><p>CAP &#x3D; Consistency（一致性） + Availability（可用性） + Partition tolerance（分区容忍）</p>
+<table>
+<thead>
+<tr>
+<th>集群模型</th>
+<th>更偏向</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CP 模型</strong></td>
+<td>保证一致性和分区容忍</td>
+<td>ZooKeeper、etcd、HDFS NameNode、Elasticsearch</td>
+</tr>
+<tr>
+<td><strong>AP 模型</strong></td>
+<td>保证可用性和分区容忍</td>
+<td>Cassandra、DynamoDB、Riak</td>
+</tr>
+<tr>
+<td><strong>CA 模型</strong></td>
+<td>理论上存在但现实中无法容忍分区</td>
+<td>单机数据库、关系型集群（如 MySQL 主从）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🏗️-三、从功能和场景角度划分："><a href="#🏗️-三、从功能和场景角度划分：" class="headerlink" title="🏗️ 三、从功能和场景角度划分："></a>🏗️ 三、从功能和场景角度划分：</h2><h3 id="1-数据存储型集群"><a href="#1-数据存储型集群" class="headerlink" title="1. 数据存储型集群"></a>1. 数据存储型集群</h3><ul>
+<li><p><strong>关系型：</strong> MySQL Group Replication, Oracle RAC</p>
+</li>
+<li><p><strong>NoSQL：</strong> MongoDB、Cassandra、HBase</p>
+</li>
+<li><p><strong>搜索分析：</strong> Elasticsearch、OpenSearch</p>
+</li>
+<li><p><strong>对象存储：</strong> MinIO、Ceph、GlusterFS</p>
+</li>
+</ul>
+<h3 id="2-消息队列-流处理集群"><a href="#2-消息队列-流处理集群" class="headerlink" title="2. 消息队列&#x2F;流处理集群"></a>2. 消息队列&#x2F;流处理集群</h3><ul>
+<li>Kafka、Pulsar、RabbitMQ、RocketMQ</li>
+</ul>
+<h3 id="3-计算调度集群"><a href="#3-计算调度集群" class="headerlink" title="3. 计算调度集群"></a>3. 计算调度集群</h3><ul>
+<li>Kubernetes（K8s）、Hadoop YARN、Apache Mesos</li>
+</ul>
+<h3 id="4-配置-协调服务集群"><a href="#4-配置-协调服务集群" class="headerlink" title="4. 配置&#x2F;协调服务集群"></a>4. 配置&#x2F;协调服务集群</h3><ul>
+<li>ZooKeeper、etcd、Consul（服务发现 + 配置）</li>
+</ul>
+<h3 id="5-安全容灾-备份集群"><a href="#5-安全容灾-备份集群" class="headerlink" title="5. 安全容灾&#x2F;备份集群"></a>5. 安全容灾&#x2F;备份集群</h3><ul>
+<li>DRBD、GlusterFS、MySQL 双主同步</li>
+</ul>
+<hr>
+<h2 id="🔍-对比小结（用途-特性）"><a href="#🔍-对比小结（用途-特性）" class="headerlink" title="🔍 对比小结（用途 + 特性）"></a>🔍 对比小结（用途 + 特性）</h2><table>
+<thead>
+<tr>
+<th>集群类型</th>
+<th>特点</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>主从集群</strong></td>
+<td>架构简单，读写分离</td>
+<td>数据库读多写少</td>
+</tr>
+<tr>
+<td><strong>主主集群</strong></td>
+<td>写入灵活，但冲突处理复杂</td>
+<td>高可用、可扩写系统</td>
+</tr>
+<tr>
+<td><strong>对等集群</strong></td>
+<td>横向扩展好，无单点</td>
+<td>日志、搜索、大数据处理</td>
+</tr>
+<tr>
+<td><strong>仲裁集群</strong></td>
+<td>强一致，适合协调</td>
+<td>分布式锁、配置同步</td>
+</tr>
+<tr>
+<td><strong>调度集群</strong></td>
+<td>资源池化 + 任务调度</td>
+<td>容器编排、集群管理</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🧠-如果你在思考："><a href="#🧠-如果你在思考：" class="headerlink" title="🧠 如果你在思考："></a>🧠 如果你在思考：</h2><ul>
+<li><p><strong>“我选哪种集群？”</strong><br>  → 要看你的业务需求：一致性优先、还是高可用优先？是计算密集型，还是存储密集型？</p>
+</li>
+<li><p><strong>“Elasticsearch 的集群能否跟其他系统兼容？”</strong><br>  → 可以，比如 Kafka + Logstash + ES（日志流转方案），也可以把 ES 数据同步到 ClickHouse 做报表分析。</p>
+</li>
+</ul>
+<hr>
+<p>如果你告诉我你具体在做的系统或者项目目标（比如日志平台、数据库架构、微服务、自动化部署等），我可以帮你精准选型，并分析哪些集群适合你的使用场景。是否需要我来画个表格或者结构图帮你更直观理解？</p>
+<p>明白了，你的问题是：</p>
+<blockquote>
+<p><strong>Elasticsearch 除了它默认的“内置对等集群”，还有没有别的“集群类型”？或者说，ES 的集群架构有没有其他形式？</strong></p>
+</blockquote>
+<p>答案是：</p>
+<hr>
+<h2 id="✅-从官方角度：Elasticsearch-只有一种集群架构"><a href="#✅-从官方角度：Elasticsearch-只有一种集群架构" class="headerlink" title="✅ 从官方角度：Elasticsearch 只有一种集群架构"></a>✅ 从官方角度：Elasticsearch 只有一种集群架构</h2><p>也就是说：<strong>ES 所谓的“集群”指的就是其默认的、内置的</strong>：</p>
+<blockquote>
+<p><strong>对等节点 + 主节点选举 + 分片副本机制</strong> 的这种 <strong>分布式集群模型</strong></p>
+</blockquote>
+<p>它本身没有其他“集群类型模式”可以切换，比如什么“主从模式”或者“轻量集群”这种东西，<strong>集群管理是 Elasticsearch 的核心特性，任何生产部署都建议以集群方式运行，即使是单节点。</strong></p>
+<hr>
+<h2 id="🔧-但根据部署和角色组合的不同，你可以“构建出”不同用途的集群风格："><a href="#🔧-但根据部署和角色组合的不同，你可以“构建出”不同用途的集群风格：" class="headerlink" title="🔧 但根据部署和角色组合的不同，你可以“构建出”不同用途的集群风格："></a>🔧 但根据部署和角色组合的不同，你可以“构建出”不同用途的集群风格：</h2><p>虽然底层原理一样，但根据部署结构、节点角色、容错策略、使用场景不同，ES 的集群可以“表现出”不同的运行方式：</p>
+<h3 id="1-单节点伪集群（开发用）"><a href="#1-单节点伪集群（开发用）" class="headerlink" title="1. 单节点伪集群（开发用）"></a>1. <strong>单节点伪集群</strong>（开发用）</h3><ul>
+<li><p>就一个节点，也运行着 master、data、coordinator 的所有角色。</p>
+</li>
+<li><p>适合本地测试、调试。</p>
+</li>
+<li><p>不是严格意义的“集群”，但依然使用同一套集群机制。</p>
+</li>
+<li><p>可以设置：</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">node.name:</span> <span class="hljs-string">single-node</span><br><span class="hljs-attr">discovery.type:</span> <span class="hljs-string">single-node</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="2-标准高可用集群"><a href="#2-标准高可用集群" class="headerlink" title="2. 标准高可用集群"></a>2. <strong>标准高可用集群</strong></h3><ul>
+<li><p>至少 <strong>3 个 master-eligible 节点</strong>，保证投票机制有效。</p>
+</li>
+<li><p>可添加任意数量的 data 节点。</p>
+</li>
+<li><p>是最常见、最推荐的部署方式。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-冷热集群（Hot-Warm-Cold-架构）"><a href="#3-冷热集群（Hot-Warm-Cold-架构）" class="headerlink" title="3. 冷热集群（Hot-Warm-Cold 架构）"></a>3. <strong>冷热集群（Hot-Warm-Cold 架构）</strong></h3><ul>
+<li><p>把节点分为“热”、“温”、“冷”：</p>
+<ul>
+<li><p><strong>Hot 节点</strong>：处理实时写入、高频查询，配置高性能磁盘和内存。</p>
+</li>
+<li><p><strong>Warm 节点</strong>：存历史数据，低频访问。</p>
+</li>
+<li><p><strong>Cold 节点</strong>：几乎不访问，仅归档备份。</p>
+</li>
+</ul>
+</li>
+<li><p>通过 ILM（Index Lifecycle Management）策略自动转移索引。</p>
+</li>
+</ul>
+<hr>
+<h3 id="4-跨地域集群（Cross-cluster-replication）"><a href="#4-跨地域集群（Cross-cluster-replication）" class="headerlink" title="4. 跨地域集群（Cross-cluster replication）"></a>4. <strong>跨地域集群（Cross-cluster replication）</strong></h3><ul>
+<li><p>在两个物理集群间做“主从复制”：</p>
+<ul>
+<li><p>主集群：写数据</p>
+</li>
+<li><p>从集群：做灾备、只读访问</p>
+</li>
+</ul>
+</li>
+<li><p>适用于多地容灾、就近访问</p>
+</li>
+</ul>
+<hr>
+<h3 id="5-混合角色集群（Custom-roles）"><a href="#5-混合角色集群（Custom-roles）" class="headerlink" title="5. 混合角色集群（Custom roles）"></a>5. <strong>混合角色集群（Custom roles）</strong></h3><ul>
+<li><p>你可以手动设置节点只承担某些功能，比如：</p>
+  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">node.master:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">node.data:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">node.ingest:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>建一个纯 Ingest 节点：只做预处理</p>
+</li>
+<li><p>建一个纯 Master 节点：更稳定地管理集群状态</p>
+</li>
+<li><p>建一些 Coordination-only 节点：当作请求网关</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="🧠-总结："><a href="#🧠-总结：" class="headerlink" title="🧠 总结："></a>🧠 总结：</h2><table>
+<thead>
+<tr>
+<th>角度</th>
+<th>是否存在其他“ES 集群类型”？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>❌ 从底层架构上看</td>
+<td><strong>没有</strong>，Elasticsearch 只有一种内置集群机制</td>
+</tr>
+<tr>
+<td>✅ 从部署策略上看</td>
+<td><strong>有表现出不同风格的集群形态</strong>（冷热、跨地域、单节点、角色隔离等）</td>
+</tr>
+</tbody></table>
+<hr>
+<p>你是想做什么样的集群部署？是准备上线一个日志系统、业务搜索平台，还是在做集群选型比较？可以告诉我你的目标，我可以推荐适合的 ES 集群结构给你。</p>
 
                 
               </div>
@@ -360,18 +584,25 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/" class="category-chain-item">分布式、虚拟化、容器化、自动化</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  <a href="/categories/Java/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="category-chain-item">分布式与微服务</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E8%99%9A%E6%8B%9F%E5%8C%96%E3%80%81%E5%AE%B9%E5%99%A8%E5%8C%96%E3%80%81%E8%87%AA%E5%8A%A8%E5%8C%96/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/" class="category-chain-item">分布式设计原理</a>
+  <a href="/categories/Java/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/" class="category-chain-item">分布式设计原理</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BE%E8%AE%A1%E5%8E%9F%E7%90%86/CAP-%E7%90%86%E8%AE%BA/" class="category-chain-item">CAP 理论</a>
+  
+  
+
   
 
   

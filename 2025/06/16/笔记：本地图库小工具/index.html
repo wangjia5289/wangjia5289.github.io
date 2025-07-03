@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 创建存放图片的目录目录路径：D:\文件集合\本地图库，向内存放一些图片  2. 编写 Py 代码创建 本地图库.py 并编写代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243import osimport threadingimport randomfrom flask impor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：本地图库小工具">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/06/16/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%9C%AC%E5%9C%B0%E5%9B%BE%E5%BA%93%E5%B0%8F%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="1. 创建存放图片的目录目录路径：D:\文件集合\本地图库，向内存放一些图片  2. 编写 Py 代码创建 本地图库.py 并编写代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243import osimport threadingimport randomfrom flask impor">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-28T08:33:51.622Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：本地图库小工具 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1%E7%BE%8E%E5%AD%A6-%E5%90%8A%E5%B8%A6%E8%A3%99.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：本地图库小工具"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-06-16 00:00" pubdate>
+          June 16, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：本地图库小工具</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-06-28T16:33:51+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-创建存放图片的目录"><a href="#1-创建存放图片的目录" class="headerlink" title="1. 创建存放图片的目录"></a>1. 创建存放图片的目录</h2><p>目录路径：D:\文件集合\本地图库，向内存放一些图片</p>
+<hr>
+<h2 id="2-编写-Py-代码"><a href="#2-编写-Py-代码" class="headerlink" title="2. 编写 Py 代码"></a>2. 编写 Py 代码</h2><p>创建 <code>本地图库.py</code> 并编写代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> threading<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask, send_from_directory, abort<br><br>app = Flask(__name__)<br>IMAGE_FOLDER = <span class="hljs-string">r&#x27;D:\文件集合\本地图库&#x27;</span><br>image_map = &#123;&#125;<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_images</span>():<br>    images = &#123;&#125;<br>    <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> os.listdir(IMAGE_FOLDER):<br>        <span class="hljs-keyword">if</span> filename.lower().endswith((<span class="hljs-string">&#x27;.jpg&#x27;</span>, <span class="hljs-string">&#x27;.jpeg&#x27;</span>, <span class="hljs-string">&#x27;.png&#x27;</span>, <span class="hljs-string">&#x27;.gif&#x27;</span>)):<br>            name = os.path.splitext(filename)[<span class="hljs-number">0</span>]<br>            images[name] = filename<br>    <span class="hljs-keyword">return</span> images<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">refresh_images_periodically</span>(<span class="hljs-params">interval=<span class="hljs-number">300</span></span>):<br>    <span class="hljs-keyword">global</span> image_map<br>    image_map = load_images()<br>    <span class="hljs-comment"># 设定下一次5分钟后调用自己，实现循环</span><br>    threading.Timer(interval, refresh_images_periodically).start()<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/image/&lt;name&gt;&#x27;</span></span>)</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_image</span>(<span class="hljs-params">name</span>):<br>    <span class="hljs-keyword">if</span> name == <span class="hljs-string">&#x27;random&#x27;</span>:<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> image_map:<br>            abort(<span class="hljs-number">404</span>)<br>        filename = random.choice(<span class="hljs-built_in">list</span>(image_map.values()))<br>        <span class="hljs-keyword">return</span> send_from_directory(IMAGE_FOLDER, filename)<br>    <span class="hljs-keyword">else</span>:<br>        filename = image_map.get(name)<br>        <span class="hljs-keyword">if</span> filename:<br>            <span class="hljs-keyword">return</span> send_from_directory(IMAGE_FOLDER, filename)<br>        <span class="hljs-keyword">else</span>:<br>            abort(<span class="hljs-number">404</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    <span class="hljs-comment"># 启动时先扫描一次图片</span><br>    image_map = load_images()<br>    <span class="hljs-comment"># 启动定时刷新任务，300秒即5分钟</span><br>    refresh_images_periodically(<span class="hljs-number">300</span>)<br>    app.run(host=<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, port=<span class="hljs-number">5000</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>安装 flask 依赖：</li>
+</ol>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">pip install flask -<span class="hljs-selector-tag">i</span> https:<span class="hljs-comment">//pypi.tuna.tsinghua.edu.cn/simple</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-打包为-exe"><a href="#3-打包为-exe" class="headerlink" title="3. 打包为 exe"></a>3. 打包为 exe</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 安装打包工具</span><br>pip install pyinstaller<br><br><br><span class="hljs-comment"># 2. 打包代码</span><br>pyinstaller <span class="hljs-operator">-</span>-onefile <span class="hljs-operator">-</span>-windowed <span class="hljs-operator">-</span>-icon<span class="hljs-operator">=</span><span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\I</span>CO<span class="hljs-char escape_">\本</span>地图库.ico&quot;</span> <span class="hljs-operator">-</span>-distpath <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合&quot;</span> <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\本</span>地图库.py&quot;</span><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. --onefile</span><br><span class="hljs-string">	1. 打包为单个 .exe 文件。</span><br><span class="hljs-string">2. --windowed</span><br><span class="hljs-string">	1. 确保 GUI 程序无控制台窗口</span><br><span class="hljs-string">3. --distpath &quot;</span>D:\文件集合\<span class="hljs-string">&quot;  &quot;</span>D:\文件集合\本地图库.py<span class="hljs-string">&quot;</span><br><span class="hljs-string">	1. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>是输出位置</span><br><span class="hljs-string">	2. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\本</span>地图库.py 是输入位置</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-获取本地图库中的图片"><a href="#5-获取本地图库中的图片" class="headerlink" title="5. 获取本地图库中的图片"></a>5. 获取本地图库中的图片</h2><p>访问：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://127.0.0.1:5000/image/image-name">http://127.0.0.1:5000/image/image-name</a></li>
+<li><a target="_blank" rel="noopener" href="http://127.0.0.1:5000/image/random">http://127.0.0.1:5000/image/random</a></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>无需带后缀，例如 <code>.jpg</code>、<code>.png</code> 等</li>
+</ol>
+</blockquote>
+<hr>
+<p>下面给你一套通用的方案，把你的 Flask 脚本上传到 Ubuntu 云服务器并且实现开机自启动。</p>
+<hr>
+<h2 id="一、把脚本和图片目录传到云服务器"><a href="#一、把脚本和图片目录传到云服务器" class="headerlink" title="一、把脚本和图片目录传到云服务器"></a>一、把脚本和图片目录传到云服务器</h2><ol>
+<li><p><strong>打包代码</strong>（在本地）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> D:\文件集合\本地图库<br>rem 假设你的脚本叫 image_server.py，打包成 zip<br>powershell Compress-Archive -Path image_server.py -DestinationPath image_server.zip<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>用 SCP 上传到云服务器</strong>（在本地 PowerShell 或 CMD）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp image_server.zip root@117.72.211.221:/home/root/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解压并调整路径</strong>（在云服务器）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /home/root<br>unzip image_server.zip<br><span class="hljs-built_in">mv</span> 本地图库 /home/root/images          <span class="hljs-comment"># 把 Windows 路径改成 Linux 目录</span><br>sed -i <span class="hljs-string">&#x27;s|IMAGE_FOLDER = .\+|IMAGE_FOLDER = r&quot;/home/root/images&quot;|&#x27;</span> image_server.py<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="二、配置-Python-环境"><a href="#二、配置-Python-环境" class="headerlink" title="二、配置 Python 环境"></a>二、配置 Python 环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装 Python3 与 venv</span><br><span class="hljs-built_in">sudo</span> apt update<br><span class="hljs-built_in">sudo</span> apt install -y python3 python3-venv<br><br><span class="hljs-comment"># 进入项目目录，创建虚拟环境</span><br><br><br><span class="hljs-built_in">cd</span> /home/root<br>python3 -m venv venv<br><span class="hljs-built_in">source</span> venv/bin/activate<br><br><span class="hljs-comment"># 安装依赖</span><br>pip install flask<br></code></pre></td></tr></table></figure>
+
+<p>测试脚本能跑通：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">python image_server.py<br><span class="hljs-comment"># 浏览器或 curl http://127.0.0.1:5000/image/random</span><br></code></pre></td></tr></table></figure>
+
+<p>确认返回图片正常后，按下一步。</p>
+<hr>
+<h2 id="三、用-systemd-把它做成服务，随开机启动"><a href="#三、用-systemd-把它做成服务，随开机启动" class="headerlink" title="三、用 systemd 把它做成服务，随开机启动"></a>三、用 systemd 把它做成服务，随开机启动</h2><ol>
+<li><strong>创建 systemd 单元文件</strong><br> 编辑 <code>/etc/systemd/system/images.service</code>，内容如下（确保路径和用户都换成实际值）：</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Flask Image Server<br><span class="hljs-attr">After</span>=network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">WorkingDirectory</span>=/home/root<br><span class="hljs-attr">User</span>=root<br><span class="hljs-comment"># 激活虚拟环境并运行脚本</span><br><span class="hljs-attr">ExecStart</span>=/home/root/venv/bin/python /home/root/image_server.py<br><span class="hljs-attr">Restart</span>=<span class="hljs-literal">on</span>-failure<br><span class="hljs-attr">RestartSec</span>=<span class="hljs-number">5</span>s<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>让 systemd 识别并启动</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> images.service<br><span class="hljs-built_in">sudo</span> systemctl start images.service<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>检查状态 &amp; 日志</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl status image_server.service<br><span class="hljs-built_in">sudo</span> journalctl -u image_server.service -f<br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="四、（可选）使用-Gunicorn-Nginx-提升稳定性"><a href="#四、（可选）使用-Gunicorn-Nginx-提升稳定性" class="headerlink" title="四、（可选）使用 Gunicorn + Nginx 提升稳定性"></a>四、（可选）使用 Gunicorn + Nginx 提升稳定性</h3><p>如果你后续想放到公网并承载更高并发，建议用 [Gunicorn] + [Nginx]：</p>
+<ol>
+<li><p><code>pip install gunicorn</code></p>
+</li>
+<li><p>在 systemd 的 <code>ExecStart</code> 改成：</p>
+</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ExecStart</span>=/home/root/venv/bin/gunicorn -w <span class="hljs-number">4</span> -b <span class="hljs-number">127.0.0.1:5000</span> image_server:app<br></code></pre></td></tr></table></figure>
+<ol start="3">
+<li>配置 Nginx 反向代理 <code>/etc/nginx/sites-available/image_server</code>：</li>
+</ol>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>	<span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>	<span class="hljs-attribute">server_name</span> your.domain.com;<br><br>	<span class="hljs-section">location</span> / &#123;<br>		<span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:5000;<br>		<span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>;<br>		<span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">然后 `sudo ln -s … &amp;&amp; sudo nginx -t &amp;&amp; sudo systemctl reload nginx`。
+</code></pre>
+<hr>
+<p>这样，每次服务器重启后，你的 Flask 程序都会自动启动并监听 <code>127.0.0.1:5000</code>（或通过 Nginx 暴露）。如果有疑问，随时告诉我！</p>
+<p>下面按照你最新的目录结构，给出一套完整的操作流程（Word 式标准步骤，不使用 Markdown）：</p>
+<ol>
+<li>修改脚本中图片目录路径<br> 1.1 用编辑器打开 <code>/mystudy/images/images.py</code><br> 1.2 将文件顶部的</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">IMAGE_FOLDER = <span class="hljs-string">r&#x27;D:\文件集合\本地图库&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">IMAGE_FOLDER</span> = <span class="hljs-string">&#x27;/mystudy/images/images&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>1.3 保存并退出</p>
+<ol start="2">
+<li><p>准备 Python 虚拟环境<br> 2.1 在服务器上切换到脚本目录<br> cd &#x2F;mystudy&#x2F;images<br> 2.2 创建并激活虚拟环境<br> python3 -m venv venv<br> source venv&#x2F;bin&#x2F;activate<br> 2.3 安装依赖<br> pip install flask</p>
+</li>
+<li><p>本地运行测试<br> 3.1 确认脚本能正确启动<br> python images.py<br> 3.2 在另一终端执行<br> curl <a target="_blank" rel="noopener" href="http://127.0.0.1:5000/image/random">http://127.0.0.1:5000/image/random</a><br> ——若能返回图片，说明一切正常<br> 3.3 按 Ctrl-C 停止服务</p>
+</li>
+<li><p>为脚本创建 systemd 服务<br> 4.1 新建文件 <code>/etc/systemd/system/images.service</code>，内容如下（请逐字复制）</p>
+</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=Flask Image Server<br><span class="hljs-attr">After</span>=network.target<br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=simple<br><span class="hljs-attr">WorkingDirectory</span>=/mystudy/images<br><span class="hljs-attr">User</span>=root<br><span class="hljs-attr">ExecStart</span>=/mystudy/images/venv/bin/python /mystudy/images/images.py<br><span class="hljs-attr">Restart</span>=<span class="hljs-literal">on</span>-failure<br><span class="hljs-attr">RestartSec</span>=<span class="hljs-number">5</span>s<br><br><span class="hljs-section">[Install]</span><br><span class="hljs-attr">WantedBy</span>=multi-user.target<br></code></pre></td></tr></table></figure>
+<p>4.2 保存后执行<br>systemctl daemon-reload<br>systemctl enable images.service<br>systemctl start images.service</p>
+<ol start="5">
+<li>验证服务状态<br>5.1 查看运行状态<br>systemctl status images.service<br>——应显示 Active: active (running)<br>5.2 查看实时日志<br>journalctl -u images.service -f<br>5.3 浏览器或 curl 测试<br>curl <a target="_blank" rel="noopener" href="http://127.0.0.1:5000/image/random">http://127.0.0.1:5000/image/random</a></li>
+</ol>
+<p>完成以上步骤后，每次服务器重启，Flask 脚本都会自动启动并监听本机 5000 端口。</p>
+<p>非常好，现在你的 Flask 服务已经 <strong>成功启动并由 systemd 托管</strong>，状态信息显示一切正常：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">Active: <span class="hljs-built_in">active</span> (running)<br>* Running on http:<span class="hljs-comment">//127.0.0.1:5000</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="✅-下一步检查"><a href="#✅-下一步检查" class="headerlink" title="✅ 下一步检查"></a>✅ 下一步检查</h3><p>你可以在云服务器上试一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl http://127.0.0.1:5000/image/random<br></code></pre></td></tr></table></figure>
+
+<p>如果你看到一大串乱码（二进制图片），说明服务正常。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs applescript">root@lavm<span class="hljs-number">-2</span>xqib0dtxy:~<span class="hljs-comment"># curl http://127.0.0.1:5000/image/random</span><br>Warning: Binary output can mess up your terminal. Use <span class="hljs-string">&quot;--output -&quot;</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">tell</span> <br>Warning: curl <span class="hljs-keyword">to</span> output <span class="hljs-keyword">it</span> <span class="hljs-keyword">to</span> your terminal anyway, <span class="hljs-keyword">or</span> consider <span class="hljs-string">&quot;--output </span><br><span class="hljs-string">Warning: &lt;FILE&gt;&quot;</span> <span class="hljs-keyword">to</span> save <span class="hljs-keyword">to</span> a <span class="hljs-built_in">file</span>.<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="🌐-如果你想让外部访问这个服务，有两个选项："><a href="#🌐-如果你想让外部访问这个服务，有两个选项：" class="headerlink" title="🌐 如果你想让外部访问这个服务，有两个选项："></a>🌐 如果你想让外部访问这个服务，有两个选项：</h3><h4 id="✅-方式-1：修改-Flask-监听公网"><a href="#✅-方式-1：修改-Flask-监听公网" class="headerlink" title="✅ 方式 1：修改 Flask 监听公网"></a>✅ 方式 1：修改 Flask 监听公网</h4><ol>
+<li><p>修改 <code>/mystudy/images/images.py</code>：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">app.run(host=<span class="hljs-string">&#x27;0.0.0.0&#x27;</span>, port=<span class="hljs-number">5000</span>)<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>重启服务：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart images.service<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>确保你的云服务器防火墙&#x2F;安全组已开放 <strong>5000端口（TCP）</strong>，你可以用：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ufw allow 5000/tcp<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>现在你可以在任意机器上访问：</p>
+ <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>你的云服务器IP:<span class="hljs-number">5000</span><span class="hljs-regexp">/image/</span>random<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h4 id="✅-方式-2：保留内网监听-用-Nginx-转发（推荐）"><a href="#✅-方式-2：保留内网监听-用-Nginx-转发（推荐）" class="headerlink" title="✅ 方式 2：保留内网监听 + 用 Nginx 转发（推荐）"></a>✅ 方式 2：保留内网监听 + 用 Nginx 转发（推荐）</h4><p>更安全、专业的做法是：</p>
+<ol>
+<li><p>Flask 保持监听 127.0.0.1:5000（不用修改）</p>
+</li>
+<li><p>安装并配置 Nginx 转发外部请求到 Flask：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install nginx<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编辑配置文件 <code>/etc/nginx/sites-available/images</code>：</p>
+ <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>    <span class="hljs-attribute">server_name</span> your_domain_or_ip;<br><br>    <span class="hljs-section">location</span> / &#123;<br>        <span class="hljs-attribute">proxy_pass</span> http://127.0.0.1:5000;<br>        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$host</span>;<br>        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启用站点并重启 Nginx：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /etc/nginx/sites-available/images /etc/nginx/sites-enabled/<br><span class="hljs-built_in">sudo</span> nginx -t<br><span class="hljs-built_in">sudo</span> systemctl reload nginx<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>然后你就可以通过：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">http:</span><span class="hljs-comment">//你的云服务器IP/</span><br></code></pre></td></tr></table></figure>
+
+<p>来访问 Flask 提供的服务了。</p>
+<hr>
+<p>你目前的部署状态已经 90% 完成，下一步就看你是希望「公网访问图片」，还是「本地脚本调用」来做什么用，如果需要我可以帮你继续优化部署结构。要不要我顺便也把 Gunicorn&#x2F;Nginx 一起给你配置好？</p>
+<p>访问： <a target="_blank" rel="noopener" href="http://117.72.211.221:5000/image/random">http://117.72.211.221:5000/image/random</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%87%AA%E7%A0%94%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="category-chain-item">自研小工具</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%87%AA%E7%A0%94%E5%B0%8F%E5%B7%A5%E5%85%B7/%E6%9C%AC%E5%9C%B0%E5%9B%BE%E5%BA%93%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="category-chain-item">本地图库小工具</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：本地图库小工具</div>
+      <div>https://wangjia5289.github.io/2025/06/16/笔记：本地图库小工具/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 16, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/06/16/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%80%E9%94%AE%E5%90%AF%E5%8A%A8%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="笔记：一键启动小工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：一键启动小工具</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/16/%E7%AC%94%E8%AE%B0%EF%BC%9A%E9%87%8D%E5%91%BD%E5%90%8D%E6%8E%92%E5%BA%8F%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="笔记：重命名排序小工具">
+                        <span class="hidden-mobile">笔记：重命名排序小工具</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>

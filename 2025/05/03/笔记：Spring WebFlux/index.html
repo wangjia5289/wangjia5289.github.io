@@ -27,7 +27,7 @@
 <meta property="og:description" content="一、理论1. Spring WebFlux 概述&#x3D;&#x3D;1.现有问题&#x3D;&#x3D;随着互联网应用的日益复杂和用户对实时性要求的提高，传统的基于阻塞 I&#x2F;O 的Web框架在处理高并发和大数据流时逐渐显现出瓶颈。 &#x3D;&#x3D;2.响应式编程解决方案&#x3D;&#x3D;基于以上问题，响应式编程模型应运而生，响应式编程是一种处理异步数据流、变化传播、非阻">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-08T09:01:52.445Z">
+<meta property="article:modified_time" content="2025-06-28T08:42:49.746Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k words
+          16k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          128 mins
+          131 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-08T17:01:52+08:00
+                    Last updated on 2025-06-28T16:42:49+08:00
                   
                   
 
@@ -1195,7 +1195,53 @@
 <li><strong><code>subscribe(onNext, onError, onComplete)</code></strong> 是你处理流结果的地方。这是最终的反应——你是流的消费者，订阅流并处理实际的数据、错误和完成状态。</li>
 </ol>
 </blockquote>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h2 id="三、补充"><a href="#三、补充" class="headerlink" title="三、补充"></a>三、补充</h2><h4 id="操作行为划分"><a href="#操作行为划分" class="headerlink" title="操作行为划分"></a>操作行为划分</h4><ol>
+<li>&#x3D;&#x3D;同步操作&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">同步简单操作</font>：<ol>
+<li>快速执行、无明显耗时、不涉及复杂计算或 I&#x2F;O</li>
+</ol>
+</li>
+<li><font color="#00b0f0">同步阻塞操作</font>：<ol>
+<li>设计耗时计算或潜在阻塞操作（如 I&#x2F;O），但是在当前线程同步执行</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;异步操作&#x3D;&#x3D;：<ol>
+<li><font color="#00b0f0">异步阻塞操作</font>：<ol>
+<li>将同步阻塞操作通过异步机制（如线程池）执行，“伪非阻塞” 操作</li>
+</ol>
+</li>
+<li><font color="#00b0f0">异步非阻塞操作</font>：<ol>
+<li>完全非阻塞，通常是基于时间驱动或回调，依赖外部异步机制（如 <code>WebClient</code>、 <code>R2DBC</code>、<code>CompletableFuture</code>）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>&#x3D;&#x3D;补充：I&#x2F;O&#x3D;&#x3D;：<ol>
+<li>I&#x2F;O，即输入&#x2F;输出（Input&#x2F;Output），是指计算机与外部世界的信息交换过程，包括但不限于：<ol>
+<li><font color="#00b0f0">网络请求</font>：<ol>
+<li>如调用其他 HTTP API 接口（RestTemplate、WebClient）、JDBC、R2DBC 等等</li>
+</ol>
+</li>
+<li><font color="#00b0f0">文件操作</font>：<ol>
+<li>读取或写入硬盘上的文件</li>
+</ol>
+</li>
+<li><font color="#00b0f0">用户交互</font>：<ol>
+<li>键盘、鼠标等输入设备的信号获取，以及向显示器等输出设备发送信息。</li>
+</ol>
+</li>
+<li><font color="#00b0f0">硬件通信</font>：<ol>
+<li>与打印机、扫描仪等外部设备的数据交换</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
                 
               </div>
             
@@ -1292,9 +1338,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/03/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Cloud%20Alibaba/" title="笔记：Spring Cloud Alibaba">
+                      <a href="/2025/05/04/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Web/" title="笔记：Spring Web">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Spring Cloud Alibaba</span>
+                        <span class="hidden-mobile">笔记：Spring Web</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -1302,8 +1348,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E4%B8%89%E6%98%8E%E6%B2%BB%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/" title="笔记：三明治分层架构">
-                        <span class="hidden-mobile">笔记：三明治分层架构</span>
+                      <a href="/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/" title="笔记：Spring Boot">
+                        <span class="hidden-mobile">笔记：Spring Boot</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

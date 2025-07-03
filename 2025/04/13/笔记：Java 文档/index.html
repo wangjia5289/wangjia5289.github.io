@@ -21,33 +21,33 @@
   
     <meta name="description" content="一、理论1. Swagger1.1. Swagger 概述Swagger 可以概括为 Swagger 规范（如何定义 API）+ Swagger 工具链（辅助开发和文档生成）。它涵盖了 API 开发的整个生命周期：设计、实现、测试、文档生成，是现代 RESTful API 开发的主流解决方案  1.2. Swagger 规范Swagger 规范是一种描述 RESTful API 的规范，它允许开发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="笔记：文档框架">
+<meta property="og:title" content="笔记：Java 文档">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="一、理论1. Swagger1.1. Swagger 概述Swagger 可以概括为 Swagger 规范（如何定义 API）+ Swagger 工具链（辅助开发和文档生成）。它涵盖了 API 开发的整个生命周期：设计、实现、测试、文档生成，是现代 RESTful API 开发的主流解决方案  1.2. Swagger 规范Swagger 规范是一种描述 RESTful API 的规范，它允许开发">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413223859767.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413223920691.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413212434485.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413214149924.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413215556974.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517160013458.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517161956335.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162033549.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162135984.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162243052.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162530905.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413223859767.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413223920691.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413212434485.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413214149924.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413215556974.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517160013458.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517161956335.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162033549.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162135984.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162243052.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162530905.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-17T10:49:31.665Z">
+<meta property="article:modified_time" content="2025-06-28T10:42:31.289Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413223859767.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413223859767.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>笔记：文档框架 - 夜阑卧听风吹雨,一枝梨花压心头</title>
+  <title>笔记：Java 文档 - 夜阑卧听风吹雨,一枝梨花压心头</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="笔记：文档框架"></span>
+            <span id="subtitle" data-typed-text="笔记：Java 文档"></span>
           
         </div>
 
@@ -296,12 +296,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">笔记：文档框架</h1>
+            <h1 id="seo-header">笔记：Java 文档</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-17T18:49:31+08:00
+                    Last updated on 2025-06-28T18:42:31+08:00
                   
                   
 
@@ -334,8 +334,8 @@
 <hr>
 <h4 id="2-2-自动生成-API-文档"><a href="#2-2-自动生成-API-文档" class="headerlink" title="2.2. 自动生成 API 文档"></a>2.2. 自动生成 API 文档</h4><p>自动生成 API 文档是指通过<strong>文档框架</strong>（如 Springfox 或 Spring Doc）通过注解自动生成 API 文档，一般我们使用这种方式。</p>
 <hr>
-<h3 id="3-API-文档的下载方式"><a href="#3-API-文档的下载方式" class="headerlink" title="3. API 文档的下载方式"></a>3. API 文档的下载方式</h3><p>&#x3D;&#x3D;1.JSON 类型文档&#x3D;&#x3D;<br>在 IDEA 中下载插件 <code>OpenAPI Specifications</code>，可以右键 <code>Export OpenAPI</code> 导出 JSON 类型的 API 文档<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413223859767.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413223920691.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-API-文档的下载方式"><a href="#3-API-文档的下载方式" class="headerlink" title="3. API 文档的下载方式"></a>3. API 文档的下载方式</h3><p>&#x3D;&#x3D;1.JSON 类型文档&#x3D;&#x3D;<br>在 IDEA 中下载插件 <code>OpenAPI Specifications</code>，可以右键 <code>Export OpenAPI</code> 导出 JSON 类型的 API 文档<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413223859767.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413223920691.png" srcset="/img/loading.gif" lazyload></p>
 <p>&#x3D;&#x3D;2.YAML 类型文档&#x3D;&#x3D;</p>
 <p>访问 <a target="_blank" rel="noopener" href="http://localhost:8080/v3/api-docs.yaml">http://localhost:8080/v3/api-docs.yaml</a></p>
 <hr>
@@ -381,7 +381,7 @@
 <blockquote>
 <p>[!NOTE] 注意事项：对此处 <code>group-configs</code> 的理解</p>
 </blockquote>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413212434485.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413212434485.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="2-6-创建-Springdoc-配置类"><a href="#2-6-创建-Springdoc-配置类" class="headerlink" title="2.6. 创建 Springdoc 配置类"></a>2.6. 创建 Springdoc 配置类</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Configuration</span>                                        <span class="hljs-comment">// 配置类</span><br><span class="hljs-variable">@OpenAPIDefinition</span>(                                   <span class="hljs-comment">// 文档基本信息</span><br>    info = <span class="hljs-variable">@Info</span>(<br>        title = <span class="hljs-string">&quot;My API&quot;</span>,<br>        version = <span class="hljs-string">&quot;v1&quot;</span>,<br>        description = <span class="hljs-string">&quot;This is the API documentation for my application&quot;</span>,<br>        contact = <span class="hljs-variable">@Contact</span>(name = <span class="hljs-string">&quot;John Doe&quot;</span>, email = <span class="hljs-string">&quot;john.doe@example.com&quot;</span>)<br>    )<br>)<br>public class OpenApiConfig &#123;<br>    .......<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -397,7 +397,7 @@
 <li>注意：Swagger 不仅会扫描 <code>@Tag</code> 注解，还会自动识别 Spring Boot 中的组件类（如 <code>@RestController</code>）。这也是为什么我前面提到：“Controller 类在 <code>Swagger UI</code> 中会自动生成一个默认标签（例如，<code>UserController</code> 默认的标签名为 <code>user-controller</code>）。</li>
 </ol>
 </blockquote>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413214149924.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413214149924.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h6 id="2-7-1-2-Operation"><a href="#2-7-1-2-Operation" class="headerlink" title="2.7.1.2. @Operation"></a>2.7.1.2. @Operation</h6><p><code>@Operation</code> 用于标注一个<strong>方法</strong>，并对该方法进行详细说明。</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Operation</span>(  <br>	summary = <span class="hljs-string">&quot;Get user by ID&quot;</span>,  <br>	description = <span class="hljs-string">&quot;Fetch a user by their unique ID from the database.&quot;</span>,  <br>	tags = &#123;<span class="hljs-string">&quot;User&quot;</span>,<span class="hljs-string">&quot;Admin&quot;</span>&#125;,  <br>	parameters = &#123;  <br>			<span class="hljs-variable">@Parameter</span>(xxxxxx),  <br>			<span class="hljs-variable">@Parameter</span>(xxxxxx)  <br>	&#125;,  <br>	requestBody = <span class="hljs-variable">@io</span>.swagger.v3.oas.annotations.parameters.<span class="hljs-built_in">RequestBody</span>(xxxxxxx),  <br>	responses = &#123;  <br>			<span class="hljs-variable">@ApiResponse</span>(xxxxxx),  <br>			<span class="hljs-variable">@ApiResponse</span>(xxxxxx)  <br>	&#125;,  <br>	deprecated = false  <br>  <br>)  <br><span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/users/&#123;id&#125;&quot;</span>)  <br>public User <span class="hljs-built_in">getUserById</span>(  <br>        <span class="hljs-variable">@PathVariable</span> Long id,  <br>        <span class="hljs-variable">@RequestParam</span> String fields  <br>) &#123;  <br>    <span class="hljs-comment">// 查询用户并返回  </span><br>    <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">userService</span><span class="hljs-selector-class">.getUserById</span>(id, fields);  <br>&#125;<br></code></pre></td></tr></table></figure>
@@ -441,7 +441,7 @@
 <li>注意：未真正脱离类 Tag</li>
 </ol>
 </blockquote>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250413215556974.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250413215556974.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h6 id="2-7-1-3-Parameter"><a href="#2-7-1-3-Parameter" class="headerlink" title="2.7.1.3. @Parameter"></a>2.7.1.3. @Parameter</h6><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Parameter</span>(<br>    name = <span class="hljs-string">&quot;id&quot;</span>, <br>    description = <span class="hljs-string">&quot;User ID&quot;</span>, <br>    example = <span class="hljs-string">&quot;123&quot;</span>, <br>    schema = <span class="hljs-variable">@Schema</span>(implementation = User.class),<br>    in = ParameterIn.PATH,<br>    required = true, <br>    allowEmptyValue = true<br>)<br></code></pre></td></tr></table></figure>
 <ol>
@@ -528,7 +528,7 @@
 </ol>
 </blockquote>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Operation(summary = <span class="hljs-string">&quot;创建用户&quot;</span>)</span><br><span class="hljs-meta">@PostMapping(<span class="hljs-string">&quot;/user&quot;</span>)</span><br><span class="hljs-keyword">public</span> User createUser(<span class="hljs-meta">@RequestBody</span> User user) &#123;<br>	<span class="hljs-comment">// 业务逻辑</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517160013458.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517160013458.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="2-8-访问-UI-文档"><a href="#2-8-访问-UI-文档" class="headerlink" title="2.8. 访问 UI 文档"></a>2.8. 访问 UI 文档</h4><p>UI 文档默认为： <a target="_blank" rel="noopener" href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a></p>
 <hr>
@@ -540,15 +540,15 @@
 <p>在配置时，除了基本配置外，您还可以进行更多自定义配置，参考：<a target="_blank" rel="noopener" href="https://doc.xiaominfo.com/docs/features/enhance">Knife4j 增强模式</a>。</p>
 <p>然后我们可以访问 Knife4j UI 文档： <a target="_blank" rel="noopener" href="http://localhost:8080/doc.html">http://localhost:8080/doc.html</a></p>
 <hr>
-<h3 id="4-使用-Apifox"><a href="#4-使用-Apifox" class="headerlink" title="4. 使用 Apifox"></a>4. 使用 Apifox</h3><h4 id="4-1-创建-Java-项目"><a href="#4-1-创建-Java-项目" class="headerlink" title="4.1. 创建 Java 项目"></a>4.1. 创建 Java 项目</h4><p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517161956335.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="4-使用-Apifox"><a href="#4-使用-Apifox" class="headerlink" title="4. 使用 Apifox"></a>4. 使用 Apifox</h3><h4 id="4-1-创建-Java-项目"><a href="#4-1-创建-Java-项目" class="headerlink" title="4.1. 创建 Java 项目"></a>4.1. 创建 Java 项目</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517161956335.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="4-2-安装-Apifox-插件"><a href="#4-2-安装-Apifox-插件" class="headerlink" title="4.2. 安装 Apifox 插件"></a>4.2. 安装 Apifox 插件</h4><p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162033549.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-2-安装-Apifox-插件"><a href="#4-2-安装-Apifox-插件" class="headerlink" title="4.2. 安装 Apifox 插件"></a>4.2. 安装 Apifox 插件</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162033549.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="4-3-创建团队和项目"><a href="#4-3-创建团队和项目" class="headerlink" title="4.3. 创建团队和项目"></a>4.3. 创建团队和项目</h4><p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162135984.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-3-创建团队和项目"><a href="#4-3-创建团队和项目" class="headerlink" title="4.3. 创建团队和项目"></a>4.3. 创建团队和项目</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162135984.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="4-4-配置-Java-项目与-Apifox-项目映射关系"><a href="#4-4-配置-Java-项目与-Apifox-项目映射关系" class="headerlink" title="4.4. 配置 Java 项目与 Apifox 项目映射关系"></a>4.4. 配置 Java 项目与 Apifox 项目映射关系</h4><p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162243052.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-4-配置-Java-项目与-Apifox-项目映射关系"><a href="#4-4-配置-Java-项目与-Apifox-项目映射关系" class="headerlink" title="4.4. 配置 Java 项目与 Apifox 项目映射关系"></a>4.4. 配置 Java 项目与 Apifox 项目映射关系</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162243052.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="4-5-上传-Java-项目"><a href="#4-5-上传-Java-项目" class="headerlink" title="4.5. 上传 Java 项目"></a>4.5. 上传 Java 项目</h4><p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/image-20250517162530905.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-5-上传-Java-项目"><a href="#4-5-上传-Java-项目" class="headerlink" title="4.5. 上传 Java 项目"></a>4.5. 上传 Java 项目</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/image-20250517162530905.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 
                 
@@ -573,8 +573,15 @@
   
     <span>></span>
     
-  <a href="/categories/Java/%E6%96%87%E6%A1%A3%E6%A1%86%E6%9E%B6/" class="category-chain-item">文档框架</a>
+  <a href="/categories/Java/%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/" class="category-chain-item">程序文档</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/Java/%E7%A8%8B%E5%BA%8F%E6%96%87%E6%A1%A3/Java-%E6%96%87%E6%A1%A3/" class="category-chain-item">Java 文档</a>
+  
+  
+
   
 
   
@@ -595,7 +602,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>笔记：文档框架</div>
+      <div>笔记：Java 文档</div>
       <div>https://wangjia5289.github.io/2025/04/13/笔记：Java 文档/</div>
     </div>
     <div class="license-meta">
@@ -640,9 +647,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E7%94%9F%E6%80%81/" title="笔记：Git 生态">
+                      <a href="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/" title="笔记：VMware">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Git 生态</span>
+                        <span class="hidden-mobile">笔记：VMware</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -650,8 +657,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch/" title="笔记：ElasticSearch">
-                        <span class="hidden-mobile">笔记：ElasticSearch</span>
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/" title="笔记：ElasticSearch 基础">
+                        <span class="hidden-mobile">笔记：ElasticSearch 基础</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

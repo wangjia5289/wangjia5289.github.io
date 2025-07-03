@@ -19,23 +19,27 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Spring 可以通过字段注入（反射）注入依赖，但这种方式不能用在final字段上，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。  一、理论0、导图：Map：Spring IOC   1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向">
+    <meta name="description" content="两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加密器对用户发送来的明文密码进行加密，然后再比对吧？可我并没有做任何相关配置，Authent">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring IOC">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="Spring 可以通过字段注入（反射）注入依赖，但这种方式不能用在final字段上，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。  一、理论0、导图：Map：Spring IOC   1、Spring IoC1.1、IoC 概述&#x3D;&#x3D;1.问题：代码高耦合度&#x3D;&#x3D;在传统的面向">
+<meta property="og:description" content="两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加密器对用户发送来的明文密码进行加密，然后再比对吧？可我并没有做任何相关配置，Authent">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103116668.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205019198.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205226473.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160340948.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160346033.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518162951182.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518163131432.png">
 <meta property="article:published_time" content="2025-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T08:03:47.329Z">
+<meta property="article:modified_time" content="2025-07-03T06:23:22.163Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -229,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k words
+          9.1k words
         
       </span>
     
@@ -240,7 +244,7 @@
         
         
         
-          69 mins
+          76 mins
         
       </span>
     
@@ -295,7 +299,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-19T16:03:47+08:00
+                    Last updated on 2025-07-03T14:23:22+08:00
                   
                   
 
@@ -305,7 +309,33 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="两种注册方式啊"><a href="#两种注册方式啊" class="headerlink" title="两种注册方式啊"></a>两种注册方式啊</h2><p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103116668.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果我们是使用 <code>AuthenticationManager</code> 进行认证，它会自动将用户发送来的用户名和密码，与我们的 <code>CustomerUserDetailsImpl</code> 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加密器对用户发送来的明文密码进行加密，然后再比对吧？可我并没有做任何相关配置，<code>AuthenticationManager</code> 怎么知道该使用哪个加密器？</li>
+<li>其实，只要你注册了一个类型为 <code>PasswordEncoder</code> 的 接口 Bean，这个 接口 Bean 有一个具体实现，<code>AuthenticationManager</code> 就会知道使用这个 <code>PasswordEncoder</code> Bean 与其具体实现，对密码进行加密，<strong>无需我们手动配置</strong>。</li>
+<li>同样的，只要你注册了一个类型为 <code>UserDetailsService</code> 的 Bean（接口 Bean），这个 接口 Bean 有一个具体的实现，<code>AuthenticationManager</code> 就会知道使用这个 <code>UserDetailsService</code> Bean 与其具体实现，去获取 <code>CustomerUserDetailsImpl</code> <strong>无需我们手动配置</strong>。</li>
+<li>上述，只限于接口 Bean 只有一个具体实现，如果有多个具体实现，那就要我们进行配置了，因为 Spring Security 虽然知道用这个 Bean，但是并不知道使用哪一个具体实现</li>
+</ol>
+</blockquote>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs markdown">/**<br><span class="hljs-bullet"> *</span> ============================================<br><span class="hljs-bullet"> *</span> Spring IoC 声明 Bean 的常用方式 1<br><span class="hljs-bullet"> *</span> --------------------------------------------<br><span class="hljs-bullet"> *</span> 概念：<br><span class="hljs-bullet"> *</span> - 同时注册了 UserDetailsService 接口类型的 Bean 和 CustomerUserDetailsImplService 实现类类型的 Bean<br><span class="hljs-bullet"> *</span> - CustomerUserDetailsImplService 是该接口的一个具体实现类，IoC 容器中可能存在多个这样的实现类 Bean<br><span class="hljs-bullet"> *</span> - 我们既可以注入 CustomerUserDetailsImplService 类 Bean，也可以注入 UserDetailsService 接口 Bean<br><span class="hljs-bullet"> *</span> - 如果注入的是 UserDetailsService，且只有一个实现类，那么调用接口方法时，实际就是调用该实现类的方法<br><span class="hljs-bullet"> *</span> - 如果存在多个实现类，则需要通过配置明确指定使用哪个实现类<br><span class="hljs-bullet"> *</span> - 简而言之，此方式支持一个接口 Bean 有多个实现类 Bean，切换实现时只需调整配置，指定使用哪一个实现即可<br><span class="hljs-bullet"> *</span> ============================================<br> <span class="hljs-emphasis">*/</span><br><span class="hljs-emphasis">@Service</span><br><span class="hljs-emphasis">public class CustomerUserDetailsImplService implements UserDetailsService &#123;</span><br><span class="hljs-emphasis">	......</span><br><span class="hljs-emphasis">&#125;</span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">/*</span>*<br><span class="hljs-bullet"> *</span> ============================================<br><span class="hljs-bullet"> *</span> Spring IoC 声明 Bean 的常用方式 2<br><span class="hljs-bullet"> *</span> --------------------------------------------<br><span class="hljs-bullet"> *</span> 概念：<br><span class="hljs-bullet"> *</span> - 仅注册了 UserDetailsService 类型的 Bean，返回的 CustomerUserDetailsImplService 实例是其具体实现类<br><span class="hljs-bullet"> *</span> - 此方式下，一个接口 Bean 只能绑定一个实现类，若要更换实现，需在此方法中直接修改返回的实例。<br><span class="hljs-bullet"> *</span> ============================================<br> <span class="hljs-emphasis">*/</span><br><span class="hljs-emphasis">@Bean</span><br><span class="hljs-emphasis">public UserDetailsService userDetailsService() &#123;</span><br><span class="hljs-emphasis">    return new CustomerUserDetailsImplService();</span><br><span class="hljs-emphasis">&#125;</span><br></code></pre></td></tr></table></figure>
+
+
+<hr>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205019198.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205226473.png" srcset="/img/loading.gif" lazyload></p>
+<p>其实这就是 Spring IOC 的核心思想了，对吧，你的接口这些方法都已经制定好了</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> interface PasswordEncoder &#123;  <br>    <span class="hljs-function"><span class="hljs-type">String</span> <span class="hljs-title">encode</span><span class="hljs-params">(CharSequence rawPassword)</span></span>;  <br>  <br>    <span class="hljs-function"><span class="hljs-type">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(CharSequence rawPassword, <span class="hljs-type">String</span> encodedPassword)</span></span>;  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-type">boolean</span> <span class="hljs-title">upgradeEncoding</span><span class="hljs-params">(<span class="hljs-type">String</span> encodedPassword)</span> </span>&#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后这些实现，都会去实现你这些方法，我们将接口直接声明为 Bean，然后选择一个合适的实现类进行返回，其实这个接口呢，就可以使用这个实现类实现的方法，以后如果我们要修改实现类，只需要修改以下这个return new BCY 到其他的，然后呢，其他的代码都不用变了，如果你是直接 Bean BCY，那你如果以后像用一个其他的，那你还得把所有的BCY 找出来，一一替换</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Configuration</span><br><span class="hljs-variable">@EnableWebSecurity</span> <br>public class SecurityConfig &#123;<br>    <span class="hljs-variable">@Bean</span> <br>    public PasswordEncoder <span class="hljs-built_in">passwordEncoder</span>() &#123;<br>        <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">BCryptPasswordEncoder</span>(); <span class="hljs-comment">// 返回合适的实现类</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Controller</span>  <br><span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/security&quot;</span>)</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">PasswordController</span> &#123;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PasswordEncoder passwordEncoder;  <br>  <br>    <span class="hljs-meta">@Autowired</span>  <br>    <span class="hljs-keyword">public</span> PasswordController(PasswordEncoder passwordEncoder) &#123;  <br>        <span class="hljs-keyword">this</span>.passwordEncoder = passwordEncoder;  <br>    &#125;  <br>      <br>    <span class="hljs-comment">// 通过方法处理密码加密  </span><br>    <span class="hljs-meta">@RequestMapping(<span class="hljs-string">&quot;/encode-password&quot;</span>)</span>  <br>    <span class="hljs-meta">@ResponseBody</span>  <br>    <span class="hljs-keyword">public</span> String encodePassword() &#123;  <br>        String password = <span class="hljs-string">&quot;myPasswordxxxxxxx&quot;</span>;  <br>        <span class="hljs-comment">// 在方法内调用 passwordEncoder 进行密码加密  </span><br>        String encodedPassword = passwordEncoder.encode(password);  <br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Encoded Password: &quot;</span> + encodedPassword;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png" srcset="/img/loading.gif" lazyload></p>
 <p>Spring 可以通过字段注入（反射）注入依赖，但这种方式<strong>不能用在final字段上</strong>，因为final字段一旦初始化就不能再改。Spring 反射注入时，Java编译器没法确定这个final字段被初始化过，编译期就报错。<br><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160340948.png" srcset="/img/loading.gif" lazyload></p>
 <p><img src="/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160346033.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h3><h3 id="0、导图：Map：Spring-IOC"><a href="#0、导图：Map：Spring-IOC" class="headerlink" title="0、导图：Map：Spring IOC"></a>0、导图：<a href="../../maps/Map%EF%BC%9ASpringIoC.xmind">Map：Spring IOC</a></h3><hr>

@@ -27,8 +27,11 @@
 <meta property="og:description" content="1. 调整电源状态1.1. 常见电源状态   状态 屏幕 程序 网络连接 是否继续运行任务    正常运行 亮 是 是 是   仅息屏 关 是 是 是 ✅   睡眠（Sleep） 关 否（挂起） 否 否 ❌   休眠（Hibernate） 关 否（写入硬盘） 否 否 ❌    1.2. 修改电源状态控制面板 → 硬件和声音 → 电源选项 → 更改计划设置     查看 CPU 架构打开 Power">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/05/%E7%AC%94%E8%AE%B0%EF%BC%9AWindows/image-20250503160117848.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203524550.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203539052.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203359869.png">
 <meta property="article:published_time" content="2025-04-04T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-27T02:17:55.875Z">
+<meta property="article:modified_time" content="2025-06-19T12:35:40.637Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/05/%E7%AC%94%E8%AE%B0%EF%BC%9AWindows/image-20250503160117848.png">
@@ -225,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          234 words
+          832 words
         
       </span>
     
@@ -236,7 +239,7 @@
         
         
         
-          2 mins
+          7 mins
         
       </span>
     
@@ -291,7 +294,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-05-27T10:17:55+08:00
+                    Last updated on 2025-06-19T20:35:40+08:00
                   
                   
 
@@ -362,6 +365,110 @@
 <h2 id="重置网络"><a href="#重置网络" class="headerlink" title="重置网络"></a>重置网络</h2><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs perl">netsh winsock <span class="hljs-keyword">reset</span><br><br>netsh <span class="hljs-keyword">int</span> ip <span class="hljs-keyword">reset</span><br></code></pre></td></tr></table></figure>
 
 <hr>
+<h3 id="查看核数"><a href="#查看核数" class="headerlink" title="查看核数"></a>查看核数</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">Get</span>-WmiObject -<span class="hljs-keyword">Class</span> Win32_Processor | <span class="hljs-keyword">Select</span>-<span class="hljs-keyword">Object</span> <span class="hljs-type">Name</span>, NumberOfCores, NumberOfLogicalProcessors<br>- **NumberOfCores** 是物理核数<br>    <br>- **NumberOfLogicalProcessors** 是逻辑核数（启用了超线程会是核数的 <span class="hljs-number">2</span> 倍）<br></code></pre></td></tr></table></figure>
+<p>我们可以简单理解为 VM分配的核心是逻辑核心</p>
+<h2 id="测磁盘读写"><a href="#测磁盘读写" class="headerlink" title="测磁盘读写"></a>测磁盘读写</h2><p>很好，CrystalDiskMark 是 Windows 系统下最流行、操作最简单的硬盘读写速度测试工具之一。下面我一步一步教你怎么用：</p>
+<hr>
+<h2 id="✅-一、下载安装"><a href="#✅-一、下载安装" class="headerlink" title="✅ 一、下载安装"></a>✅ 一、下载安装</h2><ol>
+<li><p><strong>访问官网下载地址</strong>：</p>
+<ul>
+<li><p>官网主页：<a target="_blank" rel="noopener" href="https://crystalmark.info/en/software/crystaldiskmark/">https://crystalmark.info/en/software/crystaldiskmark/</a></p>
+</li>
+<li><p>选择适合你系统的版本：</p>
+<ul>
+<li><p>通常选“<strong>Standard Edition</strong>”</p>
+</li>
+<li><p>如果不想安装，也可以点“<strong>ZIP版（免安装）</strong>”，解压后直接运行。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>安装或解压后打开</strong>程序。</p>
+</li>
+</ol>
+<hr>
+<h2 id="✅-二、界面参数说明（见下图）"><a href="#✅-二、界面参数说明（见下图）" class="headerlink" title="✅ 二、界面参数说明（见下图）"></a>✅ 二、界面参数说明（见下图）</h2><p>界面上方有几个关键参数，按需设置：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用说明</th>
+<th>推荐设置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>① 测试次数</td>
+<td>默认是 5 次，取平均值。可改成 3 次测试更快。</td>
+<td>建议保持默认</td>
+</tr>
+<tr>
+<td>② 测试文件大小</td>
+<td>单次测试的数据量，单位 GiB</td>
+<td>通常选 1GiB 或 4GiB</td>
+</tr>
+<tr>
+<td>③ 测试磁盘</td>
+<td>选择你要测试的磁盘分区（如 C: D: E:）</td>
+<td>选你要测试的硬盘</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="✅-三、开始测试"><a href="#✅-三、开始测试" class="headerlink" title="✅ 三、开始测试"></a>✅ 三、开始测试</h2><p>点击中间绿色的 <strong>“All” 按钮</strong>，系统会依次执行 4 个读写测试：</p>
+<table>
+<thead>
+<tr>
+<th>测试项</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Seq1M Q8T1</td>
+<td>顺序读写（大文件），多个线程并发访问</td>
+</tr>
+<tr>
+<td>Seq1M Q1T1</td>
+<td>顺序读写（大文件），单线程访问</td>
+</tr>
+<tr>
+<td>RND4K Q32T16</td>
+<td>随机读写（小文件），高并发场景</td>
+</tr>
+<tr>
+<td>RND4K Q1T1</td>
+<td>随机读写（小文件），真实日常使用最接近</td>
+</tr>
+</tbody></table>
+<p>每项测试会分别显示：</p>
+<ul>
+<li><p><strong>Read（读取速度）</strong></p>
+</li>
+<li><p><strong>Write（写入速度）</strong><br>  单位：MB&#x2F;s（越高越好）</p>
+</li>
+</ul>
+<hr>
+<h2 id="✅-四、如何看结果"><a href="#✅-四、如何看结果" class="headerlink" title="✅ 四、如何看结果"></a>✅ 四、如何看结果</h2><ul>
+<li><p><code>Seq1M</code> 的结果：代表你硬盘的<strong>最高理论顺序读写速度</strong>。</p>
+</li>
+<li><p><code>RND4K Q1T1</code> 的结果：代表日常使用时（比如开网页、打开软件）<strong>平均性能表现</strong>。</p>
+</li>
+<li><p>机械硬盘 <code>RND4K</code> 通常只有个位数 MB&#x2F;s，NVMe SSD 能有几百甚至上千。</p>
+</li>
+</ul>
+<hr>
+<h2 id="✅-五、补充说明"><a href="#✅-五、补充说明" class="headerlink" title="✅ 五、补充说明"></a>✅ 五、补充说明</h2><ul>
+<li><p>不建议在 <strong>系统盘（C盘）使用过程中测试</strong>，会有干扰。</p>
+</li>
+<li><p>如果硬盘有缓存，第一次和第二次结果可能会差别较大（可多跑几次看波动）。</p>
+</li>
+<li><p>如果你想测试实际复制大文件的速度，也可以手动复制 10GB 文件试试，但这不如 CrystalDiskMark 标准化。</p>
+</li>
+</ul>
+<hr>
+<p>你要不要我帮你分析一下测试结果？你测完后发截图或结果数值就行。</p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203524550.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203539052.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/indows/image-20250619203359869.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
