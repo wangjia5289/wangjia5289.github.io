@@ -19,27 +19,29 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加密器对用户发送来的明文密码进行加密，然后再比对吧？可我并没有做任何相关配置，Authent">
+    <meta name="description" content="不能这样做，会报错，要想在本方法用，只能 csrfTokenRepository()  两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring IOC">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加密器对用户发送来的明文密码进行加密，然后再比对吧？可我并没有做任何相关配置，Authent">
+<meta property="og:description" content="不能这样做，会报错，要想在本方法用，只能 csrfTokenRepository()  两种注册方式啊   [!NOTE] 注意事项  如果我们是使用 AuthenticationManager 进行认证，它会自动将用户发送来的用户名和密码，与我们的 CustomerUserDetailsImpl 中返回的用户名和密码进行比对，这是我们已知的逻辑。那你可能会有疑问：它在比对前，肯定需要先用密码加">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103116668.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205019198.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205226473.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250704122212717.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250703215302874.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250703103102608.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250703103116668.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250701205019198.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250701205226473.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160241335.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160340948.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250519160346033.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518162951182.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20IOC/image-20250518163131432.png">
 <meta property="article:published_time" content="2025-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T06:23:22.163Z">
+<meta property="article:modified_time" content="2025-07-04T04:24:16.875Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/C/image-20250704122212717.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -299,7 +301,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-03T14:23:22+08:00
+                    Last updated on 2025-07-04T12:24:16+08:00
                   
                   
 
@@ -309,8 +311,11 @@
             
               <div class="markdown-body">
                 
-                <h2 id="两种注册方式啊"><a href="#两种注册方式啊" class="headerlink" title="两种注册方式啊"></a>两种注册方式啊</h2><p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103102608.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250703103116668.png" srcset="/img/loading.gif" lazyload></p>
+                <p><img src="/2025/03/10/hello-world/C/image-20250704122212717.png" srcset="/img/loading.gif" lazyload></p>
+<p>不能这样做，会报错，要想在本方法用，只能 csrfTokenRepository()</p>
+<p><img src="/2025/03/10/hello-world/C/image-20250703215302874.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="两种注册方式啊"><a href="#两种注册方式啊" class="headerlink" title="两种注册方式啊"></a>两种注册方式啊</h2><p><img src="/2025/03/10/hello-world/C/image-20250703103102608.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/C/image-20250703103116668.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -324,8 +329,8 @@
 
 
 <hr>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205019198.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20IOC/image-20250701205226473.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/C/image-20250701205019198.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/C/image-20250701205226473.png" srcset="/img/loading.gif" lazyload></p>
 <p>其实这就是 Spring IOC 的核心思想了，对吧，你的接口这些方法都已经制定好了</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> interface PasswordEncoder &#123;  <br>    <span class="hljs-function"><span class="hljs-type">String</span> <span class="hljs-title">encode</span><span class="hljs-params">(CharSequence rawPassword)</span></span>;  <br>  <br>    <span class="hljs-function"><span class="hljs-type">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(CharSequence rawPassword, <span class="hljs-type">String</span> encodedPassword)</span></span>;  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-type">boolean</span> <span class="hljs-title">upgradeEncoding</span><span class="hljs-params">(<span class="hljs-type">String</span> encodedPassword)</span> </span>&#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 <p>然后这些实现，都会去实现你这些方法，我们将接口直接声明为 Bean，然后选择一个合适的实现类进行返回，其实这个接口呢，就可以使用这个实现类实现的方法，以后如果我们要修改实现类，只需要修改以下这个return new BCY 到其他的，然后呢，其他的代码都不用变了，如果你是直接 Bean BCY，那你如果以后像用一个其他的，那你还得把所有的BCY 找出来，一一替换</p>
