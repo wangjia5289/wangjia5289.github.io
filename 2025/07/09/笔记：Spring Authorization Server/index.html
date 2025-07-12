@@ -1,0 +1,948 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
+  <link rel="icon" href="/img/ba.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、理论导图  Spring Authorization Server 执行流程OAuth2AuthorizationEndpointFilter 介入Spring Authorization Server 配置Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oauthserverwithmyprojec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Spring Authorization Server">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/07/09/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Authorization%20Server/index.html">
+<meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
+<meta property="og:description" content="一、理论导图  Spring Authorization Server 执行流程OAuth2AuthorizationEndpointFilter 介入Spring Authorization Server 配置Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oauthserverwithmyprojec">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/Map%EF%BC%9ASpringAuthorizationServer%201.xmind">
+<meta property="article:published_time" content="2025-07-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-12T09:10:18.607Z">
+<meta property="article:author" content="Ba Tian">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/Map%EF%BC%9ASpringAuthorizationServer%201.xmind">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Spring Authorization Server - 夜阑卧听风吹雨,一枝梨花压心头</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1%E7%BE%8E%E5%AD%A6-%E5%90%8A%E5%B8%A6%E8%A3%99.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Spring Authorization Server"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-09 00:00" pubdate>
+          July 9, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Spring Authorization Server</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-07-12T17:10:18+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p><img src="/Map%EF%BC%9ASpringAuthorizationServer%201.xmind" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="Spring-Authorization-Server-执行流程"><a href="#Spring-Authorization-Server-执行流程" class="headerlink" title="Spring Authorization Server 执行流程"></a>Spring Authorization Server 执行流程</h2><h3 id="OAuth2AuthorizationEndpointFilter-介入"><a href="#OAuth2AuthorizationEndpointFilter-介入" class="headerlink" title="OAuth2AuthorizationEndpointFilter 介入"></a>OAuth2AuthorizationEndpointFilter 介入</h3><h2 id="Spring-Authorization-Server-配置"><a href="#Spring-Authorization-Server-配置" class="headerlink" title="Spring Authorization Server 配置"></a>Spring Authorization Server 配置</h2><h3 id="Spring-Authorization-Server-配置模板"><a href="#Spring-Authorization-Server-配置模板" class="headerlink" title="Spring Authorization Server 配置模板"></a>Spring Authorization Server 配置模板</h3><p>AuthServerConfiguration 类在 <code>com.example.oauthserverwithmyproject.configuration</code> 包下，直接粘贴这份配置模板，再根据下方的详细说明按需进行调整。</p>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h2 id="注册客户端应用"><a href="#注册客户端应用" class="headerlink" title="注册客户端应用"></a>注册客户端应用</h2><h3 id="客户端应用能注册哪些信息"><a href="#客户端应用能注册哪些信息" class="headerlink" title="客户端应用能注册哪些信息"></a>客户端应用能注册哪些信息</h3><p>客户端应用必须在我们的授权服务器完成注册，才能获得 Access Token 的颁发资格。那么，客户端在注册时需要提交哪些信息呢？在 Spring Authorization Server 中，类 <code>RegisteredClient</code> 定义了客户端应用可注册的具体属性，源码中的属性包括：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RegisteredClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123; <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> id;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientId;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Instant</span> clientIdIssuedAt;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientSecret;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Instant</span> clientSecretExpiresAt;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientName;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">ClientAuthenticationMethod</span>&gt; clientAuthenticationMethods;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">AuthorizationGrantType</span>&gt; authorizationGrantTypes;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; redirectUris;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; postLogoutRedirectUris;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; scopes;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">ClientSettings</span> clientSettings;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">TokenSettings</span> tokenSettings;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里只列举我们常用的一些属性，其他次要或无关的属性暂不展开：</p>
+<p><font color="#92d050">1. id</font><br>这个字段不是客户端应用提交的注册信息，而是我们入库时生成的自增主键（或者是 UUID 等格式），Spring 会使用该 ID 作为数据结构中的键，例如 <code>Map&lt;String, RegisteredClient&gt;</code>。</p>
+<p>你可能会疑问，为什么不直接用 <code>clientId</code> 作为数据库主键？原因在于客户端应用可能会重置 <code>clientId</code>，而数据库主键要求必须保持唯一且不可变。</p>
+<p><font color="#92d050">2. clientId</font><br>clientId 是 OAuth2 协议中用于标识客户端的重要凭证之一，当客户端应用进行注册时，由<strong>我们生成</strong>一个 <code>clientId</code> 并返回给他们。</p>
+<p><font color="#92d050">3. clientIdIssuedAt</font><br>这是 <code>clientId</code> 的发放时间，<strong>同样由我们生成</strong>，通常在生成 <code>clientId</code> 时一并创建，该时间用于便于后续跟踪和判断 <code>clientId</code> 的有效性。</p>
+<p>要求以时间戳的形式，建议在数据库中使用 <code>TIMESTAMP</code> 类型存储，格式示例为：<code>2025-07-11 12:34:56.789 +00:00</code>。</p>
+<p>需要注意的是，Spring Authorization Server 并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientId</code> 的生命周期进行跟踪和管理。</p>
+<p><font color="#92d050">4. clientSecret</font><br>clientSecret 同样是 OAuth2 协议中用于标识客户端的重要凭证之一，当客户端应用进行注册时，由我们生成一个 <code>clientSecret</code> 并返回给他们。</p>
+<p>可以将 <code>clientId</code> 理解为账号，而 <code>clientSecret</code> 则相当于密码。</p>
+<p><font color="#92d050">5. clientSecretExpiresAt</font><br>这是 <code>clientSecret</code> 的过期时间，主要用于支持密钥轮换场景，可设置为 <code>NULL</code> 表示永不过期（实际应用中通常为不过期）。</p>
+<p>要求以时间戳的形式，建议在数据库中使用 <code>TIMESTAMP</code> 类型存储，格式示例为：<code>2025-07-11 12:34:56.789 +00:00</code>。</p>
+<p>需要注意的是，Spring Authorization Server 同样并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientSecret</code> 进行轮换处理等。</p>
+<p><font color="#92d050">6. clientName</font><br>客户端应用的名称，由客户端应用在注册时指定，用于展示给用户，例如在授权确认页面中，会显示为 “XXX 正在请求访问你的信息，是否同意”。</p>
+<p><font color="#92d050">7. clientAuthenticationMethods</font><br>客户端如何进行身份认证，简单来说，就是在哪个位置、以何种方式传递 <code>client_id</code> 和 <code>client_secret</code>，需要客户端应用在注册时进行指定，常见的方式包括：</p>
+<ol>
+<li>client_secret_basic（默认）：<ol>
+<li>通过 HTTP Basic 的方式传递 <code>client_id</code> 和 <code>client_secret</code></li>
+<li>简单来说，就是将其放入请求头的 Authorization 中，格式为：<code>Authorization: Basic &lt;Base64 编码后的 clientId:clientSecret&gt;</code>，例如：<code>Authorization: Basic Y2xpZW50MTIzOnNlY3JldFhZWg==</code></li>
+</ol>
+</li>
+<li>client_secret_post：<ol>
+<li>通过表单参数的方式传递 <code>client_id</code> 和 <code>client_secret</code></li>
+</ol>
+</li>
+<li>none：<ol>
+<li>仅传 <code>client_id</code>，不传 <code>client_secret</code>，常用于 SPA 单页应用或移动端应用（这也是引入 PKCE 的原因）</li>
+</ol>
+</li>
+</ol>
+<p>需要注意的是，客户端可以在注册时，可以注册多个身份认证方式，Spring Authorization Server 会按顺序依次尝试这些方式，直到认证成功为止。</p>
+<p><font color="#92d050">8. authorizationGrantTypes</font><br>客户端支持的授权方式，需要客户端应用在注册时进行指定（指定未来可能会用到哪些授权方式）常见包括：</p>
+<ol>
+<li>authorization_code：<ol>
+<li>授权码模式</li>
+</ol>
+</li>
+<li>client_credentials：<ol>
+<li>客户端凭证式</li>
+</ol>
+</li>
+<li>refresh_token：<ol>
+<li>刷新令牌式</li>
+</ol>
+</li>
+<li>password：<ol>
+<li>密码式，已被弃用，不推荐使用</li>
+</ol>
+</li>
+</ol>
+<p>需要注意的是：</p>
+<ol>
+<li>Spring Authorization Server 从未支持过隐藏式（implicit）。</li>
+<li>客户端在注册时可以注册多个授权方式，但 Spring Authorization Server 并不会按顺序依次尝试这些方式。而是在授权请求时，客户端必须明确指定使用其中的一种授权方式。<ol>
+<li>简单来说，注册时支持注册多个授权方式，表示未来可能会用到这些授权方式</li>
+<li>但授权时，只能选择其中一种进行使用</li>
+<li>如果授权请求中指定的授权模式未在注册时指定，服务器将拒绝处理该请求。</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">9. redirectUris</font><br>用户授权成功后的回调地址（redirect URI），由客户端应用在注册时进行指定，而且在发起授权请求时必须携带<strong>完全一致</strong>的值，否则服务器将拒绝处理请求，例如：<code>https://example.com/oauth2/callback</code></p>
+<p><font color="#92d050">10. scopes</font><br>客户端请求的权限范围，其是我们高度自定义的，客户端应用在注册时需勾选其可能会用到的权限范围（scope），表示未来可能申请这些权限。</p>
+<p>实际授权请求时，客户端携带所需的 scope，服务器根据请求的 scope 颁发相应的 Access Token，确保客户端应用使用该 Access Token 只能访问授权范围内的信息。</p>
+<p>需要注意的是，注册时勾选的 scope 并非必须全部使用，而是以授权请求中携带的 scope 为准。如果授权请求中指定的 scope 未在注册时配置，服务器将拒绝该请求。</p>
+<p>我们在自定义权限范围时，一般遵循这样的命名规则：</p>
+<ol>
+<li>模块:资源:操作<ol>
+<li>细粒度权限范围</li>
+<li>例如读取用户信息的权限，可以命名为：<code>user:user:read</code></li>
+</ol>
+</li>
+<li>模块:操作<ol>
+<li>粗粒度权限范围</li>
+<li>例如读取用户信息的权限，可以命名为：<code>user:read</code></li>
+</ol>
+</li>
+</ol>
+<p>OAuth 的 Scope 本质上是高度自定义的，但 OpenID Connect（OIDC）规范定义了一些标准的 scope，包括：</p>
+<ol>
+<li>openid<ol>
+<li>表示请求 OpenID Connect 身份令牌（ID Token），如果客户端应用需要我们返回 ID Token，则需要在授权请求中携带 openid</li>
+<li>返回的 ID Token 为 JWT 格式，默认仅包含 <code>sub</code> 字段（即 <code>userInfoRequest.getPrincipal().getName()</code> 的值），使用 RS256 算法（私钥签名、公钥验证）。</li>
+<li>需要注意的是，默认情况下公私钥对是在应用启动时内存中动态生成的。可通过 <code>/.well-known/jwks.json</code> 端点获取当前启动的公钥用于验证 ID Token。</li>
+<li>但应用重启或多实例部署时，密钥对会发生变化，导致之前颁发的 ID Token 无法验证。实际环境中，应使用固定的密钥对，确保 ID Token 在服务重启后依然可验证。</li>
+</ol>
+</li>
+<li>profile<ol>
+<li>请求访问用户的基本信息，如姓名、头像、性别等</li>
+</ol>
+</li>
+<li>email<ol>
+<li>请求访问用户的电子邮件地址</li>
+</ol>
+</li>
+<li>address<ol>
+<li>请求访问用户的地址信息</li>
+</ol>
+</li>
+<li>phone<ol>
+<li>请求访问用户的电话号码</li>
+</ol>
+</li>
+<li>offline_access<ol>
+<li>请求返回 Refresh Token，以实现用户离线访问。</li>
+<li>如果未集成 OIDC，在 <code>authorizationGrantTypes</code> 中配置了 <code>refresh_token</code>，Spring Authorization Server 会返回 Refresh Token</li>
+<li>但是在集成 OIDC 后，必须携带 <code>offline_access</code>，授权服务器才会返回 Refresh Token，因为其要求更为严格。</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">11. clientSettings</font><br>客户端级别的配置，需要客户端应用在注册时指定，格式为 JSON，通常在数据库中以 <code>TEXT</code> 类型进行存储。可配置的项包括：</p>
+<ol>
+<li>requireAuthorizationConsent(boolean)<ol>
+<li>是否强制用户在授权时显示“授权确认页”（consent screen），即使用户已授权</li>
+<li>默认值为 <code>false</code></li>
+</ol>
+</li>
+<li>requireProofKey(boolean)<ol>
+<li>是否启用 PKCE</li>
+<li>默认值为 <code>false</code><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;requireAuthorizationConsent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;requireProofKey&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">12. tokenSettings</font><br>各种令牌的配置，可配置的项包括：</p>
+<ol>
+<li>accessTokenTimeToLive(Duration)<ol>
+<li>访问令牌（Access Token）的有效期，以分钟为单位</li>
+<li>例如：<code>accessTokenTimeToLive(5)</code> 是 5 分钟</li>
+</ol>
+</li>
+<li>accessTokenFormat(AccessTokenFormat)<ol>
+<li>访问令牌（Access Token）的格式</li>
+<li>AccessTokenFormat.REFERENCE<ol>
+<li>访问令牌格式为引用类型</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>refreshTokenTimeToLive(Duration)<ol>
+<li>刷新令牌（Refresh Token）的有效期，以天为单位</li>
+<li>例如：<code>refreshTokenTimeToLive(30)</code> 是 30 天</li>
+</ol>
+</li>
+<li>reuseRefreshTokens(boolean)<ol>
+<li>刷新令牌是否可重复使用</li>
+<li>true：<ol>
+<li>可重复使用</li>
+</ol>
+</li>
+<li>false：<ol>
+<li>每次刷新都会生成新的刷新令牌</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>idTokenTimeToLive(Duration)<ol>
+<li>ID 令牌（ID Token）的有效期，以分钟为单位</li>
+<li>例如：<code>idTokenTimeToLive(10)</code> 是 10 分钟</li>
+</ol>
+</li>
+<li>authorizationCodeTimeToLive(Duration)<ol>
+<li>授权码（Authorization Code）的有效期，以分钟为单位</li>
+<li>例如：<code>authorizationCodeTimeToLive(5)</code> 是 5 分钟</li>
+</ol>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>配置方法</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>accessTokenTimeToLive(Duration)</code></td>
+<td><code>Duration</code></td>
+<td>5 分钟</td>
+<td></td>
+</tr>
+<tr>
+<td>&#96;</td>
+<td><code>Duration</code></td>
+<td>30 天</td>
+<td></td>
+</tr>
+<tr>
+<td>&#96;&#96;</td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>刷新令牌是否可重复使用（<code>true</code>：可反复用；<code>false</code>：每次刷新都会生成新的刷新令牌）</td>
+</tr>
+<tr>
+<td>&#96;&#96;</td>
+<td><code>Duration</code></td>
+<td>5 分钟</td>
+<td>ID Token 的有效期（OIDC 场景）</td>
+</tr>
+<tr>
+<td>&#96;&#96;</td>
+<td><code>Duration</code></td>
+<td>5 分钟</td>
+<td>授权码的有效期</td>
+</tr>
+<tr>
+<td>&#96;&#96;</td>
+<td>枚举</td>
+<td><code>SELF_CONTAINED</code></td>
+<td>访问令牌格式（自包含 JWT 或引用型 Token）</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>accessTokenTimeToLive</strong>：控制客户端拿到的访问令牌在多长时间后失效，影响资源服务器的访问权限有效期。</p>
+</li>
+<li><p><strong>refreshTokenTimeToLive</strong>：刷新令牌的有效期，决定客户端在多长时间内可以用刷新令牌换取新的访问令牌。</p>
+</li>
+<li><p><strong>reuseRefreshTokens</strong>：是否允许刷新令牌重复使用。设置为 <code>false</code> 能提高安全性，防止刷新令牌被重放利用。</p>
+</li>
+<li><p><strong>authorizationCodeTimeToLive</strong>：授权码有效期，过期后用户必须重新授权获取新的授权码。</p>
+</li>
+<li><p><strong>accessTokenFormat</strong>：通常选择 <code>SELF_CONTAINED</code>（JWT），也可以选引用型（opaque token），但需要额外支持 Token 存储和校验。</p>
+</li>
+</ul>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">TokenSettings tokenSettings = TokenSettings.builder<span class="hljs-params">()</span><br>    <span class="hljs-string">.accessTokenTimeToLive</span><span class="hljs-params">(Duration.ofMinutes(60)</span>)         <span class="hljs-string">//</span> 访问令牌有效期 60 分钟<br>    <span class="hljs-string">.refreshTokenTimeToLive</span><span class="hljs-params">(Duration.ofDays(14)</span>)           <span class="hljs-string">//</span> 刷新令牌有效期 14 天<br>    <span class="hljs-string">.reuseRefreshTokens</span><span class="hljs-params">(false)</span>                              <span class="hljs-string">//</span> 刷新令牌使用一次后失效，强制发新令牌<br>    <span class="hljs-string">.authorizationCodeTimeToLive</span><span class="hljs-params">(Duration.ofMinutes(10)</span>)   <span class="hljs-string">//</span> 授权码有效期 10 分钟<br>    <span class="hljs-string">.build</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="创建-客户端应用-数据库表"><a href="#创建-客户端应用-数据库表" class="headerlink" title="创建 客户端应用 数据库表"></a>创建 客户端应用 数据库表</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/Spring-Authorization-Server/" class="category-chain-item">Spring Authorization Server</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Spring Authorization Server</div>
+      <div>https://wangjia5289.github.io/2025/07/09/笔记：Spring Authorization Server/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 9, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9AHttpClient/" title="笔记：HttpClient">
+                        <span class="hidden-mobile">笔记：HttpClient</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"display":{"superSample":2,"width":200,"height":350,"position":"left","hOffset":40,"vOffset":-20},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":1,"opacityOnHover":0.5},"log":false});</script></body>
+</html>

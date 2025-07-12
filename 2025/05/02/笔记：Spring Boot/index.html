@@ -19,25 +19,31 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="@Scheduled(fixedRate &#x3D; 5000)定时任务，可以用来定时发邮件、定期清理数据库、晚上跑报表等 1. 常用注解1.1. Spring Web 相关注解1.1.1. @RequestMapping@RequestMapping 用于将 HTTP 请求映射到控制器的方法。开发者可以通过这些注解定义特定的 URL 路径和请求方法，以处理不同类型的请求。这些注解可以应用于类或">
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485public class Cookie &#123;      private">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring Boot">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="@Scheduled(fixedRate &#x3D; 5000)定时任务，可以用来定时发邮件、定期清理数据库、晚上跑报表等 1. 常用注解1.1. Spring Web 相关注解1.1.1. @RequestMapping@RequestMapping 用于将 HTTP 请求映射到控制器的方法。开发者可以通过这些注解定义特定的 URL 路径和请求方法，以处理不同类型的请求。这些注解可以应用于类或">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485public class Cookie &#123;      private">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250709172129814.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250709074128434.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250708185639252.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250708182201629.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250708180840473.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250707155119821.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250517211323498.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250517211409902.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250517210734445.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Boot/image-20250617161457306.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250617161457306.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250513162343394.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250510204814351.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250517125404803.png">
 <meta property="article:published_time" content="2025-05-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-27T13:13:03.590Z">
+<meta property="article:modified_time" content="2025-07-10T04:14:49.523Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/02/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Boot/image-20250517211323498.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/10/hello-world/ot/image-20250709172129814.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -231,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k words
+          4.1k words
         
       </span>
     
@@ -242,7 +248,7 @@
         
         
         
-          27 mins
+          35 mins
         
       </span>
     
@@ -297,7 +303,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-27T21:13:03+08:00
+                    Last updated on 2025-07-10T12:14:49+08:00
                   
                   
 
@@ -307,7 +313,88 @@
             
               <div class="markdown-body">
                 
-                <h3 id="Scheduled-fixedRate-5000"><a href="#Scheduled-fixedRate-5000" class="headerlink" title="@Scheduled(fixedRate &#x3D; 5000)"></a>@Scheduled(fixedRate &#x3D; 5000)</h3><p>定时任务，可以用来定时发邮件、定期清理数据库、晚上跑报表等</p>
+                <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cookie</span> &#123;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> name;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> domain;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> path;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Boolean</span> httpOnly;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Boolean</span> secure;  <br>    <span class="hljs-meta">@DurationUnit</span>(<span class="hljs-title class_">ChronoUnit</span>.<span class="hljs-property">SECONDS</span>)  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Duration</span> maxAge;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">SameSite</span> sameSite;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Cookie</span>() &#123;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getName</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setName</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> name</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getDomain</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">domain</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setDomain</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> domain</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">domain</span> = domain;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">getPath</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">path</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setPath</span>(<span class="hljs-params"><span class="hljs-title class_">String</span> path</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">path</span> = path;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Boolean</span> <span class="hljs-title function_">getHttpOnly</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">httpOnly</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setHttpOnly</span>(<span class="hljs-params"><span class="hljs-title class_">Boolean</span> httpOnly</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">httpOnly</span> = httpOnly;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Boolean</span> <span class="hljs-title function_">getSecure</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">secure</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setSecure</span>(<span class="hljs-params"><span class="hljs-title class_">Boolean</span> secure</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">secure</span> = secure;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">Duration</span> <span class="hljs-title function_">getMaxAge</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">maxAge</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setMaxAge</span>(<span class="hljs-params"><span class="hljs-title class_">Duration</span> maxAge</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">maxAge</span> = maxAge;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">SameSite</span> <span class="hljs-title function_">getSameSite</span>(<span class="hljs-params"></span>) &#123;  <br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">sameSite</span>;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">setSameSite</span>(<span class="hljs-params"><span class="hljs-title class_">SameSite</span> sameSite</span>) &#123;  <br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">sameSite</span> = sameSite;  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">enum</span> <span class="hljs-title class_">SameSite</span> &#123;  <br>        <span class="hljs-title function_">NONE</span>(<span class="hljs-string">&quot;None&quot;</span>),  <br>        <span class="hljs-title function_">LAX</span>(<span class="hljs-string">&quot;Lax&quot;</span>),  <br>        <span class="hljs-title function_">STRICT</span>(<span class="hljs-string">&quot;Strict&quot;</span>);  <br>  <br>        <span class="hljs-keyword">private</span> final <span class="hljs-title class_">String</span> attributeValue;  <br>  <br>        <span class="hljs-keyword">private</span> <span class="hljs-title class_">SameSite</span>(<span class="hljs-title class_">String</span> attributeValue) &#123;  <br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">attributeValue</span> = attributeValue;  <br>        &#125;  <br>  <br>        <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">attributeValue</span>(<span class="hljs-params"></span>) &#123;  <br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">attributeValue</span>;  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/2025/03/10/hello-world/ot/image-20250709172129814.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Root(name = <span class="hljs-string">&quot;LifecycleConfiguration&quot;</span>)</span>  <br><span class="hljs-meta">@Namespace(reference = <span class="hljs-string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>)</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LifecycleConfiguration</span> &#123;  <br>  <span class="hljs-meta">@ElementList(name = <span class="hljs-string">&quot;Rule&quot;</span>, inline = true)</span>  <br>  <span class="hljs-keyword">private</span> List&lt;LifecycleRule&gt; rules;  <br>  <br>  <span class="hljs-comment">/** Constructs new lifecycle configuration. */</span>  <br>  <span class="hljs-keyword">public</span> LifecycleConfiguration(  <br>      <span class="hljs-meta">@Nonnull</span> <span class="hljs-meta">@ElementList(name = <span class="hljs-string">&quot;Rule&quot;</span>, inline = true)</span> List&lt;LifecycleRule&gt; rules) &#123;  <br>    <span class="hljs-keyword">this</span>.rules =  <br>        Collections.unmodifiableList(Objects.requireNonNull(rules, <span class="hljs-string">&quot;Rules must not be null&quot;</span>));  <br>    <span class="hljs-keyword">if</span> (rules.isEmpty()) &#123;  <br>      <span class="hljs-keyword">throw</span> new IllegalArgumentException(<span class="hljs-string">&quot;Rules must not be empty&quot;</span>);  <br>    &#125;  <br>  &#125;  <br>  <br>  <span class="hljs-keyword">public</span> List&lt;LifecycleRule&gt; rules() &#123;  <br>    <span class="hljs-keyword">return</span> rules;  <br>  &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/03/10/hello-world/ot/image-20250709074128434.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/ot/image-20250708185639252.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/ot/image-20250708182201629.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/ot/image-20250708180840473.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/ot/image-20250707155119821.png" srcset="/img/loading.gif" lazyload></p>
+<p>这个和reponse，没事就传进去玩呗</p>
+<p>你在yaml中配置的，究竟去哪里了，spring ioc 也应该有这部分内容：<br>这是个非常核心又容易忽略的问题。Spring Boot 的“配置”其实不是直接配置到某个类上，而是<strong>通过自动装配机制，把配置值绑定到相关的 Bean 或配置类中去</strong>。你可以从这几个方面理解：</p>
+<hr>
+<h3 id="一、配置的来源"><a href="#一、配置的来源" class="headerlink" title="一、配置的来源"></a>一、配置的来源</h3><p>Spring Boot 支持多种配置来源，最常见的是：</p>
+<ul>
+<li><p><code>application.properties</code> 或 <code>application.yml</code></p>
+</li>
+<li><p>命令行参数、环境变量、<code>@Value</code> 注解</p>
+</li>
+<li><p>外部配置服务（如 Nacos、Consul）</p>
+</li>
+</ul>
+<p>这些配置本身只是<strong>键值对</strong>，但它们最终都会通过 <strong>绑定</strong> 或 <strong>条件装配</strong> 的方式作用于 Spring 容器中的某些 Bean。</p>
+<hr>
+<h3 id="二、配置去到了哪里？"><a href="#二、配置去到了哪里？" class="headerlink" title="二、配置去到了哪里？"></a>二、配置去到了哪里？</h3><ol>
+<li><strong>绑定到配置类（<code>@ConfigurationProperties</code>）</strong></li>
+</ol>
+<p>Spring Boot 内置了大量的配置类，比如：</p>
+<ul>
+<li><p><code>org.springframework.boot.autoconfigure.web.ServerProperties</code><br>  → 用来读取 <code>server.port</code>、<code>server.servlet.context-path</code> 等</p>
+</li>
+<li><p><code>org.springframework.boot.autoconfigure.jdbc.DataSourceProperties</code><br>  → 读取 <code>spring.datasource.url</code>、<code>spring.datasource.username</code></p>
+</li>
+</ul>
+<p>Spring Boot 启动时，会自动扫描这些带有 <code>@ConfigurationProperties</code> 的类，把配置文件中的值注入进去。</p>
+<ol start="2">
+<li><strong>作用于自动配置类（<code>@EnableAutoConfiguration</code>）</strong></li>
+</ol>
+<p>Spring Boot 的核心机制是“自动配置”，即：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoApplication</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(DemoApplication.class, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这个注解背后其实是 <code>@EnableAutoConfiguration</code>，它会加载 <code>META-INF/spring.factories</code>（或 Boot 3.x 用 <code>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</code>）中声明的自动配置类。</p>
+<p>比如你配置了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring.mvc.view.prefix:</span> <span class="hljs-string">/WEB-INF/views/</span><br></code></pre></td></tr></table></figure>
+
+<p>这个值会绑定到 <code>WebMvcProperties</code> 中，再被 <code>WebMvcAutoConfiguration</code> 使用，来设置视图解析器。</p>
+<ol start="3">
+<li><strong>配置注入到 Bean 中（<code>@Value</code>）</strong></li>
+</ol>
+<p>如果你写了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Value(&quot;$&#123;my.custom.name&#125;&quot;)</span><br><span class="hljs-keyword">private</span> String name;<br></code></pre></td></tr></table></figure>
+
+<p>这个是最直接的，Spring 会在容器初始化时，自动把配置文件里的值注入进去。</p>
+<hr>
+<h3 id="三、总结性一句话"><a href="#三、总结性一句话" class="headerlink" title="三、总结性一句话"></a>三、总结性一句话</h3><blockquote>
+<p>Spring Boot 配置文件中的值，<strong>不是配置到某一个类上</strong>，而是：</p>
+<ul>
+<li><p><strong>绑定到配置类（<code>@ConfigurationProperties</code>）</strong>；</p>
+</li>
+<li><p><strong>影响自动配置类的装配行为</strong>；</p>
+</li>
+<li><p><strong>可通过 <code>@Value</code> 注入到 Bean 中</strong>；</p>
+</li>
+<li><p><strong>最终决定 Bean 的属性值、是否加载某个 Bean 等行为</strong>。</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="如果你想“看见”这些配置是去哪了？"><a href="#如果你想“看见”这些配置是去哪了？" class="headerlink" title="如果你想“看见”这些配置是去哪了？"></a>如果你想“看见”这些配置是去哪了？</h3><p>你可以：</p>
+<h4 id="✅-开启配置元信息元数据支持"><a href="#✅-开启配置元信息元数据支持" class="headerlink" title="✅ 开启配置元信息元数据支持"></a>✅ 开启配置元信息元数据支持</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">optional</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">optional</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后去看 IDE 中提示出来的 <code>@ConfigurationProperties</code> 类都有哪些字段支持配置。</p>
+<h4 id="✅-打开调试日志"><a href="#✅-打开调试日志" class="headerlink" title="✅ 打开调试日志"></a>✅ 打开调试日志</h4><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">logging.level.org.springframework.boot.autoconfigure</span>=<span class="hljs-string">DEBUG</span><br></code></pre></td></tr></table></figure>
+
+<p>你会看到哪些自动配置类被加载了、哪些条件没满足没加载。</p>
+<hr>
+<p>如你需要，我也可以帮你找几个典型配置，看它们是怎么绑定到 Spring Bean 的。要不要？</p>
+<h3 id="Scheduled-fixedRate-5000"><a href="#Scheduled-fixedRate-5000" class="headerlink" title="@Scheduled(fixedRate &#x3D; 5000)"></a>@Scheduled(fixedRate &#x3D; 5000)</h3><p>定时任务，可以用来定时发邮件、定期清理数据库、晚上跑报表等</p>
 <h3 id="1-常用注解"><a href="#1-常用注解" class="headerlink" title="1. 常用注解"></a>1. 常用注解</h3><h4 id="1-1-Spring-Web-相关注解"><a href="#1-1-Spring-Web-相关注解" class="headerlink" title="1.1. Spring Web 相关注解"></a>1.1. Spring Web 相关注解</h4><h5 id="1-1-1-RequestMapping"><a href="#1-1-1-RequestMapping" class="headerlink" title="1.1.1. @RequestMapping"></a>1.1.1. @RequestMapping</h5><p><code>@RequestMapping</code> 用于将 HTTP 请求映射到控制器的方法。开发者可以通过这些注解定义特定的 URL 路径和请求方法，以处理不同类型的请求。这些注解可以应用于类或方法上。</p>
 <p>其具有多种衍生注解，包括：</p>
 <ol>
@@ -338,7 +425,7 @@
 <h5 id="1-1-3-ResponseBody"><a href="#1-1-3-ResponseBody" class="headerlink" title="1.1.3. @ResponseBody"></a>1.1.3. @ResponseBody</h5><p>这个注解可以作用在类或方法上，用来告诉 Spring：返回值应直接写入 HTTP 响应体，而不是跳转到视图层（如 JSP 或 HTML 模板）。通俗点说，它让方法的返回结果以 JSON 格式返回，并自动完成数据转换。</p>
 <p>我们常用的 <code>@RestController</code> 实际上就是 <code>@Controller + @ResponseBody</code> 的组合，意味着类中所有方法默认都启用了 <code>@ResponseBody</code>，不需要每个方法单独添加。<br> <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/hello&quot;</span>)<br><span class="hljs-meta">@ResponseBody</span><br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">hello</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, World!&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <hr>
-<h5 id="1-1-4-RequestBody"><a href="#1-1-4-RequestBody" class="headerlink" title="1.1.4. @RequestBody"></a>1.1.4. @RequestBody</h5><p><code>@RequestBody</code> 是用于将请求体中的 JSON 数据反序列化为 Java 对象的注解。</p>
+<h5 id="1-1-4-RequestBody"><a href="#1-1-4-RequestBody" class="headerlink" title="1.1.4. @RequestBody"></a>1.1.4. @RequestBody</h5><p><code>@RequestBody</code> 是用于将请求体中的 JSON 数据反序列化为 Java 对象的注解。（是默认集成的 Jackson 依赖）</p>
 <p>注意：也能将请求体中的 XML 数据反序列化为 Java 对象，但需要添加 <code>Jackson XML</code> 依赖</p>
 <figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-comment"># 1. 前端请求</span><br>POST /user<br>Content-<span class="hljs-built_in">Type</span>: application/json<br><br>&#123;<br>  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Alice&quot;</span>,<br>  <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">28</span><br>&#125;<br><br><br><span class="hljs-comment"># 2. 后端处理</span><br><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/user&quot;</span>)<br>public <span class="hljs-built_in">String</span> createUser(<span class="hljs-meta">@RequestBody</span> User user) &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;User created: &quot;</span> + user.getName();<br>&#125;<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">// User Pojo 类</span><br><span class="hljs-string">public class User &#123;</span><br><span class="hljs-string">    private String name;</span><br><span class="hljs-string">    private int age;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 
@@ -350,6 +437,7 @@
 </blockquote>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">// <span class="hljs-number">1.</span> AJAX<br><span class="hljs-keyword">fetch</span>(<span class="hljs-string">&#x27;/user&#x27;</span>, &#123;<br>  <span class="hljs-keyword">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,<br>  headers: &#123;<br>    <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span><br>  &#125;,<br>  body: <span class="hljs-type">JSON</span>.stringify(&#123;<br>    username: <span class="hljs-string">&#x27;张三&#x27;</span>,<br>    email: <span class="hljs-string">&#x27;123@example.com&#x27;</span><br>  &#125;)<br>&#125;)<br>.<span class="hljs-keyword">then</span>(response =&gt; response.text())<br>.<span class="hljs-keyword">then</span>(data =&gt; console.log(data));<br><br><br>// <span class="hljs-number">2.</span> 发送请求<br>POST /<span class="hljs-keyword">user</span> HTTP/<span class="hljs-number">1.1</span><br>Content-<span class="hljs-keyword">Type</span>: application/<span class="hljs-type">json</span><br><br>&#123;<br>  &quot;username&quot;: &quot;张三&quot;,<br>  &quot;email&quot;: &quot;123@example.com&quot;<br>&#125;<br><br><br>// <span class="hljs-number">3.</span> 后端接收<br>@PostMapping(&quot;/user&quot;)<br><span class="hljs-built_in">public</span> String createUser(@RequestBody <span class="hljs-keyword">User</span> <span class="hljs-keyword">user</span>) &#123;<br>    <span class="hljs-keyword">return</span> &quot;收到: 用户名=&quot; + <span class="hljs-keyword">user</span>.getUsername() + &quot;, 邮箱=&quot; + <span class="hljs-keyword">user</span>.getEmail();<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<p>是把所有请求体都映射到一个参数，不是一个参数映射一个懂吗</p>
 <hr>
 <h5 id="1-1-5-RequestParam"><a href="#1-1-5-RequestParam" class="headerlink" title="1.1.5. @RequestParam"></a>1.1.5. @RequestParam</h5><p><code>@RequestParam</code> 用于将 HTTP 请求参数（URL 查询参数、表单参数） 绑定到 Controller 方法的参数上：</p>
 <ol>
@@ -422,7 +510,7 @@
 <hr>
 <h5 id="CacheEvict"><a href="#CacheEvict" class="headerlink" title="@CacheEvict"></a>@CacheEvict</h5><p><code>@CacheEvict</code> 一般用在更新或删除方法上，每次执行时会清空缓存（有 <code>condition</code> 不算），使用方法和 <code>@Cacheable</code> 类似，不过，该注解没有 <code>unless</code> 属性，只有 <code>value</code>、<code>key</code> 和 <code>condition</code> 三个属性。并且 <code>condition</code> 的判断方式相对简单，只要条件满足就执行清空缓存操作，否则不清空。</p>
 <hr>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Boot/image-20250617161457306.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/10/hello-world/ot/image-20250617161457306.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="乱七八糟"><a href="#乱七八糟" class="headerlink" title="乱七八糟"></a>乱七八糟</h1><h3 id="1-Spring-Boot-如何加载配置文件"><a href="#1-Spring-Boot-如何加载配置文件" class="headerlink" title="1. Spring Boot 如何加载配置文件"></a>1. Spring Boot 如何加载配置文件</h3><ol>
 <li>&#x3D;&#x3D;Spring Boot 启动后加载配置文件的顺序&#x3D;&#x3D;<ol>
 <li><font color="#00b0f0">读取本地 bootstrap.yml</font><ol>

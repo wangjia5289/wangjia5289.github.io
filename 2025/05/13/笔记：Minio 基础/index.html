@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/image-20250514104455366.png">
 <meta property="article:published_time" content="2025-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T10:59:25.436Z">
+<meta property="article:modified_time" content="2025-07-08T05:24:51.333Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/image-20250514104455366.png">
@@ -236,7 +236,7 @@
         
         
         
-          21 mins
+          20 mins
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T18:59:25+08:00
+                    Last updated on 2025-07-08T13:24:51+08:00
                   
                   
 
@@ -308,12 +308,9 @@
 <p>至少4台节点、</p>
 <p>扩容时最好一次性加偶数个磁盘&#x2F;节点</p>
 <hr>
-<h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><h4 id="1-1-单机测试环境搭建"><a href="#1-1-单机测试环境搭建" class="headerlink" title="1.1. 单机测试环境搭建"></a>1.1. 单机测试环境搭建</h4><h5 id="1-1-1-安装-Minio"><a href="#1-1-1-安装-Minio" class="headerlink" title="1.1.1. 安装 Minio"></a>1.1.1. 安装 Minio</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker run -d \<br>  --name minio-test \<br>  -p <span class="hljs-number">9000</span>:<span class="hljs-number">9000</span> \<br>  -p <span class="hljs-number">9001</span>:<span class="hljs-number">9001</span> \<br>  -e <span class="hljs-string">&quot;MINIO_ROOT_USER=admin&quot;</span> \<br>  -e <span class="hljs-string">&quot;MINIO_ROOT_PASSWORD=admin123&quot;</span> \<br>  minio<span class="hljs-regexp">/minio server /</span>data --console-address <span class="hljs-string">&quot;:9001&quot;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">注意事项：密码长度至少 8 个字符</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="1-1-2-访问-Minio-控制台"><a href="#1-1-2-访问-Minio-控制台" class="headerlink" title="1.1.2. 访问 Minio 控制台"></a>1.1.2. 访问 Minio 控制台</h5><p>访问 Minio 控制台： <a target="_blank" rel="noopener" href="http://192.168.136.8:9001/">http://192.168.136.8:9001</a></p>
-<hr>
-<h4 id="分布式集群环境搭建"><a href="#分布式集群环境搭建" class="headerlink" title="分布式集群环境搭建"></a>分布式集群环境搭建</h4><h5 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h5><p>采用 多驱动＋纠删码 的架构，每个节点上挂载多块驱动器（存储目录），利用纠删码将对象数据拆分成「数据分片」和「校验分片」，从而实现冗余存储和容错能力。</p>
+<h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><h4 id="分布式集群环境搭建"><a href="#分布式集群环境搭建" class="headerlink" title="分布式集群环境搭建"></a>分布式集群环境搭建</h4><p>纯对等分布式集群</p>
+<p>与 es 的对等分布式 集群不同，她又master 这里没有master</p>
+<h5 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h5><p>采用 多驱动＋纠删码 的架构，每个节点上挂载多块驱动器（存储目录），利用纠删码将对象数据拆分成「数据分片」和「校验分片」，从而实现冗余存储和容错能力。</p>
 <p>简单来说，在一个 12 驱动器集群中，一个对象将被切分为 6 个数据分片和 6 个校验分片。即便任意 6 个驱动器（无论是数据分片还是校验分片）丢失，你仍可从剩余分片中完整恢复该对象。</p>
 <blockquote>
 <p>[!NOTE] 注意事：驱动器到底是什么？</p>
