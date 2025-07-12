@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. CAP 理论概述CAP 理论指出：一个分布式系统无法同时完美地满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition Tolerance）这三大特性，最多只能同时较好地满足其中两项。  &#x3D;&#x3D;C（Consistency）一致性&#x3D;&#x3D;： 所有节点在同一时间的数据完全一致。   &#x3D;&#x3D;A（Av">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/AP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191408958.png">
 <meta property="article:published_time" content="2025-04-30T16:00:00.000Z">
@@ -336,7 +336,7 @@
 </ul>
 <p><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191235422.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/AP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250626141217557.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="2-AP-架构"><a href="#2-AP-架构" class="headerlink" title="2. AP 架构"></a>2. AP 架构</h3><p>在网络分区发生时，<strong>为了保持系统可用性，系统B仍会响应请求，即使返回的是旧数据</strong>。</p>
 <p>例如：当A和B之间网络断开，某些注册信息只存在于节点B，此时请求节点A可能查询不到，但请求节点B则能获得结果。虽然数据不一致，但服务依然对外正常运行。</p>
 <p><strong>结论</strong>：为了保证可用性和分区容错性，牺牲了一致性，因此属于 <strong>AP 类型系统</strong>。<br><img src="/2025/05/01/%E7%AC%94%E8%AE%B0%EF%BC%9ACAP%20%E7%90%86%E8%AE%BA/image-20250501191351661.png" srcset="/img/loading.gif" lazyload>、</p>

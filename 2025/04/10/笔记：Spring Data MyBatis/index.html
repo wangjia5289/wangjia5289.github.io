@@ -30,9 +30,9 @@
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250517142511693.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250517142611270.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250413094940754.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617163656683.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175958685.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175835700.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617163656683.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617175958685.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617175835700.png">
 <meta property="article:published_time" content="2025-04-09T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-06-28T08:49:32.303Z">
 <meta property="article:author" content="Ba Tian">
@@ -969,11 +969,11 @@
 
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- XML --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertAuditsCyfh&quot;</span> <span class="hljs-attr">parameterType</span>=<span class="hljs-string">&quot;map&quot;</span> <span class="hljs-attr">useGeneratedKeys</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">keyProperty</span>=<span class="hljs-string">&quot;articleId&quot;</span>&gt;</span><br>  INSERT INTO Audits_cyfh (user_id,title,content)<br>  VALUES (#&#123;userId&#125;,#&#123;title&#125;,#&#123;content&#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>把签名和 <code>parameterType</code> 对齐之后，MyBatis 就能给 <code>AuditsCyfhMapper</code> 生成代理，Spring 也能正常注入，你就不会再拿到 <code>null</code> 了。<br><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617163656683.png" srcset="/img/loading.gif" lazyload></p>
+<p>把签名和 <code>parameterType</code> 对齐之后，MyBatis 就能给 <code>AuditsCyfhMapper</code> 生成代理，Spring 也能正常注入，你就不会再拿到 <code>null</code> 了。<br><img src="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617163656683.png" srcset="/img/loading.gif" lazyload></p>
 <p>因为其实Controller 的返回值是返回给客户端的，我门随意返回都无所谓，但是在 Mapper 接口中，我们的返回值必须好好的整一整，因为我们执行 SQL 语句他返回的值肯定是固定的</p>
 <p>然后 Mapper 传入的参数也需要好好搞一搞，因为是需要传入我们 SQL 与的</p>
-<h1 id="很有意思"><a href="#很有意思" class="headerlink" title="很有意思"></a>很有意思</h1><p>我们平常都是select all 对吧，就是不管我们知道是根据 ID 只查一条也是selec all 因为你懒得取搞那么多烦人的事情，但是我们一般也会用到一条的时候，例如这种情况对吧，然后我们就可以使用实体类，然后get（0）就算是获取他的第一条了，但是这个也很有问题，就是你查全区get0，如果这个id有还好，让你查到了，没查到也罢，会给你提示，但是如果你是直接查全文，那么如果已经没有3了，就会拿到4，就和你想的不一样<br><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175958685.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/05/12/%E6%9C%AA%E5%91%BD%E5%90%8D/pring%20Data%20MyBatis/image-20250617175835700.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="很有意思"><a href="#很有意思" class="headerlink" title="很有意思"></a>很有意思</h1><p>我们平常都是select all 对吧，就是不管我们知道是根据 ID 只查一条也是selec all 因为你懒得取搞那么多烦人的事情，但是我们一般也会用到一条的时候，例如这种情况对吧，然后我们就可以使用实体类，然后get（0）就算是获取他的第一条了，但是这个也很有问题，就是你查全区get0，如果这个id有还好，让你查到了，没查到也罢，会给你提示，但是如果你是直接查全文，那么如果已经没有3了，就会拿到4，就和你想的不一样<br><img src="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617175958685.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20MyBatis/image-20250617175835700.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -1078,9 +1078,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AMVC%20%E4%B8%8E%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84/" title="笔记：MVC 与三层架构">
+                      <a href="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83/" title="笔记：JDBC 规范">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：MVC 与三层架构</span>
+                        <span class="hidden-mobile">笔记：JDBC 规范</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -1088,8 +1088,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJDBC%20%E8%A7%84%E8%8C%83/" title="笔记：JDBC 规范">
-                        <span class="hidden-mobile">笔记：JDBC 规范</span>
+                      <a href="/2025/04/08/%E7%AC%94%E8%AE%B0%EF%BC%9ACeph%20%E5%9F%BA%E7%A1%80/" title="笔记：Ceph 基础">
+                        <span class="hidden-mobile">笔记：Ceph 基础</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
