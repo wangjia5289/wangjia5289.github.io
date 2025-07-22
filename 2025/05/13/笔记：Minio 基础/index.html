@@ -19,19 +19,19 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. Minio 核心概念&#x3D;&#x3D;1.Bucket&#x3D;&#x3D;Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹 &#x3D;&#x3D;2.Object&#x3D;&#x3D;Object 是存储到 Minio 中的基本对象，对用户而言，相当于文件  二、实操把控全场每台机器至少挂">
+    <meta name="description" content="Minio 概述 Minio 语法系统命令1. 连接 Minio 服务（配置 Minio 服务别名） 12345mc alias set &lt;Minio 服务别名&gt; &lt;Minio 地址&gt; &lt;用户名&gt; &lt;密码&gt;“”“1. 示例值：	1. mc alias set myminio http:&#x2F;&#x2F;127.0.0.1:9000 root wq666666”“”">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Minio 基础">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. Minio 核心概念&#x3D;&#x3D;1.Bucket&#x3D;&#x3D;Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹 &#x3D;&#x3D;2.Object&#x3D;&#x3D;Object 是存储到 Minio 中的基本对象，对用户而言，相当于文件  二、实操把控全场每台机器至少挂">
+<meta property="og:description" content="Minio 概述 Minio 语法系统命令1. 连接 Minio 服务（配置 Minio 服务别名） 12345mc alias set &lt;Minio 服务别名&gt; &lt;Minio 地址&gt; &lt;用户名&gt; &lt;密码&gt;“”“1. 示例值：	1. mc alias set myminio http:&#x2F;&#x2F;127.0.0.1:9000 root wq666666”“”">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/image-20250514104455366.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/image-20250715224906230.png">
 <meta property="article:published_time" content="2025-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-08T05:24:51.333Z">
+<meta property="article:modified_time" content="2025-07-15T15:08:01.412Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/image-20250514104455366.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/image-20250715224906230.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          3.3k words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          20 mins
+          28 mins
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-08T13:24:51+08:00
+                    Last updated on 2025-07-15T23:08:01+08:00
                   
                   
 
@@ -301,143 +301,299 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-Minio-核心概念"><a href="#1-Minio-核心概念" class="headerlink" title="1. Minio 核心概念"></a>1. Minio 核心概念</h3><p>&#x3D;&#x3D;1.Bucket&#x3D;&#x3D;<br>Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层<strong>文件夹</strong></p>
-<p>&#x3D;&#x3D;2.Object&#x3D;&#x3D;<br>Object 是存储到 Minio 中的基本对象，对用户而言，相当于<strong>文件</strong></p>
-<hr>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h3 id="把控全场"><a href="#把控全场" class="headerlink" title="把控全场"></a>把控全场</h3><p>每台机器至少挂在2块磁盘，格式话为 XFS&#x2F;ext4</p>
-<p>至少4台节点、</p>
-<p>扩容时最好一次性加偶数个磁盘&#x2F;节点</p>
-<hr>
-<h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><h4 id="分布式集群环境搭建"><a href="#分布式集群环境搭建" class="headerlink" title="分布式集群环境搭建"></a>分布式集群环境搭建</h4><p>纯对等分布式集群</p>
-<p>与 es 的对等分布式 集群不同，她又master 这里没有master</p>
-<h5 id="架构说明"><a href="#架构说明" class="headerlink" title="架构说明"></a>架构说明</h5><p>采用 多驱动＋纠删码 的架构，每个节点上挂载多块驱动器（存储目录），利用纠删码将对象数据拆分成「数据分片」和「校验分片」，从而实现冗余存储和容错能力。</p>
-<p>简单来说，在一个 12 驱动器集群中，一个对象将被切分为 6 个数据分片和 6 个校验分片。即便任意 6 个驱动器（无论是数据分片还是校验分片）丢失，你仍可从剩余分片中完整恢复该对象。</p>
+                <h2 id="Minio-概述"><a href="#Minio-概述" class="headerlink" title="Minio 概述"></a>Minio 概述</h2><hr>
+<h2 id="Minio-语法"><a href="#Minio-语法" class="headerlink" title="Minio 语法"></a>Minio 语法</h2><h3 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h3><p><font color="#92d050">1. 连接 Minio 服务（配置 Minio 服务别名）</font></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc alias <span class="hljs-built_in">set</span> <span class="hljs-variable">&lt;Minio 服务别名&gt;</span> <span class="hljs-variable">&lt;Minio 地址&gt;</span> <span class="hljs-variable">&lt;用户名&gt;</span> <span class="hljs-variable">&lt;密码&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 示例值：<br>	<span class="hljs-number">1</span>. mc alias <span class="hljs-built_in">set</span> myminio http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9000</span> root wq666666<br>”“”<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>[!NOTE] 注意事：驱动器到底是什么？</p>
+<p>[!NOTE] 注意事项</p>
 <ol>
-<li>驱动器就是<strong>存储目录</strong>。记住了，驱动器 ≈ 存储目录，没别的玄学。</li>
-<li>不推荐将存储目录放在 Root（系统）盘下。原因很简单：MinIO 是高 IO、高吞吐的服务，频繁写入会让系统盘压力山大。如果你把数据写到系统盘（例如 <code>/data</code>、<code>/mnt</code> 下的目录），一旦空间爆满或磁盘故障，不仅存储服务会挂，可能连系统都崩，SSH 也登不上去了，连喊“救命”都来不及</li>
-<li>我们强烈推荐驱动器使用独立的磁盘或分区。什么意思呢？简单说，不要在一个已有的挂载目录下再创建子目录，而是直接将整块磁盘或一个分区挂载到驱动器目录本身。也就是说，存储目录就是磁盘或分区挂载点本身，而不是在挂载点下再套一个子目录。</li>
-<li>为什么这么推荐？虽然你技术上可以在一个磁盘或分区挂载的目录下创建多个子目录，并把这些子目录作为多个驱动器使用，但别忘了，MinIO 是为数据冗余和容错设计的。如果你把 12 个驱动器目录全放在同一个盘下，这个盘一旦挂了，12 个驱动器全都陪葬，数据恢复无从谈起。相反，如果每个驱动器目录都是独立挂载的磁盘或分区，就算某一块盘出问题，其他驱动器依旧健康，你的数据照样能恢复，稳得很。</li>
+<li>给 MinIO 服务起别名 <code>myminio</code>，以后就可以通过 <code>myminio</code> 来访问，而不用每次输入 URL 和账号密码：</li>
 </ol>
 </blockquote>
-<hr>
-<h5 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h5><ol>
-<li>&#x3D;&#x3D;硬件要求&#x3D;&#x3D;：<ol>
-<li>4 台服务器</li>
-<li>5 块磁盘<ol>
-<li>Root 盘</li>
-<li>四块数据盘（类型不限，推荐 SCSI）</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;系统要求&#x3D;&#x3D;：<ol>
-<li>Ubuntu 22.04</li>
-<li>时间同步</li>
-<li>开放 9000、9001 TCP端口</li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;软件要求&#x3D;&#x3D;：</li>
-</ol>
-<hr>
-<h5 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h5><p>Ø准备4台机器；（根据MinIO的架构设计，至少需要4个节点来构建集群，这是因为在一个N节点的分布式MinIO集群中，只要有N&#x2F;2节点在线，数据就是安全的，同时，为了确保能够创建新的对象，需要至少有N&#x2F;2+1个节点，因此，对于一个4节点的集群，即使有两个节点宕机，集群仍然是可读的，但需要有3个节点才能写数据；）</p>
-<hr>
-<h5 id="时间同步"><a href="#时间同步" class="headerlink" title="时间同步"></a>时间同步</h5><p>开放 9000、9001 端口</p>
-<hr>
-<h5 id="安装-Minio-Server"><a href="#安装-Minio-Server" class="headerlink" title="安装 Minio Server"></a>安装 Minio Server</h5><p>首先，在系统中创建目录 <code>/mystudy/minio</code>，并进入到该目录：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 创建目录</span><br>mkdir -p <span class="hljs-regexp">/mystudy/mi</span>nio<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. -p：</span><br><span class="hljs-string">	1. 如果 /mystudy 目录本身不存在，可以加上 -p 参数，递归创建所有父目录</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 2. 进入该目录</span><br>cd <span class="hljs-regexp">/mystudy/mi</span>nio<br></code></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 1. 使用 Minio 服务别名<br>mc cp <span class="hljs-string">./file.txt</span> myminio/mybucket/<br><br><br><span class="hljs-string">//</span> 2. 不使用 Minio 服务别名<br>mc <span class="hljs-params">--insecure</span> <span class="hljs-params">--config-dir</span> <span class="hljs-string">/root/.mc</span> cp <span class="hljs-string">./file.txt</span> http:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:9000</span>/mybucket/file.txt <span class="hljs-params">--access-key</span> root <span class="hljs-params">--secret-key</span> wq666666<br></code></pre></td></tr></table></figure>
 
-<p>接着，参考 <a target="_blank" rel="noopener" href="https://min.io/open-source/download?platform=linux">MinIO 官方下载页面</a> 进行安装，安装过程会将 <code>minio</code> 文件下载到<strong>当前目录</strong>，文件名即为 <code>minio</code>（没有扩展名）。</p>
-<p>注意：此处下载的是 MinIO Server，不是其他工具，以下是 MinIO 的几个组件区别说明：</p>
+<hr>
+<h3 id="集群命令"><a href="#集群命令" class="headerlink" title="集群命令"></a>集群命令</h3><p><font color="#92d050">1. 查看服务信息（基本健康状态）</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">info</span> &lt;<span class="hljs-keyword">alias</span>&gt;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/image-20250715224906230.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="用户命令"><a href="#用户命令" class="headerlink" title="用户命令"></a>用户命令</h3><p><font color="#92d050">1. 添加用户</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">add</span> &lt;<span class="hljs-keyword">alias</span>&gt; &lt;username&gt; &lt;<span class="hljs-keyword">password</span>&gt;<br>“”“<br><span class="hljs-number">1.</span> 示例值：<br>	<span class="hljs-number">1.</span> mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">add</span> myminio alice StrongPass123<br><span class="hljs-number">2.</span> 注意事项：<br>	<span class="hljs-number">1.</span> 添加的用户，默认是启用的<br>	<span class="hljs-number">2.</span> 被禁用的用户，才需要启用<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 禁用用户</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">disable</span> &lt;<span class="hljs-keyword">alias</span>&gt; &lt;username&gt;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 启用用户</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">enable</span> &lt;<span class="hljs-keyword">alias</span>&gt; &lt;username&gt;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. 删除用户</font></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">mc admin <span class="hljs-keyword">user</span> <span class="hljs-title">remove</span> <span class="hljs-tag">&lt;alias&gt;</span> <span class="hljs-tag">&lt;username&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">5. 列出所有用户</font></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">mc admin <span class="hljs-keyword">user</span> <span class="hljs-title">list</span> <span class="hljs-tag">&lt;alias&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. 为用户设置权限</font></p>
+<p><font color="#92d050">7. 查看用户的权限</font></p>
+<p><font color="#92d050">8. 修改 Root 密码</font></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc admin <span class="hljs-keyword">user</span> password <span class="hljs-variable">&lt;alias&gt;</span> <span class="hljs-variable">&lt;username&gt;</span> <span class="hljs-variable">&lt;newpassword&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 注意事项：<br>	<span class="hljs-number">1</span>. Root 密码长度至少 <span class="hljs-number">8</span> 个字符<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="用户组命令"><a href="#用户组命令" class="headerlink" title="用户组命令"></a>用户组命令</h3><hr>
+<h3 id="Bucket-操作命令"><a href="#Bucket-操作命令" class="headerlink" title="Bucket 操作命令"></a>Bucket 操作命令</h3><p><font color="#92d050">1. 创建 Bucket</font></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown">mc mb <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span>/<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">bucket</span>&gt;</span></span><br>“”“<br><span class="hljs-bullet">1.</span> alias：<br><span class="hljs-bullet">	1.</span> 配置好的 Minio 服务别名<br><span class="hljs-bullet">2.</span> 示例：<br><span class="hljs-bullet">	1.</span> mc mb myminio/mybucket<br><span class="hljs-bullet">3.</span> 注意事项：<br><span class="hljs-bullet">	1.</span> Bucket 名字长度至少 3 个字符<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 删除 Bucket</font></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 1. 删除空 Bucket（不能删除有内容的 Bucket）<br>mc rb &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;<br><br><br><span class="hljs-string">//</span> 2. 强制删除 Bucket<br>mc rb &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt; <span class="hljs-params">--force</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 列出当前用户可访问的所有 Bucket</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">ls</span> &lt;<span class="hljs-built_in">alias</span>&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">ls</span> myminio<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. 列出某 Bucket 中当前用户可访问的所有 Object</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">ls</span> &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">ls</span> myminio/mybucket<br>2. 注意事项：<br>	1. 加上 --versions 表示查看对象的所有版本<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">5. 设置 Bucket 策略</font></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">// 1. 内置策略</span><br>mc anonymous <span class="hljs-keyword">set</span> [download|upload|<span class="hljs-keyword">public</span>|<span class="hljs-keyword">private</span>] &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;<br>“”“<br><span class="hljs-number">1.</span> download：<br>	<span class="hljs-number">1.</span> 允许匿名用户下载指定 bucket 中的对象，但不允许删除、上传、列出 bucket 中的对象<br>	<span class="hljs-number">2.</span> 下载对象时，必须知道对象的完整路径，例如 http:<span class="hljs-comment">//minio.example.com/mybucket/myfile.txt</span><br><span class="hljs-number">2.</span> upload：<br>	<span class="hljs-number">1.</span>允许匿名用户向指定 bucket 上传对象，但不允许删除、下载、列出 bucket 中的对象<br><span class="hljs-number">3.</span> <span class="hljs-keyword">public</span>：<br>	<span class="hljs-number">1.</span> 允许匿名用户对指定 bucket 进行完整操作，包括上传、下载、列出和删除对象<br><span class="hljs-number">4.</span> <span class="hljs-keyword">private</span>：<br>	<span class="hljs-number">1.</span> 完全禁止匿名用户访问指定 bucket，所有操作（上传、下载、列出、删除）均不允许<br>”“”<br><br><br><span class="hljs-comment">// 2. 自定义访问策略</span><br>推荐使用 SDK 设置，详见下文：Bucket 自定义访问策略<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. 获取 Bucket 策略</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc anonymous <span class="hljs-built_in">get</span> <span class="hljs-symbol">&lt;alias&gt;</span>/<span class="hljs-symbol">&lt;bucket&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">7. 设置 Bucket 标签</font><br><code>mc</code> 没有直接设置 Bucket 标签的命令，但可以通过 SDK 操作</p>
+<p><font color="#92d050">8. 获取 Bucket 标签</font><br><code>mc</code> 没有直接显示 Bucket 标签的命令，但可以通过 SDK 操作</p>
+<p><font color="#92d050">9. 启用 Bucket 版本控制</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">version</span> <span class="hljs-keyword">enable</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">10. 禁用 Bucket 版本控制</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc <span class="hljs-keyword">version</span> <span class="hljs-keyword">suspend</span> <span class="hljs-symbol">&lt;alias&gt;</span>/<span class="hljs-symbol">&lt;bucket-name&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">11. 设置 Bucket 生命周期</font><br>推荐使用 SDK 设置，详见下文：Bucket 生命周期</p>
+<p><font color="#92d050">12. 获取 Bucket 生命周期</font><br><code>mc</code> 没有直接显示 Bucket 标签的命令，但可以通过 SDK 操作</p>
+<hr>
+<h3 id="Object-操作命令"><a href="#Object-操作命令" class="headerlink" title="Object 操作命令"></a>Object 操作命令</h3><p><font color="#92d050">1. 上传对象</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 1. 上传文件<br>mc <span class="hljs-built_in">cp</span> &lt;本地文件&gt; &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;/<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">cp</span> ./report.pdf myminio/mybucket/<br>”“”<br><br><br>// 2. 上传整个目录<br>mc <span class="hljs-built_in">cp</span> -r &lt;本地目录&gt; &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;/<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">cp</span> -r ./images/ myminio/mybucket/photos/<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 下载对象</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">cp</span> &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;/&lt;object&gt; &lt;本地路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">cp</span> myminio/mybucket/report.pdf ./downloads/<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 列出对象</font></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 1. 列出根目录下的对象和子目录<br>mc <span class="hljs-keyword">ls</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;/<br><br><br><span class="hljs-string">//</span> 2. 递归列出桶内所有对象，包括所有子目录和子目录中的文件<br>mc <span class="hljs-keyword">ls</span> <span class="hljs-params">--recursive</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;/<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. 查看对象元数据</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">stat</span> &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;/&lt;object&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">stat</span> myminio/mybucket/report.pdf<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">5. 删除对象</font></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 1. 删除单个对象<br>mc rm <span class="hljs-params">--force</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;/&lt;object&gt;<br>“”“<br>1. 示例：<br>	1. mc rm <span class="hljs-params">--force</span> myminio/mybucket/report.pdf<br>2. 注意事项：<br>	1. 默认会提示确认，你可以按提示确认或者直接加 <span class="hljs-params">--force</span> 跳过<br>”“”<br><br><br><span class="hljs-string">//</span> 2. 递归强制删除目录及所有内容<br>mc rm <span class="hljs-params">--recursive</span> <span class="hljs-params">--force</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket&gt;/&lt;prefix/&gt;<br>“”“<br>1. 示例：<br>	1. mc rm <span class="hljs-params">--recursive</span> <span class="hljs-params">--force</span> myminio/mybucket/logs/2024/<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. 移动 &#x2F; 重命名对象</font></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nix">mc mv <span class="hljs-symbol">&lt;alias&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;bucket&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;source&gt;</span> <span class="hljs-symbol">&lt;alias&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;bucket&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;destination&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 示例：<br>	<span class="hljs-number">1</span>. mc mv myminio<span class="hljs-symbol">/mybucket/file1.txt</span> myminio<span class="hljs-symbol">/mybucket/file2.txt</span><br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">7. 同步目录</font><br>实现本地目录与 Minio 同步，达到备份的效果</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-operator">//</span> <span class="hljs-number">1</span>. 将本地目录的内容完整同步到 MinIO<br>mc mirror <span class="hljs-operator">&lt;</span>本地目录<span class="hljs-operator">&gt;</span> <span class="hljs-symbol">&lt;alias&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;bucket&gt;</span><span class="hljs-symbol">/</span><br>“”“<br><span class="hljs-number">1</span>. 示例：<br>	<span class="hljs-number">1</span>. mc mirror <span class="hljs-symbol">./localdir</span> myminio<span class="hljs-operator">/</span>bucket<span class="hljs-symbol">/</span><br><span class="hljs-number">2</span>. 注意事项：<br>	<span class="hljs-number">1</span>. 会删除桶中多余但本地不存在的文件<br>”“”<br><br><br><span class="hljs-operator">//</span> <span class="hljs-number">2</span>. 将桶内内容完整同步到本地目录<br>mc mirror <span class="hljs-symbol">&lt;alias&gt;</span><span class="hljs-operator">/</span><span class="hljs-symbol">&lt;bucket&gt;</span><span class="hljs-symbol">/</span> <span class="hljs-operator">&lt;</span>本地目录<span class="hljs-operator">&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 示例：<br>	<span class="hljs-number">1</span>. mc mirror myminio<span class="hljs-operator">/</span>bucket<span class="hljs-symbol">/</span> <span class="hljs-symbol">./localdir</span><br><span class="hljs-number">2</span>. 注意事项：<br>	<span class="hljs-number">1</span>. 删除本地多余但桶中不存在的文件<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">8. 生成临时访问 URL（预签名 URL）</font></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs applescript">mc presign &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket&gt;/&lt;object&gt; <span class="hljs-comment">--expiry &lt;过期秒数&gt;</span><br>“”“<br><span class="hljs-number">1.</span> 示例：<br>	<span class="hljs-number">1.</span> mc presign myminio/mybucket/<span class="hljs-built_in">file</span>.zip <span class="hljs-comment">--expiry 3600</span><br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">9. 设置对象标签</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc tag set <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">object</span>&gt;</span> &quot;<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>=<span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>&amp;<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>=<span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>&quot;<br>“”“<br>1. 注意事项：<br>	1. 会覆盖之前的 对象 标签<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">10. 查看对象标签</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc <span class="hljs-keyword">tag</span> <span class="hljs-built_in">get</span> <span class="hljs-symbol">&lt;alias&gt;</span>/<span class="hljs-symbol">&lt;bucket&gt;</span>/<span class="hljs-symbol">&lt;object&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">11. 删除对象标签</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc <span class="hljs-keyword">tag</span> <span class="hljs-built_in">remove</span> <span class="hljs-symbol">&lt;alias&gt;</span>/<span class="hljs-symbol">&lt;bucket&gt;</span>/<span class="hljs-symbol">&lt;object&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">12. 拷贝对象</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc <span class="hljs-keyword">cp</span> <span class="hljs-symbol">&lt;alias1&gt;</span>/<span class="hljs-symbol">&lt;bucket1&gt;</span>/<span class="hljs-symbol">&lt;object&gt;</span> <span class="hljs-symbol">&lt;alias2&gt;</span>/<span class="hljs-symbol">&lt;bucket2&gt;</span>/<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Bucket"><a href="#Bucket" class="headerlink" title="Bucket"></a>Bucket</h2><h3 id="Bucket-概述"><a href="#Bucket-概述" class="headerlink" title="Bucket 概述"></a>Bucket 概述</h3><p>Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层<strong>文件夹</strong></p>
+<hr>
+<h3 id="Bucket-自定义访问策略"><a href="#Bucket-自定义访问策略" class="headerlink" title="Bucket 自定义访问策略"></a>Bucket 自定义访问策略</h3><p>Bucket 内置策略是 MinIO 提供的简化权限控制方式之一，但我们也可以通过自定义 JSON 实现更细粒度、更复杂的访问控制逻辑。需要注意的是，Bucket 策略采用覆盖式配置，即每次设置都会替换上一次的策略内容，因此同一时间只能存在一个生效策略。</p>
+<p>当请求为不带凭证的匿名访问时，系统只会依据 Bucket 策略来判断是否允许操作。而对于带有凭证的认证请求，则会<strong>先检查用户策略</strong>，再检查<strong>对应的 Bucket 策略</strong>，<strong>两者必须同时允许</strong>，请求才会被执行。正因为这种双重判断机制，就可能出现这样一种情况：匿名用户可以访问某对象，但认证用户因用户策略未授权而无法访问相同资源。</p>
+<p>我们一般通过 MinIO SDK 为指定的 Bucket 设置自定义策略：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketPolicy&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketPolicy</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName, <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">String</span> policyJson</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketPolicy</span>(<br>				<span class="hljs-title class_">SetBucketPolicyArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(policyJson)<br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 策略设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶策略失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里需要传入完整的 JSON 策略，示例请求体格式如下：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<br>  <span class="hljs-string">&quot;Version&quot;</span>: <span class="hljs-string">&quot;2012-10-17&quot;</span>,<br>  <span class="hljs-string">&quot;Statement&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;Effect&quot;</span>: <span class="hljs-string">&quot;Allow&quot;</span>,<br>      <span class="hljs-string">&quot;Principal&quot;</span>: &#123;<span class="hljs-string">&quot;AWS&quot;</span>: [<span class="hljs-string">&quot;*&quot;</span>]&#125;,<br>      <span class="hljs-string">&quot;Action&quot;</span>: [<span class="hljs-string">&quot;s3:GetObject&quot;</span>],<br>      <span class="hljs-string">&quot;Resource&quot;</span>: [<span class="hljs-string">&quot;arn:aws:s3:::your-bucket-name/*&quot;</span>]<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. Version</font><br>表示 Bucket 策略语法的版本，目前写 <code>&quot;2012-10-17&quot;</code> 是标准写法</p>
+<p><font color="#92d050">2. Effect</font><br>表示我们写的这个策略是允许还是禁止，可选值有：</p>
 <ol>
-<li>&#x3D;&#x3D;MinIO Server&#x3D;&#x3D;：<ol>
-<li>要搭建 MinIO 服务端时，下载这个。</li>
+<li>Allow</li>
+<li>Deny</li>
+</ol>
+<p><font color="#92d050">3. Principal</font><br>指定哪些用户可以执行或拒绝执行某些操作，常见的 <code>Principal</code> 取值包括：</p>
+<ol>
+<li>* <ol>
+<li>表示所有用户，包括匿名用户和认证用户</li>
 </ol>
 </li>
-<li>&#x3D;&#x3D;MinIO Client&#x3D;&#x3D;：<ol>
-<li>命令行工具，用来管理 MinIO 或 AWS S3，例如上传、下载、建桶、设权限等。</li>
-<li>想用命令行操作 MinIO（或 AWS S3）存储，就得下载它！</li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;MinIO SDK&#x3D;&#x3D;<ol>
-<li>代程序员在代码中操作 MinIO（上传&#x2F;下载&#x2F;授权等）时使用，根据语言选择对应的 SDK（如 Java、Python、Go）<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio%20%E5%9F%BA%E7%A1%80/image-20250514104455366.png" srcset="/img/loading.gif" lazyload></li>
+<li>user-arn<ol>
+<li>表示具体某个用户的用户名，用于精确控制该用户的权限</li>
 </ol>
 </li>
 </ol>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>我们可以先在一台服务器上先下载 minio，然后拷贝到其他服务器上</li>
-<li>但是不要忘记执行另外两步操作</li>
+<li>AWS 是指用户</li>
+<li>是可以执行还是拒绝执行，取决于策略中的 <code>Effect</code> 字段：若为 <code>Allow</code>，表示允许执行相应操作；若为 <code>Deny</code>，则表示明确禁止执行。</li>
 </ol>
 </blockquote>
-<hr>
-<h5 id="磁盘格式化与挂载"><a href="#磁盘格式化与挂载" class="headerlink" title="磁盘格式化与挂载"></a>磁盘格式化与挂载</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 创建磁盘挂载目录</span><br><span class="hljs-built_in">mkdir</span> -p /mystudy/minio/disk&#123;1..4&#125;<br><br><br><span class="hljs-comment"># 2. 安装 xfsprogs 工具</span><br><span class="hljs-built_in">sudo</span> apt install -y xfsprogs<br><br><br><span class="hljs-comment"># 3. 列出所有块设备</span><br>lsblk<br><br><br><span class="hljs-comment"># 4. 格式化块（需要格式化为 XFS 或 ext4），这里格式化为 XFS</span><br>mkfs.xfs /dev/sdb<br><br>mkfs.xfs /dev/sdc<br><br>mkfs.xfs /dev/sdd<br><br>mkfs.xfs /dev/sde<br><br><br><span class="hljs-comment"># 5. 将磁盘挂载到挂载目录</span><br>mount /dev/sdb /mystudy/minio/disk1<br><br>mount /dev/sdc /mystudy/minio/disk2<br><br>mount /dev/sdd /mystudy/minio/disk3<br><br>mount /dev/sde /mystudy/minio/disk4<br><br><br><span class="hljs-comment"># 6. 再次列出所有块设备，查看是否挂载成功</span><br>lsblk<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="创建-Shell-启动脚本"><a href="#创建-Shell-启动脚本" class="headerlink" title="创建 Shell 启动脚本"></a>创建 Shell 启动脚本</h5><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 1. 进入 Minio 目录</span><br>cd /mystudy/minio<br><br><br><span class="hljs-meta"># 2. 创建 Shell 启动脚本</span><br>vim start<span class="hljs-punctuation">-</span>minio.sh<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-number">1</span>. 脚本内容：<br><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-meta"># 设置根账户和密码</span><br>export MINIO_ROOT_USER<span class="hljs-punctuation">=</span>admin<br>export MINIO_ROOT_PASSWORD<span class="hljs-punctuation">=</span>password<br><br><span class="hljs-meta"># 多机分布式模式</span><br>nohup /mystudy/minio/minio server \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>config<span class="hljs-punctuation">-</span>dir /etc/minio \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>address <span class="hljs-punctuation">:</span><span class="hljs-number">9000</span> \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>console<span class="hljs-punctuation">-</span>address <span class="hljs-punctuation">:</span><span class="hljs-number">9001</span> \<br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.8/mystudy/minio/disk1  http://192.168.136.8/mystudy/minio/disk2  \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.8/mystudy/minio/disk3  http://192.168.136.8/mystudy/minio/disk4  \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.9/mystudy/minio/disk1  http://192.168.136.9/mystudy/minio/disk2  \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.9/mystudy/minio/disk3  http://192.168.136.9/mystudy/minio/disk4  \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.10/mystudy/minio/disk1 http://192.168.136.10/mystudy/minio/disk2 \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.10/mystudy/minio/disk3 http://192.168.136.10/mystudy/minio/disk4 \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.11/mystudy/minio/disk1 http://192.168.136.11/mystudy/minio/disk2 \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.11/mystudy/minio/disk3 http://192.168.136.11/mystudy/minio/disk4 \</span><br>  &gt; /var/<span class="hljs-built_in">log</span>/minio.<span class="hljs-built_in">log</span> <span class="hljs-number">2</span>&gt;<span class="hljs-meta">&amp;1 &amp;</span><br><br>echo <span class="hljs-string">&quot;MinIO 多机分布式集群已启动，后台运行…&quot;</span><br><br><span class="hljs-number">2</span>.<br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-meta"># 3. 添加可执行权限</span><br>chmod <span class="hljs-punctuation">+</span>x start<span class="hljs-punctuation">-</span>minio.sh<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="启动分布式集群"><a href="#启动分布式集群" class="headerlink" title="启动分布式集群"></a>启动分布式集群</h5><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 1. 执行 Shell 启动脚本（每个节点都要启动）</span><br>/mystudy/minio/<span class="hljs-built_in">start</span>-minio.sh<br><br><br><span class="hljs-comment"># 2. 补充：若提示 /mystudy/minio/start-minio.sh: cannot execute: required file not found。</span><br><span class="hljs-comment"># 2.1. 原因</span><br>可能是因为，我们在编辑器里创建／修改过这个脚本，行尾可能包含 \r\n（<span class="hljs-literal">CRLF</span>），而 Linux 期望的是 \n（LF），我们可以这样做<br><br><span class="hljs-comment"># 2.2. 安装 dos2unix 工具</span><br>apt-<span class="hljs-built_in">get</span> install -y dos2unix<br><br><span class="hljs-comment"># 2.3. 将脚本转为 Unix 格式</span><br>dos2unix /mystudy/minio/<span class="hljs-built_in">start</span>-minio.sh<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h3 id="1-相关网站"><a href="#1-相关网站" class="headerlink" title="1. 相关网站"></a>1. 相关网站</h3><ol>
-<li>&#x3D;&#x3D;Minio 官方文档、官网&#x3D;&#x3D;<ol>
-<li><a target="_blank" rel="noopener" href="https://min.io/docs/minio/linux/developers/minio-drivers.html">https://min.io/docs/minio/linux/developers/minio-drivers.html</a></li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;Minio 官方下载页面&#x3D;&#x3D;<ol>
-<li><a target="_blank" rel="noopener" href="https://min.io/open-source/download?platform=linux">https://min.io/open-source/download?platform=linux</a></li>
-</ol>
-</li>
-</ol>
-<hr>
-<h3 id="2-Minio-命名规范"><a href="#2-Minio-命名规范" class="headerlink" title="2. Minio 命名规范"></a>2. Minio 命名规范</h3><ol>
-<li>&#x3D;&#x3D;Root 用户密码&#x3D;&#x3D;：<ol>
-<li>密码长度至少 8 个字符</li>
-</ol>
-</li>
-<li>&#x3D;&#x3D;存储桶名&#x3D;&#x3D;：<ol>
-<li>长度至少 3 个字符</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5><h1 id="数据一致"><a href="#数据一致" class="headerlink" title="数据一致"></a>数据一致</h1><p>不是的，MinIO 并不采用 Raft 协议来同步各节点的元数据，而是依赖自有的“分布式锁 + 多数派（quorum）”机制来保证一致性：</p>
+<p><font color="#92d050">4. Action</font><br>用于指定允许或拒绝执行的具体操作，常见操作包括：</p>
 <ol>
-<li><p><strong>元数据存储在对象存储层</strong><br> MinIO 没有单独的元数据库，所有的元数据（bucket 列表、对象索引、版本信息等）都直接以对象形式写入磁盘。各节点启动时会基于一致性哈希（consistent hashing）探测到同一份磁盘集群，然后通过文件系统进行读写操作，实现了天然的扩展能力和高吞吐。(<a target="_blank" rel="noopener" href="https://blog.min.io/minio-versioning-metadata-deep-dive/?utm_source=chatgpt.com" title="MinIO Versioning, Metadata and Storage Deep Dive">MinIO Blog</a>)</p>
+<li>Bucket 级操作：<ol>
+<li>s3:ListBucket<ol>
+<li>列出桶中的对象列表</li>
+</ol>
 </li>
-<li><p><strong>dsync：轻量级的分布式锁</strong><br> MinIO 在内部使用一个名为 <code>dsync</code> 的库来实现跨节点的分布式锁。它的原理类似于 Raft，但更简单，旨在做锁服务：</p>
-<ul>
-<li><p>每个节点都和其它所有节点保持连接。</p>
+<li>s3:GetBucketLocation<ol>
+<li>获取桶的所属区域（Region）信息</li>
+</ol>
 </li>
-<li><p>发起锁请求时，会广播给所有节点，等待半数以上（<code>n/2+1</code>）节点响应成功才算获取到锁。</p>
+<li>s3:ListBucketMultipartUploads<ol>
+<li>查看该桶中正在进行的多部分（分片）上传任务</li>
+</ol>
 </li>
-<li><p>释放锁时再广播一次，告知其它节点可以释放。<br>  这种设计既能保证在网络分区或节点故障时仍能达成多数派共识，又避免了 Raft 那样的日志复制与状态机恢复开销。(<a target="_blank" rel="noopener" href="https://github.com/minio/dsync/blob/master/README.md?utm_source=chatgpt.com" title="README.md - minio/dsync - GitHub">GitHub</a>)</p>
+<li>s3:GetBucketPolicy<ol>
+<li>查看桶的访问策略</li>
+</ol>
 </li>
-</ul>
+<li>s3:PutBucketPolicy<ol>
+<li>设置桶的访问策略</li>
+</ol>
 </li>
-<li><p><strong>读写流程中的多数派确认</strong></p>
-<ul>
-<li><p><strong>写入</strong>：当客户端 PUT&#x2F;DELETE 操作元数据或对象时，MinIO 会把数据切分（若启用了纠删码）、并行写入多块磁盘，再等待多数块写成功后才返回成功给客户端。</p>
+<li>s3:DeleteBucketPolicy<ol>
+<li>删除桶的访问策略</li>
+</ol>
 </li>
-<li><p><strong>读取</strong>：同样，从多数块中重建或直接读取，不依赖某个“主”节点。</p>
+</ol>
 </li>
-</ul>
+<li>Object 级操作：<ol>
+<li>s3:GetObject<ol>
+<li>下载对象</li>
+</ol>
 </li>
-<li><p><strong>为何不用 Raft？</strong><br> Raft 虽然可提供强一致性，但在需要超大规模（上千节点、上万磁盘）的高并发环境下，日志复制和领导者选举的开销会显著影响性能。MinIO 更追求极简、高效的读写路径，因此选择了基于 dsync 的 quorum 方案，而不是 Raft。</p>
+<li>s3:PutObject<ol>
+<li>上传对象</li>
+</ol>
+</li>
+<li>s3:DeleteObject<ol>
+<li>删除对象</li>
+</ol>
+</li>
+<li>s3:AbortMultipartUpload<ol>
+<li>取消一个正在进行的分片上传任务</li>
+</ol>
+</li>
+<li>s3:ListMultipartUploadParts<ol>
+<li>查看指定分片上传任务中已上传的部分</li>
+</ol>
+</li>
+<li>s3:GetObjectVersion<ol>
+<li>获取对象的指定版本（MinIO 默认未启用版本控制，需要我们开启）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>s3:*<ol>
+<li>表示允许所有操作</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>获取桶的区域信息，即判断桶属于哪个 Region。</li>
+<li>在 MinIO 社区版中，Region 往往是“虚拟”的（默认通常为 <code>us-east-1</code>），但权限上仍然要考虑是否开放，但若未开放 <code>s3:GetBucketLocation</code> 权限，某些 SDK 或 CLI 工具可能因无法获取区域而返回 403 错误。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">5. Resource</font><br>用于指定允许或拒绝操作的具体资源，常见资源包括：</p>
+<ol>
+<li>arn:aws:s3:::my-bucket<ol>
+<li>表示桶本身，适用于桶级操作，如 <code>s3:ListBucket</code>、<code>s3:GetBucketPolicy</code> 等</li>
+</ol>
+</li>
+<li>arn:aws:s3:::my-bucket&#x2F;*<ol>
+<li>示该桶内的所有对象，适用于对象级操作，如 <code>s3:GetObject</code>、<code>s3:PutObject</code> 等</li>
+</ol>
+</li>
+<li>arn:aws:s3:::my-bucket&#x2F;public&#x2F;*<ol>
+<li>表示桶中某个前缀路径下的对象，例如 <code>public</code> 文件夹下的所有对象，可用于限制访问特定目录内容</li>
+</ol>
 </li>
 </ol>
 <hr>
-<p><strong>小结</strong>：</p>
-<ul>
-<li><p>MinIO 的元数据同步并非通过 Raft 日志复制，而是把元数据当成普通对象写入磁盘，并依赖 <code>dsync</code> 分布式锁＋多数派确认来保证并发一致性。</p>
+<h3 id="Bucket-生命周期"><a href="#Bucket-生命周期" class="headerlink" title="Bucket 生命周期"></a>Bucket 生命周期</h3><p>其实，更准确地说，这个操作是针对 Object 生命周期的设置，但从操作维度上来看，它仍归类为 Bucket 生命周期。</p>
+<p>需要特别注意的是，Bucket 生命周期配置和 Bucket 策略一样，<strong>都是整体性的配置</strong>，每次设置都会<strong>覆盖之前的所有规则</strong>。我们可以通过 SDK 为指定的 Bucket 配置生命周期策略：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketLifecycle&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketLifecycle</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName,</span><br><span class="hljs-params">								 <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">LifecycleConfiguration</span> lifecycleConfigurationXml</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketLifecycle</span>(<br>				<span class="hljs-title class_">SetBucketLifecycleArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(lifecycleConfigurationXml) <span class="hljs-comment">// 传入 LifecycleConfigutation 类型的 Bucket 生命周期</span><br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 生命周期设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶生命周期失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里我们需要传入 XML 格式的配置，客户端请求体示例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LifecycleConfiguration</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-temp-files<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>temp/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>7<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-logs<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>logs/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>90<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>delete-old-versions<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>archive/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">LifecycleConfiguration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. LifecycleConfiguration</font><br>根标签，表示这是生命周期配置文件，xmlns 指定了该 XML 遵循 S3 生命周期配置的标准格式。</p>
+<p><font color="#92d050">2. ID</font><br>规则（Rule）的唯一标识，用于管理区分，长度最多支持 255 个字符。</p>
+<p><font color="#92d050">3. Statue</font><br>用于启用或禁用该条规则，可选值包括：</p>
+<ol>
+<li>Enabled</li>
+<li>Disabled</li>
+</ol>
+<p><font color="#92d050">4. Filter</font><br>用于设置对象的过滤条件，从而精确控制生命周期规则的应用对象。常见选项包括：</p>
+<ol>
+<li>Prefix<ol>
+<li>指定对象键名前缀，匹配所有以该前缀开头的对象。</li>
+<li>例如 <code>&lt;Prefix&gt;temp/&lt;/Prefix&gt;</code> 表示匹配所有以 <code>temp/</code> 开头的对象。</li>
+</ol>
 </li>
-<li><p>不同节点之间无领导者（leader）；每个节点都可接受请求，只要多数派达成共识即可。</p>
+<li>And<ol>
+<li>用于组合多个过滤条件，通常结合前缀（Prefix）和标签（Tag）共同生效。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">And</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>log/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>env<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>dev<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>type<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">And</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
 </li>
-</ul>
-<p>这样既避免了单点，也能在极大规模下保持高性能。希望能解答你的疑惑！</p>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>标签（Tag）是对象上的，而不是 Bucket 上的</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">5. Expiration</font><br>用于设置对象的过期策略，当对象达到指定时间后将被自动删除</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml">// 1. 对象创建后，指定天数过期<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br><br><br>// 2. 在固定日期后过期，必须使用符合 ISO 8601 标准的时间格式（这里表示对象将在 2025 年 12 月 31 日 00:00:00.000（UTC 时间）过期并被删除）<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2025-12-31T00:00:00.000Z<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. NoncurrentVersionExpiration</font><br>适用于<strong>开启版本控制的 Bucket</strong>，当对象成为旧版本后，在指定天数内自动删除该旧版本。只支持 <code>&lt;NoncurrentDays&gt;</code> 设置天数：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">7. AbortIncompleteMultipartUpload</font><br>用于自动清理<strong>未完成的分片上传任务</strong>，从分片上传发起时间算起，超过指定天数后自动终止，避免浪费存储空间。只支持 <code>&lt;DaysAfterInitiation&gt;</code> 设置天数：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><h3 id="Object-概述"><a href="#Object-概述" class="headerlink" title="Object 概述"></a>Object 概述</h3><p>Object 是存储到 Minio 中的基本对象，对用户而言，相当于<strong>文件</strong></p>
+<hr>
 
                 
               </div>

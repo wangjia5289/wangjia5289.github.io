@@ -19,19 +19,20 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问—— “我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？” 换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问： “我做了一个 Java&amp;#x2F">
+    <meta name="description" content="运行时数据区一览图  程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根据 JVM 规范，每个线程都拥有独立的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JVM">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="JVM 概述Java 从编码到执行的流程  JVM 是什么我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问—— “我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？” 换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问： “我做了一个 Java&amp;#x2F">
+<meta property="og:description" content="运行时数据区一览图  程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根据 JVM 规范，每个线程都拥有独立的">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250529103837116.png">
+<meta property="og:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/-20250722190040146.png">
 <meta property="article:published_time" content="2025-05-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T10:47:36.436Z">
+<meta property="article:modified_time" content="2025-07-22T11:02:36.896Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250529103837116.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          941 words
+          954 words
         
       </span>
     
@@ -291,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T18:47:36+08:00
+                    Last updated on 2025-07-22T19:02:36+08:00
                   
                   
 
@@ -301,39 +302,47 @@
             
               <div class="markdown-body">
                 
-                <h2 id="JVM-概述"><a href="#JVM-概述" class="headerlink" title="JVM 概述"></a>JVM 概述</h2><h3 id="Java-从编码到执行的流程"><a href="#Java-从编码到执行的流程" class="headerlink" title="Java 从编码到执行的流程"></a>Java 从编码到执行的流程</h3><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250529103837116.png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><h3 id="一览图"><a href="#一览图" class="headerlink" title="一览图"></a>一览图</h3><p><img src="/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="JVM-是什么"><a href="#JVM-是什么" class="headerlink" title="JVM 是什么"></a>JVM 是什么</h3><p>我现在明白你真正的意思了：你不是在讨论“怎么去类加载器分析”，也不是在问 JVM 的哪些分区怎么运作；你其实是在问——</p>
-<p>“我写了一个程序，里面有很多类、方法、变量，那它到底运行起来会占多少内存？怎么知道？”</p>
-<p>换句话说，你是站在开发者角度，不是在搞操作系统理论，也不是在讲 JVM 的架构，而是非常现实地在问：</p>
-<p>“我做了一个 Java&#x2F;Web 项目，我怎么知道它运行的时候大概要占多少内存？”</p>
-<p>⸻</p>
-<p>那我重新整理、直接回答你这个问题：</p>
-<p>⸻</p>
-<p>✅ 一个程序到底占多少内存？这取决于三部分：<br>    1.	静态资源大小（类、字节码、常量池等）<br>    •	这是编译生成后的 .class 文件所占空间，加载后会占用 JVM 的元空间。<br>    •	比如，你有 1000 个类，每个类字节码几 KB，那么运行时大概就会占用几 MB 的元空间。<br>    2.	运行时对象的内存占用（堆）<br>    •	这包括你 new 出来的所有对象、集合、缓存等等。<br>    •	数量和结构不确定，取决于：访问量、业务逻辑、缓存策略等。<br>    3.	线程、栈帧、JNI、本地资源等<br>    •	每个线程都要一个线程栈，默认大概 512 KB ~ 1 MB。<br>    •	如果你用到了很多并发，或者底层库（如 Netty、Redis 客户端）还会分配额外内存。</p>
-<p>⸻</p>
-<p>✅ 那你怎么知道“整个程序”会占多少内存？</p>
-<p>这不是靠“看代码”或者“加总类字段”能算出来的 —— Java 程序的内存是运行时才知道的。</p>
-<p>所以现实中有两种办法来掌握这件事：</p>
-<p>⸻</p>
-<p>🔍 方法一：运行实测（推荐）</p>
-<p>这是最靠谱的方式，尤其是你做 Web 项目的话：<br>    •	部署程序后，用以下方式实时观察内存使用：</p>
-<p>工具	功能<br>jps + jstat &#x2F; jmap	看 JVM 堆内存分布、类占用<br>VisualVM &#x2F; JConsole	图形化查看堆、类加载、线程等<br>JFR（Java Flight Recorder）	更深入的事件和内存追踪<br>Prometheus + Micrometer	生产上用来监控服务内存使用<br>top &#x2F; ps aux &#x2F; docker stats	直接看整个进程占了多少物理内存</p>
-<p>这样你可以知道：<br>    •	程序启动时占多少内存<br>    •	并发访问时内存增长情况<br>    •	有无内存泄漏、频繁 GC 等问题</p>
-<p>⸻</p>
-<p>📊 方法二：静态预估（用于部署前做预算）</p>
-<p>你可以基于经验做粗略估算：<br>    •	项目启动初期：一个中等 Spring Boot Web 项目，启动后常驻内存约 150MB~500MB<br>    •	平稳运行期：根据并发用户量、数据量、缓存策略，动态增长<br>    •	配置 JVM 参数限制最大堆：比如 -Xmx1024m</p>
-<p>示例配置：</p>
-<p>java -Xms512m -Xmx1024m -XX:MaxMetaspaceSize&#x3D;256m -jar myapp.jar</p>
-<p>这就相当于你告诉操作系统：“我这个程序最多会占用 1.25 GB 左右的内存”，超了就 OutOfMemory。</p>
-<p>⸻</p>
-<p>✍️ 所以你现在问的是：</p>
-<p>💬“我开发了一个很大的项目，有很多类，有很多对象，那它到底运行时会占多大？”</p>
-<p>那答案就是：</p>
-<p>✅ 你无法静态知道它到底占多少内存，但你可以通过运行实测 + JVM 参数控制 + 历史经验来掌握和约束它的内存使用。</p>
-<p>⸻</p>
-<p>如果你愿意我可以：<br>    •	给你写个小 demo，让你看到对象和类的真实内存占用；<br>    •	或者教你用 VisualVM 连上你的 Java 程序，看看它现在占了多少内存；<br>    •	或者我们一起估算一下你项目中的几个典型组件（如缓存、线程池）大概会吃多少堆空间。</p>
-<p>你想具体看哪部分？我可以陪你一步步操作。</p>
+<h3 id="程序计数器（PC-寄存器）"><a href="#程序计数器（PC-寄存器）" class="headerlink" title="程序计数器（PC 寄存器）"></a>程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
+<p>根据 JVM 规范，每个线程都拥有独立的、私有的程序计数器，其生命周期与线程一致，用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量），由执行引擎负责读取指令并执行。如果执行的是本地方法（native），PC 的值为 <code>undefined</code>。</p>
+<p>PC 寄存器是一块极小的内存区域，几乎可以忽略不计，因为它只需保存一个字节码指令的地址。在 32 位 JVM 中，通常使用 <code>int</code> 类型，占 4 个字节；而在 64 位 JVM 中，通常使用 <code>long</code> 类型，占 8 个字节。</p>
+<p>需要注意的是，程序计数器不存在 GC，也不存在 OOM</p>
+<p><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/-20250722190040146.png" srcset="/img/loading.gif" lazyload></p>
+<p>以如下 Java 代码举例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PCExample</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        <span class="hljs-built_in">int</span> result = <span class="hljs-keyword">add</span>(<span class="hljs-number">5</span>, <span class="hljs-number">7</span>);<br>        <span class="hljs-keyword">if</span> (result &gt; <span class="hljs-number">10</span>) &#123;<br>            printResult(result);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Too small.&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> a, <span class="hljs-built_in">int</span> b</span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> a + b;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printResult</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span> &#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Result is: &quot;</span> + <span class="hljs-keyword">value</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>它的 class 文件如下：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">// main 方法字节码</span><br> <span class="hljs-number">0</span>: bipush        <span class="hljs-number">5</span>          <span class="hljs-comment">// 把 5 压栈</span><br> <span class="hljs-number">2</span>: bipush        <span class="hljs-number">7</span>          <span class="hljs-comment">// 把 7 压栈</span><br> <span class="hljs-number">4</span>: invokestatic  <span class="hljs-meta">#2         <span class="hljs-comment">// 调用 add(int, int)，此时 PC → add 方法入口</span></span><br> <span class="hljs-number">7</span>: istore_1                  <span class="hljs-comment">// 把结果存入本地变量 result</span><br><br> <span class="hljs-number">8</span>: iload_1                   <span class="hljs-comment">// 加载 result</span><br> <span class="hljs-number">9</span>: bipush       <span class="hljs-number">10</span>           <span class="hljs-comment">// 加载常量 10</span><br><span class="hljs-number">11</span>: if_icmple    <span class="hljs-number">21</span>           <span class="hljs-comment">// 若 result &lt;= 10，跳转到 21（else 分支）</span><br><br><span class="hljs-number">14</span>: iload_1<br><span class="hljs-number">15</span>: invokestatic <span class="hljs-meta">#3           <span class="hljs-comment">// 调用 printResult，PC → printResult 方法入口</span></span><br><span class="hljs-number">18</span>: <span class="hljs-keyword">goto</span>          <span class="hljs-number">26</span>          <span class="hljs-comment">// 跳过 else 分支，直接 return</span><br><br><span class="hljs-number">21</span>: getstatic     <span class="hljs-meta">#4          <span class="hljs-comment">// System.out</span></span><br><span class="hljs-number">24</span>: ldc           <span class="hljs-meta">#5          <span class="hljs-comment">// 加载 &quot;Too small.&quot;</span></span><br><span class="hljs-number">26</span>: invokevirtual <span class="hljs-meta">#6          <span class="hljs-comment">// 调用 println(String)</span></span><br><span class="hljs-number">29</span>: <span class="hljs-keyword">return</span><br><br><br><span class="hljs-comment">// add 字节码</span><br> <span class="hljs-number">0</span>: iload_0       <span class="hljs-comment">// 加载第一个参数 a</span><br> <span class="hljs-number">1</span>: iload_1       <span class="hljs-comment">// 加载第二个参数 b</span><br> <span class="hljs-number">2</span>: iadd          <span class="hljs-comment">// 相加</span><br> <span class="hljs-number">3</span>: ireturn       <span class="hljs-comment">// 返回结果，PC 返回 main 中调用位置之后</span><br><br><br><span class="hljs-comment">// printResult 字节码</span><br> <span class="hljs-number">0</span>: getstatic     <span class="hljs-meta">#4          <span class="hljs-comment">// System.out</span></span><br> <span class="hljs-number">3</span>: <span class="hljs-keyword">new</span>           <span class="hljs-meta">#7          <span class="hljs-comment">// new StringBuilder</span></span><br> <span class="hljs-number">6</span>: dup<br> <span class="hljs-number">7</span>: invokespecial <span class="hljs-meta">#8          <span class="hljs-comment">// StringBuilder.&lt;init&gt;()</span></span><br><br><span class="hljs-number">10</span>: ldc           <span class="hljs-meta">#9          <span class="hljs-comment">// &quot;Result is: &quot;</span></span><br><span class="hljs-number">12</span>: invokevirtual <span class="hljs-meta">#10         <span class="hljs-comment">// StringBuilder.append(String)</span></span><br><span class="hljs-number">15</span>: iload_0<br><span class="hljs-number">16</span>: invokevirtual <span class="hljs-meta">#11         <span class="hljs-comment">// append(int)</span></span><br><span class="hljs-number">19</span>: invokevirtual <span class="hljs-meta">#12         <span class="hljs-comment">// toString</span></span><br><span class="hljs-number">22</span>: invokevirtual <span class="hljs-meta">#6          <span class="hljs-comment">// println(String)</span></span><br><span class="hljs-number">25</span>: <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+
+<ul>
+<li><input disabled="" type="checkbox"> <blockquote>
+<p>[!NOTE] 注意事项：</p>
+<ol>
+<li>PC 寄存器为什么不存在 GC？<ol>
+<li>在 JVM 创建线程时，会分配一块连续的内存区域，称为线程执行上下文，用于维护该线程的完整运行状态，包括 PC 寄存器、虚拟机栈、本地方法栈、线程本地存储以及线程状态等</li>
+<li>当线程结束时，JVM 和操作系统会释放该线程所有相关的资源</li>
+</ol>
+</li>
+<li>PC 寄存器为什么不存在 OOM？</li>
+<li>为什么将 PC 寄存器设置为线程私有？<ol>
+<li>为了准确记录每个线程当前正在执行的字节码指令地址，最合理的做法是为每个线程分配独立的 PC 寄存器</li>
+</ol>
+</li>
+<li>为什么使用 PC 寄存器记录对应线程的执行地址？<ol>
+<li>由于 CPU 需要频繁切换不同线程，切换回来时必须知道从哪里继续执行，因此通过 PC 寄存器保存线程的执行地址，实现精确恢复</li>
+</ol>
+</li>
+<li>PC 寄存器中只记录偏移量，但你却说它 “用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量）”，那它是如何确保这个偏移量一定对应的是 “当前方法” 的指令？<ol>
+<li>程序计数器只记录字节码数组中的偏移量，但它会配合 JVM 虚拟机栈中当前线程的栈顶栈帧，因为每个方法对应一个栈帧，最顶层的栈帧代表当前正在执行的方法。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
 
                 
               </div>

@@ -19,16 +19,17 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论导图  Spring Authorization Server 执行流程OAuth2AuthorizationEndpointFilter 介入Spring Authorization Server 配置Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oauthserverwithmyprojec">
+    <meta name="description" content="一、理论1. 导图  2. Spring Authorization Server 执行流程2.1. OAuth2AuthorizationEndpointFilter 介入3. Spring Authorization Server 配置3.1. Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oaut">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring Authorization Server">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/07/09/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Authorization%20Server/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论导图  Spring Authorization Server 执行流程OAuth2AuthorizationEndpointFilter 介入Spring Authorization Server 配置Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oauthserverwithmyprojec">
+<meta property="og:description" content="一、理论1. 导图  2. Spring Authorization Server 执行流程2.1. OAuth2AuthorizationEndpointFilter 介入3. Spring Authorization Server 配置3.1. Spring Authorization Server 配置模板AuthServerConfiguration 类在 com.example.oaut">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/Map%EF%BC%9ASpringAuthorizationServer%201.xmind">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/thorization%20Server/image-20250713165050243.png">
 <meta property="article:published_time" content="2025-07-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-12T09:10:18.607Z">
+<meta property="article:modified_time" content="2025-07-14T07:54:25.788Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/Map%EF%BC%9ASpringAuthorizationServer%201.xmind">
@@ -225,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          4.2k words
         
       </span>
     
@@ -236,7 +237,7 @@
         
         
         
-          21 mins
+          35 mins
         
       </span>
     
@@ -291,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-12T17:10:18+08:00
+                    Last updated on 2025-07-14T15:54:25+08:00
                   
                   
 
@@ -301,25 +302,104 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p><img src="/Map%EF%BC%9ASpringAuthorizationServer%201.xmind" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="1-导图"><a href="#1-导图" class="headerlink" title="1. 导图"></a>1. 导图</h2><p><img src="/Map%EF%BC%9ASpringAuthorizationServer%201.xmind" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h2 id="Spring-Authorization-Server-执行流程"><a href="#Spring-Authorization-Server-执行流程" class="headerlink" title="Spring Authorization Server 执行流程"></a>Spring Authorization Server 执行流程</h2><h3 id="OAuth2AuthorizationEndpointFilter-介入"><a href="#OAuth2AuthorizationEndpointFilter-介入" class="headerlink" title="OAuth2AuthorizationEndpointFilter 介入"></a>OAuth2AuthorizationEndpointFilter 介入</h3><h2 id="Spring-Authorization-Server-配置"><a href="#Spring-Authorization-Server-配置" class="headerlink" title="Spring Authorization Server 配置"></a>Spring Authorization Server 配置</h2><h3 id="Spring-Authorization-Server-配置模板"><a href="#Spring-Authorization-Server-配置模板" class="headerlink" title="Spring Authorization Server 配置模板"></a>Spring Authorization Server 配置模板</h3><p>AuthServerConfiguration 类在 <code>com.example.oauthserverwithmyproject.configuration</code> 包下，直接粘贴这份配置模板，再根据下方的详细说明按需进行调整。</p>
-<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h2 id="注册客户端应用"><a href="#注册客户端应用" class="headerlink" title="注册客户端应用"></a>注册客户端应用</h2><h3 id="客户端应用能注册哪些信息"><a href="#客户端应用能注册哪些信息" class="headerlink" title="客户端应用能注册哪些信息"></a>客户端应用能注册哪些信息</h3><p>客户端应用必须在我们的授权服务器完成注册，才能获得 Access Token 的颁发资格。那么，客户端在注册时需要提交哪些信息呢？在 Spring Authorization Server 中，类 <code>RegisteredClient</code> 定义了客户端应用可注册的具体属性，源码中的属性包括：</p>
+<h2 id="2-Spring-Authorization-Server-执行流程"><a href="#2-Spring-Authorization-Server-执行流程" class="headerlink" title="2. Spring Authorization Server 执行流程"></a>2. Spring Authorization Server 执行流程</h2><h3 id="2-1-OAuth2AuthorizationEndpointFilter-介入"><a href="#2-1-OAuth2AuthorizationEndpointFilter-介入" class="headerlink" title="2.1. OAuth2AuthorizationEndpointFilter 介入"></a>2.1. OAuth2AuthorizationEndpointFilter 介入</h3><h2 id="3-Spring-Authorization-Server-配置"><a href="#3-Spring-Authorization-Server-配置" class="headerlink" title="3. Spring Authorization Server 配置"></a>3. Spring Authorization Server 配置</h2><h3 id="3-1-Spring-Authorization-Server-配置模板"><a href="#3-1-Spring-Authorization-Server-配置模板" class="headerlink" title="3.1. Spring Authorization Server 配置模板"></a>3.1. Spring Authorization Server 配置模板</h3><p>AuthServerConfiguration 类在 <code>com.example.oauthserverwithmyproject.configuration</code> 包下，直接粘贴这份配置模板，再根据下方的详细说明按需进行调整。</p>
+<h1 id="二、实操"><a href="#二、实操" class="headerlink" title="二、实操"></a>二、实操</h1><h2 id="1-创建-Spring-Web-项目，添加相关依赖"><a href="#1-创建-Spring-Web-项目，添加相关依赖" class="headerlink" title="1. 创建 Spring Web 项目，添加相关依赖"></a>1. 创建 Spring Web 项目，添加相关依赖</h2><ol>
+<li>Web<ol>
+<li>Spring Web</li>
+</ol>
+</li>
+<li>Template Engines<ol>
+<li>Thymeleaf</li>
+</ol>
+</li>
+<li>Security<ol>
+<li>Spring Security</li>
+<li>OAuth2 Authorization Server</li>
+</ol>
+</li>
+<li>SQL<ol>
+<li>JDBC API</li>
+<li>MyBatis Framework</li>
+<li>MySQL Driver</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>spring-security-oauth2-jose</code> 是 Spring 官方为 OAuth2 提供的 JWT 支持模块，而 <code>jjwt-*</code> 是 Okta 社区维护的第三方库 JJWT。</li>
+<li>虽然 JJWT 也能生成 JWT，但它与 Spring Security 的集成度较低，许多功能（如 token 签发、校验、JWK 支持等）都需要我们手动实现。它与我们原先采用的 JJWT 库存在不少差异，不能直接沿用过去的写法，需要根据新库的方式进行修改。</li>
+<li>Thymeleaf 是个模板引擎，负责把模板（html文件）渲染成最终的HTML页面返回给浏览器，只有在 <code>@Controller</code> 返回字符串为视图名时，Thymeleaf 才会介入渲染页面。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-实现-注册客户端应用-功能"><a href="#2-实现-注册客户端应用-功能" class="headerlink" title="2. 实现 注册客户端应用 功能"></a>2. 实现 注册客户端应用 功能</h2><h3 id="2-1-客户端应用能注册哪些信息"><a href="#2-1-客户端应用能注册哪些信息" class="headerlink" title="2.1. 客户端应用能注册哪些信息"></a>2.1. 客户端应用能注册哪些信息</h3><p>客户端应用必须在我们的授权服务器完成注册，才能获得 Access Token 的颁发资格。那么，客户端在注册时需要提交哪些信息呢？在 Spring Authorization Server 中，类 <code>RegisteredClient</code> 定义了客户端应用可注册的具体属性，源码中的属性包括：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RegisteredClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123; <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> id;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientId;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Instant</span> clientIdIssuedAt;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientSecret;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Instant</span> clientSecretExpiresAt;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">String</span> clientName;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">ClientAuthenticationMethod</span>&gt; clientAuthenticationMethods;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">AuthorizationGrantType</span>&gt; authorizationGrantTypes;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; redirectUris;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; postLogoutRedirectUris;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">Set</span>&lt;<span class="hljs-title class_">String</span>&gt; scopes;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">ClientSettings</span> clientSettings;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">TokenSettings</span> tokenSettings;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这里只列举我们常用的一些属性，其他次要或无关的属性暂不展开：</p>
-<p><font color="#92d050">1. id</font><br>这个字段不是客户端应用提交的注册信息，而是我们入库时生成的自增主键（或者是 UUID 等格式），Spring 会使用该 ID 作为数据结构中的键，例如 <code>Map&lt;String, RegisteredClient&gt;</code>。</p>
-<p>你可能会疑问，为什么不直接用 <code>clientId</code> 作为数据库主键？原因在于客户端应用可能会重置 <code>clientId</code>，而数据库主键要求必须保持唯一且不可变。</p>
+<p><font color="#92d050">1. id</font><br>这个字段不是客户端应用提交的注册信息，而是我们入库时生成的主键（常用 UUID），Spring 会使用该 ID 作为数据结构中的键，例如 <code>Map&lt;String, RegisteredClient&gt;</code>。</p>
+<p>Spring Authorization Server 所需的 id 类型为 String，我们可以在数据库中使用 int 类型进行存储，使用时进行数据类型转换</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>为什么不用自增主键而是 UUID<ol>
+<li>Spring Authorization Server 要求 id 类型为 String，但自增主键为 Int，两者类型不匹配，需额外编写 TypeHandler 进行转换，太麻烦</li>
+<li>直接采用 UUID 作为主键，避免类型转换，而且更简洁、符合分布式设计理念</li>
+</ol>
+</li>
+<li>为什么不直接用 <code>clientId</code> 作为数据库主键？<ol>
+<li>原因在于客户端应用可能会重置 <code>clientId</code>，而数据库主键要求必须保持唯一且不可变。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
 <p><font color="#92d050">2. clientId</font><br>clientId 是 OAuth2 协议中用于标识客户端的重要凭证之一，当客户端应用进行注册时，由<strong>我们生成</strong>一个 <code>clientId</code> 并返回给他们。</p>
+<p>Spring Authorization Server 所需的 clientId 类型为 String，我们可以在数据库中使用 int 类型进行存储，使用时进行数据类型转换</p>
 <p><font color="#92d050">3. clientIdIssuedAt</font><br>这是 <code>clientId</code> 的发放时间，<strong>同样由我们生成</strong>，通常在生成 <code>clientId</code> 时一并创建，该时间用于便于后续跟踪和判断 <code>clientId</code> 的有效性。</p>
-<p>要求以时间戳的形式，建议在数据库中使用 <code>TIMESTAMP</code> 类型存储，格式示例为：<code>2025-07-11 12:34:56.789 +00:00</code>。</p>
-<p>需要注意的是，Spring Authorization Server 并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientId</code> 的生命周期进行跟踪和管理。</p>
-<p><font color="#92d050">4. clientSecret</font><br>clientSecret 同样是 OAuth2 协议中用于标识客户端的重要凭证之一，当客户端应用进行注册时，由我们生成一个 <code>clientSecret</code> 并返回给他们。</p>
-<p>可以将 <code>clientId</code> 理解为账号，而 <code>clientSecret</code> 则相当于密码。</p>
+<p>Spring Authorization Server 所需的 clientIdIssuedAt 类型为 Instant，Instant 的格式为：<code>YYYY-MM-DDTHH:mm:ssZ</code>，如<code>2025-07-13T01:23:45Z</code>，表示 UTC 上的一个时间点。</p>
+<p>建议在数据库中使用带时区的 <code>timestamp</code> 类型存储，格式为：<code>YYYY-MM-DD HH:mm:ss</code>，如 <code>2025-07-13 01:23:45</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Spring Authorization Server 并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientId</code> 的生命周期进行跟踪和管理。</li>
+<li>推荐使用 <code>timestamp</code> 类型进行存储，而不是 <code>VARCHAR</code>，因为前者可以与 <code>Instant</code> 类型无缝映射，避免手动解析字符串</li>
+<li>建议使用带时区的 <code>timestamp</code> 类型，是因为它表示的是 UTC 上的一个绝对时间点。而不带时区的时间类型仅代表本地时间，可能导致语义不明确或出现误差</li>
+<li>MySQL 虽然不支持真正意义上的带时区 <code>timestamp</code>，但其 <code>timestamp</code> 类型在内部始终以 UTC 存储。在插入数据时，如果未显式指定时区，MySQL 会按当前系统时区进行转换，为了确保行为一致，建议在插入前显式设置为 UTC，例如：</li>
+</ol>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">SET</span> time_zone = &#x27;+<span class="hljs-number">00</span>:<span class="hljs-number">00</span>&#x27;;<br><span class="hljs-attribute">INSERT</span> INTO registered_client (client_id, client_id_issued_at)<br><span class="hljs-attribute">VALUES</span> (&#x27;my-client&#x27;, &#x27;<span class="hljs-number">2025</span>-<span class="hljs-number">07</span>-<span class="hljs-number">13</span> <span class="hljs-number">01</span>:<span class="hljs-number">23</span>:<span class="hljs-number">45</span>&#x27;);<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. clientSecret</font><br>clientSecret 同样是 OAuth2 协议中用于标识客户端的重要凭证之一，当客户端应用进行注册时，由我们生成一个 <code>clientSecret</code> 并返回给他们，可以将 <code>clientId</code> 理解为账号，而 <code>clientSecret</code> 则相当于密码。</p>
+<p>Spring Authorization Server 所需的 clientSecret 类型为 String，格式为：<code>&#123;bcrypt&#125;$2a$10$...</code>，格式通常为：<code>&#123;bcrypt&#125;$2a$10$...</code>。其中 <code>&#123;bcrypt&#125;</code> 是加密前缀，用于指示 Spring Authorization Server 采用哪种方式验证客户端提交的 <code>clientSecret</code> 是否与数据库中存储的加密值一致。常见的前缀包括：</p>
+<ol>
+<li>{noop}<ol>
+<li>明文密码（不加密）</li>
+</ol>
+</li>
+<li>{bcrypt}<ol>
+<li>使用 BCrypt 加密</li>
+</ol>
+</li>
+<li>{pbkdf2}<ol>
+<li>使用 PBKDF2 加密</li>
+</ol>
+</li>
+<li>{argon2}<ol>
+<li>使用 Argon2 加密</li>
+</ol>
+</li>
+</ol>
+<p>其相关代码逻辑大致如下：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">// 1. 生成未加密的 clientSecret</span><br><span class="hljs-type">String</span> rawPassword = UUID.<span class="hljs-built_in">randomUUID</span>().<span class="hljs-built_in">toString</span>();<br><br><br><span class="hljs-comment">// 2. 将未加密的 clientSecret 进行加密，并加上对应加密算法的前缀</span><br><span class="hljs-type">String</span> encodedPassword = <span class="hljs-string">&quot;&#123;bcrypt&#125;&quot;</span> + passwordEncoder.<span class="hljs-built_in">encode</span>(rawPassword);<br><br><br><span class="hljs-comment">// 3. 将处理好的 clientSecret 保存到数据库</span><br>registeredClient.<span class="hljs-built_in">setClientSecret</span>(encodedPassword);<br><br><br><span class="hljs-comment">// 4. 返回给客户端应用的是 未加密的 clientSecret（rawPassword）</span><br></code></pre></td></tr></table></figure>
+
+
 <p><font color="#92d050">5. clientSecretExpiresAt</font><br>这是 <code>clientSecret</code> 的过期时间，主要用于支持密钥轮换场景，可设置为 <code>NULL</code> 表示永不过期（实际应用中通常为不过期）。</p>
-<p>要求以时间戳的形式，建议在数据库中使用 <code>TIMESTAMP</code> 类型存储，格式示例为：<code>2025-07-11 12:34:56.789 +00:00</code>。</p>
-<p>需要注意的是，Spring Authorization Server 同样并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientSecret</code> 进行轮换处理等。</p>
+<p>Spring Authorization Server 所需的 clientSecretExpiresAt 类型为与 clientIdIssuedAt 一致</p>
 <p><font color="#92d050">6. clientName</font><br>客户端应用的名称，由客户端应用在注册时指定，用于展示给用户，例如在授权确认页面中，会显示为 “XXX 正在请求访问你的信息，是否同意”。</p>
+<p>Spring Authorization Server 所需的 clientName 类型为 String</p>
 <p><font color="#92d050">7. clientAuthenticationMethods</font><br>客户端如何进行身份认证，简单来说，就是在哪个位置、以何种方式传递 <code>client_id</code> 和 <code>client_secret</code>，需要客户端应用在注册时进行指定，常见的方式包括：</p>
 <ol>
 <li>client_secret_basic（默认）：<ol>
@@ -336,7 +416,13 @@
 </ol>
 </li>
 </ol>
-<p>需要注意的是，客户端可以在注册时，可以注册多个身份认证方式，Spring Authorization Server 会按顺序依次尝试这些方式，直到认证成功为止。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>客户端在注册时，可以注册多个身份认证方式，Spring Authorization Server 会按顺序依次尝试这些方式，直到认证成功为止。</li>
+<li>在数据库中存储，就用小写格式存储即可，Spring Authorization Server 会自动进行处理，不要用大写格式存储</li>
+</ol>
+</blockquote>
 <p><font color="#92d050">8. authorizationGrantTypes</font><br>客户端支持的授权方式，需要客户端应用在注册时进行指定（指定未来可能会用到哪些授权方式）常见包括：</p>
 <ol>
 <li>authorization_code：<ol>
@@ -356,7 +442,8 @@
 </ol>
 </li>
 </ol>
-<p>需要注意的是：</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
 <ol>
 <li>Spring Authorization Server 从未支持过隐藏式（implicit）。</li>
 <li>客户端在注册时可以注册多个授权方式，但 Spring Authorization Server 并不会按顺序依次尝试这些方式。而是在授权请求时，客户端必须明确指定使用其中的一种授权方式。<ol>
@@ -365,8 +452,18 @@
 <li>如果授权请求中指定的授权模式未在注册时指定，服务器将拒绝处理该请求。</li>
 </ol>
 </li>
+<li>这些在数据库中也以小写格式存储</li>
 </ol>
+</blockquote>
 <p><font color="#92d050">9. redirectUris</font><br>用户授权成功后的回调地址（redirect URI），由客户端应用在注册时进行指定，而且在发起授权请求时必须携带<strong>完全一致</strong>的值，否则服务器将拒绝处理请求，例如：<code>https://example.com/oauth2/callback</code></p>
+<p>Spring Authorization Server 所需的 clientName 类型为 String</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Spring Authorization Server 允许一个客户端配置多个 redirectUris，并会依次处理这些地址。</li>
+<li>但出于安全考虑，通常我们只允许一个客户端应用注册一个重定向地址。</li>
+</ol>
+</blockquote>
 <p><font color="#92d050">10. scopes</font><br>客户端请求的权限范围，其是我们高度自定义的，客户端应用在注册时需勾选其可能会用到的权限范围（scope），表示未来可能申请这些权限。</p>
 <p>实际授权请求时，客户端携带所需的 scope，服务器根据请求的 scope 颁发相应的 Access Token，确保客户端应用使用该 Access Token 只能访问授权范围内的信息。</p>
 <p>需要注意的是，注册时勾选的 scope 并非必须全部使用，而是以授权请求中携带的 scope 为准。如果授权请求中指定的 scope 未在注册时配置，服务器将拒绝该请求。</p>
@@ -415,7 +512,14 @@
 </ol>
 </li>
 </ol>
-<p><font color="#92d050">11. clientSettings</font><br>客户端级别的配置，需要客户端应用在注册时指定，格式为 JSON，通常在数据库中以 <code>TEXT</code> 类型进行存储。可配置的项包括：</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>我们在颁发 Access Token 的时候，第三方客户端应用肯定不能和我们自己家的客户端应用拥有相同的权限。我们颁发给自家客户端的是具备完整访问权限的 Token，而第三方客户端只能访问部分数据。</li>
+<li>因此，我们可以设置一个只有我们自己知道、第三方客户端无法获取的 scope，通过这个 scope，我们就能获取到所有权限。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">11. clientSettings</font><br>客户端级别的配置，需要客户端应用在注册时指定，Spring Authorization Server 所需的 clientSettings 类型为 JSON，通常在数据库中以 <code>TEXT</code> 类型进行存储。可配置的项包括：</p>
 <ol>
 <li>requireAuthorizationConsent(boolean)<ol>
 <li>是否强制用户在授权时显示“授权确认页”（consent screen），即使用户已授权</li>
@@ -428,7 +532,7 @@
 </ol>
 </li>
 </ol>
-<p><font color="#92d050">12. tokenSettings</font><br>各种令牌的配置，可配置的项包括：</p>
+<p><font color="#92d050">12. tokenSettings</font><br>各种令牌的配置，需要客户端应用在注册时指定，Spring Authorization Server 所需的 tokenSettings 类型为 JSON，通常在数据库中以 <code>TEXT</code> 类型进行存储。可配置的项包括：</p>
 <ol>
 <li>accessTokenTimeToLive(Duration)<ol>
 <li>访问令牌（Access Token）的有效期，以分钟为单位</li>
@@ -439,6 +543,13 @@
 <li>访问令牌（Access Token）的格式</li>
 <li>AccessTokenFormat.REFERENCE<ol>
 <li>访问令牌格式为引用类型</li>
+<li>即 Access Token 是一个随机 ID，不包含任何业务信息，例如：<code>bdf89d81-8c41-47ad-a3cf-3cb257c13b7c</code></li>
+<li>授权服务器需自行维护 Access Token 与用户及权限信息的映射关系，能根据 Access Token 查出对应的用户</li>
+</ol>
+</li>
+<li>AccessTokenFormat.SELF_CONTAINED<ol>
+<li>访问令牌格式为自包含类型</li>
+<li>即 Access Token 中包含用户的基本信息，不用授权服务器自己维护，常以 JWT 格式</li>
 </ol>
 </li>
 </ol>
@@ -467,72 +578,317 @@
 </li>
 <li>authorizationCodeTimeToLive(Duration)<ol>
 <li>授权码（Authorization Code）的有效期，以分钟为单位</li>
-<li>例如：<code>authorizationCodeTimeToLive(5)</code> 是 5 分钟</li>
+<li>例如：<code>authorizationCodeTimeToLive(5)</code> 是 5 分钟<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;access_token_time_to_live&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;access_token_format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;REFERENCE&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;reuse_refresh_tokens&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;refresh_token_time_to_live&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2592000</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;id_token_time_to_live&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">600</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;authorization_code_time_to_live&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">300</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ol>
-<table>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在数据库中一般采用秒为单位存储，这是一种行业规范，Spring Authorization Server 不会自动进行单位转换，需由开发者自行处理。</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-2-创建-客户端应用-相关-MySQL-表"><a href="#2-2-创建-客户端应用-相关-MySQL-表" class="headerlink" title="2.2. 创建 客户端应用 相关 MySQL 表"></a>2.2. 创建 客户端应用 相关 MySQL 表</h3><h4 id="2-2-1-ER-图"><a href="#2-2-1-ER-图" class="headerlink" title="2.2.1. ER 图"></a>2.2.1. ER 图</h4><p><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/thorization%20Server/image-20250713165050243.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-2-2-oauth-clients-表（客户端应用表）"><a href="#2-2-2-oauth-clients-表（客户端应用表）" class="headerlink" title="2.2.2. oauth_clients 表（客户端应用表）"></a>2.2.2. oauth_clients 表（客户端应用表）</h4><table>
 <thead>
 <tr>
-<th>配置方法</th>
-<th>类型</th>
+<th>列名</th>
+<th>数据类型</th>
+<th>约束</th>
+<th>索引</th>
 <th>默认值</th>
+<th>示例值</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>accessTokenTimeToLive(Duration)</code></td>
-<td><code>Duration</code></td>
-<td>5 分钟</td>
+<td><strong>id</strong></td>
+<td>varchar(100)</td>
+<td>唯一约束</td>
+<td>唯一约束</td>
 <td></td>
+<td>550e8400-e29b-41d4-a716-446655440000</td>
+<td>………</td>
 </tr>
 <tr>
-<td>&#96;</td>
-<td><code>Duration</code></td>
-<td>30 天</td>
+<td><strong>client_id</strong></td>
+<td>varchar(100)</td>
+<td>唯一约束</td>
+<td>唯一索引</td>
 <td></td>
+<td>web-client</td>
+<td>………</td>
 </tr>
 <tr>
-<td>&#96;&#96;</td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>刷新令牌是否可重复使用（<code>true</code>：可反复用；<code>false</code>：每次刷新都会生成新的刷新令牌）</td>
+<td><strong>client_id_issued_at</strong></td>
+<td>timestamp</td>
+<td></td>
+<td></td>
+<td>当前 timestamp</td>
+<td>2025-07-13 12:00:00</td>
+<td>………</td>
 </tr>
 <tr>
-<td>&#96;&#96;</td>
-<td><code>Duration</code></td>
-<td>5 分钟</td>
-<td>ID Token 的有效期（OIDC 场景）</td>
+<td><strong>client_secret</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>{bcrypt}$2a$10$…</td>
+<td>………</td>
 </tr>
 <tr>
-<td>&#96;&#96;</td>
-<td><code>Duration</code></td>
-<td>5 分钟</td>
-<td>授权码的有效期</td>
+<td><strong>client_secret_expires_at</strong></td>
+<td>timestamp</td>
+<td></td>
+<td></td>
+<td>NULL</td>
+<td>2025-07-13 12:00:00</td>
+<td>………</td>
 </tr>
 <tr>
-<td>&#96;&#96;</td>
-<td>枚举</td>
-<td><code>SELF_CONTAINED</code></td>
-<td>访问令牌格式（自包含 JWT 或引用型 Token）</td>
+<td><strong>client_name</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>吧唧</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>redirect_uris</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td><code>https://example.com/oauth2/callback</code></td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>client_settings</strong></td>
+<td>text</td>
+<td></td>
+<td></td>
+<td>{}</td>
+<td>{<br>  “requireAuthorizationConsent”: true,<br>  “requireProofKey”: false<br>}</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>token_settings</strong></td>
+<td>text</td>
+<td></td>
+<td></td>
+<td>{}</td>
+<td>{<br>  “access_token_time_to_live”: 300,<br>  “access_token_format”: “REFERENCE”,<br>  “reuse_refresh_tokens”: false,<br>  “refresh_token_time_to_live”: 2592000,<br>  “id_token_time_to_live”: 600,<br>  “authorization_code_time_to_live”: 300<br>}</td>
+<td>………</td>
 </tr>
 </tbody></table>
-<ul>
-<li><p><strong>accessTokenTimeToLive</strong>：控制客户端拿到的访问令牌在多长时间后失效，影响资源服务器的访问权限有效期。</p>
-</li>
-<li><p><strong>refreshTokenTimeToLive</strong>：刷新令牌的有效期，决定客户端在多长时间内可以用刷新令牌换取新的访问令牌。</p>
-</li>
-<li><p><strong>reuseRefreshTokens</strong>：是否允许刷新令牌重复使用。设置为 <code>false</code> 能提高安全性，防止刷新令牌被重放利用。</p>
-</li>
-<li><p><strong>authorizationCodeTimeToLive</strong>：授权码有效期，过期后用户必须重新授权获取新的授权码。</p>
-</li>
-<li><p><strong>accessTokenFormat</strong>：通常选择 <code>SELF_CONTAINED</code>（JWT），也可以选引用型（opaque token），但需要额外支持 Token 存储和校验。</p>
-</li>
-</ul>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">TokenSettings tokenSettings = TokenSettings.builder<span class="hljs-params">()</span><br>    <span class="hljs-string">.accessTokenTimeToLive</span><span class="hljs-params">(Duration.ofMinutes(60)</span>)         <span class="hljs-string">//</span> 访问令牌有效期 60 分钟<br>    <span class="hljs-string">.refreshTokenTimeToLive</span><span class="hljs-params">(Duration.ofDays(14)</span>)           <span class="hljs-string">//</span> 刷新令牌有效期 14 天<br>    <span class="hljs-string">.reuseRefreshTokens</span><span class="hljs-params">(false)</span>                              <span class="hljs-string">//</span> 刷新令牌使用一次后失效，强制发新令牌<br>    <span class="hljs-string">.authorizationCodeTimeToLive</span><span class="hljs-params">(Duration.ofMinutes(10)</span>)   <span class="hljs-string">//</span> 授权码有效期 10 分钟<br>    <span class="hljs-string">.build</span><span class="hljs-params">()</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> oauth_clients (<br>    id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    client_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    client_id_issued_at <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">CURRENT_TIMESTAMP</span>,<br>    client_secret <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    client_secret_expires_at <span class="hljs-type">TIMESTAMP</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>    client_name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    redirect_uris <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    client_settings <span class="hljs-type">TEXT</span>,<br>    token_settings <span class="hljs-type">TEXT</span><br>);<br><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> oauth_clients <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> uk_oauth_clients_id <span class="hljs-keyword">UNIQUE</span> (id);<br><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> oauth_clients <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> uk_oauth_clients_client_id <span class="hljs-keyword">UNIQUE</span> (client_id);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-3-oauth-client-authentication-methods-表（身份认证方式表）"><a href="#2-2-3-oauth-client-authentication-methods-表（身份认证方式表）" class="headerlink" title="2.2.3. oauth_client_authentication_methods 表（身份认证方式表）"></a>2.2.3. oauth_client_authentication_methods 表（身份认证方式表）</h4><table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>约束</th>
+<th>索引</th>
+<th>默认值</th>
+<th>示例值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>id</strong></td>
+<td>int</td>
+<td>主键约束、自增属性</td>
+<td>主键索引</td>
+<td>自增</td>
+<td>1</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>client_id</strong></td>
+<td>varchar(100)</td>
+<td>外键约束（→ clients.id）</td>
+<td></td>
+<td></td>
+<td>550e8400-e29b-41d4-a716-446655440000</td>
+<td>是 <code>oauth_clients</code> 表中的 <code>id</code> 字段，而不是 <code>oauth_clients</code> 表中的 <code>client_id</code> 字段。</td>
+</tr>
+<tr>
+<td><strong>method</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>none</td>
+<td>………</td>
+</tr>
+</tbody></table>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> oauth_client_authentication_methods (<br>    id <span class="hljs-type">INT</span> AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span>,<br>    client_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    <span class="hljs-keyword">method</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> oauth_client_authentication_methods <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_ocam_client_id_to_oc_id <span class="hljs-keyword">FOREIGN KEY</span> (client_id) <span class="hljs-keyword">REFERENCES</span> oauth_clients(id);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-4-oauth-client-authorization-grant-types-表（授权方式表）"><a href="#2-2-4-oauth-client-authorization-grant-types-表（授权方式表）" class="headerlink" title="2.2.4. oauth_client_authorization_grant_types 表（授权方式表）"></a>2.2.4. oauth_client_authorization_grant_types 表（授权方式表）</h4><table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>约束</th>
+<th>索引</th>
+<th>默认值</th>
+<th>示例值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>id</strong></td>
+<td>int</td>
+<td>主键约束、自增属性</td>
+<td>主键索引</td>
+<td>自增</td>
+<td>1</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>client_id</strong></td>
+<td>varchar(100)</td>
+<td>外键约束（→ clients.id）</td>
+<td></td>
+<td></td>
+<td>550e8400-e29b-41d4-a716-446655440000</td>
+<td>是 <code>clients</code> 表中的 <code>id</code> 字段，而不是 <code>clients</code> 表中的 <code>client_id</code> 字段。</td>
+</tr>
+<tr>
+<td><strong>grant_type</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>authorization_code</td>
+<td>………</td>
+</tr>
+</tbody></table>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> oauth_client_authorization_grant_types (<br>    id <span class="hljs-type">INT</span> AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span>,<br>    client_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    grant_type <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> oauth_client_authorization_grant_types <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_ocagt_client_id_to_oc_id <span class="hljs-keyword">FOREIGN KEY</span> (client_id) <span class="hljs-keyword">REFERENCES</span> oauth_clients(id);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-5-oauth-client-scopes-表（权限表）"><a href="#2-2-5-oauth-client-scopes-表（权限表）" class="headerlink" title="2.2.5. oauth_client_scopes 表（权限表）"></a>2.2.5. oauth_client_scopes 表（权限表）</h4><table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>约束</th>
+<th>索引</th>
+<th>默认值</th>
+<th>示例值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>id</strong></td>
+<td>int</td>
+<td>主键约束、自增属性</td>
+<td>主键索引</td>
+<td>自增</td>
+<td>1</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>client_id</strong></td>
+<td>varchar(100)</td>
+<td>外键约束（→ clients.id）</td>
+<td></td>
+<td></td>
+<td>550e8400-e29b-41d4-a716-446655440000</td>
+<td>是 <code>clients</code> 表中的 <code>id</code> 字段，而不是 <code>clients</code> 表中的 <code>client_id</code> 字段。</td>
+</tr>
+<tr>
+<td><strong>scope</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>openid</td>
+<td>………</td>
+</tr>
+</tbody></table>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> oauth_client_scopes (<br>    id <span class="hljs-type">INT</span> AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span>,<br>    client_id <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    scope <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> oauth_client_scopes <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_ocs_client_id_to_os_id <span class="hljs-keyword">FOREIGN KEY</span> (client_id) <span class="hljs-keyword">REFERENCES</span> oauth_clients(id);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-6-oauth-system-scopes-表（系统权限表）"><a href="#2-2-6-oauth-system-scopes-表（系统权限表）" class="headerlink" title="2.2.6. oauth_system_scopes 表（系统权限表）"></a>2.2.6. oauth_system_scopes 表（系统权限表）</h4><table>
+<thead>
+<tr>
+<th>列名</th>
+<th>数据类型</th>
+<th>约束</th>
+<th>索引</th>
+<th>默认值</th>
+<th>示例值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>id</strong></td>
+<td>int</td>
+<td>主键约束、自增属性</td>
+<td>主键索引</td>
+<td>自增</td>
+<td>1</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>scope_name</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>openid</td>
+<td>………</td>
+</tr>
+<tr>
+<td><strong>scope_description</strong></td>
+<td>varchar(100)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>申请 ID Token</td>
+<td>………</td>
+</tr>
+</tbody></table>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> oauth_system_scopes (<br>    id <span class="hljs-type">INT</span> AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span>,<br>    scope_name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    scope_description <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> oauth_system_scopes (scope_name, scope_description) <span class="hljs-keyword">VALUES</span><br>  (<span class="hljs-string">&#x27;openid&#x27;</span>, <span class="hljs-string">&#x27;请求返回 OPENID Connect 身份令牌，其包含用户基本信息&#x27;</span>),<br>  (<span class="hljs-string">&#x27;offline_access&#x27;</span>, <span class="hljs-string">&#x27;请求返回 Refresh Token&#x27;</span>),<br>  (<span class="hljs-string">&#x27;user:info&#x27;</span>, <span class="hljs-string">&#x27;请求返回用户基本信息&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-3-进行-MyBatis-配置"><a href="#2-3-进行-MyBatis-配置" class="headerlink" title="2.3. 进行 MyBatis 配置"></a>2.3. 进行 MyBatis 配置</h3><p><font color="#92d050">1. application.yaml 处</font></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">spring:</span><br>  <span class="hljs-params">datasource:</span><br>    <span class="hljs-params">url:</span> jdbc:mysql:<span class="hljs-operator">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">136.8</span>:<span class="hljs-number">3306</span><span class="hljs-operator">/</span>security<span class="hljs-operator">?</span>useUnicode<span class="hljs-operator">=</span><span class="hljs-literal">true</span>&amp;characterEncoding<span class="hljs-operator">=</span>utf8&amp;serverTimezone<span class="hljs-operator">=</span>UTC<br>    <span class="hljs-params">username:</span> root<br>    <span class="hljs-params">password:</span> wq666666<br>    <span class="hljs-params">driver-class-name:</span> com.mysql.cj.jdbc.Driver<br><br><span class="hljs-params">mybatis:</span><br>  <span class="hljs-params">configuration:</span><br>    <span class="hljs-params">map-underscore-to-camel-case:</span> <span class="hljs-literal">true</span><br>    <span class="hljs-params">log-impl:</span> org.apache.ibatis.logging.stdout.StdOutImpl<br>  <span class="hljs-params">mapper-locations:</span> classpath<span class="hljs-operator">*</span>:mapper<span class="hljs-comment">/*.xml</span><br><span class="hljs-comment">  type-aliases-package: com.example.oauthserverwithmyproject.entity</span><br></code></pre></td></tr></table></figure>
 
 
-<h3 id="创建-客户端应用-数据库表"><a href="#创建-客户端应用-数据库表" class="headerlink" title="创建 客户端应用 数据库表"></a>创建 客户端应用 数据库表</h3>
+<p><font color="#92d050">2. MybatisConfiguration 处</font></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Configuration</span>  <br><span class="hljs-variable">@MapperScan</span>(<span class="hljs-string">&quot;com.example.oauthserverwithmyproject.mapper&quot;</span>)  <br>public class MybatisConfiguration &#123;  <br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-编写-Client-Entity-类"><a href="#2-4-编写-Client-Entity-类" class="headerlink" title="2.4. 编写 Client Entity 类"></a>2.4. 编写 Client Entity 类</h3><p>Client 类位于 <code>com.example.oauthserverwithmyproject.entity</code> 包下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-5-编写-ClientMapper-接口"><a href="#2-5-编写-ClientMapper-接口" class="headerlink" title="2.5. 编写 ClientMapper 接口"></a>2.5. 编写 ClientMapper 接口</h3><p>ClientMapper 类位于 <code>com.example.oauthserverwithmyproject.mapper</code> 包下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-6-编写-RedirectUrisTypeHandler-类"><a href="#2-6-编写-RedirectUrisTypeHandler-类" class="headerlink" title="2.6. 编写 RedirectUrisTypeHandler 类"></a>2.6. 编写 RedirectUrisTypeHandler 类</h3><p>RedirectUrisTypeHandler 类位于 <code>com.example.oauthserverwithmyproject.handler</code> 包下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@MappedTypes(Set.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RedirectUrisTypeHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseTypeHandler</span>&lt;Set&lt;String&gt;&gt; &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNonNullParameter</span><span class="hljs-params">(PreparedStatement ps, <span class="hljs-type">int</span> i, Set&lt;String&gt; parameter, JdbcType jdbcType)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-keyword">if</span> (parameter == <span class="hljs-literal">null</span> || parameter.isEmpty()) &#123;<br>            ps.setString(i, <span class="hljs-literal">null</span>);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            ps.setString(i, parameter.iterator().next());<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Set&lt;String&gt; <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, String columnName)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> rs.getString(columnName);<br>        <span class="hljs-keyword">return</span> value == <span class="hljs-literal">null</span> ? Collections.emptySet() : Collections.singleton(value);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Set&lt;String&gt; <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> rs.getString(columnIndex);<br>        <span class="hljs-keyword">return</span> value == <span class="hljs-literal">null</span> ? Collections.emptySet() : Collections.singleton(value);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Set&lt;String&gt; <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(CallableStatement cs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> cs.getString(columnIndex);<br>        <span class="hljs-keyword">return</span> value == <span class="hljs-literal">null</span> ? Collections.emptySet() : Collections.singleton(value);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-7-编写-ClientSettingsTypeHandler-类"><a href="#2-7-编写-ClientSettingsTypeHandler-类" class="headerlink" title="2.7. 编写 ClientSettingsTypeHandler 类"></a>2.7. 编写 ClientSettingsTypeHandler 类</h3><p>ClientSettingsTypeHandler 类位于 <code>com.example.oauthserverwithmyproject.handler</code> 包下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@MappedTypes(ClientSettings.class)</span>  <br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClientSettingsTypeHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseTypeHandler</span>&lt;ClientSettings&gt; &#123;  <br>  <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">ObjectMapper</span> <span class="hljs-variable">objectMapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>();  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNonNullParameter</span><span class="hljs-params">(PreparedStatement ps, <span class="hljs-type">int</span> i, ClientSettings parameter, JdbcType jdbcType)</span> <span class="hljs-keyword">throws</span> SQLException &#123;  <br>        <span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            json = objectMapper.writeValueAsString(parameter.getSettings());  <br>        &#125; <span class="hljs-keyword">catch</span> (JsonProcessingException e) &#123;  <br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);  <br>        &#125;  <br>        ps.setString(i, json);  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> ClientSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, String columnName)</span> <span class="hljs-keyword">throws</span> SQLException &#123;  <br>        <span class="hljs-keyword">return</span> fromJson(rs.getString(columnName));  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> ClientSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;  <br>        <span class="hljs-keyword">return</span> fromJson(rs.getString(columnIndex));  <br>    &#125;  <br>  <br>    <span class="hljs-meta">@Override</span>  <br>    <span class="hljs-keyword">public</span> ClientSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(CallableStatement cs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;  <br>        <span class="hljs-keyword">return</span> fromJson(cs.getString(columnIndex));  <br>    &#125;  <br>  <br>    <span class="hljs-keyword">private</span> ClientSettings <span class="hljs-title function_">fromJson</span><span class="hljs-params">(String json)</span> &#123;  <br>        <span class="hljs-keyword">if</span> (json == <span class="hljs-literal">null</span> || json.isBlank()) &#123;  <br>            <span class="hljs-keyword">return</span> ClientSettings.builder().build();  <br>        &#125;  <br>        <span class="hljs-keyword">try</span> &#123;  <br>            Map&lt;String, Object&gt; map = objectMapper.readValue(json, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeReference</span>&lt;&gt;() &#123;&#125;);  <br>            <span class="hljs-keyword">return</span> ClientSettings.withSettings(map).build();  <br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;  <br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Failed to parse ClientSettings JSON&quot;</span>, e);  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-8-编写-TokenSettingsTypeHandler-类"><a href="#2-8-编写-TokenSettingsTypeHandler-类" class="headerlink" title="2.8. 编写 TokenSettingsTypeHandler 类"></a>2.8. 编写 TokenSettingsTypeHandler 类</h3><p>TokenSettingsTypeHandler 类位于 <code>com.example.oauthserverwithmyproject.handler</code> 包下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@MappedTypes(TokenSettings.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TokenSettingsTypeHandler</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BaseTypeHandler</span>&lt;TokenSettings&gt; &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">ObjectMapper</span> <span class="hljs-variable">objectMapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>();<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNonNullParameter</span><span class="hljs-params">(PreparedStatement ps, <span class="hljs-type">int</span> i, TokenSettings parameter, JdbcType jdbcType)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">json</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            json = objectMapper.writeValueAsString(parameter.getSettings());<br>        &#125; <span class="hljs-keyword">catch</span> (JsonProcessingException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>        &#125;<br>        ps.setString(i, json);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> TokenSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, String columnName)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-keyword">return</span> fromJson(rs.getString(columnName));<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> TokenSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(ResultSet rs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-keyword">return</span> fromJson(rs.getString(columnIndex));<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> TokenSettings <span class="hljs-title function_">getNullableResult</span><span class="hljs-params">(CallableStatement cs, <span class="hljs-type">int</span> columnIndex)</span> <span class="hljs-keyword">throws</span> SQLException &#123;<br>        <span class="hljs-keyword">return</span> fromJson(cs.getString(columnIndex));<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> TokenSettings <span class="hljs-title function_">fromJson</span><span class="hljs-params">(String json)</span> &#123;<br>        <span class="hljs-keyword">if</span> (json == <span class="hljs-literal">null</span> || json.isBlank()) &#123;<br>            <span class="hljs-keyword">return</span> TokenSettings.builder().build();<br>        &#125;<br>        <span class="hljs-keyword">try</span> &#123;<br>            Map&lt;String, Object&gt; map = objectMapper.readValue(json, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeReference</span>&lt;&gt;() &#123;&#125;);<br>            <span class="hljs-keyword">return</span> TokenSettings.withSettings(map).build();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Failed to parse TokenSettings JSON&quot;</span>, e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+
                 
               </div>
             
@@ -628,6 +984,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/" title="笔记：分布式 ID">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：分布式 ID</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

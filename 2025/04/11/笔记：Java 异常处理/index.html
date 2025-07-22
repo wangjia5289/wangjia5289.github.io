@@ -19,12 +19,12 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这种该怎么办  在 mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback) 中，Throwable 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 Exception 和 Error 类的基类。 详细解释： **Throwable**：  Throwable 是 Ja">
+    <meta name="description" content="明白了，你说的是 Java 异常中“必须处理的”和“可以不用处理的”两种类型，确实是这样，具体说法如下：  Java 异常的两大类：Checked Exception 和 Unchecked Exception1. Checked Exception （受检异常） 编译器强制你必须处理（捕获 try-catch）或声明抛出（throws）  否则代码无法通过编译  一般是可预见、可恢复的异常，如文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java 异常处理">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="这种该怎么办  在 mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback) 中，Throwable 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 Exception 和 Error 类的基类。 详细解释： **Throwable**：  Throwable 是 Ja">
+<meta property="og:description" content="明白了，你说的是 Java 异常中“必须处理的”和“可以不用处理的”两种类型，确实是这样，具体说法如下：  Java 异常的两大类：Checked Exception 和 Unchecked Exception1. Checked Exception （受检异常） 编译器强制你必须处理（捕获 try-catch）或声明抛出（throws）  否则代码无法通过编译  一般是可预见、可恢复的异常，如文">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250708180126262.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250708180155666.png">
 <meta property="article:published_time" content="2025-04-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-08T10:01:56.064Z">
+<meta property="article:modified_time" content="2025-07-17T08:41:00.426Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          2.5k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          19 mins
+          21 mins
         
       </span>
     
@@ -301,7 +301,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-08T18:01:56+08:00
+                    Last updated on 2025-07-17T16:41:00+08:00
                   
                   
 
@@ -311,7 +311,85 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png" srcset="/img/loading.gif" lazyload></p>
+                <p>明白了，你说的是 Java 异常中<strong>“必须处理的”和“可以不用处理的”</strong>两种类型，确实是这样，具体说法如下：</p>
+<hr>
+<h2 id="Java-异常的两大类：Checked-Exception-和-Unchecked-Exception"><a href="#Java-异常的两大类：Checked-Exception-和-Unchecked-Exception" class="headerlink" title="Java 异常的两大类：Checked Exception 和 Unchecked Exception"></a>Java 异常的两大类：Checked Exception 和 Unchecked Exception</h2><h3 id="1-Checked-Exception-（受检异常）"><a href="#1-Checked-Exception-（受检异常）" class="headerlink" title="1. Checked Exception （受检异常）"></a>1. Checked Exception （<strong>受检异常</strong>）</h3><ul>
+<li><p>编译器强制你必须处理（捕获 try-catch）或声明抛出（throws）</p>
+</li>
+<li><p>否则代码无法通过编译</p>
+</li>
+<li><p>一般是<strong>可预见、可恢复的异常</strong>，如文件找不到、数据库连接失败等</p>
+</li>
+<li><p>典型例子：</p>
+<ul>
+<li><p><code>IOException</code></p>
+</li>
+<li><p><code>SQLException</code></p>
+</li>
+<li><p><code>ClassNotFoundException</code></p>
+</li>
+<li><p><code>InterruptedException</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">readFile</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>    <span class="hljs-type">FileReader</span> <span class="hljs-variable">fr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(<span class="hljs-string">&quot;file.txt&quot;</span>);  <span class="hljs-comment">// 可能抛 IOException</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>如果不声明 <code>throws IOException</code>，编译会报错。</p>
+<hr>
+<h3 id="2-Unchecked-Exception-（运行时异常）"><a href="#2-Unchecked-Exception-（运行时异常）" class="headerlink" title="2. Unchecked Exception （运行时异常）"></a>2. Unchecked Exception （<strong>运行时异常</strong>）</h3><ul>
+<li><p>继承自 <code>RuntimeException</code></p>
+</li>
+<li><p>编译器不强制要求捕获或声明抛出</p>
+</li>
+<li><p>这类异常通常是<strong>程序错误引起的，比如空指针、数组越界、非法参数</strong></p>
+</li>
+<li><p>典型例子：</p>
+<ul>
+<li><p><code>NullPointerException</code></p>
+</li>
+<li><p><code>ArrayIndexOutOfBoundsException</code></p>
+</li>
+<li><p><code>IllegalArgumentException</code></p>
+</li>
+<li><p><code>ArithmeticException</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">divide</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a / b;  <span class="hljs-comment">// 可能抛 ArithmeticException，但不强制处理</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>你可以捕获，但不写也能编译通过。</p>
+<hr>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>编译器是否强制处理</th>
+<th>典型类举例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Checked Exception</strong></td>
+<td>是</td>
+<td>IOException, SQLException</td>
+<td>必须 try-catch 或 throws</td>
+</tr>
+<tr>
+<td><strong>Unchecked Exception</strong></td>
+<td>否</td>
+<td>NullPointerException, IllegalArgumentException</td>
+<td>可选捕获，不处理也编译通过</td>
+</tr>
+</tbody></table>
+<hr>
+<p>你说的那个“必须处理否则编译不通过”的，就是 Checked Exception；“不必须处理”的，就是 Unchecked Exception。</p>
+<hr>
+<p>需要的话我可以帮你梳理具体哪些异常属于 Checked，哪些是 Unchecked，或者帮你理解怎么写 try-catch 更规范？</p>
+<p><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png" srcset="/img/loading.gif" lazyload></p>
 <p>这种该怎么办</p>
 <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png" srcset="/img/loading.gif" lazyload></p>
 <p>在 <code>mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</code> 中，<code>Throwable</code> 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 <code>Exception</code> 和 <code>Error</code> 类的基类。</p>

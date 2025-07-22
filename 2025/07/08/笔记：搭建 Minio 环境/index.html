@@ -19,17 +19,20 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="单机测试环境Docker 单机部署 Minio1. 创建宿主机数据挂载目录 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;minio   2. 启动 Minio 容器 123456789docker run -d \  --name minio-test \  -p 9000:9000 \  -p 9001:9001 \  -e &quot;MINIO_ROOT_USER&#x3D;root&quot;">
+    <meta name="description" content="1. 单机测试环境1.1. 创建宿主机数据挂载目录1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;minio   1.2. 启动 Minio 容器123456789docker run -d \  --name minio-test \  -p 9000:9000 \  -p 9001:9001 \  -e &quot;MINIO_ROOT_USER&#x3D;admin&quot; \  -e &amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：搭建 Minio 环境">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="单机测试环境Docker 单机部署 Minio1. 创建宿主机数据挂载目录 1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;minio   2. 启动 Minio 容器 123456789docker run -d \  --name minio-test \  -p 9000:9000 \  -p 9001:9001 \  -e &quot;MINIO_ROOT_USER&#x3D;root&quot;">
+<meta property="og:description" content="1. 单机测试环境1.1. 创建宿主机数据挂载目录1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;minio   1.2. 启动 Minio 容器123456789docker run -d \  --name minio-test \  -p 9000:9000 \  -p 9001:9001 \  -e &quot;MINIO_ROOT_USER&#x3D;admin&quot; \  -e &amp;quot">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250715220301330.png">
 <meta property="article:published_time" content="2025-07-07T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-08T09:42:50.112Z">
+<meta property="article:modified_time" content="2025-07-16T09:46:59.969Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          247 words
+          6.4k words
         
       </span>
     
@@ -234,7 +237,7 @@
         
         
         
-          3 mins
+          54 mins
         
       </span>
     
@@ -289,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-08T17:42:50+08:00
+                    Last updated on 2025-07-16T17:46:59+08:00
                   
                   
 
@@ -299,12 +302,10 @@
             
               <div class="markdown-body">
                 
-                <h2 id="单机测试环境"><a href="#单机测试环境" class="headerlink" title="单机测试环境"></a>单机测试环境</h2><h3 id="Docker-单机部署-Minio"><a href="#Docker-单机部署-Minio" class="headerlink" title="Docker 单机部署 Minio"></a>Docker 单机部署 Minio</h3><p><font color="#92d050">1. 创建宿主机数据挂载目录</font></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/minio<br></code></pre></td></tr></table></figure>
+                <h2 id="1-单机测试环境"><a href="#1-单机测试环境" class="headerlink" title="1. 单机测试环境"></a>1. 单机测试环境</h2><h3 id="1-1-创建宿主机数据挂载目录"><a href="#1-1-创建宿主机数据挂载目录" class="headerlink" title="1.1. 创建宿主机数据挂载目录"></a>1.1. 创建宿主机数据挂载目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/minio<br></code></pre></td></tr></table></figure>
 
-
-<p><font color="#92d050">2. 启动 Minio 容器</font></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name minio-test <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9000</span>:<span class="hljs-number">9000</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9001</span>:<span class="hljs-number">9001</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_USER=root&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_PASSWORD=wq666666&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/minio:/data <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  minio/minio:RELEASE.<span class="hljs-number">2025</span>-<span class="hljs-number">06</span>-<span class="hljs-number">13</span>T11-<span class="hljs-number">33</span>-<span class="hljs-number">47</span>Z <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  server /data --console-address <span class="hljs-string">&quot;:9001&quot;</span><br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="1-2-启动-Minio-容器"><a href="#1-2-启动-Minio-容器" class="headerlink" title="1.2. 启动 Minio 容器"></a>1.2. 启动 Minio 容器</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name minio-test <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9000</span>:<span class="hljs-number">9000</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9001</span>:<span class="hljs-number">9001</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_USER=admin&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_PASSWORD=password&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/minio:/data <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  minio/minio:RELEASE.<span class="hljs-number">2025</span>-<span class="hljs-number">06</span>-<span class="hljs-number">13</span>T11-<span class="hljs-number">33</span>-<span class="hljs-number">47</span>Z <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  server /data --console-address <span class="hljs-string">&quot;:9001&quot;</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -331,10 +332,374 @@
 </blockquote>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
 
-<p><font color="#92d050">3. 访问 Minio 控制台</font></p>
-<p>访问： <a target="_blank" rel="noopener" href="http://192.168.136.8:9001/">http://192.168.136.8:9001</a></p>
 <hr>
-<h2 id="Minio-分布式集群"><a href="#Minio-分布式集群" class="headerlink" title="Minio 分布式集群"></a>Minio 分布式集群</h2>
+<h3 id="1-3-访问-Minio-Web-UI"><a href="#1-3-访问-Minio-Web-UI" class="headerlink" title="1.3. 访问 Minio Web UI"></a>1.3. 访问 Minio Web UI</h3><p>访问： <a target="_blank" rel="noopener" href="http://192.168.136.8:9001/">http://192.168.136.8:9001</a></p>
+<hr>
+<h2 id="2-Minio-分布式集群"><a href="#2-Minio-分布式集群" class="headerlink" title="2. Minio 分布式集群"></a>2. Minio 分布式集群</h2><h3 id="环境特性"><a href="#环境特性" class="headerlink" title="环境特性"></a>环境特性</h3><h4 id="数据写入"><a href="#数据写入" class="headerlink" title="数据写入"></a>数据写入</h4><p>MinIO 的数据写入具备强一致性，具体表现如下：</p>
+<p>关于一些元数据操作，例如创建桶、添加标签、用户及用户组管理、对象多部分上传的临时元数据等，通常都会经过如下流程：</p>
+<ol>
+<li>客户端通过 API 或命令行发起元数据相关请求。</li>
+<li>集群中任意节点作为入口节点接收该请求。</li>
+<li>入口节点执行用户身份验证和权限授权检查，通常包括桶策略和用户策略两部分。</li>
+<li>然后入口节点解析请求，确定需要操作的桶、对象或配置，生成对应的元数据内容（如 JSON、配置文件、标签文本等）</li>
+<li>入口节点将该元数据变更广播至所有相关节点，所有参与节点在本地存储路径（通常位于 <code>.minio.sys</code> 目录结构内）同步阻塞地写入或更新相应元数据文件，确保一致性。</li>
+<li>当所有节点写入成功后，入口节点返回操作成功响应（如 HTTP 200）。</li>
+<li>若任一节点写入失败，整体操作回滚，入口节点返回错误信息（如 HTTP 500）。</li>
+</ol>
+<p>而对于对象上传，MinIO 会采用纠删码机制，通常流程如下：</p>
+<ol>
+<li>客户端通过 API 或命令行发起上传对象请求。</li>
+<li>集群中任意节点作为入口节点接收该请求。</li>
+<li>入口节点执行用户身份验证和权限授权检查，通常包括桶策略和用户策略两部分。</li>
+<li>入口节点根据对象名和桶名，通过一致性哈希计算确定对象所属的 Erasure Set，并定位所需分片所在的节点和磁盘；</li>
+<li>入口将对象数据切分为多个数据分片，经过纠删码编码生成校验分片（例如 12 个数据分片 + 4 个校验分片），并行发送给对应节点。</li>
+<li>各节点在本地磁盘写入自己的分片数据，同时生成并存储对应的元数据（如对象大小、ETag、时间戳等），入口节点在此期间等待所有参与节点确认写入成功。</li>
+<li>所有数据分片和校验分片成功写入后，入口节点向客户端返回成功响应（如 HTTP 200）。</li>
+<li>若任一分片写入失败，整体上传操作回滚，入口节点返回错误信息（如 HTTP 500）。</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对象级元数据（如 xl.meta）仅写入其所属的 Erasure Set（ES）组内节点，不会同步到其它 ES；</li>
+<li>而系统级元数据（如桶配置、策略、用户信息等）则会<strong>同步写入集群中所有节点</strong>，确保全局一致性。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h4><p>关于元数据的读取，通常流程如下：</p>
+<ol>
+<li>客户端通过 API 或命令行发起读取元数据请求</li>
+<li>集群中任意节点作为入口节点接收该请求</li>
+<li>入口节点执行用户身份验证和权限授权检查，通常包括桶策略和用户策略两部分</li>
+<li>然后入口节点在自己的 <code>.minio.sys/</code> 路径下查找对应元数据文件<ol>
+<li>正常情况下，每个节点都有完整的元数据副本，可以直接读取本地即可</li>
+<li>若本地副本缺失或读取失败，入口节点可能尝试从其他节点同步获取</li>
+</ol>
+</li>
+<li>入口节点将读取到的元数据封装为响应内容，返回给客户端（如 JSON）。</li>
+</ol>
+<p>而对于对象下载，通常流程如下：</p>
+<ol>
+<li>客户端通过 API 、命令行，也可能是通过预签名 URL 发起对象下载请求</li>
+<li>集群中任意节点作为入口节点接收该请求</li>
+<li>入口节点执行用户身份验证和权限授权检查，通常包括桶策略和用户策略两部分</li>
+<li>入口节点根据对象名和桶名，通过一致性哈希计算确定对象所属的 Erasure Set，并定位所需分片所在的节点和磁盘；同时读取对象元数据（如 ETag、大小、版本等）</li>
+<li>以 EC(12,4) 为例，入口节点优先从计算得到的 12 个数据分片所在节点并发拉取数据分片；</li>
+<li>入口节点会对每个拉取到的分片执行大小和哈希校验，确认分片完整有效。</li>
+<li>如果部分数据分片不可用或校验失败，会启用冗余容错机制，从校验分片节点补拉，确保至少获得 12 个有效分片。</li>
+<li>使用获得的任意 12 个有效分片（数据+校验混合）一同通过 Reed-Solomon 解码恢复对象数据（如果 12 个都是数据分片，就无需解码了）</li>
+<li>对解码恢复后的完整对象进行哈希校验（如 ETag 比对），确保数据完整无误后，通过 HTTP 流形式，将完整对象数据返回给客户端。</li>
+<li>若可用分片不足 12 个或校验失败，返回相应错误码（如 503 或 500）。</li>
+</ol>
+<hr>
+<h4 id="容灾冗余"><a href="#容灾冗余" class="headerlink" title="容灾冗余"></a>容灾冗余</h4><h5 id="纠删码概述"><a href="#纠删码概述" class="headerlink" title="纠删码概述"></a>纠删码概述</h5><p>MinIO 使用纠删码（Erasure Code）实现容灾冗余。简单来说，就是将对象拆分为 K 个数据分片，同时生成 m 个校验分片。假设 s &#x3D; k + m，在这 s 个分片中，任意选取 k 个（无论是数据分片还是校验分片）即可恢复出原始数据。换句话说，即使任意 m 个分片损坏，系统仍然能够完整还原原始数据。<br><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png" srcset="/img/loading.gif" lazyload></p>
+<p>EC 存储的优点是：</p>
+<ol>
+<li>磁盘利用率高：<ol>
+<li>相比于 3 副本机制，EC 仅需额外存储少量校验片即可实现容错，有效降低冗余数据占比。</li>
+<li>例如：EC(k&#x3D;12, m&#x3D;4) 可容忍任意 4 块磁盘故障，但冗余开销仅为 33%；而 3 副本机制的冗余开销高达 200%。</li>
+</ol>
+</li>
+<li>容错能力高：<ol>
+<li>在 EC(k, m) 模型中，任意丢失 m 个分片都能恢复原始数据，适合应对多节点或多磁盘同时故障的分布式场景。</li>
+</ol>
+</li>
+<li>天然支持数据校验和完整性验证：<ol>
+<li>纠删码通过数学方式生成校验片，本身具备数据校验和完整性验证能力，无需额外机制支持。</li>
+</ol>
+</li>
+</ol>
+<p>EC 存储的缺点是：</p>
+<ol>
+<li>写入和恢复开销较大：<ol>
+<li>写入时需先分片再计算校验片，恢复时需解码，整个编解码过程会消耗大量 CPU 与网络带宽，开销主要体现在写入操作和故障恢复读取时</li>
+</ol>
+</li>
+<li>故障读取时延迟高于副本机制：<ol>
+<li>正常读取时延迟较低，但当部分分片不可用时，需从多个节点获取数据并进行解码，导致延迟明显增加，尤其在节点故障情况下更为显著。</li>
+</ol>
+</li>
+<li>实现的复杂度高：<ol>
+<li>EC 的编码与解码涉及较为复杂的线性代数运算，实现难度较大，对开发和系统维护要求更高。</li>
+</ol>
+</li>
+<li>对网络与时间同步依赖强：<ol>
+<li>多个分片需并行写入与恢复，依赖较低延迟和较高一致性的网络环境，在跨地域部署时，网络抖动或时间漂移可能影响可靠性和性能</li>
+</ol>
+</li>
+</ol>
+<p>因此，EC 存储更适用于冷数据归档、大文件存储以及对数据可靠性要求高的场景；而对于低延迟访问、频繁读写或高并发写入等场景，则并不适合。</p>
+<blockquote>
+<p>[!NOTE] 注意事项：MinIO 为什么在 EC 存储有这些短板的情况下，依然成为对象存储界的一哥</p>
+<ol>
+<li>定位精准，专注对象存储：<ol>
+<li>它不像 Ceph 走“全能型”路线（块、文件、对象都搞），MinIO 从一开始就专注于 S3 兼容对象存储，在接口、语义和生态适配上几乎与 AWS S3 完美对齐，天然契合云原生环境。</li>
+</ol>
+</li>
+<li>纠删码 + 分布式架构 &#x3D; 面向未来的弹性扩展：<ol>
+<li>虽然 EC 在写入方面有延迟劣势，但带来了更高的容量利用率、更强的容错能力和更低的存储成本，成为现代大规模对象存储架构的基础。</li>
+</ol>
+</li>
+<li>天然云原生，完美适配 Kubernetes：<ol>
+<li>MinIO 是最早深度集成 Kubernetes 的对象存储之一，原生支持 Operator、Helm、StatefulSet 等，轻松融入 DevOps 和云原生部署体系</li>
+</ol>
+</li>
+<li>大多数情况下是 ”正常读“，不会触发重建：<ol>
+<li>虽然故障读取时需要进行重建，耗时较长，但在分布式存储环境下，只要网络和磁盘状态良好，大部分读操作都能直接从原始数据片获取，无需解码进行重建，延迟较低。</li>
+<li>因此，性能瓶颈主要聚焦在写入环节。</li>
+</ol>
+</li>
+<li>EC 的 “写入短板” 在对象存储主流场景中并不致命<ol>
+<li>对象存储主要面向大文件和非结构化数据（如图像、视频、日志、备份等），通常写少读多，对 EC 架构更为友好</li>
+<li>云原生工作负载更关注容量、可用性与成本，而非毫秒级访问延迟。</li>
+<li>MinIO 对 EC 实现做了大量优化，如预分配编码缓冲区、并发 IO 管理等，有效降低了编码带来的性能影响</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="纠删码参数"><a href="#纠删码参数" class="headerlink" title="纠删码参数"></a>纠删码参数</h5><p>MinIO 在首次启动集群时，会根据所提供的磁盘数量自动推导出默认的 EC 参数（k 和 m），并将该参数写入每个磁盘上的 <code>.minio.sys</code> 元数据目录中。此后集群运行将固定使用该参数组合，无法变更。</p>
+<p>在某些特定版本的 MinIO 中，也支持在首次启动时通过 <code>--erasure-coding.k</code> 和 <code>--erasure-coding.m</code> 手动指定 k 和 m。需要注意的是，此方式下 k + m 一般不得超过 16，且总磁盘数量必须是 k + m 的整数倍，且不得少于该值。</p>
+<hr>
+<p>部分ok，恢复怎么恢复</p>
+<h3 id="2-1-环境要求"><a href="#2-1-环境要求" class="headerlink" title="2.1. 环境要求"></a>2.1. 环境要求</h3><h4 id="2-1-1-节点要求"><a href="#2-1-1-节点要求" class="headerlink" title="2.1.1. 节点要求"></a>2.1.1. 节点要求</h4><p>官方建议 MinIO 分布式集群至少部署 4 个节点。这是因为纠删码模式运行时最少需要 4 块磁盘才能生效，而如果只提供 4 块磁盘，那么需要每个节点都挂载一块磁盘（不推荐采用一个节点挂载 4 块磁盘，或两个节点共计 4 块磁盘的方式部署，因为这种架构下单点故障风险较高，无法实现真正意义上的数据高可用与分布式冗余）</p>
+<p>节点数量是奇数还是偶数并不关键，关键在于保证最终的磁盘总数为偶数。例如，7 个节点每个挂载 2 个磁盘，总磁盘数为 14 个。通常推荐使用偶数个节点，主要是基于每个节点仅有一块磁盘的情况，但我们一般都是部署偶数个节点。</p>
+<p>在早期版本中，MinIO 集群中建议最多使用不超过 32 块磁盘。即使每个节点仅挂载一块磁盘，那么集群也最多不能超过 32 个节点。</p>
+<p>MinIO 集群中，虽然节点数量的增加有助于提升容量和并发性能，但同时也带来一系列挑战与潜在问题：</p>
+<ol>
+<li>元数据一致性成本上升：<ol>
+<li>MinIO 采用去中心化架构，所有节点共同管理元数据（如 bucket 配置、版本控制、对象锁等）；<ol>
+<li>元数据由节点负责，而非磁盘维护，相关信息以 Key-Value 形式存储于每个节点本地的 <code>.minio.sys</code> 目录中。</li>
+</ol>
+</li>
+<li>随着节点增多，元数据的广播与同步耗时显著增加，尤其在网络存在延迟或抖动时更为明显。</li>
+<li>节点数量增加，网络负载成倍上升，易形成“网状拓扑”瓶颈，影响集群整体性能。</li>
+</ol>
+</li>
+<li>运维成本提升：<ol>
+<li>节点越多，需监控的服务日志、性能指标与健康状态也随之增多，运维复杂度提升。</li>
+</ol>
+</li>
+<li>故障排查难度加大：<ol>
+<li>一次写入失败，可能涉及多个节点的 I&#x2F;O、网络或锁状态，排查路径长，定位难度显著上升。</li>
+</ol>
+</li>
+<li>启动与恢复耗时增长：<ol>
+<li>MinIO 启动时需要加载全部节点信息、初始化纠删码映射、执行健康检查</li>
+<li>节点越多，启动时间越长，若某些节点响应缓慢，可能导致整个集群初始化受阻或卡顿。</li>
+</ol>
+</li>
+</ol>
+<p>在新版本中，MinIO 已取消对最大磁盘数 32 的限制，单个集群可支持无限数量的磁盘。也就是说，单个集群可支持无限数量的节点，但出于性能、稳定性和运维复杂度的综合考虑，仍推荐将节点数控制在 32 个以内。</p>
+<p>一般来说，4 到 8 个节点属于中型部署规模，10 到 16 个节点则适用于高并发、大容量的场景，而超过 16 个节点的部署则属于超大规模集群，常见于企业级云平台、公有云提供商。</p>
+<p>当需要构建大规模分布式存储系统时，不建议持续扩展单个 MinIO 集群的节点数量，而是推荐通过部署多个独立的 MinIO 集群，并借助分布式协调机制，将多个集群组成联邦架构，实现更灵活的横向扩展与统一管理。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>推荐每个节点仅运行一个 Minio 实例，以确保集群稳定性</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-2-磁盘要求"><a href="#2-1-2-磁盘要求" class="headerlink" title="2.1.2. 磁盘要求"></a>2.1.2. 磁盘要求</h4><p>MinIO 要求至少使用 4 块磁盘，这是因为纠删码模式在运行时至少需要 4 块磁盘才能正常工作（EC:2, 2）。推荐每台机器挂载 2 块磁盘，不建议超过 4 块磁盘。</p>
+<p>推荐每台机器挂在的磁盘数量一致，并且总磁盘数为偶数个，这是因为偶数数量更有利于提升纠删码的存储效率、容错能力与扩展时的平衡性，这一经验来自实际部署中的性能表现。</p>
+<p>在早期版本中，MinIO 集群建议最多使用不超过 32 块磁盘。新版本已取消对最大磁盘数 32 的限制，单个集群可支持无限数量的磁盘，但仍建议控制在 32 块以内。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>文件系统推荐使用 XFS 或 ext4</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-3-CPU-要求"><a href="#2-1-3-CPU-要求" class="headerlink" title="2.1.3. CPU 要求"></a>2.1.3. CPU 要求</h4><p>纠删码计算和数据加密对 CPU 负载较大，CPU 性能直接影响整体吞吐和响应延迟。建议至少配置 4 核 CPU 起步，以更好地支持并发请求及加密计算（如 TLS&#x2F;SSL 加解密和纠删码编码&#x2F;解码）。</p>
+<p>一般而言，小型或中型集群以 4 核 CPU 起步，大型高并发集群则建议配备 8 核或以上的 CPU。</p>
+<hr>
+<h4 id="2-1-4-内存要求"><a href="#2-1-4-内存要求" class="headerlink" title="2.1.4. 内存要求"></a>2.1.4. 内存要求</h4><p>较大内存有助于提升整体性能和响应速度，尤其在高负载场景下效果更为明显。一般而言，小型或中型集群以 8GB 内存起步，大型高并发集群则建议配备 16GB 或以上的内存。</p>
+<p>如果启用了大量加密（如 SSE-C、SSE-KMS）或复杂的纠删码配置，建议适当增加内存；此外，在使用 Kubernetes Operator 或多租户环境时，内存需求也会相应提升。</p>
+<hr>
+<h4 id="2-1-5-网络要求"><a href="#2-1-5-网络要求" class="headerlink" title="2.1.5. 网络要求"></a>2.1.5. 网络要求</h4><p>一般而言，小型或中型集群以千兆（1 Gbps）网络带宽起步，大型高并发集群则建议配备 10 Gbps 或以上的网络带宽。</p>
+<p>单个集群中的所有节点必须部署在同一局域网内，确保低延迟、低丢包率。不建议跨机房部署同一个集群，因为网络延迟和不确定性将严重影响纠删码的数据一致性与性能。</p>
+<hr>
+<h4 id="2-1-6-时间要求"><a href="#2-1-6-时间要求" class="headerlink" title="2.1.6. 时间要求"></a>2.1.6. 时间要求</h4><p>MinIO 分布式集群中，各节点之间必须保持时间同步。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在跨多集群时，时间同步更加敏感，必须进行时间同步。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-7-用户要求"><a href="#2-1-7-用户要求" class="headerlink" title="2.1.7. 用户要求"></a>2.1.7. 用户要求</h4><p>在生产环境中，建议新建一个专门的系统用户（例如命名为 <code>minio</code>）来运行 MinIO 服务，不建议赋予其过高权限（如 root 权限），以降低安全风险。通过限制权限，可以有效防止因服务漏洞导致整个系统被攻破。</p>
+<p>该用户需对存储数据目录具备读写权限，并能够访问 MinIO 监听的端口。</p>
+<hr>
+<h4 id="2-1-8-端口要求"><a href="#2-1-8-端口要求" class="headerlink" title="2.1.8. 端口要求"></a>2.1.8. 端口要求</h4><table>
+<thead>
+<tr>
+<th>端口</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>9000</td>
+<td>TCP</td>
+<td>HTTP 服务端口</td>
+</tr>
+<tr>
+<td>9001</td>
+<td>TCP</td>
+<td>Web 控制台端口</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-1-9-扩容要求"><a href="#2-1-9-扩容要求" class="headerlink" title="2.1.9. 扩容要求"></a>2.1.9. 扩容要求</h4><p>扩容时应尽量保证最终磁盘总数为偶数，并且由于纠删码参数（EC 的 k 和 m 值）在集群初始化时便已固定，无法后期更改，因此磁盘总数应为 EC 分组大小的整数倍。</p>
+<p>例如，若采用 EC(4,2)，每个 Erasure Set 由 6 块磁盘组成，那么在这 6 块磁盘中已经写入 <code>.minio.sys</code> 的情况下，合理的扩容目标应为 12、18、24、30 等磁盘数。</p>
+<p>假如我们将磁盘扩展至 12 块，此时已有的 6 块磁盘中存在 <code>.minio.sys</code>，而新增的 6 块磁盘为空盘，尚未初始化。MinIO 在启动时会扫描这 6 块新盘，发现它们均不含 <code>.minio.sys</code>，且数量刚好满足一个完整 Erasure Set 的要求，于是会自动将其初始化为新的 ES，并写入对应新的 <code>.minio.sys</code>。</p>
+<p>最终，集群中将包含 2 个 Erasure Set，每组的 stripe size 为 6。各 ES 拥有独立的元数据，但共享身份认证配置和 API 接口。此后新写入的数据将由 MinIO 在多个 ES 间选择其一进行存储。</p>
+<p>而若扩容至 10 块磁盘这类非整倍数的情况，MinIO 将因无法形成完整的 Erasure Set 而拒绝启动。</p>
+<p>如果确有修改 EC 参数的需求，我们通常有以下三种策略：</p>
+<ol>
+<li>删除原集群中的 <code>.minio.sys</code> 和所有数据，重新启动集群。此时 MinIO 会将其视为一个全新的集群，并根据当前磁盘数量重新推导 EC 参数</li>
+<li>保留原集群，另行搭建一个新集群，将原集群中的数据迁移至新集群，随后逐步下线旧集群。</li>
+<li>采用联邦架构策略：保留现有 EC(4,2) 的集群，同时部署一个新的集群（如 EC(12,4)），并通过 MinIO Gateway 或联合访问机制，将多个集群整合为一个逻辑上的统一存储空间。</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>当需要构建大规模分布式存储系统时，不建议持续扩展单个 MinIO 集群的节点数量，而是推荐通过部署多个独立的 MinIO 集群，并借助分布式协调机制，将多个集群组成联邦架构，实现更灵活的横向扩展与统一管理。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-10-Swap-分区要求"><a href="#2-1-10-Swap-分区要求" class="headerlink" title="2.1.10. Swap 分区要求"></a>2.1.10. Swap 分区要求</h4><p>swap 分区，简单来说，是操作系统在系统内存不足时，将某些程序不活跃或暂时不需要的数据移动到 swap 分区（位于硬盘），以释放内存资源供当前活跃程序使用。</p>
+<p>由于 swap 分区依赖硬盘，其读写速度远低于内存。如果系统频繁使用 swap，会造成大量磁盘 I&#x2F;O，严重影响系统性能，甚至导致系统响应迟缓或无响应。因此，在性能敏感的场景（如数据库、实时计算、大内存服务器）中，通常建议禁用 swap，确保数据始终在高速内存中运行。</p>
+<p>我们 MinIO 要求关闭 swap 分区。</p>
+<hr>
+<h3 id="2-2-环境准备"><a href="#2-2-环境准备" class="headerlink" title="2.2. 环境准备"></a>2.2. 环境准备</h3><h4 id="2-2-1-Ubuntu-版本（22-04）"><a href="#2-2-1-Ubuntu-版本（22-04）" class="headerlink" title="2.2.1. Ubuntu 版本（22.04）"></a>2.2.1. Ubuntu 版本（22.04）</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-2-节点列表"><a href="#2-2-2-节点列表" class="headerlink" title="2.2.2. 节点列表"></a>2.2.2. 节点列表</h4><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>磁盘</th>
+<th>CPU</th>
+<th>内存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.136.8</td>
+<td>Root 盘、四块 SCSI 数据盘</td>
+<td>2 核</td>
+<td>4GB</td>
+</tr>
+<tr>
+<td>192.168.136.9</td>
+<td>Root 盘、四块 SCSI 数据盘</td>
+<td>2 核</td>
+<td>4GB</td>
+</tr>
+<tr>
+<td>192.168.136.10</td>
+<td>Root 盘、四块 SCSI 数据盘</td>
+<td>2 核</td>
+<td>4GB</td>
+</tr>
+<tr>
+<td>192.168.136.11</td>
+<td>Root 盘、四块 SCSI 数据盘</td>
+<td>2 核</td>
+<td>4GB</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-2-3-时间同步"><a href="#2-2-3-时间同步" class="headerlink" title="2.2.3. 时间同步"></a>2.2.3. 时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v chrony &gt;/dev/null 2&gt;&amp;1 || <span class="hljs-built_in">sudo</span> apt-get install -y chrony<br><br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>会话级别以太网临时代理：</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-4-开放端口"><a href="#2-2-4-开放端口" class="headerlink" title="2.2.4. 开放端口"></a>2.2.4. 开放端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">9000</span>/tcp<br><br><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">9001</span>/tcp<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果使用云服务器，同样需要开放安全组</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-2-5-关闭-Swap-分区"><a href="#2-2-5-关闭-Swap-分区" class="headerlink" title="2.2.5. 关闭 Swap 分区"></a>2.2.5. 关闭 Swap 分区</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 编辑 /etc/fstab</span><br>vim <span class="hljs-regexp">/etc/</span>fstab<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># 将此内容进行注释（/swap 开头的）</span><br><span class="hljs-string"># /swap.img       none    swap    sw      0       0</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 立即关闭 Swap 分区</span><br>swapoff -a<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-2-6-安装需要的工具"><a href="#2-2-6-安装需要的工具" class="headerlink" title="2.2.6. 安装需要的工具"></a>2.2.6. 安装需要的工具</h4><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs q"><span class="hljs-comment">// 1. dos2unix，用于将文件转为 Unix 格式</span><br>command -v dos2unix &gt;/<span class="hljs-built_in">dev</span>/<span class="hljs-built_in">null</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> || sudo apt-<span class="hljs-built_in">get</span> install -y dos2unix<br><br><br><span class="hljs-comment">// 2. xfsprogs，用于将磁盘块设备格式化为 xfs 文件系统</span><br>command -v xfsprogs &gt;/<span class="hljs-built_in">dev</span>/<span class="hljs-built_in">null</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> || sudo apt install -y xfsprogs<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>会话级别以太网临时代理：</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-3-环境搭建"><a href="#2-3-环境搭建" class="headerlink" title="2.3. 环境搭建"></a>2.3. 环境搭建</h3><h4 id="2-3-1-创建软件安装路径"><a href="#2-3-1-创建软件安装路径" class="headerlink" title="2.3.1. 创建软件安装路径"></a>2.3.1. 创建软件安装路径</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -p <span class="hljs-regexp">/mystudy/mi</span>nio<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">1. -p：</span><br><span class="hljs-string">	1. 如果 /mystudy 目录本身不存在，可以加上 -p 参数，递归创建所有父目录</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-2-安装-Minio-Server"><a href="#2-3-2-安装-Minio-Server" class="headerlink" title="2.3.2. 安装 Minio Server"></a>2.3.2. 安装 Minio Server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/minio<br></code></pre></td></tr></table></figure>
+
+<p>接着参考 <a target="_blank" rel="noopener" href="https://min.io/open-source/download?platform=linux">MinIO 官方下载页面</a> 进行安装，安装过程会将 <code>minio</code> 文件下载到当前目录，文件名即为 <code>minio</code>（没有扩展名）。</p>
+<p>需要注意的是，此处下载的是 MinIO Server，以下是 MinIO 的几个组件区别说明：</p>
+<ol>
+<li>MinIO Server：<ol>
+<li>用于部署 MinIO 服务端时下载，用来搭建对象存储系统。</li>
+</ol>
+</li>
+<li>MinIO Client：<ol>
+<li>一款命令行工具，用于管理 MinIO 或兼容的 AWS S3 服务，支持上传、下载、创建桶、设置权限等操作。</li>
+<li>如果你希望通过命令行操作 MinIO 或 AWS S3，就需要安装它！</li>
+</ol>
+</li>
+<li>MinIO SDK<ol>
+<li>面向开发者，用于在代码中操作 MinIO（如上传、下载、授权等），需根据所用编程语言选择对应版本（如 Java、Python、Go）<br><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250715220301330.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>安装 amd64 还是 arm64，要看系统 CPU 架构</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">uname</span> -m<br>“”“<br>1. x86_64：<br>	1. amd64<br>2. aarch64：<br>	1. arm64<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-3-磁盘格式化与挂载"><a href="#2-3-3-磁盘格式化与挂载" class="headerlink" title="2.3.3. 磁盘格式化与挂载"></a>2.3.3. 磁盘格式化与挂载</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 创建磁盘挂载目录</span><br><span class="hljs-built_in">mkdir</span> -p /mystudy/minio/disk&#123;1..4&#125;<br><br><br><span class="hljs-comment"># 2. 列出所有块设备</span><br>lsblk<br><br><br><span class="hljs-comment"># 3. 格式化块（需要格式化为 XFS 或 ext4），这里格式化为 XFS</span><br>mkfs.xfs /dev/sdb<br><br>mkfs.xfs /dev/sdc<br><br>mkfs.xfs /dev/sdd<br><br>mkfs.xfs /dev/sde<br><br><br><span class="hljs-comment"># 4. 将磁盘挂载到挂载目录</span><br>mount /dev/sdb /mystudy/minio/disk1<br><br>mount /dev/sdc /mystudy/minio/disk2<br><br>mount /dev/sdd /mystudy/minio/disk3<br><br>mount /dev/sde /mystudy/minio/disk4<br><br><br><span class="hljs-comment"># 5. 再次列出所有块设备，查看是否挂载成功</span><br>lsblk<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-4-编写-Shell-启动脚本"><a href="#2-3-4-编写-Shell-启动脚本" class="headerlink" title="2.3.4. 编写 Shell 启动脚本"></a>2.3.4. 编写 Shell 启动脚本</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 1. 进入 Minio 目录</span><br>cd /mystudy/minio<br><br><br><span class="hljs-meta"># 2. 创建 Shell 启动脚本</span><br>vim start<span class="hljs-punctuation">-</span>minio.sh<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-meta"># 设置根账户和密码</span><br>export MINIO_ROOT_USER<span class="hljs-punctuation">=</span>admin<br>export MINIO_ROOT_PASSWORD<span class="hljs-punctuation">=</span>password<br><br><span class="hljs-meta"># 多机分布式模式</span><br>nohup /mystudy/minio/minio server \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>config<span class="hljs-punctuation">-</span>dir /etc/minio \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>address <span class="hljs-punctuation">:</span><span class="hljs-number">9000</span> \<br>  <span class="hljs-punctuation">-</span><span class="hljs-punctuation">-</span>console<span class="hljs-punctuation">-</span>address <span class="hljs-punctuation">:</span><span class="hljs-number">9001</span> \<br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.8/mystudy/minio/disk&#123;1..4&#125; \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.9/mystudy/minio/disk&#123;1..4&#125; \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.10/mystudy/minio/disk&#123;1..4&#125; \</span><br>  http<span class="hljs-punctuation">:</span><span class="hljs-comment">//192.168.136.11/mystudy/minio/disk&#123;1..4&#125; \</span><br>  &gt; /var/<span class="hljs-built_in">log</span>/minio.<span class="hljs-built_in">log</span> <span class="hljs-number">2</span>&gt;<span class="hljs-meta">&amp;1 &amp;</span><br><br>echo <span class="hljs-string">&quot;MinIO 多机分布式集群已启动，后台运行…&quot;</span><br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment">// 2. 将脚本转为 Unix 格式</span><br>dos2unix /mystudy/minio/start<span class="hljs-punctuation">-</span>minio.sh<br><br><br><span class="hljs-meta"># 3. 添加可执行权限</span><br>chmod <span class="hljs-punctuation">+</span>x /mystudy/minio/start<span class="hljs-punctuation">-</span>minio.sh<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Shell 启动脚本中的最后一个空白行并非笔误，它是必须添加的内容。</li>
+<li>我们可以在 MinIO 首次启动时手动指定纠删码参数（EC 的 k 和 m）。此时，所提供的磁盘数量必须是 k + m 的整数倍，且不得少于 k + m，否则将导致启动失败。</li>
+<li>需要注意的是，k + m 一般不超过 16，并且能手动指定纠删码参数的，只有某些特定 Minio 版本可以使用</li>
+</ol>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#!/bin/bash</span><br><br><span class="hljs-comment"># 设置根账户和密码</span><br><span class="hljs-attribute">export</span> MINIO_ROOT_USER=admin<br><span class="hljs-attribute">export</span> MINIO_ROOT_PASSWORD=password<br><br><span class="hljs-comment"># 多机分布式模式，指定纠删码参数为 EC(10,6)</span><br><span class="hljs-attribute">nohup</span> /mystudy/minio/minio server <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --config-dir /etc/minio <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --address :<span class="hljs-number">9000</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --console-address :<span class="hljs-number">9001</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --erasure-coding.k <span class="hljs-number">10</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --erasure-coding.m <span class="hljs-number">6</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  http://<span class="hljs-number">192.168.136.8</span>/mystudy/minio/disk&#123;<span class="hljs-number">1</span>..<span class="hljs-number">4</span>&#125; <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  http://<span class="hljs-number">192.168.136.9</span>/mystudy/minio/disk&#123;<span class="hljs-number">1</span>..<span class="hljs-number">4</span>&#125; <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  http://<span class="hljs-number">192.168.136.10</span>/mystudy/minio/disk&#123;<span class="hljs-number">1</span>..<span class="hljs-number">4</span>&#125; <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  http://<span class="hljs-number">192.168.136.11</span>/mystudy/minio/disk&#123;<span class="hljs-number">1</span>..<span class="hljs-number">4</span>&#125; <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  &gt; /var/log/minio.log <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> &amp;<br><br><span class="hljs-attribute">echo</span> <span class="hljs-string">&quot;MinIO 多机分布式集群已启动，后台运行…&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-5-启动分布式集群"><a href="#2-3-5-启动分布式集群" class="headerlink" title="2.3.5. 启动分布式集群"></a>2.3.5. 启动分布式集群</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">/mystudy/minio/start-minio.<span class="hljs-keyword">sh</span><br><br><br><span class="hljs-keyword">ps</span> aux | <span class="hljs-keyword">grep</span> minio<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>每个节点都要启动</li>
+</ol>
+</blockquote>
+<hr>
+
                 
               </div>
             

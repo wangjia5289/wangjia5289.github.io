@@ -19,15 +19,15 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论BucketBucket 概述Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹  Bucket 策略我们可以使用 Minio SDK 进行指定 Bucket 策略： 1234567891011121314@PostMapping(&quot;&#x2F;setBucketPolicy&quot;)public Stri">
+    <meta name="description" content="一、理论Minio 配置MinioConfiguration 配置类在 com.example.minio.configuration 包下 12345678910111213141516171819@Configurationpublic class MinioConfiguration &#123;    @Bean(name &#x3D; &quot;minioClientA&quot;)    pu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring 整合 Minio">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/13/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20%E6%95%B4%E5%90%88%20Minio/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论BucketBucket 概述Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹  Bucket 策略我们可以使用 Minio SDK 进行指定 Bucket 策略： 1234567891011121314@PostMapping(&quot;&#x2F;setBucketPolicy&quot;)public Stri">
+<meta property="og:description" content="一、理论Minio 配置MinioConfiguration 配置类在 com.example.minio.configuration 包下 12345678910111213141516171819@Configurationpublic class MinioConfiguration &#123;    @Bean(name &#x3D; &quot;minioClientA&quot;)    pu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-09T01:14:37.243Z">
+<meta property="article:modified_time" content="2025-07-15T15:09:16.474Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k words
+          1.6k words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          27 mins
+          14 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-09T09:14:37+08:00
+                    Last updated on 2025-07-15T23:09:16+08:00
                   
                   
 
@@ -299,214 +299,14 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="Bucket"><a href="#Bucket" class="headerlink" title="Bucket"></a>Bucket</h2><h3 id="Bucket-概述"><a href="#Bucket-概述" class="headerlink" title="Bucket 概述"></a>Bucket 概述</h3><p>Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层<strong>文件夹</strong></p>
-<hr>
-<h3 id="Bucket-策略"><a href="#Bucket-策略" class="headerlink" title="Bucket 策略"></a>Bucket 策略</h3><p>我们可以使用 Minio SDK 进行指定 Bucket 策略：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketPolicy&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketPolicy</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName, <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">String</span> policyJson</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketPolicy</span>(<br>				<span class="hljs-title class_">SetBucketPolicyArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(policyJson)<br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 策略设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶策略失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>在这里需要我们传入 JSON，我们请求体需要这样写：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<br>  <span class="hljs-string">&quot;Version&quot;</span>: <span class="hljs-string">&quot;2012-10-17&quot;</span>,<br>  <span class="hljs-string">&quot;Statement&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;Effect&quot;</span>: <span class="hljs-string">&quot;Allow&quot;</span>,<br>      <span class="hljs-string">&quot;Principal&quot;</span>: &#123;<span class="hljs-string">&quot;AWS&quot;</span>: [<span class="hljs-string">&quot;*&quot;</span>]&#125;,<br>      <span class="hljs-string">&quot;Action&quot;</span>: [<span class="hljs-string">&quot;s3:GetObject&quot;</span>],<br>      <span class="hljs-string">&quot;Resource&quot;</span>: [<span class="hljs-string">&quot;arn:aws:s3:::your-bucket-name/*&quot;</span>]<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><font color="#92d050">1. Version</font><br>表示 Bucket 策略语法的版本，目前写 <code>&quot;2012-10-17&quot;</code> 是标准写法</p>
-<p><font color="#92d050">2. Effect</font><br>表示我们写的这个策略是允许还是禁止，在多个策略冲突时，Deny 权限优先生效，可选值有：</p>
-<ol>
-<li>Allow</li>
-<li>Deny</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项：策略冲突</p>
-<ol>
-<li>比如给用户绑定了某个权限策略，用户可能属于一个或多个组，这些组也会有自己的策略，桶可能设置了自己的访问策略，限制谁能访问，系统可能还有一些默认策略或者管理员设置的全局策略</li>
-<li>两个策略同时作用于同一个用户时，策略内容“冲突”了：一个允许，一个拒绝，Deny（拒绝）优先生效</li>
-</ol>
-</blockquote>
-<p><font color="#92d050">3. Principal</font><br>指定那个用户可以执行或者拒绝谁执行哪些操作，需要看我们的 Effect，如果是 Allow，就说明是可以执行，如果是 Deny 就是指定谁不可以执行，常见有：</p>
-<ol>
-<li>* <ol>
-<li>所有用户</li>
-</ol>
-</li>
-<li>user-arn<ol>
-<li>某个用户的用户名</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>AWS 是指用户</li>
-</ol>
-</blockquote>
-<p><font color="#92d050">4. Action</font><br>指定动作，常见有：</p>
-<ol>
-<li>Bucket 级操作：<ol>
-<li>s3:ListBucket<ol>
-<li>列出桶内的对象列表</li>
-</ol>
-</li>
-<li>s3:GetBucketLocation<ol>
-<li>获取桶所在区域（Region）信息</li>
-</ol>
-</li>
-<li>s3:ListBucketMultipartUploads<ol>
-<li>查看这个桶中进行中的多部分上传任务（分片上传）</li>
-</ol>
-</li>
-<li>s3:GetBucketPolicy<ol>
-<li>查看桶策略</li>
-</ol>
-</li>
-<li>s3:PutBucketPolicy<ol>
-<li>设置桶策略</li>
-</ol>
-</li>
-<li>s3:DeleteBucketPolicy<ol>
-<li>删除桶策略</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Object 级操作：<ol>
-<li>s3:GetObject<ol>
-<li>下载 Object</li>
-</ol>
-</li>
-<li>s3:PutObject<ol>
-<li>上传对象</li>
-</ol>
-</li>
-<li>s3:DeleteObject<ol>
-<li>删除对象</li>
-</ol>
-</li>
-<li>s3:AbortMultipartUpload<ol>
-<li>取消一个正在进行的分片上传任务</li>
-</ol>
-</li>
-<li>s3:ListMultipartUploadParts<ol>
-<li>查看某个分片上传任务的已上传部分</li>
-</ol>
-</li>
-<li>s3:GetObjectVersion<ol>
-<li>获取某个版本对象（MinIO默认不开启版本控制）</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>s3:ListBucket<ol>
-<li>列出桶中的对象列表</li>
-</ol>
-</li>
-<li>s3:GetBucketLocation<ol>
-<li>获取桶的区域信息</li>
-</ol>
-</li>
-<li>s3:*<ol>
-<li>所有操作</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>获取桶的区域信息，也就是这个桶属于哪个区域（Region），在 MinIO 社区版中区域的概念有时是“虚拟”的（比如默认都叫 <code>us-east-1</code>），**但权限上仍然要考虑是否开放 <code>s3:GetBucketLocation</code>**，否则 SDK&#x2F;CLI 工具可能报 403。</li>
-</ol>
-</blockquote>
-<p><font color="#92d050">5. Resource</font><br>操作哪些资源，常见有：</p>
-<ol>
-<li>arn:aws:s3:::my-bucket<ol>
-<li>桶本身</li>
-</ol>
-</li>
-<li>arn:aws:s3:::my-bucket&#x2F;*<ol>
-<li>桶内所有 Object</li>
-</ol>
-</li>
-<li>arn:aws:s3:::my-bucket&#x2F;public&#x2F;*<ol>
-<li>某些 Object</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>除 Minio SDK 外，还可以通过 Web UI、Minio CLI 进行指定</li>
-<li>需要注意的是，社区版不能通过 Web UI 进行指定</li>
-</ol>
-</blockquote>
-<hr>
-<h3 id="Bucket-标签"><a href="#Bucket-标签" class="headerlink" title="Bucket 标签"></a>Bucket 标签</h3><p>一组键值对标签，用来给桶做标识或分类，前端需要使用 JSON 格式发过来：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;production&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;team&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;devops&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;project&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;minio-demo&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-<h3 id="Bucket-生命周期"><a href="#Bucket-生命周期" class="headerlink" title="Bucket 生命周期"></a>Bucket 生命周期</h3><p>其实这不能叫做 Bucket 生命周期，而应该叫做 Object 生命周期，但是在操作维度上还是属于 Bucket 生命周期，我们可以使用 Minio SDK 进行指定 Bucket 生命周期：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketLifecycle&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketLifecycle</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName,</span><br><span class="hljs-params">								 <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">LifecycleConfiguration</span> lifecycleConfigurationXml</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketLifecycle</span>(<br>				<span class="hljs-title class_">SetBucketLifecycleArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(lifecycleConfigurationXml) <span class="hljs-comment">// 传入 LifecycleConfigutation 类型的 Bucket 生命周期</span><br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 生命周期设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶生命周期失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p>在这里需要我们传入 XML，我们请求体需要这样写：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LifecycleConfiguration</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-temp-files<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>temp/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>7<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-logs<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>logs/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>90<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>delete-old-versions<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>archive/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">LifecycleConfiguration</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p><font color="#92d050">1. LifecycleConfiguration</font><br>根标签，表示这是一个生命周期配置文件，其 xmlns 是 XML 命名空间，指定该 XML 遵循 S3 生命周期配置的标准格式</p>
-<p><font color="#92d050">2. ID</font><br>该规则（Role）的唯一标识，方便管理，最多 255 个字符</p>
-<p><font color="#92d050">3. Statue</font><br>启用或禁用该条规则，可选值：</p>
-<ol>
-<li>Enabled</li>
-<li>Disabled</li>
-</ol>
-<p><font color="#92d050">4. Filter</font><br>对象过滤器，常用有：</p>
-<ol>
-<li>Prefix<ol>
-<li>匹配对象键名前缀</li>
-<li>如 temp&#x2F; 指的匹配桶中所有以 <code>temp/</code> 开头的对象</li>
-</ol>
-</li>
-<li>And<ol>
-<li>可组合多个条件，一般是组合前缀和标签<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">And</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>log/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>env<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>dev<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>type<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">And</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>Tag 是作用在 Object 上的</li>
-</ol>
-</blockquote>
-<p><font color="#92d050">5. Expiration</font><br>过期策略，Days 与 Date 两选一，过期后将被删除</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml">// 1. 30 天后过期<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br><br><br>// 2. 在固定日期后过期，必须填写标准 ISO 格式，这里是在2025年12月31日0时0分0秒0毫秒过期<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2025-12-31T00:00:00.000Z<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>生命周期配置是<strong>整体配置</strong>，不是单挑规则独立操作，也就是说：每次调用 <code>setBucketLifecycle</code> 都是覆盖桶的<strong>全部生命周期配置</strong></li>
-</ol>
-</blockquote>
-<p><font color="#92d050">6. NoncurrentVersionExpiration</font><br>仅适用于 <strong>版本控制开启的桶</strong>，当对象成为旧版本后几天删除，只能使用 NoncurrentDays</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-
-<p><font color="#92d050">7. AbortIncompleteMultipartUpload</font><br>从分片上传开始算起，几天后自动终止“未完成的分片上传”任务，节省空间，只支持 DaysAfterInitiation</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-<h2 id="Minio-配置"><a href="#Minio-配置" class="headerlink" title="Minio 配置"></a>Minio 配置</h2><p>MinioConfiguration 配置类在 <code>com.example.minio.configuration</code> 包下</p>
+                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="Minio-配置"><a href="#Minio-配置" class="headerlink" title="Minio 配置"></a>Minio 配置</h2><p>MinioConfiguration 配置类在 <code>com.example.minio.configuration</code> 包下</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MinioConfiguration</span> &#123;<br><br>    <span class="hljs-meta">@Bean(name = <span class="hljs-string">&quot;minioClientA&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> MinioClient minioClientA() &#123;<br>        <span class="hljs-keyword">return</span> MinioClient.builder()<br>                .endpoint(<span class="hljs-string">&quot;http://192.168.136.8:9000&quot;</span>)<br>                .credentials(<span class="hljs-string">&quot;acount&quot;</span>, <span class="hljs-string">&quot;password&quot;</span>)<br>                .build();<br>    &#125;<br><br>    <span class="hljs-meta">@Bean(name = <span class="hljs-string">&quot;minioClientB&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> MinioClient minioClientB() &#123;<br>        <span class="hljs-keyword">return</span> MinioClient.builder()<br>                .endpoint(<span class="hljs-string">&quot;http://192.168.136.9:9000&quot;</span>)<br>                .credentials(<span class="hljs-string">&quot;adminB&quot;</span>, <span class="hljs-string">&quot;adminB123&quot;</span>)<br>                .build();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>配置方面，我们只需将 MinioClient 声明为一个 Bean，使用时直接注入即可</li>
-<li>MinioClient 用于与 MinIO 服务建立连接，发送请求</li>
-<li>MinioClient 底层基于 OkHttpClient，使用的是 HTTP 连接池机制，这与我们日常理解的 MySQL 等数据库连接池有所不同，所以 MinioClient 是线程安全的</li>
+<li>MinioClient 用于与 MinIO 服务建立连接，发送请求。而所谓的 Minio 配置，就算将 MinioClient 声明为一个 Bean，使用时直接注入即可</li>
+<li>MinioClient 底层基于 OkHttpClient，使用的是 HTTP 连接池机制，这与我们日常理解的 MySQL 等数据库连接池有所不同，所以 MinioClient 是线程安全的，但是高并发时也会存在瓶颈</li>
 </ol>
 </blockquote>
 <hr>

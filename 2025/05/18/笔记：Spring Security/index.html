@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250628210023140.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250630183241212.png">
 <meta property="article:published_time" content="2025-05-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-11T06:49:57.208Z">
+<meta property="article:modified_time" content="2025-07-14T01:23:08.176Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/Map%EF%BC%9ASpringSecurity.xmind">
@@ -294,7 +294,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-11T14:49:57+08:00
+                    Last updated on 2025-07-14T09:23:08+08:00
                   
                   
 
@@ -748,7 +748,7 @@
 <td>唯一约束</td>
 <td>唯一索引</td>
 <td></td>
-<td><a href="mailto:&#106;&#111;&#x68;&#110;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#109;">&#106;&#111;&#x68;&#110;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#109;</a></td>
+<td><a href="mailto:&#106;&#x6f;&#x68;&#110;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;">&#106;&#x6f;&#x68;&#110;&#x40;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;</a></td>
 <td>邮箱</td>
 </tr>
 <tr>
@@ -929,7 +929,7 @@
 <hr>
 <h4 id="1-1-3-使用-Spring-Data-MyBatis-实现查询用户的基本信息和权限"><a href="#1-1-3-使用-Spring-Data-MyBatis-实现查询用户的基本信息和权限" class="headerlink" title="1.1.3. 使用 Spring Data MyBatis 实现查询用户的基本信息和权限"></a>1.1.3. 使用 Spring Data MyBatis 实现查询用户的基本信息和权限</h4><h5 id="1-1-3-1-进行-MyBatis-相关配置"><a href="#1-1-3-1-进行-MyBatis-相关配置" class="headerlink" title="1.1.3.1. 进行 MyBatis 相关配置"></a>1.1.3.1. 进行 MyBatis 相关配置</h5><p>详见笔记：Spring Data MyBatis</p>
 <hr>
-<h5 id="1-1-3-2-编写-User-Entity-类"><a href="#1-1-3-2-编写-User-Entity-类" class="headerlink" title="1.1.3.2. 编写 User Entity 类"></a>1.1.3.2. 编写 User Entity 类</h5><p>User Entity 类位于 <code>com.example.securitywithhttpsession.entity</code> 包下</p>
+<h5 id="1-1-3-2-编写-User-Entity-类"><a href="#1-1-3-2-编写-User-Entity-类" class="headerlink" title="1.1.3.2. 编写 User Entity 类"></a>1.1.3.2. 编写 User Entity 类</h5><p>User 类位于 <code>com.example.securitywithhttpsession.entity</code> 包下</p>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-keyword">public</span> class User &#123;<br><br>	<span class="hljs-comment">// users 表中的数据（用户基本信息）</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">Integer</span> userId;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">String</span> username;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">String</span> password;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">Integer</span> isAccountNonExpired;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">Integer</span> isAccountNonLocked;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">Integer</span> isCredentialsNonExpired;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">Integer</span> isEnabled;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">String</span> email;<br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">String</span> phoneNumber;<br>    <br>	<span class="hljs-comment">// authorities 表中的数据（用户的权限，不要忘记添加这个）</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-built_in">List</span>&lt;SimpleGrantedAuthority&gt; authorities;<br><br>	<span class="hljs-comment">// 构造方法</span><br>    <span class="hljs-comment">// getter 方法</span><br>	<span class="hljs-comment">// setter 方法</span><br>	<span class="hljs-comment">// equals 方法</span><br>	<span class="hljs-comment">// hashCode 方法</span><br>	<span class="hljs-comment">// toString 方法</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
@@ -948,7 +948,7 @@
 </blockquote>
 <p><img src="/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250630183241212.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="1-1-3-3-编写-UserMapper-接口，并定义查询方法"><a href="#1-1-3-3-编写-UserMapper-接口，并定义查询方法" class="headerlink" title="1.1.3.3. 编写 UserMapper 接口，并定义查询方法"></a>1.1.3.3. 编写 UserMapper 接口，并定义查询方法</h5><p>User Entity 类位于 <code>com.example.securitywithhttpsession.mapper</code> 包下</p>
+<h5 id="1-1-3-3-编写-UserMapper-接口，并定义查询方法"><a href="#1-1-3-3-编写-UserMapper-接口，并定义查询方法" class="headerlink" title="1.1.3.3. 编写 UserMapper 接口，并定义查询方法"></a>1.1.3.3. 编写 UserMapper 接口，并定义查询方法</h5><p>UserMapper 类位于 <code>com.example.securitywithhttpsession.mapper</code> 包下</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Mapper</span>  <br>public interface UserMapper &#123;  <br><br>    <span class="hljs-selector-tag">User</span> <span class="hljs-selector-tag">getUserByUserName</span>(<span class="hljs-variable">@Param</span>(<span class="hljs-string">&quot;username&quot;</span>) String username) ;  <br>  <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
