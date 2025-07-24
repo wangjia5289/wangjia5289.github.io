@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
-  <link rel="icon" href="/img/ba.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,17 +19,29 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="运行时数据区一览图  程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根据 JVM 规范，每个线程都拥有独立的">
+    <meta name="description" content="1. 运行时数据区1.1. 运行时数据区一览图  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JVM">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="运行时数据区一览图  程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根据 JVM 规范，每个线程都拥有独立的">
+<meta property="og:description" content="1. 运行时数据区1.1. 运行时数据区一览图  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/-20250722190040146.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723142505659.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723130746731.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180139005.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180026214.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180216377.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180252011.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180343374.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180532258.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180621968.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180737908.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723173022583.png">
 <meta property="article:published_time" content="2025-05-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-22T11:02:36.896Z">
+<meta property="article:modified_time" content="2025-07-24T02:53:24.317Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
@@ -197,7 +209,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1%E7%BE%8E%E5%AD%A6-%E5%90%8A%E5%B8%A6%E8%A3%99.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -226,7 +238,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          954 words
+          3.4k words
         
       </span>
     
@@ -237,7 +249,7 @@
         
         
         
-          8 mins
+          29 mins
         
       </span>
     
@@ -292,7 +304,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-22T19:02:36+08:00
+                    Last updated on 2025-07-24T10:53:24+08:00
                   
                   
 
@@ -302,21 +314,13 @@
             
               <div class="markdown-body">
                 
-                <h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><h3 id="一览图"><a href="#一览图" class="headerlink" title="一览图"></a>一览图</h3><p><img src="/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="1-运行时数据区"><a href="#1-运行时数据区" class="headerlink" title="1. 运行时数据区"></a>1. 运行时数据区</h2><h3 id="1-1-运行时数据区一览图"><a href="#1-1-运行时数据区一览图" class="headerlink" title="1.1. 运行时数据区一览图"></a>1.1. 运行时数据区一览图</h3><p><img src="/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="程序计数器（PC-寄存器）"><a href="#程序计数器（PC-寄存器）" class="headerlink" title="程序计数器（PC 寄存器）"></a>程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
+<h3 id="1-2-程序计数器（PC-寄存器）"><a href="#1-2-程序计数器（PC-寄存器）" class="headerlink" title="1.2. 程序计数器（PC 寄存器）"></a>1.2. 程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
 <p>根据 JVM 规范，每个线程都拥有独立的、私有的程序计数器，其生命周期与线程一致，用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量），由执行引擎负责读取指令并执行。如果执行的是本地方法（native），PC 的值为 <code>undefined</code>。</p>
 <p>PC 寄存器是一块极小的内存区域，几乎可以忽略不计，因为它只需保存一个字节码指令的地址。在 32 位 JVM 中，通常使用 <code>int</code> 类型，占 4 个字节；而在 64 位 JVM 中，通常使用 <code>long</code> 类型，占 8 个字节。</p>
 <p>需要注意的是，程序计数器不存在 GC，也不存在 OOM</p>
-<p><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/-20250722190040146.png" srcset="/img/loading.gif" lazyload></p>
-<p>以如下 Java 代码举例：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PCExample</span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        <span class="hljs-built_in">int</span> result = <span class="hljs-keyword">add</span>(<span class="hljs-number">5</span>, <span class="hljs-number">7</span>);<br>        <span class="hljs-keyword">if</span> (result &gt; <span class="hljs-number">10</span>) &#123;<br>            printResult(result);<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Too small.&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> a, <span class="hljs-built_in">int</span> b</span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> a + b;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printResult</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> <span class="hljs-keyword">value</span></span>)</span> &#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Result is: &quot;</span> + <span class="hljs-keyword">value</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-<p>它的 class 文件如下：</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-comment">// main 方法字节码</span><br> <span class="hljs-number">0</span>: bipush        <span class="hljs-number">5</span>          <span class="hljs-comment">// 把 5 压栈</span><br> <span class="hljs-number">2</span>: bipush        <span class="hljs-number">7</span>          <span class="hljs-comment">// 把 7 压栈</span><br> <span class="hljs-number">4</span>: invokestatic  <span class="hljs-meta">#2         <span class="hljs-comment">// 调用 add(int, int)，此时 PC → add 方法入口</span></span><br> <span class="hljs-number">7</span>: istore_1                  <span class="hljs-comment">// 把结果存入本地变量 result</span><br><br> <span class="hljs-number">8</span>: iload_1                   <span class="hljs-comment">// 加载 result</span><br> <span class="hljs-number">9</span>: bipush       <span class="hljs-number">10</span>           <span class="hljs-comment">// 加载常量 10</span><br><span class="hljs-number">11</span>: if_icmple    <span class="hljs-number">21</span>           <span class="hljs-comment">// 若 result &lt;= 10，跳转到 21（else 分支）</span><br><br><span class="hljs-number">14</span>: iload_1<br><span class="hljs-number">15</span>: invokestatic <span class="hljs-meta">#3           <span class="hljs-comment">// 调用 printResult，PC → printResult 方法入口</span></span><br><span class="hljs-number">18</span>: <span class="hljs-keyword">goto</span>          <span class="hljs-number">26</span>          <span class="hljs-comment">// 跳过 else 分支，直接 return</span><br><br><span class="hljs-number">21</span>: getstatic     <span class="hljs-meta">#4          <span class="hljs-comment">// System.out</span></span><br><span class="hljs-number">24</span>: ldc           <span class="hljs-meta">#5          <span class="hljs-comment">// 加载 &quot;Too small.&quot;</span></span><br><span class="hljs-number">26</span>: invokevirtual <span class="hljs-meta">#6          <span class="hljs-comment">// 调用 println(String)</span></span><br><span class="hljs-number">29</span>: <span class="hljs-keyword">return</span><br><br><br><span class="hljs-comment">// add 字节码</span><br> <span class="hljs-number">0</span>: iload_0       <span class="hljs-comment">// 加载第一个参数 a</span><br> <span class="hljs-number">1</span>: iload_1       <span class="hljs-comment">// 加载第二个参数 b</span><br> <span class="hljs-number">2</span>: iadd          <span class="hljs-comment">// 相加</span><br> <span class="hljs-number">3</span>: ireturn       <span class="hljs-comment">// 返回结果，PC 返回 main 中调用位置之后</span><br><br><br><span class="hljs-comment">// printResult 字节码</span><br> <span class="hljs-number">0</span>: getstatic     <span class="hljs-meta">#4          <span class="hljs-comment">// System.out</span></span><br> <span class="hljs-number">3</span>: <span class="hljs-keyword">new</span>           <span class="hljs-meta">#7          <span class="hljs-comment">// new StringBuilder</span></span><br> <span class="hljs-number">6</span>: dup<br> <span class="hljs-number">7</span>: invokespecial <span class="hljs-meta">#8          <span class="hljs-comment">// StringBuilder.&lt;init&gt;()</span></span><br><br><span class="hljs-number">10</span>: ldc           <span class="hljs-meta">#9          <span class="hljs-comment">// &quot;Result is: &quot;</span></span><br><span class="hljs-number">12</span>: invokevirtual <span class="hljs-meta">#10         <span class="hljs-comment">// StringBuilder.append(String)</span></span><br><span class="hljs-number">15</span>: iload_0<br><span class="hljs-number">16</span>: invokevirtual <span class="hljs-meta">#11         <span class="hljs-comment">// append(int)</span></span><br><span class="hljs-number">19</span>: invokevirtual <span class="hljs-meta">#12         <span class="hljs-comment">// toString</span></span><br><span class="hljs-number">22</span>: invokevirtual <span class="hljs-meta">#6          <span class="hljs-comment">// println(String)</span></span><br><span class="hljs-number">25</span>: <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
-
-
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
 <li><input disabled="" type="checkbox"> <blockquote>
 <p>[!NOTE] 注意事项：</p>
@@ -343,7 +347,158 @@
 </blockquote>
 </li>
 </ul>
+<hr>
+<h3 id="1-3-虚拟机栈"><a href="#1-3-虚拟机栈" class="headerlink" title="1.3. 虚拟机栈"></a>1.3. 虚拟机栈</h3><h4 id="1-3-1-虚拟机栈一览图"><a href="#1-3-1-虚拟机栈一览图" class="headerlink" title="1.3.1. 虚拟机栈一览图"></a>1.3.1. 虚拟机栈一览图</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="1-3-2-虚拟机栈"><a href="#1-3-2-虚拟机栈" class="headerlink" title="1.3.2. 虚拟机栈"></a>1.3.2. 虚拟机栈</h4><hr>
+<h4 id="1-3-3-局部变量表"><a href="#1-3-3-局部变量表" class="headerlink" title="1.3.3. 局部变量表"></a>1.3.3. 局部变量表</h4><p>局部变量表是一个一维的数字数组，用于保存<strong>方法参数</strong>和<strong>方法体内部定义的局部变量</strong>。它可以存储多种数据类型，包括基本数据类型和对象引用（reference），在 JDK5 之前还包含一种 returnAddress 类型（了解即可）。</p>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723142505659.png" srcset="/img/loading.gif" lazyload></p>
+<p>局部变量表中，最基本的存储单元称为变量槽（Slot）。JVM 会为每一个 Slot 分配一个访问索引（从 index 0 开始），通过这个索引可以访问到局部变量表中的变量。需要注意的是，索引不一定是连续递增 1，例如 long、double 类型会占用两个槽位。</p>
+<p>其中，32 位及以内的数据类型（如：<code>reference</code>、<code>returnAddress</code>、<code>byte</code>、<code>short</code>、<code>char</code>、<code>int</code>、<code>float</code>、<code>boolean</code>）占用一个 Slot；<strong>64 位的数据类型</strong>（如：<code>long</code> 和 <code>double</code>）则占用两个 Slot。</p>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723130746731.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>byte</code>、<code>short</code>、<code>char</code> 在存储进局部变量表前，会被自动转换为 <code>int</code> 类型，对应关系有：<ol>
+<li>原始类型 —- 在局部变量表的类型</li>
+<li>byte —- int</li>
+<li>short —- int</li>
+<li>char —- int</li>
+<li>int —- int</li>
+<li>boolean —- int</li>
+<li>long —– long</li>
+<li>float —- float</li>
+<li>double —- double</li>
+</ol>
+</li>
+<li>在栈帧中，与性能调优关系最为密切的部分就是局部变量表</li>
+<li>当方法调用结束后，该方法对应的栈帧会被销毁，局部变量表也随之销毁。</li>
+<li>局部变量表所需的容量大小在编译期间就已经确定，运行时无法更改。</li>
+<li>如果当前线程调用的方法是构造方法或实例方法，那么代表当前对象的引用 <code>this</code>（即堆中对象的引用地址）会默认存放在局部变量表 index 为 0 的槽中。这也解释了为什么我们在构造方法和实例方法中可以使用 <code>this</code>，而在 <code>static</code> 方法中却不能使用：<ol>
+<li>在下面的示例中，当执行 <code>main</code> 方法时，会创建一个栈帧；</li>
+<li>执行 <code>Demo.staticMethod();</code> 时，由于是静态方法，属于类级别，可以直接调用；</li>
+<li>执行 <code>Demo demo = new Demo();</code> 时，调用的是构造方法 <code>&lt;init&gt;</code>，此时会创建一个新的栈帧，并自动将 <code>this</code> 引用压入 index 为 0 的槽位中；当 <code>&lt;init&gt;</code> 方法执行完毕，会返回 <code>this</code>，赋值给变量 <code>demo</code>；</li>
+<li>调用 <code>demo.instanceMethod();</code> 时，同样会创建一个栈帧，并将 <code>this</code> 引用压入 index 为 0 的槽位。</li>
+<li>你可能会疑惑：调用 <code>new Demo()</code> 和 <code>demo.instanceMethod()</code> 的时候，代码里并没有传递 <code>this</code>，为什么 <code>this</code> 也能压入槽？其实这是 Java 的一种语法糖 + 字节码优化机制。虽然源码中没写，但在编译成字节码时，JVM 会自动将 <code>this</code> 作为第一个参数加入，如果方法声明为：<code>method(int a, int b, int c)</code>，实际上在实例方法中对应的局部变量表会是：<code>[this, a, b, c]</code></li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> &#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        Demo.staticMethod();<br>        Demo demo = <span class="hljs-keyword">new</span> Demo();<br>        demo.instanceMethod();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">staticMethod</span>()</span> &#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Static&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">instanceMethod</span>()</span> &#123;<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Instance&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>[!NOTE] 注意事项<br>4. 槽位是可以复用的。当某个局部变量生命周期结束（超出作用域）后，在其作用域之外声明的新局部变量很可能会复用这个已释放的槽位，从而达到节省局部变量表空间的目的</p>
+<ol>
+<li>例如，在下面的示例代码中，<code>b</code> 会复用 <code>a</code> 所占用的槽位。因此，整个方法的局部变量表最大只需要 2 个槽位</li>
+</ol>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;  <br>        &#123;  <br>            <span class="hljs-built_in">int</span> a = <span class="hljs-number">10</span>;  <br>            System.<span class="hljs-keyword">out</span>.println(a);  <br>        &#125;  <br>  <br>        &#123;  <br>            <span class="hljs-built_in">int</span> b = <span class="hljs-number">20</span>;  <br>            System.<span class="hljs-keyword">out</span>.println(b);  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>5. Java 类里各种变量的 “诞生” 与 “存活” 流程</p>
+<ol>
+<li>在下面的例子中，变量会经历以下几个阶段：<ol>
+<li>类加载阶段<ol>
+<li>准备阶段<ol>
+<li>JVM 将 <code>Demo.class</code> 文件加载到内存，并为静态变量 <code>staticVar</code> 分配内存，并赋予默认值 0</li>
+<li>该静态变量存储在方法区（元空间、Metaspace）</li>
+<li>准备阶段不执行任何代码，也不调用任何方法，只是为静态变量提供一个 “安全” 的初始状态，避免野指针或未定义行为。</li>
+</ol>
+</li>
+<li>初始化阶段<ol>
+<li>执行静态变量的显式赋值语句（如 <code>staticVar = 10;</code>）和静态代码块（<code>static &#123;&#125;</code>）中的代码。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对象创建阶段<ol>
+<li>JVM 在堆内存中为对象 <code>demo</code> 分配空间，所有成员变量（如 <code>instanceVar</code>）都被分配内存并赋予默认值（0、false、null）</li>
+<li>然后执行构造方法，可以对成员变量进行显式初始化或逻辑处理。</li>
+</ol>
+</li>
+<li>方法调用阶段<ol>
+<li>JVM 在栈内存中为方法调用创建一个新的栈帧</li>
+<li>因为是实例方法，槽位 0 用于存放 <code>this</code> 引用，指向当前调用方法的 <code>demo</code> 对象。</li>
+<li>槽位 1 用于存放方法参数 <code>param</code>，槽位 2 存放局部变量 <code>localVar</code>。</li>
+<li>需要注意的是，局部变量和方法参数不会像静态变量或成员变量那样自动初始化默认值。</li>
+<li>如果你只是声明了一个局部变量（如 <code>int localVar;</code>），但没有显式赋值（如 <code>localVar = 5</code>），那么就会编译报错。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs perl">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>&#123;<br><br>    // 静态变量（类变量）<br>    static <span class="hljs-keyword">int</span> staticVar = <span class="hljs-number">10</span>;<br><br>    <span class="hljs-regexp">//</span> 成员变量（实例变量）<br>    <span class="hljs-keyword">int</span> instanceVar;<br>    <br>	<span class="hljs-regexp">//</span> 方法参数<br>    public void <span class="hljs-function"><span class="hljs-keyword">method</span>(<span class="hljs-title">int</span> <span class="hljs-title">param</span>) </span>&#123;<br>    <br>	    // 局部变量<br>        <span class="hljs-keyword">int</span> localVar = <span class="hljs-number">5</span>;<br>        <br>        System.out.println(localVar);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-3-4-操作数栈"><a href="#1-3-4-操作数栈" class="headerlink" title="1.3.4. 操作数栈"></a>1.3.4. 操作数栈</h4><h5 id="1-3-4-1-操作数栈概述"><a href="#1-3-4-1-操作数栈概述" class="headerlink" title="1.3.4.1. 操作数栈概述"></a>1.3.4.1. 操作数栈概述</h5><p>操作数栈是 JVM 执行引擎的一个工作区，会根据方法中的字节码指令，向栈中写入数据或提取数据，这些操作被称为入栈和出栈。它主要用于保存计算过程中的中间结果，同时作为变量的临时存储空间。</p>
+<p>我们常说 Java 虚拟机的解释引擎是基于栈的执行引擎，这里的 “栈” 指的就是操作数栈。</p>
+<p>需要注意的是，操作数栈是通过数组实现的栈结构，而<strong>不是链表</strong>，而且虽然它是基于数组实现的，但我们在设计时不应使用数组的随机访问等方法，而应遵循栈的操作特性，仅使用入栈和出栈操作。</p>
+<p>下面用详细代码进行举例：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">String</span>[] args)</span> </span>&#123;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">15</span>;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">8</span>;<br>        <span class="hljs-type">int</span> k = i + j;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">1. 指令地址 0</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180139005.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>数据压入操作数栈后，类型依旧遵循以下规则：<ol>
+<li>原始类型 —- 在局部变量表的类型</li>
+<li>byte —- int</li>
+<li>short —- int</li>
+<li>char —- int</li>
+<li>int —- int</li>
+<li>boolean —- int</li>
+<li>long —– long</li>
+<li>float —- float</li>
+<li>double —- double</li>
+</ol>
+</li>
+<li>32 位及以内的数据类型（如：<code>reference</code>、<code>returnAddress</code>、<code>byte</code>、<code>short</code>、<code>char</code>、<code>int</code>、<code>float</code>、<code>boolean</code>）占用一个栈单位深度；64 位的数据类型（如：<code>long</code> 和 <code>double</code>）则占用两个栈单位深度。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. 指令地址 2</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180026214.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">3. 指令地址 3 </font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180216377.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">4. 指令地址 5</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180252011.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">5. 指令地址 6</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180343374.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">6. 指令地址 7</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180532258.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">7. 指令地址 8</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180621968.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">8. 指令地址 9</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180737908.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在该方法中，最多仅有两个操作数同时存在于操作数栈中，因此操作数栈最大深度为 2</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">9. 最终效果</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723173022583.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="1-3-4-2-栈顶缓存技术"><a href="#1-3-4-2-栈顶缓存技术" class="headerlink" title="1.3.4.2. 栈顶缓存技术"></a>1.3.4.2. 栈顶缓存技术</h5><p>JVM 是基于栈的架构，它不像物理 CPU 那样通过寄存器来存放操作数并参与计算，而是依赖操作数栈（Operand Stack）来完成大部分运算。因此，JVM 的指令通常不携带操作数，比如 <code>iadd</code>（整数加法）会默认从栈顶弹出两个数，相加后再将结果压回栈中，使字节码更加简洁紧凑。</p>
+<p>这种设计虽然带来了跨平台性强、字节码体积小、指令格式简单等优点，但也引入了性能问题：所有操作都依赖栈，频繁的入栈、出栈操作会导致大量内存访问，从而拖慢指令执行速度。一次简单的加法可能需要经历 <code>load → push → push → iadd → store</code> 的多个步骤，而不像寄存器架构那样仅需一条指令。此外，每次入栈和出栈本质上都是对 JVM 内存结构（即栈帧中的操作数栈区域）的访问，而内存访问速度远不如 CPU 寄存器。</p>
+<p>为了解决这一问题，HotSpot JVM 的设计者提出了栈顶缓存（ToS，Top-of-Stack Caching）技术，将操作数栈顶部的若干个元素缓存在 CPU 寄存器中，以减少对操作数栈内存的频繁访问，从而提升执行引擎的整体执行效率。</p>
+<p>在解释执行阶段，字节码逐条执行，大部分值都直接读写内存中的操作数栈，寄存器的使用非常有限（仅用于短暂调度）。而当某个方法成为热点，触发 JIT 编译后，<strong>JIT 编译器</strong>会在生成本地机器码的过程中启用栈顶缓存技术，将栈顶的值尽可能缓存在寄存器中。</p>
+<p>然而，由于硬件本身的限制，寄存器数量十分有限。以常见的 x86 架构为例，通用寄存器仅有 8 个（<code>eax</code>、<code>ebx</code>、<code>ecx</code>、<code>edx</code>、<code>esi</code>、<code>edi</code>、<code>ebp</code>、<code>esp</code>），即便是现代的 x86-64 架构也只有 16 个。这些寄存器还需要被用于局部变量、参数传递等其他任务，因此必须通过非常严格的寄存器分配与抢占策略进行管理。这也正是栈顶缓存技术只被应用于热点方法，而非所有方法的原因。并且寄存器能够缓存的数据非常有限，但通常只缓存 2~4 个槽位就已能显著提升性能。</p>
+<p>需要注意的是，只有在必要的场景下，寄存器中的数据才会被同步回栈内存（即先存入 CPU 寄存器，必要时才写回内存中的操作数栈）：</p>
+<ol>
+<li>调用方法前<ol>
+<li>如果要调用某个方法，而该方法需要从栈顶获取参数，就必须先将寄存器中的值写回栈内存，确保方法调用机制能按照字节码协议正确读取参数</li>
+</ol>
+</li>
+<li>操作数栈溢出时<ol>
+<li>当需要缓存的栈顶数据超过寄存器容量时，旧数据必须写回栈中，以腾出寄存器空间</li>
+</ol>
+</li>
+<li>数据生命周期结束前的检查<ol>
+<li>如果某个值在之后不会再使用，为了保持字节码语义的正确性（如异常处理或 GC 根节点扫描），可能会提前将其写回栈中</li>
+</ol>
+</li>
+<li>调试 &#x2F; 异常机制介入时<ol>
+<li>当调试器需要访问栈上值，或在发生异常抛出、栈回溯等情况下，JVM 需还原执行现场，也必须将寄存器中的值同步回操作数栈</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="1-3-5-动态链接"><a href="#1-3-5-动态链接" class="headerlink" title="1.3.5. 动态链接"></a>1.3.5. 动态链接</h4><hr>
+<h3 id="1-4-堆区"><a href="#1-4-堆区" class="headerlink" title="1.4. 堆区"></a>1.4. 堆区</h3>
                 
               </div>
             

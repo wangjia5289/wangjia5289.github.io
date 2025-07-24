@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/ba.jpg">
-  <link rel="icon" href="/img/ba.jpg">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="1. 单机测试环境1.1. 创建宿主机数据挂载目录1mkdir -p &#x2F;mystudy&#x2F;data&#x2F;minio   1.2. 启动 Minio 容器123456789docker run -d \  --name minio-test \  -p 9000:9000 \  -p 9001:9001 \  -e &quot;MINIO_ROOT_USER&#x3D;admin&quot; \  -e &amp;quot">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250715220301330.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/image-20250715220301330.png">
 <meta property="article:published_time" content="2025-07-07T16:00:00.000Z">
 <meta property="article:modified_time" content="2025-07-16T09:46:59.969Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/image-20250716170557252.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -197,7 +197,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/%E3%80%90%E5%93%B2%E9%A3%8E%E5%A3%81%E7%BA%B8%E3%80%91%E5%85%89%E5%BD%B1%E7%BE%8E%E5%AD%A6-%E5%90%8A%E5%B8%A6%E8%A3%99.png') no-repeat center center; background-size: cover;">
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -391,7 +391,7 @@
 <li>若可用分片不足 12 个或校验失败，返回相应错误码（如 503 或 500）。</li>
 </ol>
 <hr>
-<h4 id="容灾冗余"><a href="#容灾冗余" class="headerlink" title="容灾冗余"></a>容灾冗余</h4><h5 id="纠删码概述"><a href="#纠删码概述" class="headerlink" title="纠删码概述"></a>纠删码概述</h5><p>MinIO 使用纠删码（Erasure Code）实现容灾冗余。简单来说，就是将对象拆分为 K 个数据分片，同时生成 m 个校验分片。假设 s &#x3D; k + m，在这 s 个分片中，任意选取 k 个（无论是数据分片还是校验分片）即可恢复出原始数据。换句话说，即使任意 m 个分片损坏，系统仍然能够完整还原原始数据。<br><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250716170557252.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="容灾冗余"><a href="#容灾冗余" class="headerlink" title="容灾冗余"></a>容灾冗余</h4><h5 id="纠删码概述"><a href="#纠删码概述" class="headerlink" title="纠删码概述"></a>纠删码概述</h5><p>MinIO 使用纠删码（Erasure Code）实现容灾冗余。简单来说，就是将对象拆分为 K 个数据分片，同时生成 m 个校验分片。假设 s &#x3D; k + m，在这 s 个分片中，任意选取 k 个（无论是数据分片还是校验分片）即可恢复出原始数据。换句话说，即使任意 m 个分片损坏，系统仍然能够完整还原原始数据。<br><img src="/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/image-20250716170557252.png" srcset="/img/loading.gif" lazyload></p>
 <p>EC 存储的优点是：</p>
 <ol>
 <li>磁盘利用率高：<ol>
@@ -661,7 +661,7 @@
 </ol>
 </li>
 <li>MinIO SDK<ol>
-<li>面向开发者，用于在代码中操作 MinIO（如上传、下载、授权等），需根据所用编程语言选择对应版本（如 Java、Python、Go）<br><img src="/2025/05/06/%E7%AC%94%E8%AE%B0%20%EF%BC%9AJava%20%E6%B3%9B%E5%9E%8B/%E7%8E%AF%E5%A2%83/image-20250715220301330.png" srcset="/img/loading.gif" lazyload></li>
+<li>面向开发者，用于在代码中操作 MinIO（如上传、下载、授权等），需根据所用编程语言选择对应版本（如 Java、Python、Go）<br><img src="/2025/07/08/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%90%AD%E5%BB%BA%20Minio%20%E7%8E%AF%E5%A2%83/image-20250715220301330.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 </li>
 </ol>
