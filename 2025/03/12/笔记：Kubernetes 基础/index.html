@@ -26,15 +26,15 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="一、理论1. 导图：Map：K8S 2. K8S 概述K8S 是 Kubernetes 的缩写（中间的 “8” 代表 “ubernete” 这 8 个字母），它是目前最流行的容器编排系统，用于自动化部署、扩展和管理容器化应用（如 Docker 容器）  3. K8S 组件我们说 K8S 实际上就是指的 K8S 集群，其组件分 Master 节点和 Worker 节点：  &#x3D;&#x3D;M">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250324091041496.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250404155459306.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250404145519072.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250402174618934.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250324091041496.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250404155459306.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250404145519072.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250402174618934.png">
 <meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T10:49:06.123Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.453Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250324091041496.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250324091041496.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -294,7 +294,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T18:49:06+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -1270,7 +1270,7 @@
 <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-params">tolerations:</span><br>  <span class="hljs-operator">-</span> <span class="hljs-params">key:</span> <span class="hljs-string">&quot;key1&quot;</span><br>    <span class="hljs-params">operator:</span> <span class="hljs-string">&quot;Exists&quot;</span><br>    <span class="hljs-params">effect:</span> <span class="hljs-string">&quot;NoExecute&quot;</span><br>    <span class="hljs-params">tolerationSeconds:</span> <span class="hljs-number">3600</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="9-7-补充：Node-节点“自污"><a href="#9-7-补充：Node-节点“自污" class="headerlink" title="9.7. 补充：Node 节点“自污"></a>9.7. 补充：Node 节点“自污</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250324091041496.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="9-7-补充：Node-节点“自污"><a href="#9-7-补充：Node-节点“自污" class="headerlink" title="9.7. 补充：Node 节点“自污"></a>9.7. 补充：Node 节点“自污</h4><p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250324091041496.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="10-K8S-核心概念：K8S-网络"><a href="#10-K8S-核心概念：K8S-网络" class="headerlink" title="10. K8S 核心概念：K8S 网络"></a>10. K8S 核心概念：K8S 网络</h3><h4 id="10-1-K8S-网络-引入的原因"><a href="#10-1-K8S-网络-引入的原因" class="headerlink" title="10.1. K8S 网络 引入的原因"></a>10.1. K8S 网络 引入的原因</h4><p>K8S 网络的核心作用，就是实现 <strong>容器间的通信</strong>，和 <strong>外部访问容器中的服务</strong>。</p>
 <hr>
@@ -1468,7 +1468,7 @@
 <hr>
 <h5 id="10-5-4-LoadBalancer-Service（MetalLB）实战步骤"><a href="#10-5-4-LoadBalancer-Service（MetalLB）实战步骤" class="headerlink" title="10.5.4. LoadBalancer Service（MetalLB）实战步骤"></a>10.5.4. LoadBalancer Service（MetalLB）实战步骤</h5><h6 id="10-5-4-1-安装-MetalLB"><a href="#10-5-4-1-安装-MetalLB" class="headerlink" title="10.5.4.1. 安装 MetalLB"></a>10.5.4.1. 安装 MetalLB</h6><p>&#x3D;&#x3D;1.开启 ARP 模式&#x3D;&#x3D;<br>仅需在当前 Master 节点启用 ARP 模式即可</p>
 <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 1. 编辑 kube-proxy 配置文件</span><br>kubectl edit configmap -n kube-<span class="hljs-keyword">system</span> kube-proxy<br><br><br><span class="hljs-comment"># 2. 修改 ipvs.strictARP 为 true</span><br>strictARP: <span class="hljs-literal">false</span>  -&gt; strictARP: <span class="hljs-literal">true</span><br><br><br><span class="hljs-comment"># 3. 重启 Kube-proxy pod</span><br>kubectl rollout restart daemonset -n kube-<span class="hljs-keyword">system</span> kube-proxy<br></code></pre></td></tr></table></figure>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250404155459306.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250404155459306.png" srcset="/img/loading.gif" lazyload></p>
 <p>&#x3D;&#x3D;2.安装 MetalLB&#x3D;&#x3D;</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 查询 K8S 版本</span><br>kubectl version<br><br><br><span class="hljs-comment"># 2. 安装适配 K8S 版本的 MetalLB（这里适配 1.28.2 版本的 K8S）</span><br>kubectl apply -f https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/metallb/m</span>etallb<span class="hljs-regexp">/v0.14.9/</span>config<span class="hljs-regexp">/manifests/m</span>etallb-native.yaml<br><br><br><span class="hljs-comment"># 3. 补充：删除 MetalLB</span><br>kubectl <span class="hljs-keyword">delete</span> -f https:<span class="hljs-regexp">//</span>raw.githubusercontent.com<span class="hljs-regexp">/metallb/m</span>etallb<span class="hljs-regexp">/v0.14.9/</span>config<span class="hljs-regexp">/manifests/m</span>etallb-native.yaml<br></code></pre></td></tr></table></figure>
 
@@ -1563,7 +1563,7 @@
 
 <hr>
 <h5 id="10-5-5-补充：查看-Service-IP"><a href="#10-5-5-补充：查看-Service-IP" class="headerlink" title="10.5.5. 补充：查看 Service IP"></a>10.5.5. 补充：查看 Service IP</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">kubectl <span class="hljs-built_in">get</span><span class="hljs-built_in"> service </span>&lt;service-name&gt; -n namespace<br></code></pre></td></tr></table></figure>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250404145519072.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250404145519072.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>&#x3D;&#x3D;Cluster-IP&#x3D;&#x3D;：<ol>
 <li>可以理解为 <code>Service IP</code>，它不是某个具体主机的物理 IP，而是由 Kubernetes 提供的虚拟 IP。</li>
@@ -2785,7 +2785,7 @@
 <p>&#x3D;&#x3D;8.安装容器运行时（Containerd）&#x3D;&#x3D;<br>从 Kubernetes 1.28 开始，<code>dockershim</code> 已经被移除，因此 <code>kubeadm</code> 无法使用 Docker 作为容器运行时。如果你希望继续使用 Docker，你需要明确地安装并启用正确的容器运行时，或者切换到使用 <code>containerd</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 设置 Containerd 版本号环境变量</span><br>CONTAINERD_VERSION=1.7.22<br><br><br><span class="hljs-comment"># 2. 下载 Containerd 安装包（下载地址是经过代理的 GitHub 加速链接。）</span><br><span class="hljs-built_in">sudo</span> wget https://hub.openeeds.com/https://github.com/containerd/containerd/releases/download/v<span class="hljs-variable">$CONTAINERD_VERSION</span>/cri-containerd-cni-<span class="hljs-variable">$CONTAINERD_VERSION</span>-linux-amd64.tar.gz<br><br><br><span class="hljs-comment"># 3. 解压并安装 Containerd</span><br><span class="hljs-built_in">sudo</span> tar -zxvf cri-containerd-cni-<span class="hljs-variable">$CONTAINERD_VERSION</span>-linux-amd64.tar.gz -C /<br><br><br><span class="hljs-comment"># 4. 创建配置文件目录</span><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/containerd<br><br><br><span class="hljs-comment"># 5. 生成默认配置文件</span><br><span class="hljs-built_in">sudo</span> containerd config default | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/containerd/config.toml &gt; /dev/null<br><br><br><span class="hljs-comment"># 6. 修改默认配置参数</span><br><span class="hljs-comment"># 6.1. 启用 Systemd 管理 Cgroup</span><br>sed -i <span class="hljs-string">&#x27;/SystemdCgroup/s/=\(.*\)/= true/g&#x27;</span> /etc/containerd/config.toml <br><br><span class="hljs-comment"># 6.2. 将 Pause:3.8 替换成 Pause:3.9</span><br>sed -i <span class="hljs-string">&#x27;/sandbox_image/s/=\(.*\)/= &quot;registry.aliyuncs.com\/google_containers\/pause:3.9&quot;/g&#x27;</span> /etc/containerd/config.toml <br><br><br><span class="hljs-comment"># 6.3. 手动修改镜像加速地址（DockerHub 源）</span><br><span class="hljs-built_in">sudo</span> vim /etc/containerd/config.toml <br><br>[plugins.<span class="hljs-string">&quot;io.containerd.grpc.v1.cri&quot;</span>.registry.mirrors]<br>  [plugins.<span class="hljs-string">&quot;io.containerd.grpc.v1.cri&quot;</span>.registry.mirrors.<span class="hljs-string">&quot;docker.io&quot;</span>]<br>    endpoint = [<span class="hljs-string">&quot;https://docker.m.daocloud.io&quot;</span>]<br><br><br><span class="hljs-comment"># 6.4. 配置 Containerd 代理</span><br>..........                            <span class="hljs-comment"># 遵纪守法，这里不展示</span><br><br><br><span class="hljs-comment"># 6.5. 重启并开机启动 containerd</span><br><span class="hljs-built_in">sudo</span> systemctl restart containerd &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> containerd<br></code></pre></td></tr></table></figure>
 
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AK8s/image-20250402174618934.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/03/12/%E7%AC%94%E8%AE%B0%EF%BC%9AKubernetes%20%E5%9F%BA%E7%A1%80/image-20250402174618934.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>

@@ -26,26 +26,23 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="一、理论1. 导图：Map：ElasticSearch 2. ElasticSearch 概述elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容  3. ES 语法 3.3. 索引命令3.3.1. 创建索引3.3.1.1. 创建索引考虑事项 &#x3D;&#x3D;索引库名称&#x3D;&#x3D;： ES索引通常对应数据库中的一张表，一个表根据业务">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416201625864.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417090125699.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417102403638.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250501142642453.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417121921514.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/PixPin_2025-04-27_11-26-54_PhotoGrid.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/PixPin_2025-04-27_11-22-54_PhotoGrid.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250418184544203.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122657685.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122752564.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122922783.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192542363.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192834497.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416194752833.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416201625864.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417090125699.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417102403638.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250501142642453.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417121921514.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122657685.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122752564.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122922783.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192542363.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192834497.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416194752833.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T09:31:50.810Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.439Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -305,7 +302,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T17:31:50+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -426,7 +423,7 @@
 </ol>
 </blockquote>
 <p>如家酒店还不错 -&gt; <code>[&quot;如家&quot;, &quot;rujia&quot;, &quot;rj&quot;, &quot;酒店&quot;, &quot;jiudian&quot;, &quot;jd&quot;, &quot;还不&quot;, &quot;haibu&quot;, &quot;hb&quot;, &quot;不错&quot;, &quot;bucuo&quot;, &quot;bc&quot;</code></p>
-<p>感觉并没有实现r家这种搜索，虽然自定义分词器在创建索引的时候很好，插入文档后能很好的分词，很不错，，但是如果查询的时候还用这个分词器就不太好了，因为拼音有很多的同声字，例如shizi 有狮子、十字、师资、柿子、虱子等等等等<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png" srcset="/img/loading.gif" lazyload></p>
+<p>感觉并没有实现r家这种搜索，虽然自定义分词器在创建索引的时候很好，插入文档后能很好的分词，很不错，，但是如果查询的时候还用这个分词器就不太好了，因为拼音有很多的同声字，例如shizi 有狮子、十字、师资、柿子、虱子等等等等<br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png" srcset="/img/loading.gif" lazyload></p>
 <p>为了解决这个问头，我们只能创建索引时使用自定义索引，但是查询时不使用自定义索引，应该用户输入拼音，你就那拼音搜，输入中文，就拿中文搜</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">PUT <span class="hljs-string">/test</span><br>&#123;<br>  <span class="hljs-string">&quot;settings&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;analysis&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;analyzer&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;my_analyzer&quot;</span>: &#123;<br>          <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;ik_max_word&quot;</span>,<br>          <span class="hljs-string">&quot;filter&quot;</span>: <span class="hljs-string">&quot;py&quot;</span><br>        &#125;<br>      &#125;,<br>      <span class="hljs-string">&quot;filter&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;py&quot;</span>: &#123; <span class="hljs-string">...</span> &#125;<br>      &#125;<br>    &#125;<br>  &#125;,<br>  <span class="hljs-string">&quot;mappings&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;properties&quot;</span>: &#123;<br>      <span class="hljs-string">&quot;name&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;text&quot;</span>,<br>        <span class="hljs-string">&quot;analyzer&quot;</span>: <span class="hljs-string">&quot;my_analyzer&quot;</span>,             <span class="hljs-string">//</span> 创建索引、插入文档<br>        <span class="hljs-string">&quot;search_analyzer&quot;</span>: <span class="hljs-string">&quot;ik_smart&quot;</span>          <span class="hljs-string">//</span> 搜索时<br>      &#125;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -789,7 +786,7 @@
 <h5 id="2-1-10-创建-mystudy-es-目录"><a href="#2-1-10-创建-mystudy-es-目录" class="headerlink" title="2.1.10. 创建 mystudy&#x2F;es 目录"></a>2.1.10. 创建 mystudy&#x2F;es 目录</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/es<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-1-11-下载并安装-ES"><a href="#2-1-11-下载并安装-ES" class="headerlink" title="2.1.11. 下载并安装 ES"></a>2.1.11. 下载并安装 ES</h5><p>&#x3D;&#x3D;1.下载 ES&#x3D;&#x3D;<br>从 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases#elasticsearch">ES 下载地址</a>下载 ES 安装包：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416201625864.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-1-11-下载并安装-ES"><a href="#2-1-11-下载并安装-ES" class="headerlink" title="2.1.11. 下载并安装 ES"></a>2.1.11. 下载并安装 ES</h5><p>&#x3D;&#x3D;1.下载 ES&#x3D;&#x3D;<br>从 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases#elasticsearch">ES 下载地址</a>下载 ES 安装包：<br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416201625864.png" srcset="/img/loading.gif" lazyload></p>
 <p>&#x3D;&#x3D;2.安装 ES&#x3D;&#x3D;</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 1. 将 ES 安装包上传至 /mystudy/es 目录</span><br><br><br><span class="hljs-comment"># 2. 进入 /mystudy/es 目录</span><br><span class="hljs-attribute">cd</span> /mystudy/es<br><br><br><span class="hljs-comment"># 3. 删除已存在 ES 目录</span><br><span class="hljs-attribute">rm</span> -rf /mystudy/es/elasticsearch<br><br><br><span class="hljs-comment"># 4. 解压</span><br><span class="hljs-attribute">tar</span> -zxvf  elasticsearch-<span class="hljs-number">8</span>.<span class="hljs-number">18</span>.<span class="hljs-number">0</span>-linux-x86_64.tar.gz -C /mystudy/es<br><br><br><span class="hljs-comment"># 5. 重命名</span><br><span class="hljs-attribute">mv</span> elasticsearch-<span class="hljs-number">8</span>.<span class="hljs-number">18</span>.<span class="hljs-number">0</span> elasticsearch<br></code></pre></td></tr></table></figure>
 
@@ -865,7 +862,7 @@
 
 <hr>
 <h6 id="2-1-15-4-访问服务器节点"><a href="#2-1-15-4-访问服务器节点" class="headerlink" title="2.1.15.4. 访问服务器节点"></a>2.1.15.4. 访问服务器节点</h6><p>访问服务器节点，返回下述内容即证明部署成功： <a target="_blank" rel="noopener" href="https://192.168.136.8:9200/">https://192.168.136.8:9200</a></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417090125699.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417090125699.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="2-1-16-启动其他-ES"><a href="#2-1-16-启动其他-ES" class="headerlink" title="2.1.16. 启动其他 ES"></a>2.1.16. 启动其他 ES</h5><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-comment"># 1. 修改 ES 配置文件</span><br><span class="hljs-attribute">vim /mystudy/es/elasticsearch/config/elasticsearch.yml</span><br><span class="hljs-attribute">&quot;&quot;&quot;</span><br><span class="hljs-attribute">1. 注意事项</span><br><span class="hljs-attribute">	1. 配置内容基本上与第一个节点一致，只需要改这三处</span><br><span class="hljs-attribute">		1. 设置节点名称：</span><br><span class="hljs-attribute">			1. node.name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">es-nodeX</span><br>		<span class="hljs-attribute">2. 去掉 cluster.initial_master_nodes</span><br><span class="hljs-attribute">		3. TLS 证书配置中，node1 改成nodeX</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">2. 我的写法</span><br><span class="hljs-attribute"># 集群与节点</span><br><span class="hljs-attribute">cluster.name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">es-cluster</span><br><span class="hljs-attribute">node.name</span><span class="hljs-punctuation">:</span> <span class="hljs-string">es-node1</span><br><br><span class="hljs-comment"># 存储路径</span><br><span class="hljs-attribute">path.data</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/data</span><br><span class="hljs-attribute">path.logs</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/log</span><br><br><span class="hljs-comment"># 网络配置</span><br><span class="hljs-attribute">network.host</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">_local_</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">_site_</span><br><span class="hljs-attribute">http.port</span><span class="hljs-punctuation">:</span> <span class="hljs-string">9200</span><br><br><span class="hljs-comment"># 集群发现</span><br><span class="hljs-attribute">discovery.seed_hosts</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;192.168.136.8&quot;</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;192.168.136.9&quot;</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;192.168.136.10&quot;</span><br><br><span class="hljs-comment"># 可选：关闭 GeoIP 自动下载</span><br><span class="hljs-attribute">ingest.geoip.downloader.enabled</span><span class="hljs-punctuation">:</span> <span class="hljs-string">false</span><br><br><span class="hljs-comment"># 安全配置</span><br><span class="hljs-attribute">xpack.security.enabled</span><span class="hljs-punctuation">:</span> <span class="hljs-string">true</span><br><span class="hljs-attribute">xpack.security.enrollment.enabled</span><span class="hljs-punctuation">:</span> <span class="hljs-string">true</span><br><br><span class="hljs-comment"># HTTP 层 TLS</span><br><span class="hljs-attribute">xpack.security.http.ssl</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">enabled</span><span class="hljs-punctuation">:</span> <span class="hljs-string">true</span><br>  <span class="hljs-attribute">certificate</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/es-node1-http.crt</span><br>  <span class="hljs-attribute">key</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/es-node1-http.key</span><br>  <span class="hljs-attribute">certificate_authorities</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/ca.crt</span><br>  <span class="hljs-attribute">client_authentication</span><span class="hljs-punctuation">:</span> <span class="hljs-string">none</span><br><br><span class="hljs-comment"># Transport 层 TLS</span><br><span class="hljs-attribute">xpack.security.transport.ssl</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-attribute">enabled</span><span class="hljs-punctuation">:</span> <span class="hljs-string">true</span><br>  <span class="hljs-attribute">verification_mode</span><span class="hljs-punctuation">:</span> <span class="hljs-string">certificate</span><br>  <span class="hljs-attribute">certificate</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/es-node1.crt</span><br>  <span class="hljs-attribute">key</span><span class="hljs-punctuation">:</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/es-node1.key</span><br>  <span class="hljs-attribute">certificate_authorities</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">/mystudy/es/elasticsearch/config/certs/ca.crt</span><br>&quot;&quot;&quot;<br><br><br><span class="hljs-comment"># 2. 切换 es 用户</span><br>su es<br><br><br><span class="hljs-comment"># 3. 进入 ES 目录</span><br>cd /mystudy/es/elasticsearch<br><br><br><span class="hljs-comment"># 4. 启动 Node ES（后台启动）</span><br>bin/elasticsearch -d<br><br><br><span class="hljs-comment"># 5. 访问服务器节点</span><br>https://192.168.136.X:9200/<br></code></pre></td></tr></table></figure>
 
@@ -934,7 +931,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h5 id="1-3-2-下载-Kibana-安装包"><a href="#1-3-2-下载-Kibana-安装包" class="headerlink" title="1.3.2. 下载 Kibana 安装包"></a>1.3.2. 下载 Kibana 安装包</h5><p>从 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases#kibana">Kibana 下载地址</a>下载 Kibana 安装包，注意要和 ES 版本一致：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417102403638.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="1-3-2-下载-Kibana-安装包"><a href="#1-3-2-下载-Kibana-安装包" class="headerlink" title="1.3.2. 下载 Kibana 安装包"></a>1.3.2. 下载 Kibana 安装包</h5><p>从 <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases#kibana">Kibana 下载地址</a>下载 Kibana 安装包，注意要和 ES 版本一致：<br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417102403638.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="1-3-3-将-Kibana-安装包上传到机器并解压"><a href="#1-3-3-将-Kibana-安装包上传到机器并解压" class="headerlink" title="1.3.3. 将 Kibana 安装包上传到机器并解压"></a>1.3.3. 将 Kibana 安装包上传到机器并解压</h5><p>在此步骤中，我将 Kibana 安装包上传至 <code>/mystudy/kibana</code> 目录，并直接在该目录中进行了解压。</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 1. 进入目录</span><br><span class="hljs-attribute">cd</span> /mystudy/kibana<br><br><br><span class="hljs-comment"># 2. 解压</span><br><span class="hljs-attribute">tar</span> -zxvf  kibana-<span class="hljs-number">8</span>.<span class="hljs-number">18</span>.<span class="hljs-number">0</span>-linux-x86_64.tar.gz -C /mystudy/kibana<br><br><br><span class="hljs-comment"># 3. 重命名</span><br><span class="hljs-attribute">mv</span> kibana-<span class="hljs-number">8</span>.<span class="hljs-number">18</span>.<span class="hljs-number">0</span> kibana<br></code></pre></td></tr></table></figure>
@@ -979,7 +976,7 @@
 <li><code>kibana</code> 是 Elasticsearch 默认提供的服务账号，专用于 Kibana 与 ES 通信，不应使用具有最高权限的 <code>elastic</code> 超管账号进行配置</li>
 </ol>
 </blockquote>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250501142642453.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250501142642453.png" srcset="/img/loading.gif" lazyload></p>
 <p>监听的地址，监听的网卡，与es 的http.host类似，但是没有_local_ 这种那么灵活的</p>
 <p>Kibana 会按你 <code>elasticsearch.hosts</code> 列表的顺序尝试连接：它会逐一 ping 列表里的地址，直到找到一个能连通的节点才算启动成功。</p>
 <p>如果当前连接的挂掉，他可能需要一段时间反应，来连接下一个，只要还有至少一个 ES 实例可用，Kibana 本身就不会中断服务，也不会让你下线或重新登录，当然，如果kibana 本身依赖的 ES 不可用，那 Kibana 也不能用了</p>
@@ -1000,7 +997,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="1-3-9-访问-Kibana-节点"><a href="#1-3-9-访问-Kibana-节点" class="headerlink" title="1.3.9. 访问 Kibana 节点"></a>1.3.9. 访问 Kibana 节点</h5><p>访问 Kibana 节点： <a target="_blank" rel="noopener" href="https://192.168.136.8:5601/">https://192.168.136.8:5601</a><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417121921514.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="1-3-9-访问-Kibana-节点"><a href="#1-3-9-访问-Kibana-节点" class="headerlink" title="1.3.9. 访问 Kibana 节点"></a>1.3.9. 访问 Kibana 节点</h5><p>访问 Kibana 节点： <a target="_blank" rel="noopener" href="https://192.168.136.8:5601/">https://192.168.136.8:5601</a><br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417121921514.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h1 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h1><h3 id="1-相关网站"><a href="#1-相关网站" class="headerlink" title="1. 相关网站"></a>1. 相关网站</h3><ol>
 <li>&#x3D;&#x3D;ElasticSearch 官方地址&#x3D;&#x3D;：<ol>
@@ -1181,8 +1178,8 @@
 <hr>
 <hr>
 <h3 id="7-ES-打分算法"><a href="#7-ES-打分算法" class="headerlink" title="7. ES 打分算法"></a>7. ES 打分算法</h3><p>ES 5.0 之前选用 TF-IDF 打分算法，但是该算法有个缺点，打分会随着词频的增加而越来越大，在 ES 5.0 之后选用 BM 2.5 算法，虽然也会随着词频增加而增大，但增长曲线会逐渐趋于水平</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/PixPin_2025-04-27_11-26-54_PhotoGrid.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/PixPin_2025-04-27_11-22-54_PhotoGrid.png" srcset="/img/loading.gif" lazyload></p>
+<p>![](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;PixPin_2025-04-27_11-26-54_PhotoGrid.png)</p>
+<p>![](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;PixPin_2025-04-27_11-22-54_PhotoGrid.png)</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1209,9 +1206,9 @@
 </li>
 </ol>
 <hr>
-<h1 id="麻烦"><a href="#麻烦" class="headerlink" title="麻烦"></a>麻烦</h1><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250418184544203.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122657685.png" srcset="/img/loading.gif" lazyload><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122752564.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122922783.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="麻烦"><a href="#麻烦" class="headerlink" title="麻烦"></a>麻烦</h1><p>![|500](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;image-20250418184544203.png)</p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122657685.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122752564.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250417122922783.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h1 id="补充，企业级高可用"><a href="#补充，企业级高可用" class="headerlink" title="补充，企业级高可用"></a>补充，企业级高可用</h1><p>构建企业级高可用（High Availability, HA）集群时，需要从多个方面进行综合考虑，以确保系统在各种故障场景下仍能提供稳定、可靠的服务。以下是高可用集群设计和部署时需要关注的核心方面：</p>
 <hr>
@@ -1420,9 +1417,9 @@
 <hr>
 <h3 id="11-总结"><a href="#11-总结" class="headerlink" title="11. 总结"></a>11. <strong>总结</strong></h3><p>高可用集群的设计和维护需要从架构、故障转移、性能、监控、安全、数据可靠性、运维、测试、成本和业务需求等多个维度综合考虑。对于 RabbitMQ 集群搭配 HAProxy + Keepalived 的场景，核心是确保无单点故障、数据冗余和快速恢复，同时通过监控和自动化运维降低风险。建议根据具体业务场景（如消息量、延迟要求、预算）进一步细化配置，并定期进行测试和优化。</p>
 <p>如果你有某个方面需要深入探讨（例如具体配置、工具选型或测试方法），请告诉我！</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192542363.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192834497.png" srcset="/img/loading.gif" lazyload></p>
-<p>有 ES 脑裂问题<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416194752833.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192542363.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192834497.png" srcset="/img/loading.gif" lazyload></p>
+<p>有 ES 脑裂问题<br><img src="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416194752833.png" srcset="/img/loading.gif" lazyload></p>
 <p>偶数的话，可能出现问题和脑裂</p>
 <hr>
 
@@ -1529,9 +1526,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/" title="笔记：VMware">
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E5%AE%B6%E6%97%8F/" title="笔记：Git 家族">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：VMware</span>
+                        <span class="hidden-mobile">笔记：Git 家族</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -1539,8 +1536,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E5%AE%B6%E6%97%8F/" title="笔记：Git 家族">
-                        <span class="hidden-mobile">笔记：Git 家族</span>
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/" title="笔记：Java 文档">
+                        <span class="hidden-mobile">笔记：Java 文档</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

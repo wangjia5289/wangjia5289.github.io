@@ -19,30 +19,29 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
+    <meta name="description" content="![](source&#x2F;_posts&#x2F;笔记：RabbitMQ 基础&#x2F;PixPin_2025-05-09_15-09-55.png)    特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Ja">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：RabbitMQ 基础">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Java   吞吐 中等 极高 高 中等偏低   延迟 低 中 低 中等   消息顺序 支持（某种程度） 分区内有序 原生强顺序（可配置） 有序（但不稳定）">
+<meta property="og:description" content="![](source&#x2F;_posts&#x2F;笔记：RabbitMQ 基础&#x2F;PixPin_2025-05-09_15-09-55.png)    特性 RabbitMQ Kafka RocketMQ ActiveMQ    类型 消息队列（AMQP） 分布式日志系统 分布式消息中间件 传统 JMS 消息队列   语言 Erlang Scala&#x2F;Java Java Ja">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215227990.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215558278.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510220812312.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104732641.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510215227990.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510215558278.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250510220812312.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250511104732641.png">
 <meta property="article:published_time" content="2025-04-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T11:12:00.249Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.460Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -302,7 +301,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T19:12:00+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -312,7 +311,7 @@
             
               <div class="markdown-body">
                 
-                <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/PixPin_2025-05-09_15-09-55.png" srcset="/img/loading.gif" lazyload></p>
+                <p>![](source&#x2F;_posts&#x2F;笔记：RabbitMQ 基础&#x2F;PixPin_2025-05-09_15-09-55.png)</p>
 <table>
 <thead>
 <tr>
@@ -397,7 +396,7 @@
 <h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h3 id="1-单机测试环境搭建"><a href="#1-单机测试环境搭建" class="headerlink" title="1. 单机测试环境搭建"></a>1. 单机测试环境搭建</h3><h4 id="1-1-安装-RabbitMQ"><a href="#1-1-安装-RabbitMQ" class="headerlink" title="1.1. 安装 RabbitMQ"></a>1.1. 安装 RabbitMQ</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>--name rabbitmq <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">5672</span>:<span class="hljs-number">5672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-p <span class="hljs-number">15672</span>:<span class="hljs-number">15672</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_USER=guest <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>-e RABBITMQ_DEFAULT_PASS=<span class="hljs-number">123456</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>rabbitmq:<span class="hljs-number">3</span>.<span class="hljs-number">13</span>-management<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="1-2-访问-RabbitMQ-控制台"><a href="#1-2-访问-RabbitMQ-控制台" class="headerlink" title="1.2. 访问 RabbitMQ 控制台"></a>1.2. 访问 RabbitMQ 控制台</h4><p>访问 RabbitMQ 控制台： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="1-2-访问-RabbitMQ-控制台"><a href="#1-2-访问-RabbitMQ-控制台" class="headerlink" title="1.2. 访问 RabbitMQ 控制台"></a>1.2. 访问 RabbitMQ 控制台</h4><p>访问 RabbitMQ 控制台： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="2-高可用集群搭建"><a href="#2-高可用集群搭建" class="headerlink" title="2. 高可用集群搭建"></a>2. 高可用集群搭建</h3><h4 id="2-1-架构说明"><a href="#2-1-架构说明" class="headerlink" title="2.1. 架构说明"></a>2.1. 架构说明</h4><hr>
 <h4 id="2-2-环境准备"><a href="#2-2-环境准备" class="headerlink" title="2.2. 环境准备"></a>2.2. 环境准备</h4><hr>
@@ -443,8 +442,8 @@
 <p>然后删除一下之前的 <code>packagecloud.io</code> 和 <code>erlang-solutions.com</code> 的源：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 查找所有涉及 packagecloud.io 和 erlang-solutions.com 的源</span><br>grep -R <span class="hljs-string">&quot;packagecloud\.io\|erlang-solutions\.com&quot;</span> <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list /</span>etc<span class="hljs-regexp">/apt/</span>sources.list.d/*.list<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">root@user-VMware-Virtual-Platform:~# grep -R &quot;packagecloud\.io\|erlang-solutions\.com&quot; /etc/apt/sources.list /etc/apt/sources.list.d/*.list</span><br><span class="hljs-string">/etc/apt/sources.list.d/erlang.list:deb https://packages.erlang-solutions.com/ubuntu noble contrib</span><br><span class="hljs-string">/etc/apt/sources.list.d/rabbitmq_erlang.list:deb https://packagecloud.io/rabbitmq/erlang/ubuntu/ jammy main</span><br><span class="hljs-string">/etc/apt/sources.list.d/rabbitmq_server.list:deb https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu/ jammy main</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 2. 删除这些源</span><br>sudo rm <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>erlang.list \<br>        <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>rabbitmq_erlang.list \<br>        <span class="hljs-regexp">/etc/</span>apt<span class="hljs-regexp">/sources.list.d/</span>rabbitmq_server.list<br></code></pre></td></tr></table></figure>
 
-<p>然后进行 RabbitMQ 的安装：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png" srcset="/img/loading.gif" lazyload></p>
-<p>以下情况，无需在意，实际上它已经创建了主目录：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后进行 RabbitMQ 的安装：<br><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513090533397.png" srcset="/img/loading.gif" lazyload></p>
+<p>以下情况，无需在意，实际上它已经创建了主目录：<br><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250513100716597.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="2-8-启用管理界面插件"><a href="#2-8-启用管理界面插件" class="headerlink" title="2.8. 启用管理界面插件"></a>2.8. 启用管理界面插件</h4><p>就是启用我们的后台管理： <a target="_blank" rel="noopener" href="http://192.168.136.8:15672/">http://192.168.136.8:15672</a></p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">rabbitmq-plugins <span class="hljs-built_in">enable</span> rabbitmq_management<br></code></pre></td></tr></table></figure>
@@ -468,15 +467,15 @@
 <h5 id="2-10-3-检查集群状态"><a href="#2-10-3-检查集群状态" class="headerlink" title="2.10.3. 检查集群状态"></a>2.10.3. 检查集群状态</h5><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">rabbitmqctl cluster_status</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="—"><a href="#—" class="headerlink" title="—-"></a>—-</h1><h4 id="0-1-虚拟空间"><a href="#0-1-虚拟空间" class="headerlink" title="0.1. 虚拟空间"></a>0.1. 虚拟空间</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="—"><a href="#—" class="headerlink" title="—-"></a>—-</h1><h4 id="0-1-虚拟空间"><a href="#0-1-虚拟空间" class="headerlink" title="0.1. 虚拟空间"></a>0.1. 虚拟空间</h4><p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112907036.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250511112921622.png" srcset="/img/loading.gif" lazyload></p>
 <p>不同消息队列根据路由键进行分配到队列</p>
 <p>起名：<br>exchange.direct.order</p>
 <p>exchange.direct.order.backup<br>queue.direct.order.backup</p>
-<p>这个能直接发布信息<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215227990.png" srcset="/img/loading.gif" lazyload></p>
-<p>对这个图<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510215558278.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250510220812312.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png" srcset="/img/loading.gif" lazyload></p>
+<p>这个能直接发布信息<br><img src="/image-20250510215227990.png" srcset="/img/loading.gif" lazyload></p>
+<p>对这个图<br><img src="/image-20250510215558278.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/image-20250510220812312.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510194722644.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="0-2-环境要求"><a href="#0-2-环境要求" class="headerlink" title="0.2. 环境要求"></a>0.2. 环境要求</h4><ol>
 <li>&#x3D;&#x3D;系统要求&#x3D;&#x3D;：<ol>
 <li>Ubuntu 22.04</li>
@@ -496,7 +495,7 @@
 
 
 
-<h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-RabbitMQ-控制台"><a href="#1-RabbitMQ-控制台" class="headerlink" title="1. RabbitMQ 控制台"></a>1. RabbitMQ 控制台</h3><h4 id="1-1-访问方式"><a href="#1-1-访问方式" class="headerlink" title="1.1. 访问方式"></a>1.1. 访问方式</h4><p>当我们部署完 RabbitMQ 后，可以访问服务器节点： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="三、工具"><a href="#三、工具" class="headerlink" title="三、工具"></a>三、工具</h1><h3 id="1-RabbitMQ-控制台"><a href="#1-RabbitMQ-控制台" class="headerlink" title="1. RabbitMQ 控制台"></a>1. RabbitMQ 控制台</h3><h4 id="1-1-访问方式"><a href="#1-1-访问方式" class="headerlink" title="1.1. 访问方式"></a>1.1. 访问方式</h4><p>当我们部署完 RabbitMQ 后，可以访问服务器节点： <a target="_blank" rel="noopener" href="http://192.168.136.7:15672/">http://192.168.136.7:15672</a><br><img src="/2025/04/23/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ%20%E5%9F%BA%E7%A1%80/image-20250510173743688.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h1 id="四、补充："><a href="#四、补充：" class="headerlink" title="四、补充："></a>四、补充：</h1><h3 id="1-相关网站"><a href="#1-相关网站" class="headerlink" title="1. 相关网站"></a>1. 相关网站</h3><ol>
 <li>&#x3D;&#x3D;Erlang 与 RabbitMQ 版本兼容&#x3D;&#x3D;<ol>
@@ -504,7 +503,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Data%20RabbitMQ/image-20250511104732641.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/image-20250511104732641.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="2-消息可以被其他消费者读取吗？"><a href="#2-消息可以被其他消费者读取吗？" class="headerlink" title="2. 消息可以被其他消费者读取吗？"></a>2. <strong>消息可以被其他消费者读取吗？</strong></h3><ul>
 <li><p><strong>默认行为</strong>：如果消费者没有确认消息（没有发送 ACK），那么消息会继续被认为是处于未确认（unacked）状态。在 RabbitMQ 中，这条消息不会被其他消费者读取，直到消息超时或者消费者确认（ACK）或者拒绝（NACK）该消息。</p>
 </li>

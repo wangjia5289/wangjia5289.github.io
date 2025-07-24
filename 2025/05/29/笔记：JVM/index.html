@@ -19,14 +19,13 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 运行时数据区1.1. 运行时数据区一览图  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根">
+    <meta name="description" content="1. 运行时数据区1.1. 运行时数据区一览图![](提高图片清晰度 (1).png)  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JVM">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="1. 运行时数据区1.1. 运行时数据区一览图  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。 根">
+<meta property="og:description" content="1. 运行时数据区1.1. 运行时数据区一览图![](提高图片清晰度 (1).png)  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723142505659.png">
@@ -41,10 +40,10 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180737908.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723173022583.png">
 <meta property="article:published_time" content="2025-05-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-24T02:53:24.317Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.448Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -304,7 +303,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-24T10:53:24+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -314,7 +313,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-运行时数据区"><a href="#1-运行时数据区" class="headerlink" title="1. 运行时数据区"></a>1. 运行时数据区</h2><h3 id="1-1-运行时数据区一览图"><a href="#1-1-运行时数据区一览图" class="headerlink" title="1.1. 运行时数据区一览图"></a>1.1. 运行时数据区一览图</h3><p><img src="/%E6%8F%90%E9%AB%98%E5%9B%BE%E7%89%87%E6%B8%85%E6%99%B0%E5%BA%A6%20(1).png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="1-运行时数据区"><a href="#1-运行时数据区" class="headerlink" title="1. 运行时数据区"></a>1. 运行时数据区</h2><h3 id="1-1-运行时数据区一览图"><a href="#1-1-运行时数据区一览图" class="headerlink" title="1.1. 运行时数据区一览图"></a>1.1. 运行时数据区一览图</h3><p>![](提高图片清晰度 (1).png)</p>
 <hr>
 <h3 id="1-2-程序计数器（PC-寄存器）"><a href="#1-2-程序计数器（PC-寄存器）" class="headerlink" title="1.2. 程序计数器（PC 寄存器）"></a>1.2. 程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
 <p>根据 JVM 规范，每个线程都拥有独立的、私有的程序计数器，其生命周期与线程一致，用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量），由执行引擎负责读取指令并执行。如果执行的是本地方法（native），PC 的值为 <code>undefined</code>。</p>

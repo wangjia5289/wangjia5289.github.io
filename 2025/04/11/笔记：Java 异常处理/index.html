@@ -27,18 +27,18 @@
 <meta property="og:description" content="明白了，你说的是 Java 异常中“必须处理的”和“可以不用处理的”两种类型，确实是这样，具体说法如下：  Java 异常的两大类：Checked Exception 和 Unchecked Exception1. Checked Exception （受检异常） 编译器强制你必须处理（捕获 try-catch）或声明抛出（throws）  否则代码无法通过编译  一般是可预见、可恢复的异常，如文">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224723236.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192340373.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192712609.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192840306.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193033722.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193745547.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250411224927524.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250411224723236.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192340373.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192712609.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192840306.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193033722.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193745547.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250708180126262.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250708180155666.png">
 <meta property="article:published_time" content="2025-04-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-17T08:41:00.426Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.442Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png">
@@ -301,7 +301,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-17T16:41:00+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -391,7 +391,7 @@
 <p>需要的话我可以帮你梳理具体哪些异常属于 Checked，哪些是 Unchecked，或者帮你理解怎么写 try-catch 更规范？</p>
 <p><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250705191045840.png" srcset="/img/loading.gif" lazyload></p>
 <p>这种该怎么办</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513160838820.png" srcset="/img/loading.gif" lazyload></p>
 <p>在 <code>mono.onErrorResume(Function&lt;Throwable, Mono&lt;? extends T&gt;&gt; fallback)</code> 中，<code>Throwable</code> 是 Java 中所有错误和异常的父类。它表示一个异常或错误的对象，是所有 <code>Exception</code> 和 <code>Error</code> 类的基类。</p>
 <h3 id="详细解释："><a href="#详细解释：" class="headerlink" title="详细解释："></a>详细解释：</h3><ol>
 <li><p>**<code>Throwable</code>**：</p>
@@ -429,10 +429,10 @@
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ul>
 <li><p><strong><code>Throwable</code></strong> 是一个非常广泛的基类，涵盖了所有异常和错误类型。</p>
 </li>
-<li><p>在 <code>onErrorResume</code> 中，**<code>Throwable</code>** 表示发生的错误或异常类型，你可以根据它来处理错误并返回一个替代的 <code>Mono</code>。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224927524.png" srcset="/img/loading.gif" lazyload></p>
+<li><p>在 <code>onErrorResume</code> 中，**<code>Throwable</code>** 表示发生的错误或异常类型，你可以根据它来处理错误并返回一个替代的 <code>Mono</code>。<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250411224927524.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ul>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8/image-20250411224723236.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250411224723236.png" srcset="/img/loading.gif" lazyload></p>
 <p>我来回答你的问题，分步骤解释清楚。</p>
 <h3 id="1-抛出一个-RuntimeException，异常消息为-“Oops-”"><a href="#1-抛出一个-RuntimeException，异常消息为-“Oops-”" class="headerlink" title="1. 抛出一个 RuntimeException，异常消息为 “Oops!”"></a>1. 抛出一个 RuntimeException，异常消息为 “Oops!”</h3><p>在 Java 中，抛出一个 <code>RuntimeException</code> 非常简单。你可以使用 <code>throw</code> 关键字，并创建一个 <code>RuntimeException</code> 实例，指定异常消息为 “Oops!”。代码示例如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;Oops!&quot;</span>);<br></code></pre></td></tr></table></figure>
@@ -507,12 +507,12 @@
 <li>记忆异常的策略：理解分类、重点记忆常见异常、结合场景、查阅文档并通过实践积累经验。</li>
 </ul>
 <p>希望这些解答对你有帮助！如果还有疑问，欢迎继续提问。</p>
-<h3 id="如何找异常"><a href="#如何找异常" class="headerlink" title="如何找异常"></a>如何找异常</h3><p>以下面这段代码为例，当我们使用第三方库、调用别人提供的方法时，经常会遇到一个问题：我怎么知道它可能抛出哪些异常？而我又该怎么处理这些异常？<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192340373.png" srcset="/img/loading.gif" lazyload></p>
-<p>其实非常简单，我们只需要把鼠标悬停在方法名上，IDEA 会自动提示这个方法可能抛出的异常类型：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192712609.png" srcset="/img/loading.gif" lazyload></p>
-<p>如果你想进一步确认，还可以按住 <code>Ctrl</code> 并点击方法名，进入该方法的源码，查看它<strong>显式抛出了哪些异常</strong>：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192840306.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="如何找异常"><a href="#如何找异常" class="headerlink" title="如何找异常"></a>如何找异常</h3><p>以下面这段代码为例，当我们使用第三方库、调用别人提供的方法时，经常会遇到一个问题：我怎么知道它可能抛出哪些异常？而我又该怎么处理这些异常？<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192340373.png" srcset="/img/loading.gif" lazyload></p>
+<p>其实非常简单，我们只需要把鼠标悬停在方法名上，IDEA 会自动提示这个方法可能抛出的异常类型：<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192712609.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果你想进一步确认，还可以按住 <code>Ctrl</code> 并点击方法名，进入该方法的源码，查看它<strong>显式抛出了哪些异常</strong>：<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513192840306.png" srcset="/img/loading.gif" lazyload></p>
 <p>当你搞清楚了可能出现的异常，就可以进行异常处理。当然，也不用自己去写一堆 try-catch：只要选中方法，按下 <code>Ctrl + Alt + T</code>，IDEA 会自动帮你生成完整的 try-catch 模板：</p>
-<p>要一整行都选中才可以<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193033722.png" srcset="/img/loading.gif" lazyload></p>
-<p>然后我们的代码就可以像这样，每种异常你都可以单独处理，灵活掌控：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193745547.png" srcset="/img/loading.gif" lazyload></p>
+<p>要一整行都选中才可以<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193033722.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后我们的代码就可以像这样，每种异常你都可以单独处理，灵活掌控：<br><img src="/2025/04/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/image-20250513193745547.png" srcset="/img/loading.gif" lazyload></p>
 <p>不过，如果你暂时不打算对每个异常做精细化区分，也可以只 catch 顶层的 <code>Exception</code>，然后简单打印下异常信息作为兜底处理：</p>
 <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/bucketExists&quot;</span>)<br>public Boolean <span class="hljs-built_in">bucketExists</span>(<span class="hljs-variable">@RequestParam</span> String bucketName) &#123;<br>    <span class="hljs-selector-tag">try</span> &#123;<br>        <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">minioClient</span><span class="hljs-selector-class">.bucketExists</span>(<br>            BucketExistsArgs.<span class="hljs-built_in">builder</span>().<span class="hljs-built_in">bucket</span>(bucketName).<span class="hljs-built_in">build</span>()<br>        );<br>    &#125; <span class="hljs-selector-tag">catch</span> (Exception e) &#123;<br>    <br>        <span class="hljs-comment">// 通知、告警</span><br>        <span class="hljs-selector-tag">System</span><span class="hljs-selector-class">.out</span><span class="hljs-selector-class">.println</span>(<span class="hljs-string">&quot;查询 bucket 时出错：&quot;</span> + e.<span class="hljs-built_in">getMessage</span>());<br><br>        <span class="hljs-comment">// 返回一个安全默认值</span><br>        <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">false</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 

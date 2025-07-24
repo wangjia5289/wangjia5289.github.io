@@ -26,15 +26,13 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="[!NOTE] 注意事项  与数据库表映射的类通常称为 Entity 类，也可称为 DO 类或 PO 类，统属 POJO 类，通常只包含 getter、setter 、equals、hashCode、toString 方法及构造方法，不应包含业务逻辑方法 数据库中的表名一般使用复数形式，如 users；而在 Java 中则采用单数形式命名，如 User 别忘了添加 private List&amp;lt">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Map%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.xmind">
-<meta property="og:image" content="https://wangjia5289.github.io/mermaid-202556%20182836.png">
 <meta property="og:image" content="https://wangjia5289.github.io/image-20250519204423459.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png">
+<meta property="og:image" content="https://wangjia5289.github.io/image-20250412122816030.png">
 <meta property="article:published_time" content="2025-06-29T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-04T09:28:19.687Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.443Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Map%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.xmind">
+<meta name="twitter:image" content="https://wangjia5289.github.io/image-20250519204423459.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -294,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-04T17:28:19+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -317,7 +315,7 @@
 </li>
 </ol>
 </blockquote>
-<h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/Map%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.xmind" srcset="/img/loading.gif" lazyload></p>
+<h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p>![](source&#x2F;_posts&#x2F;笔记：Java 数据类型&#x2F;Map：Java数据类型.xmind)</p>
 <hr>
 <h3 id="4-Java-数据类型"><a href="#4-Java-数据类型" class="headerlink" title="4. Java 数据类型"></a>4. Java 数据类型</h3><h4 id="4-1-基本数据类型"><a href="#4-1-基本数据类型" class="headerlink" title="4.1. 基本数据类型"></a>4.1. 基本数据类型</h4><table>
 <thead>
@@ -561,7 +559,7 @@
 </tr>
 </tbody></table>
 <hr>
-<h4 id="4-5-集合框架"><a href="#4-5-集合框架" class="headerlink" title="4.5. 集合框架"></a>4.5. 集合框架</h4><h5 id="4-5-1-集合框架一览图"><a href="#4-5-1-集合框架一览图" class="headerlink" title="4.5.1. 集合框架一览图"></a>4.5.1. 集合框架一览图</h5><p><img src="/mermaid-202556%20182836.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-5-集合框架"><a href="#4-5-集合框架" class="headerlink" title="4.5. 集合框架"></a>4.5. 集合框架</h4><h5 id="4-5-1-集合框架一览图"><a href="#4-5-1-集合框架一览图" class="headerlink" title="4.5.1. 集合框架一览图"></a>4.5.1. 集合框架一览图</h5><p>![](mermaid-202556 182836.png)</p>
 <hr>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/listBuckets&quot;</span>)  <br><span class="hljs-keyword">public</span> <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; <span class="hljs-title function_">listBuckets</span>(<span class="hljs-params"></span>) &#123;  <br>    <span class="hljs-keyword">try</span> &#123;  <br>        <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; buckets = minioClient.<span class="hljs-title function_">listBuckets</span>().<span class="hljs-title function_">forEach</span>(  <br>                e -&gt; &#123;  <br>                    <span class="hljs-keyword">return</span> e.<span class="hljs-title function_">name</span>() + <span class="hljs-string">&quot;---&quot;</span> + e.<span class="hljs-title function_">creationDate</span>();  <br>                &#125;  <br>        );  <br>    &#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;  <br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseStatusException</span>(  <br>            <span class="hljs-title class_">HttpStatus</span>.<span class="hljs-property">INTERNAL_SERVER_ERROR</span>, <span class="hljs-string">&quot;列出存储桶时出错: &quot;</span> + e.<span class="hljs-title function_">getMessage</span>(), e  <br>        );  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -901,7 +899,7 @@
 </tbody></table>
 <hr>
 <p>如果你有一个前后端分离的 Spring Boot 项目，这样的分类和包结构能让代码更清晰、职责更明确，也便于团队协作。需要我帮你生成一个实际的包结构模板代码示例，也可以提一下～</p>
-<h3 id="1-MySQL-数据类型"><a href="#1-MySQL-数据类型" class="headerlink" title="1. MySQL 数据类型"></a>1. MySQL 数据类型</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E4%BC%A0%E5%8F%82/image-20250412122816030.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1-MySQL-数据类型"><a href="#1-MySQL-数据类型" class="headerlink" title="1. MySQL 数据类型"></a>1. MySQL 数据类型</h3><p><img src="/image-20250412122816030.png" srcset="/img/loading.gif" lazyload></p>
 <p>简单类型、包装类、array、list、set、map、对象</p>
 <p>参数类型可以根据实际需求灵活选择，包括简单类型（主要使用）、包装类、数组（Array）、集合类（List、Set、Map）、实体类对象（主要使用）以及其他普通对象等，均可作为参数传入。</p>
 <p>无论方法中需要传递多少个参数，我们都<strong>推荐为每个参数显式使用 <code>@Param</code> 注解</strong>。这是 MyBatis 提供的注解，用于为传入 SQL 的参数命名，以确保 SQL 语句中能够准确引用对应参数，提升可读性和可维护性。</p>

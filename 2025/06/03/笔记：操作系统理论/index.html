@@ -26,66 +26,66 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="操作系统的特征 并发、共享、异步、虚拟   操作系统的功能 处理器管理、存储器管理、文件管理、设备管理   进程的特性 动态、并发、独立、异步、结构   死锁产生的原因 系统资源的竞争、进程推进顺序非法   死锁产生的必要条件 互斥、不剥夺、请求并保持、循环等待   解除死锁 进程的定义 进程（Process），是计算机中的程序关于某个数据集合的一次运行活动，是系统进行 资源分配和调度 的一个基">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120226825.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605185358630.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605192232877.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605191804066.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203459668.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203754645.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204107933.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204157303.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204314508.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605205200815.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605210113393.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211455385.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211635746.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605155209835.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605164732952.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181232101.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181346721.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181435348.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181527733.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182208816.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182525623.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120028051.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604123703414.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231317732.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231335064.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231518546.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111536575.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111950327.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606132823514.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606135102882.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140124152.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140256568.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604145748064.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604170710743.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182339375.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182536954.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190000531.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190222746.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190620867.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115823481.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115933479.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605121338563.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605235308568.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605122755944.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123055738.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123223431.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123504580.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123524314.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123707615.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605105809959.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605111034701.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113423128.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113731012.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605114030512.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120226825.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605185358630.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605192232877.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605191804066.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203459668.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203754645.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204107933.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204157303.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204314508.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605205200815.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605210113393.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211455385.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211635746.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605155209835.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605164732952.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181232101.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181346721.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181435348.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181527733.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182208816.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182525623.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120028051.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604123703414.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231317732.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231335064.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231518546.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111536575.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111950327.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606132823514.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606135102882.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140124152.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140256568.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604145748064.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604170710743.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182339375.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182536954.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190000531.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190222746.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190620867.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115823481.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115933479.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605121338563.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605235308568.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605122755944.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123055738.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123223431.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123504580.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123524314.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123707615.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605105809959.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605111034701.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113423128.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113731012.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605114030512.png">
 <meta property="article:published_time" content="2025-06-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T08:30:59.287Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.476Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -345,7 +345,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T16:30:59+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -523,7 +523,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250603111913745.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -535,7 +535,7 @@
 <h2 id="3-进程管理"><a href="#3-进程管理" class="headerlink" title="3. 进程管理"></a>3. 进程管理</h2><h3 id="3-1-进程概述"><a href="#3-1-进程概述" class="headerlink" title="3.1. 进程概述"></a>3.1. 进程概述</h3><p>进程（Process），是计算机中的程序关于某个数据集合的一次运行活动，是系统进行 <strong>资源分配和调度</strong> 的一个基本单位，我们简单理解为：一个进程就是一个程序在操作系统中实际运行时的一个实例</p>
 <p>在早期的分时系统中，进程是操作系统进行任务调度和执行的基本单位。然而，在现代操作系统中，我们引入了线程（Thread）的概念，进程不再是基本的执行单位，而是作为<strong>线程的容器</strong>存在，真正被调度和执行的单元变成了线程。</p>
 <hr>
-<h3 id="3-2-进程的状态"><a href="#3-2-进程的状态" class="headerlink" title="3.2. 进程的状态"></a>3.2. 进程的状态</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120226825.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-2-进程的状态"><a href="#3-2-进程的状态" class="headerlink" title="3.2. 进程的状态"></a>3.2. 进程的状态</h3><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120226825.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>&#x3D;&#x3D;创建状态&#x3D;&#x3D;：<ol>
 <li>当用户或系统请求创建一个新进程时，操作系统会为其分配必要的资源，例如在内核中创建进程控制块（PCB）、将装入程序加载到内存等</li>
@@ -595,7 +595,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="3-4-2-间接相互制约关系（互斥）"><a href="#3-4-2-间接相互制约关系（互斥）" class="headerlink" title="3.4.2. 间接相互制约关系（互斥）"></a>3.4.2. 间接相互制约关系（互斥）</h4><h5 id="3-4-2-1-临界资源的访问过程"><a href="#3-4-2-1-临界资源的访问过程" class="headerlink" title="3.4.2.1. 临界资源的访问过程"></a>3.4.2.1. 临界资源的访问过程</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605185358630.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="3-4-2-间接相互制约关系（互斥）"><a href="#3-4-2-间接相互制约关系（互斥）" class="headerlink" title="3.4.2. 间接相互制约关系（互斥）"></a>3.4.2. 间接相互制约关系（互斥）</h4><h5 id="3-4-2-1-临界资源的访问过程"><a href="#3-4-2-1-临界资源的访问过程" class="headerlink" title="3.4.2.1. 临界资源的访问过程"></a>3.4.2.1. 临界资源的访问过程</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605185358630.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -614,9 +614,9 @@
 <li>记录型信号量</li>
 </ol>
 <hr>
-<h6 id="3-4-2-5-2-整形信号量"><a href="#3-4-2-5-2-整形信号量" class="headerlink" title="3.4.2.5.2. 整形信号量"></a>3.4.2.5.2. 整形信号量</h6><p>缺点是是 CPU 忙等<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605192232877.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="3-4-2-5-2-整形信号量"><a href="#3-4-2-5-2-整形信号量" class="headerlink" title="3.4.2.5.2. 整形信号量"></a>3.4.2.5.2. 整形信号量</h6><p>缺点是是 CPU 忙等<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605192232877.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h6 id="3-4-2-5-3-记录型信号量"><a href="#3-4-2-5-3-记录型信号量" class="headerlink" title="3.4.2.5.3. 记录型信号量"></a>3.4.2.5.3. 记录型信号量</h6><p>解决 CPU 忙等问题<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605191804066.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="3-4-2-5-3-记录型信号量"><a href="#3-4-2-5-3-记录型信号量" class="headerlink" title="3.4.2.5.3. 记录型信号量"></a>3.4.2.5.3. 记录型信号量</h6><p>解决 CPU 忙等问题<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605191804066.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="3-4-3-死锁"><a href="#3-4-3-死锁" class="headerlink" title="3.4.3. 死锁"></a>3.4.3. 死锁</h4><h5 id="3-4-3-1-死锁概述"><a href="#3-4-3-1-死锁概述" class="headerlink" title="3.4.3.1. 死锁概述"></a>3.4.3.1. 死锁概述</h5><p>死锁是指多个进程因竞争资源而相互等待，导致彼此陷入阻塞状态，若无外力干预，这些进程将永远无法继续执行。</p>
 <blockquote>
@@ -632,27 +632,27 @@
 <li>进程推进顺序非法</li>
 </ol>
 <hr>
-<h5 id="3-4-3-3-死锁产生的必要条件"><a href="#3-4-3-3-死锁产生的必要条件" class="headerlink" title="3.4.3.3. 死锁产生的必要条件"></a>3.4.3.3. 死锁产生的必要条件</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203459668.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="3-4-3-3-死锁产生的必要条件"><a href="#3-4-3-3-死锁产生的必要条件" class="headerlink" title="3.4.3.3. 死锁产生的必要条件"></a>3.4.3.3. 死锁产生的必要条件</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203459668.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="3-4-3-4-死锁的预防"><a href="#3-4-3-4-死锁的预防" class="headerlink" title="3.4.3.4. 死锁的预防"></a>3.4.3.4. 死锁的预防</h5><p>&#x3D;&#x3D;1.破坏互斥条件&#x3D;&#x3D;<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203754645.png" srcset="/img/loading.gif" lazyload></p>
-<p>&#x3D;&#x3D;2.破坏不可剥夺条件&#x3D;&#x3D;<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204107933.png" srcset="/img/loading.gif" lazyload></p>
-<p>&#x3D;&#x3D;3.破坏请求并保持条件&#x3D;&#x3D;<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204157303.png" srcset="/img/loading.gif" lazyload></p>
-<p>&#x3D;&#x3D;4.破坏循环等待条件&#x3D;&#x3D;<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204314508.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="3-4-3-4-死锁的预防"><a href="#3-4-3-4-死锁的预防" class="headerlink" title="3.4.3.4. 死锁的预防"></a>3.4.3.4. 死锁的预防</h5><p>&#x3D;&#x3D;1.破坏互斥条件&#x3D;&#x3D;<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605203754645.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;2.破坏不可剥夺条件&#x3D;&#x3D;<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204107933.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;3.破坏请求并保持条件&#x3D;&#x3D;<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204157303.png" srcset="/img/loading.gif" lazyload></p>
+<p>&#x3D;&#x3D;4.破坏循环等待条件&#x3D;&#x3D;<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605204314508.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="3-4-3-5-死锁的避免"><a href="#3-4-3-5-死锁的避免" class="headerlink" title="3.4.3.5. 死锁的避免"></a>3.4.3.5. 死锁的避免</h5><p>也就是我们大名鼎鼎的银行家算法，进程需要在开始时向操作系统声明其<strong>最大可能资源需求</strong>，以图中的 P0 为例，声明的最大需求为 10 个资源，当前已分配了 5 个。</p>
 <p>现在 P0 向操作系统申请 6 个资源，OS 一计算：你这次要 6 个，加上已有的 5 个，总共就是 11 个，已经超过了你最初声明的最大需求 —— 操作系统据此预判此请求<strong>可能导致系统进入不安全状态</strong>（即可能引发死锁），于是<strong>拒绝请求</strong>。</p>
-<p>如果 P0 这次只申请 5 个资源，虽然总需求没有超过最大值，但操作系统检查当前<strong>可用资源数为 3 个</strong>，仍无法满足请求，因此也会<strong>拒绝分配</strong>。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605205200815.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果 P0 这次只申请 5 个资源，虽然总需求没有超过最大值，但操作系统检查当前<strong>可用资源数为 3 个</strong>，仍无法满足请求，因此也会<strong>拒绝分配</strong>。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605205200815.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="3-4-3-6-死锁的检测"><a href="#3-4-3-6-死锁的检测" class="headerlink" title="3.4.3.6. 死锁的检测"></a>3.4.3.6. 死锁的检测</h5><h6 id="3-4-3-6-1-死锁的检测概述"><a href="#3-4-3-6-1-死锁的检测概述" class="headerlink" title="3.4.3.6.1. 死锁的检测概述"></a>3.4.3.6.1. 死锁的检测概述</h6><p>即便我们有了死锁的预防和死锁的避免机制，也不能保证系统就绝对不会发生死锁。比如在程序运行过程中，可能会人为动态地创建线程或进程，这些行为是操作系统事先无法完全预测的，而新的资源请求也可能引发死锁。</p>
 <p>那么一旦死锁真的发生了，我们该如何检测？其实方法就是：绘制资源分配图，然后根据死锁定理来判断当前是否存在死锁。</p>
 <hr>
-<h6 id="3-4-3-6-2-资源分配图"><a href="#3-4-3-6-2-资源分配图" class="headerlink" title="3.4.3.6.2. 资源分配图"></a>3.4.3.6.2. 资源分配图</h6><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605210113393.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="3-4-3-6-2-资源分配图"><a href="#3-4-3-6-2-资源分配图" class="headerlink" title="3.4.3.6.2. 资源分配图"></a>3.4.3.6.2. 资源分配图</h6><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605210113393.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h6 id="3-4-3-6-3-资源分配图的简化"><a href="#3-4-3-6-3-资源分配图的简化" class="headerlink" title="3.4.3.6.3. 资源分配图的简化"></a>3.4.3.6.3. 资源分配图的简化</h6><p>资源分配图的简化就是去找那些不是孤点（即存在分配边或请求边）、不处于阻塞状态（即其请求的资源当前可满足）的点。</p>
 <p>如上图所示：  R1 为 P0 分配了 2 个资源，为 P1 分配了 1 个资源，此时 R1 中没有剩余资源；  R2 为 P1 分配了 1 个资源，当前仍剩下 1 个资源。</p>
 <p>我们先看 P0：P0 正在向 R2 请求一个资源，而 R2 中还有资源可用，说明 P0 能够获取资源，满足条件；<br>然后再看 P1：P1 正在向 R1 请求资源，但 R1 当前没有可用资源，不满足条件，处于阻塞状态。</p>
-<p>因此，我们将满足条件的 P0 的所有请求边和分配边从图中删除，如下图所示：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211455385.png" srcset="/img/loading.gif" lazyload></p>
-<p>随后，P0 执行完成并归还其占用的所有资源。这时 R1 中恢复了两个资源。我们再次观察 P1：此时它请求 R1 的资源，而 R1 已有空闲资源，因此 P1 现在满足条件。于是我们也将 P1 的出边和入边删除，如下图所示：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211635746.png" srcset="/img/loading.gif" lazyload></p>
+<p>因此，我们将满足条件的 P0 的所有请求边和分配边从图中删除，如下图所示：<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211455385.png" srcset="/img/loading.gif" lazyload></p>
+<p>随后，P0 执行完成并归还其占用的所有资源。这时 R1 中恢复了两个资源。我们再次观察 P1：此时它请求 R1 的资源，而 R1 已有空闲资源，因此 P1 现在满足条件。于是我们也将 P1 的出边和入边删除，如下图所示：<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605211635746.png" srcset="/img/loading.gif" lazyload></p>
 <p>所以这是一个完全简化过程，说明此状态下不存在死锁，对应的进程执行顺序可以表示为：P0 → P1</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -709,7 +709,7 @@
 </ol>
 </li>
 </ol>
-<p>下图是高级调度（作业调度）的示意图：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605155209835.png" srcset="/img/loading.gif" lazyload></p>
+<p>下图是高级调度（作业调度）的示意图：<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605155209835.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="4-1-3-处理机调度的方式"><a href="#4-1-3-处理机调度的方式" class="headerlink" title="4.1.3. 处理机调度的方式"></a>4.1.3. 处理机调度的方式</h4><ol>
 <li>&#x3D;&#x3D;剥夺式调度（抢占式调度）&#x3D;&#x3D;：<ol>
@@ -797,7 +797,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="4-1-7-处理机调度的常见算法"><a href="#4-1-7-处理机调度的常见算法" class="headerlink" title="4.1.7. 处理机调度的常见算法"></a>4.1.7. 处理机调度的常见算法</h4><h5 id="4-1-7-1-处理机调度的常见算法概述"><a href="#4-1-7-1-处理机调度的常见算法概述" class="headerlink" title="4.1.7.1. 处理机调度的常见算法概述"></a>4.1.7.1. 处理机调度的常见算法概述</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605164732952.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-1-7-处理机调度的常见算法"><a href="#4-1-7-处理机调度的常见算法" class="headerlink" title="4.1.7. 处理机调度的常见算法"></a>4.1.7. 处理机调度的常见算法</h4><h5 id="4-1-7-1-处理机调度的常见算法概述"><a href="#4-1-7-1-处理机调度的常见算法概述" class="headerlink" title="4.1.7.1. 处理机调度的常见算法概述"></a>4.1.7.1. 处理机调度的常见算法概述</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605164732952.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -805,17 +805,17 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="4-1-7-2-先来先服务（FCFS）"><a href="#4-1-7-2-先来先服务（FCFS）" class="headerlink" title="4.1.7.2. 先来先服务（FCFS）"></a>4.1.7.2. 先来先服务（FCFS）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181232101.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-1-7-2-先来先服务（FCFS）"><a href="#4-1-7-2-先来先服务（FCFS）" class="headerlink" title="4.1.7.2. 先来先服务（FCFS）"></a>4.1.7.2. 先来先服务（FCFS）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181232101.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="4-1-7-3-短作业优先（SJF）"><a href="#4-1-7-3-短作业优先（SJF）" class="headerlink" title="4.1.7.3. 短作业优先（SJF）"></a>4.1.7.3. 短作业优先（SJF）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181346721.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-1-7-3-短作业优先（SJF）"><a href="#4-1-7-3-短作业优先（SJF）" class="headerlink" title="4.1.7.3. 短作业优先（SJF）"></a>4.1.7.3. 短作业优先（SJF）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181346721.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="4-1-7-4-高相应比优先（HRRN）"><a href="#4-1-7-4-高相应比优先（HRRN）" class="headerlink" title="4.1.7.4. 高相应比优先（HRRN）"></a>4.1.7.4. 高相应比优先（HRRN）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181435348.png" srcset="/img/loading.gif" lazyload><br>等待时间 &#x3D; 现在时间 - 到达时间，每次都要重新计算<br>响应比 &#x3D; （等待时间 + 服务时间）&#x2F;服务时间</p>
+<h5 id="4-1-7-4-高相应比优先（HRRN）"><a href="#4-1-7-4-高相应比优先（HRRN）" class="headerlink" title="4.1.7.4. 高相应比优先（HRRN）"></a>4.1.7.4. 高相应比优先（HRRN）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181435348.png" srcset="/img/loading.gif" lazyload><br>等待时间 &#x3D; 现在时间 - 到达时间，每次都要重新计算<br>响应比 &#x3D; （等待时间 + 服务时间）&#x2F;服务时间</p>
 <hr>
-<h5 id="4-1-7-5-优先级调度（PSA）"><a href="#4-1-7-5-优先级调度（PSA）" class="headerlink" title="4.1.7.5. 优先级调度（PSA）"></a>4.1.7.5. 优先级调度（PSA）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181527733.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-1-7-5-优先级调度（PSA）"><a href="#4-1-7-5-优先级调度（PSA）" class="headerlink" title="4.1.7.5. 优先级调度（PSA）"></a>4.1.7.5. 优先级调度（PSA）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605181527733.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="4-1-7-6-时间片轮转调度（RR）"><a href="#4-1-7-6-时间片轮转调度（RR）" class="headerlink" title="4.1.7.6. 时间片轮转调度（RR）"></a>4.1.7.6. 时间片轮转调度（RR）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182208816.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-1-7-6-时间片轮转调度（RR）"><a href="#4-1-7-6-时间片轮转调度（RR）" class="headerlink" title="4.1.7.6. 时间片轮转调度（RR）"></a>4.1.7.6. 时间片轮转调度（RR）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182208816.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="4-1-7-7-多级反馈队列调度（MFQ）"><a href="#4-1-7-7-多级反馈队列调度（MFQ）" class="headerlink" title="4.1.7.7. 多级反馈队列调度（MFQ）"></a>4.1.7.7. 多级反馈队列调度（MFQ）</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182525623.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-1-7-7-多级反馈队列调度（MFQ）"><a href="#4-1-7-7-多级反馈队列调度（MFQ）" class="headerlink" title="4.1.7.7. 多级反馈队列调度（MFQ）"></a>4.1.7.7. 多级反馈队列调度（MFQ）</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605182525623.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="4-1-8-处理机的状态"><a href="#4-1-8-处理机的状态" class="headerlink" title="4.1.8. 处理机的状态"></a>4.1.8. 处理机的状态</h4><p>处理机的状态常见有：</p>
 <ol>
@@ -860,9 +860,9 @@
 </li>
 </ol>
 <hr>
-<h2 id="5-存储器管理（内存管理）"><a href="#5-存储器管理（内存管理）" class="headerlink" title="5. 存储器管理（内存管理）"></a>5. 存储器管理（内存管理）</h2><h3 id="5-1-存储器的结构"><a href="#5-1-存储器的结构" class="headerlink" title="5.1. 存储器的结构"></a>5.1. 存储器的结构</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120028051.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="5-存储器管理（内存管理）"><a href="#5-存储器管理（内存管理）" class="headerlink" title="5. 存储器管理（内存管理）"></a>5. 存储器管理（内存管理）</h2><h3 id="5-1-存储器的结构"><a href="#5-1-存储器的结构" class="headerlink" title="5.1. 存储器的结构"></a>5.1. 存储器的结构</h3><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604120028051.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="5-2-进程运行的原理"><a href="#5-2-进程运行的原理" class="headerlink" title="5.2. 进程运行的原理"></a>5.2. 进程运行的原理</h3><h4 id="5-2-1-程序装入内存过程图示（要转为进程）"><a href="#5-2-1-程序装入内存过程图示（要转为进程）" class="headerlink" title="5.2.1. 程序装入内存过程图示（要转为进程）"></a>5.2.1. 程序装入内存过程图示（要转为进程）</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604123703414.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="5-2-进程运行的原理"><a href="#5-2-进程运行的原理" class="headerlink" title="5.2. 进程运行的原理"></a>5.2. 进程运行的原理</h3><h4 id="5-2-1-程序装入内存过程图示（要转为进程）"><a href="#5-2-1-程序装入内存过程图示（要转为进程）" class="headerlink" title="5.2.1. 程序装入内存过程图示（要转为进程）"></a>5.2.1. 程序装入内存过程图示（要转为进程）</h4><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604123703414.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="5-2-2-编译阶段"><a href="#5-2-2-编译阶段" class="headerlink" title="5.2.2. 编译阶段"></a>5.2.2. 编译阶段</h4><p>程序的编译，是将源代码转化为机器能够理解或执行的形式。例如：</p>
 <ol>
@@ -902,7 +902,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231317732.png" srcset="/img/loading.gif" lazyload><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231335064.png" srcset="/img/loading.gif" lazyload><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231518546.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231317732.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231335064.png" srcset="/img/loading.gif" lazyload><br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605231518546.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="5-2-4-装入阶段"><a href="#5-2-4-装入阶段" class="headerlink" title="5.2.4. 装入阶段"></a>5.2.4. 装入阶段</h4><p>程序装入主要有三种方式：</p>
 <ol>
@@ -951,7 +951,7 @@
 <ol>
 <li>只能同时运行一个程序，存储器利用率低</li>
 <li>程序大小受限于整个内存容量，超出部分无法加载（可以使用内存扩充技术）</li>
-<li>有内部碎片，程序实际使用的内存往往小于整块分区，导致部分空间浪费<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111536575.png" srcset="/img/loading.gif" lazyload></li>
+<li>有内部碎片，程序实际使用的内存往往小于整块分区，导致部分空间浪费<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111536575.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 <hr>
 <h5 id="5-3-2-3-固定分区分配"><a href="#5-3-2-3-固定分区分配" class="headerlink" title="5.3.2.3. 固定分区分配"></a>5.3.2.3. 固定分区分配</h5><p>系统将除系统保留区之外的所有可用内存划分为若干个大小固定的分区，<strong>每个分区独立供一个进程使用</strong>。</p>
@@ -971,7 +971,7 @@
 </li>
 <li>分区数量固定，扩展性差，如果可用分区都在使用，但有新进程要进入，必须等待或进行重启配置；若分区过剩，则部分分区长期空闲，降低利用率。</li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111950327.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606111950327.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="5-3-2-4-动态分区分配"><a href="#5-3-2-4-动态分区分配" class="headerlink" title="5.3.2.4. 动态分区分配"></a>5.3.2.4. 动态分区分配</h5><p>系统将除系统保留区之外的所有可用内存视为一个整体的空闲区域。起初，当进程到来时，系统根据其需求划出相应大小的一块内存，这块区域即视为一个“分区”。该进程退出后，所占用的分区会重新变为新的空闲区。系统通过数据结构（如空闲区链表、空闲区表，该表通常存放于系统区内存中）记录当前所有空闲区的位置和大小。</p>
 <p>当新进程请求内存时，系统会优先在现有空闲区中查找合适的连续空间进行分配。例如，若进程需要 6 KB，而找到的空闲区为 8 KB，则系统会从该空闲区划出 6  KB分配给进程，剩余的2KB则被划分为一个新的空闲区。需要注意的是，操作系统通常会设置一个最小分配单位（分配粒度），如果剩余空间小于该单位，则不会再进一步划分，以避免产生过多的碎片。</p>
@@ -989,17 +989,17 @@
 <li>分配和回收开销较大，每次分配需遍历空闲区链表寻找合适空间，并可能拆分空闲区；回收时还需检查并合并相邻空闲区，增加了算法复杂度和执行时间。</li>
 <li>内存管理复杂，需维护动态变化的空闲区表或链表（或位示图），实时更新状态。相比固定分区，数据结构更复杂，易出错且调试难度较高</li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606132823514.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606132823514.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="5-3-3-内存的非连续分配"><a href="#5-3-3-内存的非连续分配" class="headerlink" title="5.3.3. 内存的非连续分配"></a>5.3.3. 内存的非连续分配</h4><h5 id="5-3-3-1-基本分页存储管理"><a href="#5-3-3-1-基本分页存储管理" class="headerlink" title="5.3.3.1. 基本分页存储管理"></a>5.3.3.1. 基本分页存储管理</h5><p>基本分页存储管理和固定分区分配在形式上很相似，都是将内存划分为多个块。但不同的是，分页允许一个进程占用多个非连续的物理块，而固定分区分配中，一个块只能被一个进程占用；分页也不同于动态分区分配，后者要求找到一整块连续的空闲空间，而分页无需考虑物理内存的连续性。</p>
 <p>操作系统将逻辑地址空间（即进程所需的虚拟内存空间）划分为若干个大小固定、长度相等的块，称为“页”（Page）；与之对应，物理内存也被划分成同样大小的块，称为“页框”（Frame）。</p>
 <p>为了尽量减少内部碎片，每一页的大小通常设计得较小，这一点不同于固定分区分配中分区尺寸较大、容易产生未充分利用的剩余空间。每个进程维护一张页表（该页表保存在 进程PCB 中，由操作系统存放于系统内存区），用于记录逻辑页与物理页框之间的映射关系。</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606135102882.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606135102882.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="5-3-3-2-基本分段存储管理"><a href="#5-3-3-2-基本分段存储管理" class="headerlink" title="5.3.3.2. 基本分段存储管理"></a>5.3.3.2. 基本分段存储管理</h5><p>一个应用，每个模块可能占用的内存不一样，如果我们像上面一样全部列出来，其实是不太好管理的<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140124152.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="5-3-3-2-基本分段存储管理"><a href="#5-3-3-2-基本分段存储管理" class="headerlink" title="5.3.3.2. 基本分段存储管理"></a>5.3.3.2. 基本分段存储管理</h5><p>一个应用，每个模块可能占用的内存不一样，如果我们像上面一样全部列出来，其实是不太好管理的<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140124152.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="5-3-3-3-段页式管理方式"><a href="#5-3-3-3-段页式管理方式" class="headerlink" title="5.3.3.3. 段页式管理方式"></a>5.3.3.3. 段页式管理方式</h5><p>先分段再分页，一个进程一个段表，一个段表项一个页表，一个页表多个物理块</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140256568.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250606140256568.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="5-3-4-内存的扩充"><a href="#5-3-4-内存的扩充" class="headerlink" title="5.3.4. 内存的扩充"></a>5.3.4. 内存的扩充</h4><p>内存扩充的常见手段有：</p>
 <ol>
@@ -1020,7 +1020,7 @@
 <h3 id="5-4-虚拟内存管理"><a href="#5-4-虚拟内存管理" class="headerlink" title="5.4. 虚拟内存管理"></a>5.4. 虚拟内存管理</h3><hr>
 <h2 id="6-文件管理"><a href="#6-文件管理" class="headerlink" title="6. 文件管理"></a>6. 文件管理</h2><h3 id="6-1-文件概述"><a href="#6-1-文件概述" class="headerlink" title="6.1. 文件概述"></a>6.1. 文件概述</h3><p>文件是信息在计算机系统中的基本存储单位，通常以计算机硬盘等存储介质为载体，用于组织和管理数据。它是用户与操作系统交互、存储数据和程序的主要方式。</p>
 <hr>
-<h3 id="6-2-文件的属性"><a href="#6-2-文件的属性" class="headerlink" title="6.2. 文件的属性"></a>6.2. 文件的属性</h3><p>文件具有一组用于描述其状态和管理信息的属性，包括但不限于：文件名、文件类型、文件大小、存储位置、访问权限等等<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604145748064.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="6-2-文件的属性"><a href="#6-2-文件的属性" class="headerlink" title="6.2. 文件的属性"></a>6.2. 文件的属性</h3><p>文件具有一组用于描述其状态和管理信息的属性，包括但不限于：文件名、文件类型、文件大小、存储位置、访问权限等等<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604145748064.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="6-3-文件的操作"><a href="#6-3-文件的操作" class="headerlink" title="6.3. 文件的操作"></a>6.3. 文件的操作</h3><p>操作系统为用户和程序提供了多种文件操作接口，主要包括：创建文件、打开与关闭文件、读写文件、文件定位（寻址）、删除文件、截断文件</p>
 <hr>
@@ -1028,7 +1028,7 @@
 <hr>
 <h5 id="6-4-1-2-无结构文件（流式文件）"><a href="#6-4-1-2-无结构文件（流式文件）" class="headerlink" title="6.4.1.2. 无结构文件（流式文件）"></a>6.4.1.2. 无结构文件（流式文件）</h5><p>无结构文件指的是文件<strong>内部的数据没有固定的组织结构</strong>，系统将其中的数据按字节（Byte）为单位、顺序排列进行存储。操作系统并不会对这些字节的内容做出任何解释或假设，具体的含义和格式完全依赖于应用程序根据需求进行解析。</p>
 <p>举个例子，像我们日常使用的 <code>.txt</code> 文本文件、<code>.java</code> 源代码文件，它们在逻辑上就是典型的无结构文件。我们可以在文件的任意位置自由地插入数据、添加注释或修改内容，不受字段格式、记录长度等结构约束——想写哪里就写哪里，非常灵活。</p>
-<p>也正因为它“无结构”，它的操作非常灵活、简单，尤其适合顺序访问。但与此同时也存在缺点：由于缺乏内部组织，若我们希望定位某一特定数据（比如某一行、某个关键字），就只能通过穷举扫描（如全文搜索）的方式查找。这种方式在小文件中影响不大，但在处理大规模数据或频繁查找时，效率就会显得不足。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604170710743.png" srcset="/img/loading.gif" lazyload></p>
+<p>也正因为它“无结构”，它的操作非常灵活、简单，尤其适合顺序访问。但与此同时也存在缺点：由于缺乏内部组织，若我们希望定位某一特定数据（比如某一行、某个关键字），就只能通过穷举扫描（如全文搜索）的方式查找。这种方式在小文件中影响不大，但在处理大规模数据或频繁查找时，效率就会显得不足。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604170710743.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1069,15 +1069,15 @@
 </ol>
 </li>
 <li>&#x3D;&#x3D;定长顺序文件&#x3D;&#x3D;：<ol>
-<li>每条记录长度相同，便于通过字节偏移直接定位记录，例如数据库的 <code>.ibd</code> 文件，虽然实际插入的数据可能大小不一，但我们都申请了固定空间（如 <code>VARCHAR(20)</code> ），整体上形成了定长的存储布局。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182339375.png" srcset="/img/loading.gif" lazyload></li>
+<li>每条记录长度相同，便于通过字节偏移直接定位记录，例如数据库的 <code>.ibd</code> 文件，虽然实际插入的数据可能大小不一，但我们都申请了固定空间（如 <code>VARCHAR(20)</code> ），整体上形成了定长的存储布局。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182339375.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 </li>
 </ol>
 <hr>
-<h6 id="6-4-1-3-3-索引文件"><a href="#6-4-1-3-3-索引文件" class="headerlink" title="6.4.1.3.3. 索引文件"></a>6.4.1.3.3. 索引文件</h6><p>文件中建立了独立索引结构（如索引表或索引块，索引与数据分离），不仅可以通过 “关键字 → 字节偏移” 的方式快速定位记录，还可以实现变长，如我们 MySQL 的 <code>.MYI</code> 文件<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182536954.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="6-4-1-3-3-索引文件"><a href="#6-4-1-3-3-索引文件" class="headerlink" title="6.4.1.3.3. 索引文件"></a>6.4.1.3.3. 索引文件</h6><p>文件中建立了独立索引结构（如索引表或索引块，索引与数据分离），不仅可以通过 “关键字 → 字节偏移” 的方式快速定位记录，还可以实现变长，如我们 MySQL 的 <code>.MYI</code> 文件<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604182536954.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h6 id="6-4-1-3-4-索引顺序文件"><a href="#6-4-1-3-4-索引顺序文件" class="headerlink" title="6.4.1.3.4. 索引顺序文件"></a>6.4.1.3.4. 索引顺序文件</h6><p>索引顺序文件是顺序文件 + 索引结构的结合，既可以按顺序遍历，也可以按索引跳转定位。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190000531.png" srcset="/img/loading.gif" lazyload></p>
-<p>当数据量非常大时，一个单层索引表所能覆盖的记录数量是有限的。为了解决这个问题，我们可以采用多级索引结构：在原有索引表之上再建立更高一层的索引，用于索引“索引表”。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190222746.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="6-4-1-3-4-索引顺序文件"><a href="#6-4-1-3-4-索引顺序文件" class="headerlink" title="6.4.1.3.4. 索引顺序文件"></a>6.4.1.3.4. 索引顺序文件</h6><p>索引顺序文件是顺序文件 + 索引结构的结合，既可以按顺序遍历，也可以按索引跳转定位。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190000531.png" srcset="/img/loading.gif" lazyload></p>
+<p>当数据量非常大时，一个单层索引表所能覆盖的记录数量是有限的。为了解决这个问题，我们可以采用多级索引结构：在原有索引表之上再建立更高一层的索引，用于索引“索引表”。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190222746.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1086,7 +1086,7 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="6-4-1-3-5-直接文件（散列文件、Hash-文件）"><a href="#6-4-1-3-5-直接文件（散列文件、Hash-文件）" class="headerlink" title="6.4.1.3.5. 直接文件（散列文件、Hash 文件）"></a>6.4.1.3.5. 直接文件（散列文件、Hash 文件）</h6><p>用哈希函数将关键字直接映射到物理地址或记录的偏移位置，实现近似 O(1) 的随机访问，例如 Redis 的 <code>.rdb</code> 文件<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190620867.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="6-4-1-3-5-直接文件（散列文件、Hash-文件）"><a href="#6-4-1-3-5-直接文件（散列文件、Hash-文件）" class="headerlink" title="6.4.1.3.5. 直接文件（散列文件、Hash 文件）"></a>6.4.1.3.5. 直接文件（散列文件、Hash 文件）</h6><p>用哈希函数将关键字直接映射到物理地址或记录的偏移位置，实现近似 O(1) 的随机访问，例如 Redis 的 <code>.rdb</code> 文件<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250604190620867.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="6-4-1-4-文件的目录结构"><a href="#6-4-1-4-文件的目录结构" class="headerlink" title="6.4.1.4. 文件的目录结构"></a>6.4.1.4. 文件的目录结构</h5><h6 id="6-4-1-4-1-文件的目录结构概述"><a href="#6-4-1-4-1-文件的目录结构概述" class="headerlink" title="6.4.1.4.1. 文件的目录结构概述"></a>6.4.1.4.1. 文件的目录结构概述</h6><p>文件的目录结构是指操作系统或文件系统用来组织和管理文件层级关系的方式。常见的目录结构有：</p>
 <ol>
@@ -1117,12 +1117,12 @@
 <li>文件打开状态、访问权限</li>
 <li>关联的缓冲区指针或文件句柄</li>
 </ol>
-<p>操作系统通过 FCB 来跟踪和管理文件的元数据，方便文件的打开、读取、写入和关闭等操作，我们资源管理器展示的，其实就是从 FCB 或 inode 等结构中拿出来展现给我们的。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115823481.png" srcset="/img/loading.gif" lazyload></p>
+<p>操作系统通过 FCB 来跟踪和管理文件的元数据，方便文件的打开、读取、写入和关闭等操作，我们资源管理器展示的，其实就是从 FCB 或 inode 等结构中拿出来展现给我们的。<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115823481.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h6 id="6-4-1-4-3-索引节点（inode）"><a href="#6-4-1-4-3-索引节点（inode）" class="headerlink" title="6.4.1.4.3. 索引节点（inode）"></a>6.4.1.4.3. 索引节点（inode）</h6><p>inode 应用于类 Unix 系统（如 Linux、FreeBSD 等），索引节点不包含文件名，而是包含文件属性、文件大小等信息，我们通过文件名对应的索引节点指针来定位本文件具体的索引节点。</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115933479.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605115933479.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="6-5-文件的控制方式"><a href="#6-5-文件的控制方式" class="headerlink" title="6.5. 文件的控制方式"></a>6.5. 文件的控制方式</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605121338563.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="6-5-文件的控制方式"><a href="#6-5-文件的控制方式" class="headerlink" title="6.5. 文件的控制方式"></a>6.5. 文件的控制方式</h3><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605121338563.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="6-6-文件的实现"><a href="#6-6-文件的实现" class="headerlink" title="6.6. 文件的实现"></a>6.6. 文件的实现</h3><h4 id="6-6-1-文件的实现概述"><a href="#6-6-1-文件的实现概述" class="headerlink" title="6.6.1. 文件的实现概述"></a>6.6.1. 文件的实现概述</h4><p>文件的实现分为两部分：</p>
 <ol>
@@ -1202,7 +1202,7 @@
 <p>缺点：</p>
 <ol>
 <li>不方便扩展</li>
-<li>会产生磁盘碎片<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605235308568.png" srcset="/img/loading.gif" lazyload></li>
+<li>会产生磁盘碎片<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605235308568.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -1211,10 +1211,10 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="6-6-2-3-链接分配"><a href="#6-6-2-3-链接分配" class="headerlink" title="6.6.2.3. 链接分配"></a>6.6.2.3. 链接分配</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605122755944.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="6-6-2-3-链接分配"><a href="#6-6-2-3-链接分配" class="headerlink" title="6.6.2.3. 链接分配"></a>6.6.2.3. 链接分配</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605122755944.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="6-6-2-4-索引分配"><a href="#6-6-2-4-索引分配" class="headerlink" title="6.6.2.4. 索引分配"></a>6.6.2.4. 索引分配</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123055738.png" srcset="/img/loading.gif" lazyload></p>
-<p>如果我们的文件特别大，可以：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123223431.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="6-6-2-4-索引分配"><a href="#6-6-2-4-索引分配" class="headerlink" title="6.6.2.4. 索引分配"></a>6.6.2.4. 索引分配</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123055738.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果我们的文件特别大，可以：<br><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123223431.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="6-6-3-文件存储空间管理"><a href="#6-6-3-文件存储空间管理" class="headerlink" title="6.6.3. 文件存储空间管理"></a>6.6.3. 文件存储空间管理</h4><h5 id="6-6-3-1-文件存储空间管理概述"><a href="#6-6-3-1-文件存储空间管理概述" class="headerlink" title="6.6.3.1. 文件存储空间管理概述"></a>6.6.3.1. 文件存储空间管理概述</h5><p>就是讲文件存储空间是如何进行管理的，主要有以下几种方式：</p>
 <ol>
@@ -1224,11 +1224,11 @@
 <li>位示图法</li>
 </ol>
 <hr>
-<h5 id="6-6-3-2-空闲表法"><a href="#6-6-3-2-空闲表法" class="headerlink" title="6.6.3.2. 空闲表法"></a>6.6.3.2. 空闲表法</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123504580.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="6-6-3-2-空闲表法"><a href="#6-6-3-2-空闲表法" class="headerlink" title="6.6.3.2. 空闲表法"></a>6.6.3.2. 空闲表法</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123504580.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="6-6-3-3-空闲链表法"><a href="#6-6-3-3-空闲链表法" class="headerlink" title="6.6.3.3. 空闲链表法"></a>6.6.3.3. 空闲链表法</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123524314.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="6-6-3-3-空闲链表法"><a href="#6-6-3-3-空闲链表法" class="headerlink" title="6.6.3.3. 空闲链表法"></a>6.6.3.3. 空闲链表法</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123524314.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="6-6-3-4-位示图法"><a href="#6-6-3-4-位示图法" class="headerlink" title="6.6.3.4. 位示图法"></a>6.6.3.4. 位示图法</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123707615.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="6-6-3-4-位示图法"><a href="#6-6-3-4-位示图法" class="headerlink" title="6.6.3.4. 位示图法"></a>6.6.3.4. 位示图法</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605123707615.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h2 id="7-设备管理"><a href="#7-设备管理" class="headerlink" title="7. 设备管理"></a>7. 设备管理</h2><h3 id="7-1-I-O-概述"><a href="#7-1-I-O-概述" class="headerlink" title="7.1. I&#x2F;O 概述"></a>7.1. I&#x2F;O 概述</h3><p>I&#x2F;O（Input&#x2F;Output）指的是输入与输出操作，即将数据从外部设备输入到计算机（CPU），或将计算机（CPU）处理后的数据输出到外部设备。</p>
 <hr>
@@ -1319,7 +1319,7 @@
 </li>
 </ol>
 <hr>
-<h5 id="7-3-2-2-I-O-控制器的组成"><a href="#7-3-2-2-I-O-控制器的组成" class="headerlink" title="7.3.2.2. I&#x2F;O 控制器的组成"></a>7.3.2.2. I&#x2F;O 控制器的组成</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605105809959.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="7-3-2-2-I-O-控制器的组成"><a href="#7-3-2-2-I-O-控制器的组成" class="headerlink" title="7.3.2.2. I&#x2F;O 控制器的组成"></a>7.3.2.2. I&#x2F;O 控制器的组成</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605105809959.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="7-4-I-O-控制方式"><a href="#7-4-I-O-控制方式" class="headerlink" title="7.4. I&#x2F;O 控制方式"></a>7.4. I&#x2F;O 控制方式</h3><h4 id="7-4-1-I-O-控制方式概述"><a href="#7-4-1-I-O-控制方式概述" class="headerlink" title="7.4.1. I&#x2F;O 控制方式概述"></a>7.4.1. I&#x2F;O 控制方式概述</h4><p>I&#x2F;O 控制方式是指 I&#x2F;O 操作的完成方式，涉及 CPU、I&#x2F;O 控制器以及 I&#x2F;O 设备。主要包括以下几种方式：</p>
 <ol>
@@ -1337,7 +1337,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="7-4-2-2-程序直接控制方式图示"><a href="#7-4-2-2-程序直接控制方式图示" class="headerlink" title="7.4.2.2. 程序直接控制方式图示"></a>7.4.2.2. 程序直接控制方式图示</h5><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605111034701.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="7-4-2-2-程序直接控制方式图示"><a href="#7-4-2-2-程序直接控制方式图示" class="headerlink" title="7.4.2.2. 程序直接控制方式图示"></a>7.4.2.2. 程序直接控制方式图示</h5><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605111034701.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="7-4-2-3-读操作流程"><a href="#7-4-2-3-读操作流程" class="headerlink" title="7.4.2.3. 读操作流程"></a>7.4.2.3. 读操作流程</h5><ol>
 <li>CPU 向控制器的控制寄存器写入“读请求”命令，同时通过地址线传送目标设备的端口地址</li>
@@ -1366,11 +1366,11 @@
 <li>由于一次只处理一个字，数据量实际上并不大。说实话，如果中断频率过高，会对效率造成较大影响，但总体上仍然优于程序直接控制方式。</li>
 </ol>
 </blockquote>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113423128.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113423128.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="7-4-4-DMA-方式（直接内存访问）"><a href="#7-4-4-DMA-方式（直接内存访问）" class="headerlink" title="7.4.4. DMA 方式（直接内存访问）"></a>7.4.4. DMA 方式（直接内存访问）</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113731012.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="7-4-4-DMA-方式（直接内存访问）"><a href="#7-4-4-DMA-方式（直接内存访问）" class="headerlink" title="7.4.4. DMA 方式（直接内存访问）"></a>7.4.4. DMA 方式（直接内存访问）</h4><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605113731012.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="7-4-5-通道控制方式"><a href="#7-4-5-通道控制方式" class="headerlink" title="7.4.5. 通道控制方式"></a>7.4.5. 通道控制方式</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605114030512.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="7-4-5-通道控制方式"><a href="#7-4-5-通道控制方式" class="headerlink" title="7.4.5. 通道控制方式"></a>7.4.5. 通道控制方式</h4><p><img src="/2025/06/03/%E7%AC%94%E8%AE%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/image-20250605114030512.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 
                 

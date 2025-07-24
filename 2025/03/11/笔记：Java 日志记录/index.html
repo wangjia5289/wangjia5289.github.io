@@ -19,21 +19,20 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="0、导图：Map：日志框架 1、框架发展史  2、JUL 实现框架2.1、JUL 概述JUL 全称 Java Util Logging，是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限，更适合中小型项目或对日志需求较为简单的场景。  2.2、JUL 组件介绍  Logge">
+    <meta name="description" content="0、导图：Map：日志框架 1、框架发展史  2、JUL 实现框架2.1、JUL 概述JUL 全称 Java Util Logging，是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限，更适合中小型项目或对日志需求较为简单的场景。  2.2、JUL 组件介绍![|500]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java 日志记录">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="0、导图：Map：日志框架 1、框架发展史  2、JUL 实现框架2.1、JUL 概述JUL 全称 Java Util Logging，是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限，更适合中小型项目或对日志需求较为简单的场景。  2.2、JUL 组件介绍  Logge">
+<meta property="og:description" content="0、导图：Map：日志框架 1、框架发展史  2、JUL 实现框架2.1、JUL 概述JUL 全称 Java Util Logging，是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限，更适合中小型项目或对日志需求较为简单的场景。  2.2、JUL 组件介绍![|500]">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311134645238.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250312195258282.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250312195258282.png">
 <meta property="article:published_time" content="2025-03-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T10:39:45.379Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.446Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -293,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T18:39:45+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -304,11 +303,11 @@
               <div class="markdown-body">
                 
                 <h3 id="0、导图：Map：日志框架"><a href="#0、导图：Map：日志框架" class="headerlink" title="0、导图：Map：日志框架"></a>0、导图：<a href="Map%EF%BC%9A%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6.xmind">Map：日志框架</a></h3><hr>
-<h3 id="1、框架发展史"><a href="#1、框架发展史" class="headerlink" title="1、框架发展史"></a>1、框架发展史</h3><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1、框架发展史"><a href="#1、框架发展史" class="headerlink" title="1、框架发展史"></a>1、框架发展史</h3><p><img src="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311223318675.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="2、JUL-实现框架"><a href="#2、JUL-实现框架" class="headerlink" title="2、JUL 实现框架"></a>2、JUL 实现框架</h3><h4 id="2-1、JUL-概述"><a href="#2-1、JUL-概述" class="headerlink" title="2.1、JUL 概述"></a>2.1、JUL 概述</h4><p>JUL 全称 Java Util Logging，是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限，更适合中小型项目或对日志需求较为简单的场景。</p>
 <hr>
-<h4 id="2-2、JUL-组件介绍"><a href="#2-2、JUL-组件介绍" class="headerlink" title="2.2、JUL 组件介绍"></a>2.2、JUL 组件介绍</h4><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250311134645238.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
+<h4 id="2-2、JUL-组件介绍"><a href="#2-2、JUL-组件介绍" class="headerlink" title="2.2、JUL 组件介绍"></a>2.2、JUL 组件介绍</h4><p>![|500](source&#x2F;_posts&#x2F;笔记：Java 日志记录&#x2F;image-20250311134645238.png)</p>
 <ol>
 <li><font color="#00b0f0">Logger</font>：<ol>
 <li>Logger（记录器）是日志框架的入口，我们通过调用 <code>Logger.getLogger(String name)</code> 获取 Logger 实例，并调用其方法记录日志信息。<ol>
@@ -505,7 +504,7 @@
 <li><font color="#00b0f0">TRACE</font>：输出最详细的信息，几乎是逐行解释发生了什么</li>
 <li><font color="#00b0f0">ALL</font>：捕获所有级别的日志信息</li>
 </ol>
-<p>无需担心 SLF4J 日志门面框架只有五个标准级别的限制。在配置层面，我们依然可以灵活设置日志级别，这是因为适配器在 SLF4J 和 Log4j2 之间建立了一套完整的映射关系。映射关系大致如下：<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250312195258282.png" srcset="/img/loading.gif" lazyload></p>
+<p>无需担心 SLF4J 日志门面框架只有五个标准级别的限制。在配置层面，我们依然可以灵活设置日志级别，这是因为适配器在 SLF4J 和 Log4j2 之间建立了一套完整的映射关系。映射关系大致如下：<br><img src="/2025/03/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95/image-20250312195258282.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="4-3、SLF4J-Log4J2-实战步骤"><a href="#4-3、SLF4J-Log4J2-实战步骤" class="headerlink" title="4.3、SLF4J + Log4J2 实战步骤"></a>4.3、SLF4J + Log4J2 实战步骤</h4><h5 id="4-3-1、引入-SLF4J-相关依赖"><a href="#4-3-1、引入-SLF4J-相关依赖" class="headerlink" title="4.3.1、引入 SLF4J 相关依赖"></a>4.3.1、引入 SLF4J 相关依赖</h5><p>引入 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.slf4j/slf4j-api/2.0.16">slf4j-api 依赖</a></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- SLF4J 日志门面依赖 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>XXXXXX<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>

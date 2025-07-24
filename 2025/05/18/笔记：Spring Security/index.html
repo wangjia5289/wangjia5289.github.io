@@ -19,22 +19,21 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. 导图  2. Spring Security 执行流程1. 用户请求（客户端请求）每次用户访问受 Spring Security 保护的资源，都会经过以下流程 2. SecurityContextPersistenceFilter 介入自动为本线程初始化 SecurityContextHolder 并根据 JSESSIONID 向 HttpSession 查找 SecurityCon">
+    <meta name="description" content="一、理论1. 导图![](source&#x2F;_posts&#x2F;笔记：Spring Security&#x2F;Map：SpringSecurity.xmind)  2. Spring Security 执行流程1. 用户请求（客户端请求）每次用户访问受 Spring Security 保护的资源，都会经过以下流程 2. SecurityContextPersistenceFilter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Spring Security">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. 导图  2. Spring Security 执行流程1. 用户请求（客户端请求）每次用户访问受 Spring Security 保护的资源，都会经过以下流程 2. SecurityContextPersistenceFilter 介入自动为本线程初始化 SecurityContextHolder 并根据 JSESSIONID 向 HttpSession 查找 SecurityCon">
+<meta property="og:description" content="一、理论1. 导图![](source&#x2F;_posts&#x2F;笔记：Spring Security&#x2F;Map：SpringSecurity.xmind)  2. Spring Security 执行流程1. 用户请求（客户端请求）每次用户访问受 Spring Security 保护的资源，都会经过以下流程 2. SecurityContextPersistenceFilter">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/Map%EF%BC%9ASpringSecurity.xmind">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250628224744251.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250628210023140.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250630183241212.png">
 <meta property="article:published_time" content="2025-05-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-14T01:23:08.176Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.470Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/Map%EF%BC%9ASpringSecurity.xmind">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/image-20250628224744251.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -239,7 +238,7 @@
         
         
         
-          153 mins
+          154 mins
         
       </span>
     
@@ -294,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-14T09:23:08+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -304,7 +303,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="1-导图"><a href="#1-导图" class="headerlink" title="1. 导图"></a>1. 导图</h2><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ASpring%20Security/Map%EF%BC%9ASpringSecurity.xmind" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h2 id="1-导图"><a href="#1-导图" class="headerlink" title="1. 导图"></a>1. 导图</h2><p>![](source&#x2F;_posts&#x2F;笔记：Spring Security&#x2F;Map：SpringSecurity.xmind)</p>
 <hr>
 <h2 id="2-Spring-Security-执行流程"><a href="#2-Spring-Security-执行流程" class="headerlink" title="2. Spring Security 执行流程"></a>2. Spring Security 执行流程</h2><p><font color="#92d050">1. 用户请求（客户端请求）</font><br>每次用户访问受 <code>Spring Security</code> 保护的资源，都会经过以下流程</p>
 <p><font color="#92d050">2. SecurityContextPersistenceFilter 介入</font><br>自动为本线程初始化 <code>SecurityContextHolder</code> 并根据 <code>JSESSIONID</code> 向 <code>HttpSession</code> 查找 <code>SecurityContext</code>（其内保存最重要的 <code>Authentication</code>）</p>
@@ -748,7 +747,7 @@
 <td>唯一约束</td>
 <td>唯一索引</td>
 <td></td>
-<td><a href="mailto:&#106;&#x6f;&#104;&#x6e;&#x40;&#101;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#106;&#x6f;&#104;&#x6e;&#x40;&#101;&#x78;&#97;&#109;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
+<td><a href="mailto:&#106;&#x6f;&#x68;&#x6e;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#x6f;&#x6d;">&#106;&#x6f;&#x68;&#x6e;&#64;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#101;&#x2e;&#99;&#x6f;&#x6d;</a></td>
 <td>邮箱</td>
 </tr>
 <tr>

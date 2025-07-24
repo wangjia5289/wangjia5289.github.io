@@ -19,19 +19,17 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导图  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高性能的 ID。  UUIDUUID 概述UUID 的设计目标是：在全球范围内生成的 UUID 都不会重复。其基本特征为：">
+    <meta name="description" content="导图![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：分布式 ID">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="导图  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高性能的 ID。  UUIDUUID 概述UUID 的设计目标是：在全球范围内生成的 UUID 都不会重复。其基本特征为：">
+<meta property="og:description" content="导图![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/Map%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID.xmind">
 <meta property="article:published_time" content="2025-07-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-12T13:23:27.129Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.473Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/Map%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID.xmind">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -225,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          719 words
+          736 words
         
       </span>
     
@@ -236,7 +234,7 @@
         
         
         
-          6 mins
+          7 mins
         
       </span>
     
@@ -291,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-12T21:23:27+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -301,7 +299,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/Map%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID.xmind" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p>![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)</p>
 <hr>
 <h2 id="分布式-ID-概述"><a href="#分布式-ID-概述" class="headerlink" title="分布式 ID 概述"></a>分布式 ID 概述</h2><p>我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。</p>
 <p>在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。</p>

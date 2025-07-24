@@ -26,18 +26,18 @@
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
 <meta property="og:description" content="理论1. 导图：Map：Redis 2. Redis 语法2.1. 系统命令12# 1. 心跳命令（检测该客户端与 Redis 的连接是正常）ping   集群命令1234567主从集群的哦，其他的无效可以动态设置，比如在 Redis 启动后执行：replicaof 192.168.1.100 6379要取消从属关系，恢复成主节点，执行：replicaof no one     2.2. 字符串键">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162633830.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530162454124.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530104631796.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160330698.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160555827.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530161002181.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162633830.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530162454124.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530104631796.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160330698.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160555827.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530161002181.png">
 <meta property="article:published_time" content="2025-05-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-28T11:12:48.697Z">
+<meta property="article:modified_time" content="2025-07-24T14:25:54.462Z">
 <meta property="article:author" content="Ba Tian">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -297,7 +297,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-06-28T19:12:48+08:00
+                    Last updated on 2025-07-24T22:25:54+08:00
                   
                   
 
@@ -387,8 +387,8 @@
 
 <hr>
 <h3 id="主从集群"><a href="#主从集群" class="headerlink" title="主从集群"></a>主从集群</h3><h4 id="集群概述"><a href="#集群概述" class="headerlink" title="集群概述"></a>集群概述</h4><p>主从集群是 Redis 最经典的集群模式，通常为一主多从架构：数据仅写入唯一的主节点，从节点通过复制机制同步主节点的数据，整个集群中只有一条主从复制链：</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png" srcset="/img/loading.gif" lazyload></p>
-<p>即使构建出多个主从组合的“多主多从”结构，其本质仍是伪多主：各主节点之间没有任何协调机制，彼此独立，数据完全隔离，甚至不具备 Redis Cluster 所支持的数据分片能力。<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162633830.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162731128.png" srcset="/img/loading.gif" lazyload></p>
+<p>即使构建出多个主从组合的“多主多从”结构，其本质仍是伪多主：各主节点之间没有任何协调机制，彼此独立，数据完全隔离，甚至不具备 Redis Cluster 所支持的数据分片能力。<br><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250601162633830.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="集群特性"><a href="#集群特性" class="headerlink" title="集群特性"></a>集群特性</h4><h5 id="读写分离"><a href="#读写分离" class="headerlink" title="读写分离"></a>读写分离</h5><hr>
 <h3 id="2-2-Redis-Cluster-集群"><a href="#2-2-Redis-Cluster-集群" class="headerlink" title="2.2. Redis Cluster 集群"></a>2.2. Redis Cluster 集群</h3><h4 id="2-2-1-集群概述"><a href="#2-2-1-集群概述" class="headerlink" title="2.2.1. 集群概述"></a>2.2.1. 集群概述</h4><p>Redis Cluster 是 Redis 官方提供的开源集群解决方案，通常采用主从架构搭建，并需要我们手动进行运维管理。它的最大特点在于，数据在写入时会被自动按哈希槽进行分区，直接分配到不同的主节点，随后，各主节点的数据由对应的从节点进行同步,而非像传统的大数据系统那样先进行分库分表处理。</p>
@@ -396,7 +396,7 @@
 <h4 id="2-2-2-集群特性"><a href="#2-2-2-集群特性" class="headerlink" title="2.2.2. 集群特性"></a>2.2.2. 集群特性</h4><h5 id="2-2-2-1-数据同步（单体一致性）"><a href="#2-2-2-1-数据同步（单体一致性）" class="headerlink" title="2.2.2.1. 数据同步（单体一致性）"></a>2.2.2.1. 数据同步（单体一致性）</h5><p>采用的是异步复制——主节点在写入成功后会立即返回；如果此时主节点宕机，而从节点尚未完成同步却被提升为主节点，就会导致数据丢失。这与 MySQL 类似，同样最多只能保障 <strong>单体一致性</strong>，实现分布式一致性中的 <strong>最终一致性</strong>，无法满足真正的强一致性的要求。</p>
 <p>尽管在很多使用场景下，相比 MySQL，我们对 Redis 中数据的“是否存在”或“是否最新”已经更宽容一些，但对于诸如金融交易、秒杀等对一致性要求极高的业务场景，这种宽容是不可接受的，我们仍然必须追求严格的分布式一致性。</p>
 <hr>
-<h5 id="2-2-2-2-数据分布"><a href="#2-2-2-2-数据分布" class="headerlink" title="2.2.2.2. 数据分布"></a>2.2.2.2. 数据分布</h5><p>Redis Cluster 采用虚拟槽分区，所有键通过哈希函数（<code>CRC16[key] &amp; 16383</code>）映射到编号为 0 到 16383 的槽内，共计 16384 个槽（编号从 0 开始）<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530162454124.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="2-2-2-2-数据分布"><a href="#2-2-2-2-数据分布" class="headerlink" title="2.2.2.2. 数据分布"></a>2.2.2.2. 数据分布</h5><p>Redis Cluster 采用虚拟槽分区，所有键通过哈希函数（<code>CRC16[key] &amp; 16383</code>）映射到编号为 0 到 16383 的槽内，共计 16384 个槽（编号从 0 开始）<br><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530162454124.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -443,7 +443,7 @@
 <h5 id="2-2-3-3-环境准备"><a href="#2-2-3-3-环境准备" class="headerlink" title="2.2.3.3. 环境准备"></a>2.2.3.3. 环境准备</h5><h6 id="2-2-3-3-1-查看-Ubuntu-版本"><a href="#2-2-3-3-1-查看-Ubuntu-版本" class="headerlink" title="2.2.3.3.1. 查看 Ubuntu 版本"></a>2.2.3.3.1. 查看 Ubuntu 版本</h6><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h6 id="2-2-3-3-2-下载软件"><a href="#2-2-3-3-2-下载软件" class="headerlink" title="2.2.3.3.2. 下载软件"></a>2.2.3.3.2. 下载软件</h6><p>在 <a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">Redis 官方下载地址</a> 下载 Redis 安装包（<code>redis-7.4.0.tar.gz</code>）<br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530104631796.png" srcset="/img/loading.gif" lazyload></p>
+<h6 id="2-2-3-3-2-下载软件"><a href="#2-2-3-3-2-下载软件" class="headerlink" title="2.2.3.3.2. 下载软件"></a>2.2.3.3.2. 下载软件</h6><p>在 <a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">Redis 官方下载地址</a> 下载 Redis 安装包（<code>redis-7.4.0.tar.gz</code>）<br><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530104631796.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h6 id="2-2-3-3-3-相关工具"><a href="#2-2-3-3-3-相关工具" class="headerlink" title="2.2.3.3.3. 相关工具"></a>2.2.3.3.3. 相关工具</h6><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt <span class="hljs-keyword">install </span>-y <span class="hljs-keyword">build-essential </span>pkg-<span class="hljs-built_in">config</span> tcl make libjemalloc-dev<br></code></pre></td></tr></table></figure>
 
@@ -607,12 +607,12 @@
 <p>此方式简单高效，如果哈希函数的质量很高，可以实现良好的数据均匀分布。缺点与节点取余分区相同，即节点数变化时大规模数据重映射，以及范围查询效率受限。</p>
 <hr>
 <h3 id="2-3-一致性哈希分区"><a href="#2-3-一致性哈希分区" class="headerlink" title="2.3. 一致性哈希分区"></a>2.3. 一致性哈希分区</h3><p>把 key 和节点都映射到一个“虚拟哈希环”上，哈希空间范围从 0 到 2³²-1。每个 key 会被分配到它在环上顺时针遇到的第一个节点上。下面是一个典型的哈希环示意，key1 对应到 Node1：</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160330698.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160330698.png" srcset="/img/loading.gif" lazyload></p>
 <p>这种设计的好处是，当你增加或减少节点时，只有少量的 key 需要重新分配，避免了大量数据迁移的问题。不过需要注意的是，节点的位置也是通过哈希算出来的，分布不一定均匀，可能会导致某些节点压力比较大。比如，添加一个节点后，节点的分布可能像这样：</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160555827.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530160555827.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="2-4-虚拟一致性哈希分区"><a href="#2-4-虚拟一致性哈希分区" class="headerlink" title="2.4. 虚拟一致性哈希分区"></a>2.4. 虚拟一致性哈希分区</h3><p>因为传统一致性哈希会出现有些节点“管得多”，有些“管得少”的情况，导致负载不平衡，所以引入了“虚拟节点”这个技巧。简单来说，就是给每个物理节点分配多个虚拟节点，让它们均匀分布在哈希环上，确保负载更平均。</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530161002181.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/05/17/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis%20%E5%9F%BA%E7%A1%80/image-20250530161002181.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h2 id="文件结构树"><a href="#文件结构树" class="headerlink" title="文件结构树"></a>文件结构树</h2><p>使用 Alt + 数字键：</p>
 <ol>
