@@ -19,13 +19,31 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 运行时数据区1.1. 运行时数据区一览图![](提高图片清晰度 (1).png)  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物">
+    <meta name="description" content="JVM 基础学习 JVM 的核心目标 防止出现 OOM 出现 OOM 后，解决 OOM 减少 Full GC 出现的平吕   1. 类编译过程 2. 类加载过程2.1. 类加载过程一览图  2.2. 类加载概述类加载是指 JVM 将类的 .class 字节码文件中的二进制数据读取到内存，为该类在 JVM 内部构建一个对应的 java.lang.Class 实例，并依次完成对该类的结构信息的加载、验">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JVM">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="1. 运行时数据区1.1. 运行时数据区一览图![](提高图片清晰度 (1).png)  1.2. 程序计数器（PC 寄存器）在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物">
+<meta property="og:description" content="JVM 基础学习 JVM 的核心目标 防止出现 OOM 出现 OOM 后，解决 OOM 减少 Full GC 出现的平吕   1. 类编译过程 2. 类加载过程2.1. 类加载过程一览图  2.2. 类加载概述类加载是指 JVM 将类的 .class 字节码文件中的二进制数据读取到内存，为该类在 JVM 内部构建一个对应的 java.lang.Class 实例，并依次完成对该类的结构信息的加载、验">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728104904949.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728230311438.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729130341869.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191420526.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191932730.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729162455405.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729104232958.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729104338743.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729105950541.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729110014360.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729111925100.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729170742826.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191615514.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729184405223.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727163945675.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728115451360.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250724223952607.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250726201657760.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723142505659.png">
@@ -39,11 +57,23 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180621968.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180737908.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723173022583.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250725114229098.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729130316083.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727083631864.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728174155278.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728181214127.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728182811254.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727223437242.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730205937863.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214613670.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730210053342.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214937797.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214912560.png">
 <meta property="article:published_time" content="2025-05-28T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-24T14:25:54.448Z">
-<meta property="article:author" content="Ba Tian">
+<meta property="article:modified_time" content="2025-07-30T13:50:43.073Z">
+<meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728104904949.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -237,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          21k words
         
       </span>
     
@@ -248,7 +278,7 @@
         
         
         
-          29 mins
+          172 mins
         
       </span>
     
@@ -303,7 +333,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-24T22:25:54+08:00
+                    Last updated on 2025-07-30T21:50:43+08:00
                   
                   
 
@@ -313,27 +343,569 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-运行时数据区"><a href="#1-运行时数据区" class="headerlink" title="1. 运行时数据区"></a>1. 运行时数据区</h2><h3 id="1-1-运行时数据区一览图"><a href="#1-1-运行时数据区一览图" class="headerlink" title="1.1. 运行时数据区一览图"></a>1.1. 运行时数据区一览图</h3><p>![](提高图片清晰度 (1).png)</p>
+                <h1 id="JVM-基础"><a href="#JVM-基础" class="headerlink" title="JVM 基础"></a>JVM 基础</h1><h2 id="学习-JVM-的核心目标"><a href="#学习-JVM-的核心目标" class="headerlink" title="学习 JVM 的核心目标"></a>学习 JVM 的核心目标</h2><ol>
+<li>防止出现 OOM</li>
+<li>出现 OOM 后，解决 OOM</li>
+<li>减少 Full GC 出现的平吕</li>
+</ol>
 <hr>
-<h3 id="1-2-程序计数器（PC-寄存器）"><a href="#1-2-程序计数器（PC-寄存器）" class="headerlink" title="1.2. 程序计数器（PC 寄存器）"></a>1.2. 程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
-<p>根据 JVM 规范，每个线程都拥有独立的、私有的程序计数器，其生命周期与线程一致，用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量），由执行引擎负责读取指令并执行。如果执行的是本地方法（native），PC 的值为 <code>undefined</code>。</p>
-<p>PC 寄存器是一块极小的内存区域，几乎可以忽略不计，因为它只需保存一个字节码指令的地址。在 32 位 JVM 中，通常使用 <code>int</code> 类型，占 4 个字节；而在 64 位 JVM 中，通常使用 <code>long</code> 类型，占 8 个字节。</p>
-<p>需要注意的是，程序计数器不存在 GC，也不存在 OOM</p>
-<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png" srcset="/img/loading.gif" lazyload></p>
-<ul>
-<li><input disabled="" type="checkbox"> <blockquote>
-<p>[!NOTE] 注意事项：</p>
+<h2 id="1-类编译过程"><a href="#1-类编译过程" class="headerlink" title="1. 类编译过程"></a>1. 类编译过程</h2><hr>
+<h2 id="2-类加载过程"><a href="#2-类加载过程" class="headerlink" title="2. 类加载过程"></a>2. 类加载过程</h2><h3 id="2-1-类加载过程一览图"><a href="#2-1-类加载过程一览图" class="headerlink" title="2.1. 类加载过程一览图"></a>2.1. 类加载过程一览图</h3><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728104904949.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-类加载概述"><a href="#2-2-类加载概述" class="headerlink" title="2.2. 类加载概述"></a>2.2. 类加载概述</h3><p><strong>类加载</strong>是指 JVM 将类的 <code>.class</code> 字节码文件中的二进制数据读取到内存，为该类在 JVM 内部构建一个对应的 <code>java.lang.Class</code> 实例，并依次完成对该类的结构信息的加载、验证、准备、解析和初始化，确保类可以被程序在运行时安全、合法地使用。</p>
+<hr>
+<h3 id="2-3-类加载的时机"><a href="#2-3-类加载的时机" class="headerlink" title="2.3. 类加载的时机"></a>2.3. 类加载的时机</h3><p>JVM（Java 虚拟机）在运行时并不会一次性加载所有的类，而是采取<strong>按需加载</strong>的策略，这被称为<strong>动态加载</strong>。类加载的时机主要分为两种：<strong>启动时加载</strong>和<strong>运行时加载</strong>。</p>
 <ol>
+<li>启动时加载<ol>
+<li>JVM 启动时，会加载启动类，然后执行其 main 方法<ol>
+<li>不会在堆内存中创建启动类的实例对象</li>
+<li>因为 <code>main</code> 方法是一个静态方法，它不需要一个类的实例就可以被调用</li>
+</ol>
+</li>
+<li>同时，JVM 会加载运行程序所需的核心类，例如 <code>java.lang.Object</code>、<code>java.lang.String</code> 以及其他在启动过程中直接或间接被引用的类。</li>
+</ol>
+</li>
+<li>运行时加载<ol>
+<li>这是类加载最常见的场景，常见触发情况有：</li>
+<li>创建类的实例时：<ol>
+<li>当你使用 <code>new</code> 关键字创建一个类的对象时，如果这个类还没有被加载，JVM 会立即加载它。</li>
+<li>例如：<code>MyClass obj = new MyClass();</code> &#x2F;&#x2F; 第一次使用 MyClass 时，会被加载</li>
+</ol>
+</li>
+<li>访问类的静态成员时：<ol>
+<li>当你访问一个类的静态变量（<code>static field</code>）或者调用一个类的静态方法（<code>static method</code>）时，如果该类还没有被加载，JVM 会加载它</li>
+<li>例如：<code>MyClass.staticMethod();</code></li>
+</ol>
+</li>
+<li>使用反射时<ol>
+<li>当你通过 <code>java.lang.reflect</code> 包中的方法，例如 <code>Class.forName(&quot;com.example.MyClass&quot;)</code> 来获取一个类的 <code>Class</code> 对象时，会触发该类的加载</li>
+<li>例如：<code>Class&lt;?&gt; clazz = Class.forName(&quot;com.example.MyClass&quot;);</code></li>
+</ol>
+</li>
+<li>子类被加载时，父类也会被加载<ol>
+<li>当一个类的子类被初始化时，它的父类如果尚未加载，则会首先被加载</li>
+<li>这是因为子类继承了父类的成员，需要确保父类已经就绪</li>
+</ol>
+</li>
+<li>使用 ClassLoader.loadClass()<ol>
+<li>根据给定的类全名（例如 <code>java.lang.String</code> 或 <code>com.example.MyClass</code>）来加载对应的类</li>
+<li>这是更底层、更灵活的加载方式，通常在自定义类加载器时使用</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="2-3-1-JVM-类加载的时机"><a href="#2-3-1-JVM-类加载的时机" class="headerlink" title="2.3.1. JVM 类加载的时机"></a>2.3.1. JVM 类加载的时机</h4><p>JVM（Java Virtual Machine）中类的加载是指将类的 <code>.class</code> 文件中的二进制数据读取到内存中，并为之创建对应的 <code>java.lang.Class</code> 对象的过程。这个过程并非在 JVM 启动时一次性完成所有类的加载，而是根据需要动态地进行。类加载的时机主要分为以下几个阶段：</p>
+<h4 id="2-3-2-加载-Loading"><a href="#2-3-2-加载-Loading" class="headerlink" title="2.3.2. 加载 (Loading)"></a>2.3.2. 加载 (Loading)</h4><p><strong>“加载”是类加载过程的第一个阶段。</strong> 在这个阶段，JVM 完成以下三件事：</p>
+<ul>
+<li><p><strong>通过类的完全限定名获取定义此类的二进制字节流。</strong> 这一步可以通过多种方式实现，例如从本地文件系统（最常见）、网络、JAR 包、运行时计算生成（如动态代理）等。</p>
+</li>
+<li><p><strong>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</strong> 方法区是存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据的区域。</p>
+</li>
+<li><p><strong>在内存中生成一个代表这个类的 <code>java.lang.Class</code> 对象。</strong> 这个对象作为方法区这个类的各种数据的访问入口。</p>
+</li>
+</ul>
+<p><strong>何时开始加载？</strong></p>
+<p>加载阶段通常在以下情况发生：</p>
+<ul>
+<li><p>当遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。在这之前，自然需要先完成加载和验证、准备阶段。</p>
+</li>
+<li><p>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时。</p>
+</li>
+<li><p>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</p>
+</li>
+<li><p>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</p>
+</li>
+<li><p>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+</ul>
+<p><strong>何时触发初始化？</strong></p>
+<p>JVM 规范严格规定了有且只有以下五种情况（在 JDK 7 中增加了第六种情况）必须立即对类进行初始化（而加载、验证、准备自然要在此之前完成）：</p>
+<ol>
+<li><p>遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。这四条指令分别对应：</p>
+<ul>
+<li><p>使用 <code>new</code> 关键字实例化对象。</p>
+</li>
+<li><p>读取一个类的静态字段（被 <code>final</code> 修饰，已在编译期把结果放入常量池的静态字段除外）。</p>
+</li>
+<li><p>设置一个类的静态字段。</p>
+</li>
+<li><p>调用一个类的静态方法。</p>
+</li>
+</ul>
+</li>
+<li><p>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时，如果类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</p>
+</li>
+<li><p>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</p>
+</li>
+<li><p>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当一个接口中定义了 <code>JDK 8</code> 新加入的默认方法（<code>default</code> 方法）时，如果有这个接口的实现类发生了初始化，那该接口要在其之前被初始化。</p>
+</li>
+</ol>
+<p>这些情况被称为 <strong>“主动引用”</strong>。除此之外的所有引用类的方式，都不会触发类的初始化，这被称为 <strong>“被动引用”</strong>。</p>
+<p>是初始化还是类加载？？？？？？&#x2F;&#x2F;&#x2F;</p>
+<hr>
+<h3 id="2-4-加载阶段"><a href="#2-4-加载阶段" class="headerlink" title="2.4. 加载阶段"></a>2.4. 加载阶段</h3><h4 id="2-4-1-加载阶段概述"><a href="#2-4-1-加载阶段概述" class="headerlink" title="2.4.1. 加载阶段概述"></a>2.4.1. 加载阶段概述</h4><p>加载阶段是类加载过程的第一个阶段，JVM 会在该阶段完成以下三件事：</p>
+<ol>
+<li>通过类的完全限定名获取定义此类的二进制字节流<ol>
+<li>这一步可以通过多种方式实现，常见有：<ol>
+<li>从本地文件系统直接加载<ol>
+<li>根据类名查找磁盘上的 <code>.class</code> 文件</li>
+<li>例如：org.example.test.MyClass → org&#x2F;example&#x2F;test&#x2F;MyClass.class</li>
+<li>场景：本地 Java 应用</li>
+</ol>
+</li>
+<li>通过网络加载<ol>
+<li>类的字节码通过 HTTP 或 FTP 等协议远程获取</li>
+<li>场景：分布式类加载</li>
+</ol>
+</li>
+<li>运行时动态生成字节码<ol>
+<li>程序运行时动态创建字节数组作为类定义内容</li>
+<li>场景：<ol>
+<li>动态代理</li>
+<li>字节码增强技术</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>从其他文件类型转换生成<ol>
+<li><code>.jsp</code> 被转换为 <code>.java</code>，再编译成 <code>.class</code> 并加载</li>
+<li>场景：<ol>
+<li>JSP</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构</li>
+<li>在内存中生成一个代表这个类的 <code>java.lang.Class</code> 对象<ol>
+<li>这个对象作为方法区这个类的各种数据的访问入口</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728230311438.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>JVM 验证的并不是 <code>.class</code> 字节码文件本身，而是将其加载并解析后生成的<strong>结构化类元信息</strong>，因此验证过程发生在加载过程之后</li>
+<li>一个类被加载后，既会在方法区（元空间）中构建对应的运行时数据结构，同时还会在内存中生成一个 <code>java.lang.Class</code> 实例，该对象内部包含指向元信息的引用，我们可以通过其提供的方法访问和获取该类的详细信息。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-4-2-类加载器"><a href="#2-4-2-类加载器" class="headerlink" title="2.4.2. 类加载器"></a>2.4.2. 类加载器</h4><hr>
+<h3 id="2-5-验证阶段"><a href="#2-5-验证阶段" class="headerlink" title="2.5. 验证阶段"></a>2.5. 验证阶段</h3><p>验证阶段是链接阶段中的第一个阶段，其主要包含：</p>
+<ol>
+<li>文件格式验证<ol>
+<li>检查字节码是否符合 Class 文件格式的规范，是否以魔数 <code>0xCAFEBABE</code> 开头。</li>
+<li>确保主版本号和副版本号在 JVM 支持的范围内。</li>
+<li>检查文件结构，如常量池、字段表、方法表等是否符合规范。</li>
+</ol>
+</li>
+<li>元数据验证<ol>
+<li>这个类是否有父类<ol>
+<li>除了 <code>java.lang.Object</code>，所有类都应该有父类</li>
+<li>注意接口 <code>interface</code> 也没有父类</li>
+</ol>
+</li>
+<li>这个类的父类是否是 <code>final</code> 的（<code>final</code> 类不允许被继承）</li>
+<li>这个类是否实现了它所声明实现的所有接口的方法</li>
+<li>类中的字段和方法是否与父类或接口的规范保持一致</li>
+<li>确保类、字段和方法访问权限的正确性（例如，不能覆盖一个 <code>final</code> 方法）</li>
+</ol>
+</li>
+<li>字节码验证<ol>
+<li>控制流分析<ol>
+<li>确保方法体内的控制流是合法的，例如，不会出现跳转到方法体外的指令，或者指令序列是连贯的</li>
+</ol>
+</li>
+<li>类型检查<ol>
+<li>确保在操作数栈上的操作是合法的，例如，不会将一个整数类型的值赋值给一个引用类型的变量，或者对一个非对象类型进行方法调用</li>
+</ol>
+</li>
+<li>栈帧验证<ol>
+<li>验证在方法执行过程中，栈帧（Stack Frame）的操作是正确的，例如，操作数栈的深度不会溢出，局部变量表的索引是合法的</li>
+</ol>
+</li>
+<li>方法调用验证<ol>
+<li>确保方法调用时参数的数量和类型都与目标方法的签名匹配</li>
+</ol>
+</li>
+<li>异常处理验证<ol>
+<li>确保异常处理器（exception handler）是合法的，并且能够正确处理抛出的异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>符号引用验证<ol>
+<li>符号引用中描述的全限定名是否能找到对应的类、字段或方法。</li>
+<li>符号引用中描述的类、字段或方法是否具有访问权限（例如，是否尝试访问一个 <code>private</code> 成员）</li>
+<li>引用的字段或方法是否与被引用的类兼容（例如，对一个接口调用其未定义的方法）</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>实际上，文件格式验证发生在加载阶段之前，而符号引用验证则是在解析阶段进行的。</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-6-准备阶段"><a href="#2-6-准备阶段" class="headerlink" title="2.6. 准备阶段"></a>2.6. 准备阶段</h3><h4 id="2-6-1-准备阶段概述"><a href="#2-6-1-准备阶段概述" class="headerlink" title="2.6.1. 准备阶段概述"></a>2.6.1. 准备阶段概述</h4><p>准备阶段是链接阶段的第二个子阶段，在这一阶段，JVM 的主要任务是：</p>
+<ol>
+<li>为类的静态变量（static 变量）分配内存<ol>
+<li>内存空间会被分配在方法区中</li>
+</ol>
+</li>
+<li>并为类的静态变量赋予默认初始值<ol>
+<li>整型（byte、short、int、long）<ol>
+<li>0</li>
+</ol>
+</li>
+<li>浮点型（float、double）<ol>
+<li>0.0</li>
+</ol>
+</li>
+<li>char<ol>
+<li>\u0000（即 0）</li>
+</ol>
+</li>
+<li>boolean<ol>
+<li>false</li>
+</ol>
+</li>
+<li>引用类型<ol>
+<li>null</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>例如这个代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;<br><br>    <span class="hljs-comment">// 1. 静态基本数据类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> staticBasicTypeValue = <span class="hljs-number">50000</span>;<br><br>    <span class="hljs-comment">// 2. 静态字符串类型变量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br><br>    <span class="hljs-comment">// 3. 静态字符串类型变量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;def&quot;</span>);<br><br>    <span class="hljs-comment">// 4. 静态字符串类型变量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue3 = staticStringTypeValue2.intern();<br><br>    <span class="hljs-comment">// 5. 静态引用类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Demo staticReferenceTypeValue = <span class="hljs-keyword">new</span> Demo();<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        Test test = <span class="hljs-keyword">new</span> Test();<br><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;1. staticBasicTypeValue = &quot;</span> + Test.staticBasicTypeValue); <span class="hljs-comment">// 50000</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;2. staticStringTypeValue1 = &quot;</span> + Test.staticStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;3. staticStringTypeValue2 = &quot;</span> + Test.staticStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;4. staticStringTypeValue3 = &quot;</span> + Test.staticStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;5. staticReferenceTypeValue = &quot;</span> + Test.staticReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@58372a00</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在准备阶段时为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729130341869.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>准备阶段的作用是为静态变量提供一个 “安全” 的初始状态，防止出现野指针或非法内存访问</li>
+<li>对于静态常量（static 和 final 同时修饰），并且是基本数据类型和字符串类型的静态常量，其值在编译期就已确定，因此在准备阶段就会被直接初始化为其编译期常量值，而不是默认值</li>
+</ol>
+</blockquote>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-comment">// 静态基本数据类型常量</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> staticBasicTypeValue = <span class="hljs-number">50000</span>;<br><br><br><span class="hljs-comment">// 静态字符串类型常量 </span><br><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> staticStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-2-静态常量处理"><a href="#2-6-2-静态常量处理" class="headerlink" title="2.6.2. 静态常量处理"></a>2.6.2. 静态常量处理</h4><p>静态常量（全局常量）与静态变量的区别在于：对于基本数据类型和字符串类型的静态常量（如 1、2），它们是<strong>编译期常量</strong>，其值在编译阶段就已确定，因此在 JVM 的<strong>准备阶段</strong>就会被直接初始化为最终值，而不是默认值</p>
+<p>而对于引用类型的静态变量（如 3、4、5），它们在准备阶段会先被赋予默认值，随后在初始化阶段通过执行 <code>clinit</code> 方法完成真正的赋值。</p>
+<p>以如下代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br><br>    <span class="hljs-comment">// 1. 静态基本数据类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">staticFinalBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">50000</span>;<br><br>    <span class="hljs-comment">// 2. 静态字符串类型常量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abc&quot;</span>;<br><br>    <span class="hljs-comment">// 3. 静态字符串类型常量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;def&quot;</span>);<br><br>    <span class="hljs-comment">// 4. 静态字符串类型常量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue3</span> <span class="hljs-operator">=</span> staticFinalStringTypeValue2.intern();<br><br>    <span class="hljs-comment">// 5. 静态引用类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Demo</span> <span class="hljs-variable">staticFinalReferenceTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Demo</span>();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Test</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Test</span>();<br><br>        System.out.println(<span class="hljs-string">&quot;1. staticFinalBasicTypeValue = &quot;</span> + Test.staticFinalBasicTypeValue); <span class="hljs-comment">// 50000</span><br>        System.out.println(<span class="hljs-string">&quot;2. staticFinalStringTypeValue1 = &quot;</span> + Test.staticFinalStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.out.println(<span class="hljs-string">&quot;3. staticFinalStringTypeValue2 = &quot;</span> + Test.staticFinalStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;4. staticFinalStringTypeValue3 = &quot;</span> + Test.staticFinalStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;5. staticFinalReferenceTypeValue = &quot;</span> + Test.staticFinalReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@58372a00</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>clinit</code> 字节码是：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gradle"> <span class="hljs-number">0</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">45</span> &lt;java<span class="hljs-regexp">/lang/</span>String&gt;<br> <span class="hljs-number">3</span> dup<br> <span class="hljs-number">4</span> ldc #<span class="hljs-number">47</span> &lt;<span class="hljs-keyword">def</span>&gt;<br> <span class="hljs-number">6</span> invokespecial #<span class="hljs-number">49</span> &lt;java<span class="hljs-regexp">/lang/</span>String.&lt;init&gt; : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br> <span class="hljs-number">9</span> putstatic #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">12</span> getstatic #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">15</span> invokevirtual #<span class="hljs-number">51</span> &lt;java<span class="hljs-regexp">/lang/</span>String.intern : ()Ljava<span class="hljs-regexp">/lang/</span>String;&gt;<br><span class="hljs-number">18</span> putstatic #<span class="hljs-number">34</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue3 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">21</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">55</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo&gt;<br><span class="hljs-number">24</span> dup<br><span class="hljs-number">25</span> invokespecial #<span class="hljs-number">57</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo.&lt;init&gt; : ()V&gt;<br><span class="hljs-number">28</span> putstatic #<span class="hljs-number">38</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalReferenceTypeValue : Lorg/</span>example<span class="hljs-regexp">/test/</span>Demo;&gt;<br><span class="hljs-number">31</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span>aload_0<br><span class="hljs-symbol">1 </span>invokespecial #<span class="hljs-number">1</span> &lt;java/lang/Object.&lt;init&gt; : ()V&gt;<br><span class="hljs-symbol">4 </span><span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>main</code> 字节码是：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs gradle"> <span class="hljs-number">0</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">7</span> &lt;org<span class="hljs-regexp">/example/</span>test/Test&gt;<br> <span class="hljs-number">3</span> dup<br> <span class="hljs-number">4</span> invokespecial #<span class="hljs-number">9</span> &lt;org<span class="hljs-regexp">/example/</span>test/Test.&lt;init&gt; : ()V&gt;<br> <span class="hljs-number">7</span> astore_1<br> <span class="hljs-number">8</span> getstatic #<span class="hljs-number">10</span> &lt;java<span class="hljs-regexp">/lang/</span>System.out : Ljava<span class="hljs-regexp">/io/</span>PrintStream;&gt;<br><span class="hljs-number">11</span> ldc #<span class="hljs-number">16</span> &lt;<span class="hljs-number">1</span>. staticFinalBasicTypeValue = <span class="hljs-number">50000</span>&gt;<br><span class="hljs-number">13</span> invokevirtual #<span class="hljs-number">18</span> &lt;java<span class="hljs-regexp">/io/</span>PrintStream.<span class="hljs-keyword">println</span> : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">16</span> getstatic #<span class="hljs-number">10</span> &lt;java<span class="hljs-regexp">/lang/</span>System.out : Ljava<span class="hljs-regexp">/io/</span>PrintStream;&gt;<br><span class="hljs-number">19</span> ldc #<span class="hljs-number">24</span> &lt;<span class="hljs-number">2</span>. staticFinalStringTypeValue1 = abc&gt;<br><span class="hljs-number">21</span> invokevirtual #<span class="hljs-number">18</span> &lt;java<span class="hljs-regexp">/io/</span>PrintStream.<span class="hljs-keyword">println</span> : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">24</span> getstatic #<span class="hljs-number">10</span> &lt;java<span class="hljs-regexp">/lang/</span>System.out : Ljava<span class="hljs-regexp">/io/</span>PrintStream;&gt;<br><span class="hljs-number">27</span> getstatic #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">30</span> invokedynamic #<span class="hljs-number">30</span> &lt;makeConcatWithConstants, BootstrapMethods #<span class="hljs-number">0</span>&gt;<br><span class="hljs-number">35</span> invokevirtual #<span class="hljs-number">18</span> &lt;java<span class="hljs-regexp">/io/</span>PrintStream.<span class="hljs-keyword">println</span> : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">38</span> getstatic #<span class="hljs-number">10</span> &lt;java<span class="hljs-regexp">/lang/</span>System.out : Ljava<span class="hljs-regexp">/io/</span>PrintStream;&gt;<br><span class="hljs-number">41</span> getstatic #<span class="hljs-number">34</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue3 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">44</span> invokedynamic #<span class="hljs-number">37</span> &lt;makeConcatWithConstants, BootstrapMethods #<span class="hljs-number">1</span>&gt;<br><span class="hljs-number">49</span> invokevirtual #<span class="hljs-number">18</span> &lt;java<span class="hljs-regexp">/io/</span>PrintStream.<span class="hljs-keyword">println</span> : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">52</span> getstatic #<span class="hljs-number">10</span> &lt;java<span class="hljs-regexp">/lang/</span>System.out : Ljava<span class="hljs-regexp">/io/</span>PrintStream;&gt;<br><span class="hljs-number">55</span> getstatic #<span class="hljs-number">38</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalReferenceTypeValue : Lorg/</span>example<span class="hljs-regexp">/test/</span>Demo;&gt;<br><span class="hljs-number">58</span> invokedynamic #<span class="hljs-number">42</span> &lt;makeConcatWithConstants, BootstrapMethods #<span class="hljs-number">2</span>&gt;<br><span class="hljs-number">63</span> invokevirtual #<span class="hljs-number">18</span> &lt;java<span class="hljs-regexp">/io/</span>PrintStream.<span class="hljs-keyword">println</span> : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">66</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>在该阶段的静态常量为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191420526.png" srcset="/img/loading.gif" lazyload></p>
+<p>其执行结果为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191932730.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-7-解析阶段"><a href="#2-7-解析阶段" class="headerlink" title="2.7. 解析阶段"></a>2.7. 解析阶段</h3><h4 id="2-7-1-解析阶段概述"><a href="#2-7-1-解析阶段概述" class="headerlink" title="2.7.1. 解析阶段概述"></a>2.7.1. 解析阶段概述</h4><p>解析阶段的主要任务是将运行时常量池中的符号引用（符号形式的文本信息）解析为直接引用（可定位到内存的真实地址）。通常，这一阶段主要针对以下四类常量池元素进行解析：</p>
+<ol>
+<li>CONSTANT_Class_info<ol>
+<li>类或接口符号引用</li>
+</ol>
+</li>
+<li>CONSTANT_Fieldref_info<ol>
+<li>字段的符号引用</li>
+</ol>
+</li>
+<li>CONSTANT_Methodref_info<ol>
+<li>类中方法的符号引用</li>
+</ol>
+</li>
+<li>CONSTANT_InterfaceMethodref_info<ol>
+<li>接口中方法的符号引用</li>
+</ol>
+</li>
+</ol>
+<p>而在 Java 7 引入 invokedynamic 指令之后，常量池中增加了三种与动态调用相关的符号引用：</p>
+<ol>
+<li>CONSTANT_MethodType_info<ol>
+<li>方法类型的符号引用</li>
+</ol>
+</li>
+<li>CONSTANT_MethodHandle_info<ol>
+<li>方法句柄的符号引用</li>
+</ol>
+</li>
+<li>CONSTANT_InvokeDynamic_info<ol>
+<li>动态调用点的符号引用</li>
+</ol>
+</li>
+</ol>
+<p>下图是在<strong>假设所有符号引用都已完成解析</strong>（未加载的类都已经发生了类加载，包括加载、链接、初始化）的前提下绘制的示意图，<strong>这在实际执行过程中是逐步完成的</strong>，而不是在解析阶段一次性完成的，<strong>这里只是为了方便理解而统一展示</strong>。</p>
+<p>另外，图中<strong>只列出了一些具有代表性的常量池元素</strong>，实际上运行时常量池中还有很多常量没有在图中展示出来。比如 <code>#1</code> 实际上引用了 <code>#2</code> 和 <code>#3</code>，但出于图示空间限制并未展开。</p>
+<p>这些常量池元素在经过解析之后，都会<strong>指向具体的内存地址（方法区内）</strong>；例外的是像 <code>Integer</code> 这样的基本类型常量，它们不是符号引用类型，而是<strong>字面量值</strong>，不涉及地址指向，因此仍以值的形式存在；而像 <code>String</code> 这样的类型，是由 JVM 通过特定机制在字符串常量池（String Table）中查找对应的地址，我们可以简单地理解为：<code>String</code> 类型的变量指向的是字符串常量池中的条目。<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729162455405.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>不同 JVM 对解析阶段的处理方式可能存在差异：<ol>
+<li>一些 JVM 实现会在解析阶段，遍历运行时常量池中的所有符号引用，并尝试将其立即解析为直接引用；</li>
+<li>也有一些 JVM 实现会在解析阶段，选择只解析其中<strong>关键或高频使用的符号引用</strong>，比如 java.lang.Object 这类核心类;</li>
+<li>HotSpot JVM 采用的是延迟解析策略<ol>
+<li>在解析阶段，HotSpot 会遍历并识别出所有类和接口的符号引用（CONSTANT_Class_info）</li>
+<li>对于像 java.lang.Object 这样的基础核心类，JVM 会尝试解析它<ol>
+<li>如果发现尚未加载，就会立即进行加载（加载、链接、初始化），然后将其转化为直接引用</li>
+</ol>
+</li>
+<li>而大多数的 类和接口的符号引用（包括其父类在内的 CONSTANT_Class_info）、字段（CONSTANT_Fieldref_info）、类中方法（CONSTANT_Methodref_info）、接口方法（CONSTANT_InterfaceMethodref_info）的符号引用，通常采用<strong>按需解析</strong>，即在首次使用时才触发解析</li>
+<li>比如在初始化阶段执行 clinit 方法时，或在运行 init、main 方法，甚至其他方法的字节码时，如果某个符号引用还未被解析，就会在那一刻解析</li>
+<li>总结来说：符号引用将在 <strong>解析阶段</strong> <strong>或者</strong> <strong>程序运行时</strong> 被解析为直接引用。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>除了上述的符号引用类型，常量池中还包含一些字面量，它们不需要经过解析过程，因为它们本身就是具体的值，可以直接使用：<ol>
+<li>CONSTANT_Utf8_info<ol>
+<li>UTF-8 编码的字符串</li>
+</ol>
+</li>
+<li>CONSTANT_Integer_info<ol>
+<li>整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Float_info<ol>
+<li>浮点数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Long_info<ol>
+<li>长整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Double_info<ol>
+<li>双精度浮点数常量</li>
+</ol>
+</li>
+<li>CONSTANT_String_info<ol>
+<li>引用一个 CONSTANT_Utf8_info 项，用于表示字符串的文本内容；</li>
+<li>最终在运行时会解析为一个 java.lang.String 对象的直接引用；</li>
+<li>它更侧重于对字符串字面量的处理，而不属于传统意义上的符号引用解析（如类、字段、方法等）</li>
+</ol>
+</li>
+<li>CONSTANT_NameAndType_info<ol>
+<li>同样引用两个 CONSTANT_Utf8_info 项，分别表示名称和描述符（Descriptor）；</li>
+<li>用于将一个 字段或方法的名称 和它的 描述符（Descriptor） 组合在一起</li>
+<li>主要被 CONSTANT_Fieldref_info、CONSTANT_Methodref_info 和 CONSTANT_InterfaceMethodref_info 所引用，用于完成字段和方法的精确标识</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>boolean、byte、char、short 没有各自对应的常量池元素<ol>
+<li>我们知道，在操作数栈和局部变量表中，这几种类型在 JVM 中统一按 int 类型进行存储和处理；</li>
+<li>对于 boolean，数值 1 表示 true，0 表示 false；</li>
+<li>对于 char，例如：char staticChar &#x3D; ‘a’，Java 中的 char 是一个 16 位无符号整数，存储的是字符的 Unicode 编码，字符 ‘a’ 的 Unicode 值是 97，所以它实际存储的就是数值 97；</li>
+<li>因此这些值在编译期间就已确定，编译器会直接使用 iconst、bipush、sipush 等指令将它们压入操作数栈，无需通过 ldc 从运行时常量池中加载，从而提升了运行效率。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-7-2-深入理解-CONSTANT-Utf8-info"><a href="#2-7-2-深入理解-CONSTANT-Utf8-info" class="headerlink" title="2.7.2. 深入理解 CONSTANT_Utf8_info"></a>2.7.2. 深入理解 CONSTANT_Utf8_info</h4><p><code>CONSTANT_Utf8_info</code> 用于存储 <code>.class</code> 文件中<strong>以 UTF-8 编码表示的各种文本信息</strong>，例如类名、字段名、方法名、描述符、字符串字面量等。</p>
+<p>例如，在 <code>Test</code> 类的常量池中，就可能存在一个 <code>CONSTANT_Class_info</code> 项，它会进一步引用一个 <code>CONSTANT_Utf8_info</code>，例如：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729104232958.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>cp_info #4</code> 项内部指向一个 <code>CONSTANT_Utf8_info</code>，而该 <code>Utf8_info</code> 项中存储的内容就是该类的全限定名字符串，例如：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729104338743.png" srcset="/img/loading.gif" lazyload></p>
+<p>这个引用的字符串（如 <code>&quot;java/lang/Object&quot;</code>）本质上只是提供了类的全限定名信息，用于告诉 JVM “应该去哪里找这个类”。例如：JVM 可能会根据这个类名去查找对应的 <code>java/lang/Object.class</code> 文件，如果该类尚未被加载，就会触发对它的加载流程（加载 → 验证 → 准备 → 解析 → 初始化）。</p>
+<p>而运行时常量池中的 <code>#2 CONSTANT_Class_info</code> 项，最终会转换为指向方法区中 <code>java.lang.Object</code> 的类元数据的直接引用。所以你可以这样理解：这个字符串信息只是 “引导解析” 的依据，真正完成解析之后，引用该指向哪里还是指向哪里。也就是说，它的作用只是 “告诉你去哪里找”，而不是 “最终指向哪里”；</p>
+<p>需要注意的是，在准备阶段，JVM 会在方法区中创建该类的元数据结构，这个过程中实际上也会读取 <code>CONSTANT_Utf8_info</code> 中的相关文本信息来初始化类的结构描述。</p>
+<hr>
+<h4 id="2-7-3-深入理解-CONSTANT-String-info"><a href="#2-7-3-深入理解-CONSTANT-String-info" class="headerlink" title="2.7.3. 深入理解 CONSTANT_String_info"></a>2.7.3. 深入理解 CONSTANT_String_info</h4><p>运行时常量池中的 <code>CONSTANT_String_info</code> 指向的是一个 <code>CONSTANT_Utf8_info</code> 项，例如我们在代码中写了：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">String</span> staticStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>这时，在运行时常量池中就会存在一个 <code>CONSTANT_String_info</code> 常量项：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729105950541.png" srcset="/img/loading.gif" lazyload></p>
+<p>它指向一个 <code>CONSTANT_Utf8_info</code>：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729110014360.png" srcset="/img/loading.gif" lazyload></p>
+<p>当我们调用某个方法（如 <code>clinit</code>）并执行对应字节码时：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">ldc</span> <span class="hljs-comment">#57 &lt;def&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>JVM 会通过 <code>CONSTANT_String_info</code> 的索引，定位到对应的 <code>CONSTANT_Utf8_info</code>，提取其中的 UTF-8 字节序列（例如 <code>&#39;a&#39;</code>、<code>&#39;b&#39;</code>、<code>&#39;c&#39;</code> 的 UTF-8 编码）</p>
+<p>接着，JVM 内部的字符串常量池机制会通过 <code>StringTable</code> 进行处理：</p>
+<ol>
+<li>如果 <code>StringTable</code> 中已经存在指向 <code>&quot;abc&quot;</code> 的 <code>String</code> 对象的引用，JVM 就直接返回该对象的堆内存地址；</li>
+<li>如果不存在，JVM 会在 堆内存中创建一个新的 <code>java.lang.String</code> 对象，其内部值为 <code>&quot;abc&quot;</code>，然后将该对象的引用（即内存地址）缓存进 <code>StringTable</code>。</li>
+</ol>
+<p>无论是复用已有对象还是新建对象，JVM 最终都会获得该字符串对象的堆内存地址<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729111925100.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><strong><code>StringTable</code></strong> 是 JVM 堆区中维护的一个哈希表，用于存储的是对堆中 <code>String</code> 对象的引用（可能是弱引用或强引用）。<ol>
+<li>它不是单独划分在哪个内存区，如 Eden 区、Survivor 区，而是可以理解为 JVM 在堆上管理的一个内部结构。</li>
+</ol>
+</li>
+<li>intern() 方法的作用是：<ol>
+<li>如果 <code>StringTable</code> 中已经存在内容相同的 <code>String</code> 对象引用，就直接返回该引用</li>
+<li>如果没有，则将当前 <code>String</code> 对象的引用加入 <code>StringTable</code> 中，并返回它的引用</li>
+</ol>
+</li>
+<li>为什么执行 System.out.println(instanceStringTypeValue) 时，打印出的内容是字符串，而按理说应该像 instanceReferenceTypeValue 那样打印引用地址才对？<ol>
+<li>这是因为 System.out.println() 实际上是先调用对象的 toString() 方法</li>
+<li>而 String 类重写了 toString()，直接返回自身（即 return this），所以直接打印字符串内容。</li>
+<li>其他对象如果没有重写 toString()，则打印的是类似 @1a2b3c4d 这样的内存地址形式</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">// 源码</span><br><span class="hljs-keyword">public</span> String instanceStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br>System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;2. instanceStringTypeValue1 = &quot;</span> + test.instanceStringTypeValue1);<br><br><br><span class="hljs-comment">// 等价于</span><br>System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;2. instanceStringTypeValue1 = &quot;</span> + test.instanceStringTypeValue1.toString());<br><br><br><span class="hljs-comment">// 但是 String 对象重写 toString() 方法</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span>()</span> &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-8-初始化阶段"><a href="#2-8-初始化阶段" class="headerlink" title="2.8. 初始化阶段"></a>2.8. 初始化阶段</h3><h4 id="2-8-1-初始化阶段概述"><a href="#2-8-1-初始化阶段概述" class="headerlink" title="2.8.1. 初始化阶段概述"></a>2.8.1. 初始化阶段概述</h4><p>Java 虚拟机（JVM）的初始化阶段是类加载过程的最后一个阶段，也是极其关键的一步。在这个阶段，<strong>JVM 会执行类的初始化方法，即 <code>clinit</code> 方法</strong>。</p>
+<p>在该方法中，JVM 会执行 <code>clinit</code> 字节码，对所有的静态变量（<code>static int staticVar = 10</code>）进行赋值，并执行静态代码块（<code>static &#123; ... &#125;</code>）中的代码（考虑到按需解析的机制，在执行过程中，若需要用到其他类，则按需加载、按需初始化）</p>
+<p>为了确保类的初始化过程具备 <strong>原子性</strong> 和 <strong>只执行一次</strong> 的语义，JVM 会为每个 <code>Class</code> 对象维护一个内部锁（该锁对 Java 程序员不可见），因此，<code>clinit</code> 方法是线程安全的，一个类的 <code>clinit</code> 方法在整个生命周期中只会执行一次。</p>
+<p>需要注意的是，类加载不一定会进行初始化，JVM 规范严格定义了以下几种情况，一个类或接口<strong>必须</strong>进行初始化：</p>
+<ol>
+<li>遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 字节码指令时<ol>
+<li>使用 <code>new</code> 关键字实例化对象</li>
+<li>访问类的静态字段时<ol>
+<li>被 <code>final</code> 修饰的静态字段，如果其值已在编译期确定，则不会触发初始化</li>
+</ol>
+</li>
+<li>访问类的静态方法时</li>
+</ol>
+</li>
+<li>使用 <code>java.lang.reflect</code> 包的方法对类型进行反射调用时<ol>
+<li>例如，使用 <code>Class.forName(&quot;com.example.MyClass&quot;)</code> 或 <code>MyClass.class.newInstance()</code></li>
+</ol>
+</li>
+<li>初始化一个类的子类时<ol>
+<li>如果一个类还没有初始化，它的任何一个子类在初始化之前，父类都必须先初始化。</li>
+</ol>
+</li>
+<li>JVM 启动时指定的主类<ol>
+<li>包含 <code>main()</code> 方法的那个类，JVM 在启动时会先初始化这个类</li>
+</ol>
+</li>
+<li>JDK 7 引入的动态语言支持<ol>
+<li>当一个 <code>java.lang.invoke.MethodHandle</code> 实例的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄时，并且这个方法句柄对应的类没有初始化时，需要先触发其初始化</li>
+</ol>
+</li>
+</ol>
+<p>下面几种情况不会触发类的初始化，这被称为被动引用：</p>
+<ol>
+<li>通过子类引用父类的静态字段<ol>
+<li>例如，<code>System.out.println(SubClass.parentStaticField);</code></li>
+<li>这只会初始化父类，而不会初始化子类</li>
+</ol>
+</li>
+<li>通过数组定义来引用类<ol>
+<li>例如，<code>MyClass[] mcArray = new MyClass[10];</code></li>
+<li>这并不会触发 <code>MyClass</code> 类的初始化，它只是创建了一个 <code>MyClass</code> 类型的数组对象</li>
+</ol>
+</li>
+<li>引用类的常量<ol>
+<li>例如，<code>System.out.println(MyClass.MY_CONSTANT);</code></li>
+<li>如果常量在编译阶段就被放入了调用类的常量池中（例如被 <code>final</code> 修饰的基本类型或字符串常量），那么本质上并没有直接引用定义常量的类，因此不会触发该类的初始化</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>init</code> 方法是在你调用 <code>new</code> 指令的那个线程中执行的</li>
+<li>但是 <code>clinit</code> 方法通常是主线程或第一个引用类的线程执行的。在大多数情况下，如果一个类是应用程序的主类（包含 <code>main</code> 方法），或者它是第一个被某个特定线程引用的类，那么 <code>clinit</code> 方法就会由启动该应用程序的线程（通常是主线程）或第一个引用该类的线程来执行</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-8-2-静态变量处理"><a href="#2-8-2-静态变量处理" class="headerlink" title="2.8.2. 静态变量处理"></a>2.8.2. 静态变量处理</h4><p>例如如下代码：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;<br><br>    <span class="hljs-comment">// 1. 静态基本数据类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> staticBasicTypeValue = <span class="hljs-number">50000</span>;<br><br>    <span class="hljs-comment">// 2. 静态字符串类型变量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br><br>    <span class="hljs-comment">// 3. 静态字符串类型变量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;def&quot;</span>);<br><br>    <span class="hljs-comment">// 4. 静态字符串类型变量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String staticStringTypeValue3 = staticStringTypeValue2.intern();<br><br>    <span class="hljs-comment">// 5. 静态引用类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Demo staticReferenceTypeValue = <span class="hljs-keyword">new</span> Demo();<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        Test test = <span class="hljs-keyword">new</span> Test();<br><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;1. staticBasicTypeValue = &quot;</span> + Test.staticBasicTypeValue); <span class="hljs-comment">// 50000</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;2. staticStringTypeValue1 = &quot;</span> + Test.staticStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;3. staticStringTypeValue2 = &quot;</span> + Test.staticStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;4. staticStringTypeValue3 = &quot;</span> + Test.staticStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;5. staticReferenceTypeValue = &quot;</span> + Test.staticReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@58372a00</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>clinit</code> 字节码是：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><code class="hljs markdown">/**<br><span class="hljs-bullet"> *</span> ============================================<br><span class="hljs-bullet"> *</span> 1. 处理 staticBasicTypeValue<br><span class="hljs-bullet"> *</span> --------------------------------------------<br><span class="hljs-bullet"> *</span> ldc #53<br><span class="hljs-bullet"> *</span> - 将运行时常量池中索引 52 处的 int 值 50000 推入操作数栈<br><span class="hljs-bullet"> *</span><br> * putstatic #16<br><span class="hljs-bullet"> *</span> - 将栈顶的 50000 存入 Test 类的静态 int 字段 staticBasicTypeValue<br><span class="hljs-bullet"> *</span> ============================================<br> <span class="hljs-emphasis">*/</span><br><span class="hljs-emphasis"> 0 ldc #52 &lt;50000&gt;</span><br><span class="hljs-emphasis"> 2 putstatic #16 <span class="language-xml">&lt;org/example/test/Test.staticBasicTypeValue : I&gt;</span></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">/*</span>*<br><span class="hljs-bullet"> *</span> ============================================<br><span class="hljs-bullet"> *</span> 2. 处理 staticStringTypeValue1<br><span class="hljs-bullet"> *</span> --------------------------------------------<br><span class="hljs-bullet"> *</span> ldc #53<br><span class="hljs-bullet"> *</span> - 将运行时常量池中索引 53 处的 &quot;abc&quot; String 对象的引用推入操作数栈<br><span class="hljs-bullet"> *</span><br> * putstatic #30<br><span class="hljs-bullet"> *</span> - 将栈顶的 &quot;abc&quot; String 对象的引用存入 Test 类的静态 String 字段 staticStringTypeValue1<br><span class="hljs-bullet"> *</span> ============================================<br> <span class="hljs-emphasis">*/</span><br><span class="hljs-emphasis"> 5 ldc #53 <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">abc</span>&gt;</span></span></span><br><span class="hljs-emphasis"> 7 putstatic #30 <span class="language-xml">&lt;org/example/test/Test.staticStringTypeValue1 : Ljava/lang/String;&gt;</span></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">/*</span>*<br><span class="hljs-bullet"> *</span> ============================================<br><span class="hljs-bullet"> *</span> 3. 处理 staticStringTypeValue2<br><span class="hljs-bullet"> *</span> --------------------------------------------<br><span class="hljs-bullet"> *</span> new #55<br><span class="hljs-bullet"> *</span> - 在堆上为 java/lang/String 对象分配空间（仅分配内存并赋默认值，不执行接下来的对象实例化步骤）<br><span class="hljs-bullet"> *</span> - 然后把那个刚分配的对象引用压入操作数栈<br><span class="hljs-bullet"> *</span><br> * dup<br><span class="hljs-bullet"> *</span> - 复制栈顶的对象引用<br><span class="hljs-bullet"> *</span> - 现在操作数栈中有两份对象引用：[ uninitRef, uninitRef ]<br><span class="hljs-bullet"> *</span> <br> * ldc #57<br><span class="hljs-bullet"> *</span> - 将运行时常量池中索引 57 处的 &quot;def&quot; String 对象的引用推入操作数栈<br><span class="hljs-bullet"> *</span> - 现在操作数栈的内容有：[ uninitRef, uninitRef, defRef ]<br><span class="hljs-bullet"> *</span> <br> * <br><span class="hljs-bullet"> *</span> invokespecial #59<br><span class="hljs-bullet"> *</span> - 调用 java/lang/String 的构造方法，消费最顶上的 [ uninitRef, defRef ] 两个操作数<br><span class="hljs-bullet"> *</span> - 然后初始化这个 String 对象，即第一个 uninitRef<br><span class="hljs-bullet"> *</span> - 初始化后只留下一个已经构造好的对象引用：[ initRef ]<br><span class="hljs-bullet"> *</span> <br> * putstatic #37<br><span class="hljs-bullet"> *</span> - 将栈顶的 String 对象的引用存入 Test 类的静态 String 字段 staticStringTypeValue2<br><span class="hljs-bullet"> *</span> ============================================<br> <span class="hljs-emphasis">*/</span><br><span class="hljs-emphasis">10 new #55 <span class="language-xml">&lt;java/lang/String&gt;</span></span><br><span class="hljs-emphasis">13 dup</span><br><span class="hljs-emphasis">14 ldc #57 <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">def</span>&gt;</span></span></span><br><span class="hljs-emphasis">16 invokespecial #59 <span class="language-xml">&lt;java/lang/String.<span class="hljs-tag">&lt;<span class="hljs-name">init</span>&gt;</span></span> : (Ljava/lang/String;)V&gt;</span><br><span class="hljs-emphasis">19 putstatic #37 <span class="language-xml">&lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/String;&gt;</span></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">// 4. 处理staticStringTypeValue3</span><br><span class="hljs-emphasis">22 getstatic #37 <span class="language-xml">&lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/String;&gt;</span></span><br><span class="hljs-emphasis">25 invokevirtual #61 <span class="language-xml">&lt;java/lang/String.intern : ()Ljava/lang/String;&gt;</span></span><br><span class="hljs-emphasis">28 putstatic #41 <span class="language-xml">&lt;org/example/test/Test.staticStringTypeValue3 : Ljava/lang/String;&gt;</span></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">// 5. 处理 staticReferenceTypeValue</span><br><span class="hljs-emphasis">31 new #65 <span class="language-xml">&lt;org/example/test/Demo&gt;</span></span><br><span class="hljs-emphasis">34 dup</span><br><span class="hljs-emphasis">35 invokespecial #67 <span class="language-xml">&lt;org/example/test/Demo.<span class="hljs-tag">&lt;<span class="hljs-name">init</span>&gt;</span></span> : ()V&gt;</span><br><span class="hljs-emphasis">38 putstatic #45 <span class="language-xml">&lt;org/example/test/Test.staticReferenceTypeValue : Lorg/example/test/Demo;&gt;</span></span><br><span class="hljs-emphasis"></span><br><span class="hljs-emphasis">41 return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span>aload_0<br><span class="hljs-symbol">1 </span>invokespecial #<span class="hljs-number">1</span> &lt;java/lang/Object.&lt;init&gt; : ()V&gt;<br><span class="hljs-symbol">4 </span><span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>main</code> 字节码是：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs llvm">// <span class="hljs-number">1</span>. Test test <span class="hljs-operator">=</span> new Test()<span class="hljs-comment">;</span><br> <span class="hljs-number">0</span> new <span class="hljs-variable">#7</span> &lt;org/example/test/Test&gt;<br> <span class="hljs-number">3</span> dup<br> <span class="hljs-number">4</span> invokespecial <span class="hljs-variable">#9</span> &lt;org/example/test/Test.&lt;init&gt; : ()V&gt;<br> <span class="hljs-number">7</span> astore_<span class="hljs-number">1</span><br><br><br>// <span class="hljs-number">2</span>. System.out.println(<span class="hljs-string">&quot;1. staticBasicTypeValue = &quot;</span> + Test.staticBasicTypeValue)<span class="hljs-comment">;</span><br> <span class="hljs-number">8</span> getstatic <span class="hljs-variable">#10</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">11</span> getstatic <span class="hljs-variable">#16</span> &lt;org/example/test/Test.staticBasicTypeValue : I&gt;<br><span class="hljs-number">14</span> invokedynamic <span class="hljs-variable">#20</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#0</span>&gt;<br><span class="hljs-number">19</span> invokevirtual <span class="hljs-variable">#24</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><br><br>// <span class="hljs-number">3</span>. System.out.println(<span class="hljs-string">&quot;2. staticStringTypeValue1 = &quot;</span> + Test.staticStringTypeValue<span class="hljs-number">1</span>)<span class="hljs-comment">;</span><br><span class="hljs-number">22</span> getstatic <span class="hljs-variable">#10</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">25</span> getstatic <span class="hljs-variable">#30</span> &lt;org/example/test/Test.staticStringTypeValue<span class="hljs-number">1</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">28</span> invokedynamic <span class="hljs-variable">#34</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#1</span>&gt;<br><span class="hljs-number">33</span> invokevirtual <span class="hljs-variable">#24</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><br><br>// <span class="hljs-number">4</span>. System.out.println(<span class="hljs-string">&quot;3. staticStringTypeValue2 = &quot;</span> + Test.staticStringTypeValue<span class="hljs-number">2</span>)<span class="hljs-comment">;</span><br><span class="hljs-number">36</span> getstatic <span class="hljs-variable">#10</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">39</span> getstatic <span class="hljs-variable">#37</span> &lt;org/example/test/Test.staticStringTypeValue<span class="hljs-number">2</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">42</span> invokedynamic <span class="hljs-variable">#40</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#2</span>&gt;<br><span class="hljs-number">47</span> invokevirtual <span class="hljs-variable">#24</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><br><br>// <span class="hljs-number">5</span>. System.out.println(<span class="hljs-string">&quot;4. staticStringTypeValue3 = &quot;</span> + Test.staticStringTypeValue<span class="hljs-number">3</span>)<span class="hljs-comment">;</span><br><span class="hljs-number">50</span> getstatic <span class="hljs-variable">#10</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">53</span> getstatic <span class="hljs-variable">#41</span> &lt;org/example/test/Test.staticStringTypeValue<span class="hljs-number">3</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">56</span> invokedynamic <span class="hljs-variable">#44</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#3</span>&gt;<br><span class="hljs-number">61</span> invokevirtual <span class="hljs-variable">#24</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><br><br>// <span class="hljs-number">6</span>. System.out.println(<span class="hljs-string">&quot;5. staticReferenceTypeValue = &quot;</span> + Test.staticReferenceTypeValue)<span class="hljs-comment">;</span><br><span class="hljs-number">64</span> getstatic <span class="hljs-variable">#10</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">67</span> getstatic <span class="hljs-variable">#45</span> &lt;org/example/test/Test.staticReferenceTypeValue : Lorg/example/test/Demo<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">70</span> invokedynamic <span class="hljs-variable">#49</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#4</span>&gt;<br><span class="hljs-number">75</span> invokevirtual <span class="hljs-variable">#24</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">78</span> return<br></code></pre></td></tr></table></figure>
+
+<p>在该阶段的静态变量为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729170742826.png" srcset="/img/loading.gif" lazyload></p>
+<p>其执行结果为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729191615514.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="3-对象实例化"><a href="#3-对象实例化" class="headerlink" title="3. 对象实例化"></a>3. 对象实例化</h2><h3 id="3-1-对象实例化概述"><a href="#3-1-对象实例化概述" class="headerlink" title="3.1. 对象实例化概述"></a>3.1. 对象实例化概述</h3><p>在对象实例化时，JVM 会在堆内存中为该对象分配空间，所有成员变量都会分配内存并赋予默认值（<strong>默认初始化</strong>）。随后，开始执行对象的初始化逻辑，即调用其 <code>&lt;init&gt;</code> 方法，具体包括以下步骤：</p>
+<ol>
+<li>调用父类的构造器<ol>
+<li>如果存在父类（除了 <code>java.lang.Object</code> 之外，所有类都应有父类）</li>
+<li>注意接口 <code>interface</code> 也没有父类</li>
+</ol>
+</li>
+<li>执行实例变量、普通常量的赋值（<strong>显示初始化</strong>）</li>
+<li>执行实例代码块<ol>
+<li>例如 <code>&#123;xxxx&#125;</code></li>
+</ol>
+</li>
+<li>执行构造器中的代码（<strong>构造器初始化</strong>）</li>
+</ol>
+<hr>
+<h3 id="3-2-实例变量处理"><a href="#3-2-实例变量处理" class="headerlink" title="3.2. 实例变量处理"></a>3.2. 实例变量处理</h3><p>以如下代码为例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;<br>		<br>    <span class="hljs-comment">// 1. 实例基本数据类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> instanceBasicTypeValue = <span class="hljs-number">50000</span>;<br>		<br>    <span class="hljs-comment">// 2. 实例字符串类型变量 1</span><br>    <span class="hljs-keyword">public</span> String instanceStringTypeValue1 = <span class="hljs-string">&quot;abc&quot;</span>;<br>		<br>    <span class="hljs-comment">// 3. 实例字符串类型变量 2</span><br>    <span class="hljs-keyword">public</span> String instanceStringTypeValue2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;def&quot;</span>);<br>		<br>    <span class="hljs-comment">// 4. 实例字符串类型变量 3</span><br>    <span class="hljs-keyword">public</span> String instanceStringTypeValue3 = instanceStringTypeValue2.intern();<br>		<br>    <span class="hljs-comment">// 5. 实例引用类型变量</span><br>    <span class="hljs-keyword">public</span> Demo instanceReferenceTypeValue = <span class="hljs-keyword">new</span> Demo();<br>		<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        Test test = <span class="hljs-keyword">new</span> Test();<br>		<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;1. instanceBasicTypeValue = &quot;</span> + test.instanceBasicTypeValue); <span class="hljs-comment">// 5</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;2. instanceStringTypeValue1 = &quot;</span> + test.instanceStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;3. instanceStringTypeValue2 = &quot;</span> + test.instanceStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;4. instanceStringTypeValue3 = &quot;</span> + test.instanceStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;5. instanceReferenceTypeValue = &quot;</span> + test.instanceReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@7699a589</span><br>		<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><code class="hljs cmake"> <span class="hljs-number">0</span> aload_0<br> <span class="hljs-number">1</span> invokespecial <span class="hljs-comment">#1 &lt;java/lang/Object.&lt;init&gt; : ()V&gt;</span><br><br>/**<br> * ============================================<br> * <span class="hljs-number">1</span>. 处理 instanceBasicTypeValue<br> * --------------------------------------------<br> * aload_0<br> * - 将当前对象的引用（this）压入操作数栈<br> *<br> * ldc <span class="hljs-comment">#7</span><br> * - 将运行时常量池中索引 <span class="hljs-number">7</span> 处的 int 值 <span class="hljs-number">50000</span> 推入操作数栈<br> * - 对于较小的数值，JVM 不需要通过 ldc 指令加载，而是直接使用 iconst、bipush 或 sipush 等指令直接将常量压入操作数栈，从而加快了效率。<br> *<br> * putfield <span class="hljs-comment">#8</span><br> * - 将栈顶的 <span class="hljs-number">50000</span> 赋值给当前对象（this）的 int 字段 instanceBasicTypeValue<br> * ============================================<br> */<br> <span class="hljs-number">4</span> aload_0<br> <span class="hljs-number">5</span> ldc <span class="hljs-comment">#7 &lt;50000&gt;</span><br> <span class="hljs-number">7</span> putfield <span class="hljs-comment">#8 &lt;org/example/test/Test.instanceBasicTypeValue : I&gt;</span><br><br> <br>/**<br> * ============================================<br> * <span class="hljs-number">2</span>. 处理 instanceStringTypeValue1<br> * --------------------------------------------<br> * aload_0<br> * - 将当前对象的引用（this）压入操作数栈<br> *<br> * ldc <span class="hljs-comment">#14</span><br> * - 将运行时常量池中索引 <span class="hljs-number">14</span> 处的 <span class="hljs-string">&quot;abc&quot;</span> <span class="hljs-keyword">String</span> 对象的引用推入操作数栈<br> *<br> * putfield <span class="hljs-comment">#16</span><br> * - 将栈顶的 <span class="hljs-string">&quot;abc&quot;</span> <span class="hljs-keyword">String</span> 对象的引用赋值给当前对象（this）的 <span class="hljs-keyword">String</span> 字段 instanceBasicTypeValue1<br> * ============================================<br> */<br><span class="hljs-number">10</span> aload_0<br><span class="hljs-number">11</span> ldc <span class="hljs-comment">#14 &lt;abc&gt;</span><br><span class="hljs-number">13</span> putfield <span class="hljs-comment">#16 &lt;org/example/test/Test.instanceStringTypeValue1 : Ljava/lang/String;&gt;</span><br><br><br>/**<br> * ============================================<br> * <span class="hljs-number">3</span>. 处理 instanceStringTypeValue2<br> * --------------------------------------------<br> * aload_0<br> * - 将当前对象的引用（this）压入操作数栈<br> *<br> * new <span class="hljs-comment">#20</span><br> * - 在堆上为 java/lang/<span class="hljs-keyword">String</span> 对象分配空间（仅分配内存并赋默认值，不执行接下来的对象实例化步骤）<br> * - 然后把那个刚分配的对象引用压入操作数栈<br> * - 为什么能恰到好处为 <span class="hljs-keyword">String</span> 对象分配空间？<br> *      - JVM 的一个基本原则是：在创建对象时，必须明确知道对象的大小，以便在堆中分配合适的内存块。这个大小信息在类的元数据中就已经确定了。<br> *      - 你可能会好奇：如果对象中有一个 <span class="hljs-keyword">List</span> 属性，那在对象创建后我不断向这个 <span class="hljs-keyword">List</span> 添加元素，JVM 怎么知道我最终需要多少内存？<br> *      - 别忘了，我们在对象中保存的只是对 <span class="hljs-keyword">List</span> 实例的引用，这个引用的大小是固定不变的。那你又好奇了：为什么 <span class="hljs-keyword">List</span> 能动态扩容？<br> *      - 其实本质是：当容量不足时，会新建一个更大的数组对象，把原有内容复制进去，然后让 elementData 字段指向新的数组。<br><br> *<br> * dup<br> * - 复制栈顶的对象引用<br> *<br> * ldc <span class="hljs-comment">#22</span><br> * - 将运行时常量池中索引 <span class="hljs-number">22</span> 处的 <span class="hljs-string">&quot;def&quot;</span> <span class="hljs-keyword">String</span> 对象的引用推入操作数栈<br> *<br> * invokespecial <span class="hljs-comment">#24</span><br> * - 调用 java/lang/<span class="hljs-keyword">String</span> 的构造方法，消费最顶上的 [ uninitRef, defRef ] 两个操作数<br> * - 然后初始化这个 <span class="hljs-keyword">String</span> 对象，即第一个 uninitRef<br> *<br> * putfield <span class="hljs-comment">#27</span><br> * - 将栈顶的 新创建的 <span class="hljs-keyword">String</span> 实例的引用 赋值给当前对象（this）的 <span class="hljs-keyword">String</span> 字段 instanceBasicTypeValue2 字段<br> * ============================================<br> */<br><span class="hljs-number">16</span> aload_0<br><span class="hljs-number">17</span> new <span class="hljs-comment">#20 &lt;java/lang/String&gt;</span><br><span class="hljs-number">20</span> dup<br><span class="hljs-number">21</span> ldc <span class="hljs-comment">#22 &lt;def&gt;</span><br><span class="hljs-number">23</span> invokespecial <span class="hljs-comment">#24 &lt;java/lang/String.&lt;init&gt; : (Ljava/lang/String;)V&gt;</span><br><span class="hljs-number">26</span> putfield <span class="hljs-comment">#27 &lt;org/example/test/Test.instanceStringTypeValue2 : Ljava/lang/String;&gt;</span><br><br><br>// <span class="hljs-number">4</span>. 处理 instanceStringTypeValue3<br><span class="hljs-number">29</span> aload_0<br><span class="hljs-number">30</span> aload_0<br><span class="hljs-number">31</span> getfield <span class="hljs-comment">#27 &lt;org/example/test/Test.instanceStringTypeValue2 : Ljava/lang/String;&gt;</span><br><span class="hljs-number">34</span> invokevirtual <span class="hljs-comment">#30 &lt;java/lang/String.intern : ()Ljava/lang/String;&gt;</span><br><span class="hljs-number">37</span> putfield <span class="hljs-comment">#34 &lt;org/example/test/Test.instanceStringTypeValue3 : Ljava/lang/String;&gt;</span><br><br><br>/**<br> * ============================================<br> * <span class="hljs-number">5</span>. 处理 instanceReferenceTypeValue<br> * --------------------------------------------<br> * aload_0<br> * - 将当前对象的引用（this）压入操作数栈<br> *<br> * new <span class="hljs-comment">#37</span><br> * - 在堆上为 org/example/<span class="hljs-keyword">test</span>/Demo 对象分配空间（仅分配内存并赋默认值，不执行接下来的对象实例化步骤）<br> * - 然后把那个刚分配的对象引用压入操作数栈<br> *<br> * dup<br> * - 复制栈顶的对象引用<br>*<br> * invokespecial <span class="hljs-comment">#39</span><br> * - 调用 Demo 构造方法，在堆内存中创建新的 Demo 实例。<br> *<br> * putfield <span class="hljs-comment">#40</span><br> * - 将栈顶的 新创建的 Demo 实例的引用 赋值给当前对象（this）的 <span class="hljs-keyword">String</span> 字段 instanceReferenceTypeValue<br> * ============================================<br> */<br><span class="hljs-number">40</span> aload_0<br><span class="hljs-number">41</span> new <span class="hljs-comment">#37 &lt;org/example/test/Demo&gt;</span><br><span class="hljs-number">44</span> dup<br><span class="hljs-number">45</span> invokespecial <span class="hljs-comment">#39 &lt;org/example/test/Demo.&lt;init&gt; : ()V&gt;</span><br><span class="hljs-number">48</span> putfield <span class="hljs-comment">#40 &lt;org/example/test/Test.instanceReferenceTypeValue : Lorg/example/test/Demo;&gt;</span><br><br><span class="hljs-number">51</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>main</code> 字节码是：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs llvm"> <span class="hljs-number">0</span> new <span class="hljs-variable">#9</span> &lt;org/example/test/Test&gt;<br> <span class="hljs-number">3</span> dup<br> <span class="hljs-number">4</span> invokespecial <span class="hljs-variable">#44</span> &lt;org/example/test/Test.&lt;init&gt; : ()V&gt;<br> <span class="hljs-number">7</span> astore_<span class="hljs-number">1</span><br> <span class="hljs-number">8</span> getstatic <span class="hljs-variable">#45</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">11</span> aload_<span class="hljs-number">1</span><br><span class="hljs-number">12</span> getfield <span class="hljs-variable">#8</span> &lt;org/example/test/Test.instanceBasicTypeValue : I&gt;<br><span class="hljs-number">15</span> invokedynamic <span class="hljs-variable">#51</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#0</span>&gt;<br><span class="hljs-number">20</span> invokevirtual <span class="hljs-variable">#55</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">23</span> getstatic <span class="hljs-variable">#45</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">26</span> aload_<span class="hljs-number">1</span><br><span class="hljs-number">27</span> getfield <span class="hljs-variable">#16</span> &lt;org/example/test/Test.instanceStringTypeValue<span class="hljs-number">1</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">30</span> invokedynamic <span class="hljs-variable">#60</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#1</span>&gt;<br><span class="hljs-number">35</span> invokevirtual <span class="hljs-variable">#55</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">38</span> getstatic <span class="hljs-variable">#45</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">41</span> aload_<span class="hljs-number">1</span><br><span class="hljs-number">42</span> getfield <span class="hljs-variable">#27</span> &lt;org/example/test/Test.instanceStringTypeValue<span class="hljs-number">2</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">45</span> invokedynamic <span class="hljs-variable">#63</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#2</span>&gt;<br><span class="hljs-number">50</span> invokevirtual <span class="hljs-variable">#55</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">53</span> getstatic <span class="hljs-variable">#45</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">56</span> aload_<span class="hljs-number">1</span><br><span class="hljs-number">57</span> getfield <span class="hljs-variable">#34</span> &lt;org/example/test/Test.instanceStringTypeValue<span class="hljs-number">3</span> : Ljava/lang/String<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">60</span> invokedynamic <span class="hljs-variable">#64</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#3</span>&gt;<br><span class="hljs-number">65</span> invokevirtual <span class="hljs-variable">#55</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">68</span> getstatic <span class="hljs-variable">#45</span> &lt;java/lang/System.out : Ljava/io/PrintStream<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">71</span> aload_<span class="hljs-number">1</span><br><span class="hljs-number">72</span> getfield <span class="hljs-variable">#40</span> &lt;org/example/test/Test.instanceReferenceTypeValue : Lorg/example/test/Demo<span class="hljs-comment">;&gt;</span><br><span class="hljs-number">75</span> invokedynamic <span class="hljs-variable">#65</span> &lt;makeConcatWithConstants<span class="hljs-punctuation">,</span> BootstrapMethods <span class="hljs-variable">#4</span>&gt;<br><span class="hljs-number">80</span> invokevirtual <span class="hljs-variable">#55</span> &lt;java/io/PrintStream.println : (Ljava/lang/String<span class="hljs-comment">;)V&gt;</span><br><span class="hljs-number">83</span> return<br></code></pre></td></tr></table></figure>
+
+<p>在该阶段的实例变量为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729184405223.png" srcset="/img/loading.gif" lazyload></p>
+<p>其执行结果为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727163945675.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3-3-普通常量处理"><a href="#3-3-普通常量处理" class="headerlink" title="3.3. 普通常量处理"></a>3.3. 普通常量处理</h3><p>普通常量的赋值方式与实例变量相同，而 <code>final</code> 则额外引入了 “只能赋值一次” 的限制。<code>final</code> 变量一旦初始化，其值就被锁定。如果是引用类型，锁定的是引用本身，而不是引用所指向对象的内容。</p>
+<p>以如下代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br><br>    <span class="hljs-comment">// 1. 基本数据类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">finalBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">15</span>;<br>	<br>    <span class="hljs-comment">// 2. 字符串类型常量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">finalStringTypeValue1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abc&quot;</span>;<br>	<br>    <span class="hljs-comment">// 3. 字符串类型常量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">finalStringTypeValue2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;def&quot;</span>);<br>	<br>    <span class="hljs-comment">// 4. 字符串类型常量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">finalStringTypeValue3</span> <span class="hljs-operator">=</span> finalStringTypeValue2.intern();<br>	<br>    <span class="hljs-comment">// 5. 引用类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Demo</span> <span class="hljs-variable">finalReferenceTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Demo</span>();<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Test</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Test</span>();<br>	<br>        System.out.println(<span class="hljs-string">&quot;1. finalBasicTypeValue = &quot;</span> + test.finalBasicTypeValue); <span class="hljs-comment">// 15</span><br>        System.out.println(<span class="hljs-string">&quot;2. finalStringTypeValue1 = &quot;</span> + test.finalStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.out.println(<span class="hljs-string">&quot;3. finalStringTypeValue2 = &quot;</span> + test.finalStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;4. finalStringTypeValue3 = &quot;</span> + test.finalStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;5. finalReferenceTypeValue = &quot;</span> + test.finalReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@4dd8dc3</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs gradle"> <span class="hljs-number">0</span> aload_0<br> <span class="hljs-number">1</span> invokespecial #<span class="hljs-number">1</span> &lt;java<span class="hljs-regexp">/lang/</span>Object.&lt;init&gt; : ()V&gt;<br> <span class="hljs-number">4</span> aload_0<br> <span class="hljs-number">5</span> bipush <span class="hljs-number">15</span><br> <span class="hljs-number">7</span> putfield #<span class="hljs-number">7</span> &lt;org<span class="hljs-regexp">/example/</span>test/Test.finalBasicTypeValue : I&gt;<br><span class="hljs-number">10</span> aload_0<br><span class="hljs-number">11</span> ldc #<span class="hljs-number">13</span> &lt;abc&gt;<br><span class="hljs-number">13</span> putfield #<span class="hljs-number">15</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.finalStringTypeValue1 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">16</span> aload_0<br><span class="hljs-number">17</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">19</span> &lt;java<span class="hljs-regexp">/lang/</span>String&gt;<br><span class="hljs-number">20</span> dup<br><span class="hljs-number">21</span> ldc #<span class="hljs-number">21</span> &lt;<span class="hljs-keyword">def</span>&gt;<br><span class="hljs-number">23</span> invokespecial #<span class="hljs-number">23</span> &lt;java<span class="hljs-regexp">/lang/</span>String.&lt;init&gt; : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br><span class="hljs-number">26</span> putfield #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.finalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">29</span> aload_0<br><span class="hljs-number">30</span> aload_0<br><span class="hljs-number">31</span> getfield #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.finalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">34</span> invokevirtual #<span class="hljs-number">29</span> &lt;java<span class="hljs-regexp">/lang/</span>String.intern : ()Ljava<span class="hljs-regexp">/lang/</span>String;&gt;<br><span class="hljs-number">37</span> putfield #<span class="hljs-number">33</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.finalStringTypeValue3 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">40</span> aload_0<br><span class="hljs-number">41</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">36</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo&gt;<br><span class="hljs-number">44</span> dup<br><span class="hljs-number">45</span> invokespecial #<span class="hljs-number">38</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo.&lt;init&gt; : ()V&gt;<br><span class="hljs-number">48</span> putfield #<span class="hljs-number">39</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.finalReferenceTypeValue : Lorg/</span>example<span class="hljs-regexp">/test/</span>Demo;&gt;<br><span class="hljs-number">51</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其执行结果为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728115451360.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3-4-补充：方法参数和局部变量处理"><a href="#3-4-补充：方法参数和局部变量处理" class="headerlink" title="3.4. 补充：方法参数和局部变量处理"></a>3.4. 补充：方法参数和局部变量处理</h3><p>方法参数和局部变量的处理并不是在对象实例化的过程中完成的，而是在对象方法被调用时进行的。具体来说：当某个线程调用对象方法时，JVM 会在该线程的虚拟机栈中为该方法创建一个栈帧，并开始执行方法字节码。</p>
+<p>需要注意的是，局部变量和方法参数不会像静态变量、静态常量、实例变量、普通常量那样自动初始化默认值。所以如果你只是声明了一个局部变量（如 <code>int localVar;</code>），但没有显式赋值（如 <code>localVar = 5</code>），那么就会编译报错。</p>
+<p>以如下代码为例：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;<br><br>    <span class="hljs-comment">// 方法参数</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">method</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> param</span>)</span> &#123;<br><br>        <span class="hljs-comment">// 局部变量</span><br>        <span class="hljs-built_in">int</span> localVar = <span class="hljs-number">5</span>;<br>        <br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;param: &quot;</span> + param);<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;localVar: &quot;</span> + localVar);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>        Test test = <span class="hljs-keyword">new</span> Test();<br>        test.method(<span class="hljs-number">10</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>method</code> 字节码是：</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs delphi"> <span class="hljs-number">0</span> iconst_5<br> <span class="hljs-number">1</span> istore_2<br> <span class="hljs-number">2</span> getstatic <span class="hljs-string">#7</span> &lt;java/lang/System.<span class="hljs-keyword">out</span> : Ljava/io/PrintStream;&gt;<br> <span class="hljs-number">5</span> iload_1<br> <span class="hljs-number">6</span> invokedynamic <span class="hljs-string">#13</span> &lt;makeConcatWithConstants, BootstrapMethods <span class="hljs-string">#0</span>&gt;<br><span class="hljs-number">11</span> invokevirtual <span class="hljs-string">#17</span> &lt;java/io/PrintStream.println : (Ljava/lang/<span class="hljs-keyword">String</span>;)V&gt;<br><span class="hljs-number">14</span> getstatic <span class="hljs-string">#7</span> &lt;java/lang/System.<span class="hljs-keyword">out</span> : Ljava/io/PrintStream;&gt;<br><span class="hljs-number">17</span> iload_2<br><span class="hljs-number">18</span> invokedynamic <span class="hljs-string">#23</span> &lt;makeConcatWithConstants, BootstrapMethods <span class="hljs-string">#1</span>&gt;<br><span class="hljs-number">23</span> invokevirtual <span class="hljs-string">#17</span> &lt;java/io/PrintStream.println : (Ljava/lang/<span class="hljs-keyword">String</span>;)V&gt;<br><span class="hljs-number">26</span> return<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>main</code> 字节码是：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs tap"><span class="hljs-number"> 0 </span>new <span class="hljs-comment">#24 &lt;org/example/test/Test&gt;</span><br><span class="hljs-number"> 3 </span>dup<br><span class="hljs-number"> 4 </span>invokespecial <span class="hljs-comment">#26 &lt;org/example/test/Test.&lt;init&gt; : ()V&gt;</span><br><span class="hljs-number"> 7 </span>astore_1<br><span class="hljs-number"> 8 </span>aload_1<br><span class="hljs-number"> 9 </span>bipush 10<br>11 invokevirtual <span class="hljs-comment">#27 &lt;org/example/test/Test.method : (I)V&gt;</span><br>14 return<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span>aload_0<br><span class="hljs-symbol">1 </span>invokespecial #<span class="hljs-number">1</span> &lt;java/lang/Object.&lt;init&gt; : ()V&gt;<br><span class="hljs-symbol">4 </span><span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-运行时数据区"><a href="#4-运行时数据区" class="headerlink" title="4. 运行时数据区"></a>4. 运行时数据区</h2><h3 id="4-1-运行时数据区一览图"><a href="#4-1-运行时数据区一览图" class="headerlink" title="4.1. 运行时数据区一览图"></a>4.1. 运行时数据区一览图</h3><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250724223952607.png" srcset="/img/loading.gif" lazyload></p>
+<p>从线程是否共享的角度又可以为：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250726201657760.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="4-2-程序计数器（PC-寄存器）"><a href="#4-2-程序计数器（PC-寄存器）" class="headerlink" title="4.2. 程序计数器（PC 寄存器）"></a>4.2. 程序计数器（PC 寄存器）</h3><p>在 CPU 中，寄存器专门用于存储指令执行相关的现场信息，CPU 只有将数据加载到寄存器后才能执行指令。而在 JVM 中，PC 寄存器的全称是 Program Counter Register，中文通常译为 “程序计数器”，它是对物理寄存器的一种抽象。尽管名称相似，但它与物理 CPU 寄存器在功能上并不相同。</p>
+<p>根据 JVM 规范，<strong>每个线程都拥有独立的、私有的程序计数器</strong>，其生命周期与线程一致，<strong>用于记录当前线程所执行方法中下一条将要执行的 JVM 字节码指令的地址（偏移量）</strong>，由执行引擎负责读取指令并执行。</p>
+<p>PC 寄存器是一块极小的内存区域，几乎可以忽略不计，因为它只需保存一个字节码指令的地址。在 32 位 JVM 中，通常使用 <code>int</code> 类型，占 4 个字节；而在 64 位 JVM 中，通常使用 <code>long</code> 类型，占 8 个字节。</p>
+<p>需要注意的是，如果执行的是本地方法（native），PC 的值为 <code>undefined</code>。本地方法是指用 Java 以外的语言（如 C、C++）编写，并编译成平台相关的机器码的方法，它们通过 Java 本地接口（JNI）被 Java 代码调用，但它实际上是离开了 JVM 的控制，转而去执行操作系统底层的机器码</p>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250722190040146.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>程序计数器不会发生 GC，也不会抛出 OOM 或其他错误</li>
 <li>PC 寄存器为什么不存在 GC？<ol>
 <li>在 JVM 创建线程时，会分配一块连续的内存区域，称为线程执行上下文，用于维护该线程的完整运行状态，包括 PC 寄存器、虚拟机栈、本地方法栈、线程本地存储以及线程状态等</li>
 <li>当线程结束时，JVM 和操作系统会释放该线程所有相关的资源</li>
 </ol>
 </li>
 <li>PC 寄存器为什么不存在 OOM？</li>
-<li>为什么将 PC 寄存器设置为线程私有？<ol>
-<li>为了准确记录每个线程当前正在执行的字节码指令地址，最合理的做法是为每个线程分配独立的 PC 寄存器</li>
-</ol>
-</li>
 <li>为什么使用 PC 寄存器记录对应线程的执行地址？<ol>
 <li>由于 CPU 需要频繁切换不同线程，切换回来时必须知道从哪里继续执行，因此通过 PC 寄存器保存线程的执行地址，实现精确恢复</li>
 </ol>
@@ -344,13 +916,30 @@
 </li>
 </ol>
 </blockquote>
+<hr>
+<h3 id="4-3-虚拟机栈"><a href="#4-3-虚拟机栈" class="headerlink" title="4.3. 虚拟机栈"></a>4.3. 虚拟机栈</h3><h4 id="4-3-1-虚拟机栈一览图"><a href="#4-3-1-虚拟机栈一览图" class="headerlink" title="4.3.1. 虚拟机栈一览图"></a>4.3.1. 虚拟机栈一览图</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="4-3-2-虚拟机栈概述"><a href="#4-3-2-虚拟机栈概述" class="headerlink" title="4.3.2. 虚拟机栈概述"></a>4.3.2. 虚拟机栈概述</h4><blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虚拟机栈不会发生 GC，但会抛出 OOM 或 StackOverflowError，常见有：<ol>
+<li>OOM<ol>
+<li>OutOfMemoryError: unable to create new native thread<ol>
+<li>JVM 尝试创建新线程时，系统无法分配栈内存</li>
+</ol>
 </li>
-</ul>
+</ol>
+</li>
+<li>StackOverflowError<ol>
+<li>栈帧太多（比如递归没结束），导致栈空间“满了”</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
 <hr>
-<h3 id="1-3-虚拟机栈"><a href="#1-3-虚拟机栈" class="headerlink" title="1.3. 虚拟机栈"></a>1.3. 虚拟机栈</h3><h4 id="1-3-1-虚拟机栈一览图"><a href="#1-3-1-虚拟机栈一览图" class="headerlink" title="1.3.1. 虚拟机栈一览图"></a>1.3.1. 虚拟机栈一览图</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E5%9B%BE%E5%83%8F%E6%B8%85%E6%99%B0%E5%8C%96.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h4 id="1-3-2-虚拟机栈"><a href="#1-3-2-虚拟机栈" class="headerlink" title="1.3.2. 虚拟机栈"></a>1.3.2. 虚拟机栈</h4><hr>
-<h4 id="1-3-3-局部变量表"><a href="#1-3-3-局部变量表" class="headerlink" title="1.3.3. 局部变量表"></a>1.3.3. 局部变量表</h4><p>局部变量表是一个一维的数字数组，用于保存<strong>方法参数</strong>和<strong>方法体内部定义的局部变量</strong>。它可以存储多种数据类型，包括基本数据类型和对象引用（reference），在 JDK5 之前还包含一种 returnAddress 类型（了解即可）。</p>
+<h4 id="4-3-3-局部变量表"><a href="#4-3-3-局部变量表" class="headerlink" title="4.3.3. 局部变量表"></a>4.3.3. 局部变量表</h4><p>局部变量表是一个一维的数字数组，用于保存<strong>方法参数</strong>和<strong>方法体内部定义的局部变量</strong>。它可以存储多种数据类型，包括基本数据类型和对象引用（reference），在 JDK5 之前还包含一种 returnAddress 类型（了解即可）。</p>
 <p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723142505659.png" srcset="/img/loading.gif" lazyload></p>
 <p>局部变量表中，最基本的存储单元称为变量槽（Slot）。JVM 会为每一个 Slot 分配一个访问索引（从 index 0 开始），通过这个索引可以访问到局部变量表中的变量。需要注意的是，索引不一定是连续递增 1，例如 long、double 类型会占用两个槽位。</p>
 <p>其中，32 位及以内的数据类型（如：<code>reference</code>、<code>returnAddress</code>、<code>byte</code>、<code>short</code>、<code>char</code>、<code>int</code>、<code>float</code>、<code>boolean</code>）占用一个 Slot；<strong>64 位的数据类型</strong>（如：<code>long</code> 和 <code>double</code>）则占用两个 Slot。</p>
@@ -393,45 +982,10 @@
 </blockquote>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> &#123;  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;  <br>        &#123;  <br>            <span class="hljs-built_in">int</span> a = <span class="hljs-number">10</span>;  <br>            System.<span class="hljs-keyword">out</span>.println(a);  <br>        &#125;  <br>  <br>        &#123;  <br>            <span class="hljs-built_in">int</span> b = <span class="hljs-number">20</span>;  <br>            System.<span class="hljs-keyword">out</span>.println(b);  <br>        &#125;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>[!NOTE] 注意事项<br>5. Java 类里各种变量的 “诞生” 与 “存活” 流程</p>
-<ol>
-<li>在下面的例子中，变量会经历以下几个阶段：<ol>
-<li>类加载阶段<ol>
-<li>准备阶段<ol>
-<li>JVM 将 <code>Demo.class</code> 文件加载到内存，并为静态变量 <code>staticVar</code> 分配内存，并赋予默认值 0</li>
-<li>该静态变量存储在方法区（元空间、Metaspace）</li>
-<li>准备阶段不执行任何代码，也不调用任何方法，只是为静态变量提供一个 “安全” 的初始状态，避免野指针或未定义行为。</li>
-</ol>
-</li>
-<li>初始化阶段<ol>
-<li>执行静态变量的显式赋值语句（如 <code>staticVar = 10;</code>）和静态代码块（<code>static &#123;&#125;</code>）中的代码。</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>对象创建阶段<ol>
-<li>JVM 在堆内存中为对象 <code>demo</code> 分配空间，所有成员变量（如 <code>instanceVar</code>）都被分配内存并赋予默认值（0、false、null）</li>
-<li>然后执行构造方法，可以对成员变量进行显式初始化或逻辑处理。</li>
-</ol>
-</li>
-<li>方法调用阶段<ol>
-<li>JVM 在栈内存中为方法调用创建一个新的栈帧</li>
-<li>因为是实例方法，槽位 0 用于存放 <code>this</code> 引用，指向当前调用方法的 <code>demo</code> 对象。</li>
-<li>槽位 1 用于存放方法参数 <code>param</code>，槽位 2 存放局部变量 <code>localVar</code>。</li>
-<li>需要注意的是，局部变量和方法参数不会像静态变量或成员变量那样自动初始化默认值。</li>
-<li>如果你只是声明了一个局部变量（如 <code>int localVar;</code>），但没有显式赋值（如 <code>localVar = 5</code>），那么就会编译报错。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs perl">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> </span>&#123;<br><br>    // 静态变量（类变量）<br>    static <span class="hljs-keyword">int</span> staticVar = <span class="hljs-number">10</span>;<br><br>    <span class="hljs-regexp">//</span> 成员变量（实例变量）<br>    <span class="hljs-keyword">int</span> instanceVar;<br>    <br>	<span class="hljs-regexp">//</span> 方法参数<br>    public void <span class="hljs-function"><span class="hljs-keyword">method</span>(<span class="hljs-title">int</span> <span class="hljs-title">param</span>) </span>&#123;<br>    <br>	    // 局部变量<br>        <span class="hljs-keyword">int</span> localVar = <span class="hljs-number">5</span>;<br>        <br>        System.out.println(localVar);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="1-3-4-操作数栈"><a href="#1-3-4-操作数栈" class="headerlink" title="1.3.4. 操作数栈"></a>1.3.4. 操作数栈</h4><h5 id="1-3-4-1-操作数栈概述"><a href="#1-3-4-1-操作数栈概述" class="headerlink" title="1.3.4.1. 操作数栈概述"></a>1.3.4.1. 操作数栈概述</h5><p>操作数栈是 JVM 执行引擎的一个工作区，会根据方法中的字节码指令，向栈中写入数据或提取数据，这些操作被称为入栈和出栈。它主要用于保存计算过程中的中间结果，同时作为变量的临时存储空间。</p>
-<p>我们常说 Java 虚拟机的解释引擎是基于栈的执行引擎，这里的 “栈” 指的就是操作数栈。</p>
+<h4 id="4-3-4-操作数栈"><a href="#4-3-4-操作数栈" class="headerlink" title="4.3.4. 操作数栈"></a>4.3.4. 操作数栈</h4><h5 id="4-3-4-1-操作数栈概述"><a href="#4-3-4-1-操作数栈概述" class="headerlink" title="4.3.4.1. 操作数栈概述"></a>4.3.4.1. 操作数栈概述</h5><p>操作数栈是 JVM 执行引擎的一个工作区，会根据方法中的字节码指令，向栈中写入数据或提取数据，这些操作被称为入栈和出栈。它主要用于保存计算过程中的中间结果，同时作为变量的临时存储空间。</p>
+<p><strong>我们常说 Java 虚拟机的解释引擎是基于栈的执行引擎，这里的 “栈” 指的就是操作数栈</strong>。</p>
 <p>需要注意的是，操作数栈是通过数组实现的栈结构，而<strong>不是链表</strong>，而且虽然它是基于数组实现的，但我们在设计时不应使用数组的随机访问等方法，而应遵循栈的操作特性，仅使用入栈和出栈操作。</p>
 <p>下面用详细代码进行举例：</p>
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">String</span>[] args)</span> </span>&#123;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">15</span>;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">8</span>;<br>        <span class="hljs-type">int</span> k = i + j;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -454,6 +1008,7 @@
 </ol>
 </li>
 <li>32 位及以内的数据类型（如：<code>reference</code>、<code>returnAddress</code>、<code>byte</code>、<code>short</code>、<code>char</code>、<code>int</code>、<code>float</code>、<code>boolean</code>）占用一个栈单位深度；64 位的数据类型（如：<code>long</code> 和 <code>double</code>）则占用两个栈单位深度。</li>
+<li>与局部变量表一致，操作数栈最大深度在编译期间就已经确定，运行时无法更改（栈顶缓存技术不会影响最大深度）</li>
 </ol>
 </blockquote>
 <p><font color="#92d050">2. 指令地址 2</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723180026214.png" srcset="/img/loading.gif" lazyload></p>
@@ -471,8 +1026,8 @@
 </blockquote>
 <p><font color="#92d050">9. 最终效果</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250723173022583.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="1-3-4-2-栈顶缓存技术"><a href="#1-3-4-2-栈顶缓存技术" class="headerlink" title="1.3.4.2. 栈顶缓存技术"></a>1.3.4.2. 栈顶缓存技术</h5><p>JVM 是基于栈的架构，它不像物理 CPU 那样通过寄存器来存放操作数并参与计算，而是依赖操作数栈（Operand Stack）来完成大部分运算。因此，JVM 的指令通常不携带操作数，比如 <code>iadd</code>（整数加法）会默认从栈顶弹出两个数，相加后再将结果压回栈中，使字节码更加简洁紧凑。</p>
-<p>这种设计虽然带来了跨平台性强、字节码体积小、指令格式简单等优点，但也引入了性能问题：所有操作都依赖栈，频繁的入栈、出栈操作会导致大量内存访问，从而拖慢指令执行速度。一次简单的加法可能需要经历 <code>load → push → push → iadd → store</code> 的多个步骤，而不像寄存器架构那样仅需一条指令。此外，每次入栈和出栈本质上都是对 JVM 内存结构（即栈帧中的操作数栈区域）的访问，而内存访问速度远不如 CPU 寄存器。</p>
+<h5 id="4-3-4-2-栈顶缓存技术"><a href="#4-3-4-2-栈顶缓存技术" class="headerlink" title="4.3.4.2. 栈顶缓存技术"></a>4.3.4.2. 栈顶缓存技术</h5><p>JVM 是基于栈的架构，它不像物理 CPU 那样通过寄存器来存放操作数并参与计算，而是依赖操作数栈（Operand Stack）来完成大部分运算。因此，JVM 的指令通常不携带操作数，比如 <code>iadd</code>（整数加法）会默认从栈顶弹出两个数，相加后再将结果压回栈中，使字节码更加简洁紧凑。</p>
+<p>这种设计虽然带来了跨平台性强、字节码体积小、指令格式简单等优点，但也引入了性能问题：所有操作都依赖栈，频繁的入栈、出栈操作会导致大量内存访问，从而拖慢指令执行速度。一次简单的加法可能需要经历 <code>load → push → push → iadd → store</code> 的多个步骤，而不像寄存器架构那样仅需一条指令。此外，每次入栈和出栈本质上都是对 JVM 内存结构（即栈帧中的操作数虚拟机栈域）的访问，而内存访问速度远不如 CPU 寄存器。</p>
 <p>为了解决这一问题，HotSpot JVM 的设计者提出了栈顶缓存（ToS，Top-of-Stack Caching）技术，将操作数栈顶部的若干个元素缓存在 CPU 寄存器中，以减少对操作数栈内存的频繁访问，从而提升执行引擎的整体执行效率。</p>
 <p>在解释执行阶段，字节码逐条执行，大部分值都直接读写内存中的操作数栈，寄存器的使用非常有限（仅用于短暂调度）。而当某个方法成为热点，触发 JIT 编译后，<strong>JIT 编译器</strong>会在生成本地机器码的过程中启用栈顶缓存技术，将栈顶的值尽可能缓存在寄存器中。</p>
 <p>然而，由于硬件本身的限制，寄存器数量十分有限。以常见的 x86 架构为例，通用寄存器仅有 8 个（<code>eax</code>、<code>ebx</code>、<code>ecx</code>、<code>edx</code>、<code>esi</code>、<code>edi</code>、<code>ebp</code>、<code>esp</code>），即便是现代的 x86-64 架构也只有 16 个。这些寄存器还需要被用于局部变量、参数传递等其他任务，因此必须通过非常严格的寄存器分配与抢占策略进行管理。这也正是栈顶缓存技术只被应用于热点方法，而非所有方法的原因。并且寄存器能够缓存的数据非常有限，但通常只缓存 2~4 个槽位就已能显著提升性能。</p>
@@ -496,8 +1051,904 @@
 </li>
 </ol>
 <hr>
-<h4 id="1-3-5-动态链接"><a href="#1-3-5-动态链接" class="headerlink" title="1.3.5. 动态链接"></a>1.3.5. 动态链接</h4><hr>
-<h3 id="1-4-堆区"><a href="#1-4-堆区" class="headerlink" title="1.4. 堆区"></a>1.4. 堆区</h3>
+<h4 id="4-3-5-动态链接"><a href="#4-3-5-动态链接" class="headerlink" title="4.3.5. 动态链接"></a>4.3.5. 动态链接</h4><hr>
+<h4 id="4-3-6-虚拟机栈异常示例"><a href="#4-3-6-虚拟机栈异常示例" class="headerlink" title="4.3.6. 虚拟机栈异常示例"></a>4.3.6. 虚拟机栈异常示例</h4><hr>
+<h3 id="4-4-本地方法栈"><a href="#4-4-本地方法栈" class="headerlink" title="4.4. 本地方法栈"></a>4.4. 本地方法栈</h3><hr>
+<h3 id="4-5-堆区"><a href="#4-5-堆区" class="headerlink" title="4.5. 堆区"></a>4.5. 堆区</h3><h4 id="4-5-1-堆区一览图"><a href="#4-5-1-堆区一览图" class="headerlink" title="4.5.1. 堆区一览图"></a>4.5.1. 堆区一览图</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250725114229098.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="4-5-2-堆区概述"><a href="#4-5-2-堆区概述" class="headerlink" title="4.5.2. 堆区概述"></a>4.5.2. 堆区概述</h4><p>堆区是 Java 内存管理的核心区域，也是整个内存结构最大的区域，几乎所有的对象实例都会被分配到堆上（需考虑逃逸分析的优化可能）。</p>
+<p>堆区是所有线程共享的内存区域（但需考虑线程私有的 TLAB 缓冲区机制），其底层物理内存可以是非连续的，但在逻辑上应被视为连续的空间。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>堆区既会发生 GC，也会抛出 OOM，常见有：<ol>
+<li>OutOfMemoryError: Java heap space<ol>
+<li>堆内存空间不足，无法为新对象分配内存</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>堆区的大小可以通过 JVM 参数手动指定，包括初始空间和最大空间，且在运行时具有动态扩展能力<ol>
+<li>-Xms512m：<ol>
+<li>用于设置堆区的初始内存大小</li>
+<li>例如：java -Xms512m YourApp</li>
+<li>默认值：物理内存的 1&#x2F;64</li>
+<li>常用单位：k、m、g</li>
+</ol>
+</li>
+<li>-Xmx2048m：<ol>
+<li>用于设置堆区的最大内存大小</li>
+<li>例如：java -Xmx2048m YourApp</li>
+<li>默认值：物理内存的 1&#x2F;4</li>
+</ol>
+</li>
+<li>实际使用中，通常将 -Xms 和 -Xmx 设置为相同的值，<ol>
+<li>为了避免 JVM 在运行期间，频繁触发 GC、堆空间扩缩容</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="对象在堆区的内存分配过程"><a href="#对象在堆区的内存分配过程" class="headerlink" title="对象在堆区的内存分配过程"></a>对象在堆区的内存分配过程</h4><p>我们 new 的对象先放到 Eden 区：</p>
+<ol>
+<li>如果 Eden 区空间不足<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h4 id="4-5-3-堆区异常示例"><a href="#4-5-3-堆区异常示例" class="headerlink" title="4.5.3. 堆区异常示例"></a>4.5.3. 堆区异常示例</h4><h5 id="OutOfMemoryError-Java-heap-space"><a href="#OutOfMemoryError-Java-heap-space" class="headerlink" title="OutOfMemoryError: Java heap space"></a>OutOfMemoryError: Java heap space</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HeapOOMExample</span> &#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;<br>    <br>        List&lt;<span class="hljs-built_in">byte</span>[]&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;尝试分配大量内存，观察 OOM...&quot;</span>);<br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-comment">// 每次循环创建一个 5MB 的字节数组（数组也是对象），并添加到列表中</span><br>            <span class="hljs-comment">// 列表持有对这些数组的引用，阻止它们被GC回收</span><br>            list.<span class="hljs-keyword">add</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">byte</span>[<span class="hljs-number">5</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>]); <span class="hljs-comment">// 5MB</span><br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>new byte[5 * 1024 * 1024]</code> 会在 Java 堆内存中开辟一块 <strong>5MB</strong> 的连续空间，用于存放这个 <code>byte</code> 数组的实际数据</li>
+<li><code>list.add()</code> 操作并不会把这 5MB 的数据复制到 <code>ArrayList</code> 内部，相反，<code>ArrayList</code> 会在其内部的数组中，存储这个 <code>byte</code> 数组的引用</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="OutOfMemoryError-GC-overhead-limit-exceeded"><a href="#OutOfMemoryError-GC-overhead-limit-exceeded" class="headerlink" title="OutOfMemoryError: GC overhead limit exceeded"></a>OutOfMemoryError: GC overhead limit exceeded</h5><h4 id="堆区-GC-过程"><a href="#堆区-GC-过程" class="headerlink" title="堆区 GC 过程"></a>堆区 GC 过程</h4><hr>
+<p>在 JVM 中，堆区的垃圾回收（GC）与方法区（PermGen&#x2F;Metaspace）有相似之处，但也有关键的不同点。堆区是 Java 应用程序运行时对象实例的主要存储区域，其 GC 过程通常更为频繁和复杂。</p>
+<h5 id="堆区的-GC-触发机制与过程"><a href="#堆区的-GC-触发机制与过程" class="headerlink" title="堆区的 GC 触发机制与过程"></a>堆区的 GC 触发机制与过程</h5><p>堆区主要关注的是<strong>对象实例的回收</strong>，而不是类的卸载。其垃圾回收主要分为以下几种类型：</p>
+<h5 id="1-Minor-GC-或-Young-GC"><a href="#1-Minor-GC-或-Young-GC" class="headerlink" title="1. Minor GC (或 Young GC)"></a>1. Minor GC (或 Young GC)</h5><ul>
+<li><p><strong>触发条件：</strong> 当新生代（Young Generation）的 Eden 区空间不足，无法为新的对象分配内存时，会触发 Minor GC。</p>
+</li>
+<li><p><strong>回收范围：</strong> 主要回收新生代中的垃圾对象。</p>
+</li>
+<li><p><strong>特点：</strong> Minor GC 通常非常频繁，但由于新生代中的对象生命周期短，且回收效率高，所以它的暂停时间（Stop-The-World, STW）通常很短。</p>
+</li>
+</ul>
+<h5 id="2-Major-GC-或-Old-GC"><a href="#2-Major-GC-或-Old-GC" class="headerlink" title="2. Major GC (或 Old GC)"></a>2. Major GC (或 Old GC)</h5><ul>
+<li><p><strong>触发条件：</strong></p>
+<ul>
+<li><p><strong>老年代空间不足：</strong> 当老年代（Old Generation）空间不足，无法容纳新生代晋升过来的对象，或者无法为大对象分配内存时。</p>
+</li>
+<li><p><strong>CMS GC 失败：</strong> 如果使用 CMS 垃圾收集器，在并发清理阶段预测失败，或者并发模式失败（Concurrent Mode Failure），也会触发 Full GC。</p>
+</li>
+<li><p><strong>其他收集器特定触发条件：</strong> 例如 G1 收集器在 Mixed GC 之后，如果内存仍然不足，可能会退化到 Full GC。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>回收范围：</strong> 主要回收老年代中的垃圾对象。</p>
+</li>
+<li><p><strong>特点：</strong> Major GC 的暂停时间通常比 Minor GC 长，因为它需要扫描并回收整个老年代。</p>
+</li>
+</ul>
+<h5 id="3-Full-GC"><a href="#3-Full-GC" class="headerlink" title="3. Full GC"></a>3. Full GC</h5><ul>
+<li><p><strong>触发条件：</strong></p>
+<ul>
+<li><p><strong>老年代空间严重不足：</strong> 这是最常见的 Full GC 触发原因。</p>
+</li>
+<li><p><strong>方法区空间不足：</strong> 如你所述，方法区触及高水位线时，JVM 会尝试触发 Full GC。</p>
+</li>
+<li><p><strong>System.gc() 调用：</strong> 应用程序代码显式调用 <code>System.gc()</code>（不推荐，因为它只是一种建议，JVM 不保证执行，且可能引发不必要的 Full GC）。</p>
+</li>
+<li><p><strong>堆内存分配失败：</strong> 在 Minor GC 或 Major GC 后，如果仍然无法分配内存。</p>
+</li>
+<li><p><strong>某些 JVM 参数设置：</strong> 例如，<code>-XX:+HeapDumpOnOutOfMemoryError</code> 可能会在 OOM 前触发一次 Full GC 以生成堆转储文件。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>回收范围：</strong> <strong>Full GC 会对整个堆（新生代、老年代）以及方法区进行垃圾回收。</strong></p>
+</li>
+<li><p><strong>特点：</strong> Full GC 通常会导致较长的暂停时间，对应用程序的性能影响最大。应尽量避免 Full GC 的频繁发生。</p>
+</li>
+</ul>
+<hr>
+<h5 id="堆区的-OOM-Out-Of-Memory-异常"><a href="#堆区的-OOM-Out-Of-Memory-异常" class="headerlink" title="堆区的 OOM (Out Of Memory) 异常"></a>堆区的 OOM (Out Of Memory) 异常</h5><p>当堆区的内存不足，且 JVM 无法通过垃圾回收（包括 Full GC）释放足够的空间来满足新的内存分配请求时，就会抛出 <code>OutOfMemoryError: Java heap space</code> 异常。</p>
+<p>这表示 JVM 已经用尽了 <code>-Xmx</code> 参数设置的最大堆内存，并且无法再分配任何新的对象。</p>
+<hr>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>与方法区的 GC 主要关注<strong>类的卸载</strong>不同，堆区的 GC 主要关注<strong>对象实例的回收</strong>。堆区的 GC 更为频繁，且根据不同的区域（新生代、老年代）有不同的回收策略（Minor GC, Major GC）。当这些回收机制无法满足内存需求时，最终会触发影响最大的 Full GC，如果仍然无法解决，便会抛出 <code>OutOfMemoryError: Java heap space</code> 错误。</p>
+<p>希望这能帮你理解堆区的 GC 机制！你对方法区和堆区的 GC 机制还有其他疑问吗？</p>
+<h4 id="堆区常用-JVM-参数"><a href="#堆区常用-JVM-参数" class="headerlink" title="堆区常用 JVM 参数"></a>堆区常用 JVM 参数</h4><ol>
+<li>设置堆区的初始内存大小<ol>
+<li>-Xms<ol>
+<li>例如：java -Xms512m -jar MyApp.jar</li>
+<li>默认值：物理内存的 1&#x2F;64</li>
+<li>常用单位有：k、m、g</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设置堆区的最大内存大小<ol>
+<li>-Xmx<ol>
+<li>例如：java -Xmx2048m -jar MyApp.jar</li>
+<li>默认值：物理内存的 1&#x2F;4</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设置新生代与老年代在堆区的占比<ol>
+<li>-XX:NewRatio&#x3D;2<ol>
+<li>例如：java -XX:NewRatio&#x3D;2 -jar MyApp.jar，表示新生代占堆区的 1&#x2F;3，老年代占堆区的 2&#x2F;3</li>
+<li>默认值：新生代占堆区的 1&#x2F;3，老年代占堆区的 2&#x2F;3</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设置 Eden 区与 Survivor 区在新生代的占比<ol>
+<li>-XX:SurvivorRatio&#x3D;8<ol>
+<li>例如：java -Xmn100m -XX:SurvivorRatio&#x3D;8 -jar MyApp.jar，表示 Eden : Survivor0 : Survivor1 &#x3D; 8 : 1 : 1</li>
+<li>默认值：Eden : Survivor0 : Survivor1 &#x3D; 8 : 1 : 1</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设置对象存活年龄<ol>
+<li>-XX:MaxTenuringThreshold&#x3D;15<ol>
+<li>例如：java -XX:MaxTenuringThreshold&#x3D;15 -jar MyApp.jar</li>
+<li>默认值：15</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>关闭 TLAB<ol>
+<li>-XX:-UseTLAB<ol>
+<li>例如：java -XX:-UseTlab -jar MyApp.jar</li>
+<li>默认值：开启 TLAB</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>打印 TLAB 分配和使用情况<ol>
+<li>-XX:+PrintTLAB<ol>
+<li>JDK 8 及以前</li>
+<li>例如：java -XX:+PrintTLAB -jar MyApp.jar</li>
+</ol>
+</li>
+<li>-Xlog:gc+tlab&#x3D;trace<ol>
+<li>JDK 9 及以后</li>
+<li>例如：java -Xlog:gc+tlab&#x3D;trace -jar MyApp.jar</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设置 TLAB 剩余空间率<ol>
+<li>-XX:TLABWasteTargetPercent&#x3D;50<ol>
+<li>例如：java -XX:TLABWasteTargetPercent&#x3D;50 -jar MyApp.jar</li>
+<li>默认值：1</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="4-6-方法区"><a href="#4-6-方法区" class="headerlink" title="4.6. 方法区"></a>4.6. 方法区</h3><h4 id="4-6-1-方法区一览图"><a href="#4-6-1-方法区一览图" class="headerlink" title="4.6.1. 方法区一览图"></a>4.6.1. 方法区一览图</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250729130316083.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>每一个在堆中的实例对象，都会持有一个指向其类元数据（位于方法区）的指针。我们知道，在对象头中存在一个名为 <code>Klass Word</code> 的字段，它正是用于存储这个类元数据的指针。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="4-6-2-方法区概述"><a href="#4-6-2-方法区概述" class="headerlink" title="4.6.2. 方法区概述"></a>4.6.2. 方法区概述</h4><p>方法区是用来存储已经被 JVM 加载的各种类的元数据信息、类的静态变量，以及即时编译器（JIT）编译后生成的代码缓存。</p>
+<p>方法区和堆区一样，都是所有线程共享的内存区域。其底层物理内存可以是非连续的，但在逻辑上应被视为连续的空间。</p>
+<p>JDK1.7 之前的永久代、JDK1.8 之后的元空间，都是对 JVM 规范中方法区的实现，其最大的区别在于：元空间不再使用 JVM 虚拟机设置的堆内存，而是改为使用本地内存，因此更少发生 OOM异常。</p>
+<ol>
+<li>永久代（PermGen） 是 JVM 内存的一部分，大小由 <code>-XX:PermSize</code> 和 <code>-XX:MaxPermSize</code> 限制，默认值往往较小（比如几十 MB），而且很容易超过上限，从而导致 OOM</li>
+<li>元空间（Metaspace） 使用的是 本地内存（Native memory），大小可以远远超过 JVM 堆的限制，甚至可以动态扩展至整个物理内存的上限</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 方法区既会发生 GC，也会抛出 OOM，常见有：<br>    1. OutOfMemoryError: Metaspace<br>        1. 元空间内存不足<br>    2. OutOfMemoryError: PermGen space<br>        1. 永久代内存不足<br>3. 方法区的大小可以通过 JVM 参数手动指定，包括初始空间和最大空间，且在运行时具有动态扩展能力<br>    1. 永久代<br>        1. -XX:PermSize&#x3D;64m<br>            1. 用于设置方法区的初始内存大小<br>            2. 例如：java -XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;128m -jar MyApp.jar<br>            3. 默认值：20.75m<br>            4. 常用单位：k、m、g<br>        2. -XX:MaxPermSize&#x3D;128m<br>            1. 用于设置方法区的最大内存大小<br>            2. 例如：java -XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;128m -jar MyApp.jar<br>            3. 默认值：32 位机器默认是 64 M，64 位机器默认是 82 M<br>    2. 元空间<br>        1. -XX:MetaspaceSize&#x3D;128m<br>            1. 用于设置方法区的初始内存大小<br>            2. 例如：java -XX:MetaspaceSize&#x3D;128m -XX:MaxMetaspaceSize&#x3D;256m -jar MyApp.jar<br>            3. 默认值：21m<br>            4. 注意事项：<br>                1. 如果初始高水位线（-XX:MetaspaceSize）设置过低，可能会导致 Full GC 频繁触发，建议将其设置为一个相对较高的值以减少不必要的 GC 开销。<br>        2. -XX:MaxMetaspaceSize&#x3D;256m<br>            1. 用于设置方法区的最大内存大小<br>            2. 例如：java -XX:MetaspaceSize&#x3D;128m -XX:MaxMetaspaceSize&#x3D;256m -jar MyApp.jar<br>            3. 默认值：-1，既没有限制</p>
+</blockquote>
+<hr>
+<h4 id="4-6-3-类元信息"><a href="#4-6-3-类元信息" class="headerlink" title="4.6.3. 类元信息"></a>4.6.3. 类元信息</h4><p>以下是类元信息中通常包含的关键内容：</p>
+<ol>
+<li>类的全限定名<ol>
+<li>例如：<code>java/lang/String</code></li>
+<li>注意事项：<ol>
+<li>当我们日常编写时，类的全限定名是用点号，例如：<code>java.lang.String</code></li>
+<li>但是在 JVM 内部、字节码文件（.class 文件）以及 JNI 描述符中，是使用斜杠 <strong>&#x2F;</strong></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>直接父类的全限定名<ol>
+<li>除了 <code>java.lang.Object</code>，所有类都应该有父类</li>
+<li>注意接口 <code>interface</code> 也没有父类</li>
+</ol>
+</li>
+<li>直接实现的接口的全限定名列表<ol>
+<li>因为可能实现很多接口，所以这里用列表进行记录</li>
+</ol>
+</li>
+<li>类的修饰符<ol>
+<li>访问修饰符<ol>
+<li>public<ol>
+<li>任何地方都可以访问</li>
+</ol>
+</li>
+<li>protected<ol>
+<li>同一个包内可以访问</li>
+<li>不同包的<strong>子类</strong>可以访问</li>
+</ol>
+</li>
+<li>package-private（默认）<ol>
+<li>只能在同一个包内访问</li>
+<li>如果不指定任何访问修饰符，则为默认访问级别</li>
+</ol>
+</li>
+<li>private<ol>
+<li>只能在定义它的类内部访问</li>
+<li>这也是为什么当我们为字段添加 <code>private</code> 修饰符时，需要编写相应的 Getter 和 Setter 方法，因为除了该类自身，其他类根本无法直接访问这个字段。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>非访问修饰符<ol>
+<li>final<ol>
+<li>最终类，不能被继承</li>
+</ol>
+</li>
+<li>static<ol>
+<li>静态嵌套类</li>
+<li>这个修饰符不能直接用于外部类，只能用于<strong>嵌套类 (Nested Classes)</strong></li>
+</ol>
+</li>
+<li>abstract<ol>
+<li>抽象类，不能被实例化，必须被继承。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意事项：<ol>
+<li>此外，还有类型本身的种类标识符，用于 JVM 判断该类到底是普通类、接口、枚举类，还是注解类型：<ol>
+<li>class</li>
+<li>interface</li>
+<li>enum</li>
+<li>@interface</li>
+</ol>
+</li>
+<li>虽然我们通常认为 <code>enum</code> 是一种特殊的 <code>class</code>，<code>@interface</code> 是一种特殊的 <code>interface</code>，但本质上它们都是处于同一级别的关键字，并在字节码层面<strong>通过不同的访问标志加以区分</strong></li>
+</ol>
+</li>
+<li>这些信息在 <code>.class</code> 文件中都包含在 <code>access_flags</code> 字段。</li>
+</ol>
+</li>
+<li>类加载器引用<ol>
+<li>指向加载这个类的那个类加载器实例的引用</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>无论是类、接口还是枚举、注解，在 JVM 的底层实现和运行层面，它们最终都被表示为 <strong>Class</strong>，因此都会在类的元数据信息中占有一席之地。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="4-6-4-域信息（字段信息）"><a href="#4-6-4-域信息（字段信息）" class="headerlink" title="4.6.4. 域信息（字段信息）"></a>4.6.4. 域信息（字段信息）</h4><ol>
+<li>字段名称</li>
+<li>字段类型</li>
+<li>字段修饰符<ol>
+<li>访问修饰符<ol>
+<li>public</li>
+<li>protected</li>
+<li>package-private（默认）</li>
+<li>private</li>
+</ol>
+</li>
+<li>非访问修饰符<ol>
+<li>final<ol>
+<li>常量字段，其值一旦初始化就不能修改</li>
+</ol>
+</li>
+<li>static</li>
+<li>volatile<ol>
+<li>用于 JUC</li>
+</ol>
+</li>
+<li>transient<ol>
+<li>用于 Java 序列化机制</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意事项：<ol>
+<li>此外，还有一些注解信息，如果注解使用了 <code>@Retention(RetentionPolicy.RUNTIME)</code>，那么它就会被保留到运行时，并存储元数据中。</li>
+<li>例如 <code>deprecated</code>，它是通过 <code>@Deprecated</code> 注解标注的字段，表示该字段已被废弃，不推荐使用。</li>
+<li>虽然这不属于传统意义上的关键字修饰符，但它确实会被记录在元数据中。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="4-6-5-方法信息"><a href="#4-6-5-方法信息" class="headerlink" title="4.6.5. 方法信息"></a>4.6.5. 方法信息</h4><ol>
+<li>方法名称</li>
+<li>方法返回类型</li>
+<li>方法的修饰符<ol>
+<li>访问修饰符<ol>
+<li>public</li>
+<li>protected</li>
+<li>package-private（默认）</li>
+<li>private</li>
+</ol>
+</li>
+<li>非访问修饰符<ol>
+<li>final<ol>
+<li>该方法不能被子类重写（oberride）</li>
+</ol>
+</li>
+<li>static<ol>
+<li>静态方法，属于类本身，可以直接通过类名调用</li>
+</ol>
+</li>
+<li>abstract<ol>
+<li>抽象方法，只有方法签名，没有方法体</li>
+<li>非抽象子类必须提供其实现</li>
+</ol>
+</li>
+<li>synchronized</li>
+<li>native<ol>
+<li>表示该方法是用<strong>非 Java 语言</strong>（如 C&#x2F;C++）实现的</li>
+<li>方法体在外部定义，通常通过 Java Native Interface (JNI) 调用</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>注意事项：<ol>
+<li>此外，还有一些注解信息，如果注解使用了 <code>@Retention(RetentionPolicy.RUNTIME)</code>，那么它就会被保留到运行时，并存储元数据中。</li>
+<li>此外还有 <code>deprecated</code>，它是通过 <code>@Deprecated</code> 注解标注的方法，表示该方法已被废弃，不推荐使用。</li>
+<li>虽然这不属于传统意义上的关键字修饰符，但它确实会被记录在元数据中。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>方法的字节码<ol>
+<li>这是方法实际执行逻辑的体现</li>
+<li>JVM 会直接解释或即时编译并执行这些指令</li>
+</ol>
+</li>
+<li>操作数栈最大深度<ol>
+<li>JVM 需要知道执行方法时需要分配多少操作数栈空间</li>
+</ol>
+</li>
+<li>局部变量表大小<ol>
+<li>JVM 需要知道执行方法时需要分配多少局部变量表空间</li>
+</ol>
+</li>
+<li>异常表<ol>
+<li>它包含了 <code>try-catch-finally</code> 块的范围、捕获的异常类型以及处理异常代码的起始位置</li>
+<li>当程序抛出异常时，JVM 会根据异常表来查找对应的异常处理器</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="4-6-6-运行时常量池"><a href="#4-6-6-运行时常量池" class="headerlink" title="4.6.6. 运行时常量池"></a>4.6.6. 运行时常量池</h4><p>存储了各种 <strong>字面量（如字符串常量、数值常量）</strong> 和<strong>符号引用</strong>，符号引用将在解析阶段或者程序运行时被解析为直接引用。</p>
+<hr>
+<h4 id="4-6-7-方法区-GC-过程"><a href="#4-6-7-方法区-GC-过程" class="headerlink" title="4.6.7. 方法区 GC 过程"></a>4.6.7. 方法区 GC 过程</h4><p>当方法区（Metaspace 或 PermGen）的使用量，触及初始高水位线（即默认的 -XX:MetaspaceSize）时，JVM 会尝试触发一次 Full GC</p>
+<p>Full GC 会对新生代、老年代、方法区进行垃圾回收，其中在方法区中主要涉及到类的卸载<br>    1. 类的卸载比较严格，当满足以下三个条件时，<strong>一个类及与其关联的数据</strong>才有可能被卸载：<br>        1. 该类的所有实例都已被回收<br>        2. 加载该类的 <code>ClassLoader</code> 已经被回收<br>        3. 该类对应的 <code>java.lang.Class</code> 对象没有在任何地方被引用<br>    2. 多数情况下，一个类的 <code>ClassLoader</code> 和 <code>Class</code> 对象都会被长期引用</p>
+<p>触发 Full GC 后，高水位线会被动态调整，新的高水位线取决于 GC 后释放了多少空间：</p>
+<ol>
+<li>如果释放的空间不足，在不超过 MaxMetaspaceSize 限制时，会适当提高高水位线</li>
+<li>如果释放的空间过多，则会适当降低高水位线</li>
+</ol>
+<p>如果 Full GC 后空间依然不足，且超过了 MaxMetaspaceSize 限制，则 JVM 会抛出 OOM 异常：</p>
+<ol>
+<li>OutOfMemoryError: PermGen space<ol>
+<li>永久代内存不足</li>
+</ol>
+</li>
+<li>OutOfMemoryError: Metaspace<ol>
+<li>元空间内存不足</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果初始高水位线（-XX:MetaspaceSize）设置过低，可能会导致 Full GC 频繁触发，建议将其设置为一个相对较高的值以减少不必要的 GC 开销。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="4-6-8-方法区常用-JVM-参数"><a href="#4-6-8-方法区常用-JVM-参数" class="headerlink" title="4.6.8. 方法区常用 JVM 参数"></a>4.6.8. 方法区常用 JVM 参数</h4><ol>
+<li>设置方法区的初始内存大小<ol>
+<li>永久代<ol>
+<li>-XX:PermSize&#x3D;64m<ol>
+<li>例如：java -XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;128m -jar MyApp.jar</li>
+<li>默认值：20.75m</li>
+<li>常用单位：k、m、g</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>元空间<ol>
+<li>-XX:MetaspaceSize&#x3D;128m<ol>
+<li>例如：java -XX:MetaspaceSize&#x3D;128m -XX:MaxMetaspaceSize&#x3D;256m -jar MyApp.jar</li>
+<li>默认值：21m</li>
+<li>注意事项：<ol>
+<li>如果初始高水位线（-XX:MetaspaceSize）设置过低，可能会导致 Full GC 频繁触发，建议将其设置为一个相对较高的值以减少不必要的 GC 开销。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>用于设置方法区的最大内存大小<ol>
+<li>永久代<ol>
+<li>-XX:MaxPermSize&#x3D;128m<ol>
+<li>例如：java -XX:PermSize&#x3D;64m -XX:MaxPermSize&#x3D;128m -jar MyApp.jar</li>
+<li>默认值：32 位机器默认是 64 M，64 位机器默认是 82 M</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>元空间<ol>
+<li>-XX:MaxMetaspaceSize&#x3D;256m<ol>
+<li>用于设置方法区的最大内存大小</li>
+<li>默认值：-1，既没有限制</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>禁止方法区中类的卸载<ol>
+<li>-Xnoclassgc<ol>
+<li>例如：java -Xnoclassgc -jar MyApp.jar</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在类被加载时输出详细日志<ol>
+<li>-XX:+TraceClassLoading<ol>
+<li>JDK 8 及以前</li>
+</ol>
+</li>
+<li>-Xlog:class+load<ol>
+<li>JDK 9 及以后</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在类被卸载时输出详细日志<ol>
+<li>-XX:+TraceClassUnloading<ol>
+<li>JDK 8 及以前</li>
+</ol>
+</li>
+<li>-Xlog:class+unload<ol>
+<li>JDK 9 及以后</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<hr>
+<h2 id="5-垃圾回收（GC）"><a href="#5-垃圾回收（GC）" class="headerlink" title="5. 垃圾回收（GC）"></a>5. 垃圾回收（GC）</h2><h3 id="5-1-垃圾回收概述"><a href="#5-1-垃圾回收概述" class="headerlink" title="5.1. 垃圾回收概述"></a>5.1. 垃圾回收概述</h3><p>垃圾回收是指在程序运行过程中，对堆区中没有任何指针指向的对象进行回收，对在方法区中主要涉及到常量池回收和类的卸载。</p>
+<p>对方法区的回收，主要涉及到：</p>
+<ol>
+<li>常量池的回收</li>
+<li>类的卸载<ol>
+<li>类的卸载比较严格，当满足以下三个条件时，一个类及与其关联的数据才有可能被卸载：<ol>
+<li>该类的所有实例都已被回收</li>
+<li>加载该类的 <code>ClassLoader</code> 已经被回收</li>
+<li>该类对应的 <code>java.lang.Class</code> 对象没有在任何地方被引用</li>
+</ol>
+</li>
+<li>多数情况下，一个类的 <code>ClassLoader</code> 和 <code>Class</code> 对象都会被长期引用</li>
+</ol>
+</li>
+</ol>
+<p>但是，堆区是垃圾收集器的主要工作区域，这里我们主要研究堆区的垃圾收集，从回收频率上看，通常遵循以下规律：</p>
+<ol>
+<li>频繁收集新生代</li>
+<li>较少收集老年代</li>
+<li>基本不动永久代（方法区、元空间）</li>
+</ol>
+<hr>
+<h3 id="5-2-垃圾标记算法"><a href="#5-2-垃圾标记算法" class="headerlink" title="5.2. 垃圾标记算法"></a>5.2. 垃圾标记算法</h3><h4 id="5-2-1-垃圾标记概述"><a href="#5-2-1-垃圾标记概述" class="headerlink" title="5.2.1. 垃圾标记概述"></a>5.2.1. 垃圾标记概述</h4><p>在堆中存放着几乎所有的 Java 对象实例，在 GC 执行垃圾回收之前，首先需要区分内存中哪些是存活的对象，哪些是已经死亡的对象。</p>
+<p>只有被标记为死亡的对象，GC 在执行回收时才会释放它们所占用的内存空间，因此，这一过程被称为垃圾标记阶段。</p>
+<hr>
+<h4 id="5-2-2-引用计数法"><a href="#5-2-2-引用计数法" class="headerlink" title="5.2.2. 引用计数法"></a>5.2.2. 引用计数法</h4><p>引用计数算法是为每一个对象维护一个整型的引用计数器<strong>属性</strong>，用于记录该对象被引用的次数。例如，对于一个对象 A，只要有其他任何对象引用了 A，则 A 的引用计数器就加 1；当引用失效时，计数器减 1。当 A 的引用计数器为 0 时，说明该对象已经无法再被访问，可以被回收。</p>
+<p>其优点是：</p>
+<ol>
+<li>实现简单</li>
+<li>垃圾对象易于识别</li>
+<li>判定效率高，回收无需等待</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>增加了一定的存储空间的开销</li>
+<li>每次赋值都需要更新计数器，伴随着加法和减法操作，带来一定的时间开销</li>
+<li>前两点尚可接受，但引用计数法有一个致命缺陷：<strong>无法处理循环引用的问题</strong>，这正是 Java 的垃圾回收器没有采用该算法的根本原因</li>
+</ol>
+<p>下面的代码是一个典型的循环引用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RefCountGC</span> &#123;<br>		<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">byte</span>[] bigSize = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">5</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>]; <span class="hljs-comment">//5MB</span><br>    <span class="hljs-type">Object</span> <span class="hljs-variable">reference</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>		<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	    <br>        <span class="hljs-type">RefCountGC</span> <span class="hljs-variable">obj1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RefCountGC</span>();<br>        <span class="hljs-type">RefCountGC</span> <span class="hljs-variable">obj2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RefCountGC</span>();<br>		<br>        obj1.reference = obj2;<br>        obj2.reference = obj1;<br>		<br>        obj1 = <span class="hljs-literal">null</span>;<br>        obj2 = <span class="hljs-literal">null</span>;<br>        <br>        <span class="hljs-comment">// 显式执行 Full GC，若使用引用计数法，obj1 和 obj2 将无法被回收</span><br>        System.gc();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其图示如下：<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727083631864.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于 Java 并未采用引用计数算法，所以在面试中回答 “什么会导致内存泄漏” 这类问题时，应避免以“循环引用”作为主要答案</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="5-2-3-可达性分析（根搜索方法、追踪性垃圾收集）"><a href="#5-2-3-可达性分析（根搜索方法、追踪性垃圾收集）" class="headerlink" title="5.2.3. 可达性分析（根搜索方法、追踪性垃圾收集）"></a>5.2.3. 可达性分析（根搜索方法、追踪性垃圾收集）</h4><h5 id="5-2-3-1-可达性分析概述"><a href="#5-2-3-1-可达性分析概述" class="headerlink" title="5.2.3.1. 可达性分析概述"></a>5.2.3.1. 可达性分析概述</h5><p>可达性分析算法是以根对象集合（GC Roots，一组始终处于活跃状态的引用）为起始点，自上而下地搜索与这些根对象相关联的目标对象是否可达，内存中的所有存活对象，都会被根对象集合直接或间接连接。</p>
+<p>搜索过程中所经过的路径被称为引用链（Reference Chain），如果某个目标对象在内存中没有任何引用链与 GC Roots 相连，那么它就是不可达的，也就意味着该对象已死亡，可被标记为垃圾对象。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果要使用可达性分析算法判断内存是否可回收，分析工作必须在一个能够<strong>保证内存状态一致性的快照中进行</strong>。</li>
+<li>如果无法满足这一点，分析结果的准确性就无法保证，这也是导致 GC 进行时必须执行 “Stop The World” 的一个重要原因。</li>
+<li>即便是号称几乎不会停顿的 CMS 收集器，在枚举根节点阶段，也必须暂停所有应用线程（主线程、工作线程、守护线程）</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="5-2-3-2-常见-GC-Roots"><a href="#5-2-3-2-常见-GC-Roots" class="headerlink" title="5.2.3.2. 常见 GC Roots"></a>5.2.3.2. 常见 GC Roots</h5><p><font color="#92d050">1. 虚拟机栈中引用的对象</font></p>
+<hr>
+<h5 id="5-2-3-3-查看-GC-Roots"><a href="#5-2-3-3-查看-GC-Roots" class="headerlink" title="5.2.3.3. 查看 GC Roots"></a>5.2.3.3. 查看 GC Roots</h5><hr>
+<h3 id="5-3-垃圾清除算法"><a href="#5-3-垃圾清除算法" class="headerlink" title="5.3. 垃圾清除算法"></a>5.3. 垃圾清除算法</h3><h4 id="5-3-1-标记-清除算法"><a href="#5-3-1-标记-清除算法" class="headerlink" title="5.3.1. 标记-清除算法"></a>5.3.1. 标记-清除算法</h4><p>标记-清除算法是垃圾回收中最基本和最古老的一种算法，也是许多现代垃圾回收算法的基础。它的工作原理正如其名称所示，分为两个主要阶段：<strong>标记 (Mark)</strong> 和 <strong>清除 (Sweep)</strong></p>
+<ol>
+<li>标记：<ol>
+<li>垃圾回收器从一组被称为 <strong>GC Roots</strong> 的对象出发，遍历所有从 GC Roots 可达的对象，并<strong>标记</strong>这些对象为“存活”或“in use”（通常通过在对象头中设置一个标记位 <code>mark bit</code> 来实现）</li>
+<li>这个遍历过程通常采用递归的深度优先搜索（DFS）或广度优先搜索（BFS）方式，沿着对象引用链不断向下，直到所有可达对象都被标记完毕。</li>
+</ol>
+</li>
+<li>清楚：<ol>
+<li>垃圾回收器会遍历整个堆内存。</li>
+<li>对于那些在标记阶段<strong>未被标记</strong>的对象（即不可达对象），它们的内存会被回收，并把这些地址加入到空闲内存列表中，供后续的新对象分配使用</li>
+<li>对于已标记为存活的对象，它们的标记位会在此阶段被清除，为下一次垃圾回收做准备。</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728174155278.png" srcset="/img/loading.gif" lazyload></p>
+<p>其优点是：</p>
+<ol>
+<li>实现简单：<ol>
+<li>标记-清除算法逻辑比较直观，容易实现</li>
+</ol>
+</li>
+<li>能够处理循环引用</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>内存碎片化：<ol>
+<li>回收后的内存空间不连续，产生大量的内存碎片</li>
+<li>需要额外维护一个空闲列表用于记录空闲地址，增加内存开销</li>
+<li>当后续需要分配较大对象时，即使总的空闲内存足够，也可能因为没有足够大的连续空间而导致分配失败</li>
+</ol>
+</li>
+<li>回收效率中等：<ol>
+<li>标记阶段的工作量，与<strong>存活对象的数量及其引用关系复杂程度</strong>成正比，如果堆中绝大部分是垃圾，那么标记的开销相对较小（这个工作量，所有垃圾清除算法都一样）</li>
+<li>但清除阶段的工作量，与<strong>整个堆内存的大小</strong>成正比，无论堆中有多少存活对象，清除阶段都需要线性扫描整个堆，从而导致效率不算高</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>无论采用哪种垃圾回收算法，也无论使用哪种垃圾回收器，都不可避免地会存在 STW（Stop The World），即暂停所有应用线程以执行垃圾回收操作。</li>
+<li>一个优秀的垃圾回收器，必须在吞吐量与响应速度之间取得良好平衡，既能高效回收内存，又不会严重影响程序的响应性能。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="5-3-2-复制算法"><a href="#5-3-2-复制算法" class="headerlink" title="5.3.2. 复制算法"></a>5.3.2. 复制算法</h4><p>复制算法同样基于可达性分析，从 From 空间中识别出所有存活对象。一旦找到这些对象，GC 会将它们复制到 To 空间中，并按顺序紧凑排列，从而自然地消除了内存碎片。并且在复制的同时更新所有引用，确保指向已移动对象的指针保持正确。</p>
+<p>复制完成后，From 空间中未被复制的对象（即不可达对象）被视为垃圾，整个 From 空间会被整体清空。下一次垃圾回收时，From 和 To 空间将交换角色，继续重复同样的回收流程。</p>
+<p>总结来说，复制算法以牺牲空间换取了时间，并彻底解决了内存碎片问题。<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728181214127.png" srcset="/img/loading.gif" lazyload></p>
+<p>其优点是：</p>
+<ol>
+<li>实现简单：<ol>
+<li>相比于复杂的标记-整理算法，复制算法的基本逻辑相对直观，容易实现</li>
+</ol>
+</li>
+<li>消除内存碎片化</li>
+<li>回收效率最高：<ol>
+<li>标记阶段的工作量，与<strong>存活对象的数量及其引用关系复杂程度</strong>成正比，如果堆中绝大部分是垃圾，那么标记的开销相对较小（这个工作量，所有垃圾清除算法都一样）</li>
+<li>复制阶段的工作量，涉及到对象的复制和引用的更新，与<strong>存活对象的数量</strong>成正比</li>
+<li>简单来说，复制算法的 “清除” 是批量化的，一旦存活对象被复制到新的空间，旧空间中的所有对象（包括大量垃圾）就被直接整块废弃，无需逐个遍历和回收。</li>
+<li>因此其适用于<strong>垃圾对象占多数</strong>的场景，需要移动的存活对象越少，其开销就越低；当存活对象较多时，复制的开销会显著增加</li>
+</ol>
+</li>
+<li>能够处理循环引用</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>内存空间利用率低：<ol>
+<li>这是复制算法最大的缺点，它需要将可用的内存空间一分为二，每次只使用一半。</li>
+</ol>
+</li>
+<li>不适用于存活对象占多数的场景<ol>
+<li>需要移动的存活对象越少，其开销就越低</li>
+<li>当存活对象较多时，复制的开销会显著增加</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="5-3-3-标记-整理算法"><a href="#5-3-3-标记-整理算法" class="headerlink" title="5.3.3. 标记-整理算法"></a>5.3.3. 标记-整理算法</h4><p>标记-整理算法是垃圾回收领域中一种重要的算法，它融合了标记-清除算法的优点，同时解决了其所带来的<strong>内存碎片问题</strong>。因此，它常被视为标记-清除算法的升级版，即“标记-清除 plus”。</p>
+<p>在标记阶段，标记-整理算法与标记-清除算法一样，<strong>基于可达性分析</strong>，对所有存活对象进行标记。标记完成后，垃圾回收器会遍历整个堆，将所有标记为存活的对象<strong>按顺序移动到堆的一端</strong>（通常是起始地址），在移动过程中同步<strong>更新所有引用</strong>，确保指针始终指向对象的新位置。</p>
+<p>当对象移动完成后，堆的另一端（尚未占用的区域）就成为<strong>连续的空闲内存空间</strong>，原位置中未被移动的对象（即不可达对象）也随之被 “清除”。<br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250728182811254.png" srcset="/img/loading.gif" lazyload></p>
+<p>其优点是：</p>
+<ol>
+<li>消除内存碎片化</li>
+<li>内存利用率高：<ol>
+<li>不像复制算法需要牺牲一半的内存空间</li>
+<li>标记-整理算法可以充分利用整个堆空间进行对象分配</li>
+</ol>
+</li>
+<li>能够处理循环引用</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>实现复杂：<ol>
+<li>相比标记-清除或复制算法，标记-整理算法的实现复杂性更高</li>
+</ol>
+</li>
+<li>回收效率最低：<ol>
+<li>标记阶段的工作量，与<strong>存活对象的数量及其引用关系复杂程度</strong>成正比，如果堆中绝大部分是垃圾，那么标记的开销相对较小（这个工作量，所有垃圾清除算法都一样）</li>
+<li>整理阶段的工作量，涉及到对象的复制和引用的更新，与<strong>存活对象的数量</strong>成正比</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="5-4-垃圾回收思想"><a href="#5-4-垃圾回收思想" class="headerlink" title="5.4. 垃圾回收思想"></a>5.4. 垃圾回收思想</h3><h4 id="5-4-1-分代思想"><a href="#5-4-1-分代思想" class="headerlink" title="5.4.1. 分代思想"></a>5.4.1. 分代思想</h4><p>分代思想的提出基于两个重要的对象生命周期假说：</p>
+<ol>
+<li>弱代假说（Weak Generational Hypothesis）：<ol>
+<li>绝大多数对象都是朝生夕死的</li>
+</ol>
+</li>
+<li>强代假说（Strong Generational Hypothesis）： <ol>
+<li>熬过越多次垃圾回收过程的对象就越难以被回收</li>
+</ol>
+</li>
+</ol>
+<p>基于这两个假说，如果每次垃圾回收都针对整个堆，效率会非常低下。因此，分代思想将 Java 堆内存划分为几个不同的区域，每个区域根据其对象的特点（生命周期）采用最适合的 GC 算法，避免了 “大而全” 的低效全堆回收</p>
+<blockquote>
+<p>[!NOTE] 注意事项：跨代引用</p>
+</blockquote>
+<h4 id="5-4-2-分区思想"><a href="#5-4-2-分区思想" class="headerlink" title="5.4.2. 分区思想"></a>5.4.2. 分区思想</h4><hr>
+<h4 id="5-4-3-增量收集思想"><a href="#5-4-3-增量收集思想" class="headerlink" title="5.4.3. 增量收集思想"></a>5.4.3. 增量收集思想</h4><hr>
+<h3 id="5-5-对象的-finalization-机制"><a href="#5-5-对象的-finalization-机制" class="headerlink" title="5.5. 对象的 finalization 机制"></a>5.5. 对象的 finalization 机制</h3><hr>
+<h3 id="5-6-GC-常用-JVM-参数"><a href="#5-6-GC-常用-JVM-参数" class="headerlink" title="5.6. GC 常用 JVM 参数"></a>5.6. GC 常用 JVM 参数</h3><blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>GC 常用的 JVM 参数有：<ol>
+<li>-XX:±PrintGCDetails</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="6-字节码详解"><a href="#6-字节码详解" class="headerlink" title="6. 字节码详解"></a>6. 字节码详解</h2><h3 id="6-1-符号引用"><a href="#6-1-符号引用" class="headerlink" title="6.1. 符号引用"></a>6.1. 符号引用</h3><p>JVM 在解析它后会把符号引用转换成 直接引用</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>常量池项类型</th>
+<th>描述</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类或接口引用</td>
+<td><code>CONSTANT_Class_info</code></td>
+<td>类的完全限定名</td>
+<td><code>java/lang/String</code></td>
+</tr>
+<tr>
+<td>字段引用</td>
+<td><code>CONSTANT_Fieldref_info</code></td>
+<td>类 + 字段名 + 描述符</td>
+<td><code>Test.instanceBasicTypeValue : I</code></td>
+</tr>
+<tr>
+<td>方法引用</td>
+<td><code>CONSTANT_Methodref_info</code></td>
+<td>类 + 方法名 + 描述符</td>
+<td><code>Object.&lt;init&gt;()V</code></td>
+</tr>
+<tr>
+<td>接口方法引用</td>
+<td><code>CONSTANT_InterfaceMethodref_info</code></td>
+<td>接口 + 方法名 + 描述符</td>
+<td><code>Comparable.compareTo(Object)</code></td>
+</tr>
+<tr>
+<td>虽然 <code>CONSTANT_String_info</code> 本身不是“符号引用”，但 JVM 在解析它后，会把运行时常量池对应槽位替换成 <code>&quot;def&quot;</code> 的 String 对象引用，因此你最终看到的是 Java 对象引用。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>常量池项类型</th>
+<th>是否符号引用类型</th>
+<th>运行时是否会变成对象引用</th>
+<th>举例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CONSTANT_String_info</code></td>
+<td>❌ 否</td>
+<td>✅ 会</td>
+<td>转成 <code>&quot;abc&quot;</code> 的 <code>String</code> 对象引用</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Integer_info</code></td>
+<td>❌ 否</td>
+<td>✅ 会</td>
+<td>转成 <code>java.lang.Integer</code> 对象或直接 int 值</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Float_info</code></td>
+<td>❌ 否</td>
+<td>✅ 会</td>
+<td>类似 float 42.0f，装箱为 Float</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Long_info</code></td>
+<td>❌ 否</td>
+<td>✅ 会</td>
+<td>long 类型字面量，值保存在堆中或局部变量表中</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Double_info</code></td>
+<td>❌ 否</td>
+<td>✅ 会</td>
+<td>同上，double 值也装箱</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Class_info</code></td>
+<td>✅ 是</td>
+<td>✅ 会</td>
+<td>转成 <code>java.lang.Class</code> 对象</td>
+</tr>
+<tr>
+<td><code>CONSTANT_MethodHandle_info</code></td>
+<td>✅ 是</td>
+<td>✅ 会</td>
+<td>转成 <code>MethodHandle</code> 对象</td>
+</tr>
+<tr>
+<td><code>CONSTANT_Dynamic_info</code></td>
+<td>✅ 是</td>
+<td>✅ 会</td>
+<td>通过 bootstrap 方法调用结果填入常量池槽位</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>包装类型</th>
+<th>实际使用的常量池项类型</th>
+<th>装箱后是否成为对象引用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Integer</code></td>
+<td><code>CONSTANT_Integer_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Float</code></td>
+<td><code>CONSTANT_Float_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Long</code></td>
+<td><code>CONSTANT_Long_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Double</code></td>
+<td><code>CONSTANT_Double_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Boolean</code></td>
+<td>❌（用 iconst 指令代替）</td>
+<td>✅（有缓存 true&#x2F;false）</td>
+</tr>
+<tr>
+<td><code>Byte</code></td>
+<td><code>CONSTANT_Integer_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Short</code></td>
+<td><code>CONSTANT_Integer_info</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>Character</code></td>
+<td><code>CONSTANT_Integer_info</code></td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250727223437242.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="6-2-iconst-n"><a href="#6-2-iconst-n" class="headerlink" title="6.2. iconst_n"></a>6.2. iconst_n</h3><p>把小整数常量（-1 ~ 5）推入栈顶，例如：</p>
+<ol>
+<li>iconst_m1<ol>
+<li>推 -1</li>
+</ol>
+</li>
+<li>iconst_0<ol>
+<li>推 0</li>
+</ol>
+</li>
+<li>iconst_1<ol>
+<li>推 1</li>
+</ol>
+</li>
+<li>iconst_2<ol>
+<li>推 2</li>
+</ol>
+</li>
+<li>iconst_3<ol>
+<li>推 3</li>
+</ol>
+</li>
+<li>iconst_4<ol>
+<li>推 4</li>
+</ol>
+</li>
+<li>iconst_5<ol>
+<li>推 5</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="6-3-bipush"><a href="#6-3-bipush" class="headerlink" title="6.3. bipush"></a>6.3. bipush</h3><p>把一个 8 位带符号整数常量（byte 类型，-128 ~ 127）推入栈顶，例如：</p>
+<ol>
+<li>binpush -30<ol>
+<li>推 -30</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="6-4-sipush"><a href="#6-4-sipush" class="headerlink" title="6.4. sipush"></a>6.4. sipush</h3><p>把一个 16 位带符号整数常量（short 类型，-32768 ~ 32767）推入栈顶，例如：</p>
+<ol>
+<li>sipush 20000<ol>
+<li>推 20000</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>数值更大，就不是直接推入栈顶了，而是字面量保存在方法区，通过 ldc 进行加载了，就像</li>
+</ol>
+</blockquote>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-comment">// 实例变量</span><br><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> instanceBasicTypeValue = <span class="hljs-number">32768</span>;<br><br><br><span class="hljs-comment">// 字节码</span><br>ldc <span class="hljs-meta">#7 &lt;32768&gt;</span><br>putfield <span class="hljs-meta">#8 &lt;org/example/test/Test.instanceBasicTypeValue : I&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="JVM-工具"><a href="#JVM-工具" class="headerlink" title="JVM 工具"></a>JVM 工具</h1><h2 id="JConsole"><a href="#JConsole" class="headerlink" title="JConsole"></a>JConsole</h2><hr>
+<h2 id="VisualVM"><a href="#VisualVM" class="headerlink" title="VisualVM"></a>VisualVM</h2><h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><h4 id="软件安装-1"><a href="#软件安装-1" class="headerlink" title="软件安装"></a>软件安装</h4><p>安装地址： <a target="_blank" rel="noopener" href="https://visualvm.github.io/download.html">https://visualvm.github.io/download.html</a><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730205937863.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><p><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214613670.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="集成-IDEA"><a href="#集成-IDEA" class="headerlink" title="集成 IDEA"></a>集成 IDEA</h4><p><font color="#92d050">1. 下载 VisualVM Launcher 插件</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730210053342.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 进行插件配置</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214937797.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">3. 使用插件</font><br><img src="/2025/05/29/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/image-20250730214912560.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+
                 
               </div>
             

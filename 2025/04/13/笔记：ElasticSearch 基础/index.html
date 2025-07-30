@@ -19,12 +19,12 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、理论1. 导图：Map：ElasticSearch 2. ElasticSearch 概述elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容  3. ES 语法 3.3. 索引命令3.3.1. 创建索引3.3.1.1. 创建索引考虑事项 &#x3D;&#x3D;索引库名称&#x3D;&#x3D;： ES索引通常对应数据库中的一张表，一个表根据业务">
+    <meta name="description" content="一、理论1. 导图：Map：ElasticSearch 2. ElasticSearch 概述elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容  ![](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;PixPin_2025-04-26_17-15-36.png) 3. ES 语法 3.3. 索引命">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：ElasticSearch 基础">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="一、理论1. 导图：Map：ElasticSearch 2. ElasticSearch 概述elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容  3. ES 语法 3.3. 索引命令3.3.1. 创建索引3.3.1.1. 创建索引考虑事项 &#x3D;&#x3D;索引库名称&#x3D;&#x3D;： ES索引通常对应数据库中的一张表，一个表根据业务">
+<meta property="og:description" content="一、理论1. 导图：Map：ElasticSearch 2. ElasticSearch 概述elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容  ![](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;PixPin_2025-04-26_17-15-36.png) 3. ES 语法 3.3. 索引命">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416201625864.png">
@@ -39,8 +39,8 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416192834497.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250416194752833.png">
 <meta property="article:published_time" content="2025-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-24T14:25:54.439Z">
-<meta property="article:author" content="Ba Tian">
+<meta property="article:modified_time" content="2025-07-27T10:09:24.729Z">
+<meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AElasticSearch%20%E5%9F%BA%E7%A1%80/image-20250427210357524.png">
   
@@ -247,7 +247,7 @@
         
         
         
-          150 mins
+          151 mins
         
       </span>
     
@@ -302,7 +302,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-24T22:25:54+08:00
+                    Last updated on 2025-07-27T18:09:24+08:00
                   
                   
 
@@ -315,6 +315,7 @@
                 <h1 id="一、理论"><a href="#一、理论" class="headerlink" title="一、理论"></a>一、理论</h1><h3 id="1-导图：Map：ElasticSearch"><a href="#1-导图：Map：ElasticSearch" class="headerlink" title="1. 导图：Map：ElasticSearch"></a>1. 导图：<a href="../../maps/Map%EF%BC%9AElasticSearch.xmind">Map：ElasticSearch</a></h3><hr>
 <h3 id="2-ElasticSearch-概述"><a href="#2-ElasticSearch-概述" class="headerlink" title="2. ElasticSearch 概述"></a>2. ElasticSearch 概述</h3><p>elasticsearch是一款非常强大的开源搜索引擎，可以帮助我们从海量数据中快速找到需要的内容</p>
 <hr>
+<p>![](source&#x2F;_posts&#x2F;笔记：ElasticSearch 基础&#x2F;PixPin_2025-04-26_17-15-36.png)</p>
 <h3 id="3-ES-语法"><a href="#3-ES-语法" class="headerlink" title="3. ES 语法"></a>3. ES 语法</h3><hr>
 <h4 id="3-3-索引命令"><a href="#3-3-索引命令" class="headerlink" title="3.3. 索引命令"></a>3.3. 索引命令</h4><h5 id="3-3-1-创建索引"><a href="#3-3-1-创建索引" class="headerlink" title="3.3.1. 创建索引"></a>3.3.1. 创建索引</h5><h6 id="3-3-1-1-创建索引考虑事项"><a href="#3-3-1-1-创建索引考虑事项" class="headerlink" title="3.3.1.1. 创建索引考虑事项"></a>3.3.1.1. 创建索引考虑事项</h6><ol>
 <li>&#x3D;&#x3D;索引库名称&#x3D;&#x3D;：<ol>
@@ -1526,9 +1527,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E5%AE%B6%E6%97%8F/" title="笔记：Git 家族">
+                      <a href="/2025/04/15/%E7%AC%94%E8%AE%B0%EF%BC%9AVMware/" title="笔记：VMware">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Git 家族</span>
+                        <span class="hidden-mobile">笔记：VMware</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -1536,8 +1537,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%20%E6%96%87%E6%A1%A3/" title="笔记：Java 文档">
-                        <span class="hidden-mobile">笔记：Java 文档</span>
+                      <a href="/2025/04/13/%E7%AC%94%E8%AE%B0%EF%BC%9AGit%20%E5%AE%B6%E6%97%8F/" title="笔记：Git 家族">
+                        <span class="hidden-mobile">笔记：Git 家族</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

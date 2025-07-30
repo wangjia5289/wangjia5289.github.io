@@ -19,17 +19,19 @@
   <meta name="author" content="霸天">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导图![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高">
+    <meta name="description" content="1. UUID1.1. UUID 概述UUID 是一个固定长度为 128 位（16 字节）的通用唯一识别码，通常以 32 个十六进制字符表示，并使用 4 个连字符分隔为 5 组，例如： 1234567891011121314151617181920212223&#x2F;&#x2F; 32 个十六进制数字 + 4 个 - 连字符（共 36 个字符）xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：分布式 ID">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/index.html">
 <meta property="og:site_name" content="夜阑卧听风吹雨,一枝梨花压心头">
-<meta property="og:description" content="导图![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)  分布式 ID 概述我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。 在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。 分布式 ID 的作用，就是生成全局唯一、且具备高">
+<meta property="og:description" content="1. UUID1.1. UUID 概述UUID 是一个固定长度为 128 位（16 字节）的通用唯一识别码，通常以 32 个十六进制字符表示，并使用 4 个连字符分隔为 5 组，例如： 1234567891011121314151617181920212223&#x2F;&#x2F; 32 个十六进制数字 + 4 个 - 连字符（共 36 个字符）xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxx">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/image-20250730100600919.png">
 <meta property="article:published_time" content="2025-07-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-24T14:25:54.473Z">
-<meta property="article:author" content="Ba Tian">
+<meta property="article:modified_time" content="2025-07-30T02:23:08.516Z">
+<meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/image-20250730100600919.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          736 words
+          2.3k words
         
       </span>
     
@@ -234,7 +236,7 @@
         
         
         
-          7 mins
+          20 mins
         
       </span>
     
@@ -289,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-07-24T22:25:54+08:00
+                    Last updated on 2025-07-30T10:23:08+08:00
                   
                   
 
@@ -299,71 +301,239 @@
             
               <div class="markdown-body">
                 
-                <h2 id="导图"><a href="#导图" class="headerlink" title="导图"></a>导图</h2><p>![](source&#x2F;_posts&#x2F;笔记：分布式 ID&#x2F;Map：分布式 ID.xmind)</p>
-<hr>
-<h2 id="分布式-ID-概述"><a href="#分布式-ID-概述" class="headerlink" title="分布式 ID 概述"></a>分布式 ID 概述</h2><p>我们在往数据库插入数据的时候呢，每一行数据都要有对应的全局唯一标识符。</p>
-<p>在单体应用中，自增主键非常好用，足以满足我们的需求，但是在微服务或分布式集群环境下，就会出现很多问题，所以我们需要引入分布式 ID。</p>
-<p>分布式 ID 的作用，就是生成全局唯一、且具备高性能的 ID。</p>
-<hr>
-<h2 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h2><h3 id="UUID-概述"><a href="#UUID-概述" class="headerlink" title="UUID 概述"></a>UUID 概述</h3><p>UUID 的设计目标是：在全球范围内生成的 UUID 都不会重复。其基本特征为：长度固定为 128 位（二进制），通常用 32 个十六进制字符表示，如：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-comment">// 32 个十六进制字符 + 4 个连字符</span><br><span class="hljs-number">550</span>e8400-e29b-<span class="hljs-number">41</span><span class="hljs-built_in">d4</span>-a716-<span class="hljs-number">446655440000</span><br></code></pre></td></tr></table></figure>
+                <h2 id="1-UUID"><a href="#1-UUID" class="headerlink" title="1. UUID"></a>1. UUID</h2><h3 id="1-1-UUID-概述"><a href="#1-1-UUID-概述" class="headerlink" title="1.1. UUID 概述"></a>1.1. UUID 概述</h3><p>UUID 是一个固定长度为 128 位（16 字节）的通用唯一识别码，通常以 32 个十六进制字符表示，并使用 4 个连字符分隔为 5 组，例如：</p>
+<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs tap">//<span class="hljs-number"> 32 </span>个十六进制数字 +<span class="hljs-number"> 4 </span>个 - 连字符（共<span class="hljs-number"> 36 </span>个字符）<br>xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx<br>    |      |    |    |        |<br>	8     <span class="hljs-number"> 4 </span>  <span class="hljs-number"> 4 </span>  <span class="hljs-number"> 4 </span>       16<br>&quot;&quot;&quot;<br>1. x<br>	1. 十六进制数字（0 ~ f）<br>2. M<br>	1. 版本位，UUID 的版本号（1 ~ 5）<br>3. N<br>	1. 变体位，UUID 的布局规则<br>	2. 这里表面上是<span class="hljs-number"> 4 </span>位，但实际上变体信息通常只占其中的<span class="hljs-number"> 2 </span>位或<span class="hljs-number"> 3 </span>位<br>	3. 剩下的<span class="hljs-number"> 2 </span>位或<span class="hljs-number"> 1 </span>位是数据位，只是这里为了简化，直接把这<span class="hljs-number"> 4 </span>位都视作变体位来看了<br>	4. Variant 0（Apollo NCS 兼容）<br>		1. 二进制：<br>			1. 0xxx<br>	5. Variant 1（RFC<span class="hljs-number"> 4122 </span>标准）<br>		1. 二进制<br>			1. 10xx<br>	6. Variant 2（Microsoft GUID 历史兼容）<br>		1. 二进制<br>			1. 110x<br>&quot;&quot;&quot;<br></code></pre></td></tr></table></figure>
 
-<p>其优点很明显：</p>
+<p>其优点是：</p>
 <ol>
-<li>可以在本地独立生成，不需要依赖数据库或网络</li>
-<li>并且跨平台、跨语言兼容性好，广泛支持，</li>
-<li>用作主键或唯一标识符时，不易被预测，安全性高，几乎不可能重复（概率极低，除非故意伪造或撞库</li>
+<li>跨平台、跨语言兼容性好，广泛支持</li>
+<li>不易被预测，安全性高，几乎不可能重复</li>
+<li>可以在本地独立生成，不依赖数据库或网络</li>
 </ol>
-<p>但是其缺点也很明显：</p>
+<p>其缺点是：</p>
 <ol>
-<li>UUID 太长了，需要 128 位，需要的存储空间大，UUID 是 128 位如果你用 <strong>字节（8位）单位表示</strong>，是 <strong>16 字节</strong>；如果你用 <strong>十六进制字符（每个占 4 位）表示</strong>，就需要 <strong>32 个字符</strong>； 加上 <code>-</code> 分隔符方便阅读后，是我们常见的 <strong>36 字符 UUID 字符串</strong>。</li>
-<li><strong>不具备顺序性</strong>，插入数据库时会导致<strong>性能下降（尤其是聚簇索引）</strong>；</li>
-<li>可读性差，不便于人工识别或排序。</li>
+<li>占用空间大，需要 128 位（bit）</li>
+<li>可读性差，不便于人工识别或排序</li>
 </ol>
-<p>UUID 有五个主要版本：</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
 <ol>
-<li>UUID V1</li>
-<li>UUID V2</li>
-<li>UUID V3</li>
-<li>UUID V4（最常用）</li>
-<li>UUID V5</li>
+<li><code>xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx</code> 是 UUID 的标准字符串表示，共有 36 个字符组成，但在底层，UUID 实际只保存了 128 位的数据，连字符仅用于显示时的格式化</li>
 </ol>
-<p>保持你原有格式不变的前提下，这是优化后的表达版本：</p>
+</blockquote>
 <hr>
-<p>UUID 的设计目标是：在全球范围内生成的 UUID 都不会重复。其基本特征为：长度固定为 128 位（二进制），通常用 32 个十六进制字符表示，如：</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-comment">// 32 个十六进制字符 + 4 个连字符</span><br><span class="hljs-number">550</span>e8400-e29b-<span class="hljs-number">41</span><span class="hljs-built_in">d4</span>-a716-<span class="hljs-number">446655440000</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-2-UUID-v1"><a href="#1-2-UUID-v1" class="headerlink" title="1.2. UUID v1"></a>1.2. UUID v1</h3><p>UUID v1 是一种 <strong>基于 UUID 时间戳 + 设备信息（MAC 地址）</strong> 的生成方式，其组成结构为：</p>
+<ol>
+<li>时间戳（60 位，精确到 100 ns）<ol>
+<li>v1 使用的时间戳是 UUID 时间戳，从 1582-10-15 00:00:00 UTC 起开始</li>
+<li>精确到的单位是 100 纳秒（即每秒有 10^7 个单位），因此精度很高，可以在极短时间内生成大量唯一 ID</li>
+</ol>
+</li>
+<li>版本位（4 位）<ol>
+<li>固定为（0001）<sub>2</sub></li>
+</ol>
+</li>
+<li>变体位<ol>
+<li>使用的变体是 Variant 1（RFC 4122 标准）</li>
+</ol>
+</li>
+<li>时钟序列（14 位）<ol>
+<li>防止系统时间回拨或时间没有前进，从而造成重复 UUID，例如：<ol>
+<li>手动调整时间<ol>
+<li>用户手动更改系统时间</li>
+</ol>
+</li>
+<li>NTP 同步<ol>
+<li>NTP 同步可能会导致时间小幅度回拨</li>
+</ol>
+</li>
+<li>时间没有前进</li>
+</ol>
+</li>
+<li>如果发现当前时间戳 ≤ 上一次生成 UUID 的时间戳，说明系统时间回拨或没有前进<ol>
+<li>为了确保生成的 ID 仍然唯一，此时时钟序列会被增加 1</li>
+<li>为了能够读取上一次生成 UUID 的时间戳，通常会将其保存在文件、内存或数据库中</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>设备信息（48 位，MAC 地址）<ol>
+<li>通常是本机的 MAC 地址</li>
+<li>例如：<code>00:0a:95:9d:68:16</code> → 48 位 进行填入</li>
+<li>注意事项：如果获取不到 MAC 地址，有些库会用随机数代替</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/07/12/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%20ID/image-20250730100600919.png" srcset="/img/loading.gif" lazyload></p>
+<p>其优点是：</p>
+<ol>
+<li>唯一性好<ol>
+<li>不同设备 + 高精度时间</li>
+</ol>
+</li>
+<li>有序性好<ol>
+<li>按时间递增，适合数据库索引</li>
+</ol>
+</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>隐私泄露<ol>
+<li>能看出生成的时间，甚至能暴露设备 MAC 地址</li>
+</ol>
+</li>
+<li>时钟回拨问题<ol>
+<li>需要额外时钟序列来补偿</li>
+</ol>
+</li>
+</ol>
+<p>Java UUID 标准库 <code>java.util.UUID</code> 默认不支持 v1，只支持 v4，我们可以使用第三方库 <code>uuid-creator</code>：添加 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.github.f4b6a3/uuid-creator">uuid-creator 依赖</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.f4b6a3<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>uuid-creator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>其优点很明显：</p>
+<p>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UUIDV1</span> &#123;  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;  <br>  <br>        UUID uuidV1 = UuidCreator.getTimeBased();  <br>        System.<span class="hljs-keyword">out</span>.println(uuidV1);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-3-UUID-v2"><a href="#1-3-UUID-v2" class="headerlink" title="1.3. UUID v2"></a>1.3. UUID v2</h3><p>UUID v2 是 UUID 中<strong>最少见、最不推荐使用</strong>的一种版本，大部分 Java 类库都<strong>不支持 UUID v2</strong>，包括 <code>uuid-creator</code> 库。这里干脆不使用 UUID v2，改用其他版本</p>
+<hr>
+<h3 id="1-4-UUID-v3"><a href="#1-4-UUID-v3" class="headerlink" title="1.4. UUID v3"></a>1.4. UUID v3</h3><p>UUID v3 是一种 <strong>基于命名空间（namespace）+ 名称（name）+ MD5 哈希算法</strong> 生成的 UUID，具有<strong>稳定性强、可复现</strong>的特点。也就是说，它不是随机生成的，而是<strong>可预测、可重现</strong>的：<strong>只要命名空间和名称的组合相同，生成的 UUIDv3 始终一致</strong>！</p>
+<p>UUID v3 的本质是：UUID &#x3D; MD5(namespace + name) → 得到 128 位结果，然后将特定位替换为版本位（固定为（0011）<sub>2</sub>）和变位信息（使用的变体是 Variant 1，即RFC 4122 标准）</p>
+<p>UUID 规范中预定义了一些命名空间 UUID：</p>
 <ol>
-<li><p>可以在本地独立生成，不依赖数据库或网络；</p>
+<li>NAMESPACE_DNS<ol>
+<li>用于 DNS 域名</li>
+</ol>
 </li>
-<li><p>跨平台、跨语言兼容性好，广泛支持；</p>
+<li>NAMESPACE_URL<ol>
+<li>用于 URL</li>
+</ol>
 </li>
-<li><p>用作主键或唯一标识符时，不易被预测，安全性高，几乎不可能重复（除非刻意伪造或撞库）。</p>
+<li>NAMESPACE_OID<ol>
+<li>用于 OID (对象标识符)</li>
+</ol>
+</li>
+<li>NAMESPACE_X500_DN<ol>
+<li>用于 X.500 DN (目录名)</li>
+</ol>
 </li>
 </ol>
-<p>但是缺点也很明显：</p>
+<p>在 <code>uuid-creator</code> 工具中也对这些命名空间进行了封装，例如可以通过 <code>UuidNamespace.NAMESPACE_X500</code> 访问这些枚举类的属性。</p>
+<p>当然，我们也可以自定义一个 UUID（通常是 UUID v4）作为命名空间使用，例如：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">UUID namespace <span class="hljs-operator">=</span> UUID.randomUUID()<span class="hljs-comment">;  </span><br></code></pre></td></tr></table></figure>
+
+<p>其优点是：</p>
 <ol>
-<li><p>UUID 太长了，占用空间大。UUID 是 128 位，如果按字节（8 位）单位表示，是 16 字节；如果用十六进制字符（每个占 4 位）表示，则为 32 个字符；再加上 <code>-</code> 分隔符后，就是常见的 36 字符 UUID 字符串；</p>
+<li>可预测、可重现<ol>
+<li>适用于需要重复输入相同 UUID 的场景</li>
+</ol>
 </li>
-<li><p>不具备顺序性，插入数据库时会导致性能下降（尤其是在聚簇索引场景下）；</p>
+<li>基于标准 MD5 哈希算法，计算性能高</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>无序性（不可排序），不适合做数据库主键<ol>
+<li>产生索引碎片</li>
+<li>降低写入性能</li>
+<li>降低查询性能</li>
+<li>缓存效率低下</li>
+<li>增加存储空间</li>
+</ol>
 </li>
-<li><p>可读性差，不便于人工识别或排序。</p>
+<li>随机性较差<ol>
+<li>与 <code>UUID v4</code> 这种完全基于随机数生成的 UUID 相比，<code>UUID v3</code> 确实没有随机性</li>
+</ol>
+</li>
+<li>MD5 已被认为不够安全，容易发生碰撞<ol>
+<li>这里的 “碰撞” 是指输入不同的数据，经过哈希计算后，却会产生相同的哈希输出。</li>
+<li>如果两个不同的 “命名空间 + 名称” 组合经过 MD5 哈希后，产生了相同的 128 位哈希值，那么它们就会生成相同的<code>UUID v3</code></li>
+<li>虽然实际应用中遇到这种 “意外” 碰撞的概率极低，但MD5 的弱点使得它不再适合高安全要求的场景，例如授权码等</li>
+<li>如果对哈希安全性有要求，推荐使用 UUID v5（使用 SHA-1 哈希算法）</li>
+</ol>
 </li>
 </ol>
-<p>UUID 共有五个主要版本：</p>
+<p>Java UUID 标准库 <code>java.util.UUID</code> 默认不支持 v3，只支持 v4，我们可以使用第三方库 <code>uuid-creator</code>：添加 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.github.f4b6a3/uuid-creator">uuid-creator 依赖</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.f4b6a3<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>uuid-creator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>代码如下：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-keyword">class</span> UUIDV3 &#123;  <br>      <br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;  <br>  <br>        // 自定义 namespace（使用 <span class="hljs-type">UUID</span> V4 生成随机 <span class="hljs-type">UUID</span>）  <br>        <span class="hljs-type">UUID</span> namespace = <span class="hljs-type">UUID</span>.randomUUID();  <br>          <br>        <span class="hljs-type">UUID</span> uuidV3 = UuidCreator.getNameBasedMd5(namespace,&quot;example.com&quot;);  <br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(uuidV3);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-5-UUID-v4（常用）"><a href="#1-5-UUID-v4（常用）" class="headerlink" title="1.5. UUID v4（常用）"></a>1.5. UUID v4（常用）</h3><p>UUID v4 是完全基于高质量随机数（pseudo-random）生成的，可以理解为：UUID v4 &#x3D; 随机生成 122 位，然后在特定位置上添加版本位（固定为（0100）<sub>2</sub>）和变体位（使用的变体是 Variant 1，即RFC 4122 标准）</p>
+<p>其优点是：</p>
 <ol>
-<li><p>UUID v1</p>
-</li>
-<li><p>UUID v2</p>
-</li>
-<li><p>UUID v3</p>
-</li>
-<li><p>UUID v4（最常用）</p>
-</li>
-<li><p>UUID v5</p>
+<li>真正随机</li>
+<li>生成速度快</li>
+<li>无隐私泄露</li>
+<li>碰撞概率极低<ol>
+<li>想要碰撞一个 UUID v4，大约需要生成 2⁶⁴ 个 UUID 才有 50% 的概率碰撞上（生日驳论）</li>
+</ol>
 </li>
 </ol>
+<p>其缺点是：</p>
+<ol>
+<li>无序性（不可排序），不适合做数据库主键<ol>
+<li>产生索引碎片</li>
+<li>降低写入性能</li>
+<li>降低查询性能</li>
+<li>缓存效率低下</li>
+<li>增加存储空间</li>
+</ol>
+</li>
+</ol>
+<p>Java UUID 标准库 <code>java.util.UUID</code> 默认支持 v4，代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UUIDV4</span> &#123;  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;  <br>          <br>        UUID uuidV4 = UUID.randomUUID();  <br>        System.<span class="hljs-keyword">out</span>.println(uuidV4);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-6-UUID-v5"><a href="#1-6-UUID-v5" class="headerlink" title="1.6. UUID v5"></a>1.6. UUID v5</h3><p>UUID v5 与 UUID v3 类似，区别在于它使用更安全的 SHA-1 哈希算法，而不是 MD5。</p>
+<p>Java UUID 标准库 <code>java.util.UUID</code> 默认不支持 v5，只支持 v4，我们可以使用第三方库 <code>uuid-creator</code>：添加 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.github.f4b6a3/uuid-creator">uuid-creator 依赖</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.f4b6a3<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>uuid-creator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>代码如下：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-keyword">class</span> UUIDV5 &#123;  <br>  <br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;  <br>  <br>        // 自定义 namespace（使用 <span class="hljs-type">UUID</span> V4 生成随机 <span class="hljs-type">UUID</span>）  <br>        <span class="hljs-type">UUID</span> namespace = <span class="hljs-type">UUID</span>.randomUUID();  <br>  <br>        <span class="hljs-type">UUID</span> uuidV5 = UuidCreator.getNameBasedSha1(namespace,&quot;example.com&quot;);  <br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(uuidV5);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-7-UUID-v6"><a href="#1-7-UUID-v6" class="headerlink" title="1.7. UUID v6"></a>1.7. UUID v6</h3><p>UUID v6 是 UUID v1 的升级版，它采用了更现代、更有序、更注重隐私的方式生成基于时间的 UUID，特别适合用于数据库主键、日志追踪等需要顺序性的场景。  </p>
+<p>不过，现在我们有了功能更强、设计更先进的 UUID v7，因此这里就不再展开介绍 UUID v6。</p>
+<hr>
+<h3 id="1-8-UUID-v7（推荐）"><a href="#1-8-UUID-v7（推荐）" class="headerlink" title="1.8. UUID v7（推荐）"></a>1.8. UUID v7（推荐）</h3><p>UUID v7 是目前中<strong>最推荐</strong>的一种 UUID 版本，是为了适应现代系统而设计的 “新一代时间型 UUID”，基于 <strong>UNIX 时间戳（毫秒）+ 高随机性</strong>，兼顾 <strong>全局唯一、生成简单、支持排序、无隐私泄露</strong> 四大优势，其组成结构为：</p>
+<ol>
+<li>时间戳（48 位，精确到 ms）<ol>
+<li>v7 使用的时间戳是标准的 Unix 时间戳，从 1970-01-01 00:00:00 UTC 起开始</li>
+<li>精确到的单位是 ms，即每秒有 1000 个单位</li>
+</ol>
+</li>
+<li>版本位（4位）<ol>
+<li>固定为（0111）<sub>2</sub></li>
+</ol>
+</li>
+<li>毫秒内序列（12 位）<ol>
+<li>表示当前这一个毫秒内生成的是第几个 UUID</li>
+<li>2<sup>12</sup> &#x3D; 4096，可表示 0 → 4095，也就是说每毫秒支持 4096 个序列</li>
+</ol>
+</li>
+<li>变体位（2 位）<ol>
+<li>使用的变体是 Variant 1（RFC 4122 标准）</li>
+</ol>
+</li>
+<li>随机数（62 位）<ol>
+<li>加强唯一性</li>
+<li>即使系统时间回拨，或者毫秒内序列冲突，也能保证 UUID 的唯一性</li>
+</ol>
+</li>
+</ol>
+<p>其缺点是：</p>
+<ol>
+<li>对系统时钟准确性的隐式信任<ol>
+<li>虽然我们有 62 位随机数来保障 UUID 的唯一性，但如果系统时钟频繁且大幅度地不准确，可能会导致 UUID 的<strong>时间排序性不可靠</strong>，从而影响其在数据库索引中的性能表现</li>
+</ol>
+</li>
+</ol>
+<p>Java UUID 标准库 <code>java.util.UUID</code> 默认不支持 v7，只支持 v4，我们可以使用第三方库 <code>uuid-creator</code>：添加 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.github.f4b6a3/uuid-creator">uuid-creator 依赖</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.github.f4b6a3<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>uuid-creator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>代码如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">UUIDV7</span> &#123;  <br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] <span class="hljs-keyword">args</span></span>)</span> &#123;  <br>  <br>        UUID uuidV7 = UuidCreator.getTimeOrderedEpoch();  <br>        System.<span class="hljs-keyword">out</span>.println(uuidV7);  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
 <hr>
 
                 
