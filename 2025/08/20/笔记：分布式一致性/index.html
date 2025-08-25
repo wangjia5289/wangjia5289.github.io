@@ -1,0 +1,1155 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="分布式一致性概述分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：分布式一致性">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="分布式一致性概述分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg">
+<meta property="og:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png">
+<meta property="article:published_time" content="2025-08-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-23T03:34:36.116Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：分布式一致性 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：分布式一致性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-20 00:00" pubdate>
+          August 20, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          61 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：分布式一致性</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-08-23T11:34:36+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="分布式一致性概述"><a href="#分布式一致性概述" class="headerlink" title="分布式一致性概述"></a>分布式一致性概述</h2><p>分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：</p>
+<ol>
+<li>强一致性</li>
+<li>线性一致性</li>
+<li>顺序一致性</li>
+<li>因果一致性</li>
+<li>会话一致性</li>
+<li>最终一致性</li>
+</ol>
+<p>但是我们仅需要将其简单地划分为两大阵营：</p>
+<ol>
+<li>强一致性<ol>
+<li>任何时刻，所有客户端看到的都是相同且最新的数据</li>
+</ol>
+</li>
+<li>最终一致性<ol>
+<li>数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值</li>
+<li>最终一致性通常可以在我们人为干涉的情况下，达到一种看似强一致性的效果，这也被称为“伪强一致性”。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="复制协议概述"><a href="#复制协议概述" class="headerlink" title="复制协议概述"></a>复制协议概述</h2><p>我们可以把<strong>一致性</strong>看作系统的目标，而<strong>复制协议</strong>则是实现这一目标的手段，不同的复制协议会直接影响系统的一致性。</p>
+<p>需要注意的是，<strong>复制协议不仅仅是用来解决 “复制” 问题的，它既用于 “复制”，也用于 “写入”</strong>。这听起来像个悖论，但实际上，在分布式系统中，写入和复制本质上是同一操作的两个方面。因为一次成功的写入操作，其定义就是：数据在所有（或多数）副本上成功完成复制。</p>
+<p>我们可以把复制协议分成四个维度来理解：</p>
+<ol>
+<li>维度一：数据的同步时机<ol>
+<li>这个维度直接决定了我们的分布式系统提供强一致性还是最终一致性</li>
+<li>同步复制：提供强一致性<ol>
+<li>当主节点收到一个写入请求后，它必须等待<strong>所有&#x2F;大多数</strong>从节点都成功复制了数据，才能向客户端返回成功响应</li>
+<li>其优点是：<ol>
+<li>强一致性</li>
+<li>数据零丢失</li>
+</ol>
+</li>
+<li>其缺点是：<ol>
+<li>延迟高<ol>
+<li>如果一个从节点响应慢，整个写操作的响应时间会很长</li>
+</ol>
+</li>
+<li>可用性差<ol>
+<li>如果一个副本节点发生故障、网络中断，整个写操作可能无法进行</li>
+</ol>
+</li>
+<li>扩展性差<ol>
+<li>随着副本数量的增加，同步复制的延迟和故障的风险也会随之增加</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>异步复制：提供最终一致性<ol>
+<li>当主节点收到一个写入请求后，它立即向客户端返回成功响应，然后才在后台异步地将数据同步给从节点</li>
+<li>其优点是：<ol>
+<li>延迟低<ol>
+<li>主节点写入数据后，无需等待任何副本的确认就立即响应客户端，大大减少了写入操作的延迟</li>
+</ol>
+</li>
+<li>可用性高<ol>
+<li>即使一个或多个副本节点发生故障、网络中断，主节点也能继续处理写入请求，不会被阻塞</li>
+</ol>
+</li>
+<li>扩展性高<ol>
+<li>由于主节点不依赖副本的响应，因此可以轻松地添加更多的副本节点来分担读取压力，而不会对写入性能产生负面影响</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>其缺点是：<ol>
+<li>最终一致性<ol>
+<li>异步复制最大的缺点是它无法保证强一致性</li>
+</ol>
+</li>
+<li>数据丢失风险<ol>
+<li>由于主节点不等待副本确认，如果主节点在写入成功响应后立即发生故障，而数据还未来得及同步到任何一个副本，那么这部分数据就会永久丢失</li>
+<li>我们说：最终一致性通常可以在我们人为干涉的情况下（例如读写分离），达到一种看似强一致性的效果，这也被称为“伪强一致性”，但这并不能解决数据丢失的问题</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>半同步复制：折中方案<ol>
+<li>强一致性和最终一致性的折中方案，主节点在提交事务后，只等待<strong>至少一个从节点</strong>确认收到数据，就向客户端返回成功</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>维度二：数据的拓扑结构<ol>
+<li>这个维度决定了数据流动的方向，也就是谁负责写入，谁负责同步</li>
+<li>主从复制（单主复制）<ol>
+<li>系统中只有一个主节点，具有多个从节点</li>
+<li>客户端所有写请求都必须发到主节点，多个从节点负责同步数据</li>
+<li>客户端所有读请求既可以发到主节点也可以发到从节点</li>
+<li>在复杂系统中，可以对集群进行分区，使得不同分区拥有各自的主节点以及对应的从节点（例如 ES），这也被称之为分区主从</li>
+</ol>
+</li>
+<li>多主复制<ol>
+<li>在主从复制模式下，所有写入操作必须经由主库完成。一旦主库因故障或网络原因不可访问，写入就会受阻。为了解决这一瓶颈，人们提出了多主复制的方案，即允许多个主节点同时承担写入任务。</li>
+<li>根据节点间数据 “复制模式”（维度一）的不同，多主复制又可分为异步多主和同步多主。<ol>
+<li>异步多主<ol>
+<li>异步多主通常应用于多个数据中心场景。每个数据中心内部依旧采用常规的主从复制，但在不同数据中心的主节点上，可以同时写入同一份数据。随后，各个数据中心之间再进行异步的数据同步</li>
+<li>之所以称为 “异步多主”，是因为跨数据中心的数据传播大多依赖异步复制（例如 MySQL 环状复制）</li>
+</ol>
+</li>
+<li>同步多主<ol>
+<li>常用于单数据中心内的集群，每个节点彼此平等，都可以同时执行读写请求，不再需要永远固定的 “老大哥主节点”，这样能减少单点故障风险，实现较高的可用性或更严格的分布式事务</li>
+<li>之所以称为 “同步多主”，是因为一般通过同步复制来保证节点间的数据一致性，并且</li>
+<li></li>
+<li>起通常不满足于 quorum 机制、共识协议，而是采用分布式事务来保证每一个节点中的数据一致性</li>
+<li>需要注意的是，一个集群中节点平等并不自动意味着它一定实现了多主复制<ol>
+<li>如果具备分布式事务来保证一致性，就可称为多主复制（同步多主）</li>
+<li>如果缺乏事务协调机制，更准确的描述可能是“无主复制”</li>
+</ol>
+</li>
+<li>例如 RabbitMQ 的所有节点在架构上是对等的，在元数据写入时，执行写入的那个节点会临时充当 “主节点”（事务协调者，进行事务协调），启动一个分布式事务来确保所有节点一致。因此，RabbitMQ 在元数据写入方面，实际上符合同步多主的模式</li>
+<li>之所以不将这种方式归类为主从复制，是因为：<ol>
+<li>它不符合典型的 “主—从” 角色划分，不存在一个始终固定的主节点</li>
+<li>它不依赖单一主节点作为统一访问入口，而是允许任何节点在需要时接收请求</li>
+<li>每个节点都有可能在特定时刻临时充当主节点，本质上更接近“多个主节点”的模式</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>需要注意的是，多主复制面临的核心挑战在于写入冲突。由于系统中存在多个写入入口，就可能同时产生彼此矛盾的更新。例如，你在在线文档中输入 “项目将在本周五发布”，而同事几乎同时写下 “项目将在下周一发布”。这类冲突必须通过机制来检测、处理或避免，才能保证数据一致性。</li>
+</ol>
+</li>
+<li>无主复制<ol>
+<li>集群中不存在 “主从” 之分，所有节点地位对等、功能相同，每个节点都可直接执行写入操作，其他节点负责同步数据</li>
+<li>无主复制本质上不强制依赖 quorum（多数派）机制，但在工程实践中，为了保证读写结果的正确性和可预期性，几乎都会配合 quorum 来控制一致性<ol>
+<li>quorum 的核心规则是：若满足 <code>R + W &gt; N</code>，则读操作必然会命中至少一个包含最新写入的副本</li>
+<li>N &#x3D; 副本总数</li>
+<li>W &#x3D; 写请求需要确认的副本数</li>
+<li>R &#x3D; 读请求需要确认的副本数</li>
+</ol>
+</li>
+<li>因此，无主复制并非绑定在某一种 “复制模式”（维度一）上<ol>
+<li>W 较大：同步复制</li>
+<li>W ≥ 2：半同步复制</li>
+<li>W &#x3D; 1：异步复制</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>维度三：数据的同步方式<ol>
+<li>这个维度决定了数据同步的手段</li>
+<li>底层技术<ol>
+<li>基于日志复制<ol>
+<li>不直接同步数据本身，而是同步引起数据变化的、确定性的<strong>操作指令 (Command&#x2F;Operation)</strong></li>
+<li>所有副本都以完全相同的顺序执行这些指令，从而达到一致的状态。基于日志是状态机复制理论的直接体现</li>
+<li>主节点在执行写入操作时，会将变更顺序地记录到日志中</li>
+<li>从节点通过拉取这些日志条目并按顺序回放，来重建数据状态</li>
+</ol>
+</li>
+<li>基于状态同步<ol>
+<li>状态转移<ol>
+<li>主节点直接把 “最终状态” 发送给从节点，用新的状态整体覆盖旧内容（可能是全部状态，也可能仅是需要被覆盖的部分状态）</li>
+<li>例如字符串从 Hello ➔ Hello World，主节点不会发“请追加 World”，而是直接把完整的 Hello World 状态传输过去。</li>
+<li>再例如 MySQL 中，修改后的数据页会替换掉硬盘上的旧数据页，这就是最纯粹的状态转移。</li>
+<li>与快照不同的是，状态转移是每一轮同步的基本方式，而快照更像是一种辅助优化（例如每隔 5 秒才做一次），并非每次都用。</li>
+</ol>
+</li>
+<li>状态合并<ol>
+<li>例如在 A 节点上点了 5 次赞（结果 105），在 B 节点上又点了 8 次赞（结果 108）。</li>
+<li>如果用状态转移方式，A 把 105 发给 B，B 把 108 发给 A，会造成冲突，导致增量信息丢失</li>
+<li>改为传递 “状态合并”，即 A 记录并发送“我增加了 5 个赞”，B 记录并发送“我增加了 8 个赞”。这样合并后，大家都得到正确的 113</li>
+<li>状态合并的优势在于与同步顺序无关，只要变更被正确传播，最终状态就是一致的</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基于请求转发（消息广播）<ol>
+<li>这是最简单也最危险的方式，直接将客户端发来的**原始请求 (Raw Request)**，原封不动地转发给所有副本，期望大家独立执行后能得到相同的结果</li>
+<li>然而，如果请求中包含诸如 <code>timestamp()</code> 或 <code>random()</code> 这样的非确定性操作，各节点独立执行时就可能得到不同结果，从而产生状态分歧，直接破坏强一致性。</li>
+<li>此外，如果请求的执行逻辑依赖于节点当前已有的状态，而这些状态在不同节点上并不完全相同，那么即使是同一个请求，也可能得出不同结果，依旧存在一致性风险</li>
+</ol>
+</li>
+<li>基于快照 + 增量同步<ol>
+<li>快照，简单来说，就是把某个时间点之前<strong>所有历史操作执行后的最终状态</strong>记录下来，而不是在日志中逐条保存这些操作。</li>
+<li>当本地生成快照后，就可以删除旧日志以释放磁盘空间。但在一些更严谨的系统中，通常会等到快照成功同步到大多数节点之后，才会删除旧日志（或者先归档到冷存储，以防万一）</li>
+<li>增量同步则相对简单，可以基于前面提到的日志复制、状态同步、请求转发等方式来实现</li>
+<li>因此，“快照 + 增量同步” 可以看作其他方式的<strong>增强机制</strong>：快照负责 “快速赶上旧账”，增量负责 “实时保持跟进”，两者结合既提高了效率，又兼顾了可靠性</li>
+<li>使用快照的典型场景：<ol>
+<li>新节点首次加入时，直接加载快照，再拉取最新增量；</li>
+<li>节点宕机过久，错过了太多日志，且这些日志已被清理，只能重新加载快照恢复。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>实现方式<br> 1. </li>
+<li>需要注意的是，这些都是底层的技术，无论是采用 ACK 阈值、共识协议还是采用分布式事务，他们的底层技术实现就是采用的这些方式</li>
+</ol>
+</li>
+<li>维度四：数据的组织方式<ol>
+<li>这个维度决定了数据是作为整体存放在某一个节点&#x2F;位置内，还是被拆分后分布在多个节点&#x2F;位置保存。</li>
+<li>整体保存<ol>
+<li>数据完整地保存在某一个节点&#x2F;位置上</li>
+</ol>
+</li>
+<li>数据拆分<ol>
+<li>分库</li>
+<li>分表</li>
+<li>分片<ol>
+<li>例如 Minio 在存储对象时，会将其切割成若干块，并在多个节点&#x2F;磁盘上进行分布保存。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>需要注意的是，如果我们采用 quorum机制、共识协议（如 Paxos&#x2F;Raft），通常只要求大多数从节点完成数据复制后即可返回响应；但如果我们使用分布式事务，这种方式则要求更严格，往往必须等到所有从节点都成功复制数据后才确认响应（常见同步复制的实现有：基于 ACK 阈值、基于共识协议、基于分布式事务）</p>
+<hr>
+<h2 id="Paxos-协议"><a href="#Paxos-协议" class="headerlink" title="Paxos 协议"></a>Paxos 协议</h2><hr>
+<h2 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h2><h3 id="Raft-协议概述"><a href="#Raft-协议概述" class="headerlink" title="Raft 协议概述"></a>Raft 协议概述</h3><p>Raft 协议是一个强一致性协议，在三个维度上的选择如下：</p>
+<ol>
+<li>维度一：同步复制</li>
+<li>维度二：主从复制</li>
+<li>维度三：基于日志的复制<ol>
+<li>从 Raft 协议的设计来看，本质是基于日志的复制。只要日志可以无限增长，并且新加入的节点能够完整同步所有历史日志，Raft 就能正常工作。</li>
+<li>但在真实实现中，几乎不会只依赖日志复制，而是采用 <strong>快照 + 增量同步</strong> 的方式。这么做是因为：<ol>
+<li>存储空间有限：<ol>
+<li>志会随着集群的持续运行不断追加，如果不做处理，最终会耗尽存储</li>
+</ol>
+</li>
+<li>同步耗时过长：<ol>
+<li>新加入的节点，如果从零开始，需要从第一个日志条目起依次同步。</li>
+<li>长时间宕机的节点，也必须从其停机点之后的日志开始追赶。</li>
+<li>你想一想，如果系统写入量很大，比如数据库每秒产生 1,000 条写入，每条日志 1KB，那么每秒就是 1MB，一天就是 <strong>86.4GB</strong>，仅仅传输日志就会成为严重瓶颈。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="Raft-协议核心角色"><a href="#Raft-协议核心角色" class="headerlink" title="Raft 协议核心角色"></a>Raft 协议核心角色</h3><p><font color="#92d050">1. Follower（跟随者，默认）</font><br>Follower 是集群中的默认角色，主要职责包括：</p>
+<ol>
+<li>不直接处理客户端的写请求</li>
+<li>等待并执行 Leader 的指令</li>
+<li>接收并持久化 Leader 的日志复制</li>
+<li>响应 Leader 的心跳，如在超时未收到心跳，则转换为 Candidate 发起选举</li>
+</ol>
+<p><font color="#92d050">2. Candidate（候选者）</font><br>Candidate 是竞选 Leader 的临时角色，主要职责包括：</p>
+<ol>
+<li>当 Follower 长时间未收到 Leader 心跳时，会转为 Candidate，并向其他节点发起 <code>RequestVote</code> 请求以争取选票<ol>
+<li>若赢得多数选票，则晋升为 Leader</li>
+<li>若选举失败，则可能再次进入 Candidate 状态，或回退为 Follower</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">3. Leader（领导者）</font><br>Leader 是集群中<strong>唯一负责处理写请求</strong>并向 Follower 复制日志的角色，整个集群在任意时刻最多只有一个 Leader。主要职责包括：</p>
+<ol>
+<li>接收并处理客户端的写入请求</li>
+<li>定期向 Follower 发送心跳以维持领导地位</li>
+<li>将日志复制到各 Follower 节点并确保数据一致性</li>
+</ol>
+<hr>
+<h3 id="Raft-协议核心流程"><a href="#Raft-协议核心流程" class="headerlink" title="Raft 协议核心流程"></a>Raft 协议核心流程</h3><p><font color="#92d050">1. Raft 启动与第一次选举 Leader</font><br>启动时，所有节点默认处于 Follower 状态，term 初始为 0，并各自设置一个 150–300ms 之间的随机选举超时时间。如果在超时时间内未收到来自 Leader 的心跳信号，该节点将从 Follower 状态切换为 Candidate，将 term 加 1，发起第一轮选举</p>
+<p>一旦某个 Candidate 获得的票数超过半数（即 &gt; N&#x2F;2，这里的 N 指的是集群中的所有节点数，而非存活节点数，因此无需担心宕机会影响选票），就会当选为 Leader。这里有两个关键点需要注意：</p>
+<ol>
+<li>选举必须赢得多数票<ol>
+<li>这一机制有效防止了脑裂问题，因为在网络分区时，只有一方能获得多数，从而成为唯一的 Leader</li>
+</ol>
+</li>
+<li>建议集群节点数为奇数<ol>
+<li>这样可以避免选举时多个 Follower 平票的情况，提高选举成功率</li>
+<li>若没有任何一个 Candidate 获得多数票，则本轮选举失败。各节点会等待各自的选举超时器再次超时，随后将 term 再增加 1，并发起新一轮选举</li>
+</ol>
+</li>
+</ol>
+<p>若某个 Candidate 当选为 Leader，会立即向其他节点发送心跳信号。其他节点一旦收到来自新 Leader 的心跳，便会自动 “认输”，切换回 Follower 状态</p>
+<p>这个全局递增的 <code>term</code>，可以理解为 “当前是第几届村长执政”。每个节点都会保存一个本地的 <code>term</code>，谁的 <code>term</code> 高，谁就拥有更高的优先级，从而避免 “过时的村长” 重新掌权</p>
+<p><font color="#92d050">2. 数据写入与复制</font><br>Leader 负责整个系统的读写操作（由 Leader 负责读取，是为了避免脏读），这种设计虽然保证了强一致性，但也将压力集中在了 Leader 节点。</p>
+<p>当 Leader 接受到一个写入请求后，会创建一个新的日志条目，Raft 要求包含当前的日志条目的索引号、当前任期号、客户端具体操作命令，例如：</p>
+<table>
+<thead>
+<tr>
+<th>索引 (Index)</th>
+<th>任期 (Term)</th>
+<th>命令 (Command)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td><code>set(&quot;name&quot;, &quot;Alice&quot;)</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td><code>set(&quot;age&quot;, &quot;30&quot;)</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td><code>increment(&quot;counter&quot;)</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td><code>set(&quot;city&quot;, &quot;New York&quot;)</code></td>
+</tr>
+</tbody></table>
+<p>Leader 首先会将该日志条目追加到本地日志中，常见的实现方式包括：</p>
+<ol>
+<li>文件追加模式<ol>
+<li>这是最常见、最直观的方式，每个节点维护一个专用日志文件，新生成的日志条目会简单地追加到文件末尾</li>
+<li>通常采用分段存储，当日志文件过大时，会开启新的文件，有助于后续的日志压缩与清理</li>
+<li>多数实现会使用 WAL（Write-Ahead Log）机制，先将日志写入磁盘，再应用到内存中的状态机，以确保系统崩溃后日志仍然可恢复</li>
+</ol>
+</li>
+<li>基于键值对存储<ol>
+<li>某些实现会选择使用键值存储保存日志条目，其中索引号作为键，日志内容作为值</li>
+<li>这种方式支持快速随机访问，且管理相对灵活</li>
+</ol>
+</li>
+</ol>
+<p>然后，Leader 并行地向所有 Follower 发送 <code>AppendEntries</code> RPC，请求它们复制这个新的日志条目，然后我们就进入 Raft 设计最精妙的地方：一致性检查：</p>
+<ol>
+<li>在 <code>AppendEntries</code> RPC 中，Leader 不仅会带上新的日志条目，还会附带新日志条目前一个日志的索引 (prevLogIndex) 和任期 (prevLogTerm)</li>
+<li>Follower 收到请求后，会检查自己本地日志在 <code>prevLogIndex</code> 位置的条目，看其任期是否与 <code>prevLogTerm</code> 匹配<ol>
+<li>如果匹配<ol>
+<li>说明日志到此为止都是一致的，Follower 会安全地将新的日志条目追加到自己的日志中，并向 Leader 回复成功</li>
+</ol>
+</li>
+<li>如果不匹配<ol>
+<li>说明 Follower 的日志在此处与 Leader 有分歧，Follower 会拒绝该请求</li>
+<li>当 Leader 收到 Follower 拒绝的响应后，它会向前回溯，找到与该 Follower 的日志共同的、一致的那个点，然后从该点开始，将后续的所有日志条目重新发送给 Follower，强制覆盖掉不一致的部分。</li>
+<li>Raft 协议是让我们使用日志进行记录，即便是刚上任的 Leader，也能够向前回溯，因为在投票前，节点会先检查候选人的日志是否至少和自己一样新，才会投票</li>
+<li>但是在大多数情况下，我们其实还是会使用快照，如果我们使用了快照，我们最多也只能回溯到快照处，如果发现需要回溯到比这个快照更造，那就会判断 Follower 的日志是严重落后（Follower 长期下线、新节点加入）</li>
+<li>在这种情况下，Leader 不会再尝试逐条回溯并同步日志，而是直接向这个 Follower 发送一个快照（这比回溯和同步大量的旧日志要高效得多）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>所以一个典型的 <code>AppendEntries</code> RPC 包含以下关键字段：<ol>
+<li>leaderId<ol>
+<li>Leader 的节点 ID</li>
+<li>用于 Follower 响应客户端请求时的重定向，它可以告诉客户端 “去找这个 Leader”</li>
+</ol>
+</li>
+<li>term<ol>
+<li>Leader 的当前任期号</li>
+<li>Follower 收到 <code>AppendEntries</code> RPC 后，会首先检查这个 <code>term</code><ol>
+<li>如果 <code>term</code> 小于自己的任期号，说明这个 Leader 是一个 “过时” 的 Leader，Follower 会拒绝这个 RPC，并告知它当前的正确任期，促使它下台</li>
+<li>如果 <code>term</code> 大于或等于自己的任期号，Follower 会接受这个 RPC，并更新自己的任期号。这是 Raft 确保集群中所有节点都在同一个 “时代” 工作的基本机制</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>prevLogIndex<ol>
+<li>新日志条目前一个条目的索引号</li>
+<li>Follower 收到后，会检查自己的日志中是否存在索引号为 <code>prevLogIndex</code> 的日志条目</li>
+</ol>
+</li>
+<li>prevLogTerm<ol>
+<li>新日志条目前一个条目的任期号</li>
+<li>与 <code>prevLogIndex</code> 配合使用，提供一个双重校验，Follower 不仅要检查自己的日志中是否存在 <code>prevLogIndex</code> 处的条目，还要确保这个条目的任期号与 <code>prevLogTerm</code> 完全一致</li>
+<li>如果两者都匹配，那么 Leader 和 Follower 的日志在这一点上就是一致的，可以安全地进行追加。如果不匹配，则说明日志存在分歧，需要进行修复。</li>
+</ol>
+</li>
+<li>entries<code>[]</code><ol>
+<li>要复制的日志条目数组</li>
+<li>Leader 要同步给 Follower 的新日志条目，通常只包含一个新条目，但在日志修复或优化时，也可能包含多个</li>
+</ol>
+</li>
+<li>leaderCommit<ol>
+<li>Leader 节点已提交的最高日志条目的索引号</li>
+<li>当 Leader 收到大多数 Follower 对某个日志条目（比如索引号为 10）的成功复制响应时，它会立即更新自己的 <code>commitIndex</code> 为 10，并将该条目应用到自己的状态机中。</li>
+<li>Leader 会在下一次发送的 <code>AppendEntries</code> RPC（无论是新的日志条目还是心跳）中，携带这个更新后的 <code>leaderCommit = 10</code>。</li>
+<li>Follower 收到这个 RPC 后，才会将自己的 <code>commitIndex</code> 更新为 10，并且如果发现自己的日志中，索引小于或等于 <code>leaderCommit</code> 的条目还没被提交，它就会将这些条目标记为已提交</li>
+<li>一旦日志条目被标记为已提交，Follower 就可以将其安全地应用到自己的状态机（state machine）中，从而更新自己的状态</li>
+<li>所以我们知道了，Follower 收到日志后，只是将其<strong>持久化</strong>到本地，但不会立即执行，而是等 Leader 的下一次指令，这是为什么呢？这是因为只有 Leader 才有权决定一个日志条目是否已提交，Follower 必须被动地等待 Leader 的提交指令。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>当 Leader 发现<strong>超过半数</strong>的 Follower 都已成功复制了某条日志后，该日志条目就被认为是 “已提交” (Committed) 的，它会立即更新自己的 <code>commitIndex</code> ，然后将该日志中的命令应用到自己的状态机，并向客户端返回成功</p>
+<p>Leader 在后续的心跳中会通知所有 Follower 哪些日志已经被提交（心跳会发送不包含任何日志条目的 <code>AppendEntries</code> RPC），Follower 收到通知后也将相应的命令应用到自己的状态机</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>你可能会疑惑，当 Leader 发现 <strong>超过半数</strong> 的 Follower 已成功复制某条日志时，该日志就被视为 <strong>已提交（Committed）</strong>。此时，Leader 会立即更新自己的 <code>commitIndex</code>，并将该日志中的命令应用到状态机。但是在极端情况下，若 Leader 尚未来得及发送下一次心跳，Follower 还未更新自己的 <code>commitIndex</code>、也未执行该日志时，Leader 突然宕机。此时会触发新一轮选举，新的 Leader 当选后，会不会因为部分 Follower 尚未执行这条日志而产生影响呢？</li>
+<li>新 Leader 上任后，其 <code>commitIndex</code> 可能暂时停留在日志条目 A 之前的某个索引，此时它不会立即将日志条目 A 标记为已提交。</li>
+<li>因为根据 Raft 的提交规则：<ol>
+<li>本任期的日志<ol>
+<li>Leader 必须将日志复制到多数节点后才能提交</li>
+</ol>
+</li>
+<li>前任期的日志<ol>
+<li>Leader 需要先在本任期提交一个后续日志条目，才能一次性将之前的日志条目标记为已提交</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如果系统在此时没有新的写操作，那么自然不会产生新的日志条目。为了解决这个问题，Raft 规定：新 Leader 选举成功后，会立即在自己的日志中追加一个 no-op 日志条目，这个条目是本任期的第一个操作。</li>
+<li>在提交这个 no-op 条目之前，Leader 会先执行该条目之前未提交的所有日志，确保它们被正确应用；然后再提交并执行这个 no-op 条目，从而完成本任期的初始化。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">3. Leader A 宕机</font><br>假设集群中已经经过几次选举了，此时 A 是当前的 Leader（term&#x3D;10），定期向 B、C、D、E 发送心跳信号。而如果 A 宕机后，B、C、D、E 都不再收到心跳信号，触发各自的选举超时定时器（150–300 ms 随机）</p>
+<ol>
+<li>假如 B 最先超时未收到心跳<ol>
+<li>B 超时在先（如 180 ms），检测到未收到心跳，便将 <code>term</code> 从 10 增加到 11，变为 Candidate。B 立即给自己投票（票数&#x3D;1），并向 C、D、E 以及已掉线的 A 广播 <code>RequestVote(term=11, candidateId=B, lastLog…)</code>。</li>
+<li>C、D、E 收到 B 的请求后，发现请求中的 term&#x3D;11 比自己当前的 term&#x3D;10 更新，便更新 term → 11，切回 Follower 身份，<strong>检查 B 的日志无落后后</strong>，投票给 B。</li>
+<li>B 收到来自 C 和 D 的投票（B 自己 + C + D &#x3D; 3 票），满足多数要求，成功当选为新 Leader（term&#x3D;11）。</li>
+<li>B 立即向其他活跃节点（C、D、E）以及离线的 A 发送心跳 <code>AppendEntries(term=11)</code>。C、D、E 收到后重置选举定时器，保持 Follower 状态；</li>
+<li>如果 A 之后恢复上线，它将收到 B 的心跳 RPC，并发现 term&#x3D;11 比自己的 term&#x3D;10 更新，于是更新自己的 term → 11，退回 Follower 状态，放弃原先的 Leader 身份。这样保证：一个处于旧 term 的节点无法参与当前任期的投票或发起选举，只有“意识到要进入新一届”的节点才能重新参选。</li>
+</ol>
+</li>
+<li>假如 B、C 几乎同时超时未收到心跳<ol>
+<li>若 B 和 C 的选举超时非常接近（如均为 180 ms 左右），两者几乎同时将 term 从 10 升为 11，变为 Candidate，并向其余节点广播 <code>RequestVote(term=11)</code>（B 向 A、C、D、E 发，C 向 A、B、D、E 发）。</li>
+<li>假设 D 先收到 B 的请求，检查通过后将票投给 B，并更新 term → 11。</li>
+<li>同时，E 先收到 C 的请求，也检查通过并投票给 C，更新 term → 11。</li>
+<li>当 B 收到来自 C 的 <code>RequestVote(term=11)</code> 请求时，B 发现自己在当前 term（11）中已将票投给自己，因此拒绝给 C 投票。C 也是同理（只能投一次，投给自己就没办法投给别人了）</li>
+<li>B 最终得票为自己 + D &#x3D; 2，C 得票为自己 + E &#x3D; 2，均未获得多数 → <strong>选票分裂（split vote）</strong>，本轮选举失败。</li>
+<li>B、C、D、E 的选举超时器重新启动，等待下一轮触发。再次进入超时的节点将把 term 增加到 12 并发起新一轮选举，如此循环，直到有人获得多数票成功当选。term 会随着失败轮次不断累加。</li>
+</ol>
+</li>
+</ol>
+<p>由于会检查日志是否落后之后再去投票，而且 Raft 协议还是多数成功，就直接杜绝了日志落后的节点“混进多数”并被选为 Leader 的可能性。</p>
+<p><font color="#92d050">4. A 节点恢复</font><br>A 节点重启后，term 仍是 10。当它收到新 Leader（如 D）发来的心跳 <code>AppendEntries</code> RPC 中 term&#x3D;11 后，立刻发现对方的 term 更新，于是更新自己的 term → 11，退回 Follower 身份，并且进行日志同步，重新与集群保持一致。<br><img src="/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h2><hr>
+<h2 id="Multi-Paxos-协议"><a href="#Multi-Paxos-协议" class="headerlink" title="Multi-Paxos 协议"></a>Multi-Paxos 协议</h2><hr>
+<h2 id="EPaxos-协议"><a href="#EPaxos-协议" class="headerlink" title="EPaxos 协议"></a>EPaxos 协议</h2><hr>
+<h2 id="Atlas-协议"><a href="#Atlas-协议" class="headerlink" title="Atlas 协议"></a>Atlas 协议</h2><hr>
+<h2 id="RIFL-协议"><a href="#RIFL-协议" class="headerlink" title="RIFL 协议"></a>RIFL 协议</h2><hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/" class="category-chain-item">分布式一致性</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：分布式一致性</div>
+      <div>https://wangjia5289.github.io/2025/08/20/笔记：分布式一致性/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 20, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/" title="笔记：RabbitMQ">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：RabbitMQ</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/19/%E6%96%B9%E6%B3%95%EF%BC%9AFileChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" title="方法：FileChannel 常用方法">
+                        <span class="hidden-mobile">方法：FileChannel 常用方法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

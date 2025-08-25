@@ -1,0 +1,1180 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、导图  二、Minio 基础BucketBucket 概述Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹  Bucket 生命周期其实，更准确地说，这个操作是针对 Object 生命周期的设置，但从操作维度上来看，它仍归类为 Bucket 生命周期。 需要特别注意的是，Bucket 生命周期配置和 Bucket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Minio">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、导图  二、Minio 基础BucketBucket 概述Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层文件夹  Bucket 生命周期其实，更准确地说，这个操作是针对 Object 生命周期的设置，但从操作维度上来看，它仍归类为 Bucket 生命周期。 需要特别注意的是，Bucket 生命周期配置和 Bucket">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-1.xmind">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-6.png">
+<meta property="article:published_time" content="2025-08-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-17T15:00:29.415Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-1.xmind">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Minio - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Minio"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-12 00:00" pubdate>
+          August 12, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Minio</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-08-17T23:00:29+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、导图"><a href="#一、导图" class="headerlink" title="一、导图"></a>一、导图</h1><p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-1.xmind" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="二、Minio-基础"><a href="#二、Minio-基础" class="headerlink" title="二、Minio 基础"></a>二、Minio 基础</h1><h2 id="Bucket"><a href="#Bucket" class="headerlink" title="Bucket"></a>Bucket</h2><h3 id="Bucket-概述"><a href="#Bucket-概述" class="headerlink" title="Bucket 概述"></a>Bucket 概述</h3><p>Bucket 是存储 Object 的逻辑空间，每个 Bucket 之间的数据是相互隔离的，对用户而言，相当于存放文件的顶层<strong>文件夹</strong></p>
+<hr>
+<h3 id="Bucket-生命周期"><a href="#Bucket-生命周期" class="headerlink" title="Bucket 生命周期"></a>Bucket 生命周期</h3><p>其实，更准确地说，这个操作是针对 Object 生命周期的设置，但从操作维度上来看，它仍归类为 Bucket 生命周期。</p>
+<p>需要特别注意的是，Bucket 生命周期配置和 Bucket 自定义访问策略一样，<strong>都是整体性的配置</strong>，每次设置都会<strong>覆盖之前的所有规则</strong>。我们可以通过 SDK 为指定的 Bucket 配置生命周期策略：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketLifecycle&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketLifecycle</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName, <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">LifecycleConfiguration</span> lifecycleConfigurationXml</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketLifecycle</span>(<br>				<span class="hljs-title class_">SetBucketLifecycleArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(lifecycleConfigurationXml) <span class="hljs-comment">// 传入 LifecycleConfigutation 类型的 Bucket 生命周期</span><br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 生命周期设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶生命周期失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里我们需要传入 XML 格式的配置，客户端请求体示例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">LifecycleConfiguration</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://s3.amazonaws.com/doc/2006-03-01/&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-temp-files<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>temp/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>7<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>expire-logs<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>logs/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>90<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Rule</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">ID</span>&gt;</span>delete-old-versions<span class="hljs-tag">&lt;/<span class="hljs-name">ID</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Status</span>&gt;</span>Enabled<span class="hljs-tag">&lt;/<span class="hljs-name">Status</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>archive/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Rule</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">LifecycleConfiguration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. LifecycleConfiguration</font><br>根标签，表示这是生命周期配置文件，xmlns 指定了该 XML 遵循 S3 生命周期配置的标准格式。</p>
+<p><font color="#92d050">2. ID</font><br>规则（Rule）的唯一标识，用于管理区分，长度最多支持 255 个字符。</p>
+<p><font color="#92d050">3. Statue</font><br>用于启用或禁用该条规则，可选值包括：</p>
+<ol>
+<li>Enabled</li>
+<li>Disabled</li>
+</ol>
+<p><font color="#92d050">4. Filter</font><br>用于设置对象的过滤条件，从而精确控制生命周期规则的应用对象。常见选项包括：</p>
+<ol>
+<li>Prefix<ol>
+<li>指定对象键名前缀，匹配所有以该前缀开头的对象。</li>
+<li>例如 <code>&lt;Prefix&gt;temp/&lt;/Prefix&gt;</code> 表示匹配所有以 <code>temp/</code> 开头的对象。</li>
+</ol>
+</li>
+<li>And<ol>
+<li>用于组合多个过滤条件，通常结合前缀（Prefix）和标签（Tag）共同生效。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Filter</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">And</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Prefix</span>&gt;</span>log/<span class="hljs-tag">&lt;/<span class="hljs-name">Prefix</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>env<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>dev<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Tag</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Key</span>&gt;</span>type<span class="hljs-tag">&lt;/<span class="hljs-name">Key</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">Value</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">Value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">Tag</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">And</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Filter</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>标签（Tag）是对象上的，而不是 Bucket 上的</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">5. Expiration</font><br>用于设置对象的过期策略，当对象达到指定时间后将被自动删除</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml">// 1. 对象创建后，指定天数过期<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Days</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">Days</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br><br><br>// 2. 在固定日期后过期，必须使用符合 ISO 8601 标准的时间格式（这里表示对象将在 2025 年 12 月 31 日 00:00:00.000（UTC 时间）过期并被删除）<br><span class="hljs-tag">&lt;<span class="hljs-name">Expiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">Date</span>&gt;</span>2025-12-31T00:00:00.000Z<span class="hljs-tag">&lt;/<span class="hljs-name">Date</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Expiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. NoncurrentVersionExpiration</font><br>适用于<strong>开启版本控制的 Bucket</strong>，当对象成为旧版本后，在指定天数内自动删除该旧版本。只支持 <code>&lt;NoncurrentDays&gt;</code> 设置天数：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">NoncurrentDays</span>&gt;</span>30<span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentDays</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">NoncurrentVersionExpiration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">7. AbortIncompleteMultipartUpload</font><br>用于自动清理<strong>未完成的分片上传任务</strong>，从分片上传发起时间算起，超过指定天数后自动终止，避免浪费存储空间。只支持 <code>&lt;DaysAfterInitiation&gt;</code> 设置天数：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">DaysAfterInitiation</span>&gt;</span>3<span class="hljs-tag">&lt;/<span class="hljs-name">DaysAfterInitiation</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AbortIncompleteMultipartUpload</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Bucket-自定义访问策略"><a href="#Bucket-自定义访问策略" class="headerlink" title="Bucket 自定义访问策略"></a>Bucket 自定义访问策略</h3><p>Bucket 内置策略是 MinIO 提供的简化权限控制方式之一，但我们也可以通过自定义 JSON 实现更细粒度、更复杂的访问控制逻辑。需要注意的是，Bucket 策略采用覆盖式配置，即每次设置都会替换上一次的策略内容，因此同一时间只能存在一个生效策略。</p>
+<p>当请求为不带凭证的匿名访问时，系统只会依据 Bucket 策略来判断是否允许操作。而对于带有凭证的认证请求，则会<strong>先检查用户策略</strong>，再检查<strong>对应的 Bucket 策略</strong>，<strong>两者必须同时允许</strong>，请求才会被执行。正因为这种双重判断机制，就可能出现这样一种情况：匿名用户可以访问某对象，但认证用户因用户策略未授权而无法访问相同资源。</p>
+<p>我们一般通过 MinIO SDK 为指定的 Bucket 设置自定义策略：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketPolicy&quot;</span>)<br><span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketPolicy</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName, <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">String</span> policyJson</span>) &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		minioClient.<span class="hljs-title function_">setBucketPolicy</span>(<br>				<span class="hljs-title class_">SetBucketPolicyArgs</span>.<span class="hljs-title function_">builder</span>()<br>						.<span class="hljs-title function_">bucket</span>(bucketName)<br>						.<span class="hljs-title function_">config</span>(policyJson)<br>						.<span class="hljs-title function_">build</span>()<br>		);<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 策略设置成功&quot;</span>;<br>	&#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶策略失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这里需要传入完整的 JSON 策略，示例请求体格式如下：</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<br>  <span class="hljs-string">&quot;Version&quot;</span>: <span class="hljs-string">&quot;2012-10-17&quot;</span>,<br>  <span class="hljs-string">&quot;Statement&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;Effect&quot;</span>: <span class="hljs-string">&quot;Allow&quot;</span>,<br>      <span class="hljs-string">&quot;Principal&quot;</span>: &#123;<span class="hljs-string">&quot;AWS&quot;</span>: [<span class="hljs-string">&quot;*&quot;</span>]&#125;,<br>      <span class="hljs-string">&quot;Action&quot;</span>: [<span class="hljs-string">&quot;s3:GetObject&quot;</span>],<br>      <span class="hljs-string">&quot;Resource&quot;</span>: [<span class="hljs-string">&quot;arn:aws:s3:::your-bucket-name/*&quot;</span>]<br>    &#125;<br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. Version</font><br>表示 Bucket 策略语法的版本，目前写 <code>&quot;2012-10-17&quot;</code> 是标准写法</p>
+<p><font color="#92d050">2. Effect</font><br>表示我们写的这个策略是允许还是禁止，可选值有：</p>
+<ol>
+<li>Allow</li>
+<li>Deny</li>
+</ol>
+<p><font color="#92d050">3. Principal</font><br>指定哪些用户可以执行或拒绝执行某些操作，常见的 <code>Principal</code> 取值包括：</p>
+<ol>
+<li>* <ol>
+<li>表示所有用户，包括匿名用户和认证用户</li>
+</ol>
+</li>
+<li>user-arn<ol>
+<li>表示具体某个用户的用户名，用于精确控制该用户的权限</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>AWS 是指用户</li>
+<li>是可以执行还是拒绝执行，取决于策略中的 <code>Effect</code> 字段：若为 <code>Allow</code>，表示允许执行相应操作；若为 <code>Deny</code>，则表示明确禁止执行。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">4. Action</font><br>用于指定允许或拒绝执行的具体操作，常见操作包括：</p>
+<ol>
+<li>Bucket 级操作：<ol>
+<li>s3:ListBucket<ol>
+<li>列出桶中的对象列表</li>
+</ol>
+</li>
+<li>s3:GetBucketLocation<ol>
+<li>获取桶的所属区域（Region）信息</li>
+</ol>
+</li>
+<li>s3:ListBucketMultipartUploads<ol>
+<li>查看该桶中正在进行的多部分（分片）上传任务</li>
+</ol>
+</li>
+<li>s3:GetBucketPolicy<ol>
+<li>查看桶的访问策略</li>
+</ol>
+</li>
+<li>s3:PutBucketPolicy<ol>
+<li>设置桶的访问策略</li>
+</ol>
+</li>
+<li>s3:DeleteBucketPolicy<ol>
+<li>删除桶的访问策略</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Object 级操作：<ol>
+<li>s3:GetObject<ol>
+<li>下载对象</li>
+</ol>
+</li>
+<li>s3:PutObject<ol>
+<li>上传对象</li>
+</ol>
+</li>
+<li>s3:DeleteObject<ol>
+<li>删除对象</li>
+</ol>
+</li>
+<li>s3:AbortMultipartUpload<ol>
+<li>取消一个正在进行的分片上传任务</li>
+</ol>
+</li>
+<li>s3:ListMultipartUploadParts<ol>
+<li>查看指定分片上传任务中已上传的部分</li>
+</ol>
+</li>
+<li>s3:GetObjectVersion<ol>
+<li>获取对象的指定版本（MinIO 默认未启用版本控制，需要我们开启）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>s3:*<ol>
+<li>表示允许所有操作</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>获取桶的区域信息，即判断桶属于哪个 Region。</li>
+<li>在 MinIO 社区版中，Region 往往是“虚拟”的（默认通常为 <code>us-east-1</code>），但权限上仍然要考虑是否开放，但若未开放 <code>s3:GetBucketLocation</code> 权限，某些 SDK 或 CLI 工具可能因无法获取区域而返回 403 错误。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">5. Resource</font><br>用于指定允许或拒绝操作的具体资源，常见资源包括：</p>
+<ol>
+<li>arn:aws:s3:::my-bucket<ol>
+<li>表示桶本身，适用于桶级操作，如 <code>s3:ListBucket</code>、<code>s3:GetBucketPolicy</code> 等</li>
+</ol>
+</li>
+<li>arn:aws:s3:::my-bucket&#x2F;*<ol>
+<li>示该桶内的所有对象，适用于对象级操作，如 <code>s3:GetObject</code>、<code>s3:PutObject</code> 等</li>
+</ol>
+</li>
+<li>arn:aws:s3:::my-bucket&#x2F;public&#x2F;*<ol>
+<li>表示桶中某个前缀路径下的对象，例如 <code>public</code> 文件夹下的所有对象，可用于限制访问特定目录内容</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><h3 id="Object-概述"><a href="#Object-概述" class="headerlink" title="Object 概述"></a>Object 概述</h3><p>Object 是存储到 Minio 中的基本对象，对用户而言，相当于<strong>文件</strong></p>
+<hr>
+<h2 id="Minio-语法"><a href="#Minio-语法" class="headerlink" title="Minio 语法"></a>Minio 语法</h2><h3 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h3><h4 id="连接-Minio-服务（配置-Minio-服务别名）"><a href="#连接-Minio-服务（配置-Minio-服务别名）" class="headerlink" title="连接 Minio 服务（配置 Minio 服务别名）"></a>连接 Minio 服务（配置 Minio 服务别名）</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc alias <span class="hljs-built_in">set</span> <span class="hljs-variable">&lt;Minio 服务别名&gt;</span> <span class="hljs-variable">&lt;Minio 地址&gt;</span> <span class="hljs-variable">&lt;用户名&gt;</span> <span class="hljs-variable">&lt;密码&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 示例值：<br>	<span class="hljs-number">1</span>. mc alias <span class="hljs-built_in">set</span> myminio http://<span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9000</span> admin password<br>”“”<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>给 MinIO 服务起别名 <code>myminio</code>，以后就可以通过 <code>myminio</code> 来访问，而不用每次输入 URL 和账号密码：</li>
+</ol>
+</blockquote>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 1. 使用 Minio 服务别名<br>mc cp <span class="hljs-string">./file.txt</span> myminio/mybucket/<br><br><br><span class="hljs-string">//</span> 2. 不使用 Minio 服务别名<br>mc <span class="hljs-params">--insecure</span> <span class="hljs-params">--config-dir</span> <span class="hljs-string">/root/.mc</span> cp <span class="hljs-string">./file.txt</span> http:<span class="hljs-string">//127.0.0.1</span><span class="hljs-function">:9000</span>/mybucket/file.txt <span class="hljs-params">--access-key</span> root <span class="hljs-params">--secret-key</span> wq666666<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="集群命令"><a href="#集群命令" class="headerlink" title="集群命令"></a>集群命令</h3><h4 id="查看服务信息（基本健康状态）"><a href="#查看服务信息（基本健康状态）" class="headerlink" title="查看服务信息（基本健康状态）"></a>查看服务信息（基本健康状态）</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">admin</span> <span class="hljs-keyword">info</span> &lt;<span class="hljs-keyword">alias</span>&gt;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="用户命令"><a href="#用户命令" class="headerlink" title="用户命令"></a>用户命令</h3><h4 id="修改-Root-用户密码"><a href="#修改-Root-用户密码" class="headerlink" title="修改 Root 用户密码"></a>修改 Root 用户密码</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc admin <span class="hljs-keyword">user</span> password <span class="hljs-variable">&lt;alias&gt;</span> <span class="hljs-variable">&lt;username&gt;</span> <span class="hljs-variable">&lt;newpassword&gt;</span><br>“”“<br><span class="hljs-number">1</span>. 注意事项：<br>	<span class="hljs-number">1</span>. Root 密码长度至少 <span class="hljs-number">8</span> 个字符<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Bucket-命令"><a href="#Bucket-命令" class="headerlink" title="Bucket 命令"></a>Bucket 命令</h3><h4 id="创建-Bucket"><a href="#创建-Bucket" class="headerlink" title="创建 Bucket"></a>创建 Bucket</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs markdown">mc mb <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span></span>/<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span></span><br>“”“<br><span class="hljs-bullet">1.</span> alias：<br><span class="hljs-bullet">	1.</span> 配置好的 Minio 服务别名<br><span class="hljs-bullet">2.</span> 示例：<br><span class="hljs-bullet">	1.</span> mc mb myminio/mybucket<br><span class="hljs-bullet">3.</span> 注意事项：<br><span class="hljs-bullet">	1.</span> Bucket 名字长度至少 3 个字符<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="删除-Bucket"><a href="#删除-Bucket" class="headerlink" title="删除 Bucket"></a>删除 Bucket</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc rb [--force] <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="列出当前用户可访问的所有-Bucket"><a href="#列出当前用户可访问的所有-Bucket" class="headerlink" title="列出当前用户可访问的所有 Bucket"></a>列出当前用户可访问的所有 Bucket</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">ls</span> &lt;<span class="hljs-built_in">alias</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="设置-Bucket-访问策略"><a href="#设置-Bucket-访问策略" class="headerlink" title="设置 Bucket 访问策略"></a>设置 Bucket 访问策略</h4><p><font color="#92d050">1. Minio 内置访问策略</font></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs csharp">mc anonymous <span class="hljs-keyword">set</span> [download|upload|<span class="hljs-keyword">public</span>|<span class="hljs-keyword">private</span>] &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket-name&gt;<br>“”“<br><span class="hljs-number">1.</span> download：<br>	<span class="hljs-number">1.</span> 允许匿名用户下载指定 bucket 中的对象，但不允许删除、上传、列出 bucket 中的对象<br>	<span class="hljs-number">2.</span> 下载对象时，必须知道对象的完整路径，例如 http:<span class="hljs-comment">//minio.example.com/mybucket/myfile.txt</span><br><span class="hljs-number">2.</span> upload：<br>	<span class="hljs-number">1.</span>允许匿名用户向指定 bucket 上传对象，但不允许删除、下载、列出 bucket 中的对象<br><span class="hljs-number">3.</span> <span class="hljs-keyword">public</span>：<br>	<span class="hljs-number">1.</span> 允许匿名用户对指定 bucket 进行完整操作，包括上传、下载、列出和删除对象<br><span class="hljs-number">4.</span> <span class="hljs-keyword">private</span>：<br>	<span class="hljs-number">1.</span> 完全禁止匿名用户访问指定 bucket，所有操作（上传、下载、列出、删除）均不允许<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 自定义访问策略</font><br>推荐使用 SDK 设置，详见上文：Bucket 自定义访问策略</p>
+<hr>
+<h4 id="获取-Bucket-访问策略"><a href="#获取-Bucket-访问策略" class="headerlink" title="获取 Bucket 访问策略"></a>获取 Bucket 访问策略</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc anonymous <span class="hljs-keyword">get</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="启用-Bucket-版本控制"><a href="#启用-Bucket-版本控制" class="headerlink" title="启用 Bucket 版本控制"></a>启用 Bucket 版本控制</h4><p>Bucket 版本控制其实就是 给存储桶里的对象加 “版本号” 的一种机制，用来记录和保留对象的历史版本：</p>
+<ol>
+<li>启用前：<ol>
+<li>同名对象会直接被覆盖或删除。</li>
+</ol>
+</li>
+<li>启用后：<ol>
+<li>上传同名对象，新版本（有唯一版本 ID）</li>
+<li>删除对象，而是生成一个 Delete Marker（删除标记），简单来说就是<code>removeObject(&quot;a.txt&quot;)</code>），MinIO <strong>不会真正删除文件</strong>。它会新增一个特殊的版本，这个版本没有文件内容，<code>isDeleteMarker=true</code>。这个版本会被当作“最新版本”，所以从外部看，这个对象就像被删除了一样。因为旧版本的文件还在，所以可以通过指定历史 <code>versionId</code> 来恢复被“删除”的文件。</li>
+<li>只有永久删除（<code>removeObject</code> 并指定版本 ID）才能把该版本真正删掉。</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mc <span class="hljs-keyword">version</span> <span class="hljs-keyword">enable</span> &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="禁用-Bucket-版本控制"><a href="#禁用-Bucket-版本控制" class="headerlink" title="禁用 Bucket 版本控制"></a>禁用 Bucket 版本控制</h4><p>禁用 Bucket 的版本控制，并不会删除已有版本，只是暂停新版本的生成</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">mc <span class="hljs-keyword">version</span> <span class="hljs-keyword">suspend</span> <span class="hljs-symbol">&lt;alias&gt;</span>/<span class="hljs-symbol">&lt;bucket-name&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="设置-Bucket-标签"><a href="#设置-Bucket-标签" class="headerlink" title="设置 Bucket 标签"></a>设置 Bucket 标签</h4><p>推荐使用 SDK 设置</p>
+<hr>
+<h4 id="获取-Bucket-标签"><a href="#获取-Bucket-标签" class="headerlink" title="获取 Bucket 标签"></a>获取 Bucket 标签</h4><p>推荐使用 SDK 获取</p>
+<hr>
+<h4 id="设置-Bucket-生命周期"><a href="#设置-Bucket-生命周期" class="headerlink" title="设置 Bucket 生命周期"></a>设置 Bucket 生命周期</h4><p>推荐使用 SDK 设置</p>
+<hr>
+<h4 id="获取-Bucket-生命周期"><a href="#获取-Bucket-生命周期" class="headerlink" title="获取 Bucket 生命周期"></a>获取 Bucket 生命周期</h4><p>推荐使用 SDK 获取</p>
+<hr>
+<h3 id="Object-命令"><a href="#Object-命令" class="headerlink" title="Object 命令"></a>Object 命令</h3><h4 id="上传-Object"><a href="#上传-Object" class="headerlink" title="上传 Object"></a>上传 Object</h4><p><font color="#92d050">1. 直接上传 单个文件 &#x2F; 整个目录</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">cp</span> [-r] &lt;本地 单个文件 / 整个目录 路径&gt; &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket 路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">cp</span> ./report.pdf myminio/mybucket/<br>	2. mc <span class="hljs-built_in">cp</span> -r ./images/ myminio/mybucket/photos/<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 本地目录同步到 Minio</font><br>使用 mc mirror 能将本地目录同步到 Minio，需要注意的是，这是一个增量同步，即只会同步有差异的，并且还会删除桶中多余但本地不存在的文件</p>
+<p>需要注意的是，只能同步目录，不能同步单个文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc mirror <span class="hljs-tag">&lt;<span class="hljs-name">本地</span> <span class="hljs-attr">整个目录</span> <span class="hljs-attr">路径</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">路径</span>&gt;</span><br>“”“<br>1. 示例：<br>	1. mc mirror ./localdir myminio/bucket/<br>”“”<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>我们在上传时，如果遇到下面的错误，一般是文件名存在非 UTF-8 编码的字符，对于 Windows 直接粘贴到 Linux 的文件，中文一般是 GBK 和 GB2312，我们可以使用 convmv 工具转换文件名编码</li>
+</ol>
+</blockquote>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs applescript">apt-<span class="hljs-keyword">get</span> install convmv<br><br><br><span class="hljs-comment"># GBK ---&gt; UTF-8</span><br>convmv -f gbk -t utf<span class="hljs-number">-8</span> <span class="hljs-comment">--notest -r /mystudy/jvm</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-1.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 你例如上传的是 jvm 目录，上传到 test&#x2F;jvm 目录，那你就会看到 test&#x2F;jvm&#x2F;jvm&#x2F;详细内容，可以理解为把 jvm 目录这一层也上传到 minio 目录下了</p>
+</blockquote>
+<hr>
+<h4 id="下载-Object"><a href="#下载-Object" class="headerlink" title="下载 Object"></a>下载 Object</h4><p><font color="#92d050">1. 直接下载 单个文件 &#x2F; 整个目录</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">cp</span> [-r] &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket 路径&gt; &lt;本地路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">cp</span> myminio/mybucket/report.pdf ./downloads/<br>”“”<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>下载整个目录千万不要忘记加上 -r</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. Minio 同步到本地目录</font><br>使用 mc mirror 同样能将 Minio 同步到本地目录，需要注意的是，这是一个增量同步，即只会同步有差异的，对于需要定期同步备份的场景，<code>mc mirror</code> 效率更高，并且还会删除本地多余但桶中不存在的文件</p>
+<p>需要注意的是，只能同步目录，不能同步单个文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc mirror <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">路径</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">本地路径</span>&gt;</span><br>“”“<br>1. 示例：<br>	1. mc mirror myminio/bucket/ ./localdir<br>”“”<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 生成临时下载链接（预签名 URL）</font><br>如果你想让没有 <code>mc</code> 或访问凭证的其他人下载文件，可以生成一个临时的、有时间限制的下载链接（预签名 URL）</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs applescript">mc presign &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-<span class="hljs-built_in">name</span>&gt;/&lt;bucket 路径&gt; <span class="hljs-comment">--expiry &lt;过期秒数&gt;</span><br>“”“<br><span class="hljs-number">1.</span> 示例：<br>	<span class="hljs-number">1.</span> mc presign myminio/mybucket/<span class="hljs-built_in">file</span>.zip <span class="hljs-comment">--expiry 3600</span><br><span class="hljs-number">2.</span> 注意事项：<br>	<span class="hljs-number">1.</span> 过期秒数默认是 <span class="hljs-number">7</span> 天<br>”“”<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>使用这种方式经常说版本不新，干脆使用 SDK</li>
+</ol>
+</blockquote>
+<p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="列出-Object"><a href="#列出-Object" class="headerlink" title="列出 Object"></a>列出 Object</h4><p><font color="#92d050">1. 列出根目录下的对象和子目录</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc ls <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">路径</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 递归列出桶内所有对象，包括所有子目录和子目录中的文件</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc ls -r <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">路径</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-2.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="删除-Object"><a href="#删除-Object" class="headerlink" title="删除 Object"></a>删除 Object</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">rm</span> [-r] [--force] &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket 路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">rm</span> --recursive --force myminio/mybucket/logs/2024/<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="移动-Object（重命名-Object）"><a href="#移动-Object（重命名-Object）" class="headerlink" title="移动 Object（重命名 Object）"></a>移动 Object（重命名 Object）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">mv</span> &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket <span class="hljs-built_in">source</span> 路径&gt; &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket destination 路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">mv</span> myminio/mybucket/file1.txt myminio/mybucket/file2.txt<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="拷贝-Object"><a href="#拷贝-Object" class="headerlink" title="拷贝 Object"></a>拷贝 Object</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc cp <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">source</span> <span class="hljs-attr">路径</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">destination</span> <span class="hljs-attr">路径</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="为-Object-设置标签"><a href="#为-Object-设置标签" class="headerlink" title="为 Object 设置标签"></a>为 Object 设置标签</h4><p>需要注意的是，只能为文件设置标签，不能为目录设置标签，并且会覆盖之前设置的标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">mc tag set <span class="hljs-tag">&lt;<span class="hljs-name">alias</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket-name</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">bucket</span> <span class="hljs-attr">路径</span>&gt;</span> &quot;<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>=<span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>&amp;<span class="hljs-tag">&lt;<span class="hljs-name">key</span>&gt;</span>=<span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>&quot;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="查看-Object-的标签"><a href="#查看-Object-的标签" class="headerlink" title="查看 Object 的标签"></a>查看 Object 的标签</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc <span class="hljs-keyword">tag</span> get <span class="hljs-variable">&lt;alias&gt;</span>/<span class="hljs-variable">&lt;bucket-name&gt;</span>/<span class="hljs-variable">&lt;bucket 路径&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="删除-Object-的标签"><a href="#删除-Object-的标签" class="headerlink" title="删除 Object 的标签"></a>删除 Object 的标签</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">mc <span class="hljs-keyword">tag</span> remove <span class="hljs-variable">&lt;alias&gt;</span>/<span class="hljs-variable">&lt;bucket-name&gt;</span>/<span class="hljs-variable">&lt;bucket 路径&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="查看-Object-元数据"><a href="#查看-Object-元数据" class="headerlink" title="查看 Object 元数据"></a>查看 Object 元数据</h4><p>既可以查看某目录的，也可以查看具体的文件的元数据</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">mc <span class="hljs-built_in">stat</span> &lt;<span class="hljs-built_in">alias</span>&gt;/&lt;bucket-name&gt;/&lt;bucket 路径&gt;<br>“”“<br>1. 示例：<br>	1. mc <span class="hljs-built_in">stat</span> myminio/mybucket/report.pdf<br>”“”<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="列出某-Bucket-中当前用户可访问的所有-Object"><a href="#列出某-Bucket-中当前用户可访问的所有-Object" class="headerlink" title="列出某 Bucket 中当前用户可访问的所有 Object"></a>列出某 Bucket 中当前用户可访问的所有 Object</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">mc <span class="hljs-keyword">ls</span> [<span class="hljs-params">--version</span>] &lt;<span class="hljs-keyword">alias</span>&gt;/&lt;bucket-name&gt;<br>“”“<br>1. 注意事项：<br>	1. 加上 <span class="hljs-params">--versions</span> 表示查看对象的所有版本（前提是启用了版本控制）<br>”“”<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、Minio-工具"><a href="#三、Minio-工具" class="headerlink" title="三、Minio 工具"></a>三、Minio 工具</h1><h2 id="mc-命令行"><a href="#mc-命令行" class="headerlink" title="mc 命令行"></a>mc 命令行</h2><h3 id="mc-命令行概述"><a href="#mc-命令行概述" class="headerlink" title="mc 命令行概述"></a>mc 命令行概述</h3><p><code>mc</code> 是一个命令行客户端，只需连接 MinIO 集群中的任意一个节点，便可统一管理整个集群，包括所有节点的桶、对象、用户、策略、健康状态等内容。</p>
+<hr>
+<h3 id="mc-命令行安装"><a href="#mc-命令行安装" class="headerlink" title="mc 命令行安装"></a>mc 命令行安装</h3><h4 id="创建软件安装路径"><a href="#创建软件安装路径" class="headerlink" title="创建软件安装路径"></a>创建软件安装路径</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/mc<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="安装-mc"><a href="#安装-mc" class="headerlink" title="安装 mc"></a>安装 mc</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/mc<br></code></pre></td></tr></table></figure>
+
+<p>接着参考 <a target="_blank" rel="noopener" href="https://min.io/open-source/download?platform=linux">MinIO 官方下载页面</a> 进行安装，安装过程会将 <code>mc</code> 文件下载到<strong>当前目录</strong>，文件名即为 <code>mc</code>（没有扩展名）：<br><img src="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio/%E7%AC%94%E8%AE%B0%EF%BC%9AMinio-6.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>会话级别以太网临时代理：</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="将-mc-添加到环境变量"><a href="#将-mc-添加到环境变量" class="headerlink" title="将 mc 添加到环境变量"></a>将 mc 添加到环境变量</h4><p>如果你不想每次都先 <code>cd /mystudy/mc</code> 然后写 <code>./mc</code>，可以把 <code>mc</code> 加到 PATH 中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/mc<br><br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ./mc /usr/local/bin/<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="四、搭建-Minio-环境"><a href="#四、搭建-Minio-环境" class="headerlink" title="四、搭建 Minio 环境"></a>四、搭建 Minio 环境</h1><h2 id="1-单机测试环境"><a href="#1-单机测试环境" class="headerlink" title="1. 单机测试环境"></a>1. 单机测试环境</h2><h3 id="1-1-创建宿主机数据挂载目录"><a href="#1-1-创建宿主机数据挂载目录" class="headerlink" title="1.1. 创建宿主机数据挂载目录"></a>1.1. 创建宿主机数据挂载目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/minio<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-2-启动-Minio-容器"><a href="#1-2-启动-Minio-容器" class="headerlink" title="1.2. 启动 Minio 容器"></a>1.2. 启动 Minio 容器</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name minio-test <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9000</span>:<span class="hljs-number">9000</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">9001</span>:<span class="hljs-number">9001</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_USER=admin&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e <span class="hljs-string">&quot;MINIO_ROOT_PASSWORD=password&quot;</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/minio:/data <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  minio/minio <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  server /data --console-address <span class="hljs-string">&quot;:9001&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>密码长度至少 8 个字符</li>
+<li><code>server /data --console-address &quot;:9001&quot;</code> 是 MinIO 启动命令中的一个子命令，用来启动 MinIO 对象存储服务的：<ol>
+<li>server：<ol>
+<li>启动 MinIO 存储服务</li>
+</ol>
+</li>
+<li>&#x2F;data<ol>
+<li>MinIO 存储数据的根目录</li>
+</ol>
+</li>
+<li>–console-address “:9001”<ol>
+<li>启动控制台 Web UI，监听 9001 端口</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>9000 端口是 Minio 端口，9001 端口是 Web UI 端口</li>
+<li>会话级别以太网临时代理：</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.3:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-3-访问-Minio-Web-UI"><a href="#1-3-访问-Minio-Web-UI" class="headerlink" title="1.3. 访问 Minio Web UI"></a>1.3. 访问 Minio Web UI</h3><p>访问： <a target="_blank" rel="noopener" href="http://192.168.136.8:9001/">http://192.168.136.8:9001</a></p>
+<hr>
+<h1 id="五、Spring-整合-Minio"><a href="#五、Spring-整合-Minio" class="headerlink" title="五、Spring 整合 Minio"></a>五、Spring 整合 Minio</h1><h2 id="Minio-配置"><a href="#Minio-配置" class="headerlink" title="Minio 配置"></a>Minio 配置</h2><p>Minio 的相关配置集中在配置类中，MinioConfiguration 配置类在 <code>com.example.minio.configuration</code> 包下</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MinioConfiguration</span> &#123;<br><br>    <span class="hljs-meta">@Bean(name = <span class="hljs-string">&quot;minioClientA&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> MinioClient minioClientA() &#123;<br>        <span class="hljs-keyword">return</span> MinioClient.builder()<br>                .endpoint(<span class="hljs-string">&quot;http://192.168.136.8:9000&quot;</span>)<br>                .credentials(<span class="hljs-string">&quot;adminA&quot;</span>, <span class="hljs-string">&quot;passwordA&quot;</span>)<br>                .build();<br>    &#125;<br><br>    <span class="hljs-meta">@Bean(name = <span class="hljs-string">&quot;minioClientB&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> MinioClient minioClientB() &#123;<br>        <span class="hljs-keyword">return</span> MinioClient.builder()<br>                .endpoint(<span class="hljs-string">&quot;http://192.168.136.9:9000&quot;</span>)<br>                .credentials(<span class="hljs-string">&quot;adminB&quot;</span>, <span class="hljs-string">&quot;passwordB&quot;</span>)<br>                .build();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>MinioClient 用于与 MinIO 服务建立连接，发送请求。而所谓的 Minio 配置，就算将 MinioClient 声明为一个 Bean，使用时直接注入即可</li>
+<li>MinioClient 底层基于 OkHttpClient，使用的是 HTTP 连接池机制，这与我们日常理解的 MySQL 等数据库连接池有所不同，所以 MinioClient 是线程安全的，但是高并发时也会存在瓶颈</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><h3 id="创建-Spring-Web-项目，添加相关依赖"><a href="#创建-Spring-Web-项目，添加相关依赖" class="headerlink" title="创建 Spring Web 项目，添加相关依赖"></a>创建 Spring Web 项目，添加相关依赖</h3><p>创建时：</p>
+<ol>
+<li>Web：<ol>
+<li>Spring Web</li>
+</ol>
+</li>
+</ol>
+<p>创建后：添加 <a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/io.minio/minio">minio 依赖</a> </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.minio<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>minio<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.5.17<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于目前未提供 <code>**-minio-starter</code> 的起步依赖，官方推荐的方式是直接添加 Minio 官方提供的 Minio Java SDK</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="进行-Minio-配置"><a href="#进行-Minio-配置" class="headerlink" title="进行 Minio 配置"></a>进行 Minio 配置</h3><p>详见上文：Minio 配置</p>
+<hr>
+<h3 id="使用-MinioClient-向-Minio-发送请求"><a href="#使用-MinioClient-向-Minio-发送请求" class="headerlink" title="使用 MinioClient 向 Minio 发送请求"></a>使用 MinioClient 向 Minio 发送请求</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MinioController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br>    <br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/bucketExists&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">Boolean</span> bucketExists(<span class="hljs-meta">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;检查 bucket 是否存在过程失败&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="业务处理"><a href="#业务处理" class="headerlink" title="业务处理"></a>业务处理</h2><h3 id="Bucket-常用操作"><a href="#Bucket-常用操作" class="headerlink" title="Bucket 常用操作"></a>Bucket 常用操作</h3><h4 id="创建-Bucket-1"><a href="#创建-Bucket-1" class="headerlink" title="创建 Bucket"></a>创建 Bucket</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 创建 Bucket（minioClient.makeBucket(MakeBucketArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * 2. 注意事项：</span><br><span class="hljs-comment">     *      1. 在创建资源之前，通常会先检查其是否已存在，再决定是否执行创建操作。</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(<span class="hljs-string">&quot;/createBucket&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> String createBucket(<span class="hljs-meta">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br><br>            boolean found = minioClient.bucketExists(<br>                    BucketExistsArgs.builder().bucket(bucketName).build()<br>            );<br><br>            <span class="hljs-keyword">if</span> (!found) &#123;<br>                minioClient.makeBucket(<br>                        MakeBucketArgs.builder().bucket(bucketName).build()<br>                );<br>                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 创建成功&quot;</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 已存在，无需创建&quot;</span>;<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;创建桶失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="删除-Bucket-1"><a href="#删除-Bucket-1" class="headerlink" title="删除 Bucket"></a>删除 Bucket</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 删除 Bucket（minioClient.removeBucket(RemoveBucketArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值，不抛异常即表示成功</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@DeleteMapping(<span class="hljs-string">&quot;/deleteBucket&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> String deleteBucket(<span class="hljs-meta">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            minioClient.removeBucket(<br>                    RemoveBucketArgs.builder().bucket(bucketName).build()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 删除成功&quot;</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;删除桶失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="列出当前用户可访问的所有-Bucket-1"><a href="#列出当前用户可访问的所有-Bucket-1" class="headerlink" title="列出当前用户可访问的所有 Bucket"></a>列出当前用户可访问的所有 Bucket</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-title class_"><span class="hljs-keyword">class</span> <span class="hljs-title">BucketMethod</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 列出当前用户可访问的所有 Bucket（minioClient.listBuckets()）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 注意事项：</span><br><span class="hljs-comment">     *      1. 列出的每个 bucket 对象都包含存储桶的名称、创建时间等信息</span><br><span class="hljs-comment">     *      2. 这里我只把每个 bucket 的 存储桶名称 拿出来了</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/listBuckets&quot;</span>)<br>    <span class="hljs-keyword">public</span> List&lt;<span class="hljs-keyword">String</span>&gt; listBuckets() &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> minioClient.listBuckets() <span class="hljs-comment">// 返回的是 List &lt;Bucket&gt;，Bucket 是 MinIO 提供的类，表示一个桶对象。</span><br>                    .stream() <span class="hljs-comment">// 把这个桶列表转换成 Java Stream 流，方便做批量处理，返回的是 Stream &lt;Bucket&gt;</span><br>                    .map(bucket -&gt; bucket.name()) <span class="hljs-comment">// 对每一个 Bucket 对象，取出它的名字，返回 Stream &lt;String&gt;</span><br>                    .collect(Collectors.toList()); <span class="hljs-comment">// 把每一个 Bucket 的名字收集成一个列表，返回 List &lt;String&gt;</span><br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span><span class="hljs-type"></span> RuntimeException(<span class="hljs-string">&quot;获取桶列表失败：&quot;</span> + e.getMessage(), e);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="设置-Bucket-访问策略-1"><a href="#设置-Bucket-访问策略-1" class="headerlink" title="设置 Bucket 访问策略"></a>设置 Bucket 访问策略</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">MinioClient</span> minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 设置 Bucket 访问策略（minioClient.setBucketPolicy(SetBucketPolicyArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * 2. 注意事项：</span><br><span class="hljs-comment">     *      1. 前端应该传递 JSON 类型的 Bucket 访问策略</span><br><span class="hljs-comment">     *      2. 我们用 String 类型来接受 JSON 类型的 Bucket 访问策略</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketPolicy&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketPolicy</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName, <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">String</span> policyJson</span>) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            minioClient.<span class="hljs-title function_">setBucketPolicy</span>(<br>                    <span class="hljs-title class_">SetBucketPolicyArgs</span>.<span class="hljs-title function_">builder</span>()<br>                            .<span class="hljs-title function_">bucket</span>(bucketName)<br>                            .<span class="hljs-title function_">config</span>(policyJson) <span class="hljs-comment">// 传入 JSON 格式的字符串类型的 Bucket 策略</span><br>                            .<span class="hljs-title function_">build</span>()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 策略设置成功&quot;</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶策略失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="获取-Bucket-访问策略-1"><a href="#获取-Bucket-访问策略-1" class="headerlink" title="获取 Bucket 访问策略"></a>获取 Bucket 访问策略</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 获取 Bucket 访问策略（minioClient.getBucketPolicy(GetBucketPolicyArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 返回 JSON 格式的 String 字符串（&quot;&#123;\&quot;username\&quot;:\&quot;wangza\&quot;,\&quot;role\&quot;:\&quot;admin\&quot;&#125;&quot;）</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/getBucketPolicy&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> String getBucketPolicy(<span class="hljs-meta">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> minioClient.getBucketPolicy(<br>                    GetBucketPolicyArgs.builder()<br>                            .bucket(bucketName)<br>                            .build()<br>            );<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;获取桶策略失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="启用-Bucket-版本控制-1"><a href="#启用-Bucket-版本控制-1" class="headerlink" title="启用 Bucket 版本控制"></a>启用 Bucket 版本控制</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 启用 Bucket 版本控制（minioClient.setBucketVersioning(SetBucketVersioningArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(&quot;/enableBucketVersioning&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">enableBucketVersioning</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String bucketName)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            minioClient.setBucketVersioning(<br>                    SetBucketVersioningArgs.builder()<br>                            .bucket(bucketName)<br>                            .config(<span class="hljs-keyword">new</span> <span class="hljs-title class_">VersioningConfiguration</span>(VersioningConfiguration.Status.ENABLED, <span class="hljs-literal">null</span>))<br>                            .build()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;已启用版本控制：&quot;</span> + bucketName;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;启用版本控制失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="禁用-Bucket-版本控制-1"><a href="#禁用-Bucket-版本控制-1" class="headerlink" title="禁用 Bucket 版本控制"></a>禁用 Bucket 版本控制</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">MinioClient</span> minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 禁用 Bucket 版本控制（minioClient.setBucketVersioning(SetBucketVersioningArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/suspendBucketVersioning&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">suspendBucketVersioning</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName</span>) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            minioClient.<span class="hljs-title function_">setBucketVersioning</span>(<br>                    <span class="hljs-title class_">SetBucketVersioningArgs</span>.<span class="hljs-title function_">builder</span>()<br>                            .<span class="hljs-title function_">bucket</span>(bucketName)<br>                            .<span class="hljs-title function_">config</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">VersioningConfiguration</span>(<span class="hljs-title class_">VersioningConfiguration</span>.<span class="hljs-property">Status</span>.<span class="hljs-property">SUSPENDED</span>, <span class="hljs-literal">null</span>))<br>                            .<span class="hljs-title function_">build</span>()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;已暂停版本控制：&quot;</span> + bucketName;<br>        &#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;暂停版本控制失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="设置-Bucket-标签-1"><a href="#设置-Bucket-标签-1" class="headerlink" title="设置 Bucket 标签"></a>设置 Bucket 标签</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title class_">MinioClient</span> minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 设置 Bucket 的标签（minioClient.setBucketTags(SetBucketTagsArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * 2. 注意事项：</span><br><span class="hljs-comment">     *      1. 前端应该传递 JSON 类型的 Bucket 标签</span><br><span class="hljs-comment">     *      2. 我们用 String 类型来接受 JSON 类型的 Bucket 标签</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">&quot;/setBucketTags&quot;</span>)<br>    <span class="hljs-keyword">public</span> <span class="hljs-title class_">String</span> <span class="hljs-title function_">setBucketTags</span>(<span class="hljs-params"><span class="hljs-meta">@RequestParam</span> <span class="hljs-title class_">String</span> bucketName,</span><br><span class="hljs-params">                                <span class="hljs-meta">@RequestBody</span> <span class="hljs-title class_">String</span> tagsJson</span>) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 将 JSON 转为 Map&lt;String, String&gt;</span><br>            <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>, <span class="hljs-title class_">String</span>&gt; tags = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>()<br>                    .<span class="hljs-title function_">readValue</span>(tagsJson, <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeReference</span>&lt;<span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">String</span>&gt;&gt;() &#123;&#125;);<br>            minioClient.<span class="hljs-title function_">setBucketTags</span>(<br>                    <span class="hljs-title class_">SetBucketTagsArgs</span>.<span class="hljs-title function_">builder</span>()<br>                            .<span class="hljs-title function_">bucket</span>(bucketName)<br>                            .<span class="hljs-title function_">tags</span>(tags) <span class="hljs-comment">// 传入 JSON 格式的字符串类型的 Bucket 标签</span><br>                            .<span class="hljs-title function_">build</span>()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 标签设置成功&quot;</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶标签失败：&quot;</span> + e.<span class="hljs-title function_">getMessage</span>();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="获取-Bucket-标签-1"><a href="#获取-Bucket-标签-1" class="headerlink" title="获取 Bucket 标签"></a>获取 Bucket 标签</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@RestController</span><br>public class BucketMethod &#123;<br><br>    <span class="hljs-variable">@Autowired</span><br>    private MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 获取 Bucket 的标签（minioClient.getBucketTags(GetBucketTagsArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 返回标签的键值对 Map</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-variable">@GetMapping</span>(<span class="hljs-string">&quot;/getBucketTags&quot;</span>)<br>    public Map&lt;String, String&gt; <span class="hljs-built_in">getBucketTags</span>(<span class="hljs-variable">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-selector-tag">try</span> &#123;<br>            <span class="hljs-selector-tag">return</span> <span class="hljs-selector-tag">minioClient</span><span class="hljs-selector-class">.getBucketTags</span>(<br>                    GetBucketTagsArgs.<span class="hljs-built_in">builder</span>().<span class="hljs-built_in">bucket</span>(bucketName).<span class="hljs-built_in">build</span>()<br>            )<span class="hljs-selector-class">.get</span>();<br>        &#125; <span class="hljs-selector-tag">catch</span> (Exception e) &#123;<br>            <span class="hljs-selector-tag">throw</span> <span class="hljs-selector-tag">new</span> <span class="hljs-selector-tag">RuntimeException</span>(<span class="hljs-string">&quot;获取桶标签失败：&quot;</span> + e.<span class="hljs-built_in">getMessage</span>(), e);<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="设置-Bucket-生命周期-1"><a href="#设置-Bucket-生命周期-1" class="headerlink" title="设置 Bucket 生命周期"></a>设置 Bucket 生命周期</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 设置 Bucket 的生命周期（minioClient.setBucketLifecycle(SetBucketLifecycleArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 无返回值</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * 2. 注意事项：</span><br><span class="hljs-comment">     *      1. 前端应该传递 XML 类型的 Bucket 生命周期</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@PostMapping(<span class="hljs-string">&quot;/setBucketLifecycle&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> String setBucketLifecycle(<span class="hljs-meta">@RequestParam</span> String bucketName,<br>                                     <span class="hljs-meta">@RequestBody</span> LifecycleConfiguration lifecycleConfigurationXml) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            minioClient.setBucketLifecycle(<br>                    SetBucketLifecycleArgs.builder()<br>                            .bucket(bucketName)<br>                            .config(lifecycleConfigurationXml) <span class="hljs-comment">// 传入 LifecycleConfigutation 类型的 Bucket 生命周期</span><br>                            .build()<br>            );<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;桶 [&quot;</span> + bucketName + <span class="hljs-string">&quot;] 生命周期设置成功&quot;</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;设置桶生命周期失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="获取-Bucket-生命周期-1"><a href="#获取-Bucket-生命周期-1" class="headerlink" title="获取 Bucket 生命周期"></a>获取 Bucket 生命周期</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BucketMethod</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> MinioClient minioClient;<br>    <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     * 获取 Bucket 的生命周期（minioClient.getBucketLifecycle(GetBucketLifecycleArgs)）</span><br><span class="hljs-comment">     * --------------------------------------------</span><br><span class="hljs-comment">     * 1. 返回值：</span><br><span class="hljs-comment">     *      1. 返回 XML 格式的 String 字符串</span><br><span class="hljs-comment">     * ============================================</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@GetMapping(<span class="hljs-string">&quot;/getBucketLifecycle&quot;</span>)</span><br>    <span class="hljs-keyword">public</span> String getBucketLifecycle(<span class="hljs-meta">@RequestParam</span> String bucketName) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> minioClient.getBucketLifecycle(<br>                    GetBucketLifecycleArgs.builder()<br>                            .bucket(bucketName)<br>                            .build()<br>            ).toString();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;获取桶生命周期失败：&quot;</span> + e.getMessage();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Object-常用操作"><a href="#Object-常用操作" class="headerlink" title="Object 常用操作"></a>Object 常用操作</h3><h4 id="上传-Object-1"><a href="#上传-Object-1" class="headerlink" title="上传 Object"></a>上传 Object</h4><h5 id="小文件（-1-MB）"><a href="#小文件（-1-MB）" class="headerlink" title="小文件（&lt; 1 MB）"></a>小文件（&lt; 1 MB）</h5><p>对于对于一个小文件（例如50KB），实际数据传输的时间可能只有几毫秒，但是其主要性能瓶颈是**请求开销 (Request Overhead) 与网络延迟 (Latency)**，因为其每一次上传操作斗湖涉及到：</p>
+<ol>
+<li>建立 TCP 链接（三次握手）</li>
+<li>如果使用 HTTPS，还需要进行 TLS &#x2F; SSL 握手</li>
+<li>发送 HTTP 请求</li>
+<li>Minio 进行身份验证、授权和元数据处理</li>
+</ol>
+<p>所以，解决这个问题的核心思想就是并发上传，不要等待一个文件上传完成后再开始下一个。使用线程池并行处理多个上传任务，从而让网络连接和服务器资源一直处于“忙碌”状态，将等待时间转化为有效的数据传输时间</p>
+<p>直接从文件路径或输入流上传即可，SDK 会处理好一切。<code>uploadObject()</code> 是专门为上传文件设计的便捷方法。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>其实 Minio 本身就是用来处理大文件的，对于小文件，性能可能并不好</li>
+</ol>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%84%E7%BB%87%E6%96%B9%E5%BC%8F/" class="category-chain-item">数据的组织方式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%84%E7%BB%87%E6%96%B9%E5%BC%8F/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" class="category-chain-item">对象存储</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%95%B0%E6%8D%AE%E7%9A%84%E7%BB%84%E7%BB%87%E6%96%B9%E5%BC%8F/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/Minio/" class="category-chain-item">Minio</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Minio</div>
+      <div>https://wangjia5289.github.io/2025/08/12/笔记：Minio/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 12, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/12/%E7%AC%94%E8%AE%B0%EF%BC%9AMIME%E7%B1%BB%E5%9E%8B/" title="笔记：MIME 类型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：MIME 类型</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/" title="笔记：MySQL">
+                        <span class="hidden-mobile">笔记：MySQL</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

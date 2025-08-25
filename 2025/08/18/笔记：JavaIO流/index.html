@@ -1,0 +1,1145 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="IO 流基础用户态与内核态在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域 限制的目的就是保护">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Java IO 流">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="IO 流基础用户态与内核态在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域 限制的目的就是保护">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png">
+<meta property="article:published_time" content="2025-08-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-25T09:19:51.334Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Java IO 流 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Java IO 流"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-18 00:00" pubdate>
+          August 18, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Java IO 流</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-08-25T17:19:51+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="IO-流基础"><a href="#IO-流基础" class="headerlink" title="IO 流基础"></a>IO 流基础</h2><h3 id="用户态与内核态"><a href="#用户态与内核态" class="headerlink" title="用户态与内核态"></a>用户态与内核态</h3><p>在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 <strong>用户态（User Mode）和内核态（Kernel Mode）</strong>，这决定了你的程序到底能不能直接操作硬件和系统资源。</p>
+<ol>
+<li>用户态（User Mode）<ol>
+<li>这是应用程序（比如你的 Java 代码）运行的地方。</li>
+<li>在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域</li>
+<li>限制的目的就是保护系统稳定性。想象如果一个小程序能随便写进硬盘文件系统的元数据，整个系统就可能立刻崩溃</li>
+</ol>
+</li>
+<li>内核态（Kernel Mode）<ol>
+<li>这是操作系统内核运行的地方</li>
+<li>在这个特权级别下，代码可以执行任何敏感指令：访问硬件、操作内存、调度进程 等</li>
+</ol>
+</li>
+</ol>
+<p>当程序在用户态里想做“越权操作”时（比如读写文件、收发网络包），它无法直接自己动手，必须通过 <strong>系统调用（System Call）</strong> 请求内核帮忙。触发系统调用后，CPU 会进入一个 “陷入（Trap）” 过程：</p>
+<ol>
+<li>当前运行线程仍旧是同一个，但 CPU 从用户态切换到内核态</li>
+<li>内核接管 CPU，执行相应的内核函数，完成硬件操作</li>
+<li>内核把结果准备好，再把 CPU 特权级切回到用户态，继续让你的程序执行</li>
+</ol>
+<hr>
+<h3 id="读-IO"><a href="#读-IO" class="headerlink" title="读 IO"></a>读 IO</h3><p>假设我们有这样一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;a.txt&quot;</span>);<br><br><span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> fis.read();<br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. Java 层发起调用</font><br>你写的 <code>fis.read()</code> 在 JVM 里其实会调用一个 native 方法（JNI），本质就是触发 Linux 的 <code>read()</code> 系统调用（Windows 下同理）。</p>
+<p>在这一刻起，CPU 的执行状态从 <strong>用户态</strong> 切换到 <strong>内核态</strong>，操作系统内核会接管 CPU，并且操作系统知道这是一个可能耗时的 I&#x2F;O 操作，于是立即将你的 Java 线程状态变成阻塞状态，什么也干不了，只能傻傻地等待。</p>
+<p><font color="#92d050">2. 操作内核找到文件</font><br>在我们 <code>FileInputStream fis = new FileInputStream(&quot;a.txt&quot;);</code> 的时候，会拿到一个文件描述符（fd），操作系统通过文件描述符到文件在内核里的 inode（文件元数据），并且定位到你要读取的文件偏移位置</p>
+<p><font color="#92d050">3. 检查 page cache</font><br>内核查看 <strong>page cache</strong>（内核里专门的一块缓存区，单位是 page，一般 4KB）</p>
+<ol>
+<li>命中<ol>
+<li>如果这一页已经在内存里，直接用</li>
+</ol>
+</li>
+<li>未命中<ol>
+<li>内核向磁盘控制器发出指令，要求从硬盘读取文件数据把目标页从磁盘读入 page cache</li>
+<li>现在多用 DMA 技术，内核对 DMA 发号命令后，在 DMA 搬运数据期间，CPU 可以切换成用户态被调度去执行其他完全不相干的、处于 RUNNABLE 状态的线程或进程。这就是多任务操作系统的魔力</li>
+<li>触发一次磁盘 I&#x2F;O，把目标页从磁盘读入 page cache</li>
+<li>DMA 控制器完成了它的任务，通过一个“中断”信号通知 CPU</li>
+</ol>
+</li>
+</ol>
+<p>需要注意的是，即便你只调用 <code>read()</code> 读 <strong>1 个字节</strong>，但内核读磁盘是以 <strong>页</strong> 为单位的（4KB），所以它可能一次读入一个页，可能比你需要的更多数据</p>
+<p>需要注意的是，每个**打开的文件描述符 (fd)**，除了关联 inode（文件元信息）外，还会维护一个 <strong>文件位置指针</strong>，指示“读&#x2F;写到文件的哪个位置了”，这个指针就是 <strong>文件偏移量</strong>（以字节为单位）</p>
+<p>所以这里就进行了第一次的数据拷贝，即硬件 -&gt; 内核内存，此时，数据已经位于内核内存中。但你的 Java 线程还在用户空间，它看不见也摸不着这些数据。</p>
+<p><font color="#92d050">4. 第 2 次数据拷贝 (内核内存 -&gt; 用户内存)</font><br>内核现在需要把数据从自己的地盘（Page Cache）送到你的地盘，也就是 CPU 执行内存拷贝指令，把数据从 Page Cache 复制到你的 JVM 对应的位置</p>
+<p><font color="#92d050">5. 唤醒线程</font><br>内核发现所有工作都完成了（数据已经成功拷贝到用户空间）内核会找到之前被挂起的那个 Java 线程，把它从“等待队列”里拿出来，将其状态从 <strong>BLOCKED</strong> 改回 <strong>RUNNABLE</strong>，CPU 恢复之前保存的该线程的用户态上下文，放回到 CPU 的“工作队列”里此时，线程被<strong>唤醒</strong>了，但可能还没轮到它立即执行。</p>
+<p>统调用执行完毕，CPU 的状态从 <strong>内核态</strong> 切换回 <strong>用户态</strong>。</p>
+<hr>
+<h3 id="写流程"><a href="#写流程" class="headerlink" title="写流程"></a>写流程</h3><p><strong>Page Cache 没有固定大小，而是动态伸缩的</strong>。如果你的机器有 32GB 内存，只有 2GB 被应用程序用掉，那么剩下的二十几 GB 里，Page Cache 可能会疯狂增长，占用十几 GB，一点都不稀奇。但如果此时应用程序突然需要 28GB 那么内核会逐步释放 Page Cache，把空间还给应用</p>
+<p>在 Linux 上可以直接看内存状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /proc/meminfo | grep -E <span class="hljs-string">&quot;Cached|Buffers&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>Linux 内核对“该不该回收 Page Cache &#x2F; 该留多少”有策略参数：</p>
+<ul>
+<li>**<code>vm.vfs_cache_pressure</code>**：控制内核回收 inode&#x2F;dentry 缓存的积极度。</li>
+<li><strong><code>vm.dirty_ratio</code></strong> 与 **<code>vm.dirty_background_ratio</code>**：控制脏页占用内存的比例，避免缓存太多脏数据。</li>
+<li>**<code>drop_caches</code>**：可手动命令清理 Page Cache（不常用，但调优&#x2F;测试时方便）。</li>
+</ul>
+<p><font color="#92d050">1. Java 层发起调用</font></p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs abnf">FileOutputStream fos <span class="hljs-operator">=</span> new FileOutputStream(<span class="hljs-string">&quot;output.txt&quot;</span>)<span class="hljs-comment">;</span><br>byte[] dataToWrite <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>.getBytes()<span class="hljs-comment">; // 5个字节的数据</span><br>fos.write(dataToWrite)<span class="hljs-comment">; // 我们将解剖这一行！</span><br>fos.close()<span class="hljs-comment">; // close() 方法在这里也至关重要</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>初始状态</strong>: 文件 <code>output.txt</code> 可能不存在（会被创建）或为空。文件描述符 fd 对应的<strong>文件位置指针 &#x3D; 0</strong>。</li>
+</ul>
+<p><strong>第 1 步 &amp; 第 2 步：发起系统调用与模式切换</strong></p>
+<ul>
+<li><strong>动作</strong>: 你的 Java 线程执行 <code>fos.write(dataToWrite)</code>，这会触发一个 <code>write</code> <strong>系统调用</strong>。</li>
+<li><strong>CPU 模式</strong>: 立即从 <strong>用户态</strong> 切换到 <strong>内核态</strong>。</li>
+<li><strong>线程状态</strong>: <strong>线程通常不会立即阻塞</strong>。因为写入内存（Page Cache）的速度非常快，这个操作大概率能瞬间完成，所以线程可能一直保持 <code>RUNNABLE</code> 状态。只有在 Page Cache 已满，需要等待数据刷盘才能腾出空间等极端情况下，<code>write</code> 才可能阻塞。</li>
+</ul>
+<p><strong>第 3 步：内核接管 - 定位与准备</strong></p>
+<ul>
+<li><strong>动作</strong>: 内核收到 <code>write</code> 请求，包含三要素：文件描述符 (fd)、要写入的数据 (<code>dataToWrite</code>)、数据长度 (5)。</li>
+<li><strong>指针使用</strong>: 内核查看 fd 关联的<strong>文件位置指针</strong>，发现是 <strong>0</strong>。内核明白了：“好的，我要把这 5 个字节的数据，写入到文件的第 0 个字节开始的位置。”</li>
+</ul>
+<p><strong>第 4 步：数据的第一次旅行 (用户内存 -&gt; 内核内存)</strong></p>
+<ul>
+<li><strong>动作</strong>: 这是 <code>write</code> 操作的核心。内核执行一次<strong>内存拷贝</strong>。</li>
+<li><strong>路径</strong>: <code>用户空间的 dataToWrite 字节数组 -&gt; 内核空间的 Page Cache</code></li>
+<li><strong>结果</strong>:<ol>
+<li>“Hello” 这 5 个字节的数据被完整地复制到了 Page Cache 中。</li>
+<li>内核将 Page Cache 中对应的这块内存区域标记为 **“脏” (Dirty)**。</li>
+</ol>
+</li>
+</ul>
+<p><strong>第 5 步：指针推进与快速返回</strong></p>
+<ul>
+<li><p><strong>指针推进</strong>: 在数据成功拷贝到 Page Cache <strong>之后</strong>，内核立即更新文件位置指针。</p>
+<ul>
+<li><strong>计算</strong>: <code>旧指针(0) + 实际写入的字节数(5) = 新指针(5)</code></li>
+<li>内核将 fd 对应的<strong>文件位置指针更新为 5</strong>。</li>
+</ul>
+</li>
+<li><p><strong>关键点 - 快速返回</strong>:</p>
+<ul>
+<li><strong>一旦数据被拷贝到 Page Cache，内核就认为这次 <code>write</code> 操作已经“完成”了！</strong></li>
+<li>它<strong>不会</strong>等待数据被真正写入硬盘。</li>
+<li><strong>系统调用立即返回</strong>。CPU 从<strong>内核态</strong>切换回<strong>用户态</strong>。</li>
+<li>你的 Java 代码 <code>fos.write(dataToWrite)</code> 执行完毕，线程继续执行下一行代码。</li>
+</ul>
+</li>
+</ul>
+<p><strong>对你的程序而言，到此为止，写入似乎已经大功告成。但真相是，数据仅仅是到达了内核的内存缓冲区。</strong></p>
+<p><strong>第 6 步：数据的第二次旅行 (内核内存 -&gt; 硬盘) - 异步刷盘</strong></p>
+<p>这一步对你的 <code>write()</code> 调用是<strong>异步 (Asynchronous)</strong> 的，你的线程不会等待它。</p>
+<ul>
+<li><p><strong>触发时机</strong>: 操作系统内核会在以下几种情况，决定将“脏页”刷写（Flush）到硬盘：</p>
+<ol>
+<li><strong>定时任务</strong>: 内核中有后台线程（如 <code>pdflush</code> 或 <code>flusher</code> 线程）会周期性地检查脏页，并将其写回硬盘。</li>
+<li><strong>脏页比例</strong>: 当脏页占用的内存达到某个阈值时，系统会触发回写以释放内存。</li>
+<li><strong>用户主动调用 <code>sync()</code> 或 <code>fsync()</code></strong>: 比如你在 Java 中调用 <code>fos.flush()</code> 或 <code>fileChannel.force()</code>，这会明确告诉内核：“请立即将这个文件的数据写入硬盘”。</li>
+<li><strong>关闭文件 (<code>close()</code>)</strong>: 当你调用 <code>fos.close()</code> 时，它会隐式地触发一次 <code>flush</code> 操作，确保所有缓存数据在文件关闭前都写入硬盘。<strong>这是为什么在文件操作后总是强调要 <code>close()</code> 的重要原因之一！</strong></li>
+<li><strong>系统内存压力大</strong>: 当系统需要更多可用内存时，会把脏页写回硬盘，然后回收这部分内存。</li>
+</ol>
+</li>
+<li><p><strong>路径</strong>: <code>内核空间的 Page Cache -&gt; DMA 控制器 -&gt; 硬盘</code></p>
+</li>
+<li><p><strong>过程</strong>: 内核命令 DMA 控制器，将脏页中的数据传输到硬盘的对应位置。</p>
+</li>
+</ul>
+<hr>
+<h2 id="IO-流分类"><a href="#IO-流分类" class="headerlink" title="IO 流分类"></a>IO 流分类</h2><p>Java IO 流分类的核心是：</p>
+<ol>
+<li>以数据流向分类<ol>
+<li>输入流<ol>
+<li>从数据源读取数据到程序中</li>
+</ol>
+</li>
+<li>输出流<ol>
+<li>将数据从程序写出到目标位置</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以数据单位分类<ol>
+<li>字节流<ol>
+<li>以字节（8 bit）为基本单位进行读写</li>
+<li>适合处理所有类型的文件，尤其是二进制文件（如图片、音频、视频等）</li>
+</ol>
+</li>
+<li>字符流<ol>
+<li>以字符为基本单位进行读写</li>
+<li>专门为文本数据设计，仅适用于纯文本文件</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以来源&#x2F;目的地分类（节点流）<ol>
+<li>文件流</li>
+<li>内存流</li>
+<li>管道流</li>
+<li>网络流</li>
+</ol>
+</li>
+<li>在基础的节点流之上，Java 提供了一类处理流。<ol>
+<li>处理流不能单独存在，而是通过 “包裹其他流” 来对已有流进行功能增强。</li>
+<li>缓冲流</li>
+<li>数据流</li>
+<li>对象流</li>
+<li>转换流</li>
+<li>打印流</li>
+<li>压缩流</li>
+</ol>
+</li>
+</ol>
+<p>IO 流侧重于前两种分类方式，又形成 IO 世界的 “四大天王”：</p>
+<ol>
+<li>InputStream<ol>
+<li>字节输入流，抽象基类</li>
+</ol>
+</li>
+<li>OutputStream<ol>
+<li>字节输出流，抽象基类</li>
+</ol>
+</li>
+<li>Reader<ol>
+<li>字符输入流，抽象基类</li>
+</ol>
+</li>
+<li>Writer<ol>
+<li>字符输出流，抽象基类</li>
+</ol>
+</li>
+</ol>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png" srcset="/img/loading.gif" lazyload></p>
+<p>在这四个抽象类的基础上，根据功能又可分为：</p>
+<ol>
+<li>文件流<ol>
+<li>文件字节流<ol>
+<li>FileInputStream</li>
+<li>FileOutputStream</li>
+</ol>
+</li>
+<li>文件字符流<ol>
+<li>FileReader</li>
+<li>FileWriter</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>缓冲流<ol>
+<li>缓冲字节流<ol>
+<li>BufferedInputStream</li>
+<li>BufferedOutputStream</li>
+</ol>
+</li>
+<li>缓冲字符流<ol>
+<li>BufferedReader</li>
+<li>BufferedWriter</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>数据流<ol>
+<li>数据字节流<ol>
+<li>DataInputStream</li>
+<li>DataOutputStream</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对象流<ol>
+<li>对象字节流<ol>
+<li>ObjectInputStream</li>
+<li>ObjectOutputStream</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>转换流</li>
+<li>序列化流</li>
+<li>打印流</li>
+<li>压缩流</li>
+<li>Commons-io</li>
+</ol>
+<ul>
+<li><strong>文件流</strong>：<code>FileInputStream</code>, <code>FileOutputStream</code>, <code>FileReader</code>, <code>FileWriter</code></li>
+<li><strong>缓冲流</strong>（带缓存，加速读写）：<code>BufferedReader</code>, <code>BufferedWriter</code>, <code>BufferedInputStream</code>, <code>BufferedOutputStream</code></li>
+<li><strong>数据流</strong>（直接读写基本数据类型）：<code>DataInputStream</code>, <code>DataOutputStream</code></li>
+<li><strong>对象流</strong>（读写对象）：<code>ObjectInputStream</code>, <code>ObjectOutputStream</code></li>
+<li>随机访问流（在文件任意位置读写）RandomAccessFile</li>
+<li>转换流</li>
+<li>序列化流</li>
+<li>打印流</li>
+<li>压缩流</li>
+<li>Commons-io</li>
+</ul>
+<hr>
+<h2 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h2><h3 id="文件流"><a href="#文件流" class="headerlink" title="文件流"></a>文件流</h3><h4 id="文件字节流"><a href="#文件字节流" class="headerlink" title="文件字节流"></a>文件字节流</h4><h5 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h5><h6 id="FileInputStream-概述"><a href="#FileInputStream-概述" class="headerlink" title="FileInputStream 概述"></a>FileInputStream 概述</h6><p><code>FileInputStream</code> 是字节输入流，用于从文件中读取原始字节数据</p>
+<hr>
+<h6 id="FileInputStream-常用方法"><a href="#FileInputStream-常用方法" class="headerlink" title="FileInputStream 常用方法"></a>FileInputStream 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileInputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h5><h6 id="FileOutputStream-概述"><a href="#FileOutputStream-概述" class="headerlink" title="FileOutputStream 概述"></a>FileOutputStream 概述</h6><p><code>FileOutputStream</code> 是字节输出流，用于向文件写入原始字节数据</p>
+<hr>
+<h6 id="FileOutputStream-常用方法"><a href="#FileOutputStream-常用方法" class="headerlink" title="FileOutputStream 常用方法"></a>FileOutputStream 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileOutputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="文件字符流"><a href="#文件字符流" class="headerlink" title="文件字符流"></a>文件字符流</h4><h5 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h5><h6 id="FileReader-概述"><a href="#FileReader-概述" class="headerlink" title="FileReader 概述"></a>FileReader 概述</h6><p><code>FileReader</code> 是字符输入流，它用于从文件中读取文件内容，并将底层的字节自动解码为字符（根据解码方式，自动取出合适数量的字节来解码成一个完整字符）</p>
+<p>虽然理论上字节流可以用于处理所有文件类型，但它是以 <strong>“一个字节一个字节”</strong> 的方式读数据。如果只是复制文件，这完全没问题。但如果直接拿来显示文本，就容易出现乱码，因为常见的编码方式（如 UTF-8）并不是 “一个字符 &#x3D; 一个字节”，而是<strong>可变长度编码</strong>（1～4 个字节一个字符）。这就导致逐字节解析时可能把字符拆断，显示结果自然就乱了。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>JDK 11 之前，<code>FileReader</code> 只能使用系统默认解码规则<ol>
+<li>Mac<ol>
+<li>UTF-8</li>
+</ol>
+</li>
+<li>Linux<ol>
+<li>UTF-8</li>
+</ol>
+</li>
+<li>Windows<ol>
+<li>GBK</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="FileReader-常用方法"><a href="#FileReader-常用方法" class="headerlink" title="FileReader 常用方法"></a>FileReader 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileReader常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h5><h6 id="FileWriter-概述"><a href="#FileWriter-概述" class="headerlink" title="FileWriter 概述"></a>FileWriter 概述</h6><p><code>FileWriter</code> 是字符输出流，用于向文件写入字符数据</p>
+<hr>
+<h6 id="FileWriter-常用方法"><a href="#FileWriter-常用方法" class="headerlink" title="FileWriter 常用方法"></a>FileWriter 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileWriter常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><h3 id="缓冲字节流"><a href="#缓冲字节流" class="headerlink" title="缓冲字节流"></a>缓冲字节流</h3><h4 id="BufferedInputStream"><a href="#BufferedInputStream" class="headerlink" title="BufferedInputStream"></a>BufferedInputStream</h4><h5 id="BufferedInputStream-概述"><a href="#BufferedInputStream-概述" class="headerlink" title="BufferedInputStream 概述"></a>BufferedInputStream 概述</h5><p><code>BufferedInputStream</code> 在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对于普通的字节输入流（如 <code>FileInputStream</code>），如果逐字节读取，会导致底层频繁触发 I&#x2F;O 调用，效率很低。虽然它也支持 <code>read(byte[])</code> 批量读取，但这种方式需要我们自己准备和管理字节数组。而 <code>BufferedInputStream</code> 内部自带一个缓冲区（默认 8192 字节）。当缓存耗尽时，它会一次性尽量把缓冲区填满，这样接下来无论你是逐字节读取，还是用自己的外部数组接收数据，都优先从内存缓冲区取，避免频繁访问底层流</li>
+<li>实际代码中，我们仍常常会声明一个外部的 <code>byte[] b</code> 来装数据。这看似是 “缓存套缓存”，但别担心，内部缓冲负责减少系统 I&#x2F;O 调用，外部数组只是从内部缓存搬数据到用户逻辑做处理。内存中的拷贝开销极小，几乎可以忽略，而且速度极快，两者结合大大提高了整体性能</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="BufferedInputStream-常用方法"><a href="#BufferedInputStream-常用方法" class="headerlink" title="BufferedInputStream 常用方法"></a>BufferedInputStream 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedInputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="BufferedOutputStream"><a href="#BufferedOutputStream" class="headerlink" title="BufferedOutputStream"></a>BufferedOutputStream</h4><h5 id="BufferedOutputStream-概述"><a href="#BufferedOutputStream-概述" class="headerlink" title="BufferedOutputStream 概述"></a>BufferedOutputStream 概述</h5><p><code>BufferedOutputStream</code> 同样在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<hr>
+<h5 id="BufferedOutputStream-常用方法"><a href="#BufferedOutputStream-常用方法" class="headerlink" title="BufferedOutputStream 常用方法"></a>BufferedOutputStream 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedOutputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="缓冲字符流"><a href="#缓冲字符流" class="headerlink" title="缓冲字符流"></a>缓冲字符流</h3><h4 id="BufferedReader"><a href="#BufferedReader" class="headerlink" title="BufferedReader"></a>BufferedReader</h4><h5 id="BufferedReader-概述"><a href="#BufferedReader-概述" class="headerlink" title="BufferedReader 概述"></a>BufferedReader 概述</h5><p><code>BufferedReader</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<hr>
+<h5 id="BufferedReader-常用方法"><a href="#BufferedReader-常用方法" class="headerlink" title="BufferedReader 常用方法"></a>BufferedReader 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedReader常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h4><h5 id="BufferedWriter-概述"><a href="#BufferedWriter-概述" class="headerlink" title="BufferedWriter 概述"></a>BufferedWriter 概述</h5><p><code>BufferedWriter</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<hr>
+<h5 id="BufferedWriter-常用方法"><a href="#BufferedWriter-常用方法" class="headerlink" title="BufferedWriter 常用方法"></a>BufferedWriter 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedWriter常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><h3 id="对象流概述"><a href="#对象流概述" class="headerlink" title="对象流概述"></a>对象流概述</h3><p>对象流也常被称为 序列化流 &#x2F; 反序列化流，能够把 Java 内存中的对象序列化为 字节流，并且可以再从字节流中反序列化恢复成原始对象，这使得对象可以方便地 持久化到文件 或 通过网络传输。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>序列化的结果是 <strong>字节流</strong>，而不是字符流。字符流只适合处理文本数据；对象序列化必须通过字节流来表达。</li>
+<li>被序列化的类，必须实现 <code>Serializable</code> 接口。这个接口是一个标记接口，是通过 “接口” 的形式，给 JVM 或相关的类库打个标记，说：“这个类支持某种特性”，而只要我们 Implements Serializable，他就告诉 JVM 这个类的对象可以被序列化和反序列化</li>
+</ol>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Serializable</span> &#123; <br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>3. 序列化&#x2F;反序列化，一定要注意固定 serialVersionUID<br>    1. 我们之前定义了一个可序列化的类，如果对象已经序列化写入文件，当我们修改了类的结构（比如新增字段、修改字段类型等），在反序列化时就会报错<br>    2. 这是因为 Java 在序列化时会自动为类生成一个 serialVersionUID（版本号），并将其写入序列化文件。<br>    3. 反序列化时，JVM 会检查本地类的 serialVersionUID 是否与文件中存储的一致，如果不一致，就会抛出 <code>InvalidClassException</code>。<br>    4. 因此，我们通常会手动指定一个固定的 <strong>serialVersionUID</strong>，以避免因类结构的轻微调整导致反序列化失败：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;  <br>	<br>    <span class="hljs-comment">// 固定写法，建议不要修改</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">1L</span>;  <br>	<br>    <span class="hljs-keyword">private</span> String name;  <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;  <br>	<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getName</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> name;  <br>    &#125;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setName</span><span class="hljs-params">(String name)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.name = name;  <br>    &#125;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getAge</span><span class="hljs-params">()</span> &#123;  <br>        <span class="hljs-keyword">return</span> age;  <br>    &#125;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setAge</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span> &#123;  <br>        <span class="hljs-built_in">this</span>.age = age;  <br>    &#125;  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>4. 在 IDEA 中，可以开启这两个选项，这样当我们实现类 <code>Serializable</code> 接口但未定义 <code>serialVersionUID</code> 时会提醒你，并可以自动计算出一个 UID</p>
+</blockquote>
+<p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="ObjectInputStream"><a href="#ObjectInputStream" class="headerlink" title="ObjectInputStream"></a>ObjectInputStream</h3><h4 id="ObjectInputStream-概述"><a href="#ObjectInputStream-概述" class="headerlink" title="ObjectInputStream 概述"></a>ObjectInputStream 概述</h4><p><code>ObjectInputStream</code> 用于从底层的字节输入流中 <strong>反序列化</strong>（deserialize）对象，也就是说，把字节流还原成 Java 对象</p>
+<hr>
+<h4 id="ObjectInputStream-常用方法"><a href="#ObjectInputStream-常用方法" class="headerlink" title="ObjectInputStream 常用方法"></a>ObjectInputStream 常用方法</h4><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectInputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="ObjectOutputStream"><a href="#ObjectOutputStream" class="headerlink" title="ObjectOutputStream"></a>ObjectOutputStream</h3><h4 id="ObjectOutputStream-概述"><a href="#ObjectOutputStream-概述" class="headerlink" title="ObjectOutputStream 概述"></a>ObjectOutputStream 概述</h4><p><code>ObjectOutputStream</code> 用于把 Java 内存中的对象序列化为字节流</p>
+<hr>
+<h4 id="ObjectOutputStream-常用方法"><a href="#ObjectOutputStream-常用方法" class="headerlink" title="ObjectOutputStream 常用方法"></a>ObjectOutputStream 常用方法</h4><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectOutputStream常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><h3 id="字节打印流"><a href="#字节打印流" class="headerlink" title="字节打印流"></a>字节打印流</h3><h4 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h4><h3 id="字符打印流"><a href="#字符打印流" class="headerlink" title="字符打印流"></a>字符打印流</h3><h4 id="PrintWriter"><a href="#PrintWriter" class="headerlink" title="PrintWriter"></a>PrintWriter</h4><hr>
+<h2 id="压缩流"><a href="#压缩流" class="headerlink" title="压缩流"></a>压缩流</h2><h3 id="压缩流-1"><a href="#压缩流-1" class="headerlink" title="压缩流"></a>压缩流</h3><h3 id="解压缩流"><a href="#解压缩流" class="headerlink" title="解压缩流"></a>解压缩流</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-IO-%E6%B5%81/" class="category-chain-item">Java IO 流</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Java IO 流</div>
+      <div>https://wangjia5289.github.io/2025/08/18/笔记：JavaIO流/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 18, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/" title="笔记：Java IO 模式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Java IO 模式</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="笔记：Java 数据类型">
+                        <span class="hidden-mobile">笔记：Java 数据类型</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
