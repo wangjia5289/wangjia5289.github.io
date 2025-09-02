@@ -19,19 +19,18 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 IO 模式概述同步阻塞操作（BIO）Java BIO（同步阻塞式）采用传统的 “一连接一线程” 模型：每当有客户端发起连接请求，服务器端就会为其分配一个独立线程进行处理，如果某个连接长时间处于空闲状态，对应的线程也会一直阻塞等待，导致系统资源被浪费，增加了不必要的线程开销。">
+    <meta name="description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java IO 模式">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 IO 模式概述同步阻塞操作（BIO）Java BIO（同步阻塞式）采用传统的 “一连接一线程” 模型：每当有客户端发起连接请求，服务器端就会为其分配一个独立线程进行处理，如果某个连接长时间处于空闲状态，对应的线程也会一直阻塞等待，导致系统资源被浪费，增加了不必要的线程开销。">
+<meta property="og:description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BI">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-3.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-4.png">
 <meta property="article:published_time" content="2025-08-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-20T02:13:03.011Z">
+<meta property="article:modified_time" content="2025-08-27T13:49:49.675Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png">
@@ -228,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k words
+          2k words
         
       </span>
     
@@ -239,7 +238,7 @@
         
         
         
-          29 mins
+          17 mins
         
       </span>
     
@@ -294,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-20T10:13:03+08:00
+                    Last updated on 2025-08-27T21:49:49+08:00
                   
                   
 
@@ -305,160 +304,33 @@
               <div class="markdown-body">
                 
                 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/unique_perfect/article/details/115108640">https://blog.csdn.net/unique_perfect/article/details/115108640</a></p>
-<h2 id="IO-模式概述"><a href="#IO-模式概述" class="headerlink" title="IO 模式概述"></a>IO 模式概述</h2><h3 id="同步阻塞操作（BIO）"><a href="#同步阻塞操作（BIO）" class="headerlink" title="同步阻塞操作（BIO）"></a>同步阻塞操作（BIO）</h3><p>Java BIO（同步阻塞式）采用传统的 “一连接一线程” 模型：每当有客户端发起连接请求，服务器端就会为其分配一个独立线程进行处理，如果某个连接长时间处于空闲状态，对应的线程也会一直阻塞等待，导致系统资源被浪费，增加了不必要的线程开销。</p>
-<p>因此，Java BIO 适用于连接数较少且相对固定的应用场景，因为这种模型对服务器资源消耗较大，并发能力有限，难以应对大量并发连接。</p>
-<p>在 JDK1.4 之前，BIO 是 Java 网络编程的唯一选择，但其实现方式简单，代码易于理解和维护</p>
+<h2 id="同步阻塞（BIO）"><a href="#同步阻塞（BIO）" class="headerlink" title="同步阻塞（BIO）"></a>同步阻塞（BIO）</h2><h3 id="BIO-概述"><a href="#BIO-概述" class="headerlink" title="BIO 概述"></a>BIO 概述</h3><p>BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。</p>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="同步非阻塞操作（NIO）"><a href="#同步非阻塞操作（NIO）" class="headerlink" title="同步非阻塞操作（NIO）"></a>同步非阻塞操作（NIO）</h3><h3 id="异步阻塞操作"><a href="#异步阻塞操作" class="headerlink" title="异步阻塞操作"></a>异步阻塞操作</h3><hr>
-<h3 id="异步非阻塞操作（AIO）"><a href="#异步非阻塞操作（AIO）" class="headerlink" title="异步非阻塞操作（AIO）"></a>异步非阻塞操作（AIO）</h3><p>Java AIO（异步非阻塞式）采用 “一个有效请求对应一个线程” 的模式，客户端的 I&#x2F;O 请求由操作系统先完成，然后再通知服务器应用启动线程进行处理。通常适用于连接数较多、且连接时间较长的场景。</p>
-<p>因此 Java AIO 适用于连接数多且连接时间较长（重操作）的架构，例如相册服务器。它能够充分利用操作系统参与并发处理。从 JDK 7 开始提供支持，但编程相对复杂。</p>
+<h3 id="伪异步-IO"><a href="#伪异步-IO" class="headerlink" title="伪异步 IO"></a>伪异步 IO</h3><p>在最传统的 <strong>BIO 模式</strong> 下，服务端的处理方式是 <strong>一连接一线程</strong>，每当有一个客户端接入，就创建一个线程专门处理这个连接，如果同时有 1000 个客户端，那么服务端就要开 1000 个线程去等待</p>
+<p>然而，<strong>线程资源并不是无限的</strong>，Java 中每个线程都会占用一定的内存（线程栈空间），而且操作系统能同时调度的线程数也有限。当线程数急剧膨胀，就会导致：内存消耗过大 → 堆栈溢出、线程创建失败，最终可能导致进程宕机或僵死</p>
+<p>我们可以采用 <strong>线程池 + 任务队列</strong> 的方式进行优化：</p>
+<ol>
+<li>服务端接收到新的客户端连接后，不再立即创建独立线程，而是将客户端的 <code>Socket</code> 封装成一个 <strong>任务（Runnable&#x2F;Callable）</strong></li>
+<li>这个任务会被放入 <strong>线程池的任务队列</strong>，后台仅维护固定数量的工作线程（例如 10 或 20 个）</li>
+<li>工作线程会不断从队列中取出任务并执行，从而保证线程数量可控</li>
+</ol>
+<p>这样一来，即使有大量客户端并发接入，也不会出现无节制的新建线程，系统能保持稳定运行。</p>
+<p>需要注意的是，这种方式只是解决了 <strong>“线程爆炸”</strong> 的资源问题，本质上仍然是 <strong>阻塞 I&#x2F;O</strong>，因为每个工作线程在执行具体的 IO 操作时依然会阻塞等待数据，所以这被称为 伪异步 IO</p>
 <hr>
-<h3 id="1-2-同步、异步、阻塞、非阻塞"><a href="#1-2-同步、异步、阻塞、非阻塞" class="headerlink" title="1.2. 同步、异步、阻塞、非阻塞"></a>1.2. 同步、异步、阻塞、非阻塞</h3><p>我们通常将操作分为下面的操作：</p>
-<ol>
-<li><p>同步操作</p>
-<ol>
-<li>同步简单操作</li>
-<li>同步阻塞操作</li>
-</ol>
-</li>
-<li><p>&#x3D;&#x3D;同步操作&#x3D;&#x3D;：</p>
-<ol>
-<li><font color="#00b0f0">同步简单操作</font>：<ol>
-<li>快速执行、无明显耗时、不涉及复杂计算或 I&#x2F;O</li>
-</ol>
-</li>
-<li><font color="#00b0f0">同步阻塞操作</font>：<ol>
-<li>设计耗时计算或潜在阻塞操作（如 I&#x2F;O），但是在当前线程同步执行</li>
-</ol>
-</li>
-<li>同步非阻塞操作</li>
-</ol>
-</li>
-<li><p>&#x3D;&#x3D;异步操作&#x3D;&#x3D;：</p>
-<ol>
-<li><font color="#00b0f0">异步阻塞操作</font>：<ol>
-<li>将同步阻塞操作通过异步机制（如线程池）执行，“伪非阻塞” 操作</li>
-</ol>
-</li>
-<li><font color="#00b0f0">异步非阻塞操作</font>：<ol>
-<li>完全非阻塞，通常是基于时间驱动或回调，依赖外部异步机制（如 <code>WebClient</code>、 <code>R2DBC</code>、<code>CompletableFuture</code>）</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>&#x3D;&#x3D;补充：I&#x2F;O&#x3D;&#x3D;：</p>
-<ol>
-<li>I&#x2F;O，即输入&#x2F;输出（Input&#x2F;Output），是指计算机与外部世界的信息交换过程，包括但不限于：<ol>
-<li><font color="#00b0f0">网络请求</font>：<ol>
-<li>如调用其他 HTTP API 接口（RestTemplate、WebClient）、JDBC、R2DBC 等等</li>
-</ol>
-</li>
-<li><font color="#00b0f0">文件操作</font>：<ol>
-<li>读取或写入硬盘上的文件</li>
-</ol>
-</li>
-<li><font color="#00b0f0">用户交互</font>：<ol>
-<li>键盘、鼠标等输入设备的信号获取，以及向显示器等输出设备发送信息。</li>
-</ol>
-</li>
-<li><font color="#00b0f0">硬件通信</font>：<ol>
-<li>与打印机、扫描仪等外部设备的数据交换</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>这是一个很好的问题，因为这正是 Java 线程状态最容易让人感到困惑的地方。我们来总结一下，哪些常见的操作会导致线程在<strong>操作系统（OS）层面处于阻塞状态</strong>，但在 **Java 层面却依然是 <code>RUNNABLE</code>**。</p>
-<p>这些操作通常都与 <strong>I&#x2F;O (输入&#x2F;输出)</strong> 有关，因为 I&#x2F;O 操作需要等待外部设备（如硬盘、网卡）的响应，而这个等待过程是由操作系统管理的。</p>
-<hr>
-<h3 id="1-3-常见的-I-O-阻塞操作总结"><a href="#1-3-常见的-I-O-阻塞操作总结" class="headerlink" title="1.3. 常见的 I&#x2F;O 阻塞操作总结"></a>1.3. 常见的 I&#x2F;O 阻塞操作总结</h3><h4 id="1-3-1-文件-I-O"><a href="#1-3-1-文件-I-O" class="headerlink" title="1.3.1. 文件 I&#x2F;O"></a>1.3.1. 文件 I&#x2F;O</h4><p>当线程执行文件读写操作时，如果数据不能立即就绪，就会发生阻塞。</p>
-<ul>
-<li><p><strong>操作</strong>：</p>
-<ul>
-<li><p><code>FileInputStream.read()</code>：从文件中读取数据。</p>
-</li>
-<li><p><code>FileOutputStream.write()</code>：向文件中写入数据。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>底层行为</strong>：Java 的 <code>native</code> 方法会向操作系统发出系统调用，请求读写磁盘。如果硬盘正在忙碌或数据量大，OS 会将线程挂起，直到 I&#x2F;O 完成。</p>
-</li>
-<li><p><strong>Java 线程状态</strong>：**<code>RUNNABLE</code>**。</p>
-</li>
-</ul>
-<h4 id="1-3-2-网络-I-O"><a href="#1-3-2-网络-I-O" class="headerlink" title="1.3.2. 网络 I&#x2F;O"></a>1.3.2. 网络 I&#x2F;O</h4><p>网络通信是 I&#x2F;O 阻塞最常见的场景之一。</p>
-<ul>
-<li><p><strong>操作</strong>：</p>
-<ul>
-<li><p><code>Socket.accept()</code>：等待客户端连接。</p>
-</li>
-<li><p><code>Socket.connect()</code>：连接远程服务器。</p>
-</li>
-<li><p><code>Socket.read()</code> &#x2F; <code>Socket.write()</code>：从网络中读取或写入数据。</p>
-</li>
-<li><p><code>DatagramSocket.receive()</code>：接收 UDP 数据包。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>底层行为</strong>：<code>native</code> 方法会向操作系统请求网络资源。当线程在等待网络连接建立、或者等待数据从网络到达时，OS 会将线程挂起。</p>
-</li>
-<li><p><strong>Java 线程状态</strong>：**<code>RUNNABLE</code>**。</p>
-</li>
-</ul>
-<h4 id="1-3-3-数据库-I-O"><a href="#1-3-3-数据库-I-O" class="headerlink" title="1.3.3. 数据库 I&#x2F;O"></a>1.3.3. 数据库 I&#x2F;O</h4><p>与数据库的交互本质上也是网络或文件 I&#x2F;O。</p>
-<ul>
-<li><p><strong>操作</strong>：</p>
-<ul>
-<li><p><code>Connection.createStatement()</code></p>
-</li>
-<li><p><code>Statement.executeQuery()</code></p>
-</li>
-<li><p><code>ResultSet.next()</code></p>
-</li>
-</ul>
-</li>
-<li><p><strong>底层行为</strong>：JDBC 驱动通过网络向数据库服务器发送请求。线程需要等待服务器处理请求并返回结果。</p>
-</li>
-<li><p><strong>Java 线程状态</strong>：**<code>RUNNABLE</code>**。</p>
-</li>
-</ul>
-<hr>
-<h3 id="1-4-为什么这些操作会这样？"><a href="#1-4-为什么这些操作会这样？" class="headerlink" title="1.4. 为什么这些操作会这样？"></a>1.4. 为什么这些操作会这样？</h3><p>核心原因在于 <strong>Java <code>Thread.State</code> 的设计哲学</strong>。</p>
-<ul>
-<li><p><code>BLOCKED</code>, <code>WAITING</code>, <code>TIMED_WAITING</code> 这些状态，是专门为了反映 <strong>Java 语言层面的同步和等待机制</strong>。它们是 JVM 精心管理和控制的状态，比如等待 <code>synchronized</code> 锁或调用 <code>wait()</code> 方法。</p>
-</li>
-<li><p><strong>I&#x2F;O 阻塞</strong>是一个<strong>操作系统层面的行为</strong>。当 Java 调用 <code>native</code> 方法进行 I&#x2F;O 时，它把控制权交给了 OS。从 JVM 的角度看，线程只是在执行一个 <code>native</code> 方法，它并没有通过 Java 自己的机制进入等待。一旦 OS 的 I&#x2F;O 操作完成，这个 <code>native</code> 方法就会返回，线程就能继续执行 Java 代码。因此，JVM 认为这个线程一直都是<strong>可运行</strong>的。</p>
-</li>
-</ul>
-<p>通过理解这个区别，你就能更好地诊断和分析 Java 多线程程序中的性能瓶颈，区分是由于锁竞争（Java <code>BLOCKED</code>）还是由于 I&#x2F;O 等待（Java <code>RUNNABLE</code>，OS 阻塞）造成的了。</p>
-<h2 id="同步阻塞式（BIO）"><a href="#同步阻塞式（BIO）" class="headerlink" title="同步阻塞式（BIO）"></a>同步阻塞式（BIO）</h2><h3 id="BIO-工作机制"><a href="#BIO-工作机制" class="headerlink" title="BIO 工作机制"></a>BIO 工作机制</h3><p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-2.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="同步非阻塞式（NIO）"><a href="#同步非阻塞式（NIO）" class="headerlink" title="同步非阻塞式（NIO）"></a>同步非阻塞式（NIO）</h2><h3 id="NIO-概述"><a href="#NIO-概述" class="headerlink" title="NIO 概述"></a>NIO 概述</h3><p>NIO（同步非阻塞式）采用同步非阻塞模型，服务器通常通过 “一个线程处理多个连接” 的方式工作，所有客户端的连接请求都会注册到多路复用器（Selector）上，服务器线程通过轮询 Selector，发现有 I&#x2F;O 事件时才进行处理，从而大大提升了资源利用率和并发能力。</p>
-<p>因此，NIO 适合处理大量、短时连接的场景（如聊天服务器、弹幕系统、服务器间通信等）。</p>
+<h2 id="同步非阻塞（NIO）"><a href="#同步非阻塞（NIO）" class="headerlink" title="同步非阻塞（NIO）"></a>同步非阻塞（NIO）</h2><h3 id="NIO-概述"><a href="#NIO-概述" class="headerlink" title="NIO 概述"></a>NIO 概述</h3><p>NIO（New IO）通过 “一个线程处理多个连接” 的方式，所有客户端的连接都会注册到多路复用器（Selector）上，服务器线程通过轮询 Selector，发现有 IO 事件时才进行处理，从而大大提升了资源利用率和并发能力。<br><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-3.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>BIO 以流的方式处理数据，而 NIO 以块的方式处理数据，块 IO 的效率比流 IO 高很多</li>
-<li>BIO 是阻塞的，即便xxxx，线程也是阻塞的，而 NIO 则是非阻塞的，线程是xxxxx</li>
-<li>BIO 是基于字节流和字符流进行操作的，而 NIO 是基于 Channel 和 Buffer 进行操作的<ol>
-<li>数据总是从通道读取到缓冲区，或者从缓冲区写道通道</li>
-<li>程序读数据：网络 &#x2F; 文件 ➔  数据 ➔  Channel ➔  Buffer ➔  程序</li>
-<li>程序写数据：程序 ➔  Buffer ➔  Channel ➔  数据 ➔  网络 &#x2F; 文件</li>
-<li>BIO 中的要么是输入流，要么是输出流，是单向的，只能读或者只能写，但是 NIO 中的 Buffer 是既可以读也可以写，Channel 也是既可以读也可以写（依靠与 Buffer）</li>
+<li>NIO 的读写流程<ol>
+<li>程序读数据：硬件（磁盘&#x2F;网卡） ➔ 内核空间 ➔ Channel ➔ Buffer</li>
+<li>程序写数据：Buffer ➔ Channel ➔ 内核空间 ➔ 硬件（磁盘&#x2F;网卡）</li>
 </ol>
 </li>
 </ol>
 </blockquote>
 <hr>
-<h3 id="NIO-原理"><a href="#NIO-原理" class="headerlink" title="NIO 原理"></a>NIO 原理</h3><h4 id="NIO-原理图"><a href="#NIO-原理图" class="headerlink" title="NIO 原理图"></a>NIO 原理图</h4><p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-3.png" srcset="/img/loading.gif" lazyload><br>通道（Channel）表示与 IO 设备（例如文件、套接字）的连接。</p>
-<p>缓冲区（Buffer）是一个内存块，底层由数组实现，数据的读写都是通过 Buffer 完成的。</p>
-<p>一个线程对应一个 Selector，一个 Selector 可以管理多个 Channel，而一个 Channel 通常对应一个 Buffer。程序在各个 Channel 之间的切换由时间和事件决定，Selector 会根据不同事件在各个通道间切换。</p>
-<hr>
-<h4 id="缓冲区（Buffer）"><a href="#缓冲区（Buffer）" class="headerlink" title="缓冲区（Buffer）"></a>缓冲区（Buffer）</h4><h5 id="Buffer-概述"><a href="#Buffer-概述" class="headerlink" title="Buffer 概述"></a>Buffer 概述</h5><p>Buffer 就是一个数组，可以存放多个相同类型的数据。</p>
-<p>想要掌握 Buffer，必须了解其几个重要概念：</p>
+<h3 id="NIO-组件"><a href="#NIO-组件" class="headerlink" title="NIO 组件"></a>NIO 组件</h3><h4 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h4><h5 id="Buffer-概述"><a href="#Buffer-概述" class="headerlink" title="Buffer 概述"></a>Buffer 概述</h5><p>Buffer 就是一个数组，可以存放多个相同类型的数据。想要掌握 Buffer，必须了解其几个重要概念：</p>
 <ol>
 <li>容量 (capacity) <ol>
 <li>作为内存块，Buffer 具有固定大小，也称为 “容量”</li>
@@ -485,7 +357,7 @@
 </ol>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-4.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h5 id="Buffer-分类"><a href="#Buffer-分类" class="headerlink" title="Buffer 分类"></a>Buffer 分类</h5><p>Buffer 是一个抽象类，根据数据类型的不同，常用子类有：</p>
+<h5 id="Buffer-分类"><a href="#Buffer-分类" class="headerlink" title="Buffer 分类"></a>Buffer 分类</h5><p>Buffer 根据存储类型，可分为：</p>
 <ol>
 <li>ByteBuffer</li>
 <li>ShortBuffer</li>
@@ -495,73 +367,45 @@
 <li>FloatBuffer</li>
 <li>DoubleBuffer</li>
 </ol>
-<p>这些 Buffer 类在管理数据的方法上都非常相似，区别仅在于所管理的数据类型不同。</p>
 <hr>
-<h5 id="Buffer-创建-获取方式"><a href="#Buffer-创建-获取方式" class="headerlink" title="Buffer 创建&#x2F;获取方式"></a>Buffer 创建&#x2F;获取方式</h5><h6 id="直接缓冲区"><a href="#直接缓冲区" class="headerlink" title="直接缓冲区"></a>直接缓冲区</h6><p>直接缓冲区是指：Buffer 分配在操作系统的内存中，而不是 JVM 堆内存上。在 IO 操作中，直接缓冲区性能更高，因为它可以直接作用于本地系统的 IO。</p>
-<p>从数据流的角度来看：</p>
+<h5 id="Buffer-常用方法"><a href="#Buffer-常用方法" class="headerlink" title="Buffer 常用方法"></a>Buffer 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABuffer%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：Buffer常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h4><h5 id="Channel-概述"><a href="#Channel-概述" class="headerlink" title="Channel 概述"></a>Channel 概述</h5><hr>
+<h5 id="Channel-分类"><a href="#Channel-分类" class="headerlink" title="Channel 分类"></a>Channel 分类</h5><p>在 Java IO 流中，如果以来源&#x2F;目的地进行分类，有：</p>
 <ol>
-<li>直接缓冲区的数据流<ol>
-<li>本地 IO ➔  直接缓存 ➔  本地 IO</li>
+<li>文件流</li>
+<li>内存流</li>
+<li>管道流</li>
+<li>网络流</li>
 </ol>
-</li>
-<li>非直接缓冲区的数据流<ol>
-<li>本地 IO ➔  直接内存 ➔  非直接内存 ➔  直接内存 ➔  本地 IO</li>
-</ol>
-</li>
-</ol>
-<p>需要注意的是，虽然 IO 性能更高，虽然直接缓冲区 IO 性能更高，但在分配和回收时开销较大。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 ByteBuffer 类型的直接缓冲区</span><br><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.allocateDirect(<span class="hljs-number">1024</span>); <span class="hljs-comment">// 1024 字节</span><br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!NOTE] 注意事项</p>
+<p>这里除了内存流没有对应的 Channel，其他三种流都有对应的 Channel</p>
 <ol>
-<li>判断 Buffer 是否为直接缓冲区，可调用 <code>xxBuffer.isDirect()</code>，返回 <code>true</code> 就表示是直接缓冲区。</li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.allocate(<span class="hljs-number">1024</span>);<br><br>System.out.println(buffer.isDirect());<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h6 id="非直接缓冲区"><a href="#非直接缓冲区" class="headerlink" title="非直接缓冲区"></a>非直接缓冲区</h6><p>非直接缓冲区是指：Buffer 分配在JVM 堆内存上</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 ByteBuffer 类型的非直接缓冲区</span><br><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.allocate(<span class="hljs-number">1024</span>);<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="Buffer-常用方法"><a href="#Buffer-常用方法" class="headerlink" title="Buffer 常用方法"></a>Buffer 常用方法</h5><h2 id="Buffer-的几个模式切换口诀"><a href="#Buffer-的几个模式切换口诀" class="headerlink" title="Buffer 的几个模式切换口诀"></a>Buffer 的几个模式切换口诀</h2><ul>
-<li><p><strong>写模式</strong>（写入数据 → <code>read(channel, buffer)</code>、<code>put()</code>）：</p>
-<ul>
-<li><code>position</code> 走到最后写入的位置</li>
-<li><code>limit = capacity</code></li>
-</ul>
-</li>
-<li><p><strong>flip() → 切换到读模式</strong></p>
-<ul>
-<li><code>limit = position</code>（就是写入的长度）</li>
-<li><code>position = 0</code>，从头读</li>
-</ul>
-</li>
-<li><p><strong>读模式</strong>（读出数据 → <code>get()</code>）：</p>
-<ul>
-<li><code>position</code> 表示读到哪了</li>
-<li><code>limit</code> 是有效数据的末尾</li>
-</ul>
-</li>
-<li><p>**clear()**（准备再次写）：</p>
-<ul>
-<li><code>position = 0</code></li>
-<li><code>limit = capacity</code></li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="通道（Channel）"><a href="#通道（Channel）" class="headerlink" title="通道（Channel）"></a>通道（Channel）</h4><h5 id="Channel-概述"><a href="#Channel-概述" class="headerlink" title="Channel 概述"></a>Channel 概述</h5><p>Channel 是 IO 源与目标之间打开的连接。Channel 类似于传统的 “流”，但有一点不同：Channel 本身不能直接访问数据，它只能与 Buffer 进行交互</p>
-<hr>
-<h5 id="Channel-分类"><a href="#Channel-分类" class="headerlink" title="Channel 分类"></a>Channel 分类</h5><p>Channel 是一个接口，常用实现类有：</p>
-<ol>
-<li>文件通道<ol>
+<li>文件流对应 Channel<ol>
 <li>FileChannel</li>
 </ol>
 </li>
-<li>网络通道<ol>
-<li>TCP 通道<ol>
+<li>管道流对应 Channel<ol>
+<li>写入端 Channel<ol>
+<li>Pipe.SinkChannel</li>
+</ol>
+</li>
+<li>读取端 Channel<ol>
+<li>Pipe.SourceChannel</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>网络流对应 Channel<ol>
+<li>TCP Channel<ol>
 <li>SocketChannel<ol>
 <li>与远程主机进行 TCP 通信的通道</li>
 </ol>
@@ -572,7 +416,7 @@
 </li>
 </ol>
 </li>
-<li>UDP 通道<ol>
+<li>UDP Channel<ol>
 <li>DatagramChannel<ol>
 <li>UDP 读写网络中的通道</li>
 </ol>
@@ -585,28 +429,24 @@
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
+<li>虽然一般管道都是可读可写的双向管道但是 NIO Pipe 的设计模型就是一个负责都一个负责写的单向管道</li>
 <li><code>FileChannel</code> 实际上是阻塞的，而且不像网络通道那样可以通过 <code>configureBlocking(false)</code> 设置为非阻塞，因此不属于多路复用的一类，不能注册到 Selector</li>
+<li>虽然 Pipe 也支持非阻塞，也能注册到 Selector，但主要是在单机程序内部做信号桥，用于线程间通信，不是网络通信。</li>
 <li>上述 Channel 分类只是 NIO 模式下 可用的通道类型。还有很多其他类型的 Channel，例如 AIO 使用的通道，并未在这里描述</li>
 </ol>
 </blockquote>
 <hr>
-<h5 id="FileChannel"><a href="#FileChannel" class="headerlink" title="FileChannel"></a>FileChannel</h5><h6 id="FileChannel-概述"><a href="#FileChannel-概述" class="headerlink" title="FileChannel 概述"></a>FileChannel 概述</h6><p><code>FileChannel</code> 来自 Java NIO 包，表面上看似属于“新 I&#x2F;O”，因此很多人会以为它支持非阻塞操作。但实际上，当你调用 <code>fileChannel.read(ByteBuffer)</code> 或 <code>fileChannel.write(ByteBuffer)</code> 时，当前线程会一直等待，直到数据传输完成才返回。</p>
+<h5 id="FileChannel"><a href="#FileChannel" class="headerlink" title="FileChannel"></a>FileChannel</h5><h6 id="FileChannel-概述"><a href="#FileChannel-概述" class="headerlink" title="FileChannel 概述"></a>FileChannel 概述</h6><p><code>FileChannel</code> 来自 Java NIO 包，表面上看似属于“新 I&#x2F;O”，因此很多人会以为它支持非阻塞操作。但实际上，当你调用 <code>fileChannel.read(ByteBuffer)</code> 或 <code>fileChannel.write(ByteBuffer)</code> 时，当前线程还是会一直等待，直到数据传输完成才返回。</p>
 <p>你可能会问：既然 <code>FileChannel</code> 也是阻塞的，为什么不直接使用 BIO 的输入流和输出流，而要用它并配合 Buffer？这是不是显得有些麻烦？</p>
 <p>其实，<code>FileChannel</code> 的优势并不在于非阻塞，而体现在以下几个方面：</p>
 <ol>
-<li>块读写<ol>
-<li>BIO 的字节流和字符流在读写时是一个字节或一个字符一个字符地操作</li>
-<li>而 <code>FileChannel</code> 可以直接将数据读写到 <code>ByteBuffer</code> 中，实现<strong>块读写</strong>，效率更高</li>
-</ol>
-</li>
 <li>随机访问<ol>
 <li><code>FileChannel</code> 可以直接跳转到文件的任意位置去读写（通过 <code>position(long)</code> 方法）</li>
-<li>虽然 <code>RandomAccessFile</code> 也支持随机访问，但 <code>FileChannel</code> 的效率更高</li>
 </ol>
 </li>
 <li>内存映射<ol>
 <li><code>map()</code> 方法可以把文件直接映射到内存中。这样你像操作内存数组一样去读写文件（它底层利用操作系统的虚拟内存机制）</li>
-<li>在在处理超大文件时，这种方式比传统 BIO 效率高得多</li>
+<li>在处理超大文件时，这种方式比传统 BIO 效率高得多</li>
 </ol>
 </li>
 <li>零拷贝文件传输<ol>
@@ -620,15 +460,6 @@
 </li>
 </ol>
 <hr>
-<h6 id="FileChannel-创建-获取方式"><a href="#FileChannel-创建-获取方式" class="headerlink" title="FileChannel 创建&#x2F;获取方式"></a>FileChannel 创建&#x2F;获取方式</h6><p><strong>FileChannel</strong> 可以通过 <code>FileInputStream</code>、<code>FileOutputStream</code>、<code>RandomAccessFile</code> 的 <code>getChannel()</code> 方法获取：</p>
-<ol>
-<li>使用 <code>FileInputStream</code> 获取的是读通道</li>
-<li>使用 <code>FileOutputStream</code> 获取的是写通道</li>
-<li>使用 <code>RandomAccessFile</code> 获取的是读写通道</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 FileInputStream</span><br><span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fileInputStream</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;test.txt&quot;</span>);<br><br><span class="hljs-comment">// 获取 FileChannel</span><br><span class="hljs-type">FileChannel</span> <span class="hljs-variable">fileChannel</span> <span class="hljs-operator">=</span> fileInputStream.getChannel();<br></code></pre></td></tr></table></figure>
-
-<hr>
 <h6 id="FileChannel-常用方法"><a href="#FileChannel-常用方法" class="headerlink" title="FileChannel 常用方法"></a>FileChannel 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileChannel常用方法</a></li>
@@ -640,8 +471,37 @@
 </li>
 </ol>
 <hr>
+<h5 id="SocketChannel"><a href="#SocketChannel" class="headerlink" title="SocketChannel"></a>SocketChannel</h5><h6 id="SocketChannel-概述"><a href="#SocketChannel-概述" class="headerlink" title="SocketChannel 概述"></a>SocketChannel 概述</h6><p><code>SocketChannel</code> 是客户端连接远程服务器时使用的通道，既支持阻塞模式，也支持非阻塞模式。在非阻塞模式下，可以将多个通道注册到同一个 <code>Selector</code>，再通过轮询机制高效地管理和处理大量连接。</p>
+<hr>
+<h6 id="SocketChannel-常用方法"><a href="#SocketChannel-常用方法" class="headerlink" title="SocketChannel 常用方法"></a>SocketChannel 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：SocketChannel常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h4 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h4><h5 id="Selector-概述"><a href="#Selector-概述" class="headerlink" title="Selector 概述"></a>Selector 概述</h5><p>Selector 是 <code>SelectableChannel</code> 对象的多路复用器，能够检测多个已注册通道上是否有事件发生，如果有事件发生，就会获取相应的事件，并对每个事件进行处理，从而实现一个线程同时监控多个 <code>SelectableChannel</code> 的 IO 状态</p>
+<hr>
+<h5 id="Selector-常用方法"><a href="#Selector-常用方法" class="headerlink" title="Selector 常用方法"></a>Selector 常用方法</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ASelector%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：Selector常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-2"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-2" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-3"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-3" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-4"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-4" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-5"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-5" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h3 id="异步非阻塞操作（AIO）"><a href="#异步非阻塞操作（AIO）" class="headerlink" title="异步非阻塞操作（AIO）"></a>异步非阻塞操作（AIO）</h3><p>Java AIO（异步非阻塞式）采用 “一个有效请求对应一个线程” 的模式，客户端的 I&#x2F;O 请求由操作系统先完成，然后再通知服务器应用启动线程进行处理。通常适用于连接数较多、且连接时间较长的场景。</p>
+<p>因此 Java AIO 适用于连接数多且连接时间较长（重操作）的架构，例如相册服务器。它能够充分利用操作系统参与并发处理。从 JDK 7 开始提供支持，但编程相对复杂。</p>
+<hr>
 <h6 id="SocketChannel、ServerSocketChannel"><a href="#SocketChannel、ServerSocketChannel" class="headerlink" title="SocketChannel、ServerSocketChannel"></a>SocketChannel、ServerSocketChannel</h6><p><font color="#92d050">1. 客户端</font></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 SocketChannel</span><br><span class="hljs-type">SocketChannel</span> <span class="hljs-variable">socketChannel</span> <span class="hljs-operator">=</span> SocketChannel.open();<br><br><span class="hljs-comment">// 让 SocketChannel 连接到指定 IP 地址和端口</span><br>socketChannel.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
+
+
 
 <p><font color="#92d050">2. 服务端</font></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 ServerSocketChannel</span><br><span class="hljs-type">ServerSocketChannel</span> <span class="hljs-variable">serverChannel</span> <span class="hljs-operator">=</span> ServerSocketChannel.open();<br><br><span class="hljs-comment">// 让 ServerSocketChannel 监听指定 IP 地址和端口</span><br>serverChannel.bind(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;192.168.1.100&quot;</span>, <span class="hljs-number">8080</span>););<br></code></pre></td></tr></table></figure>
@@ -658,12 +518,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 DatagramChannel</span><br><span class="hljs-type">DatagramChannel</span> <span class="hljs-variable">datagramChannel</span> <span class="hljs-operator">=</span> DatagramChannel.open();<br><br><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.wrap(<span class="hljs-string">&quot;Hello&quot;</span>.getBytes());<br>datagramChannel.send(buffer, <span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="选择器（Selector）"><a href="#选择器（Selector）" class="headerlink" title="选择器（Selector）"></a>选择器（Selector）</h4><h5 id="Selector-概述"><a href="#Selector-概述" class="headerlink" title="Selector 概述"></a>Selector 概述</h5><p>Selector 是 <code>SelectableChannel</code> 对象的多路复用器，能够检测多个已注册通道上是否有事件发生，如果有事件发生，就会获取相应的事件，并对每个事件进行处理，从而实现一个线程同时监控多个 <code>SelectableChannel</code> 的 IO 状态</p>
-<hr>
-<h5 id="Selector-获取方式"><a href="#Selector-获取方式" class="headerlink" title="Selector 获取方式"></a>Selector 获取方式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Selector</span> <span class="hljs-variable">selector</span> <span class="hljs-operator">=</span> Selector.open();<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h1 id="ssssssssssssssssssssssss"><a href="#ssssssssssssssssssssssss" class="headerlink" title="ssssssssssssssssssssssss"></a>ssssssssssssssssssssssss</h1><h1 id="ssssssssssssssssssssssss-1"><a href="#ssssssssssssssssssssssss-1" class="headerlink" title="ssssssssssssssssssssssss"></a>ssssssssssssssssssssssss</h1>
                 
               </div>
             

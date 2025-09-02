@@ -19,21 +19,21 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="IO 流基础用户态与内核态在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域 限制的目的就是保护">
+    <meta name="description" content="1. IO 流基础1.1. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java IO 流">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="IO 流基础用户态与内核态在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域 限制的目的就是保护">
+<meta property="og:description" content="1. IO 流基础1.1. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png">
 <meta property="article:published_time" content="2025-08-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-25T09:19:51.334Z">
+<meta property="article:modified_time" content="2025-08-28T00:37:09.554Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.4k words
+          5.1k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          37 mins
+          43 mins
         
       </span>
     
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-25T17:19:51+08:00
+                    Last updated on 2025-08-28T08:37:09+08:00
                   
                   
 
@@ -303,127 +303,202 @@
             
               <div class="markdown-body">
                 
-                <h2 id="IO-流基础"><a href="#IO-流基础" class="headerlink" title="IO 流基础"></a>IO 流基础</h2><h3 id="用户态与内核态"><a href="#用户态与内核态" class="headerlink" title="用户态与内核态"></a>用户态与内核态</h3><p>在理解 Java 的 I&#x2F;O 之前，一个关键的基础概念就是 <strong>用户态（User Mode）和内核态（Kernel Mode）</strong>，这决定了你的程序到底能不能直接操作硬件和系统资源。</p>
+                <h2 id="1-IO-流基础"><a href="#1-IO-流基础" class="headerlink" title="1. IO 流基础"></a>1. IO 流基础</h2><h3 id="1-1-用户态与内核态"><a href="#1-1-用户态与内核态" class="headerlink" title="1.1. 用户态与内核态"></a>1.1. 用户态与内核态</h3><p>计算机 IO（输入、输出）本质上都是：<strong>用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡）</strong></p>
+<p>在理解 IO 之前，一个关键的基础概念就是 <strong>用户态（User Mode）和内核态（Kernel Mode）</strong>，这<strong>决定了你的程序到底能不能直接操作硬件和系统资源</strong>。</p>
 <ol>
 <li>用户态（User Mode）<ol>
 <li>这是应用程序（比如你的 Java 代码）运行的地方。</li>
-<li>在这里，程序不能直接访问硬件（比如硬盘、网卡），也不能随便操作操作系统关键内存区域</li>
-<li>限制的目的就是保护系统稳定性。想象如果一个小程序能随便写进硬盘文件系统的元数据，整个系统就可能立刻崩溃</li>
+<li>在这个级别下，程序既不能直接访问硬件设备（如硬盘、网卡），也无法随意操作操作系统的关键内存区域，以及干预进程的调度机制。</li>
+<li>有这种限制的目的，就是保护系统稳定性。想象如果一个小程序能随便写进硬盘文件系统的元数据，整个系统就可能立刻崩溃</li>
 </ol>
 </li>
 <li>内核态（Kernel Mode）<ol>
 <li>这是操作系统内核运行的地方</li>
-<li>在这个特权级别下，代码可以执行任何敏感指令：访问硬件、操作内存、调度进程 等</li>
+<li>在这个特权级别下，代码可以执行任何敏感指令：访问硬件、操作内存、调度进程等</li>
 </ol>
 </li>
 </ol>
-<p>当程序在用户态里想做“越权操作”时（比如读写文件、收发网络包），它无法直接自己动手，必须通过 <strong>系统调用（System Call）</strong> 请求内核帮忙。触发系统调用后，CPU 会进入一个 “陷入（Trap）” 过程：</p>
-<ol>
-<li>当前运行线程仍旧是同一个，但 CPU 从用户态切换到内核态</li>
-<li>内核接管 CPU，执行相应的内核函数，完成硬件操作</li>
-<li>内核把结果准备好，再把 CPU 特权级切回到用户态，继续让你的程序执行</li>
-</ol>
+<p>当程序在用户态里想做 “越权操作” 时，必须通过 <strong>系统调用（System Call）</strong> 请求操作系统内核帮忙</p>
 <hr>
-<h3 id="读-IO"><a href="#读-IO" class="headerlink" title="读 IO"></a>读 IO</h3><p>假设我们有这样一段代码：</p>
+<h3 id="1-2-文件流读写流程"><a href="#1-2-文件流读写流程" class="headerlink" title="1.2. 文件流读写流程"></a>1.2. 文件流读写流程</h3><h4 id="1-2-1-读流程"><a href="#1-2-1-读流程" class="headerlink" title="1.2.1. 读流程"></a>1.2.1. 读流程</h4><p>假设我们有这样一段 Java 代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;a.txt&quot;</span>);<br><br><span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> fis.read();<br></code></pre></td></tr></table></figure>
 
-<p><font color="#92d050">1. Java 层发起调用</font><br>你写的 <code>fis.read()</code> 在 JVM 里其实会调用一个 native 方法（JNI），本质就是触发 Linux 的 <code>read()</code> 系统调用（Windows 下同理）。</p>
-<p>在这一刻起，CPU 的执行状态从 <strong>用户态</strong> 切换到 <strong>内核态</strong>，操作系统内核会接管 CPU，并且操作系统知道这是一个可能耗时的 I&#x2F;O 操作，于是立即将你的 Java 线程状态变成阻塞状态，什么也干不了，只能傻傻地等待。</p>
-<p><font color="#92d050">2. 操作内核找到文件</font><br>在我们 <code>FileInputStream fis = new FileInputStream(&quot;a.txt&quot;);</code> 的时候，会拿到一个文件描述符（fd），操作系统通过文件描述符到文件在内核里的 inode（文件元数据），并且定位到你要读取的文件偏移位置</p>
-<p><font color="#92d050">3. 检查 page cache</font><br>内核查看 <strong>page cache</strong>（内核里专门的一块缓存区，单位是 page，一般 4KB）</p>
+<p><font color="#92d050">1. 获取文件描述符</font><br>当我们执行 <code>new FileInputStream(&quot;a.txt&quot;)</code> 的时候，在 Java 层我们创建了一个 <code>FileInputStream</code> 对象，在系统层，这个构造函数内部会触发一个 open 系统调用，请求操作系统内核打开名为 “a.txt” 的文件</p>
+<p>操作系统内核接收到请求后，会在文件系统中查找 “a.txt”，并会在其内部创建一个代表这个打开文件的结构体（包含了文件信息、当前读取位置等），然后返回一个唯一的数字ID给你的程序，这个ID就是**文件描述符 (File Descriptor)**。</p>
+<p><code>FileInputStream</code> 对象会保存这个文件描述符，现在，这个 Java 对象就和底层的内核文件结构体关联起来了。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
 <ol>
-<li>命中<ol>
-<li>如果这一页已经在内存里，直接用</li>
-</ol>
-</li>
-<li>未命中<ol>
-<li>内核向磁盘控制器发出指令，要求从硬盘读取文件数据把目标页从磁盘读入 page cache</li>
-<li>现在多用 DMA 技术，内核对 DMA 发号命令后，在 DMA 搬运数据期间，CPU 可以切换成用户态被调度去执行其他完全不相干的、处于 RUNNABLE 状态的线程或进程。这就是多任务操作系统的魔力</li>
-<li>触发一次磁盘 I&#x2F;O，把目标页从磁盘读入 page cache</li>
-<li>DMA 控制器完成了它的任务，通过一个“中断”信号通知 CPU</li>
+<li>操作系统内部管理文件，大概有这样一层层的表结构：<ol>
+<li>进程级文件描述符表（per‑process fd table）<ol>
+<li>每个进程在内核态都有一张 “文件描述符表”，你调用 <code>open()</code> 得到的 <strong>整数 fd</strong>，其实就是这张表的 “下标”</li>
+<li><ol>
+<li>该表项本身并不存放文件数据，而是一个 <strong>引用</strong>，指向 <strong>系统级打开文件表</strong> 的某个条目。</li>
 </ol>
 </li>
 </ol>
-<p>需要注意的是，即便你只调用 <code>read()</code> 读 <strong>1 个字节</strong>，但内核读磁盘是以 <strong>页</strong> 为单位的（4KB），所以它可能一次读入一个页，可能比你需要的更多数据</p>
-<p>需要注意的是，每个**打开的文件描述符 (fd)**，除了关联 inode（文件元信息）外，还会维护一个 <strong>文件位置指针</strong>，指示“读&#x2F;写到文件的哪个位置了”，这个指针就是 <strong>文件偏移量</strong>（以字节为单位）</p>
-<p>所以这里就进行了第一次的数据拷贝，即硬件 -&gt; 内核内存，此时，数据已经位于内核内存中。但你的 Java 线程还在用户空间，它看不见也摸不着这些数据。</p>
-<p><font color="#92d050">4. 第 2 次数据拷贝 (内核内存 -&gt; 用户内存)</font><br>内核现在需要把数据从自己的地盘（Page Cache）送到你的地盘，也就是 CPU 执行内存拷贝指令，把数据从 Page Cache 复制到你的 JVM 对应的位置</p>
-<p><font color="#92d050">5. 唤醒线程</font><br>内核发现所有工作都完成了（数据已经成功拷贝到用户空间）内核会找到之前被挂起的那个 Java 线程，把它从“等待队列”里拿出来，将其状态从 <strong>BLOCKED</strong> 改回 <strong>RUNNABLE</strong>，CPU 恢复之前保存的该线程的用户态上下文，放回到 CPU 的“工作队列”里此时，线程被<strong>唤醒</strong>了，但可能还没轮到它立即执行。</p>
-<p>统调用执行完毕，CPU 的状态从 <strong>内核态</strong> 切换回 <strong>用户态</strong>。</p>
-<hr>
-<h3 id="写流程"><a href="#写流程" class="headerlink" title="写流程"></a>写流程</h3><p><strong>Page Cache 没有固定大小，而是动态伸缩的</strong>。如果你的机器有 32GB 内存，只有 2GB 被应用程序用掉，那么剩下的二十几 GB 里，Page Cache 可能会疯狂增长，占用十几 GB，一点都不稀奇。但如果此时应用程序突然需要 28GB 那么内核会逐步释放 Page Cache，把空间还给应用</p>
-<p>在 Linux 上可以直接看内存状态：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /proc/meminfo | grep -E <span class="hljs-string">&quot;Cached|Buffers&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>系统级打开文件表（system‑wide open file table）<ol>
+<li>内核维护这张全局表，用于记录所有被打开的文件实例</li>
+<li>每个条目保存了与这次“打开行为”相关的状态，包括：<ol>
+<li>当前读写偏移量</li>
+<li>打开模式（只读&#x2F;可写&#x2F;追加）</li>
+</ol>
+</li>
+<li>此外，每个条目还含有一个 <strong>引用</strong>，指向对应的 <strong>inode</strong>，这样可以找到文件的元信息和数据位置</li>
+</ol>
+</li>
+<li>文件系统 inode 表（inode table）<ol>
+<li><strong>inode</strong> 是文件系统维护的文件元信息结构，与某个用户进程无关。</li>
+<li>一个 inode 描述了：文件大小、所有者、权限、时间戳，以及磁盘数据块的物理位置等</li>
+<li>所有指向该文件的 “打开实例条目”，最终都会通过 inode 找到该文件的真实内容</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>每个新进程创建时，内核会默认为它打开三个文件描述符：<ol>
+<li>0<ol>
+<li>标准输入（stdin），默认连接到键盘输入</li>
+</ol>
+</li>
+<li>1<ol>
+<li>标准输出（stdout），默认连接到终端屏幕</li>
+</ol>
+</li>
+<li>2<ol>
+<li>标准错误输出（stderr），默认连接到终端屏幕，独立于标准输出</li>
+</ol>
+</li>
+<li>这就是为什么在 C 程序里常见的 <code>printf</code> 或者在 Java 里 <code>System.out.println</code>，最终都能直接在屏幕上看到结果。</li>
+</ol>
+</li>
+<li>我们可以通过 <code>FileInputStream.getFD()</code> 等方式拿到一个 <strong><code>FileDescriptor</code> 对象</strong>。在这个对象内部，确实有一个记录底层文件描述符整数的字段（<code>fd</code>）。<ol>
+<li>不过，这个字段在 JDK 中被标记为 <strong>包级可见（package‑private）</strong>，也就是说外部代码无法直接访问。Java 之所以这样设计，是有意避免开发者绕过抽象层，直接依赖平台相关的文件描述符数字。</li>
+<li>如果真的需要查看这个数字，通常只能借助 <strong>反射</strong> 这个黑科技来访问该字段。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. Java 层发起读请求</font><br><code>fis.read()</code> 在 JVM 里其实会调用一个 native 方法（JNI），本质就是触发 <code>read()</code> 的系统调用。</p>
+<p>它向内核传递了三个关键信息：</p>
+<ol>
+<li>文件描述符<ol>
+<li>指明要从哪个文件读取数据</li>
+</ol>
+</li>
+<li>目标缓冲区<ol>
+<li>告诉内核数据应写入到 JVM 的哪块内存区域</li>
+</ol>
+</li>
+<li>读取长度</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>当调用 <code>int len = fis.read(byte[] buffer)</code> 时，传递给内核的其实是 <strong>这个字节数组在 JVM 堆中的起始地址</strong>，内核据此将数据直接写入相应的内存区域。</li>
+<li>如果调用的是 <code>int b = fis.read()</code>，情况就不同了。因为 <code>b</code> 只是一个基本类型变量，存放在局部变量槽中，并没有内存地址可以直接交给内核</li>
+<li>为解决这个问题，Java I&#x2F;O 库通常在 JNI 层准备一个 <strong>内部缓冲区（通常只有 1 个字节大小）</strong>。内核会先把数据写入这个缓冲区，再由底层代码取出并赋值给 <code>b</code></li>
+</ol>
+</blockquote>
+<p><font color="#92d050">3. 内核接管 CPU，检查 “高速缓存”</font><br>从这一刻开始，CPU 的执行状态会从 <strong>用户态</strong> 切换为 <strong>内核态</strong>。控制权交由操作系统内核，Java 线程在逻辑上则进入“挂起等待” 状态。</p>
+<p>内核接手后，会先通过传入的文件描述符定位到对应的文件结构体，接着读取其中的当前读写偏移量，并据此计算出本次需要访问的具体数据范围。</p>
+<p>然后，操作系统内核会检查内存中的 <strong>文件缓存区（page cache）</strong>。这是内核预留的一块专门缓存，以「页（page）」为单位管理（通常 4KB）。内核会先计算出目标数据所在的页面，再判断缓存情况：</p>
+<ol>
+<li>缓存命中<ol>
+<li>这是最高效的路径，可能因为你或别的程序刚刚读过这个文件，相关内容已经被预加载到内存里。</li>
+<li>内核在 Page Cache 中找到了所需的页面，从中精确拷贝出请求的那几个字节，并拷贝到你的用户空间</li>
+</ol>
+</li>
+<li>缓存未命中<ol>
+<li>这是第一次读文件，或者数据太久没被用过，缓存里没有现成的页。</li>
+<li>内核会向硬盘驱动发出请求，要求读取包含目标字节的<strong>一个完整数据块</strong>（往往是 4KB 或更大，这是典型的预读优化策略）</li>
+<li>因为磁盘 I&#x2F;O 较慢，内核会把发起系统调用的 Java 线程标记为「阻塞」，先从 CPU 上撤下来，让处理器去忙别的任务</li>
+<li>这时，硬盘控制器开始用 <strong>DMA（直接内存访问）</strong> 把数据搬到内存。完成后，它会给 CPU 发一个“中断”信号，报告：“货已送达！”</li>
+<li>内核收到中断后启动对应的处理程序，把刚才的 Java 线程唤醒，将状态改为「就绪」，排队等待调度</li>
+<li>当调度器再次分配 CPU 时间时，这个线程会 “从刚才阻塞的地方继续执行”，完成最后的 <code>copy_to_user(user_buf, page_cache_data, len)</code>。</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>所谓 “逻辑暂停”，只是从 Java 程序员的视角看，线程像被卡住了一样。实际上 CPU 并没闲着，而是在执行内核态的代码</li>
+<li>即便你只用 <code>read()</code> 读取 <strong>1 个字节</strong>，内核访问磁盘时仍然是按 <strong>页（page）</strong> 为单位的（通常 4KB）</li>
+<li>Page Cache 没有固定大小，而是动态伸缩的。<ol>
+<li>如果机器有 32GB 内存，Page Cache 占个二十几 GB 都很正常，这是内核的 “贪吃” 本性</li>
+<li>当应用程序突然需要大量内存（比如一口气要 28GB），内核会逐步回收一部分 Page Cache，把空间还给应用程序。</li>
+<li>操作系统提供了一系列可调参数，用来影响 Page Cache 的回收与写回策略</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-comment">// Linux 查看内存状态</span><br>cat <span class="hljs-regexp">/proc/m</span>eminfo | <span class="hljs-keyword">grep</span> -E <span class="hljs-string">&quot;Cached|Buffers&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p>Linux 内核对“该不该回收 Page Cache &#x2F; 该留多少”有策略参数：</p>
-<ul>
-<li>**<code>vm.vfs_cache_pressure</code>**：控制内核回收 inode&#x2F;dentry 缓存的积极度。</li>
-<li><strong><code>vm.dirty_ratio</code></strong> 与 **<code>vm.dirty_background_ratio</code>**：控制脏页占用内存的比例，避免缓存太多脏数据。</li>
-<li>**<code>drop_caches</code>**：可手动命令清理 Page Cache（不常用，但调优&#x2F;测试时方便）。</li>
-</ul>
-<p><font color="#92d050">1. Java 层发起调用</font></p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs abnf">FileOutputStream fos <span class="hljs-operator">=</span> new FileOutputStream(<span class="hljs-string">&quot;output.txt&quot;</span>)<span class="hljs-comment">;</span><br>byte[] dataToWrite <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>.getBytes()<span class="hljs-comment">; // 5个字节的数据</span><br>fos.write(dataToWrite)<span class="hljs-comment">; // 我们将解剖这一行！</span><br>fos.close()<span class="hljs-comment">; // close() 方法在这里也至关重要</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li><strong>初始状态</strong>: 文件 <code>output.txt</code> 可能不存在（会被创建）或为空。文件描述符 fd 对应的<strong>文件位置指针 &#x3D; 0</strong>。</li>
-</ul>
-<p><strong>第 1 步 &amp; 第 2 步：发起系统调用与模式切换</strong></p>
-<ul>
-<li><strong>动作</strong>: 你的 Java 线程执行 <code>fos.write(dataToWrite)</code>，这会触发一个 <code>write</code> <strong>系统调用</strong>。</li>
-<li><strong>CPU 模式</strong>: 立即从 <strong>用户态</strong> 切换到 <strong>内核态</strong>。</li>
-<li><strong>线程状态</strong>: <strong>线程通常不会立即阻塞</strong>。因为写入内存（Page Cache）的速度非常快，这个操作大概率能瞬间完成，所以线程可能一直保持 <code>RUNNABLE</code> 状态。只有在 Page Cache 已满，需要等待数据刷盘才能腾出空间等极端情况下，<code>write</code> 才可能阻塞。</li>
-</ul>
-<p><strong>第 3 步：内核接管 - 定位与准备</strong></p>
-<ul>
-<li><strong>动作</strong>: 内核收到 <code>write</code> 请求，包含三要素：文件描述符 (fd)、要写入的数据 (<code>dataToWrite</code>)、数据长度 (5)。</li>
-<li><strong>指针使用</strong>: 内核查看 fd 关联的<strong>文件位置指针</strong>，发现是 <strong>0</strong>。内核明白了：“好的，我要把这 5 个字节的数据，写入到文件的第 0 个字节开始的位置。”</li>
-</ul>
-<p><strong>第 4 步：数据的第一次旅行 (用户内存 -&gt; 内核内存)</strong></p>
-<ul>
-<li><strong>动作</strong>: 这是 <code>write</code> 操作的核心。内核执行一次<strong>内存拷贝</strong>。</li>
-<li><strong>路径</strong>: <code>用户空间的 dataToWrite 字节数组 -&gt; 内核空间的 Page Cache</code></li>
-<li><strong>结果</strong>:<ol>
-<li>“Hello” 这 5 个字节的数据被完整地复制到了 Page Cache 中。</li>
-<li>内核将 Page Cache 中对应的这块内存区域标记为 **“脏” (Dirty)**。</li>
-</ol>
-</li>
-</ul>
-<p><strong>第 5 步：指针推进与快速返回</strong></p>
-<ul>
-<li><p><strong>指针推进</strong>: 在数据成功拷贝到 Page Cache <strong>之后</strong>，内核立即更新文件位置指针。</p>
-<ul>
-<li><strong>计算</strong>: <code>旧指针(0) + 实际写入的字节数(5) = 新指针(5)</code></li>
-<li>内核将 fd 对应的<strong>文件位置指针更新为 5</strong>。</li>
-</ul>
-</li>
-<li><p><strong>关键点 - 快速返回</strong>:</p>
-<ul>
-<li><strong>一旦数据被拷贝到 Page Cache，内核就认为这次 <code>write</code> 操作已经“完成”了！</strong></li>
-<li>它<strong>不会</strong>等待数据被真正写入硬盘。</li>
-<li><strong>系统调用立即返回</strong>。CPU 从<strong>内核态</strong>切换回<strong>用户态</strong>。</li>
-<li>你的 Java 代码 <code>fos.write(dataToWrite)</code> 执行完毕，线程继续执行下一行代码。</li>
-</ul>
-</li>
-</ul>
-<p><strong>对你的程序而言，到此为止，写入似乎已经大功告成。但真相是，数据仅仅是到达了内核的内存缓冲区。</strong></p>
-<p><strong>第 6 步：数据的第二次旅行 (内核内存 -&gt; 硬盘) - 异步刷盘</strong></p>
-<p>这一步对你的 <code>write()</code> 调用是<strong>异步 (Asynchronous)</strong> 的，你的线程不会等待它。</p>
-<ul>
-<li><p><strong>触发时机</strong>: 操作系统内核会在以下几种情况，决定将“脏页”刷写（Flush）到硬盘：</p>
-<ol>
-<li><strong>定时任务</strong>: 内核中有后台线程（如 <code>pdflush</code> 或 <code>flusher</code> 线程）会周期性地检查脏页，并将其写回硬盘。</li>
-<li><strong>脏页比例</strong>: 当脏页占用的内存达到某个阈值时，系统会触发回写以释放内存。</li>
-<li><strong>用户主动调用 <code>sync()</code> 或 <code>fsync()</code></strong>: 比如你在 Java 中调用 <code>fos.flush()</code> 或 <code>fileChannel.force()</code>，这会明确告诉内核：“请立即将这个文件的数据写入硬盘”。</li>
-<li><strong>关闭文件 (<code>close()</code>)</strong>: 当你调用 <code>fos.close()</code> 时，它会隐式地触发一次 <code>flush</code> 操作，确保所有缓存数据在文件关闭前都写入硬盘。<strong>这是为什么在文件操作后总是强调要 <code>close()</code> 的重要原因之一！</strong></li>
-<li><strong>系统内存压力大</strong>: 当系统需要更多可用内存时，会把脏页写回硬盘，然后回收这部分内存。</li>
-</ol>
-</li>
-<li><p><strong>路径</strong>: <code>内核空间的 Page Cache -&gt; DMA 控制器 -&gt; 硬盘</code></p>
-</li>
-<li><p><strong>过程</strong>: 内核命令 DMA 控制器，将脏页中的数据传输到硬盘的对应位置。</p>
-</li>
-</ul>
+
+<p><font color="#92d050">4. 唤醒线程</font><br>CPU 从<strong>内核态</strong>切换回<strong>用户态</strong>，把控制权交还给 Java 线程</p>
 <hr>
-<h2 id="IO-流分类"><a href="#IO-流分类" class="headerlink" title="IO 流分类"></a>IO 流分类</h2><p>Java IO 流分类的核心是：</p>
+<h4 id="1-2-2-写流程"><a href="#1-2-2-写流程" class="headerlink" title="1.2.2. 写流程"></a>1.2.2. 写流程</h4><p>假设我们有这样一段 Java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;output.txt&quot;</span>);  <br>  <br>fos.write(<span class="hljs-string">&quot;Hello&quot;</span>.getBytes());  <br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. 获取文件描述符</font></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>与读取流程略有不同，如果目标文件不存在，写操作会先创建一个新文件，再返回对应的文件描述符</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. Java 层发起写请求</font><br><code>fos.write(&quot;Hello&quot;.getBytes())</code> 在 JVM 里其实会调用一个 native 方法（JNI），本质就是触发 <code>write(data)</code> 的系统调用。</p>
+<p>它向内核传递了三个关键信息：</p>
+<ol>
+<li>文件描述符<ol>
+<li>指明要往哪个文件写入数据</li>
+</ol>
+</li>
+<li>数据源</li>
+<li>数据长度</li>
+</ol>
+<p><font color="#92d050">3. 内核接管 CPU，写入到 ”高速缓存“</font><br>从这一刻开始，CPU 的执行状态会从 <strong>用户态</strong> 切换为 <strong>内核态</strong>。控制权交由操作系统内核，Java 线程在逻辑上则进入“挂起等待” 状态。</p>
+<p>内核接手后，会先通过传入的文件描述符定位到对应的文件结构体，接着读取其中的当前读写偏移量，确定要写入的位置</p>
+<p>然后，操作系统内核会定位或分配一块属于该文件的 <strong>Page Cache 内存页</strong>，并将你的 <code>data</code> 从 <strong>用户空间</strong> 拷贝到 <strong>内核空间的 Page Cache</strong> 中。</p>
+<p>此时数据已经落到了内存缓存里（Page Cache），<strong>还没有真正写入硬盘</strong>！</p>
+<p>当数据被写入 Page Cache 后，内核会在对应的内存页上打一个 “脏页” 标记，意思是，该页内存中的内容比硬盘上的副本更新，未来需要在合适的时机回写到磁盘。</p>
+<p><font color="#92d050">4. 返回成功状态</font><br><code>write(data)</code> 系统调用在数据被写入 Page Cache 并打上“脏页”标记后，就算大功告成了。此时它会立即返回一个 “写入成功” 的状态给你的程序，CPU 也随之从 内核态 切回 用户态。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这里的 “写入成功”，仅仅意味着数据已经可靠地进入了 内存缓存（Page Cache），但这并不等同于硬盘上的内容已经更新。如果在此之后系统突然崩溃，那么这些尚未来得及写入磁盘的数据依然可能丢失。</li>
+<li>数据真正落盘的时机有：<ol>
+<li>内核定时任务<ol>
+<li>操作系统有一个后台进程（如 Linux 的 <code>pdflush</code> 或 <code>kworker</code>），会周期性地检查 “脏” 页。</li>
+<li>如果一个页面“脏”了太久，就会被安排写入磁盘。</li>
+</ol>
+</li>
+<li>内存压力<ol>
+<li>当系统内存不足，需要回收一些 Page Cache 页面给其他程序使用时，如果这些页面是 “脏” 的，内核会先将它们写入磁盘，然后再回收。</li>
+</ol>
+</li>
+<li>用户主动要求<ol>
+<li>fos.flush()<ol>
+<li>这个方法会触发一个 <code>fsync(fd)</code> 的系统调用，会将这个文件的所有 Page Cache 落盘，并等到底层存储设备报告 “写成功” 才返回</li>
+<li>这个过程是阻塞的，确保数据持久化</li>
+</ol>
+</li>
+<li>fos.close()<ol>
+<li>关闭文件流时，它会在内部自动调用一次 <code>fos.flush()</code>，然后再释放文件描述符等资源。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>sync 命令<ol>
+<li>在 Linux 系统中，执行 <code>sync</code> 命令会要求内核将所有内存中的 “脏” 数据（不仅仅是你的文件）全部写入磁盘。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-IO-流分类"><a href="#2-IO-流分类" class="headerlink" title="2. IO 流分类"></a>2. IO 流分类</h2><p>Java IO 流分类的核心是：</p>
 <ol>
 <li>以数据流向分类<ol>
 <li>输入流<ol>
@@ -486,7 +561,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png" srcset="/img/loading.gif" lazyload></p>
 <p>在这四个抽象类的基础上，根据功能又可分为：</p>
 <ol>
 <li>文件流<ol>
@@ -550,9 +625,9 @@
 <li>Commons-io</li>
 </ul>
 <hr>
-<h2 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h2><h3 id="文件流"><a href="#文件流" class="headerlink" title="文件流"></a>文件流</h3><h4 id="文件字节流"><a href="#文件字节流" class="headerlink" title="文件字节流"></a>文件字节流</h4><h5 id="FileInputStream"><a href="#FileInputStream" class="headerlink" title="FileInputStream"></a>FileInputStream</h5><h6 id="FileInputStream-概述"><a href="#FileInputStream-概述" class="headerlink" title="FileInputStream 概述"></a>FileInputStream 概述</h6><p><code>FileInputStream</code> 是字节输入流，用于从文件中读取原始字节数据</p>
+<h2 id="3-节点流"><a href="#3-节点流" class="headerlink" title="3. 节点流"></a>3. 节点流</h2><h3 id="3-1-文件流"><a href="#3-1-文件流" class="headerlink" title="3.1. 文件流"></a>3.1. 文件流</h3><h4 id="3-1-1-文件字节流"><a href="#3-1-1-文件字节流" class="headerlink" title="3.1.1. 文件字节流"></a>3.1.1. 文件字节流</h4><h5 id="3-1-1-1-FileInputStream"><a href="#3-1-1-1-FileInputStream" class="headerlink" title="3.1.1.1. FileInputStream"></a>3.1.1.1. FileInputStream</h5><h6 id="3-1-1-1-1-FileInputStream-概述"><a href="#3-1-1-1-1-FileInputStream-概述" class="headerlink" title="3.1.1.1.1. FileInputStream 概述"></a>3.1.1.1.1. FileInputStream 概述</h6><p><code>FileInputStream</code> 是字节输入流，用于从文件中读取原始字节数据</p>
 <hr>
-<h6 id="FileInputStream-常用方法"><a href="#FileInputStream-常用方法" class="headerlink" title="FileInputStream 常用方法"></a>FileInputStream 常用方法</h6><ol>
+<h6 id="3-1-1-1-2-FileInputStream-常用方法"><a href="#3-1-1-1-2-FileInputStream-常用方法" class="headerlink" title="3.1.1.1.2. FileInputStream 常用方法"></a>3.1.1.1.2. FileInputStream 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileInputStream常用方法</a></li>
 </ol>
@@ -563,9 +638,9 @@
 </li>
 </ol>
 <hr>
-<h5 id="FileOutputStream"><a href="#FileOutputStream" class="headerlink" title="FileOutputStream"></a>FileOutputStream</h5><h6 id="FileOutputStream-概述"><a href="#FileOutputStream-概述" class="headerlink" title="FileOutputStream 概述"></a>FileOutputStream 概述</h6><p><code>FileOutputStream</code> 是字节输出流，用于向文件写入原始字节数据</p>
+<h5 id="3-1-1-2-FileOutputStream"><a href="#3-1-1-2-FileOutputStream" class="headerlink" title="3.1.1.2. FileOutputStream"></a>3.1.1.2. FileOutputStream</h5><h6 id="3-1-1-2-1-FileOutputStream-概述"><a href="#3-1-1-2-1-FileOutputStream-概述" class="headerlink" title="3.1.1.2.1. FileOutputStream 概述"></a>3.1.1.2.1. FileOutputStream 概述</h6><p><code>FileOutputStream</code> 是字节输出流，用于向文件写入原始字节数据</p>
 <hr>
-<h6 id="FileOutputStream-常用方法"><a href="#FileOutputStream-常用方法" class="headerlink" title="FileOutputStream 常用方法"></a>FileOutputStream 常用方法</h6><ol>
+<h6 id="3-1-1-2-2-FileOutputStream-常用方法"><a href="#3-1-1-2-2-FileOutputStream-常用方法" class="headerlink" title="3.1.1.2.2. FileOutputStream 常用方法"></a>3.1.1.2.2. FileOutputStream 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileOutputStream常用方法</a></li>
 </ol>
@@ -576,7 +651,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="文件字符流"><a href="#文件字符流" class="headerlink" title="文件字符流"></a>文件字符流</h4><h5 id="FileReader"><a href="#FileReader" class="headerlink" title="FileReader"></a>FileReader</h5><h6 id="FileReader-概述"><a href="#FileReader-概述" class="headerlink" title="FileReader 概述"></a>FileReader 概述</h6><p><code>FileReader</code> 是字符输入流，它用于从文件中读取文件内容，并将底层的字节自动解码为字符（根据解码方式，自动取出合适数量的字节来解码成一个完整字符）</p>
+<h4 id="3-1-2-文件字符流"><a href="#3-1-2-文件字符流" class="headerlink" title="3.1.2. 文件字符流"></a>3.1.2. 文件字符流</h4><h5 id="3-1-2-1-FileReader"><a href="#3-1-2-1-FileReader" class="headerlink" title="3.1.2.1. FileReader"></a>3.1.2.1. FileReader</h5><h6 id="3-1-2-1-1-FileReader-概述"><a href="#3-1-2-1-1-FileReader-概述" class="headerlink" title="3.1.2.1.1. FileReader 概述"></a>3.1.2.1.1. FileReader 概述</h6><p><code>FileReader</code> 是字符输入流，它用于从文件中读取文件内容，并将底层的字节自动解码为字符（根据解码方式，自动取出合适数量的字节来解码成一个完整字符）</p>
 <p>虽然理论上字节流可以用于处理所有文件类型，但它是以 <strong>“一个字节一个字节”</strong> 的方式读数据。如果只是复制文件，这完全没问题。但如果直接拿来显示文本，就容易出现乱码，因为常见的编码方式（如 UTF-8）并不是 “一个字符 &#x3D; 一个字节”，而是<strong>可变长度编码</strong>（1～4 个字节一个字符）。这就导致逐字节解析时可能把字符拆断，显示结果自然就乱了。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -599,7 +674,7 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="FileReader-常用方法"><a href="#FileReader-常用方法" class="headerlink" title="FileReader 常用方法"></a>FileReader 常用方法</h6><ol>
+<h6 id="3-1-2-1-2-FileReader-常用方法"><a href="#3-1-2-1-2-FileReader-常用方法" class="headerlink" title="3.1.2.1.2. FileReader 常用方法"></a>3.1.2.1.2. FileReader 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileReader常用方法</a></li>
 </ol>
@@ -610,9 +685,9 @@
 </li>
 </ol>
 <hr>
-<h5 id="FileWriter"><a href="#FileWriter" class="headerlink" title="FileWriter"></a>FileWriter</h5><h6 id="FileWriter-概述"><a href="#FileWriter-概述" class="headerlink" title="FileWriter 概述"></a>FileWriter 概述</h6><p><code>FileWriter</code> 是字符输出流，用于向文件写入字符数据</p>
+<h5 id="3-1-2-2-FileWriter"><a href="#3-1-2-2-FileWriter" class="headerlink" title="3.1.2.2. FileWriter"></a>3.1.2.2. FileWriter</h5><h6 id="3-1-2-2-1-FileWriter-概述"><a href="#3-1-2-2-1-FileWriter-概述" class="headerlink" title="3.1.2.2.1. FileWriter 概述"></a>3.1.2.2.1. FileWriter 概述</h6><p><code>FileWriter</code> 是字符输出流，用于向文件写入字符数据</p>
 <hr>
-<h6 id="FileWriter-常用方法"><a href="#FileWriter-常用方法" class="headerlink" title="FileWriter 常用方法"></a>FileWriter 常用方法</h6><ol>
+<h6 id="3-1-2-2-2-FileWriter-常用方法"><a href="#3-1-2-2-2-FileWriter-常用方法" class="headerlink" title="3.1.2.2.2. FileWriter 常用方法"></a>3.1.2.2.2. FileWriter 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileWriter常用方法</a></li>
 </ol>
@@ -623,8 +698,8 @@
 </li>
 </ol>
 <hr>
-<h2 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h2><h3 id="缓冲字节流"><a href="#缓冲字节流" class="headerlink" title="缓冲字节流"></a>缓冲字节流</h3><h4 id="BufferedInputStream"><a href="#BufferedInputStream" class="headerlink" title="BufferedInputStream"></a>BufferedInputStream</h4><h5 id="BufferedInputStream-概述"><a href="#BufferedInputStream-概述" class="headerlink" title="BufferedInputStream 概述"></a>BufferedInputStream 概述</h5><p><code>BufferedInputStream</code> 在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
-<p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="4-缓冲流"><a href="#4-缓冲流" class="headerlink" title="4. 缓冲流"></a>4. 缓冲流</h2><h3 id="4-1-缓冲字节流"><a href="#4-1-缓冲字节流" class="headerlink" title="4.1. 缓冲字节流"></a>4.1. 缓冲字节流</h3><h4 id="4-1-1-BufferedInputStream"><a href="#4-1-1-BufferedInputStream" class="headerlink" title="4.1.1. BufferedInputStream"></a>4.1.1. BufferedInputStream</h4><h5 id="4-1-1-1-BufferedInputStream-概述"><a href="#4-1-1-1-BufferedInputStream-概述" class="headerlink" title="4.1.1.1. BufferedInputStream 概述"></a>4.1.1.1. BufferedInputStream 概述</h5><p><code>BufferedInputStream</code> 在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -633,7 +708,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="BufferedInputStream-常用方法"><a href="#BufferedInputStream-常用方法" class="headerlink" title="BufferedInputStream 常用方法"></a>BufferedInputStream 常用方法</h5><ol>
+<h5 id="4-1-1-2-BufferedInputStream-常用方法"><a href="#4-1-1-2-BufferedInputStream-常用方法" class="headerlink" title="4.1.1.2. BufferedInputStream 常用方法"></a>4.1.1.2. BufferedInputStream 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedInputStream常用方法</a></li>
 </ol>
@@ -644,9 +719,9 @@
 </li>
 </ol>
 <hr>
-<h4 id="BufferedOutputStream"><a href="#BufferedOutputStream" class="headerlink" title="BufferedOutputStream"></a>BufferedOutputStream</h4><h5 id="BufferedOutputStream-概述"><a href="#BufferedOutputStream-概述" class="headerlink" title="BufferedOutputStream 概述"></a>BufferedOutputStream 概述</h5><p><code>BufferedOutputStream</code> 同样在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h4 id="4-1-2-BufferedOutputStream"><a href="#4-1-2-BufferedOutputStream" class="headerlink" title="4.1.2. BufferedOutputStream"></a>4.1.2. BufferedOutputStream</h4><h5 id="4-1-2-1-BufferedOutputStream-概述"><a href="#4-1-2-1-BufferedOutputStream-概述" class="headerlink" title="4.1.2.1. BufferedOutputStream 概述"></a>4.1.2.1. BufferedOutputStream 概述</h5><p><code>BufferedOutputStream</code> 同样在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="BufferedOutputStream-常用方法"><a href="#BufferedOutputStream-常用方法" class="headerlink" title="BufferedOutputStream 常用方法"></a>BufferedOutputStream 常用方法</h5><ol>
+<h5 id="4-1-2-2-BufferedOutputStream-常用方法"><a href="#4-1-2-2-BufferedOutputStream-常用方法" class="headerlink" title="4.1.2.2. BufferedOutputStream 常用方法"></a>4.1.2.2. BufferedOutputStream 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedOutputStream常用方法</a></li>
 </ol>
@@ -657,9 +732,9 @@
 </li>
 </ol>
 <hr>
-<h3 id="缓冲字符流"><a href="#缓冲字符流" class="headerlink" title="缓冲字符流"></a>缓冲字符流</h3><h4 id="BufferedReader"><a href="#BufferedReader" class="headerlink" title="BufferedReader"></a>BufferedReader</h4><h5 id="BufferedReader-概述"><a href="#BufferedReader-概述" class="headerlink" title="BufferedReader 概述"></a>BufferedReader 概述</h5><p><code>BufferedReader</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h3 id="4-2-缓冲字符流"><a href="#4-2-缓冲字符流" class="headerlink" title="4.2. 缓冲字符流"></a>4.2. 缓冲字符流</h3><h4 id="4-2-1-BufferedReader"><a href="#4-2-1-BufferedReader" class="headerlink" title="4.2.1. BufferedReader"></a>4.2.1. BufferedReader</h4><h5 id="4-2-1-1-BufferedReader-概述"><a href="#4-2-1-1-BufferedReader-概述" class="headerlink" title="4.2.1.1. BufferedReader 概述"></a>4.2.1.1. BufferedReader 概述</h5><p><code>BufferedReader</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="BufferedReader-常用方法"><a href="#BufferedReader-常用方法" class="headerlink" title="BufferedReader 常用方法"></a>BufferedReader 常用方法</h5><ol>
+<h5 id="4-2-1-2-BufferedReader-常用方法"><a href="#4-2-1-2-BufferedReader-常用方法" class="headerlink" title="4.2.1.2. BufferedReader 常用方法"></a>4.2.1.2. BufferedReader 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedReader常用方法</a></li>
 </ol>
@@ -670,9 +745,9 @@
 </li>
 </ol>
 <hr>
-<h4 id="BufferedWriter"><a href="#BufferedWriter" class="headerlink" title="BufferedWriter"></a>BufferedWriter</h4><h5 id="BufferedWriter-概述"><a href="#BufferedWriter-概述" class="headerlink" title="BufferedWriter 概述"></a>BufferedWriter 概述</h5><p><code>BufferedWriter</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h4 id="4-2-2-BufferedWriter"><a href="#4-2-2-BufferedWriter" class="headerlink" title="4.2.2. BufferedWriter"></a>4.2.2. BufferedWriter</h4><h5 id="4-2-2-1-BufferedWriter-概述"><a href="#4-2-2-1-BufferedWriter-概述" class="headerlink" title="4.2.2.1. BufferedWriter 概述"></a>4.2.2.1. BufferedWriter 概述</h5><p><code>BufferedWriter</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="BufferedWriter-常用方法"><a href="#BufferedWriter-常用方法" class="headerlink" title="BufferedWriter 常用方法"></a>BufferedWriter 常用方法</h5><ol>
+<h5 id="4-2-2-2-BufferedWriter-常用方法"><a href="#4-2-2-2-BufferedWriter-常用方法" class="headerlink" title="4.2.2.2. BufferedWriter 常用方法"></a>4.2.2.2. BufferedWriter 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedWriter常用方法</a></li>
 </ol>
@@ -683,7 +758,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><h3 id="对象流概述"><a href="#对象流概述" class="headerlink" title="对象流概述"></a>对象流概述</h3><p>对象流也常被称为 序列化流 &#x2F; 反序列化流，能够把 Java 内存中的对象序列化为 字节流，并且可以再从字节流中反序列化恢复成原始对象，这使得对象可以方便地 持久化到文件 或 通过网络传输。</p>
+<h2 id="5-转换流"><a href="#5-转换流" class="headerlink" title="5. 转换流"></a>5. 转换流</h2><h2 id="6-对象流"><a href="#6-对象流" class="headerlink" title="6. 对象流"></a>6. 对象流</h2><h3 id="6-1-对象流概述"><a href="#6-1-对象流概述" class="headerlink" title="6.1. 对象流概述"></a>6.1. 对象流概述</h3><p>对象流也常被称为 序列化流 &#x2F; 反序列化流，能够把 Java 内存中的对象序列化为 字节流，并且可以再从字节流中反序列化恢复成原始对象，这使得对象可以方便地 持久化到文件 或 通过网络传输。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -703,9 +778,9 @@
 </blockquote>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="ObjectInputStream"><a href="#ObjectInputStream" class="headerlink" title="ObjectInputStream"></a>ObjectInputStream</h3><h4 id="ObjectInputStream-概述"><a href="#ObjectInputStream-概述" class="headerlink" title="ObjectInputStream 概述"></a>ObjectInputStream 概述</h4><p><code>ObjectInputStream</code> 用于从底层的字节输入流中 <strong>反序列化</strong>（deserialize）对象，也就是说，把字节流还原成 Java 对象</p>
+<h3 id="6-2-ObjectInputStream"><a href="#6-2-ObjectInputStream" class="headerlink" title="6.2. ObjectInputStream"></a>6.2. ObjectInputStream</h3><h4 id="6-2-1-ObjectInputStream-概述"><a href="#6-2-1-ObjectInputStream-概述" class="headerlink" title="6.2.1. ObjectInputStream 概述"></a>6.2.1. ObjectInputStream 概述</h4><p><code>ObjectInputStream</code> 用于从底层的字节输入流中 <strong>反序列化</strong>（deserialize）对象，也就是说，把字节流还原成 Java 对象</p>
 <hr>
-<h4 id="ObjectInputStream-常用方法"><a href="#ObjectInputStream-常用方法" class="headerlink" title="ObjectInputStream 常用方法"></a>ObjectInputStream 常用方法</h4><ol>
+<h4 id="6-2-2-ObjectInputStream-常用方法"><a href="#6-2-2-ObjectInputStream-常用方法" class="headerlink" title="6.2.2. ObjectInputStream 常用方法"></a>6.2.2. ObjectInputStream 常用方法</h4><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectInputStream常用方法</a></li>
 </ol>
@@ -716,9 +791,9 @@
 </li>
 </ol>
 <hr>
-<h3 id="ObjectOutputStream"><a href="#ObjectOutputStream" class="headerlink" title="ObjectOutputStream"></a>ObjectOutputStream</h3><h4 id="ObjectOutputStream-概述"><a href="#ObjectOutputStream-概述" class="headerlink" title="ObjectOutputStream 概述"></a>ObjectOutputStream 概述</h4><p><code>ObjectOutputStream</code> 用于把 Java 内存中的对象序列化为字节流</p>
+<h3 id="6-3-ObjectOutputStream"><a href="#6-3-ObjectOutputStream" class="headerlink" title="6.3. ObjectOutputStream"></a>6.3. ObjectOutputStream</h3><h4 id="6-3-1-ObjectOutputStream-概述"><a href="#6-3-1-ObjectOutputStream-概述" class="headerlink" title="6.3.1. ObjectOutputStream 概述"></a>6.3.1. ObjectOutputStream 概述</h4><p><code>ObjectOutputStream</code> 用于把 Java 内存中的对象序列化为字节流</p>
 <hr>
-<h4 id="ObjectOutputStream-常用方法"><a href="#ObjectOutputStream-常用方法" class="headerlink" title="ObjectOutputStream 常用方法"></a>ObjectOutputStream 常用方法</h4><ol>
+<h4 id="6-3-2-ObjectOutputStream-常用方法"><a href="#6-3-2-ObjectOutputStream-常用方法" class="headerlink" title="6.3.2. ObjectOutputStream 常用方法"></a>6.3.2. ObjectOutputStream 常用方法</h4><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectOutputStream常用方法</a></li>
 </ol>
@@ -729,8 +804,8 @@
 </li>
 </ol>
 <hr>
-<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><h3 id="字节打印流"><a href="#字节打印流" class="headerlink" title="字节打印流"></a>字节打印流</h3><h4 id="PrintStream"><a href="#PrintStream" class="headerlink" title="PrintStream"></a>PrintStream</h4><h3 id="字符打印流"><a href="#字符打印流" class="headerlink" title="字符打印流"></a>字符打印流</h3><h4 id="PrintWriter"><a href="#PrintWriter" class="headerlink" title="PrintWriter"></a>PrintWriter</h4><hr>
-<h2 id="压缩流"><a href="#压缩流" class="headerlink" title="压缩流"></a>压缩流</h2><h3 id="压缩流-1"><a href="#压缩流-1" class="headerlink" title="压缩流"></a>压缩流</h3><h3 id="解压缩流"><a href="#解压缩流" class="headerlink" title="解压缩流"></a>解压缩流</h3>
+<h2 id="7-打印流"><a href="#7-打印流" class="headerlink" title="7. 打印流"></a>7. 打印流</h2><h3 id="7-1-字节打印流"><a href="#7-1-字节打印流" class="headerlink" title="7.1. 字节打印流"></a>7.1. 字节打印流</h3><h4 id="7-1-1-PrintStream"><a href="#7-1-1-PrintStream" class="headerlink" title="7.1.1. PrintStream"></a>7.1.1. PrintStream</h4><h3 id="7-2-字符打印流"><a href="#7-2-字符打印流" class="headerlink" title="7.2. 字符打印流"></a>7.2. 字符打印流</h3><h4 id="7-2-1-PrintWriter"><a href="#7-2-1-PrintWriter" class="headerlink" title="7.2.1. PrintWriter"></a>7.2.1. PrintWriter</h4><hr>
+<h2 id="8-压缩流"><a href="#8-压缩流" class="headerlink" title="8. 压缩流"></a>8. 压缩流</h2><h3 id="8-1-压缩流"><a href="#8-1-压缩流" class="headerlink" title="8.1. 压缩流"></a>8.1. 压缩流</h3><h3 id="8-2-解压缩流"><a href="#8-2-解压缩流" class="headerlink" title="8.2. 解压缩流"></a>8.2. 解压缩流</h3>
                 
               </div>
             

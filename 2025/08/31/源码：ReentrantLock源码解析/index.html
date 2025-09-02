@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 概述ReentrantLock 是一个具体类  [!NOTE] 注意事项  Lock 源码解析 obsidian 内部链接： 源码：Lock源码解析   Hexo 内部链接：         2. 源码部分123public class ReentrantLock implements Lock, java.io.Serializable &#123;&#125;     3. 内部类Syn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReentrantLock 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AReentrantLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. 概述ReentrantLock 是一个具体类  [!NOTE] 注意事项  Lock 源码解析 obsidian 内部链接： 源码：Lock源码解析   Hexo 内部链接：         2. 源码部分123public class ReentrantLock implements Lock, java.io.Serializable &#123;&#125;     3. 内部类Syn">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-02T08:32:58.498Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>ReentrantLock 源码解析 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ReentrantLock 源码解析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-31 00:00" pubdate>
+          August 31, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          804 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">ReentrantLock 源码解析</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-02T16:32:58+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><code>ReentrantLock</code> 是一个具体类</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Lock 源码解析<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Lock源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 内部链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-源码部分"><a href="#2-源码部分" class="headerlink" title="2. 源码部分"></a>2. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ReentrantLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Lock</span>, java.io.Serializable &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="3-内部类"><a href="#3-内部类" class="headerlink" title="3. 内部类"></a>3. 内部类</h2><h3 id="Sync"><a href="#Sync" class="headerlink" title="Sync"></a>Sync</h3><p><code>Sync</code> 是 <code>ReentrantLock</code> 的 静态 内部类</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ASync%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Sync 源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="NonfairSync"><a href="#NonfairSync" class="headerlink" title="NonfairSync"></a>NonfairSync</h3><p><code>NonfairSync</code> 是 <code>ReentrantLock</code> 的 静态 内部类，用于实现非公平锁的加锁策略。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NonfairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> &#123;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> <span class="hljs-number">7316153563782823691L</span>;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">initialTryLock</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-comment">// 获取当前线程</span><br>		<span class="hljs-type">Thread</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> Thread.currentThread();<br>		<span class="hljs-comment">// 执行 compareAndSetState(0, 1) 成功，进入 if 逻辑</span><br>		<span class="hljs-keyword">if</span> (compareAndSetState(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) &#123; <br>			<span class="hljs-comment">/**</span><br><span class="hljs-comment">			 * 调用 setExclusiveOwnerThread(current) 将本线程设置为同步器的独占线程</span><br><span class="hljs-comment">			 * 该方法是 Sync 的父类 AQS 的父类 AOS 提供的</span><br><span class="hljs-comment">			 */</span><br>			setExclusiveOwnerThread(current);<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		<span class="hljs-comment">/**</span><br><span class="hljs-comment">		 * 执行 compareAndSetState(0, 1) 失败，执行 getExclusiveOwnerThread() == current</span><br><span class="hljs-comment">		 * 看是否是重入，如果是重入，进入 else if 逻辑</span><br><span class="hljs-comment">		 */</span><br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getExclusiveOwnerThread() == current) &#123;<br>			<span class="hljs-comment">// 将同步器的 State + 1</span><br>			<span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> getState() + <span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">if</span> (c &lt; <span class="hljs-number">0</span>)<br>				<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);<br>			setState(c);<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		<span class="hljs-comment">// 如果两者都未执行成功，说明单纯是有别的线程独占该同步器，返回 false</span><br>		&#125; <span class="hljs-keyword">else</span><br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAcquire</span><span class="hljs-params">(<span class="hljs-type">int</span> acquires)</span> &#123;<br>		<span class="hljs-keyword">if</span> (getState() == <span class="hljs-number">0</span> &amp;&amp; compareAndSetState(<span class="hljs-number">0</span>, acquires)) &#123;<br>			setExclusiveOwnerThread(Thread.currentThread());<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="FairSync"><a href="#FairSync" class="headerlink" title="FairSync"></a>FairSync</h3><p><code>FairSync</code> 是 <code>ReentrantLock</code> 的 静态 内部类，用于实现公平锁的加锁策略。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> &#123;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">3000897897090466540L</span>;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">initialTryLock</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-type">Thread</span> <span class="hljs-variable">current</span> <span class="hljs-operator">=</span> Thread.currentThread();<br>		<span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> getState();<br>		<span class="hljs-comment">// 如果同步器的 State 为 0，进入 if 逻辑</span><br>		<span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) &#123;<br>			<span class="hljs-comment">// 如果同步队列中没有其他线程，并且该线程成功执行 compareAndSetState(0, 1)，进入 if 逻辑</span><br>			<span class="hljs-keyword">if</span> (!hasQueuedThreads() &amp;&amp; compareAndSetState(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) &#123;<br>				setExclusiveOwnerThread(current);<br>				<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>			&#125;<br>		<span class="hljs-comment">/**</span><br><span class="hljs-comment">		 * 如果同步器的 Statte 不为 0，执行 getExclusiveOwnerThread() == current</span><br><span class="hljs-comment">		 * 看是否是重入，如果是重入，进入 else if 逻辑</span><br><span class="hljs-comment">		 */</span><br>		<span class="hljs-comment">// </span><br>		&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (getExclusiveOwnerThread() == current) &#123;<br>			<span class="hljs-comment">// 将同步器的 State + 1</span><br>			<span class="hljs-keyword">if</span> (++c &lt; <span class="hljs-number">0</span>)<br>				<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;Maximum lock count exceeded&quot;</span>);<br>			setState(c);<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-comment">// 如果两者都未执行成功，说明单纯是有别的线程独占该同步器，返回 false</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<br>	<span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAcquire</span><span class="hljs-params">(<span class="hljs-type">int</span> acquires)</span> &#123;<br>		<span class="hljs-keyword">if</span> (getState() == <span class="hljs-number">0</span> &amp;&amp; !hasQueuedPredecessors() &amp;&amp;<br>			compareAndSetState(<span class="hljs-number">0</span>, acquires)) &#123;<br>			setExclusiveOwnerThread(Thread.currentThread());<br>			<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>		&#125;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>	&#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-核心属性"><a href="#4-核心属性" class="headerlink" title="4. 核心属性"></a>4. 核心属性</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 作用</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 初始值</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 详细介绍</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br> XXXXXXXXXXXXXXXXXXXXXXXXXXXXX<br> <br> <br> <span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 作用</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 初始值</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 详细介绍</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br> XXXXXXXXXXXXXXXXXXXXXXXXXXXXX<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-构造方法"><a href="#5-构造方法" class="headerlink" title="5. 构造方法"></a>5. 构造方法</h2><h3 id="0-1-public-ReentrantLock"><a href="#0-1-public-ReentrantLock" class="headerlink" title="0.1. public ReentrantLock()"></a>0.1. public ReentrantLock()</h3><p><code>public ReentrantLock()</code> 用于构造一个 非公平锁的 <code>ReentrantLock</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *      1. public</span><br><span class="hljs-comment"> *          1. 天下皆公（EveryWhere）</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 方法参数</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 抛出异常</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 构造示例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ReentrantLock reentrantLock = new ReentrantLock();</span><br><span class="hljs-comment"> * </span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">ReentrantLock</span><span class="hljs-params">()</span> &#123;<br>	sync = <span class="hljs-keyword">new</span> <span class="hljs-title class_">NonfairSync</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0-1-public-ReentrantLock-boolean-fair"><a href="#0-1-public-ReentrantLock-boolean-fair" class="headerlink" title="0.1. public ReentrantLock(boolean fair)"></a>0.1. public ReentrantLock(boolean fair)</h3><p><code>public ReentrantLock(boolean fair)</code> 用于构造一个 公平锁&#x2F;非公平锁的 <code>ReentrantLock</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *      1. public</span><br><span class="hljs-comment"> *          1. 天下皆公（EveryWhere）</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 方法参数</span><br><span class="hljs-comment"> *      1. boolean fair</span><br><span class="hljs-comment"> *          1. 是否是公平锁</span><br><span class="hljs-comment"> *          2. true</span><br><span class="hljs-comment"> *              1. 公平锁</span><br><span class="hljs-comment"> *          3. false</span><br><span class="hljs-comment"> *              1. 非公平锁</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 抛出异常</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 构造示例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ReentrantLock reentrantLock = new ReentrantLock(true);</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">ReentrantLock</span><span class="hljs-params">(<span class="hljs-type">boolean</span> fair)</span> &#123;<br>	sync = fair ? <span class="hljs-keyword">new</span> <span class="hljs-title class_">FairSync</span>() : <span class="hljs-keyword">new</span> <span class="hljs-title class_">NonfairSync</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-抽象方法"><a href="#6-抽象方法" class="headerlink" title="6. 抽象方法"></a>6. 抽象方法</h2><hr>
+<h2 id="7-接口方法"><a href="#7-接口方法" class="headerlink" title="7. 接口方法"></a>7. 接口方法</h2><h3 id="7-1-接口方法（无）"><a href="#7-1-接口方法（无）" class="headerlink" title="7.1. 接口方法（无）"></a>7.1. 接口方法（无）</h3><hr>
+<h3 id="7-2-接口方法（default）"><a href="#7-2-接口方法（default）" class="headerlink" title="7.2. 接口方法（default）"></a>7.2. 接口方法（default）</h3><hr>
+<h3 id="7-3-接口方法（default-重写）"><a href="#7-3-接口方法（default-重写）" class="headerlink" title="7.3. 接口方法（default 重写）"></a>7.3. 接口方法（default 重写）</h3><hr>
+<h2 id="8-具体方法"><a href="#8-具体方法" class="headerlink" title="8. 具体方法"></a>8. 具体方法</h2><h3 id="8-1-具体方法（无）"><a href="#8-1-具体方法（无）" class="headerlink" title="8.1. 具体方法（无）"></a>8.1. 具体方法（无）</h3><hr>
+<h3 id="8-2-具体方法（重写）"><a href="#8-2-具体方法（重写）" class="headerlink" title="8.2. 具体方法（重写）"></a>8.2. 具体方法（重写）</h3><hr>
+<h3 id="8-3-具体方法（实现）"><a href="#8-3-具体方法（实现）" class="headerlink" title="8.3. 具体方法（实现）"></a>8.3. 具体方法（实现）</h3><h4 id="0-1-1-Lock-中的方法实现"><a href="#0-1-1-Lock-中的方法实现" class="headerlink" title="0.1.1. Lock 中的方法实现"></a>0.1.1. Lock 中的方法实现</h4><h5 id="0-1-1-1-Lock-源码解析"><a href="#0-1-1-1-Lock-源码解析" class="headerlink" title="0.1.1.1. Lock 源码解析"></a>0.1.1.1. Lock 源码解析</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Lock源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="0-1-1-2-public-void-lock"><a href="#0-1-1-2-public-void-lock" class="headerlink" title="0.1.1.2. public void lock()"></a>0.1.1.2. public void lock()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lock</span><span class="hljs-params">()</span> &#123;<br>	sync.lock();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Sync 源码解析<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ASync%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Sync 源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="0-1-1-2-public-void-lockInterruptibly"><a href="#0-1-1-2-public-void-lockInterruptibly" class="headerlink" title="0.1.1.2. public void lockInterruptibly()"></a>0.1.1.2. public void lockInterruptibly()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lockInterruptibly</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>	sync.lockInterruptibly();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ReentrantLock 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/08/31/源码：ReentrantLock源码解析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 31, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：Lock 源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：Lock 源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" title="笔记：Redis">
+                        <span class="hidden-mobile">笔记：Redis</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

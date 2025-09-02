@@ -19,17 +19,28 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分布式一致性概述分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致">
+    <meta name="description" content="分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致性通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：分布式一致性">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="分布式一致性概述分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致">
+<meta property="og:description" content="分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致性通">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg">
-<meta property="og:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-9.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-11.png">
 <meta property="article:published_time" content="2025-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-23T03:34:36.116Z">
+<meta property="article:modified_time" content="2025-08-26T01:49:16.432Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg">
@@ -226,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.2k words
+          12k words
         
       </span>
     
@@ -237,7 +248,7 @@
         
         
         
-          61 mins
+          104 mins
         
       </span>
     
@@ -292,7 +303,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-23T11:34:36+08:00
+                    Last updated on 2025-08-26T09:49:16+08:00
                   
                   
 
@@ -302,7 +313,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="分布式一致性概述"><a href="#分布式一致性概述" class="headerlink" title="分布式一致性概述"></a>分布式一致性概述</h2><p>分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：</p>
+                <h2 id="分布式一致性"><a href="#分布式一致性" class="headerlink" title="分布式一致性"></a>分布式一致性</h2><p>分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：</p>
 <ol>
 <li>强一致性</li>
 <li>线性一致性</li>
@@ -324,7 +335,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="复制协议概述"><a href="#复制协议概述" class="headerlink" title="复制协议概述"></a>复制协议概述</h2><p>我们可以把<strong>一致性</strong>看作系统的目标，而<strong>复制协议</strong>则是实现这一目标的手段，不同的复制协议会直接影响系统的一致性。</p>
+<h2 id="复制协议"><a href="#复制协议" class="headerlink" title="复制协议"></a>复制协议</h2><p>我们可以把<strong>一致性</strong>看作系统的目标，而<strong>复制协议</strong>则是实现这一目标的手段，不同的复制协议会直接影响系统的一致性。</p>
 <p>需要注意的是，<strong>复制协议不仅仅是用来解决 “复制” 问题的，它既用于 “复制”，也用于 “写入”</strong>。这听起来像个悖论，但实际上，在分布式系统中，写入和复制本质上是同一操作的两个方面。因为一次成功的写入操作，其定义就是：数据在所有（或多数）副本上成功完成复制。</p>
 <p>我们可以把复制协议分成四个维度来理解：</p>
 <ol>
@@ -447,6 +458,7 @@
 <li>W &#x3D; 1：异步复制</li>
 </ol>
 </li>
+<li>需要注意的是，无主复制面临的核心挑战同样在于写入冲突。</li>
 </ol>
 </li>
 </ol>
@@ -498,7 +510,13 @@
 </li>
 </ol>
 </li>
-<li>实现方式<br> 1. </li>
+<li>实现方式<ol>
+<li>CRDT</li>
+<li>共识协议</li>
+<li>分布式事务</li>
+<li>Quorum NWR 模型</li>
+</ol>
+</li>
 <li>需要注意的是，这些都是底层的技术，无论是采用 ACK 阈值、共识协议还是采用分布式事务，他们的底层技术实现就是采用的这些方式</li>
 </ol>
 </li>
@@ -523,8 +541,8 @@
 <p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>需要注意的是，如果我们采用 quorum机制、共识协议（如 Paxos&#x2F;Raft），通常只要求大多数从节点完成数据复制后即可返回响应；但如果我们使用分布式事务，这种方式则要求更严格，往往必须等到所有从节点都成功复制数据后才确认响应（常见同步复制的实现有：基于 ACK 阈值、基于共识协议、基于分布式事务）</p>
 <hr>
-<h2 id="Paxos-协议"><a href="#Paxos-协议" class="headerlink" title="Paxos 协议"></a>Paxos 协议</h2><hr>
-<h2 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h2><h3 id="Raft-协议概述"><a href="#Raft-协议概述" class="headerlink" title="Raft 协议概述"></a>Raft 协议概述</h3><p>Raft 协议是一个强一致性协议，在三个维度上的选择如下：</p>
+<h2 id="共识协议"><a href="#共识协议" class="headerlink" title="共识协议"></a>共识协议</h2><h3 id="Paxos-协议"><a href="#Paxos-协议" class="headerlink" title="Paxos 协议"></a>Paxos 协议</h3><hr>
+<h3 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h3><h4 id="Raft-协议概述"><a href="#Raft-协议概述" class="headerlink" title="Raft 协议概述"></a>Raft 协议概述</h4><p>Raft 协议是一个强一致性协议，在三个维度上的选择如下：</p>
 <ol>
 <li>维度一：同步复制</li>
 <li>维度二：主从复制</li>
@@ -547,7 +565,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="Raft-协议核心角色"><a href="#Raft-协议核心角色" class="headerlink" title="Raft 协议核心角色"></a>Raft 协议核心角色</h3><p><font color="#92d050">1. Follower（跟随者，默认）</font><br>Follower 是集群中的默认角色，主要职责包括：</p>
+<h4 id="Raft-协议核心角色"><a href="#Raft-协议核心角色" class="headerlink" title="Raft 协议核心角色"></a>Raft 协议核心角色</h4><p><font color="#92d050">1. Follower（跟随者，默认）</font><br>Follower 是集群中的默认角色，主要职责包括：</p>
 <ol>
 <li>不直接处理客户端的写请求</li>
 <li>等待并执行 Leader 的指令</li>
@@ -569,7 +587,7 @@
 <li>将日志复制到各 Follower 节点并确保数据一致性</li>
 </ol>
 <hr>
-<h3 id="Raft-协议核心流程"><a href="#Raft-协议核心流程" class="headerlink" title="Raft 协议核心流程"></a>Raft 协议核心流程</h3><p><font color="#92d050">1. Raft 启动与第一次选举 Leader</font><br>启动时，所有节点默认处于 Follower 状态，term 初始为 0，并各自设置一个 150–300ms 之间的随机选举超时时间。如果在超时时间内未收到来自 Leader 的心跳信号，该节点将从 Follower 状态切换为 Candidate，将 term 加 1，发起第一轮选举</p>
+<h4 id="Raft-协议核心流程"><a href="#Raft-协议核心流程" class="headerlink" title="Raft 协议核心流程"></a>Raft 协议核心流程</h4><p><font color="#92d050">1. Raft 启动与第一次选举 Leader</font><br>启动时，所有节点默认处于 Follower 状态，term 初始为 0，并各自设置一个 150–300ms 之间的随机选举超时时间。如果在超时时间内未收到来自 Leader 的心跳信号，该节点将从 Follower 状态切换为 Candidate，将 term 加 1，发起第一轮选举</p>
 <p>一旦某个 Candidate 获得的票数超过半数（即 &gt; N&#x2F;2，这里的 N 指的是集群中的所有节点数，而非存活节点数，因此无需担心宕机会影响选票），就会当选为 Leader。这里有两个关键点需要注意：</p>
 <ol>
 <li>选举必须赢得多数票<ol>
@@ -733,13 +751,438 @@
 </li>
 </ol>
 <p>由于会检查日志是否落后之后再去投票，而且 Raft 协议还是多数成功，就直接杜绝了日志落后的节点“混进多数”并被选为 Leader 的可能性。</p>
-<p><font color="#92d050">4. A 节点恢复</font><br>A 节点重启后，term 仍是 10。当它收到新 Leader（如 D）发来的心跳 <code>AppendEntries</code> RPC 中 term&#x3D;11 后，立刻发现对方的 term 更新，于是更新自己的 term → 11，退回 Follower 身份，并且进行日志同步，重新与集群保持一致。<br><img src="/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">4. A 节点恢复</font><br>A 节点重启后，term 仍是 10。当它收到新 Leader（如 D）发来的心跳 <code>AppendEntries</code> RPC 中 term&#x3D;11 后，立刻发现对方的 term 更新，于是更新自己的 term → 11，退回 Follower 身份，并且进行日志同步，重新与集群保持一致。<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h2 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h2><hr>
-<h2 id="Multi-Paxos-协议"><a href="#Multi-Paxos-协议" class="headerlink" title="Multi-Paxos 协议"></a>Multi-Paxos 协议</h2><hr>
-<h2 id="EPaxos-协议"><a href="#EPaxos-协议" class="headerlink" title="EPaxos 协议"></a>EPaxos 协议</h2><hr>
-<h2 id="Atlas-协议"><a href="#Atlas-协议" class="headerlink" title="Atlas 协议"></a>Atlas 协议</h2><hr>
-<h2 id="RIFL-协议"><a href="#RIFL-协议" class="headerlink" title="RIFL 协议"></a>RIFL 协议</h2><hr>
+<h3 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h3><hr>
+<h3 id="Multi-Paxos-协议"><a href="#Multi-Paxos-协议" class="headerlink" title="Multi-Paxos 协议"></a>Multi-Paxos 协议</h3><hr>
+<h3 id="EPaxos-协议"><a href="#EPaxos-协议" class="headerlink" title="EPaxos 协议"></a>EPaxos 协议</h3><hr>
+<h3 id="Atlas-协议"><a href="#Atlas-协议" class="headerlink" title="Atlas 协议"></a>Atlas 协议</h3><hr>
+<h3 id="RIFL-协议"><a href="#RIFL-协议" class="headerlink" title="RIFL 协议"></a>RIFL 协议</h3><hr>
+<h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><h3 id="事务概述"><a href="#事务概述" class="headerlink" title="事务概述"></a>事务概述</h3><p>在数据库里，事务具有四个关键特性（ACID）</p>
+<ol>
+<li>原子性（A）<ol>
+<li>事务中的所有操作要么全部执行成功，要么全部执行失败回滚。</li>
+<li>对于数据库来说，事务是一个不可分割的最小操作单元。</li>
+</ol>
+</li>
+<li>一致性（C）<ol>
+<li>事务执行前后，数据库都处于一致的状态。</li>
+<li>也就是说，事务执行前后，数据库的状态应该满足所有的定义约束、触发器、级联操作等。</li>
+</ol>
+</li>
+<li>隔离性（I）<ol>
+<li>事务的执行不会受到其他事务的干扰。</li>
+<li>多个事务并发执行时，一个事务的中间状态对其他事务是不可见的。</li>
+</ol>
+</li>
+<li>持久性（D）<ol>
+<li>事务一旦提交，其结果就永久保存到数据库中。</li>
+<li>即使系统发生故障，事务的结果也不会丢失。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="分布式事务概述"><a href="#分布式事务概述" class="headerlink" title="分布式事务概述"></a>分布式事务概述</h3><p>分布式事务是指：把事务的概念，从单机数据库扩展到了<strong>跨多个微服务、多个数据库</strong>的场景。</p>
+<p>过去，在单体应用的电商系统里，订单、支付、库存都塞在一个大项目，数据也都放在同一个数据库里。这样一来，所有操作都在单机环境的同一个数据库里完成，事务自然很简单。例如在 MySQL 里只要 <code>BEGIN … COMMIT</code>，数据库就能帮你搞定一致性。</p>
+<p>后来大家觉得“大一统”的架构太笨重，就拆成了微服务：有 订单服务、库存服务、支付服务。每个服务不仅代码独立，还各自拿着自己的数据库，技术选型五花八门（这边用 MySQL，那边用 MongoDB，甚至还有 Redis 出来凑热闹）</p>
+<p>可是问题也随之出现，在电商下单场景里：</p>
+<ol>
+<li>订单服务要插入一条订单记录（向数据库 A）</li>
+<li>库存服务要扣减一条库存（向数据库 B）</li>
+<li>付服务要完成扣款（向数据库 C）</li>
+</ol>
+<p>这三件事必须保证 要么全部成功，要么全部失败，否则就会出现 “订单生成了但没扣钱”、“扣了钱却没库存” 的大灾难。</p>
+<p>但是数据库 A 有自己的本地事务，数据库 B 有自己的本地事务，数据库 C 也有自己的本地事务，他们各自为政，互不干涉，却没有一个 “老大哥” 能帮你全局管控。</p>
+<p>于是，这正是 分布式事务 要解决的问题：在分布式场景下，每个服务都能开启自己的 本地事务，只保证自己的一亩三分地。而分布式事务的任务，就是把这些零散的本地事务“绑在一起”，形成一个 逻辑上的整体事务，让它们的命运合二为一。</p>
+<hr>
+<h3 id="强一致性分布式事务"><a href="#强一致性分布式事务" class="headerlink" title="强一致性分布式事务"></a>强一致性分布式事务</h3><h4 id="2PC-提交协议"><a href="#2PC-提交协议" class="headerlink" title="2PC 提交协议"></a>2PC 提交协议</h4><h5 id="2PC-核心角色"><a href="#2PC-核心角色" class="headerlink" title="2PC 核心角色"></a>2PC 核心角色</h5><p><font color="#92d050">1. 协调者（Coordinator）</font><br>负责事务的发起、管理和最终决定（提交 &#x2F; 回滚）。</p>
+<p><font color="#92d050">2. 参与者（Participant）</font><br>一般是数据库、消息队列节点，实际执行事务操作。</p>
+<hr>
+<h5 id="2PC-核心流程"><a href="#2PC-核心流程" class="headerlink" title="2PC 核心流程"></a>2PC 核心流程</h5><h6 id="阶段一：准备阶段"><a href="#阶段一：准备阶段" class="headerlink" title="阶段一：准备阶段"></a>阶段一：准备阶段</h6><p>在这个阶段，协调者需要确认所有参与者都 “有能力” 提交事务。于是，它会向所有参与者发送 Prepare 请求，就好比在问：“你们是否能提交事务？”</p>
+<p>参与者收到 <code>Prepare</code> 请求后，开始执行事务操作并锁定相关资源，但不会提交事务：</p>
+<ol>
+<li>执行事务操作，在这个过程要将相关资源加锁（行锁、表锁），确保这批数据在最终提交前不会被其他事务破坏</li>
+<li>并且将事务的 Redo Log 和 Undo Log 写入本地的持久化日志文件</li>
+</ol>
+<p>如果一切顺利，参与者就向协调者返回 YES，表示自己已经做好提交的准备。若中途遇到异常（如约束条件失败、磁盘空间不足等），则返回 NO。</p>
+<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在这里，Prepare 阶段通常依赖我们 “四维度理论” 所强调的底层技术来实现</li>
+<li>其他地方中的多次 “交互” 本质上只是一条网络信号的传递</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="阶段二：提交阶段"><a href="#阶段二：提交阶段" class="headerlink" title="阶段二：提交阶段"></a>阶段二：提交阶段</h6><p>协调者在收到所有参与者的响应消息后，会根据反馈结果通知各参与者：执行 commit 提交 或 rollback 回滚 操作。</p>
+<p><font color="#92d050">1. 事务提交</font><br>当所有参与者均返回 <strong>YES</strong> 时，协调者发起正式的提交流程：</p>
+<ol>
+<li>协调者向所有参与者发送 <code>commit</code> 请求。<ol>
+<li>参与者接到请求后，正式提交事务，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</li>
+</ol>
+</li>
+<li>提交完成后，参与者向协调者返回 <code>ACK</code></li>
+<li>协调者收到所有参与者的 <code>ACK</code> 后，确认整个事务提交完成<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-2.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<p><font color="#92d050">2. 事务回滚</font><br>若任意一个参与者返回 <strong>NO</strong>，或在超时时间内未返回响应，则协调者触发回滚流程：</p>
+<ol>
+<li>协调者向所有参与者发送 <code>rollback</code> 请求</li>
+<li>参与者根据第一阶段保存的 <strong>undo 信息</strong> 执行回滚，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</li>
+<li>回滚完成后，参与者向协调者发送 <code>ACK</code> 确认消息</li>
+<li>协调者收到所有参与者的 <code>ACK</code> 后，确认事务已取消<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-3.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在 阶段二 中，如果协调者迟迟没有收到某个参与者返回的 <code>ACK</code>，根据严格的 2PC 协议规范，协调者会进入阻塞等待状态，等待该参与者恢复正常，或由管理员人工干预</li>
+<li>在工程实践中，很多实现会加入重试机制，但依旧无法改变阻塞的事实</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2PC-优缺点"><a href="#2PC-优缺点" class="headerlink" title="2PC 优缺点"></a>2PC 优缺点</h6><p>协调着也有可能卡死，参与者也有可能卡死</p>
+<ol>
+<li>缺点<ol>
+<li>性能问题<ol>
+<li>在分布式场景下，2PC 严重依赖多次网络通信</li>
+<li>而且在第二阶段，资源会被锁定，其他节点想要访问这部分资源，只能阻塞等待<ol>
+<li>这也是 2PC 不适合长事务的原因：事务持续越久，锁定的资源越多，等待的请求越多，系统吞吐量就会迅速下降</li>
+</ol>
+</li>
+<li>此外还会长期占用数据库连接</li>
+<li>在高并发场景（成千上万事务同时执行）下，使用 2PC 很容易导致系统 “卡爆”</li>
+<li>因此，在对响应速度要求极高的场景（如电商秒杀、社交消息流），几乎不会采用 2PC</li>
+</ol>
+</li>
+<li>可靠性问题<ol>
+<li>协调者（TM）是整个流程的核心，存在单点故障问题</li>
+<li>尤其是在提交阶段，一旦 TM 宕机，资源会被一直锁定，数据库连接也会被持续占用</li>
+<li>尽管可以通过重新选举产生一个新的协调者，但这并不能解除因原协调者宕机而导致的参与者长期处于阻塞状态的问题</li>
+</ol>
+</li>
+<li>数据一致性问题<ol>
+<li>在提交阶段中，如果协调者已经向部分参与者下发了 <code>commit</code>，但由于网络中断，另外一些参与者没有收到指令，就会导致一部分节点提交成功、另一部分节点停留在未提交状态，最终造成数据不一致。</li>
+<li>2PC和3PC都无法保证数据绝对的一致性，一般为了预防这种问题，可以添加一个报警，比如监控到事务异常的时候，通过脚本自动补偿差异的信息。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="3PC-提交协议"><a href="#3PC-提交协议" class="headerlink" title="3PC 提交协议"></a>3PC 提交协议</h4><blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>YES&#x2F;NO 与 ACK 的区别<ol>
+<li>YES&#x2F;NO<ol>
+<li>用于协调者的询问阶段，仅表示参与者的意向或能力，不会实际修改资源</li>
+</ol>
+</li>
+<li>ACK<ol>
+<li>用于指令执行阶段，当协调者下达操作命令后，参与者完成执行并以 <code>ACK</code> 确认结果。</li>
+</ol>
+</li>
+<li>nack</li>
+<li>error</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h5 id="3PC-概述"><a href="#3PC-概述" class="headerlink" title="3PC 概述"></a>3PC 概述</h5><p>三阶段提交（3PC）被设计出来的唯一目的，就是为了解决两阶段提交（2PC）的一个致命缺陷：<strong>协调者单点故障导致的参与者永久阻塞问题</strong>。</p>
+<p>3PC 的出现主要是为了解决以下问题：</p>
+<ol>
+<li>2PC 阻塞问题<ol>
+<li>在 2PC 中，一旦参与者在准备阶段返回了 <code>YES</code>，它就不得不锁定公共资源并占用数据库连接，直到协调者发来最终指令。</li>
+<li>如果此时协调者宕机，参与者将一直无法释放资源，陷入阻塞状态。</li>
+</ol>
+</li>
+<li>2PC 数据不一致问题<ol>
+<li>在提交阶段中，如果协调者已经向部分参与者下发了 <code>commit</code>，但由于网络中断，另外一些参与者没有收到指令，就会导致一部分节点提交成功、另一部分节点停留在未提交状态，最终造成数据不一致。</li>
+</ol>
+</li>
+</ol>
+<p>而 3PC 通过引入一个额外的 <strong><code>PreCommit</code>（预提交）</strong> 阶段，并加入 <strong>超时机制</strong>，来<strong>缓解</strong>这些问题</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然 3PC 缓解了 2PC 的部分问题，但它也带来了更高的通信成本和实现复杂性，且依旧具有性能问题和数据一致性问题</li>
+<li>因此，在现代分布式系统中，人们更倾向于使用 2PC 而非 3PC，甚至更倾向于采用共识协议来解决这部分问题</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="3PC-核心流程"><a href="#3PC-核心流程" class="headerlink" title="3PC 核心流程"></a>3PC 核心流程</h5><h6 id="阶段一：CanCommit（准备阶段）"><a href="#阶段一：CanCommit（准备阶段）" class="headerlink" title="阶段一：CanCommit（准备阶段）"></a>阶段一：CanCommit（准备阶段）</h6><p>协调者向所有参与者发送 <code>CanCommit</code> 请求，询问它们是否都 “有能力” 提交事务</p>
+<p>参与者在收到 <code>CanCommit</code> 请求后，会先对自身环境进行检查（例如：本地数据是否满足约束、资源是否充足等），此时<strong>不会真正执行事务操作或锁定资源</strong></p>
+<p>检查无误后，它会向协调者返回 YSE。若检查失败，则返回 NO</p>
+<hr>
+<h6 id="阶段二：PreCommit-预提交阶段"><a href="#阶段二：PreCommit-预提交阶段" class="headerlink" title="阶段二：PreCommit (预提交阶段)"></a>阶段二：PreCommit (预提交阶段)</h6><p>协调者根据参与者在阶段一的反应情况，来决定如何进行 PreCommit 操作，有以下两种可能：</p>
+<p><font color="#92d050">1. 事务预提交</font><br>当所有参与者均返回 YES 时，协调者向所有参与者发送 <code>PreCommit</code> 请求。</p>
+<p>参与者收到 <code>PreCommit</code> 请求后，开始执行事务操作并锁定相关资源，但不会提交事务（这步才真正等同于 2PC 的第一阶段）</p>
+<p>执行成功后，参与者向协调者返回 <code>ACK</code>。若执行失败，则返回 NO<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-4.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 事务中断</font><br>若任意一个参与者返回 NO，或在超时时间内未返回响应，协调者向所有参与者发送 <code>Abort</code> 请求</p>
+<p>参与者收到 <code>Abort</code> 请求后，直接中断事务<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-5.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在 3PC 中引入 “超时机制”，主要体现在第二和第三阶段。如果参与者在规定时间内没有收到协调者的指令，就可以自主作出决策，默认将事务中止，从而避免因协调者故障而无限期阻塞。</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="阶段三：DoCommit（提交阶段）"><a href="#阶段三：DoCommit（提交阶段）" class="headerlink" title="阶段三：DoCommit（提交阶段）"></a>阶段三：DoCommit（提交阶段）</h5><p>协调者根据参与者在阶段二的反应情况，来决定如何进行 DoCommit 操作，有以下两种可能：</p>
+<p><font color="#92d050">1. 事务提交</font><br>当所有参与者均返回 ACK 时，协调者向所有参与者发送 <code>DoCommit</code> 请求。</p>
+<p>参与者收到 <code>DoCommit</code> 请求后，正式提交事务，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</p>
+<p>提交完成后，参与者向协调者返回 <code>ACK</code></p>
+<p> 协调者收到所有参与者的 <code>ACK</code> 后，确认整个事务提交完成<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-6.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 事务中断</font><br>若任意一个参与者返回 NO，或在超时时间内未返回响应，协调者向所有参与者发送 <code>Abort</code> 请求</p>
+<p>参与者收到 <code>Abort</code> 请求后，根据阶段二记录的 Undo 日志执行回滚，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</p>
+<p>中断完成后，参与者向协调者返回 <code>ACK</code></p>
+<p> 协调者收到所有参与者的 <code>ACK</code> 后，确认整个事务中断完成</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在 3PC 中引入 “超时机制”，主要体现在第二和第三阶段。如果参与者在规定时间内没有收到协调者的指令，就可以自主作出决策，默认将事务中止，从而避免因协调者故障而无限期阻塞。</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="最终一致性分布式事务"><a href="#最终一致性分布式事务" class="headerlink" title="最终一致性分布式事务"></a>最终一致性分布式事务</h3><h4 id="TCC-模式"><a href="#TCC-模式" class="headerlink" title="TCC 模式"></a>TCC 模式</h4><h5 id="TCC-概述"><a href="#TCC-概述" class="headerlink" title="TCC 概述"></a>TCC 概述</h5><p>TCC 的出现主要是为了解决以下问题：传统强一致分布式事务协议（如 2PC、3PC）实现复杂、性能低下，而且常常导致资源长时间锁定</p>
+<p>而 TCC 通过在业务层进行灵活的编排，将锁粒度和持锁时间最小化，从而以更高效的方式实现最终一致性</p>
+<hr>
+<h5 id="TCC-核心流程"><a href="#TCC-核心流程" class="headerlink" title="TCC 核心流程"></a>TCC 核心流程</h5><h6 id="阶段一：Try-阶段（资源预留）"><a href="#阶段一：Try-阶段（资源预留）" class="headerlink" title="阶段一：Try 阶段（资源预留）"></a>阶段一：Try 阶段（资源预留）</h6><p>假设你在 Mall 商城里买了一台手机，这个操作涉及到三个服务：</p>
+<ol>
+<li>订单服务<ol>
+<li>创建订单</li>
+</ol>
+</li>
+<li>库存服务<ol>
+<li>扣减库存</li>
+</ol>
+</li>
+<li>支付服务<ol>
+<li>扣除余额</li>
+</ol>
+</li>
+</ol>
+<p>在 Try 阶段，事务协调者会调用各服务的 Try 接口，各服务先执行资源预留，但尚未进行最终确认：</p>
+<ol>
+<li>订单服务<ol>
+<li>在数据库插入一条订单记录</li>
+<li>状态设为 <code>Pending</code>（待确认）</li>
+</ol>
+</li>
+<li>库存服务<ol>
+<li>从 <code>available_quantity</code>（可用库存）中扣减对应数量</li>
+<li>在 <code>reserved_quantity</code>（冻结库存）中增加相应数量</li>
+</ol>
+</li>
+<li>支付服务<ol>
+<li>从 <code>available_balance</code>（可用余额）中扣减相应金额</li>
+<li>在 <code>reserved_balance</code>（冻结金额）中增加对应金额</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>常见的资源预留实现方式可以分为两类：<ol>
+<li>库存预留<ol>
+<li>数据库设计：<ol>
+<li> 建立两类字段或表，<code>available_quantity</code>（可用库存） 和 <code>reserved_quantity</code>（冻结库存）</li>
+</ol>
+</li>
+<li>Try<ol>
+<li>扣减 <code>available_quantity</code>，并相应增加 <code>reserved_quantity</code></li>
+</ol>
+</li>
+<li>Confirm<ol>
+<li>直接从 <code>reserved_quantity</code> 扣除，完成真正消耗</li>
+</ol>
+</li>
+<li>Cancel<ol>
+<li>回滚操作，即增加 <code>available_quantity</code>，并减少 <code>reserved_quantity</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>优惠卷预留<ol>
+<li>Try<ol>
+<li>给记录加上 “冻结” 标志（如 <code>Locked=Y</code>），并通常设置过期时间（例如 10 分钟）</li>
+<li>在冻结期间，该优惠券对其他用户不可见</li>
+</ol>
+</li>
+<li>Confirm<ol>
+<li>将标志更新为 “已领取”</li>
+</ol>
+</li>
+<li>Cancel<ol>
+<li>将标志恢复成原始状态（解除冻结）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>状态预留不会像 2PC、3PC 那样锁住数据库资源，而是通过业务字段来标记和控制资源的占用状态</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="阶段二：Confirm-Cancel-阶段"><a href="#阶段二：Confirm-Cancel-阶段" class="headerlink" title="阶段二：Confirm&#x2F;Cancel 阶段"></a>阶段二：Confirm&#x2F;Cancel 阶段</h6><p>事务协调者根据各服务在阶段一的反应情况，来决定如何进行阶段二的操作，有以下两种可能：</p>
+<p><font color="#92d050">1. Confirm 阶段</font><br>当所有服务都 Try 成功，事务协调者会调用各服务的 Confirm 接口：</p>
+<ol>
+<li>订单服务<ol>
+<li>把 <code>Pending</code> 修改为 <code>Confirmed</code></li>
+</ol>
+</li>
+<li>库存服务<ol>
+<li>直接从 <code>reserved_quantity</code>（冻结库存）扣除，完成真正消耗</li>
+</ol>
+</li>
+<li>支付服务<ol>
+<li>直接从 <code>reserved_balance</code>（冻结金额）扣除，完成真正支付</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">2. Cancel 阶段</font><br>当任一服务在 Try 阶段有任何失败，事务协调者会调用各服务的 Cancel 接口：</p>
+<ol>
+<li>订单服务<ol>
+<li>把订单取消甚至直接删除</li>
+</ol>
+</li>
+<li>库存服务<ol>
+<li>解锁刚才冻结的库存</li>
+</ol>
+</li>
+<li>支付服务<ol>
+<li>解锁刚才冻结的金额<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-7.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>幂等保护<ol>
+<li>Confirm 和 Cancel 必须设计成安全的重复调用</li>
+<li>我们可以通过事务 ID（分布式 ID）来记录，确保不会重复结算</li>
+</ol>
+</li>
+<li>允许空回滚<ol>
+<li>空回滚是指：一个服务根本没成功执行过 Try，就被要求执行 Cancel</li>
+<li>造成空回滚的原因包括：<ol>
+<li>网络抖动<ol>
+<li>事务协调器的 Try 请求因为网络抖动超时未到达服务，但协调者认为失败了，就会触发 Cancel</li>
+</ol>
+</li>
+<li>服务宕机<ol>
+<li>事务协调器的 Try 请求因为服务宕机无法未到达服务，但协调者认为失败了，就会触发 Cancel</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>我们可以在各服务维护一个事务日志表，对每个事务 ID 记录 Try&#x2F;Confirm&#x2F;Cancel 状态<ol>
+<li>在 Cancel 的时候，如果查不到事务日志记录，说明 Try 根本没执行过，就直接返回（即空回滚），不能真的去执行操作</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>防悬挂控制<ol>
+<li>悬挂是指：Cancel 比 Try 先到达，然后 Try 又 “姗姗来迟”</li>
+<li>我们可以在处理 Try 时，先检查事务日志表 ，查看这个事务 ID 是否已经是 Cancel 状态</li>
+<li>如果已经是 Cancel 状态，说明 Cancel 已经到达过，就拒绝执行 Try</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="Saga-模式"><a href="#Saga-模式" class="headerlink" title="Saga 模式"></a>Saga 模式</h4><h5 id="Saga-概述"><a href="#Saga-概述" class="headerlink" title="Saga 概述"></a>Saga 概述</h5><p>Saga 是指：将一个大事务拆分为一系列可以独立提交的<strong>局部事务</strong>，每个局部事务<strong>成功后立即提交</strong>，避免长时间持有锁与资源，如果中途出现失败，则按既定顺序依次执行对应的<strong>补偿操作</strong>，将已完成的动作回滚，从而保证整体达到<strong>最终一致性</strong></p>
+<p>只要每个小事务都是自洽的（要么提交，要么补偿），那么整个业务过程在逻辑上就是完整、可恢复的。</p>
+<hr>
+<h5 id="Saga-恢复策略"><a href="#Saga-恢复策略" class="headerlink" title="Saga 恢复策略"></a>Saga 恢复策略</h5><ol>
+<li>向前恢复（补偿事务）<ol>
+<li>一旦执行过程中出错，就回滚之前已经成功的局部事务</li>
+<li>这个恢复策略需要每个局部事务必须有一个对应的补偿，来导致状态回退</li>
+<li>但有些操作可能不好补偿，比如发短信都已经发出去了，很难 “收回”</li>
+</ol>
+</li>
+<li>向后恢复（端点续跑）<ol>
+<li>出错后不撤销之前成功的事务，而是不断重试失败的那一步，直到成功为止</li>
+<li>这个恢复策略假设所有局部事务最终一定能成功，不需要补偿</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="Saga-核心流程"><a href="#Saga-核心流程" class="headerlink" title="Saga 核心流程"></a>Saga 核心流程</h5><h6 id="编排模式（Orchestration）"><a href="#编排模式（Orchestration）" class="headerlink" title="编排模式（Orchestration）"></a>编排模式（Orchestration）</h6><p>在 编排式 Saga（Orchestration Saga） 中，会有一个中心控制器 （Saga Orchestrator），它负责统一调度所有子事务及其补偿事务：</p>
+<ol>
+<li>正常执行<ol>
+<li>Orchestrator 按顺序依次调用各个局部事务：Txn1 → Txn2 → Txn3 → …</li>
+<li>每个事务执行成功后立即提交，不阻塞后续流程</li>
+</ol>
+</li>
+<li>异常回滚<ol>
+<li>一旦有事务失败，Orchestrator 会主动触发补偿逻辑：Cn(n-1) → Cn(n-2) → …<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-8.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="舞会模式（Choreography）"><a href="#舞会模式（Choreography）" class="headerlink" title="舞会模式（Choreography）"></a>舞会模式（Choreography）</h6><p>在 <strong>协作式 Saga</strong> 中，不再有中心控制器，而是每个服务通过<strong>事件驱动</strong>自发参与事务流程：</p>
+<ol>
+<li>正常执行<ol>
+<li>当某个服务完成自己的局部事务后，会发布一个事件（如 OrderCreate）</li>
+<li>下一个相关服务订阅并监听该事件，执行自己的局部事务并继续发布事件（如 InventoryReserved）</li>
+<li>整个 Saga 事务就这样靠事件链条一步步推进</li>
+</ol>
+</li>
+<li>异常回滚<ol>
+<li>如果某个服务在执行时发生错误，它会发布一个补偿事件（如 PaymentFaile）</li>
+<li>订阅该补偿事件的服务按照约定，自行触发补偿逻辑</li>
+<li>由此实现链式的按需回滚<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-9.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="本地消息表"><a href="#本地消息表" class="headerlink" title="本地消息表"></a>本地消息表</h4><h5 id="本地消息表概述"><a href="#本地消息表概述" class="headerlink" title="本地消息表概述"></a>本地消息表概述</h5><p>本地消息表 的出现主要是为了解决以下问题：<br>在分布式系统中，我们常通过消息队列来传递事件（因为消息队列优势很多，详见笔记：MQ 概述）。</p>
+<p>但如果采用 “先写数据库，再发消息” 这种常见流程，就会产生一致性问题：</p>
+<ol>
+<li>如果 “写库成功，但发消息失败”，队列中就没有事件，消费者无法感知</li>
+<li>如果 “发消息成功，但写库失败”，消费者就会处理到一条不存在的业务（脏数据）</li>
+<li>这些问题都会导致数据不一致</li>
+</ol>
+<p>而 本地消息表 通过先将消息写入本地消息表，随后由后台定时任务扫描该表，并将消息推送到消息队列。这样，即使因宕机等原因导致消息一时未能发送，消息记录仍然安全地保存在本地，后续任务会对其进行扫描和补发，从而保证最终一致性。</p>
+<hr>
+<h5 id="本地消息表核心流程"><a href="#本地消息表核心流程" class="headerlink" title="本地消息表核心流程"></a>本地消息表核心流程</h5><p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-10.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="MQ-事务消息"><a href="#MQ-事务消息" class="headerlink" title="MQ 事务消息"></a>MQ 事务消息</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/122402303">https://blog.csdn.net/a745233700/article/details/122402303</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1936417534988489826">https://zhuanlan.zhihu.com/p/1936417534988489826</a></p>
+<hr>
+<h4 id="最大努力通知"><a href="#最大努力通知" class="headerlink" title="最大努力通知"></a>最大努力通知</h4><p>重复通知，消息校对<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-11.png" srcset="/img/loading.gif" lazyload></p>
+<p>Seata 不只是单一的 2PC，而是封装了多种模式，适合不同业务需求：</p>
+<ol>
+<li><p><strong>AT 模式（Automatic Transaction）</strong></p>
+<ul>
+<li><p>最常用，适合关系型数据库。</p>
+</li>
+<li><p>原理：Seata 拦截 SQL，自动生成 <strong>Undo Log</strong>，失败时自动回滚。</p>
+</li>
+<li><p>对应用开发者几乎无感知。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>TCC 模式（Try-Confirm-Cancel）</strong></p>
+<ul>
+<li><p>业务层自己定义三步操作：Try 预留资源、Confirm 确认提交、Cancel 回滚。</p>
+</li>
+<li><p>灵活，但业务代码要额外编写。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Saga 模式</strong></p>
+<ul>
+<li><p>把长事务拆成一系列本地事务，如果中间失败，就用补偿操作撤销。</p>
+</li>
+<li><p>适合跨服务、长流程场景。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>XA 模式</strong>（标准两阶段协议）</p>
+</li>
+</ol>
+<h3 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h3><h4 id="Seata"><a href="#Seata" class="headerlink" title="Seata"></a>Seata</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a745233700/article/details/122402795">https://blog.csdn.net/a745233700/article/details/122402795</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/315164700">https://zhuanlan.zhihu.com/p/315164700</a></p>
+<hr>
 
                 
               </div>
