@@ -444,15 +444,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Condition 源码解析
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ConditionObject 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. 概述Condition 是一个接口，定义了线程间等待与唤醒的协调机制，配合 Lock 使用，相当于 Object 的 wait&#x2F;notify&#x2F;notifyAll 的升级版。 我们先来想象以下 synchronized 锁，它配合 Object 的 wait&#x2F;notify&#x2F;notifyAll 使用。但是有一个关键限制，一个 synchronized 锁（
+          1. 概述ConditionObject 是一个具体类，是 AQS 的 内部类，实现了 Condition，维护了一个等待队列，实现了线程间等待与唤醒的协调机制   [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 链接：      Condition 源码解析 obsidian 内部链接：
         </div>
       </a>
 
@@ -498,15 +498,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ConditionObject 源码解析
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Condition 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. 概述ConditionObject 是一个具体类，是 AQS 的 内部类，实现了 Condition，维护了一个等待队列，实现了线程间等待与唤醒的协调机制   [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 链接：      Condition 源码解析 obsidian 内部链接：
+          1. 概述Condition 是一个接口，定义了线程间等待与唤醒的协调机制，配合 Lock 使用，相当于 Object 的 wait&#x2F;notify&#x2F;notifyAll 的升级版。 我们先来想象以下 synchronized 锁，它配合 Object 的 wait&#x2F;notify&#x2F;notifyAll 使用。但是有一个关键限制，一个 synchronized 锁（
         </div>
       </a>
 
