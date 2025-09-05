@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. 脑图 Xmind  Edraw    2. 线程基础2.1. 串行、并发、并行1. 串行串行是指任务按顺序一个接一个地执行，只有当前一个任务执行完成，后一个任务才会开始执行，严格遵循任务提交的先后顺序。即便系统拥有多个 CPU 核心，在串行模式下，任意时刻也只会有一个线程在运行。 2. 并发并发是指多个线程看起来像是在同时运行，其是通过时间片轮转机制实现，通过快速切换线程，让每个线程都获得运">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-3.png">
@@ -44,9 +44,9 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-10.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-11.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-16.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-18.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-19.png">
 <meta property="article:published_time" content="2025-08-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-02T08:43:44.231Z">
+<meta property="article:modified_time" content="2025-09-03T03:50:34.302Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
@@ -243,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.7k words
+          7.8k words
         
       </span>
     
@@ -309,7 +309,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-09-02T16:43:44+08:00
+                    Last updated on 2025-09-03T11:50:34+08:00
                   
                   
 
@@ -331,7 +331,7 @@
 <p>而在多核 CPU 上，线程有可能被分配到不同的核心上并行执行，但当线程数量多于核心数量时，CPU 仍需通过时间片轮转进行调度，以确保所有线程都能获得执行机会。</p>
 <p><font color="#92d050">3. 并行</font><br>并行是指多个线程在真正意义上同时运行，分别占用不同的 CPU 核心，在同一时刻执行各自的任务，体现出真正的同时处理能力。</p>
 <hr>
-<h3 id="2-2-线程的状态"><a href="#2-2-线程的状态" class="headerlink" title="2.2. 线程的状态"></a>2.2. 线程的状态</h3><h4 id="2-2-1-操作系统层面"><a href="#2-2-1-操作系统层面" class="headerlink" title="2.2.1. 操作系统层面"></a>2.2.1. 操作系统层面</h4><p>操作系统层面的线程状态，是<strong>操作系统内核对线程的实际调度反映</strong><br><img src="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-2-线程的状态"><a href="#2-2-线程的状态" class="headerlink" title="2.2. 线程的状态"></a>2.2. 线程的状态</h3><h4 id="2-2-1-操作系统层面"><a href="#2-2-1-操作系统层面" class="headerlink" title="2.2.1. 操作系统层面"></a>2.2.1. 操作系统层面</h4><p>操作系统层面的线程状态，是<strong>操作系统内核对线程的实际调度反映</strong><br><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h4 id="2-2-2-Java-层面"><a href="#2-2-2-Java-层面" class="headerlink" title="2.2.2. Java 层面"></a>2.2.2. Java 层面</h4><p>Java 层面的线程状态，是 JVM 对线程生命周期的抽象和管理，主要<strong>反映线程在 Java 内存模型中的行为</strong>：<br><img src="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
@@ -755,7 +755,29 @@
 <ol>
 <li>Executor 源码解析<ol>
 <li>obsidian 内部链接：<ol>
-<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Executor 源码解析</a></li>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Executor源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>ExecutorService 源码解析<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：ExecutorService源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>AbstractExecutorService 源码解析<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AAbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：AbstractExecutorService源码解析</a></li>
 </ol>
 </li>
 <li>Hexo 链接：<ol>
@@ -783,7 +805,10 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h2><h3 id="异步编程基础体系"><a href="#异步编程基础体系" class="headerlink" title="异步编程基础体系"></a>异步编程基础体系</h3><p><img src="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-18.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="ThreadPoolExecutor-使用示例"><a href="#ThreadPoolExecutor-使用示例" class="headerlink" title="ThreadPoolExecutor 使用示例"></a>ThreadPoolExecutor 使用示例</h3><hr>
+<h3 id="ScheduledThreadPoolExecutor-使用示例"><a href="#ScheduledThreadPoolExecutor-使用示例" class="headerlink" title="ScheduledThreadPoolExecutor 使用示例"></a>ScheduledThreadPoolExecutor 使用示例</h3><hr>
+<h3 id="ForkJoinPool-使用示例"><a href="#ForkJoinPool-使用示例" class="headerlink" title="ForkJoinPool 使用示例"></a>ForkJoinPool 使用示例</h3><hr>
+<h2 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h2><h3 id="异步编程基础体系"><a href="#异步编程基础体系" class="headerlink" title="异步编程基础体系"></a>异步编程基础体系</h3><p><img src="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-19.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li>Runnable 源码解析<ol>
 <li>obsidian 内部链接：<ol>

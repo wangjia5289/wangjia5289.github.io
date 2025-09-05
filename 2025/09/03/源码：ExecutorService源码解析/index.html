@@ -16,16 +16,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#373737">
-  <meta name="author" content="Ba Yuan">
+  <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="咸阳猴🐒的博客">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/08/30/%E6%9C%AA%E5%91%BD%E5%90%8D%201/index.html">
+    <meta name="description" content="1. 概述ExecutorService 是一个接口，继承了 Executor，在 Executor 的基础上增加了任务生命周期管理的能力，同时扩展了任务提交、任务结果获取、任务批量执行等功能  [!NOTE] 注意事项  Executor 源码解析 obsidian 内部链接： 源码：Executor源码解析   Hexo 链接：         2. 源码部分12345678910111213">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码：ExecutorService 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9AExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. 概述ExecutorService 是一个接口，继承了 Executor，在 Executor 的基础上增加了任务生命周期管理的能力，同时扩展了任务提交、任务结果获取、任务批量执行等功能  [!NOTE] 注意事项  Executor 源码解析 obsidian 内部链接： 源码：Executor源码解析   Hexo 链接：         2. 源码部分12345678910111213">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-08-30T13:56:56.008Z">
-<meta property="article:modified_time" content="2025-08-30T13:56:56.008Z">
+<meta property="article:published_time" content="2025-09-03T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-03T03:50:34.329Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -33,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>咸阳猴🐒的博客</title>
+  <title>源码：ExecutorService 源码解析 - 咸阳猴🐒的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="源码：ExecutorService 源码解析"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-30 21:56" pubdate>
-          August 30, 2025 pm
+        <time datetime="2025-09-03 08:00" pubdate>
+          September 3, 2025 am
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          555 words
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          1 mins
+          5 mins
         
       </span>
     
@@ -282,18 +284,70 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">源码：ExecutorService 源码解析</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-03T11:50:34+08:00
+                  
+                  
+
+                
+              </p>
             
             
               <div class="markdown-body">
                 
-                
+                <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><code>ExecutorService</code> 是一个接口，继承了 <code>Executor</code>，在 <code>Executor</code> 的基础上增加了任务生命周期管理的能力，同时扩展了任务提交、任务结果获取、任务批量执行等功能</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Executor 源码解析<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Executor源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-源码部分"><a href="#2-源码部分" class="headerlink" title="2. 源码部分"></a>2. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ExecutorService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Executor</span> &#123;<br>	<br>	<span class="hljs-comment">// 有序关闭，已提交的任务会继续执行，但不会接收新的任务</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">shutdown</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 强制关闭，停止正在运行的任务，并且返回还没开始执行的任务列表</span><br>    List&lt;Runnable&gt; <span class="hljs-title function_">shutdownNow</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 判断是否执行过 shutdown/shutdownNow</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isShutdown</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 判断是否彻底终止</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isTerminated</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 最多阻塞 timeout unit，看线程池是否彻底终止。如果当前线程被中断，抛出 InterruptedException</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">awaitTermination</span><span class="hljs-params">(<span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>	<span class="hljs-comment">// 提交 Callable 任务</span><br>    &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span>;<br>	<br>	<span class="hljs-comment">// 提交 Runnable 任务，但是要手动指定一个固定结果</span><br>    &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Runnable task, T result)</span>;<br>	<br>	<span class="hljs-comment">// 提交 Runnable 任务</span><br>    Future&lt;?&gt; submit(Runnable task);<br>	<br>	<span class="hljs-comment">// 提交一批 Callable 任务，等所有任务都执行完再统一返回结果列表。如果当前线程被中断，抛出 InterruptedException</span><br>    &lt;T&gt; List&lt;Future&lt;T&gt;&gt; <span class="hljs-title function_">invokeAll</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>	<span class="hljs-comment">// 提交一批 Callable 任务，等所有任务都执行完再统一返回结果列表，最多阻塞 timeout unit，超时未完成的任务会取消。如果当前线程被中断，抛出 InterruptedException</span><br>    &lt;T&gt; List&lt;Future&lt;T&gt;&gt; <span class="hljs-title function_">invokeAll</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,</span><br><span class="hljs-params">                                  <span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>	<span class="hljs-comment">// 提交一批 Callable 任务，只要有一个成功完成，就立刻返回它的结果，并取消其他任务。如果当前线程被中断，抛出 InterruptedException。如果所有任务都执行失败，抛出 ExecutionException</span><br>    &lt;T&gt; T <span class="hljs-title function_">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException;<br>	<br>	<span class="hljs-comment">// 提交一批 Callable 任务，只要有一个成功完成，就立刻返回它的结果，并取消其他任务，最多阻塞 timeout unit。如果当前线程被中断，抛出 InterruptedException。如果等待时间内所有任务都执行失败，抛出 ExecutionException。如果超时一个任务都未执行成功，抛出 TimeoutException</span><br>    &lt;T&gt; T <span class="hljs-title function_">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,</span><br><span class="hljs-params">                    <span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -304,20 +358,20 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://wangjia5289.github.io/2025/08/30/未命名 1/</div>
+      <div>源码：ExecutorService 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/09/03/源码：ExecutorService源码解析/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>Ba Yuan</div>
+          <div>咸阳猴🐒</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 30, 2025</div>
+          <div>September 3, 2025</div>
         </div>
       
       
@@ -349,9 +403,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" title="笔记：Redis">
+                      <a href="/2025/09/04/%E7%AC%94%E8%AE%B0%EF%BC%9ANetty%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="笔记：Netty 服务器">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Redis</span>
+                        <span class="hidden-mobile">笔记：Netty 服务器</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -359,8 +413,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：RejectedExecutionHandler 源码解析">
-                        <span class="hidden-mobile">源码：RejectedExecutionHandler 源码解析</span>
+                      <a href="/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9AAbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：AbstractExecutorService源码解析">
+                        <span class="hidden-mobile">源码：AbstractExecutorService源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -530,6 +584,33 @@
   
 
 
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
 
 
   

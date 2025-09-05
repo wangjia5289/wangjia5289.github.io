@@ -228,6 +228,114 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：LockSupport 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述LockSupport 是一个具体类，是整个 AQS 阻塞&#x2F;唤醒机制的基石，几乎所有同步器的 “挂起线程&#x2F;唤醒线程” 都是靠它完成的。 之所以不使用 Object 的 wait&#x2F;notify&#x2F;notifyAll，是因为在 Object 中，这些方法必须在 synchronized 块里调用，因为调用线程必须持有该对象的锁 而 LockSupport
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-01 00:00" pubdate>
+              2025-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ManagedBlocker源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述ManagedBlocker 是一个接口，是 ForkJoinPool 的 静态 接口，用于 向 ForkJoinPool 声明 “这里可能会发生阻塞”，以便池子在 Worker 暂停时 临时补充线程，保证吞吐量不下降  2. 源码部分12345678public static interface ManagedBlocker &#123;		// 执行实际的阻塞操作	boolean b
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-01 00:00" pubdate>
+              2025-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionNode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
           源码：ConditionNode 源码解析
         </a>
@@ -444,15 +552,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
           源码：Executor 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. 概述Executor 是一个接口，定义了一种统一的方式来提交（而不是直接创建和启动）线程任务  2. 源码部分12345public interface Executor &#123;	    void execute(Runnable command);    &#125;   4. 接口方法4.1. 接口方法（无）void execute(Runnable command)方法概述voi
+          1. 概述Executor 是一个接口，定义了一种统一的方式提交线程任务  2. 源码部分123456public interface Executor &#123;		// 定义提交任务的规范    void execute(Runnable command);    &#125;   3. 实现示例12345678910111213141516171819202122public class
         </div>
       </a>
 
@@ -614,7 +722,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" target="_self">
         <div>
-          一、脑图 Xmind  Edraw    二、Redis 基础三、搭建 Redis 环境单机测试环境环境搭建创建宿主机数据挂载目录1mkdir -p /mystudy/data/redis   启动 Redis 容器123456docker run -d \  --name redis \  -p 6379:6379 \  -v /mystudy/data/redis:/data \  redis
+          一、脑图 Xmind  Edraw    二、Redis 基础Redis 数据类型数据类型一览图  [!NOTE] 注意事项  这里提到的数据类型，指的都是 值（Value）的数据类型。至于键（Key），在 Redis 中始终都是字符串类型    字符串（String）String 是二进制安全的字符串，简单来说，它能存放各种数据，例如普通文本、数字、图片、序列化对象等等。表面上叫 “字符串”，实
         </div>
       </a>
 
@@ -654,93 +762,6 @@
 
   
 
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E6%9C%AA%E5%91%BD%E5%90%8D%201/" target="_self">
-          
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%9C%AA%E5%91%BD%E5%90%8D%201/" target="_self">
-        <div>
-          
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 21:56" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：RejectedExecutionHandler 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述RejectedExecutionHandler 是一个接口。是专门用来处理 线程池无法接受新任务时该怎么办 的策略  2. 源码部分12345public interface RejectedExecutionHandler &#123;	    void rejectedExecution(Runnable r, ThreadPoolExecutor executor);    &#
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
   
 
       </span>

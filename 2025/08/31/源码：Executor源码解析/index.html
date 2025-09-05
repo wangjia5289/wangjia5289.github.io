@@ -19,13 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="源码：AbstractOwnableSynchronizer 源码解析">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/09/02/%E6%9C%AA%E5%91%BD%E5%90%8D%202/index.html">
+    <meta name="description" content="1. 概述Executor 是一个接口，定义了一种统一的方式提交线程任务  2. 源码部分123456public interface Executor &#123;		&#x2F;&#x2F; 定义提交任务的规范    void execute(Runnable command);    &#125;   3. 实现示例12345678910111213141516171819202122public class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码：Executor 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. 概述Executor 是一个接口，定义了一种统一的方式提交线程任务  2. 源码部分123456public interface Executor &#123;		&#x2F;&#x2F; 定义提交任务的规范    void execute(Runnable command);    &#125;   3. 实现示例12345678910111213141516171819202122public class">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-09-02T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-02T08:17:10.287Z">
+<meta property="article:published_time" content="2025-08-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-03T03:08:03.447Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -33,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>源码：AbstractOwnableSynchronizer 源码解析 - 咸阳猴🐒的博客</title>
+  <title>源码：Executor 源码解析 - 咸阳猴🐒的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="源码：AbstractOwnableSynchronizer 源码解析"></span>
+            <span id="subtitle" data-typed-text="源码：Executor 源码解析"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-02 08:00" pubdate>
-          September 2, 2025 am
+        <time datetime="2025-08-31 00:00" pubdate>
+          August 31, 2025 am
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          127 words
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          1 mins
+          2 mins
         
       </span>
     
@@ -282,12 +284,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">源码：AbstractOwnableSynchronizer 源码解析</h1>
+            <h1 id="seo-header">源码：Executor 源码解析</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-09-02T16:17:10+08:00
+                    Last updated on 2025-09-03T11:08:03+08:00
                   
                   
 
@@ -297,7 +299,15 @@
             
               <div class="markdown-body">
                 
-                
+                <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p><code>Executor</code> 是一个接口，定义了一种统一的方式提交线程任务</p>
+<hr>
+<h2 id="2-源码部分"><a href="#2-源码部分" class="headerlink" title="2. 源码部分"></a>2. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Executor</span> &#123;<br>	<br>	<span class="hljs-comment">// 定义提交任务的规范</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">(Runnable command)</span>;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-实现示例"><a href="#3-实现示例" class="headerlink" title="3. 实现示例"></a>3. 实现示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoExecutor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Executor</span> &#123;<br>	<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">execute</span><span class="hljs-params">(Runnable command)</span> &#123;<br>        <span class="hljs-keyword">if</span> (command == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>(<span class="hljs-string">&quot;Runnable 不能为 null&quot;</span>);<br>        &#125;<br>        <span class="hljs-comment">// 每次来一个任务就开一个新的线程</span><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(command).start();<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Executor</span> <span class="hljs-variable">executor</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DemoExecutor</span>();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">3</span>; i++) &#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> i;<br>            executor.execute(() -&gt; &#123;<br>                System.out.println(<span class="hljs-string">&quot;执行任务 &quot;</span> + id + <span class="hljs-string">&quot; 的线程: &quot;</span> + Thread.currentThread().getName());<br>            &#125;);<br>        &#125;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+
                 
               </div>
             
@@ -335,8 +345,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>源码：AbstractOwnableSynchronizer 源码解析</div>
-      <div>https://wangjia5289.github.io/2025/09/02/未命名 2/</div>
+      <div>源码：Executor 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/08/31/源码：Executor源码解析/</div>
     </div>
     <div class="license-meta">
       
@@ -348,7 +358,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 2, 2025</div>
+          <div>August 31, 2025</div>
         </div>
       
       
@@ -380,12 +390,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：ConditionObject 源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：ConditionObject 源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9AAbstractOwnableSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：AbstractOwnableSynchronizer源码解析">
-                        <span class="hidden-mobile">源码：AbstractOwnableSynchronizer源码解析</span>
+                      <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：Lock 源码解析">
+                        <span class="hidden-mobile">源码：Lock 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

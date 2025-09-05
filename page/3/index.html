@@ -228,15 +228,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ThreadFactory 源码解析
+        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：RejectedExecutionHandler 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. 概述ThreadFactory 是一个接口。负责如何创建线程  2. 源码部分12345public interface ThreadFactory &#123;	    Thread newThread(Runnable r);    &#125;   6. 接口方法6.1. 接口方法（无）Thread newThread(Runnable r)方法概述Thread newThread(R
+          1. 概述RejectedExecutionHandler 是一个接口。是专门用来处理 线程池无法接受新任务时该怎么办 的策略  2. 源码部分12345public interface RejectedExecutionHandler &#123;	    void rejectedExecution(Runnable r, ThreadPoolExecutor executor);    &#
         </div>
       </a>
 
@@ -282,15 +282,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ThreadPoolExecutor 源码解析
+        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ThreadFactory 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. 概述ThreadPoolExecutor 是一个具体类，是一个用来管理和复用一组线程来执行多个并发任务的工具  2. 源码部分1   内部类private final class WorkerWorker 是 ThreadPoolExecutor 的 成员 内部类，在 ThreadPoolExecutor 里，每一个运行中的线程都对应一个 Worker 对象，相当于是个 线程包装器 + 控制
+          1. 概述ThreadFactory 是一个接口。负责如何创建线程  2. 源码部分12345public interface ThreadFactory &#123;	    Thread newThread(Runnable r);    &#125;   6. 接口方法6.1. 接口方法（无）Thread newThread(Runnable r)方法概述Thread newThread(R
         </div>
       </a>
 
