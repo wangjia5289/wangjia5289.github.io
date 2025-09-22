@@ -1,0 +1,1277 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. Java 日志框架发展史  2. JUL2.1. JUL 概述JUL（Java Util Logging），是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。 JUL 虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限。  2.2. JUL 核心组件  Logger Logger（记录器）是日志框架的入口，我们可以通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Java 日志框架">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. Java 日志框架发展史  2. JUL2.1. JUL 概述JUL（Java Util Logging），是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。 JUL 虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限。  2.2. JUL 核心组件  Logger Logger（记录器）是日志框架的入口，我们可以通">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6-2.png">
+<meta property="article:published_time" content="2025-09-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-10T14:36:22.183Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Java 日志框架 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Java 日志框架"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-10 00:00" pubdate>
+          September 10, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Java 日志框架</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-10T22:36:22+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-Java-日志框架发展史"><a href="#1-Java-日志框架发展史" class="headerlink" title="1. Java 日志框架发展史"></a>1. Java 日志框架发展史</h2><p><img src="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="2-JUL"><a href="#2-JUL" class="headerlink" title="2. JUL"></a>2. JUL</h2><h3 id="2-1-JUL-概述"><a href="#2-1-JUL-概述" class="headerlink" title="2.1. JUL 概述"></a>2.1. JUL 概述</h3><p><code>JUL</code>（<code>Java Util Logging</code>），是 <code>JDK</code> 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。</p>
+<p><code>JUL</code> 虽然能满足一般应用的日志需求，但相比 <code>Log4j</code>、<code>SLF4J</code> 等第三方框架，其扩展性和高级特性较为有限。</p>
+<hr>
+<h3 id="2-2-JUL-核心组件"><a href="#2-2-JUL-核心组件" class="headerlink" title="2.2. JUL 核心组件"></a>2.2. JUL 核心组件</h3><p><img src="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6-1.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>Logger<ol>
+<li><code>Logger</code>（记录器）是日志框架的入口，我们可以通过调用 <code>Logger.getLogger(String name)</code> 获取 <code>Logger</code> 实例，并调用其方法记录日志信息。</li>
+<li>需要注意的是：<ol>
+<li><code>Logger</code> 会根据我们设置的 <code>Logger</code> 日志级别来记录需要的日志，对于低于我们设定级别的日志，即使我们调用了日志的记录方法（如 <code>logger.config(xxx)</code>），这些日志也不会被 <code>Logger</code> 记录（可以理解为：日志的第一层过滤）</li>
+<li><code>Logger</code> 通常搭配 <code>Level</code> 和 <code>Filter</code> 使用</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Filter<ol>
+<li><code>Filter</code>（过滤器） 用于在日志记录被发送到 <code>Handler</code> 之前进行筛选，可以进行定制，决定哪些日志信息应该被接受，哪些应被过滤掉（可以理解为：日志的第二层过滤）</li>
+</ol>
+</li>
+<li>Handler<ol>
+<li><code>Handler</code>（处理器），负责接收 <code>Logger</code> 记录的日志，并将日志消息输出到指定目标</li>
+<li>常用的 <code>Handler</code> 包括：<ol>
+<li>ConsoleHandler<ol>
+<li>日志输出到控制台</li>
+</ol>
+</li>
+<li>FileHandler<ol>
+<li>日志输出到文件</li>
+</ol>
+</li>
+<li>SocketHandler<ol>
+<li>日志输出到网络端点</li>
+</ol>
+</li>
+<li>MemoryHandler<ol>
+<li>日志暂存于内存，满足条件时批量输出</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>需要注意的是：<ol>
+<li>一个 <code>Logger</code> 可以关联多个 <code>Handler</code>，以便将日志消息输出到不同的目标。</li>
+<li><code>Handler</code> 会根据我们设置的 <code>Handler</code> 日志级别来输出需要的日志，对于低于设定级别的日志，即使 <code>Logger</code> 将其传递过来，这些日志也不会被输出（可以理解为：日志的第三层过滤）</li>
+<li><code>Handler</code> 通常搭配 <code>Level</code> 和 <code>Formatter</code> 使用</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Formatter<ol>
+<li><code>Formatter</code>（格式化组件） 定义了日志消息的输出格式。</li>
+<li>常用的 Formatter 包括：<ol>
+<li>SimpleFormatter<ol>
+<li>简单、易读的文本格式</li>
+</ol>
+</li>
+<li>XMLFormatter<ol>
+<li>以 XML 格式输出日志</li>
+</ol>
+</li>
+<li>除此之外，我们可以通过扩展 <code>Formatter</code> 类来自定义输出格式</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Level<ol>
+<li><code>Level</code>（验证级别）定义了日志级别</li>
+<li><code>Level</code> 的级别顺序为：<ol>
+<li>OFF<ol>
+<li>禁止捕获所有级别的日志信息</li>
+</ol>
+</li>
+<li>SEVERE<ol>
+<li>错误信息，表示严重错误或异常情况，应用可能无法继续运行</li>
+</ol>
+</li>
+<li>WARNING<ol>
+<li>警告信息，提示潜在的问题，但应用仍然可以继续运行</li>
+</ol>
+</li>
+<li>INFO<ol>
+<li>输出常规运行信息，提供系统运行状态</li>
+</ol>
+</li>
+<li>CONFIG<ol>
+<li>输出配置项信息</li>
+</ol>
+</li>
+<li>FINE<ol>
+<li>调试信息（少），详细调试时使用</li>
+</ol>
+</li>
+<li>FINER<ol>
+<li>调试信息（中），详细调试时使用</li>
+</ol>
+</li>
+<li>FINEST<ol>
+<li>调试信息（多），详细调试时使用</li>
+</ol>
+</li>
+<li>ALL<ol>
+<li>捕获所有级别的日志信息</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2-3-JUL-核心特性"><a href="#2-3-JUL-核心特性" class="headerlink" title="2.3. JUL 核心特性"></a>2.3. JUL 核心特性</h3><p><code>JUL</code> 是一个具备层次结构的日志记录器，采用父子关系进行组织。例如 <code>com</code> 是 <code>com.example</code> 的父级，而 <code>com.example</code> 又是 <code>com.example.test</code> 的父级，而最顶层的 <code>com</code> 则以根日志（ <code>RootLogger</code>） 作为其父级。</p>
+<p>而 JUL 包含以下核心特性：</p>
+<ol>
+<li>继承的特性<ol>
+<li>如果我们没有为子级 <code>Logger</code> 手动设置日志级别，它会默认继承父级 <code>Logger</code> 的日志级别</li>
+</ol>
+</li>
+<li>日志向上传递的特性<ol>
+<li>每当子级 <code>Logger</code>（例如 <code>com.example</code>）记录一条日志时，首先会通过自身配置的 <code>Handler</code> 输出</li>
+<li>随后，这条日志会向上传递至父级 <code>Logger</code>，并通过父级的 <code>Handler</code> 输出（在父级同样会进行过滤）</li>
+<li>这个向上传递过程会逐级进行，最终到达最顶层的 <code>RootLogger</code>，并通过其 <code>Handler</code> 输出</li>
+<li>我们可以禁用这种向上传递行为（通过 <code>setUseParentHandlers(false)</code>）</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于日志是<strong>逐条向上传递</strong>的，而不是等到底层 <code>Handler</code> 整体输出后再整体向上传递，因此可能会看到类似以下的日志输出：</li>
+</ol>
+</blockquote>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>严重: severe 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>严重: severe 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>严重: severe 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>警告: warning 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>警告: warning 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>警告: warning 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>信息: info 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>信息: info 信息<br><span class="hljs-number">3</span>月 <span class="hljs-number">12</span>, <span class="hljs-number">2025</span> <span class="hljs-number">10</span>:<span class="hljs-number">47</span>:<span class="hljs-number">37</span> 上午 com<span class="hljs-selector-class">.example</span><span class="hljs-selector-class">.test</span><span class="hljs-selector-class">.Main</span> <span class="hljs-selector-tag">main</span><br>信息: info 信息<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-JUL-快速上手"><a href="#2-4-JUL-快速上手" class="headerlink" title="2.4. JUL 快速上手"></a>2.4. JUL 快速上手</h3><h4 id="2-4-1-进行-JUL-相关配置"><a href="#2-4-1-进行-JUL-相关配置" class="headerlink" title="2.4.1. 进行 JUL 相关配置"></a>2.4.1. 进行 JUL 相关配置</h4><h5 id="2-4-1-1-配置根日志管道（properties）"><a href="#2-4-1-1-配置根日志管道（properties）" class="headerlink" title="2.4.1.1. 配置根日志管道（properties）"></a>2.4.1.1. 配置根日志管道（properties）</h5><h6 id="2-4-1-1-1-文件位置"><a href="#2-4-1-1-1-文件位置" class="headerlink" title="2.4.1.1.1. 文件位置"></a>2.4.1.1.1. 文件位置</h6><p>文件在：<code>$&#123;JAVA_HOME&#125;/conf/logging.properties</code></p>
+<hr>
+<h6 id="2-4-1-1-2-Logger-配置"><a href="#2-4-1-1-2-Logger-配置" class="headerlink" title="2.4.1.1.2. Logger 配置"></a>2.4.1.1.2. Logger 配置</h6><p><font color="#92d050">1. 配置 Logger 的日志级别</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">.<span class="hljs-keyword">level</span> = <span class="hljs-keyword">INFO</span>  <br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="2-4-1-1-3-Handler-配置"><a href="#2-4-1-1-3-Handler-配置" class="headerlink" title="2.4.1.1.3. Handler 配置"></a>2.4.1.1.3. Handler 配置</h6><p><font color="#92d050">1. 配置 RootLogger 使用哪些 Handler</font></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">handlers = java<span class="hljs-selector-class">.util</span><span class="hljs-selector-class">.logging</span><span class="hljs-selector-class">.ConsoleHandler</span>, java<span class="hljs-selector-class">.util</span><span class="hljs-selector-class">.logging</span>.FileHandler<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. ConsoleHandler 的详细配置</font></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 1. ConsoleHandler 的日志级别</span><br><span class="hljs-attr">java.util.logging.ConsoleHandler.level</span> = INFO<br><br><span class="hljs-comment"># 2. ConsoleHandler 的日志输出格式</span><br><span class="hljs-attr">java.util.logging.ConsoleHandler.formatter</span> = java.util.logging.SimpleFormatter<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. FileHandler 的详细配置</font></p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-comment"># 1. FileHandler 的日志级别</span><br><span class="hljs-keyword">java.util.logging.FileHandler.level </span>= ALL<br><br><span class="hljs-comment"># 2. FileHandler 输出到的日志文件的存放位置</span><br><span class="hljs-keyword">java.util.logging.FileHandler.pattern </span>= D:\\EnglishDeployment\\logs\\<span class="hljs-keyword">JUL.%g.log</span><br><span class="hljs-keyword"></span><br><span class="hljs-comment"># 3. 单个日志文件最大字节数量（10485760 字节 为 10MB）</span><br><span class="hljs-keyword">java.util.logging.FileHandler.limit </span>= <span class="hljs-number">10485760</span><br><br><span class="hljs-comment"># 4. 日志文件最大总数量</span><br><span class="hljs-keyword">java.util.logging.FileHandler.count </span>= <span class="hljs-number">5</span> <br><br><span class="hljs-comment"># 5. FileHandler 输出日志是否以追加模式（true 为追加模式，false 为覆盖模式）</span><br>    <span class="hljs-number">1</span>. true<br>        <span class="hljs-number">1</span>. 追加模式<br>        <span class="hljs-number">2</span>. 如果日志文件已经存在，新日志会接在旧日志后面继续写<br>    <span class="hljs-number">2</span>. false<br>        <span class="hljs-number">1</span>. 覆盖模式<br>        <span class="hljs-number">2</span>. 每次应用启动时，如果日志文件已存在，会先清空，从头写新的内容<br><span class="hljs-keyword">java.util.logging.FileHandler.append </span>= true<br><br><span class="hljs-comment"># 6. FileHandler 的日志输出格式（默认是 XML 方式）</span><br><span class="hljs-keyword">java.util.logging.FileHandler.formatter </span>= <span class="hljs-keyword">java.util.logging.SimpleFormatter</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果需要将日志写入文件（即使用 <code>FileHandler</code>），需要注意以下三点：<ol>
+<li><code>JUL</code> 只创建文件而不会自动生成文件所在的目录，因此必须手动创建 <code>logs</code> 目录，并确保程序具有相应的读写权限。</li>
+<li>文件路径的格式应使用 <code>\\</code> 而非 <code>\</code></li>
+<li><code>JUL</code> 中的日志轮换机制流程如下：<ol>
+<li><code>JUL</code> 先将日志记录在 <code>JUL.0.log</code> 文件中。</li>
+<li>当 <code>JUL.0.log</code> 文件写满时，它会被重命名为 <code>JUL.1.log</code>，同时创建一个新的 <code>JUL.0.log</code> 继续记录。</li>
+<li>随着 <code>JUL.0.log</code> 日志再次写满，<code>JUL.1.log</code> 会被重命名为 <code>JUL.2.log</code>，而 <code>JUL.0.log</code> 则再次重命名为 <code>JUL.1.log</code>，这样依次进行。</li>
+<li>当文件数量达到最大限制时，最早的日志文件（如 <code>JUL.4.log</code>）将被删除，以腾出空间</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-4-1-2-配置包日志管道"><a href="#2-4-1-2-配置包日志管道" class="headerlink" title="2.4.1.2. 配置包日志管道"></a>2.4.1.2. 配置包日志管道</h5><p>对于某些包下的代码，如果我们不希望完全沿用<code> RootLogger</code> 的配置，可以在代码中手动为这些包单独配置</p>
+<p>在下面的示例中，我们为 <code>com.example.Main</code> 包单独配置了日志管道（有入口，有出口，不如直接叫做日志管道），并且禁用了日志向上传递</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<br>        <span class="hljs-comment">// 1. 创建 ConsoleHandler（日志处理器）</span><br>        <span class="hljs-type">ConsoleHandler</span> <span class="hljs-variable">consoleHandler</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConsoleHandler</span>();<br>		<br>        <span class="hljs-comment">// 2. 创建 SimpleFormatter（格式化组件）</span><br>        <span class="hljs-type">SimpleFormatter</span> <span class="hljs-variable">simpleFormatter</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleFormatter</span>();<br>		<br>        <span class="hljs-comment">// 3. 将格式化组件设置到日志处理器中</span><br>        consoleHandler.setFormatter(simpleFormatter);<br>		<br>        <span class="hljs-comment">// 4. 获取 com.example.Main 层的 Logger</span><br>        <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> Logger.getLogger(<span class="hljs-string">&quot;com.example.Main&quot;</span>);<br>		<br>        <span class="hljs-comment">// 5. 配置 com.example.Main 层的 Logger</span><br>        logger.setLevel(Level.INFO); <span class="hljs-comment">// Logger 的日志级别</span><br>        logger.setUseParentHandlers(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 禁用日志向上传递</span><br>        logger.addHandler(consoleHandler); <span class="hljs-comment">// Logger 输出到的 Handler</span><br>		<br>        <span class="hljs-comment">// 6. 调用我们配置好的包日志管道记录日志（记录时是使用 logger 进行记录，因为 logger 是日志的入口）</span><br>        logger.severe(<span class="hljs-string">&quot;severe 信息&quot;</span>);<br>        logger.warning(<span class="hljs-string">&quot;warning 信息&quot;</span>);<br>        logger.info(<span class="hljs-string">&quot;info 信息&quot;</span>);<br>        logger.config(<span class="hljs-string">&quot;config 信息&quot;</span>);<br>        logger.fine(<span class="hljs-string">&quot;fine 信息&quot;</span>);<br>        logger.finer(<span class="hljs-string">&quot;finer 信息&quot;</span>);<br>        logger.finest(<span class="hljs-string">&quot;finest 信息&quot;</span>);<br>        <br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果我们为每个类都单独写一堆日志配置，使用起来就会显得非常繁琐。更好的做法是写一个 <code>LogUtil</code> 工具类，在里面一次性为 <code>com.example</code> 包配置好日志管道，这样后续各个类只需要直接获取 Logger 就能记录日志了。</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LogUtil</span> &#123;<br>	<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> Logger.getLogger(<span class="hljs-string">&quot;com.example&quot;</span>);<br>	<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-type">ConsoleHandler</span> <span class="hljs-variable">handler</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConsoleHandler</span>();<br>        handler.setFormatter(<span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleFormatter</span>());<br>        handler.setLevel(Level.ALL);<br>        logger.addHandler(handler);<br>        logger.setUseParentHandlers(<span class="hljs-literal">false</span>);<br>        logger.setLevel(Level.ALL);<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title function_">getLogger</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> logger;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-4-2-记录日志"><a href="#2-4-2-记录日志" class="headerlink" title="2.4.2. 记录日志"></a>2.4.2. 记录日志</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<br>		<span class="hljs-comment">// 获取 com.example.Main 层的 Logger</span><br>        <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> Logger.getLogger(<span class="hljs-string">&quot;com.example.Main&quot;</span>);<br>		<br>        logger.severe(<span class="hljs-string">&quot;severe 信息&quot;</span>);<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>JUL 的 Logger 是<strong>按名字单例</strong>的，都会保存在全局的 <code>LogManager</code> 中。<ol>
+<li>如果你之前已经运行过配置好的 <code>com.example.Main</code> 层的 <code>Logger</code>，那么在其它地方获取同名的 <code>Logger</code>，拿到的就是这个已经配置过的实例。</li>
+<li>但是如果你之前没有运行过，那么在获取时， <code>LogManager</code> 会为 <code>com.example.Main</code> 新建一个 <code>Logger</code>，并使用默认配置（继承父级 <code>Logger</code>），再在其它地方获取同名的 <code>Logger</code>，拿到的就是这个已经配置过的实例（即便再运行配置好的 <code>com.example.Main</code> 层的 <code>Logger</code>）</li>
+</ol>
+</li>
+<li>JUL 还提供一种方便的日志记录方式，允许我们动态传递参数，<strong>从而代替拼接字符串</strong>：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Ba Tian&quot;</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">18</span>;<br>logger.log(Level.INFO,<span class="hljs-string">&quot;学生的姓名为：&#123;0&#125;，年龄为：&#123;1&#125;&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;name,age&#125;);<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-SLF4J"><a href="#3-SLF4J" class="headerlink" title="3. SLF4J"></a>3. SLF4J</h2><h3 id="3-1-SLF4J-概述"><a href="#3-1-SLF4J-概述" class="headerlink" title="3.1. SLF4J 概述"></a>3.1. SLF4J 概述</h3><p><code>SLF4J</code>（<code>Simple Logging Facade for Java</code>）是一种日志门面框架，为各种日志框架提供统一的抽象接口（<code>API</code>），让开发者在应用中只需依赖于这一套 <code>API</code>，而无需针对不同的日志实现学习各自的专有 <code>API</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>SLF4J</code> 只是个日志门面，自身不提供任何配置功能</li>
+<li>如果需要配置日志，例如设置日志级别等，仍需按照具体日志实现（如 <code>Log4J2</code>、<code>JUL</code> 等）的配置方式，进行相关配置</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="3-2-SLF4J-支持的日志级别"><a href="#3-2-SLF4J-支持的日志级别" class="headerlink" title="3.2. SLF4J 支持的日志级别"></a>3.2. SLF4J 支持的日志级别</h3><p>SLF4J 支持的日志级别顺序为：</p>
+<ol>
+<li>ERROR<ol>
+<li>输出错误信息，表示严重错误或异常情况，应用可能无法继续进行</li>
+</ol>
+</li>
+<li>WARN<ol>
+<li>输出警告信息，提示潜在的问题（推荐）</li>
+</ol>
+</li>
+<li>INFO<ol>
+<li>输出常规运行信息，提供系统运行状态</li>
+</ol>
+</li>
+<li>DEBUF<ol>
+<li>输出调试信息，比如详细的配置解析过程</li>
+</ol>
+</li>
+<li>TRACE<ol>
+<li>输出最详细的信息，几乎是逐行解释发生了什么</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>SLF4J 本身只是个日志门面，因此他没有默认的日志级别，其取决于我们使用的底层日志实现：<ol>
+<li>JUL<ol>
+<li>默认日志级别是 <code>INFO</code></li>
+</ol>
+</li>
+<li>Log4J<ol>
+<li>默认日志级别是 <code>ERROR</code></li>
+</ol>
+</li>
+<li>Log4J2<ol>
+<li>默认日志级别是 <code>ERROR</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="3-3-SLF4J-快速上手"><a href="#3-3-SLF4J-快速上手" class="headerlink" title="3.3. SLF4J 快速上手"></a>3.3. SLF4J 快速上手</h3><h4 id="3-3-1-添加相关依赖"><a href="#3-3-1-添加相关依赖" class="headerlink" title="3.3.1. 添加相关依赖"></a>3.3.1. 添加相关依赖</h4><ol>
+<li>创建时<br> 1. </li>
+<li>创建后<ol>
+<li>slf4j-api<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.slf4j/slf4j-api">https://mvnrepository.com/artifact/org.slf4j/slf4j-api</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>log4j-slf4j2-impl<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl">https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.0-alpha1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-slf4j2-impl<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.0-beta2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这里引入的 <code>log4j-slf4j2-impl</code> 依赖是一个适配器。</li>
+<li>因为 <code>SLF4J</code> 诞生之前的日志框架，并未遵循 <code>SLF4J</code> 标准，因此无法在引入 <code>SLF4J</code> 依赖后，立即投入使用，需要额外引入适配器</li>
+<li>而 <code>SLF4J</code> 之后的日志框架，如果已遵循 <code>SLF4J</code> 规范，则只需直接引入相关依赖即可正常使用。但如果日志框架未遵循 <code>SLF4J</code> 标准（例如 <code>Log4J2</code>），仍然需要引入适配器才能使用</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="3-3-2-记录日志"><a href="#3-3-2-记录日志" class="headerlink" title="3.3.2. 记录日志"></a>3.3.2. 记录日志</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>        <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(<span class="hljs-string">&quot;com.example.Main&quot;</span>);<br>        logger.trace(<span class="hljs-string">&quot;trace 信息&quot;</span>);  <br>        logger.debug(<span class="hljs-string">&quot;debug 信息&quot;</span>);  <br>        logger.info(<span class="hljs-string">&quot;info 信息&quot;</span>);  <br>        logger.warn(<span class="hljs-string">&quot;warn 信息&quot;</span>);  <br>        logger.error(<span class="hljs-string">&quot;error 信息&quot;</span>);  <br>    &#125;  <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>SLF4J 同样提供另外一种记录方式，允许我们动态传递参数，<strong>从而代替拼接字符串</strong>：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 基础使用</span><br><span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Ba Tian&quot;</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">age</span> <span class="hljs-operator">=</span> <span class="hljs-number">18</span>;<br>logger.log(Level.INFO,<span class="hljs-string">&quot;学生的姓名为：&#123;&#125;，年龄为：&#123;&#125;&quot;</span>,name,age);<br><br><br><span class="hljs-comment">// 进阶使用</span><br><span class="hljs-keyword">try</span>&#123;<br>	......<br>&#125;<br><span class="hljs-keyword">catch</span>(ClaassNotFoudException e)&#123;<br>	logger.info(<span class="hljs-string">&quot;xxx类中的xxx方法出现了异常，请及时关注相关信息&quot;</span>);<br>	logger.info(<span class="hljs-string">&quot;具体错误是：&#123;&#125;&quot;</span>,e);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-SLF4J-Log4J2"><a href="#4-SLF4J-Log4J2" class="headerlink" title="4. SLF4J + Log4J2"></a>4. SLF4J + Log4J2</h2><h3 id="4-1-SLF4J-Log4J2-概述"><a href="#4-1-SLF4J-Log4J2-概述" class="headerlink" title="4.1. SLF4J + Log4J2 概述"></a>4.1. SLF4J + Log4J2 概述</h3><p>使用 <code>SLF4J</code> 作为日志门面框架，搭配 <code>Log4j2</code> 的日志实现框架，绝对是当前市场上最强大、最灵活的日志功能实现方式。</p>
+<hr>
+<h3 id="4-2-Log4J2-核心组件"><a href="#4-2-Log4J2-核心组件" class="headerlink" title="4.2. Log4J2 核心组件"></a>4.2. Log4J2 核心组件</h3><p><code>Log4j2</code> 主要由 <code>Loggers</code> (日志记录器)、<code>Appenders</code>（输出控制器）和 <code>Layout</code>（日志格式化器）组成</p>
+<ol>
+<li>Loggers<ol>
+<li><code>Loggers</code>（日志记录器），负责记录日志，并控制日志的输出级别</li>
+<li>需要注意的是，与 <code>JUL</code> 不同，<code>Log4j2</code> 中的日志信息在 <code>Logger</code> 中确定输出级别后，不会再经过 <code>Handler</code> 的再次过滤，这意味着 <code>Logger</code> 配置的输出级别直接决定最终的日志输出级别</li>
+</ol>
+</li>
+<li>Appenders<ol>
+<li><code>Appenders</code>（输出控制器），负责把日志输出到指定位置</li>
+<li>常用的 <code>Appenders</code> 包括：<ol>
+<li>ConsoleAppender<ol>
+<li>将日志输出到控制台</li>
+</ol>
+</li>
+<li>FileAppender<ol>
+<li>将日志写入到单一文件中</li>
+</ol>
+</li>
+<li>RollingFileAppender<ol>
+<li>将日志写入到文件中，支持按大小和时间滚动</li>
+</ol>
+</li>
+<li>JDBCAppender<ol>
+<li>将日志存储到关系型数据库中</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Layout<ol>
+<li><code>Layout</code>（日志格式化器），决定了日志的格式化方式，即日志输出的具体格式</li>
+<li>常用的 <code>Layout</code> 包括：<ol>
+<li>HTMLLayout<ol>
+<li>输出为 HTML 表格的格式</li>
+</ol>
+</li>
+<li>JSONLayout<ol>
+<li>输出为 JSON 格式</li>
+</ol>
+</li>
+<li>XMLLayout<ol>
+<li>输出为 XML 格式</li>
+</ol>
+</li>
+<li>SimpleLayout<ol>
+<li>简单的日志输出格式</li>
+</ol>
+</li>
+<li>PatternLayout（默认）<ol>
+<li>最强大的格式化组件，可以根据自定义日志输出格式</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="4-3-Log4J2-支持的日志级别"><a href="#4-3-Log4J2-支持的日志级别" class="headerlink" title="4.3. Log4J2 支持的日志级别"></a>4.3. Log4J2 支持的日志级别</h3><p>Log4J2 支持的级别顺序为：</p>
+<ol>
+<li>OFF<ol>
+<li>禁止捕获所有级别的日志信息</li>
+</ol>
+</li>
+<li>FATAL<ol>
+<li>输出严重错误信息，应用可能无法继续运行</li>
+</ol>
+</li>
+<li>ERROR<ol>
+<li>输出错误信息，表示严重错误或异常情况，但应用仍然可以继续运行</li>
+</ol>
+</li>
+<li>WARN<ol>
+<li>输出警告信息，提示潜在的问题</li>
+</ol>
+</li>
+<li>INFO<ol>
+<li>输出常规运行信息，提供系统运行状态</li>
+</ol>
+</li>
+<li>DEBUG<ol>
+<li>输出调试信息，比如详细的配置解析过程</li>
+</ol>
+</li>
+<li>TRACE<ol>
+<li>输出最详细的信息，几乎是逐行解释发生了什么</li>
+</ol>
+</li>
+<li>ALL<ol>
+<li>捕获所有级别的日志信息</li>
+</ol>
+</li>
+</ol>
+<p>需要注意的是，无需担心 <code>SLF4J</code> 日志门面框架只有五个标准级别的限制，这是因为适配器在 <code>SLF4J</code> 和 <code>Log4j2</code> 之间建立了一套完整的映射关系：<br><img src="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6-2.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="4-4-SLF4J-Log4J2-快速上手"><a href="#4-4-SLF4J-Log4J2-快速上手" class="headerlink" title="4.4. SLF4J + Log4J2 快速上手"></a>4.4. SLF4J + Log4J2 快速上手</h3><h4 id="4-4-1-添加相关依赖"><a href="#4-4-1-添加相关依赖" class="headerlink" title="4.4.1. 添加相关依赖"></a>4.4.1. 添加相关依赖</h4><h3 id="添加相关依赖"><a href="#添加相关依赖" class="headerlink" title="添加相关依赖"></a>添加相关依赖</h3><ol>
+<li>创建时<ol>
+<li>Web<ol>
+<li>Spring Web</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>创建后<ol>
+<li>slf4j-api <ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.slf4j/slf4j-api">https://mvnrepository.com/artifact/org.slf4j/slf4j-api</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>log4j-api<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api">https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>log4j-core<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core">https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core</a></li>
+</ol>
+</li>
+<li>Gradle</li>
+</ol>
+</li>
+<li>disruptor<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/com.lmax/disruptor">https://mvnrepository.com/artifact/com.lmax/disruptor</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>log4j-slf4j2-impl<ol>
+<li>Maven<ol>
+<li><a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl">https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j2-impl</a></li>
+</ol>
+</li>
+<li>Gradle<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.1.0-alpha1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.24.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.24.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.lmax<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>disruptor<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.4.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-slf4j2-impl<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.24.3<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>log4j-api</code> 是 <code>Log4j</code> 的日志门面，为什么在已有 <code>SLF4J</code> 门面的情况下仍需要引入？<ol>
+<li>虽然 <code>SLF4J</code> 是一个通用日志门面，但在使用 <code>Log4j2</code> 作为日志实现时，<code>SLF4J</code> 实际上会访问调用 <code>log4j-api</code>，再由它对接 <code>Log4j2</code> 的具体实现</li>
+</ol>
+</li>
+<li>为什么引入的是 <code>Log4j2</code> 依赖，看起来却像是在引入 <code>Log4j</code> 依赖？<ol>
+<li>如果依赖的版本号是 <code>2.x.x</code>，说明引入的确实是 <code>Log4j2</code></li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="4-4-2-进行-Log4J2-相关配置"><a href="#4-4-2-进行-Log4J2-相关配置" class="headerlink" title="4.4.2. 进行 Log4J2 相关配置"></a>4.4.2. 进行 Log4J2 相关配置</h4><h5 id="4-4-2-1-配置-Loggers、Appenders、Layout（xml）"><a href="#4-4-2-1-配置-Loggers、Appenders、Layout（xml）" class="headerlink" title="4.4.2.1. 配置 Loggers、Appenders、Layout（xml）"></a>4.4.2.1. 配置 Loggers、Appenders、Layout（xml）</h5><h6 id="4-4-2-1-1-文件位置"><a href="#4-4-2-1-1-文件位置" class="headerlink" title="4.4.2.1.1. 文件位置"></a>4.4.2.1.1. 文件位置</h6><p>文件在：<code>resources/log4j2.xml</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>Log4J2 默认会按照一定顺序在类路径下查找配置文件：<ol>
+<li>log4j2.xml</li>
+<li>log4j2.json（log4j2.jsn）</li>
+<li>log4j2.yaml（log4j2.yml）</li>
+<li>log4j2.properties</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="4-4-2-1-2-Tiny-配置"><a href="#4-4-2-1-2-Tiny-配置" class="headerlink" title="4.4.2.1.2. Tiny 配置"></a>4.4.2.1.2. Tiny 配置</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">&quot;WARN&quot;</span> <span class="hljs-attr">monitorInterval</span>=<span class="hljs-string">&quot;30&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- 定义全局属性 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Properties</span>&gt;</span><br>	    <br>        <span class="hljs-comment">&lt;!-- 自定义日志输出格式（Layout） --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;LOG_PATTERN&quot;</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss&#125; [%t] %-5level %logger&#123;36&#125; - %msg%n<span class="hljs-tag">&lt;/<span class="hljs-name">Property</span>&gt;</span><br>		<br>        <span class="hljs-comment">&lt;!-- 自定义日志文件的保存路径 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;LOG_PATH&quot;</span>&gt;</span>D:\\EnglishDeployment\\logs<span class="hljs-tag">&lt;/<span class="hljs-name">Property</span>&gt;</span>   <span class="hljs-comment">&lt;!-- 自定义文件的保存路径 --&gt;</span><br>        <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Properties</span>&gt;</span><br>	<br>    <span class="hljs-comment">&lt;!-- 配置 Appenders（日志输出器） --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Appenders</span>&gt;</span><br>        <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Appenders</span>&gt;</span><br>	<br>    <span class="hljs-comment">&lt;!-- 配置 Loggers（日志记录器） --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span><br>        <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">Configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="4-4-2-1-3-配置-Appenders（日志输出器）"><a href="#4-4-2-1-3-配置-Appenders（日志输出器）" class="headerlink" title="4.4.2.1.3. 配置 Appenders（日志输出器）"></a>4.4.2.1.3. 配置 Appenders（日志输出器）</h6><p><font color="#92d050">1. 配置 ConsoleAppender</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Console</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ConsoleAppender&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;SYSTEM_OUT&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;$&#123;LOG_PATTERN&#125;&quot;</span>/&gt;</span>  <br><span class="hljs-tag">&lt;/<span class="hljs-name">Console</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ol>
+<li>target<ol>
+<li>输出的位置</li>
+<li>SYSTEM_OUT<ol>
+<li>输出到标准输出流（<code>System.out</code>）</li>
+</ol>
+</li>
+<li>SYSTEM_ERR<ol>
+<li>输出到标准错误流（<code>System.err</code>）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">2. 配置 FileAppender</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">File</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;FileAppender&quot;</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">&quot;$&#123;LOG_PATH&#125;/app.log&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;$&#123;LOG_PATTERN&#125;&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">File</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 配置 RollingFileAppender</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;RollingFileAppender&quot;</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">&quot;$&#123;LOG_PATH&#125;/rolling.log&quot;</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">&quot;$&#123;LOG_PATH&#125;/rolling-%d&#123;yyyy-MM-dd&#125;-%i.log&quot;</span>&gt;</span><br>	<br>	<span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;$&#123;LOG_PATTERN&#125;&quot;</span>/&gt;</span><br>	<br>	<span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span><br>		<br>		<span class="hljs-comment">&lt;!-- 文件达到 10MB 时滚动一次 --&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">SizeBasedTriggeringPolicy</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;10MB&quot;</span>/&gt;</span><br>		<br>		<span class="hljs-comment">&lt;!-- 每天滚动一次 --&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span>/&gt;</span><br>		<br>	<span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span><br>	<br>	<span class="hljs-comment">&lt;!-- 最多保留 7 个历史文件 --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;7&quot;</span>/&gt;</span><br>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. JDBCAppender</font></p>
+<hr>
+<h6 id="4-4-2-1-4-配置-Loggers（日志记录器）"><a href="#4-4-2-1-4-配置-Loggers（日志记录器）" class="headerlink" title="4.4.2.1.4. 配置 Loggers（日志记录器）"></a>4.4.2.1.4. 配置 Loggers（日志记录器）</h6><p><font color="#92d050">1. 根 Logger 配置</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Root</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;INFO&quot;</span>&gt;</span><br><br>	<span class="hljs-comment">&lt;!-- 使用 ConsoleAppender（这里 ref 引用的，是我们上面配置 Appenders 时的 name） --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;ConsoleAppender&quot;</span>/&gt;</span>  <br>	<br>	<span class="hljs-comment">&lt;!-- 使用 RollingFileAppender --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;RollingFileAppender&quot;</span>/&gt;</span>  <br>	<br><span class="hljs-tag">&lt;/<span class="hljs-name">Root</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 包 Logger 配置</font></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.service&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;DEBUG&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br>	<span class="hljs-comment">&lt;!-- 使用 FileAppender --&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;FileAppender&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ol>
+<li>additivity<ol>
+<li>日志是否向上传递</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">3. 混合异步日志配置</font><br>混合异步日志是指：在保持根日志管道为同步模式的前提下，为特定包的日志管道单独配置为异步模式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">AsyncLogger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.example.async&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;INFO&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">includeLocation</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;ConsoleAppender&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">AsyncLogger</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ol>
+<li>includeLocation<ol>
+<li>日志中是否包含行号信息</li>
+<li>由于获取行号信息会影响日志记录性能，建议将其设置为 <code>false</code> 以提升效率</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="4-4-2-2-配置全局异步日志（properties）"><a href="#4-4-2-2-配置全局异步日志（properties）" class="headerlink" title="4.4.2.2. 配置全局异步日志（properties）"></a>4.4.2.2. 配置全局异步日志（properties）</h5><p>全局异步日志是指：所有日志记录的操作统一设置为异步模式</p>
+<h6 id="4-4-2-2-1-文件位置"><a href="#4-4-2-2-1-文件位置" class="headerlink" title="4.4.2.2.1. 文件位置"></a>4.4.2.2.1. 文件位置</h6><p>文件在：<code>resources/log4j2.component.properties</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>文件名必须固定</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="4-4-2-2-2-具体配置"><a href="#4-4-2-2-2-具体配置" class="headerlink" title="4.4.2.2.2. 具体配置"></a>4.4.2.2.2. 具体配置</h6><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">Log4jContextSelector</span>=<span class="hljs-string">org.apache.logging.log4j.core.async.AsyncLoggerContextSelector</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="4-4-3-记录日志"><a href="#4-4-3-记录日志" class="headerlink" title="4.4.3. 记录日志"></a>4.4.3. 记录日志</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;  <br>	<span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(<span class="hljs-string">&quot;com.example.Main&quot;</span>);  <br>	logger.trace(<span class="hljs-string">&quot;trace 信息&quot;</span>);  <br>	logger.debug(<span class="hljs-string">&quot;debug 信息&quot;</span>);  <br>	logger.info(<span class="hljs-string">&quot;info 信息&quot;</span>);  <br>	logger.warn(<span class="hljs-string">&quot;warn 信息&quot;</span>);  <br>	logger.error(<span class="hljs-string">&quot;error 信息&quot;</span>);  <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E6%97%A5%E5%BF%97/" class="category-chain-item">Java 日志</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Java 日志框架</div>
+      <div>https://wangjia5289.github.io/2025/09/10/笔记：Java日志框架/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 10, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9AStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：Stream源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：Stream源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9ARBAC%E6%80%9D%E6%83%B3/" title="笔记：RBAC 思想">
+                        <span class="hidden-mobile">笔记：RBAC 思想</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

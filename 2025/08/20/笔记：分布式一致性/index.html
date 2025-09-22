@@ -19,14 +19,16 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致性通">
+    <meta name="description" content="脑图 Xmind  Edraw    分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：分布式一致性">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副本最终会达到一个相同的值 最终一致性通">
+<meta property="og:description" content="脑图 Xmind  Edraw    分布式一致性分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：  强一致性 线性一致性 顺序一致性 因果一致性 会话一致性 最终一致性  但是我们仅需要将其简单地划分为两大阵营：  强一致性 任何时刻，所有客户端看到的都是相同且最新的数据   最终一致性 数据可能暂时不一致，但在没有新的写入操作后，所有副">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-12.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-18.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-20.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-2.png">
@@ -40,10 +42,10 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-10.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-11.png">
 <meta property="article:published_time" content="2025-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-04T15:19:48.057Z">
+<meta property="article:modified_time" content="2025-09-14T15:00:25.857Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-12.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.eddx">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -237,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k words
+          17k words
         
       </span>
     
@@ -248,7 +250,7 @@
         
         
         
-          103 mins
+          139 mins
         
       </span>
     
@@ -303,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-09-04T23:19:48+08:00
+                    Last updated on 2025-09-14T23:00:25+08:00
                   
                   
 
@@ -313,7 +315,14 @@
             
               <div class="markdown-body">
                 
-                <h2 id="分布式一致性"><a href="#分布式一致性" class="headerlink" title="分布式一致性"></a>分布式一致性</h2><p>分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：</p>
+                <h2 id="脑图"><a href="#脑图" class="headerlink" title="脑图"></a>脑图</h2><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h2 id="分布式一致性"><a href="#分布式一致性" class="headerlink" title="分布式一致性"></a>分布式一致性</h2><p>分布式一致性是用来描述多个副本之间数据是否一致、何时一致，以及对用户来说是否可见一致，一致性的模型有很多：</p>
 <ol>
 <li>强一致性</li>
 <li>线性一致性</li>
@@ -337,15 +346,18 @@
 <hr>
 <h2 id="复制协议"><a href="#复制协议" class="headerlink" title="复制协议"></a>复制协议</h2><p>我们可以把<strong>一致性</strong>看作系统的目标，而<strong>复制协议</strong>则是实现这一目标的手段，不同的复制协议会直接影响系统的一致性。</p>
 <p>需要注意的是，<strong>复制协议不仅仅是用来解决 “复制” 问题的，它既用于 “复制”，也用于 “写入”</strong>。这听起来像个悖论，但实际上，在分布式系统中，写入和复制本质上是同一操作的两个方面。因为一次成功的写入操作，其定义就是：数据在所有（或多数）副本上成功完成复制。</p>
-<p>下面内容，是复制协议的六脉神剑：</p>
+<p>下面内容，是复制协议的北斗七剑：</p>
 <ol>
-<li>少商剑：节点的拓扑结构<ol>
+<li>天枢剑：节点的拓扑结构<ol>
 <li>这个维度决定了数据流动的方向，也就是谁负责写入，谁负责同步</li>
 <li>主从复制（单主复制）<ol>
 <li>系统中只有一个主节点，具有多个从节点</li>
 <li>客户端所有写请求都必须发到主节点，多个从节点负责同步数据</li>
 <li>客户端所有读请求既可以发到主节点也可以发到从节点</li>
-<li>在复杂系统中，可以对集群进行分区，使得不同分区拥有各自的主节点以及对应的从节点（例如 ES），这也被称之为分区主从</li>
+<li>在复杂系统中，可以对集群进行分区，使得不同分区拥有各自的主节点以及对应的从节点（例如 ES），这也被称之为分区主从<ol>
+<li>需要注意的是，对集群进行分区，并不一定采用主从模式，例如 MinIO 就是分区无主的架构。</li>
+</ol>
+</li>
 </ol>
 </li>
 <li>多主复制<ol>
@@ -396,27 +408,51 @@
 </li>
 </ol>
 </li>
-<li>商阳剑：数据的分布策略<ol>
+<li>天璇剑：数据的组织形式<ol>
+<li>这个维度决定了数据在逻辑上的组织形式</li>
+<li>树状结构<ol>
+<li>类似于文件系统的树状结构</li>
+</ol>
+</li>
+<li>Key-Value 结构<ol>
+<li>分层 Key-Value<ol>
+<li>Key 具备上下级目录关系，可按照层级进行分组与管理</li>
+</ol>
+</li>
+<li>扁平化 Key-Value<ol>
+<li>所有 Key 处在同一层级，不存在目录或层次区分</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>天权剑：数据的分布策略<ol>
 <li>这个维度决定了数据是作为整体存放在某一位置内，还是被拆分后分布在多个位置</li>
 <li>整体存储<ol>
 <li>数据完整地存储在某一位置</li>
 </ol>
 </li>
 <li>数据拆分<ol>
-<li>分库</li>
-<li>分表</li>
-<li>分片<ol>
-<li>例如 Minio 在存储对象时，会将其切割成若干块，并在多个驱动上进行分布</li>
+<li>例如 Minio 在存储对象时，虽说是存储在某一分区，但会将其切割成若干块，并在多个驱动上进行分布</li>
 </ol>
 </li>
 </ol>
 </li>
+<li>开阳剑：数据的协调机制<ol>
+<li>单点写入（无协调机制）</li>
+<li>CRDT</li>
+<li>共识协议</li>
+<li>分布式事务</li>
+<li>Gossip 协议</li>
+<li>ACK 确认机制</li>
+<li>Quorum NWR 模型</li>
 </ol>
 </li>
-<li>中冲剑：数据的同步时机<ol>
+<li>天玑剑：数据的同步时机（还有缺点，不够详细）<ol>
 <li>这个维度直接决定了我们的分布式系统提供强一致性还是最终一致性</li>
 <li>同步复制：提供强一致性<ol>
-<li>当主节点收到一个写入请求后，它必须等待<strong>所有&#x2F;大多数</strong>从节点都成功复制了数据，才能向客户端返回成功响应</li>
+<li>当主节点收到一个写入请求后，它必须等待<strong>所有&#x2F;大多数（超过半数）</strong> 从节点都成功复制了数据，才能向客户端返回成功响应</li>
 </ol>
 </li>
 <li>异步复制：提供最终一致性<ol>
@@ -429,12 +465,17 @@
 </li>
 </ol>
 </li>
-<li>关冲剑：同步的传输内容<ol>
-<li>日志拉取<ol>
+<li>玉衡剑：数据的同步传输<ol>
+<li>日志推送<ol>
 <li>不直接同步数据本身，而是同步引起数据变化的、确定性的<strong>操作指令 (Command&#x2F;Operation)</strong></li>
 <li>所有副本都以完全相同的顺序执行这些指令，从而达到一致的状态。基于日志是状态机复制理论的直接体现</li>
 <li>主节点在执行写入操作时，会将变更顺序地记录到日志中</li>
 <li>从节点通过拉取这些日志条目并按顺序回放，来重建数据状态（从哪里开始缺失就从哪里开始拉取）</li>
+<li>需要注意的是，拉取到的日志条目是否需要保存，取决于系统的设计目标。<ol>
+<li>在某些场景中，日志条目只需被立即执行，并不要求落盘持久化</li>
+<li>而在另一些场景中，日志需要持久化保存，通常的做法是将其追加写入某个日志文件。这个文件并不一定是 WAL，例如在 MySQL 中，拉取到的日志会写入 <strong>Relay Log</strong>，用于复制重放</li>
+</ol>
+</li>
 </ol>
 </li>
 <li>状态同步<ol>
@@ -473,22 +514,26 @@
 </li>
 </ol>
 </li>
-<li>少泽剑：状态的协调机制<ol>
-<li>CRDT</li>
-<li>共识协议</li>
-<li>分布式事务</li>
-<li>Quorum NWR 模型</li>
-</ol>
-</li>
-<li>少冲剑：数据的持久化保障<ol>
+<li>瑶光剑：数据的持久化保障（持久化逻辑还有缺点）<ol>
 <li>持久化逻辑<ol>
 <li>状态持久化（基于快照的持久化）<ol>
-<li>在某个特定时间点，将完整数据状态一次性地写入磁盘</li>
+<li>可能是完整 dump，也可能是脏页</li>
+<li>可能是在某个特定时间点，将完整数据状态一次性地写入磁盘，例如 Redis</li>
+<li>也可能是修改的脏页刷到磁盘中，这个也是快照，例如 MySQL 的 Buffer Pool 被刷到磁盘，其实和操作系统的 OS Page Cache 不太一样，Page Cache 不是快照，但是脏页是快照，我们可以理解为 Buffer Pool ➔ Page Cache ➔ 磁盘，Buffer Pool 的脏页有 16KB，但是 Page Cache 只有 4KB，这里认为是快照的理由是因为当脏页被写入磁盘时，它代表了 <strong>某个时刻数据库逻辑数据结构的完整状态</strong>，并且和 redo log 一起构成了可恢复的“一致性点”。虽然它不是全量“全局快照”，但它确实固定了<strong>数据库内部某一部分数据的确定版本</strong><ol>
+<li>事务修改的数据首先落在 <strong>Buffer Pool</strong>，修改后的内存页称为“脏页”。当这些脏页被刷回到磁盘文件时，就固定下来了那个时间点的数据状态。这一动作并不是全量 dump，而是基于页的 <strong>一致性写入</strong>，它与 redo log 配合，确保数据库在异常后仍然可以恢复到某个一致性点。<strong>从数据库内部视角，这就是一种“小范围、增量式的快照</strong></li>
+<li>OS Page Cache 缓存的是文件的字节块（通常 4KB）。它完全不关心数据库事务，也不保证整体一致性，仅仅是一个通用的 I&#x2F;O 缓冲区。即使 OS Page Cache 把 4KB block 刷盘，数据库也未必能恢复一致状态。<strong>因此把 OS Page Cache 刷盘称为“快照”是不合适的</strong></li>
+<li>说人话就是，崩溃的时候，你依赖 Redo log 恢复对吧，Redo log 只需要看看你有哪些 16KB 的脏页没有刷到磁盘上，就重放哪些操作，所以我们说可以依赖 Redo log 实现可恢复的一致性点，那你可能会问，为什么要用 16KB 呢？而不是8KB，32KB呢？都可以，只不过，这个 16KB 页里装的是完整的数据结构（索引、行记录、事务指针…），刚刚好</li>
+<li>那为什么不用 OS PAGE CACHE呢，因为它只懂字节块，不懂事务 &#x2F; 页逻辑，我们无法知道这个 Page Cache 是干了什么，是 Innodb 的第几个 Page，是第几个事务的修改？Redo log 根本无法定位，也无法获得回馈，所以 MySQL 自己搞了个缓冲区，能知道，奥，这个 16KB 是哪些指令所在的，如果崩溃了只需要执行那几个指令就能恢复了</li>
+<li>使用这个的通常都是原地更新模型，这也是为什么原地更新模型高度依赖 WAL</li>
+<li>必须保证“写的时候要么全写，要么不写”。如果部分写进去，部分没写进去，这就是撕裂页</li>
+</ol>
+</li>
 </ol>
 </li>
 <li>操作持久化（基于日志的持久化）<ol>
 <li>不直接记录数据本身，而是将所有导致数据变化的写操作指令按照顺序追加到日志文件中</li>
 <li>恢复时，可以通过重放所有操作来重建最终的数据状态</li>
+<li>为防止日志无限增长挤满磁盘，系统可能会定期清理&#x2F;压缩&#x2F;转移&#x2F;重写旧日志文件</li>
 </ol>
 </li>
 <li>混合持久化（基于 快照 + 日志 的持久化）<ol>
@@ -501,23 +546,68 @@
 <li>原地更新模型<ol>
 <li>数据以高度结构化的形式（如 B+ 树）存储在磁盘页（Page）中</li>
 <li>当数据更新时，系统直接定位到磁盘对应页，将其读入内存修改，再写回原来的位置</li>
-<li>这种模型高度依赖 预写日志（WAL，Write-Ahead Log），任何磁盘页的修改必须先记录到 WAL 并持久化，以保证崩溃恢复</li>
-<li>如果系统发生故障，可以通过重放 WAL 来恢复未完成的操作</li>
+<li>这种模型高度依赖 预写日志（WAL，Write-Ahead Log），任何磁盘页的修改必须先记录到 WAL 并持久化，如果系统发生故障，可以通过重放 WAL 来恢复未完成的操作（操作先更新内存页，再写入 WAL 日志，最后再想办法把脏页持久化到磁盘数据文件）</li>
 </ol>
 </li>
 <li>写时复制模型<ol>
 <li>不直接修改已写入的数据，而是将修改写入 新的数据块或新文件</li>
-<li>在写入新数据时，同时记录 WAL（操作日志），保证崩溃恢复的完整性</li>
+<li>在写入新数据时，同时记录 WAL，保证崩溃恢复的完整性（可以不依赖 WAL，但大部分会使用）</li>
 <li>数据写入完成后，再通过 替换&#x2F;合并 的方式更新原来的文件或数据结构</li>
 </ol>
 </li>
-<li>需要注意的是，并非所有系统都必须使用 WAL，例如 <strong>Redis</strong>，其 RDB 快照机制允许在快照间隔内丢失部分数据，因此在写入快照时 不依赖 WAL。</li>
+<li>需要注意的是<ol>
+<li>undo log 不是 WAL，因为 undo log如果事务中途失败，需要撤销修改，用 undo log 把旧值写回去。不是用来崩溃恢复的</li>
+<li>WAL 是指：在对数据页进行修改之前（内存中的数据写到磁盘数据页之前），先将相应的操作以日志形式写入 WAL 并持久化。随后，数据页本身的修改可以在后台异步根据 WAL 刷写到磁盘。如果系统在此过程中崩溃，则可通过重放 WAL 中的记录，将数据库恢复到一致状态。</li>
+<li>写 WAL 本身也会带来性能开销，因此并不是所有数据操作都必须依赖 WAL。<ol>
+<li>对于核心数据更新，一旦丢失将造成严重问题，自然必须通过 WAL 来保障持久性与一致性</li>
+<li>而对于可容忍丢失&#x2F;能自动恢复的数据，就没必要承担 WAL 带来的额外成本。<ol>
+<li>例如在 MySQL 主从复制中，从节点拉取到的日志条目会追加到 <strong>Relay Log</strong>，而这一步没有必要使用 WAL，因为即使日志条目丢失，也能通过重新向主库请求来恢复</li>
+<li>再如 <strong>Redis</strong> 的 RDB 快照机制。快照之间的更新丢失是可接受的，因此写快照时无需依赖 WAL 来保证每个写入都崩溃安全</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>即便采用了 WAL 机制，也并不意味着每次写入 WAL 日志都必须马上 <code>fsync</code> 到磁盘。InnoDB 将这一权衡交给用户，通过参数 <strong><code>innodb_flush_log_at_trx_commit</code></strong> 控制 Redo Log 的刷新策略：<ol>
+<li>innodb_flush_log_at_trx_commit &#x3D; 1<ol>
+<li>每个事务提交时，必须将该事务的 Redo Log 先写入 WAL 缓冲区，并立即调用 <code>fsync</code> 将其刷到磁盘</li>
+<li>log buffer ➔ Page Cache ➔ fsync ➔ 磁盘</li>
+</ol>
+</li>
+<li>innodb_flush_log_at_trx_commit &#x3D; 2<ol>
+<li>事务提交时，只把 Redo Log 写入操作系统的文件系统缓存（Page Cache），但不立刻 <code>fsync</code></li>
+<li>操作系统或 InnoDB 的后台线程会大约<strong>每秒</strong>统一执行一次 <code>fsync</code></li>
+<li>log buffer ➔ Page Cache ➔ 磁盘</li>
+</ol>
+</li>
+<li>innodb_flush_log_at_trx_commit &#x3D; 0<ol>
+<li>事务提交时甚至不写入操作系统缓存，而是直接返回成功</li>
+<li>Redo Log 的写入与 <code>fsync</code> 都由 InnoDB 的后台线程每秒统一完成</li>
+</ol>
+</li>
+<li>所以一定要有一个思想，我们通常会自己维护一个缓冲区，这里是用户缓冲区，然后是内核缓冲区，内核缓冲区不容易控制，而且写一次内存缓冲区要进入内核态，频繁写开销大到爆，我们先在自己的缓冲区写写写，汇总再一起写到内核态，所以你写一个什么东西，强制刷盘，也得从用户内存区 ➔ 核心内存区 ➔ fsync ➔ 磁盘</li>
+</ol>
+</li>
+<li>在学习数据库系统时，通常会遇到 “事务日志” 这一概念。数据库的事务日志机制普遍是基于 WAL（Write-Ahead Logging） 来实现的。<ol>
+<li>例如 PostgreSQL 就是最经典的 直接写 WAL 的系统（执行完操作后，将相应的操作以日志形式写入 WAL）</li>
+<li>需要注意的是，即使在非数据库系统中，我们也常常会遇到直接将操作写入 WAL 的做法，本质上与此并无不同</li>
+</ol>
+</li>
+<li>但是并非所有数据库系统都采用 WAL 即事务日志 的模式。很多系统将 WAL 与事务日志分离，由此形成了著名的 “双日志机制”。<ol>
+<li>MySQL 就是其中的典型代表</li>
+<li>WAL （Redo Log、Undo Log）负责存储引擎自身的一致性与崩溃恢复</li>
+<li>事务日志（Binary Log）由 Server 层维护，记录逻辑变更（SQL 语句或行级更新），并包含事务边界信息，用于主从复制、增量备份、审计与时间点恢复等功能</li>
+<li>所以 MySQL 通常是先写入 Redo Log，再写入 Binlog，最后将 Redo Log 标记为 Commit，数据页的更新可延迟、异步地写入磁盘</li>
+</ol>
+</li>
+</ol>
+</li>
 </ol>
 </li>
 <li>操作系统交互<ol>
 <li>无论采用哪种持久化逻辑思想和存储引擎层模型，最终都必须通过操作系统将数据写入物理磁盘。</li>
 <li>然而为了提高性能，操作系统引入了页缓存（Page Cache），这意味着应用程序的 <code>write</code> 调用默认并不保证数据立即落盘。</li>
-<li>因此，必须采用特定机制来确保数据真正写入磁盘，从而保证持久化的可靠性。<ol>
+<li>因此，必须采用特定机制来确保数据真正写入磁盘，从而保证持久化的可靠性。</li>
+<li>得先 write 再 fsync，其实 fsync 就是刷盘，得操作系统调用 fsync，或者我们在某个时刻要求执行 fsync，我们经常说是什么强制，其实就是简单的落盘<ol>
 <li>强制刷盘（fsync 系统调用）<ol>
 <li>当需要确保关键数据绝对可靠时（例如 WAL），就要在 <code>write</code> 之后调用 <code>fsync</code>，将内存中的数据强制写入磁盘。</li>
 <li>根据调用 <code>fsync</code> 的时机，强制刷盘可分为三类：<ol>
@@ -533,6 +623,17 @@
 <li>完全依赖操作系统决定何时刷盘，应用程序不显式调用 <code>fsync</code></li>
 </ol>
 </li>
+<li>条件刷盘<ol>
+<li>根据特定条件刷盘，例如积累 5 个事务后刷盘</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>需要注意的是：<ol>
+<li>强制刷盘通常只针对 WAL，而不是数据文件本身。</li>
+<li>因为直接强制数据页写盘的代价过高，数据库一般都是先确保 WAL 日志持久化，从而保证数据安全，再由后续机制负责将数据页异步地刷新到磁盘。</li>
+<li>所以，以后若提到 “状态持久化” 的 “操作系统交互” 是 “强制刷盘”，默认指的是快照的保存过程采用 “强制刷盘” 策略。</li>
+<li>若提到 “操作持久化” 的 “操作系统交互” 是 “强制刷盘”，默认指的是 WAL 的保存过程采用 “强制刷盘” 策略，而不是指数据的刷盘策略</li>
 </ol>
 </li>
 </ol>
@@ -548,10 +649,11 @@
 </ol>
 </li>
 </ol>
-<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-12.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-18.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-20.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h2 id="共识协议"><a href="#共识协议" class="headerlink" title="共识协议"></a>共识协议</h2><h3 id="Paxos-协议"><a href="#Paxos-协议" class="headerlink" title="Paxos 协议"></a>Paxos 协议</h3><hr>
-<h3 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h3><h4 id="Raft-协议概述"><a href="#Raft-协议概述" class="headerlink" title="Raft 协议概述"></a>Raft 协议概述</h4><p>Raft 协议是一个强一致性协议，在三个维度上的选择如下：</p>
+<h3 id="Raft-协议"><a href="#Raft-协议" class="headerlink" title="Raft 协议"></a>Raft 协议</h3><h4 id="Raft-概述"><a href="#Raft-概述" class="headerlink" title="Raft 概述"></a>Raft 概述</h4><p>Raft 协议是一个强一致性协议，在三个维度上的选择如下：</p>
 <ol>
 <li>维度一：同步复制</li>
 <li>维度二：主从复制</li>
@@ -574,7 +676,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="Raft-协议核心角色"><a href="#Raft-协议核心角色" class="headerlink" title="Raft 协议核心角色"></a>Raft 协议核心角色</h4><p><font color="#92d050">1. Follower（跟随者，默认）</font><br>Follower 是集群中的默认角色，主要职责包括：</p>
+<h4 id="Raft-核心角色"><a href="#Raft-核心角色" class="headerlink" title="Raft 核心角色"></a>Raft 核心角色</h4><p><font color="#92d050">1. Follower（跟随者，默认）</font><br>Follower 是集群中的默认角色，主要职责包括：</p>
 <ol>
 <li>不直接处理客户端的写请求</li>
 <li>等待并执行 Leader 的指令</li>
@@ -596,23 +698,38 @@
 <li>将日志复制到各 Follower 节点并确保数据一致性</li>
 </ol>
 <hr>
-<h4 id="Raft-协议核心流程"><a href="#Raft-协议核心流程" class="headerlink" title="Raft 协议核心流程"></a>Raft 协议核心流程</h4><p><font color="#92d050">1. Raft 启动与第一次选举 Leader</font><br>启动时，所有节点默认处于 Follower 状态，term 初始为 0，并各自设置一个 150–300ms 之间的随机选举超时时间。如果在超时时间内未收到来自 Leader 的心跳信号，该节点将从 Follower 状态切换为 Candidate，将 term 加 1，发起第一轮选举</p>
-<p>一旦某个 Candidate 获得的票数超过半数（即 &gt; N&#x2F;2，这里的 N 指的是集群中的所有节点数，而非存活节点数，因此无需担心宕机会影响选票），就会当选为 Leader。这里有两个关键点需要注意：</p>
+<h4 id="Raft-核心流程"><a href="#Raft-核心流程" class="headerlink" title="Raft 核心流程"></a>Raft 核心流程</h4><h5 id="Leader-选举"><a href="#Leader-选举" class="headerlink" title="Leader 选举"></a>Leader 选举</h5><p>在 Raft 系统刚启动时，所有节点默认处于 <code>Follower</code>，<code>term</code> 初始为 0，并各自设置一个 <code>150–300ms</code> 之间的随机选举超时时间。如果在超时时间内未收到来自 <code>Leader</code> 的心跳信号，该节点将从 <code>Follower</code> 切换为 <code>Candidate</code>，将 <code>term</code> 加 1，发起第一轮选举（详见下文：假设）</p>
+<p>一旦某个 <code>Candidate</code> 获得的票数超过半数（即 &gt; N&#x2F;2，这里的 N 指的是集群中的所有节点数，而非存活节点数，因此无需担心宕机会影响选票），就会当选为 <code>Leader</code>。这里有两个关键点需要注意：</p>
 <ol>
 <li>选举必须赢得多数票<ol>
-<li>这一机制有效防止了脑裂问题，因为在网络分区时，只有一方能获得多数，从而成为唯一的 Leader</li>
+<li>这一机制有效防止了脑裂问题，因为在网络分区时，只有一方能获得多数，从而成为唯一的 <code>Leader</code></li>
 </ol>
 </li>
 <li>建议集群节点数为奇数<ol>
-<li>这样可以避免选举时多个 Follower 平票的情况，提高选举成功率</li>
-<li>若没有任何一个 Candidate 获得多数票，则本轮选举失败。各节点会等待各自的选举超时器再次超时，随后将 term 再增加 1，并发起新一轮选举</li>
+<li>这样可以避免选举时多个 <code>Follower</code> 平票的情况，提高选举成功率</li>
+<li>若没有任何一个 <code>Candidate</code> 获得多数票，则本轮选举失败。各节点会等待各自的选举超时器再次超时，随后将 term 再增加 1，并发起新一轮选举</li>
 </ol>
 </li>
 </ol>
-<p>若某个 Candidate 当选为 Leader，会立即向其他节点发送心跳信号。其他节点一旦收到来自新 Leader 的心跳，便会自动 “认输”，切换回 Follower 状态</p>
+<p>若某个 <code>Candidate</code> 当选为 <code>Leader</code>，会立即向其他节点发送心跳信号。其他节点一旦收到来自新 <code>Leader</code> 的心跳，便会自动 “认输”，切换回 <code>Follower</code> 状态</p>
 <p>这个全局递增的 <code>term</code>，可以理解为 “当前是第几届村长执政”。每个节点都会保存一个本地的 <code>term</code>，谁的 <code>term</code> 高，谁就拥有更高的优先级，从而避免 “过时的村长” 重新掌权</p>
-<p><font color="#92d050">2. 数据写入与复制</font><br>Leader 负责整个系统的读写操作（由 Leader 负责读取，是为了避免脏读），这种设计虽然保证了强一致性，但也将压力集中在了 Leader 节点。</p>
-<p>当 Leader 接受到一个写入请求后，会创建一个新的日志条目，Raft 要求包含当前的日志条目的索引号、当前任期号、客户端具体操作命令，例如：</p>
+<hr>
+<h5 id="数据同步"><a href="#数据同步" class="headerlink" title="数据同步"></a>数据同步</h5><p><code>Leader</code> 负责整个系统的读写操作（由 <code>Leader</code> 负责读取，是为了避免脏读），这种设计虽然保证了强一致性，但也将压力集中在了 <code>Leader</code> 节点。</p>
+<p>当 <code>Leader</code> 接受到一个写入请求后，会创建一个新的日志条目，并先将该日志条目追加到本地日志中，常见的实现方式包括：</p>
+<ol>
+<li>日志文件追加<ol>
+<li>这是最常见、最直观的方式，每个节点维护一个专用日志文件，新生成的日志条目会简单地追加到文件末尾</li>
+<li>通常采用分段存储，当日志文件过大时，会开启新的文件，有助于后续的日志压缩与清理</li>
+<li>多数实现会使用 <code>WAL</code>（<code>Write-Ahead Log</code>）机制，先将日志条目写入 <code>WAL</code> 并刷新到磁盘，然后再应用到内存中的状态机，以确保系统崩溃后日志仍然可恢复</li>
+</ol>
+</li>
+<li>键值对存储<ol>
+<li>某些实现会选择使用键值存储保存日志条目，其中索引号作为键，日志内容作为值</li>
+<li>这种方式支持快速随机访问，且管理相对灵活</li>
+</ol>
+</li>
+</ol>
+<p><code>Raft</code> 要求包含当前的日志条目的索引号、当前任期号、客户端具体操作命令，例如：</p>
 <table>
 <thead>
 <tr>
@@ -642,127 +759,243 @@
 <td><code>set(&quot;city&quot;, &quot;New York&quot;)</code></td>
 </tr>
 </tbody></table>
-<p>Leader 首先会将该日志条目追加到本地日志中，常见的实现方式包括：</p>
+<p>然后，<code>Leader</code> 并行地向所有 <code>Follower</code> 发送 <code>AppendEntries RPC</code>，请求它们复制这个新的日志条目，然后我们就进入 <code>Raft</code> 设计最精妙的地方：一致性检查：</p>
 <ol>
-<li>文件追加模式<ol>
-<li>这是最常见、最直观的方式，每个节点维护一个专用日志文件，新生成的日志条目会简单地追加到文件末尾</li>
-<li>通常采用分段存储，当日志文件过大时，会开启新的文件，有助于后续的日志压缩与清理</li>
-<li>多数实现会使用 WAL（Write-Ahead Log）机制，先将日志写入磁盘，再应用到内存中的状态机，以确保系统崩溃后日志仍然可恢复</li>
-</ol>
-</li>
-<li>基于键值对存储<ol>
-<li>某些实现会选择使用键值存储保存日志条目，其中索引号作为键，日志内容作为值</li>
-<li>这种方式支持快速随机访问，且管理相对灵活</li>
-</ol>
-</li>
-</ol>
-<p>然后，Leader 并行地向所有 Follower 发送 <code>AppendEntries</code> RPC，请求它们复制这个新的日志条目，然后我们就进入 Raft 设计最精妙的地方：一致性检查：</p>
-<ol>
-<li>在 <code>AppendEntries</code> RPC 中，Leader 不仅会带上新的日志条目，还会附带新日志条目前一个日志的索引 (prevLogIndex) 和任期 (prevLogTerm)</li>
-<li>Follower 收到请求后，会检查自己本地日志在 <code>prevLogIndex</code> 位置的条目，看其任期是否与 <code>prevLogTerm</code> 匹配<ol>
+<li>在 <code>AppendEntries RPC</code> 中，<code>Leader</code> 不仅会带上新的日志条目，还会附带新日志条目前一个日志的索引 (<code>prevLogIndex</code>) 和任期 (<code>prevLogTerm</code>)</li>
+<li><code>Follower</code> 收到请求后，会检查自己本地日志在 <code>prevLogIndex</code> 位置上的条目，看其任期是否与 <code>prevLogTerm</code> 匹配<ol>
 <li>如果匹配<ol>
-<li>说明日志到此为止都是一致的，Follower 会安全地将新的日志条目追加到自己的日志中，并向 Leader 回复成功</li>
+<li>说明日志到此为止都是一致的，<code>Follower</code> 会安全地将新的日志条目追加到自己的日志中，并向 <code>Leader</code> 回复成功</li>
 </ol>
 </li>
 <li>如果不匹配<ol>
-<li>说明 Follower 的日志在此处与 Leader 有分歧，Follower 会拒绝该请求</li>
-<li>当 Leader 收到 Follower 拒绝的响应后，它会向前回溯，找到与该 Follower 的日志共同的、一致的那个点，然后从该点开始，将后续的所有日志条目重新发送给 Follower，强制覆盖掉不一致的部分。</li>
-<li>Raft 协议是让我们使用日志进行记录，即便是刚上任的 Leader，也能够向前回溯，因为在投票前，节点会先检查候选人的日志是否至少和自己一样新，才会投票</li>
-<li>但是在大多数情况下，我们其实还是会使用快照，如果我们使用了快照，我们最多也只能回溯到快照处，如果发现需要回溯到比这个快照更造，那就会判断 Follower 的日志是严重落后（Follower 长期下线、新节点加入）</li>
-<li>在这种情况下，Leader 不会再尝试逐条回溯并同步日志，而是直接向这个 Follower 发送一个快照（这比回溯和同步大量的旧日志要高效得多）</li>
+<li>说明 <code>Follower</code> 的日志在此处与 <code>Leader</code> 有分歧，<code>Follower</code> 会拒绝该请求</li>
+<li>当 <code>Leader</code> 收到 <code>Follower</code> 拒绝的响应后，它会向前回溯，找到与该 <code>Follower</code> 的日志共同的、一致的那个点，然后从该点开始，将后续的所有日志条目重新发送给 <code>Follower</code>，强制覆盖掉不一致的部分。</li>
+<li><code>Raft</code> 协议虽然要求的是，让我们完全使用日志进行记录，即便是刚上任的 <code>Leader</code>，也能够向前回溯（因为在投票前，节点会先检查候选人的日志是否至少和自己一样新，才会投票）</li>
+<li>但是在大多数情况下，我们其实还是会使用快照，但是如果我们使用了快照，我们最多也只能回溯到快照处，如果发现需要回溯到比这个快照更早，那就会判断出 <code>Follower</code> 的日志是严重落后的（<code>Follower</code> 长期下线、作为新节点刚加入）</li>
+<li>在这种情况下，<code>Leader</code> 不会再尝试逐条回溯并同步日志，而是直接向这个 <code>Follower</code> 发送一个快照（这比回溯和同步大量的旧日志要高效得多）</li>
 </ol>
 </li>
 </ol>
 </li>
-<li>所以一个典型的 <code>AppendEntries</code> RPC 包含以下关键字段：<ol>
-<li>leaderId<ol>
-<li>Leader 的节点 ID</li>
-<li>用于 Follower 响应客户端请求时的重定向，它可以告诉客户端 “去找这个 Leader”</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>一个典型的 <code>AppendEntries RPC</code> 包含以下关键字段：<ol>
+<li>LeaderId<ol>
+<li><code>Leader</code> 的节点 ID</li>
+<li>用于 <code>Follower</code> 响应客户端请求时的重定向，它可以告诉客户端 “去找这个 <code>Leader</code>”</li>
 </ol>
 </li>
 <li>term<ol>
-<li>Leader 的当前任期号</li>
-<li>Follower 收到 <code>AppendEntries</code> RPC 后，会首先检查这个 <code>term</code><ol>
-<li>如果 <code>term</code> 小于自己的任期号，说明这个 Leader 是一个 “过时” 的 Leader，Follower 会拒绝这个 RPC，并告知它当前的正确任期，促使它下台</li>
-<li>如果 <code>term</code> 大于或等于自己的任期号，Follower 会接受这个 RPC，并更新自己的任期号。这是 Raft 确保集群中所有节点都在同一个 “时代” 工作的基本机制</li>
+<li><code>Leader</code> 的当前任期号</li>
+<li><code>Follower</code> 收到 <code>AppendEntries RPC</code> 后，会首先检查这个 <code>term</code><ol>
+<li>如果 <code>term</code> 小于自己的任期号，说明这个 <code>Leader</code> 是一个 “过时” 的 <code>Leader</code>，<code>Follower</code> 会拒绝这个 <code>RPC</code>，并告知它当前的正确任期，促使它下台</li>
+<li>如果 <code>term</code> 大于或等于自己的任期号，<code>Follower</code> 会接受这个 <code>RPC</code>，并更新自己的任期号。这是 <code>Raft</code> 确保集群中所有节点都在同一个 “时代” 工作的基本机制</li>
 </ol>
 </li>
 </ol>
 </li>
 <li>prevLogIndex<ol>
-<li>新日志条目前一个条目的索引号</li>
-<li>Follower 收到后，会检查自己的日志中是否存在索引号为 <code>prevLogIndex</code> 的日志条目</li>
+<li>新日志条目的前一个条目的索引号</li>
+<li><code>Follower</code> 收到后，会检查自己的日志中是否存在索引号为 <code>prevLogIndex</code> 的日志条目</li>
 </ol>
 </li>
 <li>prevLogTerm<ol>
-<li>新日志条目前一个条目的任期号</li>
-<li>与 <code>prevLogIndex</code> 配合使用，提供一个双重校验，Follower 不仅要检查自己的日志中是否存在 <code>prevLogIndex</code> 处的条目，还要确保这个条目的任期号与 <code>prevLogTerm</code> 完全一致</li>
+<li>新日志条目的前一个条目的任期号</li>
+<li>与 <code>prevLogIndex</code> 配合使用，提供一个双重校验，<code>Follower</code> 不仅要检查自己的日志中是否存在 <code>prevLogIndex</code> 处的条目，还要确保这个条目的任期号与 <code>prevLogTerm</code> 完全一致</li>
 <li>如果两者都匹配，那么 Leader 和 Follower 的日志在这一点上就是一致的，可以安全地进行追加。如果不匹配，则说明日志存在分歧，需要进行修复。</li>
 </ol>
 </li>
-<li>entries<code>[]</code><ol>
+<li>entries[]<ol>
 <li>要复制的日志条目数组</li>
-<li>Leader 要同步给 Follower 的新日志条目，通常只包含一个新条目，但在日志修复或优化时，也可能包含多个</li>
+<li><code>Leader</code> 要同步给 <code>Follower</code> 的新日志条目，通常只包含一个新条目，但在日志修复或优化时，也可能包含多个</li>
 </ol>
 </li>
 <li>leaderCommit<ol>
-<li>Leader 节点已提交的最高日志条目的索引号</li>
-<li>当 Leader 收到大多数 Follower 对某个日志条目（比如索引号为 10）的成功复制响应时，它会立即更新自己的 <code>commitIndex</code> 为 10，并将该条目应用到自己的状态机中。</li>
-<li>Leader 会在下一次发送的 <code>AppendEntries</code> RPC（无论是新的日志条目还是心跳）中，携带这个更新后的 <code>leaderCommit = 10</code>。</li>
-<li>Follower 收到这个 RPC 后，才会将自己的 <code>commitIndex</code> 更新为 10，并且如果发现自己的日志中，索引小于或等于 <code>leaderCommit</code> 的条目还没被提交，它就会将这些条目标记为已提交</li>
-<li>一旦日志条目被标记为已提交，Follower 就可以将其安全地应用到自己的状态机（state machine）中，从而更新自己的状态</li>
-<li>所以我们知道了，Follower 收到日志后，只是将其<strong>持久化</strong>到本地，但不会立即执行，而是等 Leader 的下一次指令，这是为什么呢？这是因为只有 Leader 才有权决定一个日志条目是否已提交，Follower 必须被动地等待 Leader 的提交指令。</li>
+<li><code>Leader</code> 节点已提交的最高日志条目的索引号</li>
+<li>当 <code>Leader</code> 收到大多数 <code>Follower</code> 对某个日志条目（比如索引号为 10）的成功复制响应时，它会立即更新自己的 <code>commitIndex</code> 为 10，并将该条目应用到自己的状态机中。</li>
+<li><code>Leader</code> 会在下一次发送的 <code>AppendEntries RPC</code>（无论是新的日志条目还是心跳）中，携带这个更新后的 <code>leaderCommit = 10</code>。</li>
+<li><code>Follower</code> 收到这个 <code>RPC</code> 后，才会将自己的 <code>commitIndex</code> 更新为 10，并且如果发现自己的日志中，索引小于或等于 <code>leaderCommit</code> 的条目还没被提交，它就会将这些条目标记为已提交（命令执行）</li>
+<li>一旦日志条目被标记为已提交，<code>Follower</code> 就可以将其安全地应用到自己的状态机（state machine）中，从而更新自己的状态</li>
+<li>所以我们知道了，<code>Follower</code> 收到日志后，只是将其<strong>持久化</strong>到本地，但不会立即执行，而是等 <code>Leader</code> 的下一次指令，这是为什么呢？这是因为只有 <code>Leader</code> 才有权决定一个日志条目是否已提交，<code>Follower</code> 必须被动地等待 <code>Leader</code> 的提交指令。</li>
 </ol>
 </li>
 </ol>
 </li>
 </ol>
-<p>当 Leader 发现<strong>超过半数</strong>的 Follower 都已成功复制了某条日志后，该日志条目就被认为是 “已提交” (Committed) 的，它会立即更新自己的 <code>commitIndex</code> ，然后将该日志中的命令应用到自己的状态机，并向客户端返回成功</p>
-<p>Leader 在后续的心跳中会通知所有 Follower 哪些日志已经被提交（心跳会发送不包含任何日志条目的 <code>AppendEntries</code> RPC），Follower 收到通知后也将相应的命令应用到自己的状态机</p>
+</blockquote>
+<p>当 <code>Leader</code> 发现<strong>超过半数</strong>的 <code>Follower</code> 都已成功复制了某条日志后，该日志条目就被认为是 “已提交” (<code>Committed</code>) 的，它会立即更新自己的 <code>commitIndex</code> ，然后将该日志中的命令应用到自己的状态机（命令执行），并向客户端返回成功</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>你可能会疑惑，当 Leader 发现 <strong>超过半数</strong> 的 Follower 已成功复制某条日志时，该日志就被视为 <strong>已提交（Committed）</strong>。此时，Leader 会立即更新自己的 <code>commitIndex</code>，并将该日志中的命令应用到状态机。但是在极端情况下，若 Leader 尚未来得及发送下一次心跳，Follower 还未更新自己的 <code>commitIndex</code>、也未执行该日志时，Leader 突然宕机。此时会触发新一轮选举，新的 Leader 当选后，会不会因为部分 Follower 尚未执行这条日志而产生影响呢？</li>
-<li>新 Leader 上任后，其 <code>commitIndex</code> 可能暂时停留在日志条目 A 之前的某个索引，此时它不会立即将日志条目 A 标记为已提交。</li>
-<li>因为根据 Raft 的提交规则：<ol>
+<li>在分布式系统中，需要避免逻辑层面的失败（例如转账时余额不足）。常见有两种处理思路：<ol>
+<li>写入前校验（前置校验方案）<ol>
+<li><code>Leader</code> 在写日志之前先查询自己的状态机</li>
+<li>如果满足条件，就确定该操作执行一定会成功，再将其写入日志</li>
+</ol>
+</li>
+<li>写入后确定性执行（业界常用方案）<ol>
+<li><code>Leader</code> 先把操作作为日志写入，并通过 <code>Raft</code> 共识复制到多数节点</li>
+<li>达成多数派确认后，<code>Leader</code> 执行该操作：  <ol>
+<li>若执行成功，则返回成功结果</li>
+<li>若执行失败，则返回错误结果</li>
+</ol>
+</li>
+<li>需要注意的是，此时日志条目<strong>已经提交</strong>（commit），只是执行返回了错误，该日志条目不会被覆盖，未提交的日志才可能被后续覆盖。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><code>Leader</code> 在后续的心跳中会通知所有 <code>Follower</code> 哪些日志已经被提交（心跳会发送不包含任何日志条目的 <code>AppendEntries RPC</code>），<code>Follower</code> 收到通知后也将相应的命令应用到自己的状态机</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>问题一：你说 “当 <code>Leader</code> 发现<strong>超过半数</strong>的 <code>Follower</code> 都已成功复制了某条日志后，该日志条目就被认为是 “已提交” (<code>Committed</code>) 的，它会立即更新自己的 <code>commitIndex</code> ，然后将该日志中的命令应用到自己的状态机，并向客户端返回成功”，但如果 Leader 执行成功，但 Follower 未执行成功呢？<ol>
+<li>逻辑层面的失败<ol>
+<li>逻辑层面的失败是指：业务逻辑上的失败。例如，转账时余额不足、插入数据时违反了唯一键约束等。</li>
+<li>在 <code>Raft</code> 中，状态机必须是<strong>确定性的</strong>：任意一个节点，在相同的初始状态下，按顺序执行同一批日志，一定会得到<strong>完全相同</strong>的结果。  </li>
+<li>因此不会出现 “<code>Leader</code> 执行成功，但 <code>Follower</code> 执行失败” 的分歧，要么大家都成功，要么大家都失败。</li>
+</ol>
+</li>
+<li>物理层面的失败<ol>
+<li>物理层面的失败是指：节点崩溃、磁盘损坏、网络中断、<code>OOM</code> (<code>Out of Memory</code>) 等</li>
+<li><code>Raft</code> 通过 “复制 + 重放日志” 来解决，详见下文：如果 A 节点再次恢复</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>问题二：在极端情况下，若 <code>Leader</code> 尚未来得及发送下一次心跳，<code>Follower</code> 还未更新自己的 <code>commitIndex</code>、也未执行该日志时，<code>Leader</code> 突然宕机。此时会触发新一轮选举，新的 <code>Leader</code> 当选后，会不会因为部分 <code>Follower</code> 尚未执行这条日志而产生影响呢？<ol>
+<li>新 <code>Leader</code> 上任后，其 <code>commitIndex</code> 可能暂时停留在日志条目 A 之前的某个索引，此时它不会立即将日志条目 A 标记为已提交。</li>
+<li>因为根据 <code>Raft</code> 的提交规则：<ol>
 <li>本任期的日志<ol>
-<li>Leader 必须将日志复制到多数节点后才能提交</li>
+<li><code>Leader</code> 必须将日志复制到多数节点后才能提交</li>
 </ol>
 </li>
 <li>前任期的日志<ol>
-<li>Leader 需要先在本任期提交一个后续日志条目，才能一次性将之前的日志条目标记为已提交</li>
+<li><code>Leader</code> 需要先在本任期提交一个后续日志条目，才能一次性将之前的日志条目标记为已提交</li>
 </ol>
 </li>
 </ol>
 </li>
-<li>如果系统在此时没有新的写操作，那么自然不会产生新的日志条目。为了解决这个问题，Raft 规定：新 Leader 选举成功后，会立即在自己的日志中追加一个 no-op 日志条目，这个条目是本任期的第一个操作。</li>
-<li>在提交这个 no-op 条目之前，Leader 会先执行该条目之前未提交的所有日志，确保它们被正确应用；然后再提交并执行这个 no-op 条目，从而完成本任期的初始化。</li>
+<li>如果系统在此时没有新的写操作，那么自然不会产生新的日志条目。为了解决这个问题，<code>Raft</code> 规定：新 <code>Leader</code> 选举成功后，会立即在自己的日志中追加一个 <code>no-op</code> 日志条目，并通过 <code>Raft</code> 共识复制到多数节点，这个条目是本任期的第一个操作。</li>
+<li>Leader 一旦提交一条 no-op 日志，就可以顺带驱动之前所有尚未执行的日志一并得到提交与应用</li>
+</ol>
+</li>
 </ol>
 </blockquote>
-<p><font color="#92d050">3. Leader A 宕机</font><br>假设集群中已经经过几次选举了，此时 A 是当前的 Leader（term&#x3D;10），定期向 B、C、D、E 发送心跳信号。而如果 A 宕机后，B、C、D、E 都不再收到心跳信号，触发各自的选举超时定时器（150–300 ms 随机）</p>
+<hr>
+<h5 id="Leader-A-宕机下线"><a href="#Leader-A-宕机下线" class="headerlink" title="Leader A 宕机下线"></a>Leader A 宕机下线</h5><p>假设集群中已经经过几次选举了，此时 A 是当前的 <code>Leader</code>（<code>term=10</code>），定期向 B、C、D、E 发送心跳信号。而如果 A 宕机后，B、C、D、E 都不再收到心跳信号，触发各自的选举超时定时器（<code>150–300ms</code> 随机）</p>
 <ol>
 <li>假如 B 最先超时未收到心跳<ol>
-<li>B 超时在先（如 180 ms），检测到未收到心跳，便将 <code>term</code> 从 10 增加到 11，变为 Candidate。B 立即给自己投票（票数&#x3D;1），并向 C、D、E 以及已掉线的 A 广播 <code>RequestVote(term=11, candidateId=B, lastLog…)</code>。</li>
-<li>C、D、E 收到 B 的请求后，发现请求中的 term&#x3D;11 比自己当前的 term&#x3D;10 更新，便更新 term → 11，切回 Follower 身份，<strong>检查 B 的日志无落后后</strong>，投票给 B。</li>
-<li>B 收到来自 C 和 D 的投票（B 自己 + C + D &#x3D; 3 票），满足多数要求，成功当选为新 Leader（term&#x3D;11）。</li>
-<li>B 立即向其他活跃节点（C、D、E）以及离线的 A 发送心跳 <code>AppendEntries(term=11)</code>。C、D、E 收到后重置选举定时器，保持 Follower 状态；</li>
-<li>如果 A 之后恢复上线，它将收到 B 的心跳 RPC，并发现 term&#x3D;11 比自己的 term&#x3D;10 更新，于是更新自己的 term → 11，退回 Follower 状态，放弃原先的 Leader 身份。这样保证：一个处于旧 term 的节点无法参与当前任期的投票或发起选举，只有“意识到要进入新一届”的节点才能重新参选。</li>
+<li>B 超时在先（如 <code>180ms</code>），检测到未收到心跳，便将 <code>term</code> 从 10 增加到 11，变为 <code>Candidate</code>。B 立即给自己投票（票数&#x3D;1），并向 C、D、E 以及已掉线的 A 广播 <code>RequestVote(term=11, candidateId=B, lastLog…)</code>。</li>
+<li>C、D、E 收到 B 的请求后，发现请求中的 <code>term=11</code> 比自己当前的 <code>term=10</code> 新，便更新 <code>term → 11</code>，切回 <code>Follower</code> 身份，<strong>检查 B 的日志无落后后</strong>，投票给 B。</li>
+<li>B 收到来自 C 和 D 的投票（B 自己 + C + D &#x3D; 3 票），满足多数要求，<strong>立即</strong>成功当选为新 <code>Leader</code>（<code>term=11</code>）。</li>
+<li>B 立即向其他活跃节点（C、D、E）以及离线的 A 发送心跳 <code>AppendEntries(term=11)</code>。C、D、E 收到后重置选举定时器，保持 <code>Follower</code> 状态；</li>
+<li>如果 A 之后恢复上线，它将收到 B 的心跳 <code>RPC</code>，并发现 <code>term=11</code> 比自己的 <code>term=10</code> 新，于是更新自己的 <code>term → 11</code>，退回 <code>Follower</code>，放弃原先的 <code>Leader</code>。这样保证：一个处于旧 <code>term</code> 的节点无法参与当前任期的投票或发起选举，只有“意识到要进入新一届”的节点才能重新参选。</li>
 </ol>
 </li>
 <li>假如 B、C 几乎同时超时未收到心跳<ol>
-<li>若 B 和 C 的选举超时非常接近（如均为 180 ms 左右），两者几乎同时将 term 从 10 升为 11，变为 Candidate，并向其余节点广播 <code>RequestVote(term=11)</code>（B 向 A、C、D、E 发，C 向 A、B、D、E 发）。</li>
-<li>假设 D 先收到 B 的请求，检查通过后将票投给 B，并更新 term → 11。</li>
-<li>同时，E 先收到 C 的请求，也检查通过并投票给 C，更新 term → 11。</li>
-<li>当 B 收到来自 C 的 <code>RequestVote(term=11)</code> 请求时，B 发现自己在当前 term（11）中已将票投给自己，因此拒绝给 C 投票。C 也是同理（只能投一次，投给自己就没办法投给别人了）</li>
+<li>若 B 和 C 的选举超时非常接近（如均为 <code>180ms</code> 左右），两者几乎同时将 <code>term</code> 从 10 升为 11，变为 <code>Candidate</code>，并向其余节点广播 <code>RequestVote(term=11)</code>（B 向 A、C、D、E 发，C 向 A、B、D、E 发）。</li>
+<li>假设 D 先收到 B 的请求，检查通过后将票投给 B，并更新 <code>term → 11</code>。</li>
+<li>同时，E 先收到 C 的请求，也检查通过并投票给 C，更新 <code>term → 11</code>。</li>
+<li>当 B 收到来自 C 的 <code>RequestVote(term=11)</code> 请求时，B 发现自己在当前<code> term（11）</code>中已将票投给自己，因此拒绝给 C 投票。C 也是同理（只能投一次，投给自己就没办法投给别人了）</li>
 <li>B 最终得票为自己 + D &#x3D; 2，C 得票为自己 + E &#x3D; 2，均未获得多数 → <strong>选票分裂（split vote）</strong>，本轮选举失败。</li>
-<li>B、C、D、E 的选举超时器重新启动，等待下一轮触发。再次进入超时的节点将把 term 增加到 12 并发起新一轮选举，如此循环，直到有人获得多数票成功当选。term 会随着失败轮次不断累加。</li>
+<li>B、C、D、E 的选举超时器重新启动，等待下一轮触发。再次进入超时的节点将把 <code>term</code> 增加到 12 并发起新一轮选举，如此循环，直到有人获得多数票成功当选，<code>term</code> 会随着失败轮次不断累加。</li>
 </ol>
 </li>
 </ol>
-<p>由于会检查日志是否落后之后再去投票，而且 Raft 协议还是多数成功，就直接杜绝了日志落后的节点“混进多数”并被选为 Leader 的可能性。</p>
-<p><font color="#92d050">4. A 节点恢复</font><br>A 节点重启后，term 仍是 10。当它收到新 Leader（如 D）发来的心跳 <code>AppendEntries</code> RPC 中 term&#x3D;11 后，立刻发现对方的 term 更新，于是更新自己的 term → 11，退回 Follower 身份，并且进行日志同步，重新与集群保持一致。<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.png" srcset="/img/loading.gif" lazyload></p>
+<p>由于会检查日志是否落后之后再去投票，而且 <code>Raft</code> 协议还是多数成功，就直接杜绝了日志落后的节点 “混进多数” 并被选为 <code>Leader</code> 的可能性。</p>
 <hr>
-<h3 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h3><hr>
+<h5 id="A-恢复上线"><a href="#A-恢复上线" class="headerlink" title="A 恢复上线"></a>A 恢复上线</h5><p>A 节点重启后，<code>term</code> 仍是 10。当它收到新 <code>Leader</code>（如 D）发来的心跳 <code>AppendEntries</code> RPC 中 <code>term=11</code> 后，立刻发现对方的 <code>term</code> 更新，于是更新自己的 <code>term → 11</code>，退回 <code>Follower</code> 身份，并且进行日志同步，重新与集群保持一致。<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="ZAB-协议"><a href="#ZAB-协议" class="headerlink" title="ZAB 协议"></a>ZAB 协议</h3><h4 id="ZAB-核心角色"><a href="#ZAB-核心角色" class="headerlink" title="ZAB 核心角色"></a>ZAB 核心角色</h4><p><font color="#92d050">1. Follower（跟随着）</font></p>
+<p><font color="#92d050">2. Leader（领导者）</font></p>
+<p><font color="#92d050">3. Observer（观察者）</font></p>
+<hr>
+<h4 id="ZAB-核心流程"><a href="#ZAB-核心流程" class="headerlink" title="ZAB 核心流程"></a>ZAB 核心流程</h4><p><code>ZAB</code> 协议包含两种基本模式：</p>
+<ol>
+<li>崩溃恢复模式<ol>
+<li>当服务刚启动或 <code>Leader</code> 宕机时，系统会进入此模式，进行新 <code>Leader</code> 的选举</li>
+</ol>
+</li>
+<li>原子广播模式<ol>
+<li>当集群中已经选举出 <code>Leader</code> 后，系统进入此模式，进行正常的数据同步和事务处理</li>
+</ol>
+</li>
+</ol>
+<h5 id="Leader-选举（崩溃恢复模式）"><a href="#Leader-选举（崩溃恢复模式）" class="headerlink" title="Leader 选举（崩溃恢复模式）"></a>Leader 选举（崩溃恢复模式）</h5><p>在 <code>ZAB</code> 系统刚启动时，所有节点默认处于 <code>LOOKING</code> 状态（寻找 <code>Leader</code>），<code>epoch</code> 初始为 0（类似于 <code>Raft</code> 的 <code>term</code>）</p>
+<p>每个节点都会发起一次投票，首先会投给自己，一个投票（<code>Vote</code>）包含三个关键信息：</p>
+<ol>
+<li>proposed_leader_id<ol>
+<li>该节点所提议的 <code>Leader</code> 的服务器 ID（本次是该节点自身）</li>
+</ol>
+</li>
+<li>last_zxid<ol>
+<li>提议的服务器最后一次事务的 <code>zxid</code></li>
+<li>zxid 是一个 64 位整数，由两部分组成：<ol>
+<li>高 32 位表示 epoch<ol>
+<li>领导任期号，类似 <code>Raft</code> 的 <code>term</code></li>
+</ol>
+</li>
+<li>低 32 位为 counter<ol>
+<li><code>Leader</code> 在任期内每产生一个新的事务 <code>Proposal</code> 时，计数加 1</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>然后节点会将自己的投票 <code>（proposed_leader_id, last_zxid）</code> 广播给集群中的所有其他节点</p>
+<p>当一个节点收到来自其他节点的投票时，它会根据以下规则决定是否更新自己的投票：</p>
+<ol>
+<li>优先比较 epoch<ol>
+<li>如果收到的投票 <code>V</code> 的 <code>epoch</code> 大于自己当前投票的 <code>epoch</code>，那么承认对方的投票更 “新”，并将自己的投票更新为 <code>V</code>，然后重新广播这个新投票</li>
+<li>如果收到的投票 <code>V</code> 的 <code>epoch</code> 小于自己当前投票的 <code>epoch</code>，则保留原有提议，并重新广播这个投票</li>
+</ol>
+</li>
+<li>epoch 相同，比较 zxid<ol>
+<li>如果 <code>epoch</code> 相同，则比较 <code>zxid</code>，<code>zxid</code> 大的节点胜出</li>
+</ol>
+</li>
+<li>zxid 相同比较 proposed_leader_id<ol>
+<li>如果 <code>epoch</code> 和 <code>zxid</code> 都相同，则比较 <code>proposed_leader_id</code>，<code>proposed_leader_id</code> 大的节点胜出</li>
+</ol>
+</li>
+</ol>
+<p>每个节点都会在本地临时维护一个票箱，用来记录收到的投票，一旦发现某个服务器的提议获得了超过半数（&gt; N&#x2F;2），那么该节点就会认为这个 <code>proposed_leader_id</code> 就是新的 <code>Leader</code></p>
+<p>如果该节点发现，这个 <code>proposed_leader_id</code> 是自己，那么该节点就切换状态为 <code>LEADING</code>，如果不是自己，则切换状态为 <code>FOLLOWING</code>，并准备连接新的 <code>Leader</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>ZAB</code> 的投票机制，确保拥有最新、最完整数据的节点才能最终能当选为 <code>Leader</code></li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="数据同步（原子广播模式）"><a href="#数据同步（原子广播模式）" class="headerlink" title="数据同步（原子广播模式）"></a>数据同步（原子广播模式）</h5><p>一旦 <code>Leader</code> 确定，它就开始负责处理所有客户端的写请求（由 <code>Leader</code> 负责读取，是为了避免脏读，这种设计虽然保证了强一致性，但也将压力集中在了 <code>Leader</code> 节点）</p>
+<p>ZAB 的数据同步过程，类似于两阶段提交 (2PC)。当 Leader 接收到一个写请求，他会生成一个新的事务，并这个事务分配一个全局唯一的、递增的 <code>zxid</code>（在当前 <code>epoch</code> 下，<code>counter</code> 加 1）</p>
+<p><code>Leader</code> 将这个事务包装成一个 <code>PROPOSAL</code> 消息，并将其<strong>持久化</strong>到自己的本地事务日志中，然后将这个 <code>PROPOSAL</code> 广播给所有的 <code>Follower</code></p>
+<p><code>Follower</code> 收到 <code>PROPOSAL</code> 后，不会立即执行，而是先将其<strong>持久化</strong>到自己的本地事务日志中，写入成功后，<code>Follower</code> 向 <code>Leader</code> 发送一个 <code>ACK</code> (Acknowledgement) 消息，表示 “我已经收到并保存好了这个提议”。</p>
+<p>一旦 <code>Leader</code> 收到了<strong>超过半数</strong>（包括自己）节点的 <code>ACK</code>，它就认为这个事务可以“提交”了，首先将这个事务应用到内存中的状态机（执行命令），接着会向所有 <code>Follower</code> 广播一个 <code>COMMIT</code> 消息，这个消息包含了刚刚达成共识的事务的 <code>zxid</code></p>
+<p><code>Follower</code> 收到 <code>COMMIT</code> 消息后，才会将对应的、已经持久化在日志中的事务，应用到自己的状态机中</p>
+<hr>
+<h5 id="Leader-A-宕机下线（崩溃恢复模式）"><a href="#Leader-A-宕机下线（崩溃恢复模式）" class="headerlink" title="Leader A 宕机下线（崩溃恢复模式）"></a>Leader A 宕机下线（崩溃恢复模式）</h5><ul>
+<li><code>Leader</code> A 会定期向所有 <code>Follower</code> 发送心跳。如果 A 宕机，B、C、D、E 会在一定超时时间内收不到心跳超时的 <code>Follower</code> 会将自己的状态从 <code>FOLLOWING</code> 切换回 <code>LOOKING</code>，准备开始新一轮的 <code>Leader</code> 选举</li>
+</ul>
+<p>所有进入 <code>LOOKING</code> 状态的节点（B, C, D, E）会<strong>将自己的 <code>epoch</code> 加 1</strong>然后，它们会按照前述的选举流程（发起投票、广播、比较、更新投票）来选举新的 <code>Leader</code></p>
+<p>在新 <code>Leader</code> D 开始接受新的写请求之前，它必须确保所有 <code>Follower</code> 的状态都与自己同步，<code>Follower</code> (B, C, E) 会连接到新 <code>Leader</code> D，并把自己的最新 <code>zxid</code> 报给 D</p>
+<p>D 会比较 <code>Follower</code> 的 <code>zxid</code> 与自己的 <code>zxid</code></p>
+<ol>
+<li>如果 <code>Follower</code> 的日志比 D 落后，D 会将差异的事务发送给 <code>Follower</code>，让其补齐。如果差异过大，可能会直接发送快照</li>
+<li>如果 <code>Follower</code> 的日志中有一些 D 没有的事务（这些事务必然是未被提交的，因为 D 当选 <code>Leader</code> 说明 D 的日志包含了所有已提交的事务），D 会指令 <code>Follower</code> 回滚这些多余的事务</li>
+</ol>
+<p>当<strong>超过半数</strong>的 <code>Follower</code> 都与 <code>Leader</code> D 完成同步后，新的 <code>Leader</code> 才能正式对外提供服务，系统进入新的原子广播模式</p>
+<hr>
+<h5 id="A-恢复上线-1"><a href="#A-恢复上线-1" class="headerlink" title="A 恢复上线"></a>A 恢复上线</h5><p>旧 <code>Leader</code> A 重启后，它可能仍然认为自己是 <code>Leader</code>，其 <code>epoch</code> 停留在旧的数值，当 A 尝试与其他节点通信时（例如发送心跳或 <code>PROPOSAL</code>），它会携带自己旧的 <code>epoch</code>，其他节点（已经是新 <code>Leader</code> D 的 <code>Follower</code>）收到来自 A 的消息后，会发现消息的 <code>epoch</code> 小于自己当前的 <code>epoch</code>，这些节点会拒绝 A 的消息，并回复一个包含当前更高 <code>epoch</code> 的响应， 收到这个响应后，意识到自己已经是一个“过时”的 <code>Leader</code>，便会立即放弃 <code>Leader</code> 身份，将自己的状态切换到 <code>LOOKING</code>，接着，A 会像一个普通节点一样，参与当前的系统，发现已经存在 <code>Leader</code> D，于是它会切换到 <code>FOLLOWING</code> 状态，并与 <code>Leader</code> D 进行数据同步，最终作为 <code>Follower</code> 重新加入集群</p>
+<hr>
 <h3 id="Multi-Paxos-协议"><a href="#Multi-Paxos-协议" class="headerlink" title="Multi-Paxos 协议"></a>Multi-Paxos 协议</h3><hr>
 <h3 id="EPaxos-协议"><a href="#EPaxos-协议" class="headerlink" title="EPaxos 协议"></a>EPaxos 协议</h3><hr>
 <h3 id="Atlas-协议"><a href="#Atlas-协议" class="headerlink" title="Atlas 协议"></a>Atlas 协议</h3><hr>
@@ -807,39 +1040,32 @@
 <h3 id="强一致性分布式事务"><a href="#强一致性分布式事务" class="headerlink" title="强一致性分布式事务"></a>强一致性分布式事务</h3><h4 id="2PC-提交协议"><a href="#2PC-提交协议" class="headerlink" title="2PC 提交协议"></a>2PC 提交协议</h4><h5 id="2PC-核心角色"><a href="#2PC-核心角色" class="headerlink" title="2PC 核心角色"></a>2PC 核心角色</h5><p><font color="#92d050">1. 协调者（Coordinator）</font><br>负责事务的发起、管理和最终决定（提交 &#x2F; 回滚）。</p>
 <p><font color="#92d050">2. 参与者（Participant）</font><br>一般是数据库、消息队列节点，实际执行事务操作。</p>
 <hr>
-<h5 id="2PC-核心流程"><a href="#2PC-核心流程" class="headerlink" title="2PC 核心流程"></a>2PC 核心流程</h5><h6 id="阶段一：准备阶段"><a href="#阶段一：准备阶段" class="headerlink" title="阶段一：准备阶段"></a>阶段一：准备阶段</h6><p>在这个阶段，协调者需要确认所有参与者都 “有能力” 提交事务。于是，它会向所有参与者发送 Prepare 请求，就好比在问：“你们是否能提交事务？”</p>
-<p>参与者收到 <code>Prepare</code> 请求后，开始执行事务操作并锁定相关资源，但不会提交事务：</p>
-<ol>
-<li>执行事务操作，在这个过程要将相关资源加锁（行锁、表锁），确保这批数据在最终提交前不会被其他事务破坏</li>
-<li>并且将事务的 Redo Log 和 Undo Log 写入本地的持久化日志文件</li>
-</ol>
-<p>如果一切顺利，参与者就向协调者返回 YES，表示自己已经做好提交的准备。若中途遇到异常（如约束条件失败、磁盘空间不足等），则返回 NO。</p>
+<h5 id="2PC-核心流程"><a href="#2PC-核心流程" class="headerlink" title="2PC 核心流程"></a>2PC 核心流程</h5><h6 id="阶段一：准备阶段"><a href="#阶段一：准备阶段" class="headerlink" title="阶段一：准备阶段"></a>阶段一：准备阶段</h6><p>在这个阶段，协调者需要确认所有参与者都 “有能力” 提交事务。所以，协调者会向所有参与者发送 <code>Prepare</code> 请求（携带事务信息），自身进入等待状态，并启动一个超时计时器</p>
+<p>参与者收到 <code>Prepare</code> 请求后，会开启本地事务，执行所有事务操作（执行但不提交），在这个过程要将相关资源加锁（行锁、表锁），确保这批数据在最终提交前不会被其他事务破坏。然后，参与者会将事务操作写到 <code>WAL（Redo Log、Undo Log）</code> 并持久化到磁盘上（这是关键承诺，保证崩溃恢复）</p>
+<p>如果以上步骤全部成功，参与者向协调者返回 <code>VOTE_COMMIT (YES)</code>。如果中途发生任何错误（如 <code>SQL</code> 执行失败、资源不足），参与者利用 <code>Undo Log</code> 回滚本地事务操作，释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接，并向协调者返回 <code>VOTE_ABORT (NO)</code></p>
 <p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>在这里，Prepare 阶段通常依赖我们 “四维度理论” 所强调的底层技术来实现</li>
-<li>其他地方中的多次 “交互” 本质上只是一条网络信号的传递</li>
+<li>数据库系统在执行事务时，会先执行命令修改内存页，并生成对应的 WAL 日志，但此时日志只写入缓冲区</li>
+<li>在事务提交时，只要确保 WAL 已经持久化即可（这个具体取决于配置，例如 MySQL 会把这个选择权交给我们）。至于数据页真正何时落盘，则也由配置决定，反正 WAL 已经写下来了，不用担心。</li>
 </ol>
 </blockquote>
 <hr>
-<h6 id="阶段二：提交阶段"><a href="#阶段二：提交阶段" class="headerlink" title="阶段二：提交阶段"></a>阶段二：提交阶段</h6><p>协调者在收到所有参与者的响应消息后，会根据反馈结果通知各参与者：执行 commit 提交 或 rollback 回滚 操作。</p>
-<p><font color="#92d050">1. 事务提交</font><br>当所有参与者均返回 <strong>YES</strong> 时，协调者发起正式的提交流程：</p>
+<h6 id="阶段二：提交阶段"><a href="#阶段二：提交阶段" class="headerlink" title="阶段二：提交阶段"></a>阶段二：提交阶段</h6><p>在这个阶段，协调者需要在收到<strong>所有参与者的响应消息</strong>后，根据反馈结果做出全局决策</p>
+<p><font color="#92d050">1. 事务提交</font><br>当所有参与者均返回 <code>VOTE_COMMIT (YES)</code> 时，协调者发起正式的提交流程：</p>
 <ol>
-<li>协调者向所有参与者发送 <code>commit</code> 请求。<ol>
-<li>参与者接到请求后，正式提交事务，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</li>
+<li>协调者首先将自己的决策（<code>COMMIT</code>）写入到本地日志，并持久化，然后向所有参与者发送 <code>Global_Commit</code> 请求</li>
+<li>参与者接收到 <code>Global_Commit</code> 请求后，执行本地事务的正式提交，释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接，然后向协调者发送 <code>ACK</code></li>
+<li>协调者收到所有参与者的 <code>ACK</code> 后，完成整个分布式事务<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-2.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
-</li>
-<li>提交完成后，参与者向协调者返回 <code>ACK</code></li>
-<li>协调者收到所有参与者的 <code>ACK</code> 后，确认整个事务提交完成<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-2.png" srcset="/img/loading.gif" lazyload></li>
-</ol>
-<p><font color="#92d050">2. 事务回滚</font><br>若任意一个参与者返回 <strong>NO</strong>，或在超时时间内未返回响应，则协调者触发回滚流程：</p>
+<p><font color="#92d050">2. 事务回滚</font><br>如果在超时时间内<strong>未收到</strong>所有参与者的响应，或者收到<strong>至少一个</strong> <code>VOTE_ABORT</code> 响应，协调者发起正式的回滚流程：</p>
 <ol>
-<li>协调者向所有参与者发送 <code>rollback</code> 请求</li>
-<li>参与者根据第一阶段保存的 <strong>undo 信息</strong> 执行回滚，并释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接</li>
-<li>回滚完成后，参与者向协调者发送 <code>ACK</code> 确认消息</li>
-<li>协调者收到所有参与者的 <code>ACK</code> 后，确认事务已取消<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-3.png" srcset="/img/loading.gif" lazyload></li>
+<li>协调者首先将自己的决策（<code>ROLLBACK</code>）写入到本地日志，并持久化，然后向所有返回 <code>VOTE_COMMIT (YES) </code>的参与者发送 <code>Global_Rollback</code> 请求</li>
+<li>参与者接收到 Global_Rollback 请求后，利用 Undo Log 回滚本地事务操作，释放事务执行期间锁定的资源（行锁、表锁）和占用的数据库连接，然后向协调者发送 ACK 消息</li>
+<li>协调者收到所有返回 <code>VOTE_COMMIT (YES) </code>的参与者的 <code>ACK</code> 后，取消整个分布式事务</li>
 </ol>
+<p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7-3.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -848,7 +1074,7 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="2PC-优缺点"><a href="#2PC-优缺点" class="headerlink" title="2PC 优缺点"></a>2PC 优缺点</h6><p>协调着也有可能卡死，参与者也有可能卡死</p>
+<h5 id="2PC-优缺点"><a href="#2PC-优缺点" class="headerlink" title="2PC 优缺点"></a>2PC 优缺点</h5><p>协调着也有可能卡死，参与者也有可能卡死</p>
 <ol>
 <li>缺点<ol>
 <li>性能问题<ol>

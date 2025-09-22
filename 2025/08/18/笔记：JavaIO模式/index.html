@@ -19,18 +19,18 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BI">
+    <meta name="description" content="同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BIO 模式 下，服务端的处理方式是 一连接一线程，每当有一个客户端接入，就创建一个线程专门处理这个连接，如果同时有 1000 个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java IO 模式">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="https:&#x2F;&#x2F;blog.csdn.net&#x2F;unique_perfect&#x2F;article&#x2F;details&#x2F;115108640 同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BI">
+<meta property="og:description" content="同步阻塞（BIO）BIO 概述BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。   伪异步 IO在最传统的 BIO 模式 下，服务端的处理方式是 一连接一线程，每当有一个客户端接入，就创建一个线程专门处理这个连接，如果同时有 1000 个">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-3.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F-4.png">
 <meta property="article:published_time" content="2025-08-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-27T13:49:49.675Z">
+<meta property="article:modified_time" content="2025-09-10T06:51:39.506Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          2.4k words
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          17 mins
+          21 mins
         
       </span>
     
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-27T21:49:49+08:00
+                    Last updated on 2025-09-10T14:51:39+08:00
                   
                   
 
@@ -303,8 +303,7 @@
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/unique_perfect/article/details/115108640">https://blog.csdn.net/unique_perfect/article/details/115108640</a></p>
-<h2 id="同步阻塞（BIO）"><a href="#同步阻塞（BIO）" class="headerlink" title="同步阻塞（BIO）"></a>同步阻塞（BIO）</h2><h3 id="BIO-概述"><a href="#BIO-概述" class="headerlink" title="BIO 概述"></a>BIO 概述</h3><p>BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。</p>
+                <h2 id="同步阻塞（BIO）"><a href="#同步阻塞（BIO）" class="headerlink" title="同步阻塞（BIO）"></a>同步阻塞（BIO）</h2><h3 id="BIO-概述"><a href="#BIO-概述" class="headerlink" title="BIO 概述"></a>BIO 概述</h3><p>BIO（Blocking IO）是最传统的 I&#x2F;O 模型，采用传统的 “一连接一线程” 的方式，并且在进行 IO 操作时，如果数据还没准备好，那么发起 IO 调用的线程就会一直阻塞等待，直到数据可用。</p>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%A8%A1%E5%BC%8F.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="伪异步-IO"><a href="#伪异步-IO" class="headerlink" title="伪异步 IO"></a>伪异步 IO</h3><p>在最传统的 <strong>BIO 模式</strong> 下，服务端的处理方式是 <strong>一连接一线程</strong>，每当有一个客户端接入，就创建一个线程专门处理这个连接，如果同时有 1000 个客户端，那么服务端就要开 1000 个线程去等待</p>
@@ -330,7 +329,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="NIO-组件"><a href="#NIO-组件" class="headerlink" title="NIO 组件"></a>NIO 组件</h3><h4 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h4><h5 id="Buffer-概述"><a href="#Buffer-概述" class="headerlink" title="Buffer 概述"></a>Buffer 概述</h5><p>Buffer 就是一个数组，可以存放多个相同类型的数据。想要掌握 Buffer，必须了解其几个重要概念：</p>
+<h3 id="NIO-核心组件"><a href="#NIO-核心组件" class="headerlink" title="NIO 核心组件"></a>NIO 核心组件</h3><h4 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h4><h5 id="Buffer-概述"><a href="#Buffer-概述" class="headerlink" title="Buffer 概述"></a>Buffer 概述</h5><p>Buffer（缓冲区） 就是一个数组，可以存放多个相同类型的数据。想要掌握 Buffer，必须了解其几个重要概念：</p>
 <ol>
 <li>容量 (capacity) <ol>
 <li>作为内存块，Buffer 具有固定大小，也称为 “容量”</li>
@@ -368,9 +367,9 @@
 <li>DoubleBuffer</li>
 </ol>
 <hr>
-<h5 id="Buffer-常用方法"><a href="#Buffer-常用方法" class="headerlink" title="Buffer 常用方法"></a>Buffer 常用方法</h5><ol>
+<h5 id="Buffer-源码解析"><a href="#Buffer-源码解析" class="headerlink" title="Buffer 源码解析"></a>Buffer 源码解析</h5><ol>
 <li>obsidian 内部链接：<ol>
-<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABuffer%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：Buffer常用方法</a></li>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ABuffer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Buffer源码解析</a></li>
 </ol>
 </li>
 <li>Hexo 链接：<ol>
@@ -406,12 +405,18 @@
 </li>
 <li>网络流对应 Channel<ol>
 <li>TCP Channel<ol>
+<li>客户端 Channel<ol>
 <li>SocketChannel<ol>
 <li>与远程主机进行 TCP 通信的通道</li>
 </ol>
 </li>
+</ol>
+</li>
+<li>服务端 Channel<ol>
 <li>ServerSocketChannel<ol>
 <li>监听客户端 TCP 连接请求的通道</li>
+</ol>
+</li>
 </ol>
 </li>
 </ol>
@@ -436,8 +441,8 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="FileChannel"><a href="#FileChannel" class="headerlink" title="FileChannel"></a>FileChannel</h5><h6 id="FileChannel-概述"><a href="#FileChannel-概述" class="headerlink" title="FileChannel 概述"></a>FileChannel 概述</h6><p><code>FileChannel</code> 来自 Java NIO 包，表面上看似属于“新 I&#x2F;O”，因此很多人会以为它支持非阻塞操作。但实际上，当你调用 <code>fileChannel.read(ByteBuffer)</code> 或 <code>fileChannel.write(ByteBuffer)</code> 时，当前线程还是会一直等待，直到数据传输完成才返回。</p>
-<p>你可能会问：既然 <code>FileChannel</code> 也是阻塞的，为什么不直接使用 BIO 的输入流和输出流，而要用它并配合 Buffer？这是不是显得有些麻烦？</p>
+<h5 id="FileChannel"><a href="#FileChannel" class="headerlink" title="FileChannel"></a>FileChannel</h5><h6 id="FileChannel-概述"><a href="#FileChannel-概述" class="headerlink" title="FileChannel 概述"></a>FileChannel 概述</h6><p><code>FileChannel</code> 来自 Java NIO 包，表面上看似属于“新 I&#x2F;O”，因此很多人会以为它支持非阻塞操作。但实际上，当你调用 <code>fileChannel.read(ByteBuffer)</code> 或 <code>fileChannel.write(ByteBuffer)</code> 时，当前线程还是会一直等待，直到数据传输完成才返回（所以无法注册到 Selector）</p>
+<p>你可能会问：既然 <code>FileChannel</code> 也是阻塞的，为什么不直接使用 BIO 的输入流和输出流？</p>
 <p>其实，<code>FileChannel</code> 的优势并不在于非阻塞，而体现在以下几个方面：</p>
 <ol>
 <li>随机访问<ol>
@@ -460,22 +465,9 @@
 </li>
 </ol>
 <hr>
-<h6 id="FileChannel-常用方法"><a href="#FileChannel-常用方法" class="headerlink" title="FileChannel 常用方法"></a>FileChannel 常用方法</h6><ol>
+<h6 id="FileChannel-源码解析"><a href="#FileChannel-源码解析" class="headerlink" title="FileChannel 源码解析"></a>FileChannel 源码解析</h6><ol>
 <li>obsidian 内部链接：<ol>
-<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileChannel常用方法</a></li>
-</ol>
-</li>
-<li>Hexo 链接：<ol>
-<li><a target="_blank" rel="noopener" href="http://localhost:4000/2025/08/19/%E6%96%B9%E6%B3%95%EF%BC%9AFileChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/">http://localhost:4000/2025/08/19/%E6%96%B9%E6%B3%95%EF%BC%9AFileChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</a></li>
-</ol>
-</li>
-</ol>
-<hr>
-<h5 id="SocketChannel"><a href="#SocketChannel" class="headerlink" title="SocketChannel"></a>SocketChannel</h5><h6 id="SocketChannel-概述"><a href="#SocketChannel-概述" class="headerlink" title="SocketChannel 概述"></a>SocketChannel 概述</h6><p><code>SocketChannel</code> 是客户端连接远程服务器时使用的通道，既支持阻塞模式，也支持非阻塞模式。在非阻塞模式下，可以将多个通道注册到同一个 <code>Selector</code>，再通过轮询机制高效地管理和处理大量连接。</p>
-<hr>
-<h6 id="SocketChannel-常用方法"><a href="#SocketChannel-常用方法" class="headerlink" title="SocketChannel 常用方法"></a>SocketChannel 常用方法</h6><ol>
-<li>obsidian 内部链接：<ol>
-<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：SocketChannel常用方法</a></li>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AFileChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：FileChannel源码解析</a></li>
 </ol>
 </li>
 <li>Hexo 链接：<ol>
@@ -483,22 +475,8 @@
 </ol>
 </li>
 </ol>
-<h4 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h4><h5 id="Selector-概述"><a href="#Selector-概述" class="headerlink" title="Selector 概述"></a>Selector 概述</h5><p>Selector 是 <code>SelectableChannel</code> 对象的多路复用器，能够检测多个已注册通道上是否有事件发生，如果有事件发生，就会获取相应的事件，并对每个事件进行处理，从而实现一个线程同时监控多个 <code>SelectableChannel</code> 的 IO 状态</p>
 <hr>
-<h5 id="Selector-常用方法"><a href="#Selector-常用方法" class="headerlink" title="Selector 常用方法"></a>Selector 常用方法</h5><ol>
-<li>obsidian 内部链接：<ol>
-<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ASelector%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：Selector常用方法</a></li>
-</ol>
-</li>
-<li>Hexo 链接：<ol>
-<li></li>
-</ol>
-</li>
-</ol>
-<h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-1" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-2"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-2" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-3"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-3" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-4"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-4" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h2 id="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-5"><a href="#aaaaaaaaaaaaaaaaaaaaaaaaaaaaa-5" class="headerlink" title="aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"></a>aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h2><h3 id="异步非阻塞操作（AIO）"><a href="#异步非阻塞操作（AIO）" class="headerlink" title="异步非阻塞操作（AIO）"></a>异步非阻塞操作（AIO）</h3><p>Java AIO（异步非阻塞式）采用 “一个有效请求对应一个线程” 的模式，客户端的 I&#x2F;O 请求由操作系统先完成，然后再通知服务器应用启动线程进行处理。通常适用于连接数较多、且连接时间较长的场景。</p>
-<p>因此 Java AIO 适用于连接数多且连接时间较长（重操作）的架构，例如相册服务器。它能够充分利用操作系统参与并发处理。从 JDK 7 开始提供支持，但编程相对复杂。</p>
-<hr>
-<h6 id="SocketChannel、ServerSocketChannel"><a href="#SocketChannel、ServerSocketChannel" class="headerlink" title="SocketChannel、ServerSocketChannel"></a>SocketChannel、ServerSocketChannel</h6><p><font color="#92d050">1. 客户端</font></p>
+<h5 id="SocketChannel"><a href="#SocketChannel" class="headerlink" title="SocketChannel"></a>SocketChannel</h5><h6 id="SocketChannel、ServerSocketChannel"><a href="#SocketChannel、ServerSocketChannel" class="headerlink" title="SocketChannel、ServerSocketChannel"></a>SocketChannel、ServerSocketChannel</h6><p><font color="#92d050">1. 客户端</font></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 SocketChannel</span><br><span class="hljs-type">SocketChannel</span> <span class="hljs-variable">socketChannel</span> <span class="hljs-operator">=</span> SocketChannel.open();<br><br><span class="hljs-comment">// 让 SocketChannel 连接到指定 IP 地址和端口</span><br>socketChannel.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
 
 
@@ -514,9 +492,73 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="DatagramChannel"><a href="#DatagramChannel" class="headerlink" title="DatagramChannel"></a>DatagramChannel</h6><p><font color="#92d050">1. 发送方</font></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建 DatagramChannel</span><br><span class="hljs-type">DatagramChannel</span> <span class="hljs-variable">datagramChannel</span> <span class="hljs-operator">=</span> DatagramChannel.open();<br><br><span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.wrap(<span class="hljs-string">&quot;Hello&quot;</span>.getBytes());<br>datagramChannel.send(buffer, <span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br><br></code></pre></td></tr></table></figure>
+<h6 id="SocketChannel-概述"><a href="#SocketChannel-概述" class="headerlink" title="SocketChannel 概述"></a>SocketChannel 概述</h6><p><code>SocketChannel</code> 是客户端连接远程服务器时使用的通道，既支持阻塞模式，也支持非阻塞模式。</p>
+<p>在非阻塞模式下，可以将多个通道注册到同一个 <code>Selector</code>，再通过轮询机制高效地管理和处理大量连接。</p>
+<hr>
+<h6 id="SocketChannel-源码解析"><a href="#SocketChannel-源码解析" class="headerlink" title="SocketChannel 源码解析"></a>SocketChannel 源码解析</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ASocketChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：SocketChannel源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="SocketChannel-常用方法"><a href="#SocketChannel-常用方法" class="headerlink" title="SocketChannel 常用方法"></a>SocketChannel 常用方法</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：SocketChannel常用方法</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="SocketChannel-源码解析-1"><a href="#SocketChannel-源码解析-1" class="headerlink" title="SocketChannel 源码解析"></a>SocketChannel 源码解析</h6><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ASocketChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：SocketChannel源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="DatagramChannel"><a href="#DatagramChannel" class="headerlink" title="DatagramChannel"></a>DatagramChannel</h5><h6 id="DatagramChannel-概述"><a href="#DatagramChannel-概述" class="headerlink" title="DatagramChannel 概述"></a>DatagramChannel 概述</h6><p><code>DatagramChannel</code> 是面向 <code>UDP</code> 的通道，既支持阻塞模式，也支持非阻塞模式</p>
+<p>在非阻塞模式下，可以将多个通道注册到同一个 <code>Selector</code>，再通过轮询机制高效地管理和处理大量连接。</p>
+<hr>
+<h6 id="单播-Java-代码实现"><a href="#单播-Java-代码实现" class="headerlink" title="单播 Java 代码实现"></a>单播 Java 代码实现</h6><p><font color="#92d050">1. 发送端</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Send</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>		<br>        <span class="hljs-comment">// 1. 创建 DatagramChannel 对象</span><br>        <span class="hljs-type">DatagramChannel</span> <span class="hljs-variable">datagramChannel</span> <span class="hljs-operator">=</span> DatagramChannel.open();<br>        datagramChannel.bind(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-number">9999</span>));<br>		<br>        <span class="hljs-comment">// 2. 打包数据（放入 ByteBuffer）</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello World with NIO&quot;</span>;<br>        <span class="hljs-type">byte</span>[] bytes = str.getBytes();<br>        <span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">byteBuffer</span> <span class="hljs-operator">=</span> ByteBuffer.allocate(<span class="hljs-number">1024</span>);<br>        byteBuffer.put(bytes);<br>		<br>        <span class="hljs-comment">// 3. 发送数据</span><br>        datagramChannel.send(byteBuffer, <span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">10086</span>));<br>		<br>        <span class="hljs-comment">// 4. 释放资源</span><br>        datagramChannel.close();<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>面的写法适用于“只发送、不接收”的场景。如果业务需要在发送之后等待对方的回馈数据，那么也可以切换到非阻塞模式，并通过 <code>Selector</code> 注册感兴趣的事件（例如 <code>OP_READ</code>），这样就能在收到响应时被通知并处理</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. 接收端</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Receive</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>		<br>        <span class="hljs-comment">// 1. 创建 DatagramChannel 对象</span><br>        <span class="hljs-type">DatagramChannel</span> <span class="hljs-variable">datagramChannel</span> <span class="hljs-operator">=</span> DatagramChannel.open();<br>        datagramChannel.bind(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-number">10086</span>));<br>		<br>        <span class="hljs-comment">// 2. 将 DatagramChannel 设置为非阻塞模式</span><br>        datagramChannel.configureBlocking(<span class="hljs-literal">false</span>);<br>		<br>        <span class="hljs-comment">// 3. 创建 Selector 对象</span><br>        <span class="hljs-type">Selector</span> <span class="hljs-variable">selector</span> <span class="hljs-operator">=</span> Selector.open();<br>		<br>        <span class="hljs-comment">// 4. 将 Channel 注册到 Selector，并监听 &quot;读就绪&quot; 事件</span><br>        datagramChannel.register(selector, SelectionKey.OP_READ);<br>		<br>        <span class="hljs-comment">// 5. 将 Buffer 附加在 SelectionKey 上，避免重复 allocate</span><br>        <span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> ByteBuffer.allocate(<span class="hljs-number">1024</span>);<br>        datagramChannel.register(selector, SelectionKey.OP_READ, buffer);<br>		<br>        <span class="hljs-comment">// 6. Selector 轮询等待</span><br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>			<br>            <span class="hljs-type">int</span> <span class="hljs-variable">readyChannels</span> <span class="hljs-operator">=</span> selector.select();<br>			<br>            <span class="hljs-keyword">if</span> (readyChannels == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>			<br>            Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();<br>			<br>            <span class="hljs-keyword">for</span> (SelectionKey key : selector.selectedKeys()) &#123;<br>                <span class="hljs-keyword">if</span> (key.isReadable()) &#123;<br>                    <span class="hljs-comment">// 拿到事件对应的 Channel</span><br>                    <span class="hljs-type">DatagramChannel</span> <span class="hljs-variable">channel</span> <span class="hljs-operator">=</span> (DatagramChannel) key.channel();<br>					<br>                    <span class="hljs-comment">// 接收数据</span><br>                    <span class="hljs-type">ByteBuffer</span> <span class="hljs-variable">buf</span> <span class="hljs-operator">=</span> (ByteBuffer) key.attachment();<br>                    buf.clear();<br>                    <span class="hljs-type">InetSocketAddress</span> <span class="hljs-variable">sourceAddress</span> <span class="hljs-operator">=</span> (InetSocketAddress) channel.receive(buf);<br>					<br>                    <span class="hljs-comment">// 数据处理</span><br>                    <span class="hljs-keyword">if</span> (sourceAddress != <span class="hljs-literal">null</span>) &#123;<br>                        buf.flip();<br>                        <span class="hljs-type">String</span> <span class="hljs-variable">receivedData</span> <span class="hljs-operator">=</span> StandardCharsets.UTF_8.decode(buf).toString();<br>                        System.out.println(<span class="hljs-string">&quot;数据是从 &quot;</span><br>                                + sourceAddress.getAddress().getHostAddress()<br>                                + <span class="hljs-string">&quot; 的 &quot;</span> + sourceAddress.getPort()<br>                                + <span class="hljs-string">&quot; 端口发出的&quot;</span>);<br>                    &#125;<br>                &#125;<br>            &#125;<br>			<br>            <span class="hljs-comment">// 清空 selectionKeys</span><br>            selectedKeys.clear();<br>			<br>        &#125;<br>			<br>        <span class="hljs-comment">// 7. 释放资源（永久不会执行）</span><br>        <span class="hljs-comment">// selector.close();</span><br>        <span class="hljs-comment">// datagramChannel.close();</span><br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h4><h5 id="Selector-概述"><a href="#Selector-概述" class="headerlink" title="Selector 概述"></a>Selector 概述</h5><p>Selector 是 <code>SelectableChannel</code> 对象的多路复用器，能够检测多个已注册通道上是否有事件发生，如果有事件发生，就会获取相应的事件，并对每个事件进行处理，从而实现一个线程同时监控多个 <code>SelectableChannel</code> 的 IO 状态</p>
+<hr>
+<h5 id="Selector-源码解析"><a href="#Selector-源码解析" class="headerlink" title="Selector 源码解析"></a>Selector 源码解析</h5><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9ASelector%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：Selector源码解析</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="异步非阻塞（AIO）"><a href="#异步非阻塞（AIO）" class="headerlink" title="异步非阻塞（AIO）"></a>异步非阻塞（AIO）</h3><p>AIO（Asynchronous IO）采用 “一个有效请求对应一个线程” 的模式，它允许用户进程在发起 IO 请求后立即返回，而不必阻塞等待操作完成。IO 的具体执行<strong>由操作系统在内核态进行</strong></p>
+<p>当操作完成时，操作系统通过通知机制（如回调、事件或信号）告知用户进程。此时，用户进程再调度一个线程来处理已完成的请求，实现线程的 “按需使用”。</p>
 <hr>
 
                 

@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 脑图 Xmind  Edraw    2. OAuth2 协议2.1. OAuth2 概述O 表示开放（Open），Auth 表示授权（Authorization），OAuth2 是一种开放式的授权协议，用于在不暴露用户凭据的前提下，让第三方应用获得访问权限  2.2. OAuth2 核心角色 资源所有者（Resource Owner） 客户端应用（Client） 资源服务器（Resourc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：OAuth 协议">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. 脑图 Xmind  Edraw    2. OAuth2 协议2.1. OAuth2 概述O 表示开放（Open），Auth 表示授权（Authorization），OAuth2 是一种开放式的授权协议，用于在不暴露用户凭据的前提下，让第三方应用获得访问权限  2.2. OAuth2 核心角色 资源所有者（Resource Owner） 客户端应用（Client） 资源服务器（Resourc">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-7.png">
+<meta property="article:published_time" content="2025-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T15:16:25.874Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：OAuth 协议 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：OAuth 协议"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-15 00:00" pubdate>
+          September 15, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：OAuth 协议</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-22T23:16:25+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-脑图"><a href="#1-脑图" class="headerlink" title="1. 脑图"></a>1. 脑图</h2><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h2 id="2-OAuth2-协议"><a href="#2-OAuth2-协议" class="headerlink" title="2. OAuth2 协议"></a>2. OAuth2 协议</h2><h3 id="2-1-OAuth2-概述"><a href="#2-1-OAuth2-概述" class="headerlink" title="2.1. OAuth2 概述"></a>2.1. OAuth2 概述</h3><p><code>O</code> 表示开放（<code>Open</code>），<code>Auth</code> 表示授权（<code>Authorization</code>），<code>OAuth2</code> 是一种开放式的授权协议，用于在不暴露用户凭据的前提下，让第三方应用获得访问权限<br><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-OAuth2-核心角色"><a href="#2-2-OAuth2-核心角色" class="headerlink" title="2.2. OAuth2 核心角色"></a>2.2. OAuth2 核心角色</h3><ol>
+<li>资源所有者（Resource Owner）</li>
+<li>客户端应用（Client）</li>
+<li>资源服务器（Resource Server）</li>
+<li>授权服务器（Authorization Server）<br><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-1.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<hr>
+<h3 id="2-3-OAuth2-授权模式"><a href="#2-3-OAuth2-授权模式" class="headerlink" title="2.3. OAuth2 授权模式"></a>2.3. OAuth2 授权模式</h3><h4 id="2-3-1-授权码模式（Authorization-Code）"><a href="#2-3-1-授权码模式（Authorization-Code）" class="headerlink" title="2.3.1. 授权码模式（Authorization Code）"></a>2.3.1. 授权码模式（Authorization Code）</h4><p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-4.png" srcset="/img/loading.gif" lazyload><br><font color="#92d050">1. 第三方登录</font><br><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-3.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 返回授权 RL</font><br>一个完整的授权请求 <code>URL</code> 可能如下所示：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs http">https://auth-server.com/oauth2/authorize?<br>response_type=code&amp;<br>client_id=my-client-id&amp;<br>redirect_uri=https://client-app.com/callback&amp;<br>scope=read write openid&amp;<br>state=aF0W1aZ8vB3nC2dE1fG0hI&amp;<br></code></pre></td></tr></table></figure>
+<ol>
+<li>核心参数<ol>
+<li>response_type<ol>
+<li>授权请求的响应类型，这里为 <code>code</code>，意为：给我 <code>Authorization Code</code></li>
+<li>常用响应类型包括：<ol>
+<li>code<ol>
+<li>用于授权码模式，意为：给我 <code>Authorization Code</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>SAS</code> 只支持授权码模式和客户端凭证模式，客户端凭证模式不经过此流程，因此这里必须是 <code>code</code>。</li>
+</ol>
+</li>
+<li>client_id</li>
+<li>redirect_uri</li>
+<li>scope</li>
+</ol>
+</li>
+<li>安全参数<ol>
+<li>state<ol>
+<li>由客户端生成的随机且不可预测的字符串，是客户端用来防止跨站请求伪造（<code>CSRF</code>）的手段</li>
+<li>授权服务器在完成授权后会原封不动返回，客户端在接收到回调时必须验证返回的 <code>state</code> 是否与之前发送的一致</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>授权请求为标准的 <code>GET</code> 请求</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">3. 发起授权请求</font></p>
+<p><font color="#92d050">4. 用户登录和授权</font><br>当访问 <strong><code>/oauth2/authorize</code></strong> 时，请求会经过 <code>authorizationServerSecurityFilterChain</code> 过滤器链，其中 <strong><code>OAuth2AuthorizationEndpointFilter</code></strong> 专门负责处理这个端点。</p>
+<p>它会先检查客户端是否合法：</p>
+<ol>
+<li>如果客户端合法<ol>
+<li>检查当前请求所在线程的 <code>Authentication</code> 是否认证<ol>
+<li>如果已认证：<ol>
+<li>进行用户授权<ol>
+<li>如果客户端配置为无需用户授权，用户不会看到授权页，直接授权成功</li>
+<li>但多数情况下，会要求用户手动勾选要授予哪些权限（<code>scope</code>），以便用户清楚地知道第三方应用可以访问什么</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如果未认证：<ol>
+<li>抛出 <code>AuthenticationException</code>，然后由 <code>ExceptionTranslationFilter</code> 捕获并将请求重定向到 <code>/login</code></li>
+<li>需要注意的是，这个跳转到的 <code>/login</code> 请求本身不带额外参数，但在用户成功登录后，系统会自动重定向到原先的请求。其实，就是 表单登录的特性：访问受保护的资源 ➝ 被拦截后跳转到登录页 ➝ 登录成功再返回原请求页面。在 SAS 这种前后端不分离的传统场景里，这种流程非常常见。但在我们熟悉的前后端分离开发中，这种模式用得比较少，我们理解即可。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>如果客户端不合法<ol>
+<li>直接报错</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在实际使用中，为了避免用户频繁登录，我们通常会实现授权服务器的 “记住我” 功能</li>
+<li>为了实现这一功能，过去我们通常采用 <code>JWT</code> 的方式，由前端发送 <code>JWT</code> 给后端，然后后端再去验证。</li>
+<li>但在这里，问题来了：前端究竟是谁呢？</li>
+<li>如果前端是第三方客户端，它可不会乖乖配合把 <code>JWT</code> 按我们的预期带上。</li>
+<li>于是我们换个思路：把浏览器当作前端，通过 <code>Cookie</code> 来实现。</li>
+<li>例如，可以使用 <code>Remember-Me Cookie</code>，或者直接把 <code>JWT</code> 存放在 <code>Cookie</code> 中，这样验证环节就能顺利跑通了。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">5. 返回 Authorization Code</font><br>返回的 <code>Authorization Code</code> 本质上是一个短期有效、一次性使用的不透明随机字符串，它自身并不携带业务含义，但授权服务器会在内部将其与一系列上下文信息绑定</p>
+<p>需要注意的是，如果我们在发起授权请求时，携带了 <code>state</code>，那么 <code>state</code> 会原样返回，一个完整的回调请求可能如下：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc?code=SKkOYEnNKauPXiVNWXmc7yxnW8PsWjzmOkhD1n_HHuCI_9uMy-zNuiBFyr31w_He3u_zvxSF5EdCEVH-JhoTH_6g4n2iInih5oKxcVXfcjqHfiwPrKqyf-eL0rPRsM6O&amp;state=xyz123&amp;continue<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">6. 发起令牌请求</font><br>一个完整的令牌请求的请求体可能如下所示：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs http">grant_type=authorization_code<br>&amp;code=SplxlOBeZQQYbYS6WxSbIA<br>&amp;redirect_uri=https://client-app.com/callback<br></code></pre></td></tr></table></figure>
+<ol>
+<li>核心参数<ol>
+<li>grant_type<ol>
+<li>授权模式，这里为 <code>authorization_code</code>，意为：授权码模式</li>
+<li>常用授权模式包括：<ol>
+<li>authorization_code</li>
+<li>client_credentials</li>
+<li>refresh_token</li>
+</ol>
+</li>
+<li>需要注意的是，<code>refresh_token</code> 通常与 <code>authorization_code</code> 一起使用，不与 <code>client_credentials</code> 一起使用，因为客户端凭证模式根本用不到 <code>Refresh Token</code></li>
+</ol>
+</li>
+<li>code<ol>
+<li>授权码（<code>Authorization Code</code>）</li>
+</ol>
+</li>
+<li>redirect_uri<ol>
+<li>需要注意的是，该地址必须与授权请求中提交的地址保持完全一致</li>
+</ol>
+</li>
+<li>client_id</li>
+<li>client_secret</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>令牌请求为标准的 <code>POST</code> 请求，请求体的 <code>MIME</code> 类型是 <code>application/x-www-form-urlencoded</code>，而不是 <code>application/json</code>，它的特点是类似 <code>URL</code> 查询串的形式（<code>key=value&amp;key=value</code>），但放在了请求体中</li>
+<li><code>client_id</code> 和 <code>client_secret</code> 既可以放在请求头中，也可以放在请求参数中，具体方式取决于客户端注册时指定的身份认证方法。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">7. 返回 Access Token</font></p>
+<hr>
+<h4 id="2-3-2-客户端凭证模式（Client-Credentials）"><a href="#2-3-2-客户端凭证模式（Client-Credentials）" class="headerlink" title="2.3.2. 客户端凭证模式（Client Credentials）"></a>2.3.2. 客户端凭证模式（Client Credentials）</h4><p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-7.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>除此之外还有隐藏式（<code>Implicit</code>）和密码式（<code>Password</code>），由于不安全，所以不学了</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="3-OAuth2-1-协议"><a href="#3-OAuth2-1-协议" class="headerlink" title="3. OAuth2.1 协议"></a>3. OAuth2.1 协议</h2><h3 id="3-1-OAuth2-1-概述"><a href="#3-1-OAuth2-1-概述" class="headerlink" title="3.1. OAuth2.1 概述"></a>3.1. OAuth2.1 概述</h3><p><code>OAuth2.1</code> 目前仍处于草案阶段，但正逐渐被广泛接受，有望成为主流。</p>
+<p><code>OAuth2.1</code> 较于 <code>OAuth2</code> 的主要变化包括：</p>
+<ol>
+<li>对授权码模式（<code>Authorization Code</code>）进行了增强，扩展了 <code>PKCE</code>（授权码交换的密钥证明），并且配套了刷新令牌模式（<code>Refresh Token</code>）<ol>
+<li><code>OAuth2.1</code> 明确指出，只要使用授权码模式，必须同时使用 <code>PKCE</code></li>
+<li>授权码模式与刷新令牌模式强相关，因为客户端凭证式根本用不到刷新令牌</li>
+</ol>
+</li>
+<li>移除了不再安全的隐藏式（<code>Implicit</code>）和密码式（<code>Password</code>），新增了刷新令牌模式（<code>Refresh Token</code>）模式</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server </code>从来没有支持过 <code>Implicit</code> 和 <code>Password</code></li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="3-2-OAuth2-1-授权模式"><a href="#3-2-OAuth2-1-授权模式" class="headerlink" title="3.2. OAuth2.1 授权模式"></a>3.2. OAuth2.1 授权模式</h3><h4 id="3-2-1-授权码模式（Authorization-Code）-PKCE-Refresh-Token"><a href="#3-2-1-授权码模式（Authorization-Code）-PKCE-Refresh-Token" class="headerlink" title="3.2.1. 授权码模式（Authorization Code） + PKCE + Refresh Token"></a>3.2.1. 授权码模式（Authorization Code） + PKCE + Refresh Token</h4><p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>该模式与普通的授权码模式相比，多了 <code>PKCE</code> 和 <code>Refresh Token</code></p>
+<p>先说 PKCE，它是为了解决授权码可能被劫持的问题：</p>
+<ol>
+<li>在传统授权码模式中，用户完成授权后，回调地址会携带 Authorization Code</li>
+<li>如果攻击者截获了这个 Authorization Code，就可以去交换 Access Token</li>
+<li>为防止这一风险，传统做法要求令牌请求由后端发起，并携带 client_secret</li>
+<li>但是对于前端应用，由于没有后端，所以 client_secret 必须由前端携带</li>
+<li>可是如果前端携带 client_secret，就极易被截获，这就带来了安全隐患</li>
+</ol>
+<p>为了解决这一问题，<code>PKCE</code> 要求在发起授权请求时携带 <code>code_challenge</code> 和 <code>code_challenge_method</code>，授权服务器会记住这两个参数</p>
+<p>此外，<code>PKCE</code> 还要求在发起令牌请求时携带 <code>code_verifier</code>，授权服务器会根据 <code>code_challenge_method</code> 对 <code>code_verifier</code> 加密，然后和 <code>code_challenge</code> 进行对比</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// code_challenge_method，这里使用 SHA-256 加密方式</span><br><span class="hljs-type">String</span> <span class="hljs-variable">codeChallengeMethod</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;S256&quot;</span>;<br><br><span class="hljs-comment">// code_verifier</span><br><span class="hljs-type">String</span> <span class="hljs-variable">codeVerifier</span> <span class="hljs-operator">=</span> <span class="hljs-number">123456</span>;<br><br><span class="hljs-comment">// code_challenge，这里先对 code_verifier 进行 SHA-256 加密，然后再使用 Base64URL 进行编码</span><br><span class="hljs-type">String</span> <span class="hljs-variable">codeChallenge</span> <span class="hljs-operator">=</span> sha256AndBase64Url(codeVerifier); <br></code></pre></td></tr></table></figure>
+
+
+<p>你可能会疑惑：这和 <code>client_secret</code> 有什么区别？前端不还是需要保存 <code>code_challenge</code>、<code>code_challenge_method</code> 和 <code>code_verifier</code> 吗？</p>
+<p>其实，<code>Code Verifier</code> 和 <code>Client Secret</code> 最大的区别在于：<code>Code Verifier</code> 是临时的、一次性的，只在交换 <code>Access Token</code> 时使用一次，用完即废。即便泄露，也无法被重复利用，因此安全性远高于长期有效的 <code>Client Secret</code></p>
+<p>而 <code>Refresh Token</code> 用于刷新 <code>Access Token</code>，一个完整的刷新请求的请全体可能如下所示：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http">grant_type=refresh_token<br>&amp;refresh_token=def456<br></code></pre></td></tr></table></figure>
+
+<p>所以，在发起授权请求时，可以有这些参数：</p>
+<ol>
+<li>核心参数<ol>
+<li>response_type</li>
+<li>client_id</li>
+<li>redirect_uri</li>
+<li>scope</li>
+</ol>
+</li>
+<li>安全参数<ol>
+<li>state</li>
+</ol>
+</li>
+<li>PKCE 参数<ol>
+<li>code_challenge</li>
+<li>code_challenge_method</li>
+</ol>
+</li>
+</ol>
+<p>在发起令牌请求时，可以有这些参数：</p>
+<ol>
+<li>核心参数<ol>
+<li>grant_type</li>
+<li>code</li>
+<li>redirect_uri</li>
+<li>client_id</li>
+<li>client_secret</li>
+</ol>
+</li>
+<li>PKCE 参数<ol>
+<li>code_verifier</li>
+</ol>
+</li>
+</ol>
+<p>在发起交换请求时，可以有这些参数：</p>
+<ol>
+<li>grant_type</li>
+<li>refresh_token</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>即使客户端能够安全地携带 <code>Client Secret</code>，同时也可以使用 <code>Code Verifier</code>，在这种情况下 PKCE 的安全作用可能不大，但仍然 推荐同时开启 <code>PKCE</code>，两者结合使用可以提供更高的安全保障。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="3-2-2-客户端凭证模式（Client-Credentials）"><a href="#3-2-2-客户端凭证模式（Client-Credentials）" class="headerlink" title="3.2.2. 客户端凭证模式（Client Credentials）"></a>3.2.2. 客户端凭证模式（Client Credentials）</h4><p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E5%AE%89%E5%85%A8/" class="category-chain-item">Java 安全</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：OAuth 协议</div>
+      <div>https://wangjia5289.github.io/2025/09/15/笔记：OAuth协议/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 15, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/16/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/" title="笔记：Java 日期时间">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Java 日期时间</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/" title="笔记：Spring Authorization Server">
+                        <span class="hidden-mobile">笔记：Spring Authorization Server</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

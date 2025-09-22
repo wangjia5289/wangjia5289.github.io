@@ -1,0 +1,1159 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、脑图 Xmind  Edraw    二、Zookeeper 基础1. Zookeeper 应用场景1.1. 分布式锁在分布式锁的实现中，所有客户端都会在 Zookeeper 的同一路径下创建临时顺序节点。Zookeeper 会按照节点的序号排序，序号最小的节点获得锁，其余客户端则处于等待状态。   当持锁客户端释放锁（即对应临时节点被删除）时，Zookeeper 会通知下一个顺序节点的客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Zookeeper">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、脑图 Xmind  Edraw    二、Zookeeper 基础1. Zookeeper 应用场景1.1. 分布式锁在分布式锁的实现中，所有客户端都会在 Zookeeper 的同一路径下创建临时顺序节点。Zookeeper 会按照节点的序号排序，序号最小的节点获得锁，其余客户端则处于等待状态。   当持锁客户端释放锁（即对应临时节点被删除）时，Zookeeper 会通知下一个顺序节点的客户端">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-11.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-9.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-12.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-4.png">
+<meta property="article:published_time" content="2025-09-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-14T15:00:35.863Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Zookeeper - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Zookeeper"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-08 00:00" pubdate>
+          September 8, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Zookeeper</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-14T23:00:35+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、脑图"><a href="#一、脑图" class="headerlink" title="一、脑图"></a>一、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h1 id="二、Zookeeper-基础"><a href="#二、Zookeeper-基础" class="headerlink" title="二、Zookeeper 基础"></a>二、Zookeeper 基础</h1><h2 id="1-Zookeeper-应用场景"><a href="#1-Zookeeper-应用场景" class="headerlink" title="1. Zookeeper 应用场景"></a>1. Zookeeper 应用场景</h2><h3 id="1-1-分布式锁"><a href="#1-1-分布式锁" class="headerlink" title="1.1. 分布式锁"></a>1.1. 分布式锁</h3><p>在分布式锁的实现中，所有客户端都会在 Zookeeper 的同一路径下创建临时顺序节点。Zookeeper 会按照节点的序号排序，序号最小的节点获得锁，其余客户端则处于等待状态。  </p>
+<p>当持锁客户端释放锁（即对应临时节点被删除）时，Zookeeper 会通知下一个顺序节点的客户端，从而保证锁的有序传递，实现类似“排队取号”的效果。</p>
+<hr>
+<h3 id="1-2-配置中心"><a href="#1-2-配置中心" class="headerlink" title="1.2. 配置中心"></a>1.2. 配置中心</h3><p>把配置信息写入 <code>Znode</code>，并通过观察者模式让所有节点实时监听该 <code>Znode</code>。一旦 <code>Zookeeper</code> 中对应的 <code>ZNode</code> 数据被修改，<code>Zookeeper</code> 会主动通知各个客户端，从而保证配置在集群中的一致性与及时更新。<br><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="1-3-元数据存储"><a href="#1-3-元数据存储" class="headerlink" title="1.3. 元数据存储"></a>1.3. 元数据存储</h3><hr>
+<h3 id="1-4-分布式队列"><a href="#1-4-分布式队列" class="headerlink" title="1.4. 分布式队列"></a>1.4. 分布式队列</h3><hr>
+<h3 id="1-5-软负载均衡"><a href="#1-5-软负载均衡" class="headerlink" title="1.5. 软负载均衡"></a>1.5. 软负载均衡</h3><p><code>ZooKeeper</code> 本身不负责请求的负载均衡，而是提供服务注册、发现和命名的能力。像 Dubbo、gRPC 等框架会从 ZooKeeper 或 Nacos 等注册中心获取可用服务节点列表，再由客户端根据预设策略在本地选择一个节点并发起请求。<br><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="1-6-Leader-选举"><a href="#1-6-Leader-选举" class="headerlink" title="1.6. Leader 选举"></a>1.6. Leader 选举</h3><p>在 Leader 选举过程中，所有候选者会在 Zookeeper 的指定路径下创建临时顺序节点。Zookeeper 会按照节点的序号排序，序号最小的节点即被选为 Leader。  </p>
+<p>如果当前 Leader 节点因掉线或宕机导致临时节点被删除，其余候选节点会立即感知，从而触发一次新的选举，按同样规则产生新的 Leader。</p>
+<hr>
+<h3 id="1-7-服务注册、发现、命名"><a href="#1-7-服务注册、发现、命名" class="headerlink" title="1.7. 服务注册、发现、命名"></a>1.7. 服务注册、发现、命名</h3><p>对集群中各个节点的状态进行统一跟踪和管理，包括节点的上下线情况以及运行状态变化。</p>
+<ol>
+<li>节点上下线状态监控<ol>
+<li>每个服务节点会在 Zookeeper 上注册一个临时节点，一旦服务节点宕机或发生网络中断，该临时节点会被自动删除</li>
+<li>其他客户端能够立即感知这一变化，从而实时掌握集群中节点的存活情况，并及时做出调整</li>
+</ol>
+</li>
+<li>节点运行状态监控<ol>
+<li>除了存活信息外，节点的运行状态（如负载、健康度等）也可以写入 Zookeeper 的 ZNode</li>
+<li>客户端通过监听该 ZNode，即可在节点运行状态发生变化时实时获取通知</li>
+<li>这样能够帮助系统根据节点的实时状态动态调整资源分配与任务调度<br><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-2.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-Zookeeper-节点类型"><a href="#2-Zookeeper-节点类型" class="headerlink" title="2. Zookeeper 节点类型"></a>2. Zookeeper 节点类型</h2><ol>
+<li>持久节点（Persistent Znode）<ol>
+<li>持久节点<ol>
+<li>节点一旦创建，除非被显式删除，否则会一直存在</li>
+</ol>
+</li>
+<li>顺序持久节点<ol>
+<li>创建时，Zookeeper 会在节点名称后自动加上递增序号，例如 <code>Znode_002</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>临时节点（Ephemeral Znode）<ol>
+<li>临时节点<ol>
+<li>客户端创建节点后，如果与服务器断开连接，所创建的节点会自动删除</li>
+</ol>
+</li>
+<li>顺序临时节点<ol>
+<li>创建时，Zookeeper 会在节点名称后自动加上递增序号，例如 <code>Znode_002</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-7.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-Zookeeper-常用命令"><a href="#3-Zookeeper-常用命令" class="headerlink" title="3. Zookeeper 常用命令"></a>3. Zookeeper 常用命令</h2><h3 id="3-1-系统命令"><a href="#3-1-系统命令" class="headerlink" title="3.1. 系统命令"></a>3.1. 系统命令</h3><h4 id="3-1-1-启动-Zookeeper"><a href="#3-1-1-启动-Zookeeper" class="headerlink" title="3.1.1. 启动 Zookeeper"></a>3.1.1. 启动 Zookeeper</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;ZooKeeper_HOME&#125;<span class="hljs-regexp">/bin/</span>zkServer.sh start<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-1-2-停止-Zookeeper"><a href="#3-1-2-停止-Zookeeper" class="headerlink" title="3.1.2. 停止 Zookeeper"></a>3.1.2. 停止 Zookeeper</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">&#123;ZooKeeper_HOME&#125;/bin/zkServer.<span class="hljs-keyword">sh</span> <span class="hljs-keyword">stop</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-2-连接命令"><a href="#3-2-连接命令" class="headerlink" title="3.2. 连接命令"></a>3.2. 连接命令</h3><h4 id="3-2-1-连接-Zookeeper"><a href="#3-2-1-连接-Zookeeper" class="headerlink" title="3.2.1. 连接 Zookeeper"></a>3.2.1. 连接 Zookeeper</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;ZooKeeper_HOME&#125;<span class="hljs-regexp">/bin/</span>zkCli.sh<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-2-2-退出连接-Zookeeper"><a href="#3-2-2-退出连接-Zookeeper" class="headerlink" title="3.2.2. 退出连接 Zookeeper"></a>3.2.2. 退出连接 Zookeeper</h4><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos"><span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-3-集群命令"><a href="#3-3-集群命令" class="headerlink" title="3.3. 集群命令"></a>3.3. 集群命令</h3><h4 id="3-3-1-查看节点状态"><a href="#3-3-1-查看节点状态" class="headerlink" title="3.3.1. 查看节点状态"></a>3.3.1. 查看节点状态</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">&#123;Zookeeper_HOME&#125;<span class="hljs-regexp">/bin/</span>zkServer.sh status<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-4-Znode-命令"><a href="#3-4-Znode-命令" class="headerlink" title="3.4. Znode 命令"></a>3.4. Znode 命令</h3><h4 id="3-4-1-创建-Znode"><a href="#3-4-1-创建-Znode" class="headerlink" title="3.4.1. 创建 Znode"></a>3.4.1. 创建 Znode</h4><p><font color="#92d050">1. 创建持久节点</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 不带值创建节点</span><br>create /sanguo<br><br><br><span class="hljs-comment"># 2. 带值创建节点</span><br>create /sanguo/shuguo/huangdi <span class="hljs-string">&quot;刘备&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Zookeeper</code> 节点路径必须以 <code>/</code> 开头，但不能以 <code>/</code> 结尾</li>
+<li>节点的数据类型为字节数组（<code>byte[]</code>），理论上可以存储任意内容</li>
+<li>需要注意的是：<ol>
+<li>一个节点只能存储单一字节数组，不能存储多个独立值</li>
+<li>一个 <code>Znode</code> 仅可以存储 1MB 数据，还需要包含自身的元信息，例如版本号（version）、访问控制列表（ACL）、时间戳以及子节点数量等。因此，ZooKeeper 通常仅用于存储元数据和配置信息，不适合承载大规模数据。</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. 创建顺序持久节点</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">create -s <span class="hljs-regexp">/sanguo/</span>shuguo/jiangjun <span class="hljs-string">&quot;张飞&quot;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-10.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">3. 创建临时节点</font></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">create</span> -<span class="hljs-built_in">e</span> /sanguo/shuguo/moushi <span class="hljs-string">&quot;诸葛亮&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">4. 创建顺序临时节点</font></p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">create</span> -<span class="hljs-built_in">e</span> -s /sanguo/shuguo/yuanshuai <span class="hljs-string">&quot;马超&quot;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-11.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="3-4-2-删除-Znode"><a href="#3-4-2-删除-Znode" class="headerlink" title="3.4.2. 删除 Znode"></a>3.4.2. 删除 Znode</h4><p><font color="#92d050">1. 删除某个节点</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">delete</span> <span class="hljs-regexp">/sanguo/</span>shuguo/zhangfei0000000000<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 删除某个节点及其子节点</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">deleteall <span class="hljs-regexp">/sanguo/</span>shuguo/jiangjun0000000003<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-4-3-修改-Znode"><a href="#3-4-3-修改-Znode" class="headerlink" title="3.4.3. 修改 Znode"></a>3.4.3. 修改 Znode</h4><p><font color="#92d050">1. 修改某节点的值</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> /sanguo/shuguo/huangdi <span class="hljs-string">&quot;刘禅&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-4-4-查看-Znode"><a href="#3-4-4-查看-Znode" class="headerlink" title="3.4.4. 查看 Znode"></a>3.4.4. 查看 Znode</h4><p><font color="#92d050">1. 列出某节点下的所有子节点</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 列出根节点下的所有子节点</span><br><span class="hljs-built_in">ls</span> /<br><br><br><span class="hljs-comment"># 2. 列出某节点下的所有子节点</span><br><span class="hljs-built_in">ls</span> /sanguo<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-8.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 查看某节点的详细信息</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> -s /<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-5.png" srcset="/img/loading.gif" lazyload alt="|500"></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>此处返回的不是节点的数据内容，而是该节点的详细信息</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">3. 查看某节点的数据内容</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">get</span> /sanguo<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-9.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="三、搭建-Zookeeper-环境"><a href="#三、搭建-Zookeeper-环境" class="headerlink" title="三、搭建 Zookeeper 环境"></a>三、搭建 Zookeeper 环境</h1><h2 id="1-Zookeeper-集群环境"><a href="#1-Zookeeper-集群环境" class="headerlink" title="1. Zookeeper 集群环境"></a>1. Zookeeper 集群环境</h2><h3 id="1-1-环境特性"><a href="#1-1-环境特性" class="headerlink" title="1.1. 环境特性"></a>1.1. 环境特性</h3><h4 id="1-1-1-数据写入机制"><a href="#1-1-1-数据写入机制" class="headerlink" title="1.1.1. 数据写入机制"></a>1.1.1. 数据写入机制</h4><h5 id="1-1-1-1-元数据写入"><a href="#1-1-1-1-元数据写入" class="headerlink" title="1.1.1.1. 元数据写入"></a>1.1.1.1. 元数据写入</h5><h6 id="天枢剑（节点的拓扑结构）"><a href="#天枢剑（节点的拓扑结构）" class="headerlink" title="天枢剑（节点的拓扑结构）"></a>天枢剑（节点的拓扑结构）</h6><p>天枢剑：主从复制</p>
+<hr>
+<h6 id="天璇剑（数据的组织形式）"><a href="#天璇剑（数据的组织形式）" class="headerlink" title="天璇剑（数据的组织形式）"></a>天璇剑（数据的组织形式）</h6><p>Zookeeper 在内存中的数据组织形式，是一个典型的树形结构，类似于文件系统的目录树，被称之为 <code>Znode</code> 树</p>
+<p>每一个 <code>Znode</code> 都有一个唯一的以 <code>/</code> 分隔的路径，例如 <code>/app/config/db-host</code>，并且可以存储少量数据</p>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-12.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>一个 <code>Znode</code> 仅可以存储 1MB 数据，还需要包含自身的元信息，例如版本号（version）、访问控制列表（ACL）、时间戳以及子节点数量等。因此，ZooKeeper 通常仅用于存储元数据和配置信息，不适合承载大规模数据。</li>
+<li>节点的数据类型为字节数组（<code>byte[]</code>），理论上可以存储任意内容</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="天权剑（数据的分布策略）"><a href="#天权剑（数据的分布策略）" class="headerlink" title="天权剑（数据的分布策略）"></a>天权剑（数据的分布策略）</h6><p>天权剑：整体存储</p>
+<p>每一个节点（无论是主节点还是从节点）都拥有一份<strong>完整</strong>的元数据副本</p>
+<hr>
+<h6 id="开阳剑（数据的协调机制）"><a href="#开阳剑（数据的协调机制）" class="headerlink" title="开阳剑（数据的协调机制）"></a>开阳剑（数据的协调机制）</h6><p>开阳剑：共识协议（ZAB 协议）</p>
+<ol>
+<li>笔记：分布式一致性<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7.md">笔记：分布式一致性</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h6 id="天玑剑（数据的同步时机）"><a href="#天玑剑（数据的同步时机）" class="headerlink" title="天玑剑（数据的同步时机）"></a>天玑剑（数据的同步时机）</h6><p>天玑剑：同步复制（大多数）</p>
+<hr>
+<h6 id="玉衡剑"><a href="#玉衡剑" class="headerlink" title="玉衡剑"></a>玉衡剑</h6><p>玉衡剑：快照 + 增量（日志推送）</p>
+<hr>
+<h6 id="瑶光剑"><a href="#瑶光剑" class="headerlink" title="瑶光剑"></a>瑶光剑</h6><p>瑶光剑：</p>
+<hr>
+<p>元数据写入在北斗七剑的选择如下：</p>
+<ol>
+<li>天枢剑：主从复制</li>
+<li>天璇剑：树状结构<ol>
+<li>Zookeeper 内部维护一个类似于文件系统的、层次化的命名空间，这个数据模型的核心是 znode（Zookeeper Data Node）</li>
+<li>每个 znode 都有一个唯一的、以 <code>/</code> 分隔的路径，例如 <code>/app/config/db-host</code></li>
+<li>每个 znode 不仅可以存储少量数据（默认只能够存储 1MB 数据），还包含自身的元信息，如版本号（version）、访问控制列表（ACL）、时间戳以及子节点数量等</li>
+</ol>
+</li>
+<li>天权剑：整体存储<ol>
+<li>Zookeeper 并不对数据进行拆分，整个 znode 树的完整副本被存储在集群中的每一个服务器上</li>
+<li>无数据拆分这种设计，意味着 Zookeeper 不适合存储大量数据，其设计初衷就是用于存储和协调少量的、关键的元数据</li>
+</ol>
+</li>
+<li>天玑剑：同步复制（大多数）</li>
+<li>玉衡剑：快照 + 增量（日志拉取）</li>
+<li>开阳剑：共识协议（ZAB 协议）</li>
+<li>瑶光剑：<ol>
+<li>持久化逻辑：混合持久化（定期删除旧日志）</li>
+<li>存储引擎实现：写时复制模型（记录 WAL）</li>
+<li>操作系统交互：强制刷盘（同步刷盘）<ol>
+<li>Zookeeper 在写入事务日志后，会显式调用 <code>fsync</code>，强制操作系统将数据从页缓存（Page Cache）刷到物理磁盘</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="1-1-1-2-数据写入"><a href="#1-1-1-2-数据写入" class="headerlink" title="1.1.1.2. 数据写入"></a>1.1.1.2. 数据写入</h5><hr>
+<h4 id="1-1-2-数据读取机制"><a href="#1-1-2-数据读取机制" class="headerlink" title="1.1.2. 数据读取机制"></a>1.1.2. 数据读取机制</h4><h5 id="1-1-2-1-元数据读取"><a href="#1-1-2-1-元数据读取" class="headerlink" title="1.1.2.1. 元数据读取"></a>1.1.2.1. 元数据读取</h5><hr>
+<h5 id="1-1-2-2-数据读取"><a href="#1-1-2-2-数据读取" class="headerlink" title="1.1.2.2. 数据读取"></a>1.1.2.2. 数据读取</h5><hr>
+<h3 id="1-2-环境限制"><a href="#1-2-环境限制" class="headerlink" title="1.2. 环境限制"></a>1.2. 环境限制</h3><hr>
+<h3 id="1-3-环境要求"><a href="#1-3-环境要求" class="headerlink" title="1.3. 环境要求"></a>1.3. 环境要求</h3><h4 id="1-3-1-操作系统要求"><a href="#1-3-1-操作系统要求" class="headerlink" title="1.3.1. 操作系统要求"></a>1.3.1. 操作系统要求</h4><p>不依赖特定操作系统，支持在 Linux、macOS 和 Windows 环境下运行</p>
+<hr>
+<h4 id="1-3-2-运行环境要求"><a href="#1-3-2-运行环境要求" class="headerlink" title="1.3.2. 运行环境要求"></a>1.3.2. 运行环境要求</h4><ol>
+<li>JDK</li>
+</ol>
+<hr>
+<h4 id="1-3-3-时间要求"><a href="#1-3-3-时间要求" class="headerlink" title="1.3.3. 时间要求"></a>1.3.3. 时间要求</h4><p>Zookeeper 集群中的各节点之间必须保持时间同步。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在跨多集群时，时间同步更加敏感，必须进行时间同步。</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="1-3-4-端口要求"><a href="#1-3-4-端口要求" class="headerlink" title="1.3.4. 端口要求"></a>1.3.4. 端口要求</h4><table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>2181</strong></td>
+<td align="center">TCP</td>
+<td align="center">客户端连接电控</td>
+</tr>
+<tr>
+<td align="center"><strong>2888</strong></td>
+<td align="center">TCP</td>
+<td align="center">集群内节点通信端口</td>
+</tr>
+<tr>
+<td align="center"><strong>3888</strong></td>
+<td align="center">TCP</td>
+<td align="center">Leader 选举专用端口</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="1-3-5-相互解析要求"><a href="#1-3-5-相互解析要求" class="headerlink" title="1.3.5. 相互解析要求"></a>1.3.5. 相互解析要求</h4><p><code>Zookeeper</code>  集群各个节点之间不必须相互解析，但强烈推荐进行相互解析</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>小规模：主机名解析</li>
+<li>中等规模：DNS 解析</li>
+<li>大规模：服务发现组件</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="1-3-6-Swap-分区要求"><a href="#1-3-6-Swap-分区要求" class="headerlink" title="1.3.6. Swap 分区要求"></a>1.3.6. Swap 分区要求</h4><p>swap 分区，简单来说，是操作系统在系统内存不足时，将某些程序不活跃或暂时不需要的数据移动到 swap 分区（位于硬盘），以释放内存资源供当前活跃程序使用。</p>
+<p>由于 swap 分区依赖硬盘，其读写速度远低于内存。如果系统频繁使用 swap，会造成大量磁盘 I&#x2F;O，严重影响系统性能，甚至导致系统响应迟缓或无响应。因此，在性能敏感的场景（如数据库、实时计算、大内存服务器）中，通常建议禁用 swap，确保数据始终在高速内存中运行。</p>
+<hr>
+<h3 id="1-4-环境准备"><a href="#1-4-环境准备" class="headerlink" title="1.4. 环境准备"></a>1.4. 环境准备</h3><h4 id="1-4-1-查看-Ubuntu-版本"><a href="#1-4-1-查看-Ubuntu-版本" class="headerlink" title="1.4.1. 查看 Ubuntu 版本"></a>1.4.1. 查看 Ubuntu 版本</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-4-2-运行环境准备"><a href="#1-4-2-运行环境准备" class="headerlink" title="1.4.2. 运行环境准备"></a>1.4.2. 运行环境准备</h4><h5 id="1-4-2-1-JDK"><a href="#1-4-2-1-JDK" class="headerlink" title="1.4.2.1. JDK"></a>1.4.2.1. JDK</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">command -v java &gt;/dev/<span class="hljs-keyword">null</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> || &#123; sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span> &amp;&amp; sudo apt-<span class="hljs-keyword">get</span> install -y openjdk<span class="hljs-number">-8</span>-jdk; &#125;<br><br><br>java -<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 如果系统里已经安装了 <code>JDK</code>（例如 <code>JDK17</code>），再执行安装 <code>JDK8</code> 的命令时，上面的命令不会执行<br>3. 在 <code>Ubuntu</code> 中可以同时安装多个 <code>JDK</code>，并通过 <code>update-alternatives</code>（<code>Ubuntu</code> 自带的管理工具）来进行版本管理和切换。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 查看已安装的 JDK</span><br><span class="hljs-built_in">ls</span> /usr/lib/jvm/<br><br><br><span class="hljs-comment"># 2. 切换 JDK 版本</span><br><span class="hljs-built_in">sudo</span> update-alternatives --config java<br><br><br><span class="hljs-comment"># 3. 验证当前版本</span><br>java -version<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-4-3-节点列表"><a href="#1-4-3-节点列表" class="headerlink" title="1.4.3. 节点列表"></a>1.4.3. 节点列表</h4><table>
+<thead>
+<tr>
+<th align="center">IP</th>
+<th align="center">磁盘</th>
+<th align="center">CPU</th>
+<th align="center">内存</th>
+<th align="center">主机名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">192.168.136.8</td>
+<td align="center">Root 盘</td>
+<td align="center">2 核</td>
+<td align="center">2GB</td>
+<td align="center">zk1</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">192.168.136.9</td>
+<td align="center">Root 盘</td>
+<td align="center">2 核</td>
+<td align="center">2GB</td>
+<td align="center">zk2</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">192.168.136.10</td>
+<td align="center">Root 盘</td>
+<td align="center">2 核</td>
+<td align="center">2GB</td>
+<td align="center">zk3</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="1-4-4-时间同步"><a href="#1-4-4-时间同步" class="headerlink" title="1.4.4. 时间同步"></a>1.4.4. 时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v chrony &gt;/dev/null 2&gt;&amp;1 || <span class="hljs-built_in">sudo</span> apt-get install -y chrony<br><br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 命令行临时代理</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br><br><br><span class="hljs-comment"># docker 代理</span><br>cat &lt;&lt;EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf<br>[Service]<br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br>EOF<br><br>sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-4-5-开放端口"><a href="#1-4-5-开放端口" class="headerlink" title="1.4.5. 开放端口"></a>1.4.5. 开放端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 2181</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">2181</span>/tcp<br><br><br><span class="hljs-comment"># 2888</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">2888</span>/tcp<br><br><br><span class="hljs-comment"># 3888</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">3888</span>/tcp<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果使用云服务器，同样需要开放安全组</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="1-4-6-关闭-Swap-分区"><a href="#1-4-6-关闭-Swap-分区" class="headerlink" title="1.4.6. 关闭 Swap 分区"></a>1.4.6. 关闭 Swap 分区</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 编辑 /etc/fstab</span><br>vim <span class="hljs-regexp">/etc/</span>fstab<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># 将此内容进行注释（/swap 开头的）</span><br><span class="hljs-string"># /swap.img       none    swap    sw      0       0</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 立即关闭 Swap 分区</span><br>swapoff -a<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-4-7-设置相互解析"><a href="#1-4-7-设置相互解析" class="headerlink" title="1.4.7. 设置相互解析"></a>1.4.7. 设置相互解析</h4><h5 id="1-4-7-1-主机名解析"><a href="#1-4-7-1-主机名解析" class="headerlink" title="1.4.7.1. 主机名解析"></a>1.4.7.1. 主机名解析</h5><p><font color="#92d050">1. 设置本机主机名</font></p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 1.1 192.168.136.8</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">zk1</span><br><br><br><span class="hljs-comment"># 1.2 192.168.136.9</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">zk2</span><br><br><br><span class="hljs-comment"># 1.3 192.168.136.10</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">zk3</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 设置节点相互解析</font></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">sudo vim /etc/hosts<br><br><br><span class="hljs-number">192.168.136.8</span> zk1<br><span class="hljs-number">192.168.136.9</span> zk2<br><span class="hljs-number">192.168.136.10</span> zk3<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-5-环境搭建"><a href="#1-5-环境搭建" class="headerlink" title="1.5. 环境搭建"></a>1.5. 环境搭建</h3><h4 id="1-5-1-下载-Zookeeper"><a href="#1-5-1-下载-Zookeeper" class="headerlink" title="1.5.1. 下载 Zookeeper"></a>1.5.1. 下载 Zookeeper</h4><p>在 <a target="_blank" rel="noopener" href="https://zookeeper.apache.org/releases.html">Zookeeper 官方下载地址</a> 选择合适的版本（<code>apache-zookeeper-3.7.2-bin.tar.gz</code>），下载 <code>Zookeeper</code> 安装包（后缀为 <code>tar.gz</code>）</p>
+<hr>
+<h4 id="1-5-2-安装-Zookeeper"><a href="#1-5-2-安装-Zookeeper" class="headerlink" title="1.5.2. 安装 Zookeeper"></a>1.5.2. 安装 Zookeeper</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/zookeeper<br><br><br><span class="hljs-built_in">mkdir</span> -p /mystudy/zookeeper<br><br><br><span class="hljs-comment"># 上传 Zookeeper 软件包</span><br><br><br><span class="hljs-built_in">cd</span> /mystudy/zookeeper<br><br><br>tar -zxvf apache-zookeeper-3.7.2-bin.tar.gz -C /mystudy/zookeeper<br><br><br><span class="hljs-built_in">rm</span> -rf apache-zookeeper-3.7.2-bin.tar.gz<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-3-基础配置"><a href="#1-5-3-基础配置" class="headerlink" title="1.5.3. 基础配置"></a>1.5.3. 基础配置</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/mystudy/</span>zookeeper<span class="hljs-regexp">/apache-zookeeper-3.7.2-bin/</span>conf<br><br><br>cp zoo_sample.cfg zoo.cfg<br><br><br>sudo vim <span class="hljs-regexp">/mystudy/</span>zookeeper<span class="hljs-regexp">/apache-zookeeper-3.7.2-bin/</span>conf/zoo.cfg<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># 心跳时间（以毫秒为单位）</span><br><span class="hljs-string">tickTime=2000</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string"># Leader 和 Follower 初始连接时能容忍的最多心跳数（Leader 不会一直等下去）</span><br><span class="hljs-string">initLimit=10</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string"># Leader 和 Follower 之间发送和应答消息的最多心跳数（Leader 不会一直等下去）</span><br><span class="hljs-string">syncLimit=5</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string"># 数据目录</span><br><span class="hljs-string">dataDir=/mystudy/data/zookeeper</span><br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string"># 客户端连接端口</span><br><span class="hljs-string">clientPort=2181</span><br><span class="hljs-string"></span><br><span class="hljs-string"># 集群配置（server.A=B:C:D，A 是 myid，B 是 IP/主机名，C 是通信端口，D 是选举端口）</span><br><span class="hljs-string">server.1=zk1:2888:3888</span><br><span class="hljs-string">server.2=zk2:2888:3888</span><br><span class="hljs-string">server.3=zk3:2888:3888</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Zookeeper</code> 默认会去找 <code>zoo.cfg</code> 这个文件，而不是 <code>zoo_sample.cfg</code></li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="1-5-4-创建-myid-文件"><a href="#1-5-4-创建-myid-文件" class="headerlink" title="1.5.4. 创建 myid 文件"></a>1.5.4. 创建 myid 文件</h4><p><code>myid</code> 文件用于标识当前服务器在集群中的唯一 <code>ID</code>，这个文件在每个节点上是不同的。</p>
+<p><font color="#92d050">1. 192.168.136.8</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;1&quot;</span> &gt; <span class="hljs-regexp">/mystudy/</span>data<span class="hljs-regexp">/zookeeper/myi</span>d<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 192.168.136.9</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;2&quot;</span> &gt; <span class="hljs-regexp">/mystudy/</span>data<span class="hljs-regexp">/zookeeper/myi</span>d<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 192.168.136.10</font></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">echo <span class="hljs-string">&quot;3&quot;</span> &gt; <span class="hljs-regexp">/mystudy/</span>data<span class="hljs-regexp">/zookeeper/myi</span>d<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-5-启动-Zookeeper-集群"><a href="#1-5-5-启动-Zookeeper-集群" class="headerlink" title="1.5.5. 启动 Zookeeper 集群"></a>1.5.5. 启动 Zookeeper 集群</h4><p>正常启动所有 Zookeeper 节点即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/zookeeper/apache-zookeeper-3.7.2-bin/bin<br><br><br>./zkServer.sh start<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-6-检查节点状态"><a href="#1-5-6-检查节点状态" class="headerlink" title="1.5.6. 检查节点状态"></a>1.5.6. 检查节点状态</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./zkServer.sh status<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="四、Zookeeper-相关工具"><a href="#四、Zookeeper-相关工具" class="headerlink" title="四、Zookeeper 相关工具"></a>四、Zookeeper 相关工具</h1><hr>
+<h1 id="五、Spring-Cloud-Zookeeper"><a href="#五、Spring-Cloud-Zookeeper" class="headerlink" title="五、Spring Cloud Zookeeper"></a>五、Spring Cloud Zookeeper</h1><h2 id="1-Spring-Cloud-Zookeeper-概述"><a href="#1-Spring-Cloud-Zookeeper-概述" class="headerlink" title="1. Spring Cloud Zookeeper 概述"></a>1. Spring Cloud Zookeeper 概述</h2><p><code>Spring Cloud Zookeeper</code> 主要用于微服务层面的服务注册、发现、命名和作为配置中心，不适合用于 <code>Znode</code> 的直接增删改查，也不支持高级分布式协调能力（例如分布式锁、分布式队列、<code>Leader</code> 选举）</p>
+<hr>
+<h1 id="六、Apache-Curator"><a href="#六、Apache-Curator" class="headerlink" title="六、Apache Curator"></a>六、Apache Curator</h1><h2 id="1-Apache-Curator-概述"><a href="#1-Apache-Curator-概述" class="headerlink" title="1. Apache Curator 概述"></a>1. Apache Curator 概述</h2><p>Apache Curator 专注于 ZooKeeper 的 Znode 操作，并提供完整的分布式协调能力（例如分布式锁、分布式队列、Leader 选举）。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然 Apache Curator 也能实现 Spring Cloud Zookeeper 的功能，但是不如直接使用 Spring Cloud Zookeeper 更合适。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-核心-API"><a href="#2-核心-API" class="headerlink" title="2. 核心 API"></a>2. 核心 API</h2><ol>
+<li>基础操作类<ol>
+<li>CuratorFramework</li>
+</ol>
+</li>
+<li>监听类<ol>
+<li>NodeCache</li>
+<li>PathChildrenCache</li>
+<li>TreeCache</li>
+</ol>
+</li>
+<li>分布式协调类<ol>
+<li>分布式锁<ol>
+<li>InterProcessMutex</li>
+<li>InterProcessReadWriteLock</li>
+</ol>
+</li>
+<li>分布式队列<ol>
+<li>DistributedQueue</li>
+<li>DistributedIdQueue</li>
+<li>DistributedPriorityQueue</li>
+</ol>
+</li>
+<li>Leader 选举<ol>
+<li>LeaderLatch</li>
+<li>LeaderSelector</li>
+</ol>
+</li>
+<li>分布式工具<ol>
+<li>DistributedBarrier</li>
+<li>DistributedDoubleBarrier</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>辅助类<ol>
+<li>RetryPolicy</li>
+<li>CuratorListener</li>
+<li>ErrorListenerPathable</li>
+</ol>
+</li>
+</ol>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1/" class="category-chain-item">分布式协调服务</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1/ZooKeeper/" class="category-chain-item">ZooKeeper</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Zookeeper</div>
+      <div>https://wangjia5289.github.io/2025/09/08/笔记：Zookeeper/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 8, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AUDPSocket/" title="笔记：UDP Socket">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：UDP Socket</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/06/%E6%BA%90%E7%A0%81%EF%BC%9AInetAddress%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：InetAddress 源码解析">
+                        <span class="hidden-mobile">源码：InetAddress 源码解析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

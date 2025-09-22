@@ -19,12 +19,12 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、导图  二、RabbitMQ 基础1. RabbitMQ 架构 1. ChannelChannel（信道）是建立在 Connection（连接）之上的虚拟通道，一个 Connection 可以有多个 Channel 2. Broker一个 Broker 就是一个 RabbitMQ 实例  2. RabbitMQ 组件2.1. Exchange·1. All exchanges  Feature">
+    <meta name="description" content="一、脑图 Xmind   二、RabbitMQ 基础1. RabbitMQ 架构 1. ChannelChannel（信道）是建立在 Connection（连接）之上的虚拟通道，一个 Connection 可以有多个 Channel 2. Broker一个 Broker 就是一个 RabbitMQ 实例  2. RabbitMQ 组件2.1. Exchange·1. All exchanges">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：RabbitMQ">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="一、导图  二、RabbitMQ 基础1. RabbitMQ 架构 1. ChannelChannel（信道）是建立在 Connection（连接）之上的虚拟通道，一个 Connection 可以有多个 Channel 2. Broker一个 Broker 就是一个 RabbitMQ 实例  2. RabbitMQ 组件2.1. Exchange·1. All exchanges  Feature">
+<meta property="og:description" content="一、脑图 Xmind   二、RabbitMQ 基础1. RabbitMQ 架构 1. ChannelChannel（信道）是建立在 Connection（连接）之上的虚拟通道，一个 Connection 可以有多个 Channel 2. Broker一个 Broker 就是一个 RabbitMQ 实例  2. RabbitMQ 组件2.1. Exchange·1. All exchanges">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-1.xmind">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-15.png">
@@ -55,7 +55,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-6.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-7.png">
 <meta property="article:published_time" content="2025-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-24T09:09:08.621Z">
+<meta property="article:modified_time" content="2025-09-22T15:40:34.985Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-1.xmind">
@@ -318,7 +318,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-24T17:09:08+08:00
+                    Last updated on 2025-09-22T23:40:34+08:00
                   
                   
 
@@ -328,11 +328,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、导图"><a href="#一、导图" class="headerlink" title="一、导图"></a>一、导图</h1><p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-1.xmind" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="一、脑图"><a href="#一、脑图" class="headerlink" title="一、脑图"></a>一、脑图</h1><ol>
+<li>Xmind<br><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-1.xmind" srcset="/img/loading.gif" lazyload></li>
+</ol>
 <hr>
 <h1 id="二、RabbitMQ-基础"><a href="#二、RabbitMQ-基础" class="headerlink" title="二、RabbitMQ 基础"></a>二、RabbitMQ 基础</h1><h2 id="1-RabbitMQ-架构"><a href="#1-RabbitMQ-架构" class="headerlink" title="1. RabbitMQ 架构"></a>1. RabbitMQ 架构</h2><p><img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-15.png" srcset="/img/loading.gif" lazyload></p>
-<p><font color="#92d050">1. Channel</font><br>Channel（信道）是建立在 Connection（连接）之上的虚拟通道，一个 Connection 可以有多个 Channel</p>
-<p><font color="#92d050">2. Broker</font><br>一个 Broker 就是一个 RabbitMQ 实例</p>
+<p><font color="#92d050">1. Channel</font><br><code>Channel</code>（信道）是建立在 <code>Connection</code>（连接）之上的虚拟通道，一个 <code>Connection</code> 可以有多个 <code>Channel</code></p>
+<p><font color="#92d050">2. Broker</font><br>一个 <code>Broker</code> 就是一个 <code>RabbitMQ</code> 实例</p>
 <hr>
 <h2 id="2-RabbitMQ-组件"><a href="#2-RabbitMQ-组件" class="headerlink" title="2. RabbitMQ 组件"></a>2. RabbitMQ 组件</h2><h3 id="2-1-Exchange"><a href="#2-1-Exchange" class="headerlink" title="2.1. Exchange"></a>2.1. Exchange</h3><p>·<img src="/2025/08/20/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ/%E7%AC%94%E8%AE%B0%EF%BC%9ARabbitMQ-26.png" srcset="/img/loading.gif" lazyload><br><font color="#92d050">1. All exchanges</font></p>
 <ol>

@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、脑图 Xmind  Edraw    二、Spring Authorization Server 基础1. Spring Authorization Server 核心流程1.1. 核心流程概述在 SAS 中，我们需要配置两条过滤器链：  authorizationServerSecurityFilterChain 用于拦截访问 OAuth 相关 URL 的请求，这条链的优先级较高 Secur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Spring Authorization Server">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、脑图 Xmind  Edraw    二、Spring Authorization Server 基础1. Spring Authorization Server 核心流程1.1. 核心流程概述在 SAS 中，我们需要配置两条过滤器链：  authorizationServerSecurityFilterChain 用于拦截访问 OAuth 相关 URL 的请求，这条链的优先级较高 Secur">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-3.png">
+<meta property="article:published_time" content="2025-09-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T15:13:22.587Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Spring Authorization Server - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Spring Authorization Server"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-15 00:00" pubdate>
+          September 15, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Spring Authorization Server</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-22T23:13:22+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、脑图"><a href="#一、脑图" class="headerlink" title="一、脑图"></a>一、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h1 id="二、Spring-Authorization-Server-基础"><a href="#二、Spring-Authorization-Server-基础" class="headerlink" title="二、Spring Authorization Server 基础"></a>二、Spring Authorization Server 基础</h1><h2 id="1-Spring-Authorization-Server-核心流程"><a href="#1-Spring-Authorization-Server-核心流程" class="headerlink" title="1. Spring Authorization Server 核心流程"></a>1. Spring Authorization Server 核心流程</h2><h3 id="1-1-核心流程概述"><a href="#1-1-核心流程概述" class="headerlink" title="1.1. 核心流程概述"></a>1.1. 核心流程概述</h3><p>在 SAS 中，我们需要配置两条过滤器链：</p>
+<ol>
+<li>authorizationServerSecurityFilterChain 用于拦截访问 OAuth 相关 URL 的请求，这条链的优先级较高</li>
+<li>SecurityFilterChain 用于拦截其他 URL 的请求</li>
+</ol>
+<p>在查看 <code>authorizationServerSecurityFilterChain</code> 默认注册的过滤器链时可以发现，它是在 <code>Spring Resource Server</code> 的基础上，额外添加了与 <code>OAuth</code> 相关的过滤器。</p>
+<p>虽然 <code>Spring Authorization Server </code>本身也能作为资源服务器使用，但专业的事情还是交给专业的人来处理比较稳妥。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">=== Chain #<span class="hljs-number">0</span> ===<br> RequestMatcher: org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$<span class="hljs-number">939</span>/<span class="hljs-symbol">0x000001f4094499f8@</span><span class="hljs-number">61394494</span><br><span class="hljs-string">  [0]</span> org.springframework.security.web.session.DisableEncodeUrlFilter<br><span class="hljs-string">  [1]</span> org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter<br><span class="hljs-string">  [2]</span> org.springframework.security.web.context.SecurityContextHolderFilter<br><span class="hljs-string">  [3]</span> org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [4]</span> org.springframework.security.web.header.HeaderWriterFilter<br><span class="hljs-string">  [5]</span> org.springframework.security.web.csrf.CsrfFilter<br><span class="hljs-string">  [6]</span> org.springframework.security.web.authentication.logout.LogoutFilter<br><span class="hljs-string">  [7]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [8]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [9]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [10]</span> org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [11]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [12]</span> org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter<br><span class="hljs-string">  [13]</span> org.springframework.security.web.authentication.AuthenticationFilter<br><span class="hljs-string">  [14]</span> org.springframework.security.web.savedrequest.RequestCacheAwareFilter<br><span class="hljs-string">  [15]</span> org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter<br><span class="hljs-string">  [16]</span> org.springframework.security.web.authentication.AnonymousAuthenticationFilter<br><span class="hljs-string">  [17]</span> org.springframework.security.web.access.ExceptionTranslationFilter<br><span class="hljs-string">  [18]</span> org.springframework.security.web.access.<span class="hljs-built_in">int</span>ercept.AuthorizationFilter <span class="hljs-comment">// 默认启用</span><br><span class="hljs-string">  [19]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [20]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [21]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter <span class="hljs-comment">// 添加</span><br><span class="hljs-string">  [22]</span> org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter <span class="hljs-comment">// 添加</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-2-核心流程一览图"><a href="#1-2-核心流程一览图" class="headerlink" title="1.2. 核心流程一览图"></a>1.2. 核心流程一览图</h3><p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="三、核心-API"><a href="#三、核心-API" class="headerlink" title="三、核心 API"></a>三、核心 API</h1><hr>
+<h1 id="四、相关注解"><a href="#四、相关注解" class="headerlink" title="四、相关注解"></a>四、相关注解</h1><hr>
+<h1 id="五、相关配置"><a href="#五、相关配置" class="headerlink" title="五、相关配置"></a>五、相关配置</h1><h2 id="1-启用-Spring-Security（配置类）"><a href="#1-启用-Spring-Security（配置类）" class="headerlink" title="1. 启用 Spring Security（配置类）"></a>1. 启用 Spring Security（配置类）</h2><h3 id="1-1-配置类名称"><a href="#1-1-配置类名称" class="headerlink" title="1.1. 配置类名称"></a>1.1. 配置类名称</h3><p>配置类名称为：<code>SecurityConfig</code></p>
+<hr>
+<h3 id="1-2-具体配置"><a href="#1-2-具体配置" class="headerlink" title="1.2. 具体配置"></a>1.2. 具体配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>  <br><span class="hljs-comment">// 启用 Spring Security</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;  <br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-SAS-授权服务器基础信息-配置（yml）"><a href="#2-SAS-授权服务器基础信息-配置（yml）" class="headerlink" title="2. SAS 授权服务器基础信息 配置（yml）"></a>2. SAS 授权服务器基础信息 配置（yml）</h2><h3 id="2-1-文件位置"><a href="#2-1-文件位置" class="headerlink" title="2.1. 文件位置"></a>2.1. 文件位置</h3><p>文件在：<code>/resources/application.yml</code></p>
+<hr>
+<h3 id="2-2-详细配置"><a href="#2-2-详细配置" class="headerlink" title="2.2. 详细配置"></a>2.2. 详细配置</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">security:</span><br>    <span class="hljs-attr">oauth2:</span><br>      <span class="hljs-attr">authorization-server:</span><br>        <span class="hljs-attr">issuer:</span> <span class="hljs-string">http://auth.example.com</span>                  <span class="hljs-comment"># 发行者信息</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>根据 <code>OAuth2.1</code> 规范，<code>issuer</code> 必须是一个 <code>URL</code></li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="3-authorizationServerSecurityFilterChain-过滤器链-配置（配置类）"><a href="#3-authorizationServerSecurityFilterChain-过滤器链-配置（配置类）" class="headerlink" title="3. authorizationServerSecurityFilterChain 过滤器链 配置（配置类）"></a>3. authorizationServerSecurityFilterChain 过滤器链 配置（配置类）</h2><h3 id="3-1-配置类名称"><a href="#3-1-配置类名称" class="headerlink" title="3.1. 配置类名称"></a>3.1. 配置类名称</h3><p>配置类名称为：<code>SecurityConfig</code></p>
+<hr>
+<h3 id="3-2-Tiny-配置"><a href="#3-2-Tiny-配置" class="headerlink" title="3.2. Tiny 配置"></a>3.2. Tiny 配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-comment">// 过滤器链优先级设置为 1（数值越小，优先级越高）</span><br>    <span class="hljs-meta">@Order(1)</span><br>    <span class="hljs-keyword">public</span> SecurityFilterChain <span class="hljs-title function_">authorizationServerSecurityFilterChain</span><span class="hljs-params">(HttpSecurity httpSecurity)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>		<br>        <span class="hljs-keyword">return</span> httpSecurity.build();<br>        <br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>过滤器链的优先级越高，请求就会越早与之进行匹配，使用该过滤器链的可能性越高</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="3-3-使用默认配置"><a href="#3-3-使用默认配置" class="headerlink" title="3.3. 使用默认配置"></a>3.3. 使用默认配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@Order(1)</span><br>    <span class="hljs-keyword">public</span> SecurityFilterChain <span class="hljs-title function_">authorizationServerSecurityFilterChain</span><span class="hljs-params">(HttpSecurity httpSecurity)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>		<br>        <span class="hljs-comment">// SAS 配置器</span><br>        <span class="hljs-type">OAuth2AuthorizationServerConfigurer</span> <span class="hljs-variable">authorizationServerConfigurer</span> <span class="hljs-operator">=</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">OAuth2AuthorizationServerConfigurer</span>();<br>		<br>        httpSecurity<br>		        <span class="hljs-comment">// 使用默认配置</span><br>                .with(authorizationServerConfigurer, Customizer.withDefaults());<br>		<br>        <span class="hljs-keyword">return</span> httpSecurity.build();<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-4-过滤器链请求匹配规则-配置"><a href="#3-4-过滤器链请求匹配规则-配置" class="headerlink" title="3.4. 过滤器链请求匹配规则 配置"></a>3.4. 过滤器链请求匹配规则 配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@Order(1)</span><br>    <span class="hljs-keyword">public</span> SecurityFilterChain <span class="hljs-title function_">authorizationServerSecurityFilterChain</span><span class="hljs-params">(HttpSecurity httpSecurity)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>		<br>        <span class="hljs-comment">// SAS 配置器</span><br>        <span class="hljs-type">OAuth2AuthorizationServerConfigurer</span> <span class="hljs-variable">authorizationServerConfigurer</span> <span class="hljs-operator">=</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">OAuth2AuthorizationServerConfigurer</span>();<br>		<br>        httpSecurity<br>                <span class="hljs-comment">// 只匹配 SAS 专用端点</span><br>                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher());<br>		<br>        <span class="hljs-keyword">return</span> httpSecurity.build();<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-5-CsrfFilter-配置"><a href="#3-5-CsrfFilter-配置" class="headerlink" title="3.5. CsrfFilter 配置"></a>3.5. CsrfFilter 配置</h3><p>默认配置已经帮我们配置了 <code>AuthorizationFilter</code>，因此我们无需重复配置。</p>
+<hr>
+<h3 id="3-6-RequestCacheAwareFilter-配置"><a href="#3-6-RequestCacheAwareFilter-配置" class="headerlink" title="3.6. RequestCacheAwareFilter 配置"></a>3.6. RequestCacheAwareFilter 配置</h3><p><font color="#92d050">1. 添加相关依赖</font></p>
+<ol>
+<li>创建时<ol>
+<li>Web<ol>
+<li>Spring Session for Spring Data Redis</li>
+</ol>
+</li>
+<li>NoSQL<ol>
+<li>Spring Data Redis</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">2. 进行 Spring Data Redis 相关配置</font></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">spring:</span>  <br>  <span class="hljs-attr">data:</span>  <br>    <span class="hljs-attr">redis:</span>  <br>      <span class="hljs-attr">host:</span> <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>  <br>      <span class="hljs-attr">port:</span> <span class="hljs-number">6379</span>  <br>      <span class="hljs-attr">password:</span> <span class="hljs-string">wq666666</span><br>      <span class="hljs-attr">database:</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 开启 Spring Session</font></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-comment">// 开启 Spring Session</span><br><span class="hljs-meta">@EnableRedisHttpSession</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SessionConfig</span> &#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-7-ExceptionTranslationFilter-配置"><a href="#3-7-ExceptionTranslationFilter-配置" class="headerlink" title="3.7. ExceptionTranslationFilter 配置"></a>3.7. ExceptionTranslationFilter 配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>	<span class="hljs-meta">@Bean</span><br>	<span class="hljs-meta">@Order(1)</span><br>	<span class="hljs-keyword">public</span> SecurityFilterChain <span class="hljs-title function_">authorizationServerSecurityFilterChain</span><span class="hljs-params">(HttpSecurity httpSecurity)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>		<br>        httpSecurity<br>                .exceptionHandling(handler -&gt; &#123;<br>                    handler<br>		                    <span class="hljs-comment">// 如果用户未认证，重定向的 /login </span><br>                            .authenticationEntryPoint(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LoginUrlAuthenticationEntryPoint</span>(<span class="hljs-string">&quot;/login&quot;</span>));<br>                &#125;);<br>		<br>		<span class="hljs-keyword">return</span> httpSecurity.build();<br>	&#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-8-AuthorizationFilter-配置"><a href="#3-8-AuthorizationFilter-配置" class="headerlink" title="3.8. AuthorizationFilter 配置"></a>3.8. AuthorizationFilter 配置</h3><p>默认配置已经帮我们配置了 <code>AuthorizationFilter</code>，因此我们无需重复配置。</p>
+<hr>
+<h2 id="4-SecurityFilterChain-过滤器链-配置（配置类）"><a href="#4-SecurityFilterChain-过滤器链-配置（配置类）" class="headerlink" title="4. SecurityFilterChain 过滤器链 配置（配置类）"></a>4. SecurityFilterChain 过滤器链 配置（配置类）</h2><p>详见笔记：Spring Security</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity.md">笔记：SpringSecurity</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="5-CORS-跨域资源共享-配置（配置类）"><a href="#5-CORS-跨域资源共享-配置（配置类）" class="headerlink" title="5. CORS 跨域资源共享 配置（配置类）"></a>5. CORS 跨域资源共享 配置（配置类）</h2><p>详见笔记：Spring Security</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity.md">笔记：SpringSecurity</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="6-AuthenticationManager-配置（配置类）"><a href="#6-AuthenticationManager-配置（配置类）" class="headerlink" title="6. AuthenticationManager 配置（配置类）"></a>6. AuthenticationManager 配置（配置类）</h2><p>详见笔记：Spring Security</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity.md">笔记：SpringSecurity</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="7-密码加密器-配置（配置类）"><a href="#7-密码加密器-配置（配置类）" class="headerlink" title="7. 密码加密器 配置（配置类）"></a>7. 密码加密器 配置（配置类）</h2><p>详见笔记：Spring Security</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity.md">笔记：SpringSecurity</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果没有为 <code>SAS</code> 配置自定义密码加密器，那么当 <code>SAS</code> 从数据库读取到像 <code>&#123;noop&#125;123456</code> 这样的 <code>client_secret</code> 时，它会根据数据库中存储的加密前缀 <code>&#123;noop&#125;</code> 自动处理我们传入的 <code>123456</code>，然后将处理后的结果与 <code>&#123;noop&#125;123456</code> 去掉前缀的内容进行匹配</li>
+<li>但是，如果配置了自定义密码加密器，它会全局使用该加密器，既不会识别 <code>&#123;noop&#125;</code> 等前缀，自动选择合适的加密器，也不会去掉前缀进行匹配</li>
+<li>例如，当配置 NoOpPasswordEncoder 时，<ol>
+<li>如果我们传入123456<ol>
+<li>SAS 会对传入的 123456 进行处理（仍为 123456）</li>
+<li>然后直接与数据库中的 {noop}123456 对比，匹配失败。</li>
+</ol>
+</li>
+<li>如果我们传入 {noop}123456<ol>
+<li>SAS 会对传入的 {noop}123456 进行处理（仍为 {noop}123456）</li>
+<li>然后接与数据库中的 {noop}123456 对比，匹配成功</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>同样地，当配置 BCryptPasswordEncoder 时<ol>
+<li>如果我们传入 {noop}123456<ol>
+<li>SAS 会对传入的 {noop}123456 进行处理（为 XXXX）</li>
+<li>然后直接与数据库中的 {noop}123456 对比，匹配失败</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="8-用户-配置"><a href="#8-用户-配置" class="headerlink" title="8. 用户 配置"></a>8. 用户 配置</h2><p>详见笔记：Spring Security</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity.md">笔记：SpringSecurity</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="9-客户端-配置"><a href="#9-客户端-配置" class="headerlink" title="9. 客户端 配置"></a>9. 客户端 配置</h2><h3 id="9-1-配置概述"><a href="#9-1-配置概述" class="headerlink" title="9.1. 配置概述"></a>9.1. 配置概述</h3><p>在 <code>Spring Authorization Server </code>中，<code>RegisteredClient</code> 定义了客户端需要注册哪些信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RegisteredClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123; <br>    <span class="hljs-keyword">private</span> String id;<br>    <span class="hljs-keyword">private</span> String clientId;<br>    <span class="hljs-keyword">private</span> Instant clientIdIssuedAt;<br>    <span class="hljs-keyword">private</span> String clientSecret;<br>    <span class="hljs-keyword">private</span> Instant clientSecretExpiresAt;<br>    <span class="hljs-keyword">private</span> String clientName;<br>    <span class="hljs-keyword">private</span> Set&lt;ClientAuthenticationMethod&gt; clientAuthenticationMethods;<br>    <span class="hljs-keyword">private</span> Set&lt;AuthorizationGrantType&gt; authorizationGrantTypes;<br>    <span class="hljs-keyword">private</span> Set&lt;String&gt; redirectUris;<br>    <span class="hljs-keyword">private</span> Set&lt;String&gt; postLogoutRedirectUris;<br>    <span class="hljs-keyword">private</span> Set&lt;String&gt; scopes;<br>    <span class="hljs-keyword">private</span> ClientSettings clientSettings;<br>    <span class="hljs-keyword">private</span> TokenSettings tokenSettings;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><font color="#92d050">1. id</font><br><code>id</code> 是数据库中的主键，不需要客户端注册，<code>Spring Authorization Server</code> 会使用该 <code>ID</code> 作为数据结构中的键，例如 <code>Map&lt;String, RegisteredClient&gt;</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>id</code> 字段为 <code>String</code> 类型<ol>
+<li>如果数据库中使用 <code>int</code> 类型作为主键，需要额外编写 <code>TypeHandler</code> 来做类型转换</li>
+<li>在数据库中推荐使用 <code>varchar</code> 类型进行存储，并使用 <code>UUID</code> 作为主键</li>
+</ol>
+</li>
+<li>为什么不直接用 <code>clientId</code> 作为数据库主键？<ol>
+<li>因为 <code>clientId</code> 可能会被重置，而数据库主键必须 唯一且不可变</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. clientId</font><br><code>clientId</code> 是 <code>OAuth2</code> 协议中用于标识客户端的重要凭证之一，同样不需要客户端注册，而是当客户端进行注册时，由我们生成一个 <code>clientId</code> 并返回给他们。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientId</code> 字段为 <code>String</code> 类型</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">3. clientIdIssuedAt</font><br><code>clientIdIssuedAt</code> 是 <code>clientId</code> 的发放时间，同样不需要客户端注册，而是在生成 <code>clientId</code> 时由我们创建，该时间用于后续跟踪和判断 <code>clientId</code> 的有效性。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientIdIssuedAt</code> 字段为 <code>Instant</code> 类型</li>
+<li><code>Spring Authorization Server</code> 并不会对该时间戳进行任何处理，这主要是为了便于我们开发人员对 <code>clientId</code> 的生命周期进行跟踪和管理。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">4. clientSecret</font><br><code>clientSecret</code> 同样是 <code>OAuth2</code> 协议中用于标识客户端的重要凭证之一，同样不需要客户端注册，而是当客户端进行注册时，由我们生成一个 <code>clientSecret</code> 并返回给他们，可以将 <code>clientId</code> 理解为账号，而 <code>clientSecret</code> 则相当于密码。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientSecret</code> 字段为 <code>String</code> 类型，并且格式要求为：<code>&#123;bcrypt&#125;$2a$10$...</code></li>
+<li><code>&#123;bcrypt&#125;</code> 是加密前缀，用于指示 <code>Spring Authorization Server</code> 使用那种密码加密器（<code>PasswordEncoder</code>）验证客户端提交的 <code>clientSecret</code> 是否与数据库中存储的值一致</li>
+<li>常用加密前缀包括：<ol>
+<li>{noop}<ol>
+<li>使用 NoOpPasswordEncoder</li>
+</ol>
+</li>
+<li>{bcrypt}<ol>
+<li>使用 BCryptPasswordEncoder</li>
+</ol>
+</li>
+<li>{pbkdf2}<ol>
+<li>使用 Pbkdf2PasswordEncoder</li>
+</ol>
+</li>
+<li>{scrypt}<ol>
+<li>使用 SCryptPasswordEncoder</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>其代码逻辑大致如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1. 生成未加密的 clientSecret</span><br><span class="hljs-type">String</span> <span class="hljs-variable">rawPassword</span> <span class="hljs-operator">=</span> UUID.randomUUID().toString();<br><br><br><span class="hljs-comment">// 2. 将未加密的 clientSecret 加密，并加上对应加密算法的前缀</span><br><span class="hljs-type">String</span> <span class="hljs-variable">encodedPassword</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&#123;bcrypt&#125;&quot;</span> + passwordEncoder.encode(rawPassword);<br><br><br><span class="hljs-comment">// 3. 将处理好的 clientSecret 保存到数据库</span><br>registeredClient.setClientSecret(encodedPassword);<br><br><br><span class="hljs-comment">// 4. 返回给客户端的是 未加密的 clientSecret（rawPassword）</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">5. clientSecretExpiresAt</font><br><code>clientSecretExpiresAt</code> 是 <code>clientSecret</code> 的过期时间同样不需要客户端注册，而是在生成 <code>clientId</code> 时由我们创建。</p>
+<p><code>Spring Authorization Server</code> 在校验 <code>client_secret</code> 时，会检查 <code>clientSecretExpiresAt</code>，如果已过期，则拒绝认证。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientSecretExpiresAt</code> 字段为 <code>Instant</code> 类型</li>
+<li><code>clientSecretExpiresAt</code> 一般为永久有效（<code>null</code>）</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">6. clientName</font><br><code>clientName</code> 是客户端的名称，需要客户端注册，用于展示给用户，例如在授权确认页面中，会显示为 “XXX 正在请求访问你的信息，是否同意”。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientName</code> 字段为 <code>String</code> 类型</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">7. clientAuthenticationMethods</font><br><code>clientAuthenticationMethods</code> 是客户端进行身份认证的方式（传递 <code>client_id</code> 和 <code>client_secret</code> 的方式），需要客户端注册，常用身份认证的方式包括：</p>
+<ol>
+<li>client_secret_basic（默认）：<ol>
+<li>客户端通过 HTTP Basic 的方式传递 client_id 和 client_secret</li>
+<li>即将其放入请求头的 Authorization 中，格式为：Authorization: Basic &lt;Base64 编码后的 clientId:clientSecret&gt;</li>
+</ol>
+</li>
+<li>client_secret_post：<ol>
+<li>客户端在表单参数中传递 client_id 和 client_secret</li>
+</ol>
+</li>
+<li>none：<ol>
+<li>仅传 client_id，不传 client_secret，常用于 SPA 单页应用或移动端应用</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientAuthenticationMethods</code> 字段为 <code>Set&lt;ClientAuthenticationMethod&gt;</code> 类型</li>
+<li>一个客户端可以注册多个身份认证方式，<code>Spring Authorization Server</code> 会按顺序依次尝试这些方式，直到认证成功为止（不需要在请求参数中携带你使用的是具体那种方式）</li>
+<li>客户端在传递 <code>client_secret</code> 的时候，不要把加密前缀带上</li>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey"><span class="hljs-built_in">client_secret_basic,</span>client_secret_post<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">8. authorizationGrantTypes</font><br><code>authorizationGrantTypes</code> 是客户端支持的授权模式，需要客户端注册，常用授权模式包括：</p>
+<ol>
+<li>authorization_code：<ol>
+<li>授权码模式</li>
+</ol>
+</li>
+<li>client_credentials：<ol>
+<li>客户端凭证模式</li>
+</ol>
+</li>
+<li>refresh_token：<ol>
+<li>令牌刷新模式</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>authorizationGrantTypes</code> 字段为 <code>Set&lt;AuthorizationGrantTypes&gt;</code> 类型</li>
+<li>一个客户端可以注册多个授权模式，但是 <code>Spring Authorization Server</code> 并不会按顺序依次尝试这些方式，而是在发起授权请求时，客户端必须明确指定所使用的授权模式。如果使用的授权模式未在客户端注册，授权服务器会拒绝处理该请求</li>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">authorization_code,<span class="hljs-built_in">ref</span>resh_token<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">9. redirectUris</font><br><code>redirectUris</code> 是用户授权成功后的回调地址，需要客户端注册，而且客户端在发起授权请求时，必须携带<strong>完全一致</strong>的值，否则服务器将拒绝处理该请求</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>redirectUris</code> 字段为 <code>String</code> 类型</li>
+<li><code>Spring Authorization Server</code> 虽然允许一个客户端配置多个 <code>redirectUris</code>，并会依次处理这些地址。但是出于安全考虑，通常我们只允许一个客户端应用注册一个重定向地址</li>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8080</span><span class="hljs-regexp">/authorized,http:/</span><span class="hljs-regexp">/localhost:8080/</span>login<span class="hljs-regexp">/oauth2/</span>code/myclient<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">10. postLogoutRedirectUri</font><br><code>postLogoutRedirectUri</code> 是用户从授权服务器退出后的回调地址，一般留空即可</p>
+<p><font color="#92d050">11. scopes</font><br><code>scopes</code> 是客户端请求的权限范围，需要客户端注册，而且客户端在发起授权请求时，需要携带所需的 <code>scope</code>，服务器根据请求的 <code>scope</code> 颁发相应的 <code>Access Token</code>，保证客户端用该 <code>Access Token</code> 只能访问授权范围内的信息，如果携带的权限范围未在客户端注册，授权服务器会拒绝处理该请求。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>scopes</code> 字段为 <code>Set&lt;String&gt;</code> 类型</li>
+<li>一个客户端可以注册多个权限范围，但是不一定都能用得上</li>
+<li>在颁发 <code>Access Token</code> 时，必须区分自有客户端与第三方客户端的权限<ol>
+<li>对于自有客户端，可以颁发具备完整访问权限的 <code>Token</code></li>
+<li>对于第三方客户端，则只能获取有限的数据访问权限</li>
+<li>因此，可以定义一个仅供内部使用、特殊 <code>scope</code>，通过该 <code>scope</code> 即可赋予自有客户端完整权限</li>
+</ol>
+</li>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">api.<span class="hljs-built_in">read</span>,api.<span class="hljs-built_in">write</span>,userinfo<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">11. clientSettings</font><br><code>clientSettings</code> 是客户端级别的配置，需要客户端注册，常用客户端级别的配置包括：</p>
+<ol>
+<li>settings.client.require-authorization-consent<ol>
+<li>是否在授权时，显示用户授权确认页面</li>
+<li>常用选项包括：<ol>
+<li>true<ol>
+<li>用户登录之后，会被引导到授权确认页面（consent page），要求勾选要授予客户端哪些权限（scopes）</li>
+<li>如果用户之前已经授权过该客户端，SAS 会记录该用户的授权决定。下次访问时，只要请求的 scopes 没有变化，就不会再次显示授权确认页面。</li>
+</ol>
+</li>
+<li>false<ol>
+<li>用户登录之后，会直接颁发 Authorization Code</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>settings.client.require-proof-key<ol>
+<li>是否启用 PKCE</li>
+<li>常用选项包括：<ol>
+<li>true<ol>
+<li>启用 PKCE</li>
+</ol>
+</li>
+<li>false<ol>
+<li>不启用 PKCE</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>Spring Authorization Server</code> 要求 <code>clientSettings</code> 字段为 <code>ClientSettings</code> 类型</li>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">&#123;<br>  <span class="hljs-string">&quot;@class&quot;</span>: <span class="hljs-string">&quot;java.util.Collections<span class="hljs-variable">$UnmodifiableMap</span>&quot;</span>,<br>  <span class="hljs-string">&quot;settings.client.require-proof-key&quot;</span>: <span class="hljs-literal">false</span>,<br>  <span class="hljs-string">&quot;settings.client.require-authorization-consent&quot;</span>: <span class="hljs-literal">true</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">12. tokenSettings</font><br><code>tokenSettings</code> 是 <code>Authorization Code</code>、<code>Access Token</code>、<code>Refresh Token</code>、<code>ID Token</code> 的配置，需要客户端注册，常用令牌配置包括：</p>
+<ol>
+<li>settings.token.authorization-code-time-to-live<ol>
+<li>Authorization Code 的有效期，以秒为单位</li>
+</ol>
+</li>
+<li>settings.token.access-token-time-to-live<ol>
+<li>Access Token 的有效期，以秒为单位</li>
+</ol>
+</li>
+<li>settings.token.access-token-format<ol>
+<li>Access Token 的格式</li>
+<li>常用形式包括：<ol>
+<li>REFERENCE<ol>
+<li>Access Token 是一个随机字符串，不包含任何信息</li>
+<li>授权服务器需要维护一个数据结构，将 Access Token 对应当相应信息</li>
+</ol>
+</li>
+<li>SELF_CONTAINED<ol>
+<li>Access Token 本身就包含了用户的基本信息、权限、有效期等，SAS 用 JWT 实现</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>settings.token.refresh-token-time-to-live<ol>
+<li>Refresh Token 的有效期，以秒为单位</li>
+</ol>
+</li>
+<li>settings.token.reuse-refresh-tokens<ol>
+<li>Refresh Token 是否可以重复使用</li>
+<li>常用选项包括：<ol>
+<li>true<ol>
+<li>Refresh Token 可以重复使用</li>
+</ol>
+</li>
+<li>false<ol>
+<li>Refresh Token 不可以重复使用，使用后 SAS 会返回新的 Refresh Token</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果使用 <code>SAS</code> 官方推荐的数据库表结构，在数据库中的存储格式如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs prolog">&#123;<br>  <span class="hljs-string">&quot;@class&quot;</span>: <span class="hljs-string">&quot;java.util.Collections$UnmodifiableMap&quot;</span>,<br>  <span class="hljs-string">&quot;settings.token.access-token-time-to-live&quot;</span>: [<br>    <span class="hljs-string">&quot;java.time.Duration&quot;</span>,<br>    <span class="hljs-number">300.0</span><br>  ],<br>  <span class="hljs-string">&quot;settings.token.refresh-token-time-to-live&quot;</span>: [<br>    <span class="hljs-string">&quot;java.time.Duration&quot;</span>,<br>    <span class="hljs-number">2592000.0</span><br>  ],<br>  <span class="hljs-string">&quot;settings.token.access-token-format&quot;</span>: &#123;<br>    <span class="hljs-string">&quot;@class&quot;</span>: <span class="hljs-string">&quot;org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat&quot;</span>,<br>    <span class="hljs-string">&quot;value&quot;</span>: <span class="hljs-string">&quot;self-contained&quot;</span><br>  &#125;,<br>  <span class="hljs-string">&quot;settings.token.reuse-refresh-tokens&quot;</span>: true,<br>  <span class="hljs-string">&quot;settings.token.authorization-code-time-to-live&quot;</span>: [<br>    <span class="hljs-string">&quot;java.time.Duration&quot;</span>,<br>    <span class="hljs-number">300.0</span><br>  ],<br>  <span class="hljs-string">&quot;settings.token.id-token-signature-algorithm&quot;</span>: [<br>    <span class="hljs-string">&quot;org.springframework.security.oauth2.jose.jws.SignatureAlgorithm&quot;</span>,<br>    <span class="hljs-string">&quot;RS256&quot;</span><br>  ],<br>  <span class="hljs-string">&quot;settings.token.device-code-time-to-live&quot;</span>: [<br>    <span class="hljs-string">&quot;java.time.Duration&quot;</span>,<br>    <span class="hljs-number">300.0</span><br>  ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="9-2-具体配置"><a href="#9-2-具体配置" class="headerlink" title="9.2. 具体配置"></a>9.2. 具体配置</h3><h4 id="9-2-1-数据库表准备"><a href="#9-2-1-数据库表准备" class="headerlink" title="9.2.1. 数据库表准备"></a>9.2.1. 数据库表准备</h4><p>这里我们使用 <code>SAS</code> 官方推荐的数据库表结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `authorization`.`oauth2_registered_client`  (<br>  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `client_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `client_id_issued_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,<br>  `client_secret` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `client_secret_expires_at` timestamp NULL DEFAULT NULL,<br>  `client_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `client_authentication_methods` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `authorization_grant_types` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `redirect_uris` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `post_logout_redirect_uris` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `scopes` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `client_settings` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `token_settings` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  PRIMARY KEY (`id`) USING BTREE,<br>  UNIQUE INDEX `unique_client_id`(`client_id` ASC) USING BTREE<br>) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="9-2-2-配置类配置"><a href="#9-2-2-配置类配置" class="headerlink" title="9.2.2. 配置类配置"></a>9.2.2. 配置类配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RegisteredClientRepository <span class="hljs-title function_">registeredClientRepository</span><span class="hljs-params">(JdbcTemplate jdbcTemplate)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcRegisteredClientRepository</span>(jdbcTemplate);<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="9-2-3-客户端注册"><a href="#9-2-3-客户端注册" class="headerlink" title="9.2.3. 客户端注册"></a>9.2.3. 客户端注册</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;/client&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClientController</span> &#123;<br>	<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RegisteredClientRepository registeredClientRepository;<br>	<br>    <span class="hljs-meta">@GetMapping(&quot;/register&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">Register</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">RegisteredClient</span> <span class="hljs-variable">registeredClient</span> <span class="hljs-operator">=</span> RegisteredClient.withId(UUID.randomUUID().toString())<br>                .clientId(<span class="hljs-string">&quot;my-client-app&quot;</span>)<br>                .clientIdIssuedAt(Instant.now())<br>                .clientSecret(<span class="hljs-string">&quot;&#123;noop&#125;123456&quot;</span>)<br>                .clientName(<span class="hljs-string">&quot;咸阳猴子公司&quot;</span>)<br>                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)<br>                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)<br>                .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)<br>                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)<br>                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)<br>                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)<br>                .redirectUri(<span class="hljs-string">&quot;http://127.0.0.1:8080/authorized&quot;</span>)<br>                .scope(<span class="hljs-string">&quot;Simple_Userinfo&quot;</span>)<br>                .scope(<span class="hljs-string">&quot;God_Manager&quot;</span>)<br>                .clientSettings(ClientSettings.builder()<br>                        .requireAuthorizationConsent(<span class="hljs-literal">true</span>)<br>                        .requireProofKey(<span class="hljs-literal">false</span>)<br>                        .build())<br>                .tokenSettings(TokenSettings.builder()<br>                        .authorizationCodeTimeToLive(Duration.ofMinutes(<span class="hljs-number">30</span>))<br>                        .accessTokenTimeToLive(Duration.ofMinutes(<span class="hljs-number">500</span>))<br>                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)<br>                        .refreshTokenTimeToLive(Duration.ofMinutes(<span class="hljs-number">500</span>))<br>                        .reuseRefreshTokens(<span class="hljs-literal">true</span>)<br>                        .build())<br>                .build();<br>			<br>        registeredClientRepository.save(registeredClient);<br>		<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;客户端注册成功&quot;</span>;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="10-SAS-运行时数据-配置"><a href="#10-SAS-运行时数据-配置" class="headerlink" title="10. SAS 运行时数据 配置"></a>10. SAS 运行时数据 配置</h2><h3 id="10-1-配置概述"><a href="#10-1-配置概述" class="headerlink" title="10.1. 配置概述"></a>10.1. 配置概述</h3><p>像 <code>Authorization Code</code>、<code>Access Token</code>、<code>Refresh Token</code>、<code>ID Token</code> 以及他们相关的数据，默认情况下也都是存储在内存中的，我们同样采用数据存入数据库的方式来解决这个问题</p>
+<hr>
+<h3 id="10-2-具体配置"><a href="#10-2-具体配置" class="headerlink" title="10.2. 具体配置"></a>10.2. 具体配置</h3><h4 id="10-2-1-数据库表准备"><a href="#10-2-1-数据库表准备" class="headerlink" title="10.2.1. 数据库表准备"></a>10.2.1. 数据库表准备</h4><h5 id="10-2-1-1-oauth2-authorization-表"><a href="#10-2-1-1-oauth2-authorization-表" class="headerlink" title="10.2.1.1. oauth2_authorization 表"></a>10.2.1.1. oauth2_authorization 表</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `authorization`.`oauth2_authorization`  (<br>  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `registered_client_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `principal_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `authorization_grant_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `authorized_scopes` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `attributes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `state` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `authorization_code_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `authorization_code_issued_at` timestamp NULL DEFAULT NULL,<br>  `authorization_code_expires_at` timestamp NULL DEFAULT NULL,<br>  `authorization_code_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `access_token_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `access_token_issued_at` timestamp NULL DEFAULT NULL,<br>  `access_token_expires_at` timestamp NULL DEFAULT NULL,<br>  `access_token_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `access_token_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `access_token_scopes` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  `oidc_id_token_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `oidc_id_token_issued_at` timestamp NULL DEFAULT NULL,<br>  `oidc_id_token_expires_at` timestamp NULL DEFAULT NULL,<br>  `oidc_id_token_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `refresh_token_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `refresh_token_issued_at` timestamp NULL DEFAULT NULL,<br>  `refresh_token_expires_at` timestamp NULL DEFAULT NULL,<br>  `refresh_token_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `user_code_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `user_code_issued_at` timestamp NULL DEFAULT NULL,<br>  `user_code_expires_at` timestamp NULL DEFAULT NULL,<br>  `user_code_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `device_code_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  `device_code_issued_at` timestamp NULL DEFAULT NULL,<br>  `device_code_expires_at` timestamp NULL DEFAULT NULL,<br>  `device_code_metadata` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,<br>  PRIMARY KEY (`id`) USING BTREE<br>) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-6.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="10-2-1-2-oauth2-authorization-consent-表"><a href="#10-2-1-2-oauth2-authorization-consent-表" class="headerlink" title="10.2.1.2. oauth2_authorization_consent 表"></a>10.2.1.2. oauth2_authorization_consent 表</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `authorization`.`oauth2_authorization_consent`  (<br>  `registered_client_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `principal_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `authorities` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,<br>  PRIMARY KEY (`registered_client_id`, `principal_name`) USING BTREE<br>) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="10-2-2-配置类配置"><a href="#10-2-2-配置类配置" class="headerlink" title="10.2.2. 配置类配置"></a>10.2.2. 配置类配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> OAuth2AuthorizationService <span class="hljs-title function_">authorizationService</span><span class="hljs-params">(DataSource dataSource,</span><br><span class="hljs-params">                                                           RegisteredClientRepository registeredClientRepository)</span> &#123;<br>        <span class="hljs-type">JdbcOperations</span> <span class="hljs-variable">jdbcOperations</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>(dataSource);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcOAuth2AuthorizationService</span>(jdbcOperations, registeredClientRepository);<br>    &#125;<br>    <br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> OAuth2AuthorizationConsentService <span class="hljs-title function_">authorizationConsentService</span><span class="hljs-params">(</span><br><span class="hljs-params">            DataSource dataSource, RegisteredClientRepository registeredClientRepository)</span> &#123;<br>        <span class="hljs-type">JdbcOperations</span> <span class="hljs-variable">jdbcOperations</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>(dataSource);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcOAuth2AuthorizationConsentService</span>(jdbcOperations, registeredClientRepository);<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>考虑到 <code>Jackson</code> 的反序列化白名单限制，我们在配置 <code>authorizationService</code> 时，可能会配置成这样：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// SecurityConfig</span><br><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.Module;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> OAuth2AuthorizationService <span class="hljs-title function_">authorizationService</span><span class="hljs-params">(JdbcTemplate jdbcTemplate, RegisteredClientRepository registeredClientRepository)</span> &#123;<br>		<br>        <span class="hljs-type">JdbcOAuth2AuthorizationService</span> <span class="hljs-variable">authorizationService</span> <span class="hljs-operator">=</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcOAuth2AuthorizationService</span>(jdbcTemplate, registeredClientRepository);<br>		<br>        <span class="hljs-comment">// 获取默认的 Jackson ObjectMapper</span><br>        <span class="hljs-type">ObjectMapper</span> <span class="hljs-variable">objectMapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>();<br>        <span class="hljs-type">ClassLoader</span> <span class="hljs-variable">classLoader</span> <span class="hljs-operator">=</span> JdbcOAuth2AuthorizationService.class.getClassLoader();<br>		<br>        <span class="hljs-comment">// 注册 Spring Security 通用模块</span><br>        objectMapper.registerModules(SecurityJackson2Modules.getModules(classLoader));<br>		<br>        <span class="hljs-comment">// 注册 SAS 专属模块</span><br>        objectMapper.registerModule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">OAuth2AuthorizationServerJackson2Module</span>());<br>		<br>        <span class="hljs-comment">// 注册我们自己的 Mixin</span><br>        objectMapper.addMixIn(UserInfo.class, UserInfoMixin.class);<br>        objectMapper.addMixIn(CustomerUserDetailsImpl.class, CustomerUserDetailsImplMixin.class);<br>		<br>        JdbcOAuth2AuthorizationService.<span class="hljs-type">OAuth2AuthorizationRowMapper</span> <span class="hljs-variable">rowMapper</span> <span class="hljs-operator">=</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcOAuth2AuthorizationService</span>.OAuth2AuthorizationRowMapper(registeredClientRepository);<br>        rowMapper.setObjectMapper(objectMapper);<br>		<br>        JdbcOAuth2AuthorizationService.<span class="hljs-type">OAuth2AuthorizationParametersMapper</span> <span class="hljs-variable">parametersMapper</span> <span class="hljs-operator">=</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcOAuth2AuthorizationService</span>.OAuth2AuthorizationParametersMapper();<br>        parametersMapper.setObjectMapper(objectMapper);<br>		<br>        authorizationService.setAuthorizationRowMapper(rowMapper);<br>        authorizationService.setAuthorizationParametersMapper(parametersMapper);<br>		<br>        <span class="hljs-keyword">return</span> authorizationService;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="11-Access-Token-公私钥-配置"><a href="#11-Access-Token-公私钥-配置" class="headerlink" title="11. Access Token 公私钥 配置"></a>11. Access Token 公私钥 配置</h2><h3 id="11-1-配置概述"><a href="#11-1-配置概述" class="headerlink" title="11.1. 配置概述"></a>11.1. 配置概述</h3><p><code>SAS</code> 默认返回的 <code>Access Token</code> 是一种 <code>JWE</code>，使用 <code>RS256</code> 算法进行签名。这意味着系统需要一对 <code>RSA</code> 公私钥：私钥用于生成签名，公钥用于验证签名。</p>
+<p>默认情况下，<code>SAS</code> 在启动时会随机生成一对 <code>RSA</code> 公私钥，并仅存储在内存中。在分布式部署场景下，不同的 <code>SAS</code> 实例会各自生成不同的密钥对，导致签发的 <code>Token</code> 无法在其他实例上被验证。为了解决这个问题，我们需要统一管理 <code>RSA</code> 密钥对，确保所有实例共享同一套公私钥。</p>
+<p>这些数据存储在内存中，而不是保存在 <code>HttpSession</code> 中，因此不能通过分布式 <code>Session</code> 来解决。在遇到此类数据存储在内存的场景时，常见的处理方式通常有两种：</p>
+<ol>
+<li>数据存入数据库</li>
+<li>数据存入配置中心</li>
+</ol>
+<p>在这里，我们选择采用数据存入数据库的方案。</p>
+<hr>
+<h3 id="11-2-具体配置"><a href="#11-2-具体配置" class="headerlink" title="11.2. 具体配置"></a>11.2. 具体配置</h3><h4 id="11-2-1-数据库表准备"><a href="#11-2-1-数据库表准备" class="headerlink" title="11.2.1. 数据库表准备"></a>11.2.1. 数据库表准备</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs mysql">CREATE TABLE `authorization`.`jwk_keys`  (<br>  `kid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `jwk_json` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,<br>  `active` tinyint NOT NULL,<br>  `created_at` timestamp NOT NULL,<br>  `expires_at` timestamp NOT NULL,<br>  PRIMARY KEY (`kid`) USING BTREE<br>) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringAuthorizationServer%EF%BC%88SAS%EF%BC%89-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="11-2-2-编写-JwkKeys-Entity-类"><a href="#11-2-2-编写-JwkKeys-Entity-类" class="headerlink" title="11.2.2. 编写 JwkKeys Entity 类"></a>11.2.2. 编写 JwkKeys Entity 类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JwkKeys</span> &#123;<br>	<br>    <span class="hljs-keyword">private</span> String kid;<br>	<br>    <span class="hljs-keyword">private</span> String jwkJson;<br>	<br>    <span class="hljs-keyword">private</span> Boolean active;<br>	<br>    <span class="hljs-keyword">private</span> LocalDateTime createdAt;<br>	<br>    <span class="hljs-keyword">private</span> LocalDateTime expiresAt;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="11-2-3-编写-JwkKeysMapper"><a href="#11-2-3-编写-JwkKeysMapper" class="headerlink" title="11.2.3. 编写 JwkKeysMapper"></a>11.2.3. 编写 JwkKeysMapper</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">JwkKeysMapper</span> &#123;<br>	<br>    <span class="hljs-meta">@Select(&quot;&quot;&quot;</span><br><span class="hljs-meta">            SELECT kid, jwk_json, active, created_at, expires_at</span><br><span class="hljs-meta">            FROM authorization.jwk_keys</span><br><span class="hljs-meta">            WHERE active = 1 AND NOW() &lt; expires_at</span><br><span class="hljs-meta">            ORDER BY created_at DESC</span><br><span class="hljs-meta">            LIMIT 1</span><br><span class="hljs-meta">            &quot;&quot;&quot;)</span><br>    JwkKeys <span class="hljs-title function_">getActiveKey</span><span class="hljs-params">()</span>;<br>	<br>    <span class="hljs-meta">@Select(&quot;&quot;&quot;</span><br><span class="hljs-meta">            SELECT kid, jwk_json, active, created_at, expires_at</span><br><span class="hljs-meta">            FROM authorization.jwk_keys</span><br><span class="hljs-meta">            WHERE kid = #&#123;kid&#125;</span><br><span class="hljs-meta">            &quot;&quot;&quot;)</span><br>    JwkKeys <span class="hljs-title function_">getKeyById</span><span class="hljs-params">(String kid)</span>;<br>	<br>    <span class="hljs-meta">@Insert(&quot;&quot;&quot;</span><br><span class="hljs-meta">            INSERT INTO authorization.jwk_keys</span><br><span class="hljs-meta">            (kid, jwk_json, active, created_at, expires_at)</span><br><span class="hljs-meta">            VALUES (#&#123;kid&#125;, #&#123;jwkJson&#125;, #&#123;active&#125;, #&#123;createdAt&#125;, #&#123;expiresAt&#125;)</span><br><span class="hljs-meta">            &quot;&quot;&quot;)</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">insertKey</span><span class="hljs-params">(JwkKeys key)</span>;<br>	<br>    <span class="hljs-meta">@Update(&quot;&quot;&quot;</span><br><span class="hljs-meta">            UPDATE authorization.jwk_keys</span><br><span class="hljs-meta">            SET active = #&#123;active&#125;</span><br><span class="hljs-meta">            WHERE kid = #&#123;kid&#125;</span><br><span class="hljs-meta">            &quot;&quot;&quot;)</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateKeyStatus</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;kid&quot;)</span> String kid, <span class="hljs-meta">@Param(&quot;active&quot;)</span> Boolean active)</span>;<br>	<br>    <span class="hljs-meta">@Select(&quot;SELECT kid, jwk_json, active, created_at, expires_at FROM authorization.jwk_keys&quot;)</span><br>    List&lt;JwkKeys&gt; <span class="hljs-title function_">listKeys</span><span class="hljs-params">()</span>;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="11-2-4-编写-JwkKeysService"><a href="#11-2-4-编写-JwkKeysService" class="headerlink" title="11.2.4. 编写 JwkKeysService"></a>11.2.4. 编写 JwkKeysService</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JwkKeysService</span> &#123;<br>	<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> JwkKeysMapper jwkKeysMapper;<br>	<br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-meta">@Transactional</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">initializeKeys</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">JwkKeys</span> <span class="hljs-variable">activeKey</span> <span class="hljs-operator">=</span> jwkKeysMapper.getActiveKey();<br>        <span class="hljs-keyword">if</span> (activeKey == <span class="hljs-literal">null</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;数据库中没有可用的有效密钥，正在生成新的密钥...&quot;</span>);<br>            <span class="hljs-keyword">try</span> &#123;<br>                <span class="hljs-type">RSAKey</span> <span class="hljs-variable">rsaKey</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RSAKeyGenerator</span>(<span class="hljs-number">2048</span>)<br>                        .keyID(UUID.randomUUID().toString())<br>                        .generate();<br>				<br>                <span class="hljs-type">JwkKeys</span> <span class="hljs-variable">newKey</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JwkKeys</span>();<br>                newKey.setKid(rsaKey.getKeyID());<br>                newKey.setJwkJson(rsaKey.toJSONString());<br>                newKey.setActive(<span class="hljs-literal">true</span>);<br>                newKey.setCreatedAt(LocalDateTime.now(ZoneOffset.UTC));<br>                newKey.setExpiresAt(LocalDateTime.now(ZoneOffset.UTC).plusYears(<span class="hljs-number">1</span>));<br>				<br>                jwkKeysMapper.insertKey(newKey);<br>                System.out.println(<span class="hljs-string">&quot;新的密钥已生成并存入数据库，KID:&quot;</span> + newKey.getKid());<br>				<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                System.out.println(<span class="hljs-string">&quot;生成和存储新密钥时发生错误&quot;</span> + e);<br>            &#125;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;数据库中已存在有效密钥，KID:&quot;</span> + activeKey.getKid());<br>        &#125;<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> List&lt;JwkKeys&gt; <span class="hljs-title function_">listKeys</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> jwkKeysMapper.listKeys();<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="11-2-5-配置类配置"><a href="#11-2-5-配置类配置" class="headerlink" title="11.2.5. 配置类配置"></a>11.2.5. 配置类配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableWebSecurity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SecurityConfig</span> &#123;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RegisteredClientRepository <span class="hljs-title function_">registeredClientRepository</span><span class="hljs-params">(JdbcTemplate jdbcTemplate)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcRegisteredClientRepository</span>(jdbcTemplate);<br>    &#125;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> AuthorizationServerSettings <span class="hljs-title function_">authorizationServerSettings</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> AuthorizationServerSettings.builder().build();<br>    &#125;<br>	<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> JWKSource&lt;SecurityContext&gt; <span class="hljs-title function_">jwkSource</span><span class="hljs-params">(JwkKeysService jwkKeysService)</span> &#123;<br>	    <br>        <span class="hljs-keyword">return</span> (jwkSelector, securityContext) -&gt; &#123;<br>            List&lt;JwkKeys&gt; keyEntities = jwkKeysService.listKeys();<br>			<br>            List&lt;JWK&gt; jwkList = keyEntities.stream()<br>                    .map(keyEntity -&gt; &#123;<br>                        <span class="hljs-keyword">try</span> &#123;<br>                            <span class="hljs-keyword">return</span> JWK.parse(keyEntity.getJwkJson());<br>                        &#125; <span class="hljs-keyword">catch</span> (ParseException e) &#123;<br>                            <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>                        &#125;<br>                    &#125;)<br>                    .filter(jwk -&gt; jwk != <span class="hljs-literal">null</span>)<br>                    .collect(Collectors.toList());<br>            <span class="hljs-type">JWKSet</span> <span class="hljs-variable">jwkSet</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JWKSet</span>(jwkList);<br>            <span class="hljs-keyword">return</span> jwkSelector.select(jwkSet);<br>        &#125;;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="六、快速上手"><a href="#六、快速上手" class="headerlink" title="六、快速上手"></a>六、快速上手</h1><h2 id="1-添加相关依赖"><a href="#1-添加相关依赖" class="headerlink" title="1. 添加相关依赖"></a>1. 添加相关依赖</h2><ol>
+<li>创建时<ol>
+<li>Web<ol>
+<li>Spring Web</li>
+<li>Spring Session for Spring Data Redis</li>
+</ol>
+</li>
+<li>Security<ol>
+<li>Spring Security</li>
+<li>OAuth2 Authorization Server</li>
+</ol>
+</li>
+<li>SQL<ol>
+<li>JDBC API</li>
+<li>MyBatis Framework</li>
+<li>MySQL Driver</li>
+</ol>
+</li>
+<li>NoSQL<ol>
+<li>Spring Data Redis</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-进行-Spring-Data-MyBatis-相关配置"><a href="#2-进行-Spring-Data-MyBatis-相关配置" class="headerlink" title="2. 进行 Spring Data MyBatis 相关配置"></a>2. 进行 Spring Data MyBatis 相关配置</h2><p>详见笔记：MySQL</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.md">笔记：MySQL</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="3-进行-Spring-Data-Redis-相关配置"><a href="#3-进行-Spring-Data-Redis-相关配置" class="headerlink" title="3. 进行 Spring Data Redis 相关配置"></a>3. 进行 Spring Data Redis 相关配置</h2><p>详见笔记：Redis</p>
+<ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ARedis.md">笔记：Redis</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="4-进行-Spring-Authorization-Server-相关配置"><a href="#4-进行-Spring-Authorization-Server-相关配置" class="headerlink" title="4. 进行 Spring Authorization Server 相关配置"></a>4. 进行 Spring Authorization Server 相关配置</h2><p>详见上文：相关配置</p>
+<hr>
+<h2 id="5-访问-OAuth-端点"><a href="#5-访问-OAuth-端点" class="headerlink" title="5. 访问 OAuth 端点"></a>5. 访问 OAuth 端点</h2><h3 id="5-1-oauth2-authorize"><a href="#5-1-oauth2-authorize" class="headerlink" title="5.1. &#x2F;oauth2&#x2F;authorize"></a>5.1. &#x2F;oauth2&#x2F;authorize</h3><p>以如下客户端为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">RegisteredClient</span> <span class="hljs-variable">registeredClient</span> <span class="hljs-operator">=</span> RegisteredClient.withId(UUID.randomUUID().toString())<br>		.clientId(<span class="hljs-string">&quot;my-client-app&quot;</span>)<br>		.clientIdIssuedAt(Instant.now())<br>		.clientSecret(<span class="hljs-string">&quot;&#123;noop&#125;123456&quot;</span>)<br>		.clientName(<span class="hljs-string">&quot;咸阳猴子公司&quot;</span>)<br>		.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)<br>		.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)<br>		.clientAuthenticationMethod(ClientAuthenticationMethod.NONE)<br>		.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)<br>		.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)<br>		.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)<br>		.redirectUri(<span class="hljs-string">&quot;http://127.0.0.1:8080/authorized&quot;</span>)<br>		.scope(<span class="hljs-string">&quot;Simple_Userinfo&quot;</span>)<br>		.scope(<span class="hljs-string">&quot;God_Manager&quot;</span>)<br>		.clientSettings(ClientSettings.builder()<br>				.requireAuthorizationConsent(<span class="hljs-literal">true</span>)<br>				.requireProofKey(<span class="hljs-literal">false</span>)<br>				.build())<br>		.tokenSettings(TokenSettings.builder()<br>				.authorizationCodeTimeToLive(Duration.ofMinutes(<span class="hljs-number">30</span>))<br>				.accessTokenTimeToLive(Duration.ofMinutes(<span class="hljs-number">500</span>))<br>				.accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)<br>				.refreshTokenTimeToLive(Duration.ofMinutes(<span class="hljs-number">500</span>))<br>				.reuseRefreshTokens(<span class="hljs-literal">true</span>)<br>				.build())<br>		.build();<br></code></pre></td></tr></table></figure>
+
+<p>发起的授权请求为：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://127.0.0.1:8080/oauth2/authorize?response_type=code&amp;client_id=my-client-app&amp;redirect_uri=http://127.0.0.1:8080/authorized&amp;scope=Simple_Userinfo%20God_Manager&amp;state=xyz123<br></code></pre></td></tr></table></figure>
+
+<p>回调的请求为：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">http://127.0.0.1:8080/authorized?code=77hqpvkcejwTHtm001lar6kcDNPVRpEWmwO9gljrwvkmoE6RVCmELvVbHXVK_Te-ouB3m-P_uX_s4zu2wWbE-YqaKmZeKQAydoIdB0HYMMs9YjiMfVETUjjkmcZweeo0&amp;state=xyz123<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-2-oauth2-token"><a href="#5-2-oauth2-token" class="headerlink" title="5.2. &#x2F;oauth2&#x2F;token"></a>5.2. &#x2F;oauth2&#x2F;token</h3><p>发起的令牌请求为：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cmd">curl -X POST ^<br><span class="hljs-function">http://127.0.0.1:8080/<span class="hljs-title">oauth2</span>/<span class="hljs-title">token</span> ^</span><br><span class="hljs-function">-<span class="hljs-title">H</span> &quot;<span class="hljs-title">Content</span>-<span class="hljs-title">Type</span>: <span class="hljs-title">application</span>/<span class="hljs-title">x</span>-<span class="hljs-title">www</span>-<span class="hljs-title">form</span>-<span class="hljs-title">urlencoded</span>&quot; ^</span><br><span class="hljs-function">-<span class="hljs-title">d</span> &quot;<span class="hljs-title">grant_type</span>=<span class="hljs-title">authorization_code</span>&quot; ^</span><br><span class="hljs-function">-<span class="hljs-title">d</span> &quot;<span class="hljs-title">code</span>=<span class="hljs-title">fsqfIh4y1GqcwKmNsGImPGpa3FNI_GoSmeZHfmZ_MDou3m96XxZz8h6HHzyMRjRX_hnTabwo9akDfNZRNQ9v_7GQxQvn9IsXjHSib7wau4ex3S5TbY4egaDlbubUEiTE</span>&quot; ^</span><br><span class="hljs-function">-<span class="hljs-title">d</span> &quot;<span class="hljs-title">redirect_uri</span>=<span class="hljs-title">http</span>://127.0.0.1:8080/<span class="hljs-title">authorized</span>&quot; ^</span><br><span class="hljs-function">-<span class="hljs-title">d</span> &quot;<span class="hljs-title">client_id</span>=<span class="hljs-title">my</span>-<span class="hljs-title">client</span>-<span class="hljs-title">app</span>&quot; ^</span><br><span class="hljs-function">-<span class="hljs-title">d</span> &quot;<span class="hljs-title">client_secret</span>=&#123;<span class="hljs-title">noop</span>&#125;123456&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>返回的响应为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;access_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eyJraWQiOiIzY2M0ZmVjNS00YzRhLTQ5YjYtOTllMC0xZWYyZDU0NDY5N2YiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXVkIjoibXktY2xpZW50LWFwcCIsIm5iZiI6MTc1ODU1MTY0MCwic2NvcGUiOlsiU2ltcGxlX1VzZXJpbmZvIl0sImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MCIsImV4cCI6MTc1ODU4MTY0MCwiaWF0IjoxNzU4NTUxNjQwLCJqdGkiOiJjZGYwODg0OS01NjkwLTQ0NDItYWIyOS00MjEzY2YyMmQ0YTMifQ.WjlZoVeavC71HrdKFGiB3icpVaCkVGCVKqdixPZVmoCBDpdPt7iyJJ3G9n8uaBiaOH6LRmjIL1Cml41PG9QYSftCe_0A7atZirwiFXGBg46GuY5AXO8ZPS7d0_zCa_67J5orxIY5JjXn7-7yCn8aNWwQ7CTG6-zwVj2-Gr-QzEr0wAkhqCE1fIeFkE7_e4EPM7QwHzNNc-6btJJ-slkgNfMCIAQ4FtPDDJeR14L4b8O0Qz7wSmQkg_StiVK5W0or_NFOQQ1ZX59U1r16Lf-IC5NSj0uYbbPsdm79kC7z6HsMs5wZb-O6nzdDLNcHPeWTWRnC3KtFX8SZYCSLE5Oa2A&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;refresh_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JJUMxNub5fHoXqSOwskDROG-SJh-1-h63KVWPrGZxe-ZiptJuQYR69fB5CSyDScuR-MCq7qF-ynvSjcv6IopZ1MBKlecbeHBByhVKK6ZGFKKRTS5l3CA1sdqtYifo8BF&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Simple_Userinfo&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;token_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bearer&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;expires_in&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">30000</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-3-oauth2-introspect"><a href="#5-3-oauth2-introspect" class="headerlink" title="5.3. &#x2F;oauth2&#x2F;introspect"></a>5.3. &#x2F;oauth2&#x2F;introspect</h3><p>发起的交换请求为：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs http">curl -X POST ^<br>  http://127.0.0.1:8080/oauth2/token ^<br>  -H &quot;Content-Type: application/x-www-form-urlencoded&quot; ^<br>  -d &quot;grant_type=refresh_token&quot; ^<br>  -d &quot;refresh_token=JJUMxNub5fHoXqSOwskDROG-SJh-1-h63KVWPrGZxe-ZiptJuQYR69fB5CSyDScuR-MCq7qF-ynvSjcv6IopZ1MBKlecbeHBByhVKK6ZGFKKRTS5l3CA1sdqtYifo8BF&quot; ^<br>  -d &quot;client_id=my-client-app&quot; ^<br>  -d &quot;client_secret=123456&quot;<br></code></pre></td></tr></table></figure>
+
+<p>返回的响应为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;access_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eyJraWQiOiIzY2M0ZmVjNS00YzRhLTQ5YjYtOTllMC0xZWYyZDU0NDY5N2YiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXVkIjoibXktY2xpZW50LWFwcCIsIm5iZiI6MTc1ODU1Mjk3Niwic2NvcGUiOlsiU2ltcGxlX1VzZXJpbmZvIl0sImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MCIsImV4cCI6MTc1ODU4Mjk3NiwiaWF0IjoxNzU4NTUyOTc2LCJqdGkiOiI2YzFhODU5MC1hZmYwLTQ1OWEtOGE3Ny01OGI0ZTcwODQwMzMifQ.fvoU3K8_5UPDZa0t7fcduiz6Y1jUAyQmW9AvJ5CWnH0ecrUgLnnTFIrfRGBgcR1uXHD9YPCckiVExOpnjKVe7kGj9MGOZW2wUSqGAkNPMMriv5rBT8KJdTuTyT0KSehVfdwAXg7YMna1UkZaX0GosN7BfGaw_UpHzOHn-M_LjTH2ysGq-4DNHeq-6MOzpnSjRVhw0DX1msW8wr9q3qV3oJsgvJN3cIPVUOAxzYapV3KugrZfU8P2nLAjJlstc0sW0B7WRAPk1E43NbU7evOAgOMbxBHtvK4OKTNOgxjcIXQ3MNol4ZSqKyqKm8vKS5cu8J7-1XFx4RJyiJDz9ReQTw&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;refresh_token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JJUMxNub5fHoXqSOwskDROG-SJh-1-h63KVWPrGZxe-ZiptJuQYR69fB5CSyDScuR-MCq7qF-ynvSjcv6IopZ1MBKlecbeHBByhVKK6ZGFKKRTS5l3CA1sdqtYifo8BF&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Simple_Userinfo&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;token_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Bearer&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;expires_in&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">29999</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="5-4-oauth2-revoke"><a href="#5-4-oauth2-revoke" class="headerlink" title="5.4. &#x2F;oauth2&#x2F;revoke"></a>5.4. &#x2F;oauth2&#x2F;revoke</h3><p><font color="#92d050">1. 撤销 Access Token 请求</font></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cmd">curl -X POST &quot;http://localhost:<span class="hljs-number">8080</span>/oauth2/revoke&quot; ^<br>  -H &quot;Content-<span class="hljs-built_in">Type</span>: application/x-www-form-urlencoded&quot; ^<br>  -u &quot;my-client-app:&#123;noop&#125;<span class="hljs-number">123456</span>&quot; ^<br>  -d &quot;token=eyJraWQiOiIzY2M0ZmVjNS00YzRhLTQ5YjYtOTllMC0xZWYyZDU0NDY5N2YiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiYXVkIjoibXktY2xpZW50LWFwcCIsIm5iZiI6MTc1ODU1Mjk3Niwic2NvcGUiOlsiU2ltcGxlX1VzZXJpbmZvIl0sImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6ODA4MCIsImV4cCI6MTc1ODU4Mjk3NiwiaWF0IjoxNzU4NTUyOTc2LCJqdGkiOiI2YzFhODU5MC1hZmYwLTQ1OWEtOGE3Ny01OGI0ZTcwODQwMzMifQ.fvoU3K8_5UPDZa0t7fcduiz6Y1jUAyQmW9AvJ5CWnH0ecrUgLnnTFIrfRGBgcR1uXHD9YPCckiVExOpnjKVe7kGj9MGOZW2wUSqGAkNPMMriv5rBT8KJdTuTyT0KSehVfdwAXg7YMna1UkZaX0GosN7BfGaw_UpHzOHn-M_LjTH2ysGq-<span class="hljs-number">4</span>DNHeq-<span class="hljs-number">6</span>MOzpnSjRVhw0DX1msW8wr9q3qV3oJsgvJN3cIPVUOAxzYapV3KugrZfU8P2nLAjJlstc0sW0B7WRAPk1E43NbU7evOAgOMbxBHtvK4OKTNOgxjcIXQ3MNol4ZSqKyqKm8vKS5cu8J7-<span class="hljs-number">1</span>XFx4RJyiJDz9ReQTw&quot; ^<br>  -d &quot;token_type_hint=access_token&quot;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 撤销 Refresh Token 请求</font></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cmd">curl -X POST &quot;http://localhost:<span class="hljs-number">8080</span>/oauth2/revoke&quot; ^<br>  -H &quot;Content-<span class="hljs-built_in">Type</span>: application/x-www-form-urlencoded&quot; ^<br>  -u &quot;my-client-app:<span class="hljs-number">123456</span>&quot; ^<br>  -d &quot;token=JJUMxNub5fHoXqSOwskDROG-SJh-<span class="hljs-number">1</span>-h63KVWPrGZxe-ZiptJuQYR69fB5CSyDScuR-MCq7qF-ynvSjcv6IopZ1MBKlecbeHBByhVKK6ZGFKKRTS5l3CA1sdqtYifo8BF&quot; ^<br>  -d &quot;token_type_hint=refresh_token&quot;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>撤销 <code>Refresh Token</code> 会同时使该 <code>Refresh Token</code> 关联的所有 <code>Access Token</code> 失效</li>
+</ol>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Spring Authorization Server</div>
+      <div>https://wangjia5289.github.io/2025/09/15/笔记：SpringAuthorizationServer（SAS）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 15, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9AOAuth%E5%8D%8F%E8%AE%AE/" title="笔记：OAuth 协议">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：OAuth 协议</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity/" title="笔记：Spring Security">
+                        <span class="hidden-mobile">笔记：Spring Security</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

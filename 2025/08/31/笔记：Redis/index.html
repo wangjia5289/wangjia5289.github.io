@@ -31,9 +31,12 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-1.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-3.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-5.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-7.png">
 <meta property="article:published_time" content="2025-08-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-04T15:29:41.595Z">
+<meta property="article:modified_time" content="2025-09-19T09:12:59.253Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis.xmind">
@@ -230,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.8k words
+          8.1k words
         
       </span>
     
@@ -241,7 +244,7 @@
         
         
         
-          49 mins
+          68 mins
         
       </span>
     
@@ -296,7 +299,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-09-04T23:29:41+08:00
+                    Last updated on 2025-09-19T17:12:59+08:00
                   
                   
 
@@ -359,8 +362,29 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="地理空间（Geospatial）"><a href="#地理空间（Geospatial）" class="headerlink" title="地理空间（Geospatial）"></a>地理空间（Geospatial）</h3><h2 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h2><h3 id="连接命令"><a href="#连接命令" class="headerlink" title="连接命令"></a>连接命令</h3><p><font color="#92d050">1. 心跳命令</font><br>心跳命令用于检测该客户端与 <code>Redis</code> 的连接是正常</p>
+<h3 id="地理空间（Geospatial）"><a href="#地理空间（Geospatial）" class="headerlink" title="地理空间（Geospatial）"></a>地理空间（Geospatial）</h3><h2 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h2><h3 id="连接命令"><a href="#连接命令" class="headerlink" title="连接命令"></a>连接命令</h3><h4 id="心跳命令"><a href="#心跳命令" class="headerlink" title="心跳命令"></a>心跳命令</h4><p>心跳命令用于检测该客户端与 <code>Redis</code> 的连接是正常</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-built_in">ping</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="保存命令"><a href="#保存命令" class="headerlink" title="保存命令"></a>保存命令</h3><h4 id="RDB-相关命令"><a href="#RDB-相关命令" class="headerlink" title="RDB 相关命令"></a>RDB 相关命令</h4><p><font color="#92d050">1. 手动触发 RDB</font><br>RDB 快照的生成会依据配置项 <code>save 3600 1 300 100 60 10000</code> 自动触发，我们也可以通过命令手动触发保存。</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta"># 1. 同步阻塞保存（由主进程负责）</span><br><span class="hljs-keyword">SAVE</span><br><br><br><span class="hljs-meta"># 2. 异步非阻塞保存（fork 出一个子进程，由子进程负责）</span><br>BGSAVE<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>除上两种情况，还有几种情况会进行触发 <code>RDB</code>：<ol>
+<li>执行 <code>SHUTDOWN</code> 并且没有设置开启 <code>AOF</code> 持久化时</li>
+<li>主从复制的时候，主节点自动触发 <code>RDB</code></li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. 获取最后一次成功保存快照的时间</font></p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">LASTSAVE</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 检查和修复 dump.rdb 文件</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">redis-<span class="hljs-keyword">check</span>-rdb dump6379.rdb<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="Key-命令"><a href="#Key-命令" class="headerlink" title="Key 命令"></a>Key 命令</h3><p><font color="#92d050">1. 删除 Key</font></p>
@@ -406,90 +430,122 @@
 <h4 id="启动-Redis-容器"><a href="#启动-Redis-容器" class="headerlink" title="启动 Redis 容器"></a>启动 Redis 容器</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name redis <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">6379</span>:<span class="hljs-number">6379</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/redis:/data <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  redis:latest <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  redis-server --appendonly yes --bind <span class="hljs-number">0.0.0.0</span> --requirepass wq666666<br></code></pre></td></tr></table></figure>
 
 <p><font color="#92d050">1. – appendonly yes</font><br>开启 AOF（Append Only File）持久化模式，简单可靠，适合这个场景</p>
-<p><font color="#92d050">2. –bind 0.0.0.0</font><br>Redis 默认只监听 127.0.0.1，也就是说只有通过本机地址 127.0.0.1:6379 才能访问它，哪怕你用本机的其他 IP 地址，例如 192.168.136.8：6379 也无法连接</p>
+<p><font color="#92d050">2. –bind 0.0.0.0</font><br>Redis 默认只监听 127.0.0.1，也就是说只有通过本机地址 127.0.0.1:6379 才能访问它，哪怕你用本机的其他 IP 地址，例如 192.168.136.8:6379 也无法连接</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>设置代理</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="Redis-Cluster-环境"><a href="#Redis-Cluster-环境" class="headerlink" title="Redis Cluster 环境"></a>Redis Cluster 环境</h2><h3 id="0-1-环境概述"><a href="#0-1-环境概述" class="headerlink" title="0.1. 环境概述"></a>0.1. 环境概述</h3><hr>
-<h3 id="0-2-环境特性"><a href="#0-2-环境特性" class="headerlink" title="0.2. 环境特性"></a>0.2. 环境特性</h3><h4 id="0-2-1-集群总体架构"><a href="#0-2-1-集群总体架构" class="headerlink" title="0.2.1. 集群总体架构"></a>0.2.1. 集群总体架构</h4><hr>
-<h4 id="0-2-2-集群线程特点"><a href="#0-2-2-集群线程特点" class="headerlink" title="0.2.2. 集群线程特点"></a>0.2.2. 集群线程特点</h4><p>并非所有分布式系统的线程都能总结出鲜明特征，没有独到之处的，也不必刻意总结</p>
+<p>dis6.0以前没有用户名的概念，只有一个全局密码。</p>
+<p>edis6.0+引I入了ACL，可以有多个用户。果没启用ACL，用户名不用写，默认就是null。</p>
+<h2 id="Redis-Cluster-环境"><a href="#Redis-Cluster-环境" class="headerlink" title="Redis Cluster 环境"></a>Redis Cluster 环境</h2><h3 id="1-1-环境概述"><a href="#1-1-环境概述" class="headerlink" title="1.1. 环境概述"></a>1.1. 环境概述</h3><hr>
+<h3 id="1-2-环境特性"><a href="#1-2-环境特性" class="headerlink" title="1.2. 环境特性"></a>1.2. 环境特性</h3><h4 id="1-2-1-集群总体架构"><a href="#1-2-1-集群总体架构" class="headerlink" title="1.2.1. 集群总体架构"></a>1.2.1. 集群总体架构</h4><hr>
+<h4 id="1-2-2-集群线程特点"><a href="#1-2-2-集群线程特点" class="headerlink" title="1.2.2. 集群线程特点"></a>1.2.2. 集群线程特点</h4><p>并非所有分布式系统的线程都能总结出鲜明特征，没有独到之处的，也不必刻意总结</p>
 <hr>
-<h4 id="0-2-3-节点角色与关系"><a href="#0-2-3-节点角色与关系" class="headerlink" title="0.2.3. 节点角色与关系"></a>0.2.3. 节点角色与关系</h4><p>集群各节点之间是对等关系：</p>
+<h4 id="1-2-3-节点角色与关系"><a href="#1-2-3-节点角色与关系" class="headerlink" title="1.2.3. 节点角色与关系"></a>1.2.3. 节点角色与关系</h4><hr>
+<h4 id="1-2-4-节点部署与启动"><a href="#1-2-4-节点部署与启动" class="headerlink" title="1.2.4. 节点部署与启动"></a>1.2.4. 节点部署与启动</h4><h5 id="1-2-4-1-核心前提"><a href="#1-2-4-1-核心前提" class="headerlink" title="1.2.4.1. 核心前提"></a>1.2.4.1. 核心前提</h5><hr>
+<h5 id="1-2-4-2-首个节点启动的流程"><a href="#1-2-4-2-首个节点启动的流程" class="headerlink" title="1.2.4.2. 首个节点启动的流程"></a>1.2.4.2. 首个节点启动的流程</h5><hr>
+<h5 id="1-2-4-3-后续节点加入的流程"><a href="#1-2-4-3-后续节点加入的流程" class="headerlink" title="1.2.4.3. 后续节点加入的流程"></a>1.2.4.3. 后续节点加入的流程</h5><hr>
+<h4 id="1-2-5-数据写入机制"><a href="#1-2-5-数据写入机制" class="headerlink" title="1.2.5. 数据写入机制"></a>1.2.5. 数据写入机制</h4><h5 id="1-2-5-1-元数据写入"><a href="#1-2-5-1-元数据写入" class="headerlink" title="1.2.5.1. 元数据写入"></a>1.2.5.1. 元数据写入</h5><hr>
+<h5 id="1-2-5-2-数据写入"><a href="#1-2-5-2-数据写入" class="headerlink" title="1.2.5.2. 数据写入"></a>1.2.5.2. 数据写入</h5><p>数据写入在北斗七剑的选择如下：</p>
 <ol>
-<li>无中心节点<ol>
-<li>集群中没有所谓的 “主” 节点来统一调度，所有节点彼此平等，地位对等、功能对等。</li>
+<li>天枢剑（节点的拓扑结构）：主从复制（分区主从）<ol>
+<li>Redis Cluster 采用虚拟槽分区，共计 16384 个槽（编号从 0 开始）。而一个主节点通常对应一个分区，本质上是由多个哈希槽组成的槽集合。</li>
+<li>每个 Key 通过哈希函数（<code>CRC16[key] &amp; 16383</code>）计算后，映射到编号为 0 到 16383 的槽内，槽隶属于哪个主节点，数据就存储在哪个主节点，而该主节点的从节点则负责对这些数据进行同步。</li>
 </ol>
 </li>
-<li>元数据全量同步<ol>
-<li>任何一个节点上的元数据操作，都会被实时同步到整个集群，确保所有节点信息一致</li>
+<li>天璇剑（数据的组织形式）：Key-Value 结构（扁平化 Key-Value 结构）<ol>
+<li>Redis 的核心数据模型就是一个巨大的字典（Dictionary），所有数据都以键值对的形式存储</li>
 </ol>
 </li>
-<li>平等的客户端接入点<ol>
-<li>客户端可以直接连接集群中的<strong>任意节点</strong>来执行操作，每个节点都是一个功能完备的入口。</li>
+<li>天权剑（数据的分布策略）：整体存储（分区）<ol>
+<li>每个 Key 通过哈希函数（<code>CRC16[key] &amp; 16383</code>）计算后，映射到编号为 0 到 16383 的槽内，槽隶属于哪个主节点，数据就存储在哪个主节点</li>
+</ol>
+</li>
+<li>天玑剑（数据的同步时机）：<ol>
+<li>同步复制<ol>
+<li>Redis 提供了 WAIT 命令，可以临时将异步复制变为同步复制</li>
+</ol>
+</li>
+<li>半同步复制<ol>
+<li>Redis 提供了 WAIT 命令，可以临时将异步复制变为半同步复制</li>
+</ol>
+</li>
+<li>异步复制（默认）<ol>
+<li>当主节点收到一个写请求后，它会先在自己的内存中执行该命令，然后立即向客户端返回成功响应</li>
+<li>之后，它才将这个写命令放入一个复制缓冲区（Replication Buffer），在后台异步地被从节点拉取</li>
 </ol>
 </li>
 </ol>
+</li>
+<li>玉衡剑（数据的同步传输）：快照 + 增量（日志拉取）<ol>
+<li>需要注意的是，这里的日志并不像 MySQL 那样的落盘二进制日志（Binary Log），而是基于命令的实时日志流，保存在内存的复制缓冲区中</li>
+</ol>
+</li>
+<li>开阳剑（数据的协调机制）：单点写入</li>
+<li>瑶光剑（数据的持久化保障）：<ol>
+<li>持久化逻辑：<ol>
+<li>状态持久化（默认）<ol>
+<li>在 Redis 中，状态持久化叫做 RDB，是 Redis 默认使用的数据持久化方式，通过将某个时刻的内存数据快照保存为一个二进制文件（默认名为 <code>dump.rdb</code>），每次保存的是整个数据库的完整状态。  </li>
+<li>Redis 会通过 <code>fork</code> 创建子进程，由子进程负责将数据写入快照文件。由于 <code>fork</code> 需要将主进程的页表复制一份，当数据量较大时，这一过程会带来明显的开销，从而对性能造成一定影响。</li>
+</ol>
+</li>
+<li>操作持久化（重写）<ol>
+<li>在 Redis 中，操作持久化叫做 AOF，会将 Redis 所执行的每一条写命令按顺序追加记录到日志文件中（默认文件名为 <code>appendonly.aof</code>）</li>
+</ol>
+</li>
+<li>混合持久化（推荐）<ol>
+<li>在 Redis 中，允许 RDB 和 AOF 一起开启。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>存储引擎实现：<ol>
+<li>RDB 的存储引擎实现：<ol>
+<li>写时复制（不依赖 WAL）</li>
+</ol>
+</li>
+<li>AOF 的存储引擎实现：<ol>
+<li>写时复制（依赖 WAL，直接写入 WAL）</li>
+<li>需要注意的是，这与传统数据库直接写入 WAL 略有不同，我们只是将 WAL 日志刷入磁盘（未依赖其他 WAL），而 Redis 的数据本体仍停留在内存中，并未被刷入磁盘文件。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>操作系统交互：<ol>
+<li>RDB 的操作系统交互：强制刷盘（定期分块刷盘、操作系统自由安排）<ol>
+<li>Redis 将 RDB 的 快照 的刷盘时机，交由我们自己选择，我们可以定期分块刷盘、操作系统自由安排</li>
+<li>Redis 为我们提供了定期分块刷盘，避免一次性在最后刷盘造成长时间卡顿。</li>
+</ol>
+</li>
+<li>AOF 的 WAL：强制刷盘（同步刷盘、间隔刷盘、操作系统自由安排）<ol>
+<li>Redis 将 AOF 的 WAL 的刷盘时机，交由我们自己选择，我们可以配置同步刷盘、间隔刷盘、操作系统自由安排</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-5.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="0-2-4-节点部署与启动"><a href="#0-2-4-节点部署与启动" class="headerlink" title="0.2.4. 节点部署与启动"></a>0.2.4. 节点部署与启动</h4><h5 id="0-2-4-1-核心前提"><a href="#0-2-4-1-核心前提" class="headerlink" title="0.2.4.1. 核心前提"></a>0.2.4.1. 核心前提</h5><p>在开始之前，所有希望加入集群的节点必须满足 X 个基本条件：</p>
-<ol>
-<li>各节点必须相互解析<ol>
-<li>因为每个 RabbitMQ 节点都有一个唯一名称，格式为 <code>rabbit@hostname</code>，其中 hostname 就是所在主机的主机名，例如：<code>rabbit@rbmq-node1</code></li>
-<li>在搭建集群时，RabbitMQ 会取出主机名（如 <code>rbmq-node1</code>），通过网络解析成对应的 IP 地址，然后发起连接</li>
-</ol>
-</li>
-</ol>
+<h4 id="1-2-6-数据读取机制"><a href="#1-2-6-数据读取机制" class="headerlink" title="1.2.6. 数据读取机制"></a>1.2.6. 数据读取机制</h4><h5 id="1-2-6-1-元数据读取"><a href="#1-2-6-1-元数据读取" class="headerlink" title="1.2.6.1. 元数据读取"></a>1.2.6.1. 元数据读取</h5><hr>
+<h5 id="1-2-6-2-数据读取"><a href="#1-2-6-2-数据读取" class="headerlink" title="1.2.6.2. 数据读取"></a>1.2.6.2. 数据读取</h5><hr>
+<h4 id="1-2-7-数据冗余机制"><a href="#1-2-7-数据冗余机制" class="headerlink" title="1.2.7. 数据冗余机制"></a>1.2.7. 数据冗余机制</h4><h5 id="1-2-7-1-元数据冗余"><a href="#1-2-7-1-元数据冗余" class="headerlink" title="1.2.7.1. 元数据冗余"></a>1.2.7.1. 元数据冗余</h5><hr>
+<h5 id="1-2-7-2-数据冗余"><a href="#1-2-7-2-数据冗余" class="headerlink" title="1.2.7.2. 数据冗余"></a>1.2.7.2. 数据冗余</h5><hr>
+<h4 id="1-2-8-数据事务支持"><a href="#1-2-8-数据事务支持" class="headerlink" title="1.2.8. 数据事务支持"></a>1.2.8. 数据事务支持</h4><h5 id="1-2-8-1-元数据事务支持"><a href="#1-2-8-1-元数据事务支持" class="headerlink" title="1.2.8.1. 元数据事务支持"></a>1.2.8.1. 元数据事务支持</h5><hr>
+<h5 id="1-2-8-2-数据事务支持"><a href="#1-2-8-2-数据事务支持" class="headerlink" title="1.2.8.2. 数据事务支持"></a>1.2.8.2. 数据事务支持</h5><hr>
+<h4 id="1-2-9-负载均衡策略"><a href="#1-2-9-负载均衡策略" class="headerlink" title="1.2.9. 负载均衡策略"></a>1.2.9. 负载均衡策略</h4><hr>
+<h4 id="1-2-10-故障转移机制"><a href="#1-2-10-故障转移机制" class="headerlink" title="1.2.10. 故障转移机制"></a>1.2.10. 故障转移机制</h4><hr>
+<h3 id="1-3-环境限制"><a href="#1-3-环境限制" class="headerlink" title="1.3. 环境限制"></a>1.3. 环境限制</h3><hr>
+<h3 id="1-4-环境要求"><a href="#1-4-环境要求" class="headerlink" title="1.4. 环境要求"></a>1.4. 环境要求</h3><h4 id="1-4-1-操作系统要求"><a href="#1-4-1-操作系统要求" class="headerlink" title="1.4.1. 操作系统要求"></a>1.4.1. 操作系统要求</h4><p>不依赖特定操作系统，支持在 Linux、macOS 和 Windows 环境下运行</p>
 <hr>
-<h5 id="0-2-4-2-首个节点启动的流程"><a href="#0-2-4-2-首个节点启动的流程" class="headerlink" title="0.2.4.2. 首个节点启动的流程"></a>0.2.4.2. 首个节点启动的流程</h5><hr>
-<h5 id="0-2-4-3-后续节点加入的流程"><a href="#0-2-4-3-后续节点加入的流程" class="headerlink" title="0.2.4.3. 后续节点加入的流程"></a>0.2.4.3. 后续节点加入的流程</h5><hr>
-<h4 id="0-2-5-数据写入机制"><a href="#0-2-5-数据写入机制" class="headerlink" title="0.2.5. 数据写入机制"></a>0.2.5. 数据写入机制</h4><h5 id="0-2-5-1-元数据写入"><a href="#0-2-5-1-元数据写入" class="headerlink" title="0.2.5.1. 元数据写入"></a>0.2.5.1. 元数据写入</h5><p>RabbitMQ 的元数据存储在 Mnesia 数据库中。Mnesia 是 Erlang 内置的分布式数据库，专为 Erlang 应用设计。每个 RabbitMQ 节点都会运行一个独立的 Mnesia 实例，这些实例共同组成一个集群。因此，这里描述的主要是 Mnesia 的写入流程。</p>
-<p>元数据写入在四个维度上的选择如下：</p>
-<ol>
-<li>维度一：同步复制（全同）</li>
-<li>维度二：多主复制（同步多主）</li>
-<li>维度三<ol>
-<li>底层技术：快照 + 增量同步（基于日志）</li>
-<li>实现方式：类 2PC 的事务机制</li>
-<li>详细流程：<ol>
-<li>客户端会将元数据变更请求发送到集群中的任一节点，我们把它称为 <strong>协调节点</strong>。</li>
-<li>协调节点在收到请求后，会首先启动一个 <strong>Mnesia 事务</strong>，为了保证隔离性和一致性，协调节点会主动向所有持有该表副本的节点发送<strong>锁请求</strong>。<ol>
-<li>并不是像标准 2PC 那样先进入 “准备阶段”，而是先尝试把相关资源的锁都拿到手</li>
-<li>一般数据库都是边执行边逐步申请锁，而 Mnesia 是以访问模式尝试获取相应的锁</li>
-</ol>
-</li>
-<li>等所有相关节点都成功加锁后，协议才会继续进入接近传统 <strong>2PC</strong> 流程的后续阶段</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>维度四：整体保存<ol>
-<li>元数据会被完整的复制到每一个节点上</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h5 id="0-2-5-2-数据写入"><a href="#0-2-5-2-数据写入" class="headerlink" title="0.2.5.2. 数据写入"></a>0.2.5.2. 数据写入</h5><p>在 RabbitMQ 中，数据就是队列中的消息</p>
-<p>在普通集群模式下，消息队列中的数据仅存储于本地副本，没有什么好讲的</p>
-<hr>
-<h4 id="0-2-6-数据读取机制"><a href="#0-2-6-数据读取机制" class="headerlink" title="0.2.6. 数据读取机制"></a>0.2.6. 数据读取机制</h4><h5 id="0-2-6-1-元数据读取"><a href="#0-2-6-1-元数据读取" class="headerlink" title="0.2.6.1. 元数据读取"></a>0.2.6.1. 元数据读取</h5><hr>
-<h5 id="0-2-6-2-数据读取"><a href="#0-2-6-2-数据读取" class="headerlink" title="0.2.6.2. 数据读取"></a>0.2.6.2. 数据读取</h5><hr>
-<h4 id="0-2-7-数据冗余机制"><a href="#0-2-7-数据冗余机制" class="headerlink" title="0.2.7. 数据冗余机制"></a>0.2.7. 数据冗余机制</h4><h5 id="0-2-7-1-元数据冗余"><a href="#0-2-7-1-元数据冗余" class="headerlink" title="0.2.7.1. 元数据冗余"></a>0.2.7.1. 元数据冗余</h5><hr>
-<h5 id="0-2-7-2-数据冗余"><a href="#0-2-7-2-数据冗余" class="headerlink" title="0.2.7.2. 数据冗余"></a>0.2.7.2. 数据冗余</h5><hr>
-<h4 id="0-2-8-数据事务支持"><a href="#0-2-8-数据事务支持" class="headerlink" title="0.2.8. 数据事务支持"></a>0.2.8. 数据事务支持</h4><h5 id="0-2-8-1-元数据事务支持"><a href="#0-2-8-1-元数据事务支持" class="headerlink" title="0.2.8.1. 元数据事务支持"></a>0.2.8.1. 元数据事务支持</h5><hr>
-<h5 id="0-2-8-2-数据事务支持"><a href="#0-2-8-2-数据事务支持" class="headerlink" title="0.2.8.2. 数据事务支持"></a>0.2.8.2. 数据事务支持</h5><hr>
-<h4 id="0-2-9-负载均衡策略"><a href="#0-2-9-负载均衡策略" class="headerlink" title="0.2.9. 负载均衡策略"></a>0.2.9. 负载均衡策略</h4><p>不存在内置负载均衡策略，依靠外部负载均衡组件</p>
-<hr>
-<h4 id="0-2-10-故障转移机制"><a href="#0-2-10-故障转移机制" class="headerlink" title="0.2.10. 故障转移机制"></a>0.2.10. 故障转移机制</h4><p>不存在故障转移机制</p>
-<hr>
-<h3 id="0-3-环境限制"><a href="#0-3-环境限制" class="headerlink" title="0.3. 环境限制"></a>0.3. 环境限制</h3><hr>
-<h3 id="0-4-环境要求"><a href="#0-4-环境要求" class="headerlink" title="0.4. 环境要求"></a>0.4. 环境要求</h3><h4 id="0-4-1-操作系统要求"><a href="#0-4-1-操作系统要求" class="headerlink" title="0.4.1. 操作系统要求"></a>0.4.1. 操作系统要求</h4><p>不依赖特定操作系统，支持在 Linux、macOS 和 Windows 环境下运行</p>
-<hr>
-<h4 id="0-4-2-节点要求"><a href="#0-4-2-节点要求" class="headerlink" title="0.4.2. 节点要求"></a>0.4.2. 节点要求</h4><ol>
+<h4 id="1-4-2-运行环境要求"><a href="#1-4-2-运行环境要求" class="headerlink" title="1.4.2. 运行环境要求"></a>1.4.2. 运行环境要求</h4><hr>
+<h4 id="1-4-3-节点要求"><a href="#1-4-3-节点要求" class="headerlink" title="1.4.3. 节点要求"></a>1.4.3. 节点要求</h4><ol>
 <li>最小节点数量</li>
 <li>最大节点数量<ol>
 <li>没有硬性限制，但有软性上限</li>
@@ -525,17 +581,17 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="0-4-3-磁盘要求"><a href="#0-4-3-磁盘要求" class="headerlink" title="0.4.3. 磁盘要求"></a>0.4.3. 磁盘要求</h4><ol>
+<h4 id="1-4-4-磁盘要求"><a href="#1-4-4-磁盘要求" class="headerlink" title="1.4.4. 磁盘要求"></a>1.4.4. 磁盘要求</h4><ol>
 <li>最小磁盘容量</li>
 <li>推荐磁盘容量</li>
 </ol>
 <hr>
-<h4 id="0-4-4-CPU-要求"><a href="#0-4-4-CPU-要求" class="headerlink" title="0.4.4. CPU 要求"></a>0.4.4. CPU 要求</h4><ol>
+<h4 id="1-4-5-CPU-要求"><a href="#1-4-5-CPU-要求" class="headerlink" title="1.4.5. CPU 要求"></a>1.4.5. CPU 要求</h4><ol>
 <li>最小 CPU 核心数</li>
 <li>推荐 CPU 核心数</li>
 </ol>
 <hr>
-<h4 id="0-4-5-内存要求"><a href="#0-4-5-内存要求" class="headerlink" title="0.4.5. 内存要求"></a>0.4.5. 内存要求</h4><ol>
+<h4 id="1-4-6-内存要求"><a href="#1-4-6-内存要求" class="headerlink" title="1.4.6. 内存要求"></a>1.4.6. 内存要求</h4><ol>
 <li>最小内存大小</li>
 <li>推荐内存大小<ol>
 <li>轻量级场景</li>
@@ -546,7 +602,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="0-4-6-时间要求"><a href="#0-4-6-时间要求" class="headerlink" title="0.4.6. 时间要求"></a>0.4.6. 时间要求</h4><p>Redis 集群中的各节点之间必须保持时间同步。</p>
+<h4 id="1-4-7-时间要求"><a href="#1-4-7-时间要求" class="headerlink" title="1.4.7. 时间要求"></a>1.4.7. 时间要求</h4><p>Redis Cluster 集群中的各节点之间必须保持时间同步。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -554,9 +610,9 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="0-4-7-用户要求"><a href="#0-4-7-用户要求" class="headerlink" title="0.4.7. 用户要求"></a>0.4.7. 用户要求</h4><p>安全起见，在生产环境中，建议新建一个专门的系统用户（例如命名为 <code>redis</code>）来运行 Redis 服务，不建议赋予其过高权限（如 root 权限），以降低安全风险。通过限制权限，可以有效防止因服务漏洞导致整个系统被攻破。</p>
+<h4 id="1-4-8-用户要求"><a href="#1-4-8-用户要求" class="headerlink" title="1.4.8. 用户要求"></a>1.4.8. 用户要求</h4><p>安全起见，在生产环境中，建议新建一个专门的系统用户（例如命名为 <code>Redis</code>）来运行 Redis 服务，不建议赋予其过高权限（如 root 权限），以降低安全风险。通过限制权限，可以有效防止因服务漏洞导致整个系统被攻破。</p>
 <hr>
-<h4 id="0-4-8-端口要求"><a href="#0-4-8-端口要求" class="headerlink" title="0.4.8. 端口要求"></a>0.4.8. 端口要求</h4><table>
+<h4 id="1-4-9-端口要求"><a href="#1-4-9-端口要求" class="headerlink" title="1.4.9. 端口要求"></a>1.4.9. 端口要求</h4><table>
 <thead>
 <tr>
 <th align="center">端口</th>
@@ -602,17 +658,27 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="0-4-9-扩容要求"><a href="#0-4-9-扩容要求" class="headerlink" title="0.4.9. 扩容要求"></a>0.4.9. 扩容要求</h4><hr>
-<h4 id="0-4-10-Swap-分区要求"><a href="#0-4-10-Swap-分区要求" class="headerlink" title="0.4.10. Swap 分区要求"></a>0.4.10. Swap 分区要求</h4><p>swap 分区，简单来说，是操作系统在系统内存不足时，将某些程序不活跃或暂时不需要的数据移动到 swap 分区（位于硬盘），以释放内存资源供当前活跃程序使用。</p>
+<h4 id="1-4-10-扩容要求"><a href="#1-4-10-扩容要求" class="headerlink" title="1.4.10. 扩容要求"></a>1.4.10. 扩容要求</h4><hr>
+<h4 id="1-4-11-Swap-分区要求"><a href="#1-4-11-Swap-分区要求" class="headerlink" title="1.4.11. Swap 分区要求"></a>1.4.11. Swap 分区要求</h4><p>swap 分区，简单来说，是操作系统在系统内存不足时，将某些程序不活跃或暂时不需要的数据移动到 swap 分区（位于硬盘），以释放内存资源供当前活跃程序使用。</p>
 <p>由于 swap 分区依赖硬盘，其读写速度远低于内存。如果系统频繁使用 swap，会造成大量磁盘 I&#x2F;O，严重影响系统性能，甚至导致系统响应迟缓或无响应。因此，在性能敏感的场景（如数据库、实时计算、大内存服务器）中，通常建议禁用 swap，确保数据始终在高速内存中运行。</p>
-<p>我们推荐 Redis 服务器关闭 Swap 分区</p>
+<p>我们推荐 RabbitMQ 服务器关闭 Swap 分区</p>
 <hr>
-<h4 id="0-4-11-节点相互解析要求"><a href="#0-4-11-节点相互解析要求" class="headerlink" title="0.4.11. 节点相互解析要求"></a>0.4.11. 节点相互解析要求</h4><p>Redis Cluster 各节点并不强制必须相互解析</p>
+<h4 id="1-4-12-节点相互解析要求"><a href="#1-4-12-节点相互解析要求" class="headerlink" title="1.4.12. 节点相互解析要求"></a>1.4.12. 节点相互解析要求</h4><p>Redis 集群各个节点之间推荐相互解析</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>小规模：主机名解析</li>
+<li>中等规模：DNS 解析</li>
+<li>大规模：服务发现组件</li>
+</ol>
+</blockquote>
 <hr>
-<h3 id="0-5-环境准备"><a href="#0-5-环境准备" class="headerlink" title="0.5. 环境准备"></a>0.5. 环境准备</h3><h4 id="0-5-1-查看-Ubuntu-版本"><a href="#0-5-1-查看-Ubuntu-版本" class="headerlink" title="0.5.1. 查看 Ubuntu 版本"></a>0.5.1. 查看 Ubuntu 版本</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-5-环境准备"><a href="#1-5-环境准备" class="headerlink" title="1.5. 环境准备"></a>1.5. 环境准备</h3><h4 id="1-5-1-查看-Ubuntu-版本"><a href="#1-5-1-查看-Ubuntu-版本" class="headerlink" title="1.5.1. 查看 Ubuntu 版本"></a>1.5.1. 查看 Ubuntu 版本</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="0-5-2-节点列表"><a href="#0-5-2-节点列表" class="headerlink" title="0.5.2. 节点列表"></a>0.5.2. 节点列表</h4><table>
+<h4 id="运行环境准备"><a href="#运行环境准备" class="headerlink" title="运行环境准备"></a>运行环境准备</h4><hr>
+<h4 id="1-5-2-安装-JDK"><a href="#1-5-2-安装-JDK" class="headerlink" title="1.5.2. 安装 JDK"></a>1.5.2. 安装 JDK</h4><hr>
+<h4 id="1-5-3-节点列表"><a href="#1-5-3-节点列表" class="headerlink" title="1.5.3. 节点列表"></a>1.5.3. 节点列表</h4><table>
 <thead>
 <tr>
 <th align="center">IP</th>
@@ -626,30 +692,54 @@
 <tbody><tr>
 <td align="center">192.168.136.8</td>
 <td align="center">Root 盘</td>
-<td align="center">2 核</td>
-<td align="center">4GB</td>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis1</td>
+<td align="center">主节点一</td>
 </tr>
 <tr>
 <td align="center">192.168.136.9</td>
 <td align="center">Root 盘</td>
-<td align="center">2 核</td>
-<td align="center">4GB</td>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis2</td>
+<td align="center">主节点二</td>
 </tr>
 <tr>
 <td align="center">192.168.136.10</td>
 <td align="center">Root 盘</td>
-<td align="center">2 核</td>
-<td align="center">4GB</td>
-<td align="center"></td>
-<td align="center"></td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis3</td>
+<td align="center">主节点三</td>
+</tr>
+<tr>
+<td align="center">192.168.136.11</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis4</td>
+<td align="center">主节点一的从节点</td>
+</tr>
+<tr>
+<td align="center">192.168.136.12</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis5</td>
+<td align="center">主节点二的从节点</td>
+</tr>
+<tr>
+<td align="center">192.168.136.13</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">redis6</td>
+<td align="center">主节点三的从节点</td>
 </tr>
 </tbody></table>
 <hr>
-<h4 id="0-5-3-时间同步"><a href="#0-5-3-时间同步" class="headerlink" title="0.5.3. 时间同步"></a>0.5.3. 时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v chrony &gt;/dev/null 2&gt;&amp;1 || <span class="hljs-built_in">sudo</span> apt-get install -y chrony<br><br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br></code></pre></td></tr></table></figure>
+<h4 id="1-5-4-时间同步"><a href="#1-5-4-时间同步" class="headerlink" title="1.5.4. 时间同步"></a>1.5.4. 时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v chrony &gt;/dev/null 2&gt;&amp;1 || <span class="hljs-built_in">sudo</span> apt-get install -y chrony<br><br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -657,10 +747,10 @@
 <li>设置代理</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="0-5-4-开放端口"><a href="#0-5-4-开放端口" class="headerlink" title="0.5.4. 开放端口"></a>0.5.4. 开放端口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 1833<br><span class="hljs-built_in">sudo</span> ufw allow 1833/tcp<br><br>// 4369<br><span class="hljs-built_in">sudo</span> ufw allow 4369/tcp<br></code></pre></td></tr></table></figure>
+<h4 id="1-5-5-开放端口"><a href="#1-5-5-开放端口" class="headerlink" title="1.5.5. 开放端口"></a>1.5.5. 开放端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 6379</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">6379</span>/tcp<br><br><br><span class="hljs-comment"># 6380</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">6380</span>/tcp<br><br><br><span class="hljs-comment"># 6381</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">6381</span>/tcp<br><br><br><span class="hljs-comment"># 16379</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">16379</span>/tcp<br><br><br><span class="hljs-comment"># 16380</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">16380</span>/tcp<br><br><br><span class="hljs-comment"># 16381</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">16381</span>/tcp<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -669,10 +759,21 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="0-5-6-关闭-Swap-分区"><a href="#0-5-6-关闭-Swap-分区" class="headerlink" title="0.5.6. 关闭 Swap 分区"></a>0.5.6. 关闭 Swap 分区</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 编辑 /etc/fstab</span><br>vim <span class="hljs-regexp">/etc/</span>fstab<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># 将此内容进行注释（/swap 开头的）</span><br><span class="hljs-string"># /swap.img       none    swap    sw      0       0</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 立即关闭 Swap 分区</span><br>swapoff -a<br></code></pre></td></tr></table></figure>
+<h4 id="1-5-6-创建用户"><a href="#1-5-6-创建用户" class="headerlink" title="1.5.6. 创建用户"></a>1.5.6. 创建用户</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="0-5-8-安装需要的工具"><a href="#0-5-8-安装需要的工具" class="headerlink" title="0.5.8. 安装需要的工具"></a>0.5.8. 安装需要的工具</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt <span class="hljs-keyword">install </span>-y <span class="hljs-keyword">build-essential </span>pkg-<span class="hljs-built_in">config</span> tcl make libjemalloc-dev<br></code></pre></td></tr></table></figure>
+<h4 id="1-5-7-关闭-Swap-分区"><a href="#1-5-7-关闭-Swap-分区" class="headerlink" title="1.5.7. 关闭 Swap 分区"></a>1.5.7. 关闭 Swap 分区</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 1. 编辑 /etc/fstab</span><br>vim <span class="hljs-regexp">/etc/</span>fstab<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string"># 将此内容进行注释（/swap 开头的）</span><br><span class="hljs-string"># /swap.img       none    swap    sw      0       0</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><br><span class="hljs-comment"># 2. 立即关闭 Swap 分区</span><br>swapoff -a<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-8-设置节点相互解析"><a href="#1-5-8-设置节点相互解析" class="headerlink" title="1.5.8. 设置节点相互解析"></a>1.5.8. 设置节点相互解析</h4><h5 id="主机名解析"><a href="#主机名解析" class="headerlink" title="主机名解析"></a>主机名解析</h5><p><font color="#92d050">1. 设置本机主机名</font></p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 1.1 192.168.136.8</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis1</span><br><br><br><span class="hljs-comment"># 1.2 192.168.136.9</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis2</span><br><br><br><span class="hljs-comment"># 1.3 192.168.136.10</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis3</span><br><br><br><span class="hljs-comment"># 1.4 192.168.136.11</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis4</span><br><br><br><span class="hljs-comment"># 1.5 192.168.136.12</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis5</span><br><br><br><span class="hljs-comment"># 1.6 192.168.136.13</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">redis6</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 设置节点相互解析</font></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">sudo vim /etc/hosts<br><br><br><span class="hljs-number">192.168.136.8</span> redis1<br><span class="hljs-number">192.168.136.9</span> redis2<br><span class="hljs-number">192.168.136.10</span> redis3<br><span class="hljs-number">192.168.136.11</span> redis4<br><span class="hljs-number">192.168.136.12</span> redis5<br><span class="hljs-number">192.168.136.13</span> redis6<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-5-9-安装需要的工具"><a href="#1-5-9-安装需要的工具" class="headerlink" title="1.5.9. 安装需要的工具"></a>1.5.9. 安装需要的工具</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -680,36 +781,17 @@
 <li>设置代理</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://192.168.8.5:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://192.168.8.5:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 命令行临时代理</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br><br><br><span class="hljs-comment"># docker 代理</span><br>cat &lt;&lt;EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf<br>[Service]<br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br>EOF<br><br>sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="0-6-环境搭建"><a href="#0-6-环境搭建" class="headerlink" title="0.6. 环境搭建"></a>0.6. 环境搭建</h3><h4 id="下载-Redis-安装包"><a href="#下载-Redis-安装包" class="headerlink" title="下载 Redis 安装包"></a>下载 Redis 安装包</h4><p>在 <a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">Redis 官方下载地址</a> 选择合适的版本（8.0），下载 <code>Redis</code> 安装包（后缀为 <code>tar.gz</code>）<br><img src="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1-6-环境搭建"><a href="#1-6-环境搭建" class="headerlink" title="1.6. 环境搭建"></a>1.6. 环境搭建</h3><h4 id="下载-Redis"><a href="#下载-Redis" class="headerlink" title="下载 Redis"></a>下载 Redis</h4><p>在 <a target="_blank" rel="noopener" href="https://redis.io/downloads/#software">Redis 官方下载地址</a> 选择合适的版本（<code>redis-8.0.0.tar.gz</code>），下载 <code>Redis</code> 安装包（后缀为 <code>tar.gz</code>）<br><img src="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h4><p>在每个节点上进行 Redis 安装：</p>
-<p><font color="#92d050">1. 创建 &#x2F;mystudy&#x2F;redis 目录并进入</font></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/redis<br><br><br><span class="hljs-built_in">cd</span> /mystudy/redis<br></code></pre></td></tr></table></figure>
-
-
-<p><font color="#92d050">2. 上传安装包</font><br>上传 <code>redis-8.0.0.tar.gz</code> 到 <code>/mystudy/redis</code></p>
-<p><font color="#92d050">3. 解压安装包</font></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> tar -xvf redis-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.tar.gz<br><br><br><span class="hljs-attribute">mv</span> redis-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> redis<br></code></pre></td></tr></table></figure>
-
-
-<p><font color="#92d050">4. 编译第三方库</font></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> /mystudy/redis/redis/deps<br><br><br><span class="hljs-keyword">make</span> hiredis linenoise <span class="hljs-keyword">lua</span> hdr_histogram fpconv jemalloc<br></code></pre></td></tr></table></figure>
-
-
-<p><font color="#92d050">5. 安装 Redis</font></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> /mystudy/redis/redis<br><br><br><span class="hljs-keyword">make</span> &amp;&amp; <span class="hljs-keyword">make</span> install<br></code></pre></td></tr></table></figure>
-
-
-<p><font color="#92d050">6. 查看 Redis 是否已安装且可执行</font></p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">which redis-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<h4 id="安装-Redis"><a href="#安装-Redis" class="headerlink" title="安装 Redis"></a>安装 Redis</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/redis<br><br><br><span class="hljs-comment"># 上传 Redis 安装包</span><br><br><br><span class="hljs-built_in">cd</span> /mystudy/redis<br><br><br><span class="hljs-built_in">sudo</span> tar -xvf redis-8.0.0.tar.gz -C/mystudy/redis<br><br><br><span class="hljs-built_in">rm</span> -<span class="hljs-built_in">rm</span> redis-8.0.0.tar.gz<br><br><br><span class="hljs-built_in">cd</span> /mystudy/redis/redis-8.0.0/deps<br><br><br>make hiredis linenoise lua hdr_histogram fpconv jemalloc<br><br><br><span class="hljs-built_in">cd</span> /mystudy/redis/redis-8.0.0<br><br><br>make &amp;&amp; make install<br><br><br><span class="hljs-built_in">which</span> redis-server<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>Redis 最终被安装到 <code>/mystudy/redis/redis</code> 目录下，但 <code>make &amp;&amp; make install</code> 会把一些 可执行文件  安装到 <code>/usr/local/bin/</code> 下：<ol>
+<li>Redis 最终被安装到 <code>/mystudy/redis/redis-8.0.0</code> 目录下，但 <code>make &amp;&amp; make install</code> 会把一些 可执行文件  安装到 <code>/usr/local/bin/</code> 下：<ol>
 <li>redis-server：<ol>
 <li>Redis 服务器启动命令</li>
 </ol>
@@ -739,10 +821,11 @@
 <li>如果编译失败，请先执行以下命令清理旧文件，然后重新安装：</li>
 </ol>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /mystudy/redis/redis<br><br><br>make distclean<br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> /mystudy/redis/redis-<span class="hljs-number">8</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span><br><br><br><span class="hljs-attribute">make</span> distclean<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h1 id="四、Spring-Data-Redis"><a href="#四、Spring-Data-Redis" class="headerlink" title="四、Spring Data Redis"></a>四、Spring Data Redis</h1><h2 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h2><h3 id="配置类配置"><a href="#配置类配置" class="headerlink" title="配置类配置"></a>配置类配置</h3><h4 id="启用注解式缓存"><a href="#启用注解式缓存" class="headerlink" title="启用注解式缓存"></a>启用注解式缓存</h4><h3 id="yml-配置"><a href="#yml-配置" class="headerlink" title="yml 配置"></a>yml 配置</h3><h4 id="数据源连接配置"><a href="#数据源连接配置" class="headerlink" title="数据源连接配置"></a>数据源连接配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">spring:  <br>  data:  <br>    redis:  <br>      host: <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>  <br>      port: <span class="hljs-number">6379</span>  <br>      password:  <br>      database: <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<h3 id="1-7-环境配置"><a href="#1-7-环境配置" class="headerlink" title="1.7. 环境配置"></a>1.7. 环境配置</h3><h4 id="文件位置"><a href="#文件位置" class="headerlink" title="文件位置"></a>文件位置</h4><h5 id="禁用危险命令"><a href="#禁用危险命令" class="headerlink" title="禁用危险命令"></a>禁用危险命令</h5><hr>
+<h1 id="四、Spring-Data-Redis"><a href="#四、Spring-Data-Redis" class="headerlink" title="四、Spring Data Redis"></a>四、Spring Data Redis</h1><h2 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h2><h3 id="配置类配置"><a href="#配置类配置" class="headerlink" title="配置类配置"></a>配置类配置</h3><h4 id="启用注解式缓存"><a href="#启用注解式缓存" class="headerlink" title="启用注解式缓存"></a>启用注解式缓存</h4><h3 id="yml-配置"><a href="#yml-配置" class="headerlink" title="yml 配置"></a>yml 配置</h3><h4 id="数据源连接配置"><a href="#数据源连接配置" class="headerlink" title="数据源连接配置"></a>数据源连接配置</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">spring:  <br>  data:  <br>    redis:  <br>      host: <span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>  <br>      port: <span class="hljs-number">6379</span>  <br>      password: wq666666<br>      database: <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
 
 <p><font color="#92d050">1. database</font><br>database 是指 Redis 的数据库编号，其默认有 16 个逻辑库，设计初衷是用于区分不同业务，比如库 1 存 Session，库 2 存验证码，避免数据混淆。</p>
 <p>但在实际生产中，大多数项目只用 DB 0，然后通过 Key 前缀来区分业务，例如：</p>
@@ -804,67 +887,103 @@
 <h3 id="进行相关配置"><a href="#进行相关配置" class="headerlink" title="进行相关配置"></a>进行相关配置</h3><p>详见上文：相关配置</p>
 <hr>
 <h3 id="执行业务逻辑"><a href="#执行业务逻辑" class="headerlink" title="执行业务逻辑"></a>执行业务逻辑</h3><hr>
-<h2 id="业务处理"><a href="#业务处理" class="headerlink" title="业务处理"></a>业务处理</h2><h3 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h3><h4 id="缓存预热概述"><a href="#缓存预热概述" class="headerlink" title="缓存预热概述"></a>缓存预热概述</h4><p>在系统刚启动或者 Redis 刚部署&#x2F;重启后，就提前把热点数据加载到 Redis 缓存里，而不是等用户第一次访问时才去查询数据库再写入缓存</p>
+<h2 id="业务处理"><a href="#业务处理" class="headerlink" title="业务处理"></a>业务处理</h2><h3 id="BigKey-筛查"><a href="#BigKey-筛查" class="headerlink" title="BigKey 筛查"></a>BigKey 筛查</h3><ol>
+<li>String 类型 ≥ 10 KB 就是 BigKey</li>
+<li>Hash、List、Set、Zset 类型元素个数 ≥ 5000 就是 BigKey</li>
+</ol>
 <hr>
-<h4 id="缓存预热实现方式"><a href="#缓存预热实现方式" class="headerlink" title="缓存预热实现方式"></a>缓存预热实现方式</h4><h5 id="定时任务预热"><a href="#定时任务预热" class="headerlink" title="定时任务预热"></a>定时任务预热</h5><hr>
-<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><h4 id="缓存雪崩概述"><a href="#缓存雪崩概述" class="headerlink" title="缓存雪崩概述"></a>缓存雪崩概述</h4><p>在 Redis 中，缓存的数据通常会设置过期时间（TTL），如果某一类数据（比如热点商品、热门文章）<strong>同一时间大批量过期</strong>，短时间内所有请求都查不到缓存，于是全部请求都去数据库，数据库压力激增，可能直接崩溃</p>
+<h3 id="Redis-MySQL-双存储模式"><a href="#Redis-MySQL-双存储模式" class="headerlink" title="Redis + MySQL 双存储模式"></a>Redis + MySQL 双存储模式</h3><h4 id="读操作基本流程"><a href="#读操作基本流程" class="headerlink" title="读操作基本流程"></a>读操作基本流程</h4><h5 id="读操作基本思路"><a href="#读操作基本思路" class="headerlink" title="读操作基本思路"></a>读操作基本思路</h5><p>读操作通常先查 Redis，若未命中则回源 MySQL，将结果返回给客户端并写回 Redis<br><img src="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-6.png" srcset="/img/loading.gif" lazyload></p>
+<p>为避免 Redis 缓存未命中时多个线程同时访问数据库，可以让第一个请求在查询数据库前加一把互斥锁（分布式锁）。后续请求检测到有锁则等待，等第一个请求完成并回填缓存后，其他请求便直接从 Redis 读取数据，无需再访问数据库。如果每次读都一锁到底，即便 Redis 里早就有数据，也会让请求干等着，效率很低，通常会配合 “双重校验” 策略来提高并发下的效率。</p>
 <hr>
-<h4 id="缓存雪崩解决方案"><a href="#缓存雪崩解决方案" class="headerlink" title="缓存雪崩解决方案"></a>缓存雪崩解决方案</h4><h5 id="缓存过期时间随机化"><a href="#缓存过期时间随机化" class="headerlink" title="缓存过期时间随机化"></a>缓存过期时间随机化</h5><p>给缓存设置过期时间时，加上一个随机值（比如 <code>random(0, 300)</code>），避免大量 key 在同一时间点集中失效</p>
+<h5 id="双重校验代码实现"><a href="#双重校验代码实现" class="headerlink" title="双重校验代码实现"></a>双重校验代码实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> String <span class="hljs-title function_">getValueWithLock</span><span class="hljs-params">(String key)</span> &#123;<br>	<br>    <span class="hljs-comment">// 第一次检查缓存</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> redis.get(key);<br>    <span class="hljs-keyword">if</span> (value != <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">return</span> value;<br>    &#125;<br>	<br>    <span class="hljs-comment">// 获取分布式锁</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">lockKey</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;lock:&quot;</span> + key;<br>    <span class="hljs-type">boolean</span> <span class="hljs-variable">locked</span> <span class="hljs-operator">=</span> redis.setnx(lockKey, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 10秒过期防死锁</span><br>	<br>    <span class="hljs-keyword">if</span> (locked) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 第二次检查缓存</span><br>            value = redis.get(key);<br>            <span class="hljs-keyword">if</span> (value != <span class="hljs-literal">null</span>) &#123;<br>                <span class="hljs-keyword">return</span> value;<br>            &#125;<br>			<br>            <span class="hljs-comment">// 查询数据库</span><br>            value = mysql.query(<span class="hljs-string">&quot;SELECT data FROM table WHERE key=?&quot;</span>, key);<br>			<br>            <span class="hljs-comment">// 回填缓存</span><br>            redis.setex(key, <span class="hljs-number">3600</span>, value);<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">// 释放锁</span><br>            redis.del(lockKey);<br>        &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 没拿到锁的线程，稍微等一会儿再从缓存读</span><br>        Thread.sleep(<span class="hljs-number">50</span>);<br>        <span class="hljs-keyword">return</span> redis.get(key);<br>    &#125;<br>	<br>    <span class="hljs-keyword">return</span> value;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
 <hr>
-<ul>
-<li><p><strong>过期时间随机化（错峰过期）</strong></p>
-<ul>
-<li><p>给缓存设置过期时间时，加上一个随机值（比如 <code>+ random(0, 300)</code> 秒）</p>
+<h4 id="写操作基本流程"><a href="#写操作基本流程" class="headerlink" title="写操作基本流程"></a>写操作基本流程</h4><h5 id="写操作基本思路"><a href="#写操作基本思路" class="headerlink" title="写操作基本思路"></a>写操作基本思路</h5><p>我们需要确保 Redis 中的数据与数据库中的值保持一致，常见的思路包括：</p>
+<ol>
+<li>先更新数据库，再更新缓存<ol>
+<li>问题一<ol>
+<li>如果更新 MySQL 成功，但更新 Redis 失败，导致 MySQL 与 Redis 数据不一致</li>
+</ol>
 </li>
-<li><p>避免大量 key 在同一时间点集中失效</p>
+<li>问题二<ol>
+<li>多线程情况下，线程的执行速度有快有慢，如果 A 线程先更新数据库为 99，然后 B 线程再更新数据库为 90，此时如果 B 比 A 先执行，把 Redis 更新成 90 ，然后 A 再把 Redis 更新成 99，就出现了问题</li>
+<li>想要解决这个问题，可以使用强一致性写，也就是使用分布式事务，但是一般很少有人这样做</li>
+</ol>
 </li>
-</ul>
+</ol>
 </li>
-<li><p><strong>缓存永不过期 + 后台异步更新</strong></p>
-<ul>
-<li><p>Redis 层面不设置过期时间</p>
+<li>先更新缓存，再更新数据库<ol>
+<li>不太推荐，因为业务上一般把 MySQL 作为底单数据库</li>
+<li>此外仍然有上述两个问题</li>
+</ol>
 </li>
-<li><p>用定时任务&#x2F;消息通知去更新缓存</p>
+<li>先删除缓存，再更新数据库<ol>
+<li>这是让客户端自动去 Redis 中拿数据过来，但会有一个问题<ol>
+<li>问题一：<ol>
+<li>就是如果 A 线程把缓存删了，然后更新数据库，B 这时候发现缓存没有了，去找数据库，如果 A 的操作还没有执行完，然后 B 把 这个数据回写到 Redis 中，那 A 提交后 MySQL 和 Redis 的数据不一致，但是由于 Redis 已经有数据了，不会再去数据库中拿了，就出现了问题</li>
+<li>想要解决这个问题，只能在更新数据时，暂停读请求，等更新完在读数据，理论上能达到强一致，但生产环境下很少这样做，分布式环境下很难做到双系统实时一致性，一般都是考虑最终一致性 </li>
+<li>通常使用延时双删，也就是线程 A 先把 Redis 缓存删了，然后再更新数据库，暂停一段时间，然后再删除一次 Redis<ol>
+<li>暂停的这一段时间就是让线程 B 先读到 MySQL 中的数据，回写进缓存之后，你其他的线程看到 Redis 有数据了，就不会来到我 MySQL 中了对吧，然后就不会出现我把 Redis 缓存刚删除，你拿着我更新数据库之前的脏数据又写到 Redis 了我再把你的缓存删了，这样下一次进程来了就会访问数据库拿到新的数据并写到 Redis 中</li>
+<li>所以暂停的时间要确保能让 B 先读再写到 Redis，这个一般有两种方法确定<ol>
+<li>在业务程序运行的时候，统计下线程读数据和写缓存的操作时间，自行评估自己的项目的读数据业务逻辑的耗时，然后在这个基础上加上个百毫秒就行</li>
+<li>看门狗机制（WatchDog），能够自动加时</li>
+</ol>
 </li>
-<li><p>前端查询时永远有数据，不会出现大面积空缓存</p>
+<li>为了优化并发下的性能情况，通常将第二次删除作为异步操作</li>
+</ol>
 </li>
-</ul>
+</ol>
 </li>
-<li><p><strong>热点数据加锁重建（互斥锁）</strong></p>
-<ul>
-<li><p>当缓存失效时，只有第一个线程去数据库加载数据</p>
+<li>问题二：<ol>
+<li>如果先删除了缓存，更新数据库的时候出现了问题，那其他线程访问数据库，读到的还是脏数据，或者你把 Redis 都删除了，请求打到了 MySQL，你更新成功了还好说，但是你更新失败了也打到 Redis，那我还要你 Redis 干嘛呢</li>
+<li>解决方案：<ol>
+<li>补偿机制，否则抗风险能力不足</li>
+</ol>
 </li>
-<li><p>其他线程等待，避免同时打 DB</p>
+</ol>
 </li>
-<li><p>可以用 Redis 的分布式锁实现</p>
+</ol>
 </li>
-</ul>
+</ol>
 </li>
-<li><p><strong>多级缓存（本地缓存 + 分布式缓存）</strong></p>
-<ul>
-<li><p>比如 Guava Caffeine（JVM 内存） + Redis</p>
+<li>先更新数据库，再删除缓存（推荐）<ol>
+<li>先更新数据库，再删除缓存，看似 Redis 中有缓存，没人影响线程 A 更新和删除，但是考虑到极限情况下，如果恰好 Key 过期，然后又出现了把 Redis 缓存刚删除，你拿着我更新数据库之前的脏数据又写到 Redis的情况下</li>
+<li>延时双删<ol>
+<li>数据库更新后，立马删除缓存，然后延长一小段时间（比如 100 ms）再删除一次，这样即使 B 在第一次删除之后回写了脏数据，延时的第二次删除也能把它清掉。</li>
+<li>第一次删除是为了 A 更新数据库后，B 过来查数据然后查到最新的数据写回缓存，不考虑这个的情况下，我们可以只延时删除一次，直接使用异步删存</li>
+<li>第二次删除是为了 A 更新数据库后，删除缓存，B 把 A 更新之前的数据写回缓存，再删除一次，可以作为异步操作（伪异步 IO，性能终究还是不行地，也可以尝试其他的异步操作，例如 Canal + 消息队列）</li>
+<li>删一次删两次看心意，反正都反正了</li>
+</ol>
 </li>
-<li><p>当 Redis 数据过期，本地缓存还能顶一顶，缓冲数据库压力</p>
+<li>更新数据库完了，但是删除缓存的时候 Redis 宕机了，那我们不能不删除阿</li>
+<li>异步删存<ol>
+<li>把删除发送到消息队列，然后依赖 MQ 的重试机制删除缓存，一般只需要删除一次，毕竟你也不差第一次删除那点失误了，如果长时间没有删除，那就需要汇报给运维了</li>
+</ol>
 </li>
-</ul>
+</ol>
 </li>
-<li><p><strong>缓存预热</strong>（结合前面说的）</p>
-<ul>
-<li><p>在系统上线或缓存重启后，提前加载热点数据到缓存</p>
-</li>
-<li><p>避免冷启动时，全部请求穿透到数据库</p>
-</li>
-</ul>
-</li>
-<li><p><strong>服务限流 &amp; 降级</strong></p>
-<ul>
-<li><p>在极端情况下，限制流量进入数据库</p>
-</li>
-<li><p>或者直接返回兜底数据（比如提示“系统繁忙”）</p>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
+<hr>
+<h5 id="延时双删代码实现"><a href="#延时双删代码实现" class="headerlink" title="延时双删代码实现"></a>延时双删代码实现</h5><hr>
+<h5 id="异步删存代码实现"><a href="#异步删存代码实现" class="headerlink" title="异步删存代码实现"></a>异步删存代码实现</h5><p>你可能会疑问，为什么不直接把消息扔到消息队列中进行删除，而是还使用 Canal 监控了扔到消息队列中再删除呢，因为业务代码耦合太重，每个地方都要记得删缓存和发消息，很容易漏掉，但是使用 Canal，你只需要专注于发 MQ 即可<br>通常使用 Canal 和 消息队列结合删除<br><img src="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h4><h5 id="缓存预热概述"><a href="#缓存预热概述" class="headerlink" title="缓存预热概述"></a>缓存预热概述</h5><p>在系统刚启动或者 Redis 刚部署&#x2F;重启后，就提前把热点数据加载到 Redis 缓存里，而不是等用户第一次访问时才去查询数据库再写入缓存，可能造成大量请求都去数据库，数据库压力激增，可能直接崩溃</p>
+<hr>
+<h5 id="缓存预热实现方式"><a href="#缓存预热实现方式" class="headerlink" title="缓存预热实现方式"></a>缓存预热实现方式</h5><hr>
+<h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><h5 id="缓存雪崩概述"><a href="#缓存雪崩概述" class="headerlink" title="缓存雪崩概述"></a>缓存雪崩概述</h5><p>在 Redis 中，缓存的数据通常会设置过期时间（TTL），如果某一类数据（比如热点商品、热门文章）<strong>同一时间大批量过期</strong>，或者 Redis 宕机，短时间内所有请求都查不到缓存，于是大量请求都去数据库，数据库压力激增，可能直接崩溃</p>
+<hr>
+<h5 id="缓存雪崩解决方案"><a href="#缓存雪崩解决方案" class="headerlink" title="缓存雪崩解决方案"></a>缓存雪崩解决方案</h5><h6 id="搭建-Redis-高可用集群"><a href="#搭建-Redis-高可用集群" class="headerlink" title="搭建 Redis 高可用集群"></a>搭建 Redis 高可用集群</h6><p>详见上文：搭建 Redis 环境</p>
+<hr>
+<h6 id="读时双重校验"><a href="#读时双重校验" class="headerlink" title="读时双重校验"></a>读时双重校验</h6><p>详见上文：读操作基本流程</p>
+<hr>
+<h6 id="缓存过期时间随机化"><a href="#缓存过期时间随机化" class="headerlink" title="缓存过期时间随机化"></a>缓存过期时间随机化</h6><p>给缓存设置过期时间时，加上一个随机值（比如 <code>random(0, 300)</code>），避免大量 key 在同一时间点集中失效</p>
+<hr>
+<h6 id="缓存永不过期-异步更新"><a href="#缓存永不过期-异步更新" class="headerlink" title="缓存永不过期 + 异步更新"></a>缓存永不过期 + 异步更新</h6><p>缓存数据本身设置为物理永不过期，保证客户端访问时始终有缓存可用。同时通过异步任务在后台定期或按需刷新缓存内容，从而平衡高可用与数据新鲜度。</p>
+<hr>
+<h6 id="多级缓存"><a href="#多级缓存" class="headerlink" title="多级缓存"></a>多级缓存</h6><p>详见笔记：多级缓存</p>
+<hr>
+<h6 id="服务限流-服务降级"><a href="#服务限流-服务降级" class="headerlink" title="服务限流 + 服务降级"></a>服务限流 + 服务降级</h6><p>详见笔记：Spring Cloud</p>
+<hr>
 
                 
               </div>
@@ -890,13 +1009,6 @@
     
   <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%94%AE%E5%80%BC%E5%9E%8B/" class="category-chain-item">键值型</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%94%AE%E5%80%BC%E5%9E%8B/Redis/" class="category-chain-item">Redis</a>
-  
-  
-
   
 
   

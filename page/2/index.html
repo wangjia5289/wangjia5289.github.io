@@ -228,15 +228,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：LockSupport 源码解析
+        <a href="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity/" target="_self">
+          笔记：Spring Security
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/15/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringSecurity/" target="_self">
         <div>
-          1. 概述LockSupport 是一个具体类，是整个 AQS 阻塞&#x2F;唤醒机制的基石，几乎所有同步器的 “挂起线程&#x2F;唤醒线程” 都是靠它完成的。 之所以不使用 Object 的 wait&#x2F;notify&#x2F;notifyAll，是因为在 Object 中，这些方法必须在 synchronized 块里调用，因为调用线程必须持有该对象的锁 而 LockSupport
+          一、脑图 Xmind  Edraw    二、Spring Security 基础1. Spring Security 核心流程1.1. 核心流程概述Spring Security 是依据过滤器链来执行操作的……. 在配置类中定义这样一个 @Bean，它会在应用启动时运行，并将当前生效的 SecurityFilterChain 中包含的过滤器逐一打印出来，方便我们直观查看 Spring Secur
         </div>
       </a>
 
@@ -244,8 +244,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-09-01 00:00" pubdate>
-              2025-09-01
+            <time datetime="2025-09-15 00:00" pubdate>
+              2025-09-15
             </time>
           </div>
         
@@ -260,506 +260,513 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ManagedBlocker源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述ManagedBlocker 是一个接口，是 ForkJoinPool 的 静态 接口，用于 向 ForkJoinPool 声明 “这里可能会发生阻塞”，以便池子在 Worker 暂停时 临时补充线程，保证吞吐量不下降  2. 源码部分12345678public static interface ManagedBlocker &#123;		// 执行实际的阻塞操作	boolean b
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-09-01 00:00" pubdate>
-              2025-09-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionNode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ConditionNode 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionNode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述ConditionNode 是一个具体类，是 AQS 的 静态 内部类，继承了 Node，实现了 ForkJoinPool.ManagedBlocker，是 AQS 在 Condition Queue 的节点，是一个比 Node 更简单的单向链表节点  [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 08:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ANode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Node 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ANode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述Node 是一个抽象类，是 AQS 的 静态 内部类，是 AQS 在 Sync Queue 的节点，是一个双向链表节点  [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 内部链接：      在最初的设计里，Node 只是一个具体类，职责非常单纯，充当同步队列中的链表节点。但随着
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 08:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ConditionObject 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述ConditionObject 是一个具体类，是 AQS 的 内部类，实现了 Condition，维护了一个等待队列，实现了线程间等待与唤醒的协调机制   [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 链接：      Condition 源码解析 obsidian 内部链接：
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Condition 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述Condition 是一个接口，定义了线程间等待与唤醒的协调机制，配合 Lock 使用，相当于 Object 的 wait&#x2F;notify&#x2F;notifyAll 的升级版。 我们先来想象以下 synchronized 锁，它配合 Object 的 wait&#x2F;notify&#x2F;notifyAll 使用。但是有一个关键限制，一个 synchronized 锁（
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Executor 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述Executor 是一个接口，定义了一种统一的方式提交线程任务  2. 源码部分123456public interface Executor &#123;		// 定义提交任务的规范    void execute(Runnable command);    &#125;   3. 实现示例12345678910111213141516171819202122public class
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Lock 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述Lock 是一个接口，定义了显式锁的基本操作规范  2. 源码部分1234567891011121314public interface Lock &#123;	    void lock();	    void lockInterruptibly() throws InterruptedException;	    boolean tryLock();	    boolean tryL
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AReentrantLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          ReentrantLock 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AReentrantLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述ReentrantLock 是一个具体类  [!NOTE] 注意事项  Lock 源码解析 obsidian 内部链接： 源码：Lock源码解析   Hexo 内部链接：         2. 源码部分123public class ReentrantLock implements Lock, java.io.Serializable &#123;&#125;     3. 内部类Syn
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" target="_self">
-          笔记：Redis
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E7%AC%94%E8%AE%B0%EF%BC%9ARedis/" target="_self">
-        <div>
-          一、脑图 Xmind  Edraw    二、Redis 基础Redis 数据类型数据类型一览图  [!NOTE] 注意事项  这里提到的数据类型，指的都是 值（Value）的数据类型。至于键（Key），在 Redis 中始终都是字符串类型    字符串（String）String 是二进制安全的字符串，简单来说，它能存放各种数据，例如普通文本、数字、图片、序列化对象等等。表面上叫 “字符串”，实
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-31 00:00" pubdate>
-              2025-08-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">非关系型数据库</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%94%AE%E5%80%BC%E5%9E%8B/" class="category-chain-item">键值型</a>
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/14/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-Admin/" target="_self">
+          笔记：Canal-Admin
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/14/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-Admin/" target="_self">
+        <div>
+          一、脑图 二、Canal-Admin 基础Canal-Admin 常用命令系统命令启动 Canal-Admin1234&#123;Canal-Admin_HOME&#125;/bin/startup.shps -ef | grep canal.admin   停止 Canal-Admin1&#123;Canal-Admin_HOME&#125;/bin/stop.sh   三、Canal-Admi
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-14 00:00" pubdate>
+              2025-09-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/14/%E7%AC%94%E8%AE%B0%EF%BC%9AKafka/" target="_self">
+          笔记：Kafka
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/14/%E7%AC%94%E8%AE%B0%EF%BC%9AKafka/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-14 00:00" pubdate>
+              2025-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E9%9D%9E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%94%AE%E5%80%BC%E5%9E%8B/Redis/" class="category-chain-item">Redis</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="category-chain-item">消息队列</a>
   
   
 
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/14/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%BE%AE%E4%BF%A1%E4%BB%BF%E5%88%B6%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89/" target="_self">
+          项目：微信仿制（简单版）
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/14/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%BE%AE%E4%BF%A1%E4%BB%BF%E5%88%B6%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89/" target="_self">
+        <div>
+          一、脑图 Xmind  Edraw
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-14 00:00" pubdate>
+              2025-09-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/" target="_self">
+          笔记：Canal
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/" target="_self">
+        <div>
+          一、脑图 二、Canal 基础Canal 概述Canal（管道）是阿里巴巴开源的一款基于数据库增量日志解析的中间件，主要捕获 MySQL 的数据变更（增量数据），并将这些变更推送给下游应用或系统  Canal 核心原理传统的 MySQL 主从复制的原理如下： Canal 通过模拟 MySQL 从库的交互协议，将自己伪装成一个 MySQL Slave，向主库发送 dump 请求。MySQL Mast
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-11 00:00" pubdate>
+              2025-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">关系型数据库</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">数据库中间件</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringWebSocket/" target="_self">
+          笔记：SpringWebSocket
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringWebSocket/" target="_self">
+        <div>
+          一、脑图 二、Spring WebSocket 基础消息推送方式在传统的通信模式中，总是 “客户端发起请求，服务端被动响应”。但你是否思考过：如果服务端有新数据，如何主动推送给客户端？ 常见消息推送方式包括：  轮询 长轮询 SSE WebSocket  轮询客户端以固定的时间间隔（例如每秒或每几分钟）向服务器发送HTTP 请求，服务器接收到请求后，处理请求并返回数据给客户端 其优点是：  实现简
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-11 00:00" pubdate>
+              2025-09-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Spring-%E7%94%9F%E6%80%81/" class="category-chain-item">Spring 生态</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9ASelectionKey%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：SelectionKey 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9ASelectionKey%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. SelectionKey 概述在 NIO 里，当你把一个 Channel（通道） 注册到 Selector（选择器） 上时，就会生成一个 SelectionKey 对象，它是 “Channel 与 Selector 的注册关系” 的代表 一个 SelectionKey 包含了以下几个核心要素  Channel 对象 Selecti
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-10 08:00" pubdate>
+              2025-09-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9ASelector%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Selector 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9ASelector%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. XXXX 概述XXXX 是一个抽象类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX 是一个接口，是 XXXX 的 XX 接口，继承了 XXXX，XXXX XXXX 是一个具体类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX  [!NOTE] 注意事
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-10 08:00" pubdate>
+              2025-09-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9AStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Stream源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/10/%E6%BA%90%E7%A0%81%EF%BC%9AStream%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. XXXX 概述XXXX 是一个抽象类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX 是一个接口，是 XXXX 的 XX 接口，继承了 XXXX，XXXX XXXX 是一个具体类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX  [!NOTE] 注意事
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-10 08:00" pubdate>
+              2025-09-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" target="_self">
+          笔记：Java 日志框架
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" target="_self">
+        <div>
+          1. Java 日志框架发展史  2. JUL2.1. JUL 概述JUL（Java Util Logging），是 JDK 内置的日志记录框架，使用时无需额外引入第三方库，使用相对简单。 JUL 虽然能满足一般应用的日志需求，但相比 Log4j、SLF4J 等第三方框架，其扩展性和高级特性较为有限。  2.2. JUL 核心组件  Logger Logger（记录器）是日志框架的入口，我们可以通
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-10 00:00" pubdate>
+              2025-09-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E6%97%A5%E5%BF%97/" class="category-chain-item">Java 日志</a>
+  
   
 
   
@@ -780,7 +787,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

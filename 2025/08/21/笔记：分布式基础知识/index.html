@@ -19,17 +19,24 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：  分布式系统（Distributed System）  这是最基础、最泛化的概念，简单来说，就是将一件庞大复杂的事情拆分给多台机器分别处理，并通过协作完成整体任务。   例如整个微服务架构，或者像淘宝这样的大型网站，背后可能有成千上万的服务器在同时支撑。   集群（Cluster） 是分布式系统的一种典型实现，简单来说，就是将多台功">
+    <meta name="description" content="1. 分布式系统、集群、高可用集群、联邦下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：  分布式系统（Distributed System）  这是最基础、最泛化的概念，简单来说，就是将一件庞大复杂的事情拆分给多台机器分别处理，并通过协作完成整体任务。   例如整个微服务架构，或者像淘宝这样的大型网站，背后可能有成千上万的服务器在同时支撑。   集群（Cluster） 是分布式系">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：分布式基础知识">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：  分布式系统（Distributed System）  这是最基础、最泛化的概念，简单来说，就是将一件庞大复杂的事情拆分给多台机器分别处理，并通过协作完成整体任务。   例如整个微服务架构，或者像淘宝这样的大型网站，背后可能有成千上万的服务器在同时支撑。   集群（Cluster） 是分布式系统的一种典型实现，简单来说，就是将多台功">
+<meta property="og:description" content="1. 分布式系统、集群、高可用集群、联邦下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：  分布式系统（Distributed System）  这是最基础、最泛化的概念，简单来说，就是将一件庞大复杂的事情拆分给多台机器分别处理，并通过协作完成整体任务。   例如整个微服务架构，或者像淘宝这样的大型网站，背后可能有成千上万的服务器在同时支撑。   集群（Cluster） 是分布式系">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-5.png">
 <meta property="article:published_time" content="2025-08-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-21T02:12:43.459Z">
+<meta property="article:modified_time" content="2025-09-08T11:58:53.213Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          361 words
+          421 words
         
       </span>
     
@@ -289,7 +296,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-21T10:12:43+08:00
+                    Last updated on 2025-09-08T19:58:53+08:00
                   
                   
 
@@ -299,7 +306,7 @@
             
               <div class="markdown-body">
                 
-                <p>下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：</p>
+                <h2 id="1-分布式系统、集群、高可用集群、联邦"><a href="#1-分布式系统、集群、高可用集群、联邦" class="headerlink" title="1. 分布式系统、集群、高可用集群、联邦"></a>1. 分布式系统、集群、高可用集群、联邦</h2><p>下面简单介绍一下分布式系统、集群、高可用集群以及联邦的基本概念：</p>
 <ol>
 <li>分布式系统（Distributed System）<ol>
 <li><ol>
@@ -328,6 +335,19 @@
 </ol>
 </li>
 </ol>
+<hr>
+<h2 id="2-分布式系统架构演进"><a href="#2-分布式系统架构演进" class="headerlink" title="2. 分布式系统架构演进"></a>2. 分布式系统架构演进</h2><h3 id="2-1-演进图"><a href="#2-1-演进图" class="headerlink" title="2.1. 演进图"></a>2.1. 演进图</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-单体架构"><a href="#2-2-单体架构" class="headerlink" title="2.2. 单体架构"></a>2.2. 单体架构</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-3-垂直架构"><a href="#2-3-垂直架构" class="headerlink" title="2.3. 垂直架构"></a>2.3. 垂直架构</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-2.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-4-分布式架构"><a href="#2-4-分布式架构" class="headerlink" title="2.4. 分布式架构"></a>2.4. 分布式架构</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-5-SOA-架构"><a href="#2-5-SOA-架构" class="headerlink" title="2.5. SOA 架构"></a>2.5. SOA 架构</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-6-微服务架构"><a href="#2-6-微服务架构" class="headerlink" title="2.6. 微服务架构"></a>2.6. 微服务架构</h3><p><img src="/2025/08/21/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%88%86%E5%B8%83%E5%BC%8F%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
 
                 
               </div>
@@ -418,9 +438,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/24/%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E3%80%81%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" title="笔记：加密解密、编码解码">
+                      <a href="/2025/08/24/%E7%AC%94%E8%AE%B0%EF%BC%9A%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81/" title="笔记：编码解码">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：加密解密、编码解码</span>
+                        <span class="hidden-mobile">笔记：编码解码</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     

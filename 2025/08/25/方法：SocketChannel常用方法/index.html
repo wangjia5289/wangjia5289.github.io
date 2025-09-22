@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="构造方法static SocketChannel open()（∈ SocketChannel）12&#x2F;&#x2F; 创建一个未连接的 SocketChannelSocketChannel socketChannel &#x3D; SocketChannel.open();   [!NOTE] 注意事项  使用这种方式构造的 SocketChannel，需要自己配合 xxSocketChannel.connect(So">
+    <meta name="description" content="实例方法连接方法boolean connect(SocketAddress remote)12&#x2F;&#x2F; 让 SocketChannel 连接到指定 IP 地址和端口socketChannel.connect(new InetSocketAddress(&quot;localhost&quot;, 8080));   注册方法SelectionKey register(Selector sel, int">
 <meta property="og:type" content="article">
 <meta property="og:title" content="方法：SocketChannel 常用方法">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="构造方法static SocketChannel open()（∈ SocketChannel）12&#x2F;&#x2F; 创建一个未连接的 SocketChannelSocketChannel socketChannel &#x3D; SocketChannel.open();   [!NOTE] 注意事项  使用这种方式构造的 SocketChannel，需要自己配合 xxSocketChannel.connect(So">
+<meta property="og:description" content="实例方法连接方法boolean connect(SocketAddress remote)12&#x2F;&#x2F; 让 SocketChannel 连接到指定 IP 地址和端口socketChannel.connect(new InetSocketAddress(&quot;localhost&quot;, 8080));   注册方法SelectionKey register(Selector sel, int">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-27T15:34:01.645Z">
+<meta property="article:modified_time" content="2025-09-10T04:30:25.825Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          316 words
+          239 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 mins
+          2 mins
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-27T23:34:01+08:00
+                    Last updated on 2025-09-10T12:30:25+08:00
                   
                   
 
@@ -299,20 +299,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="static-SocketChannel-open-（∈-SocketChannel）"><a href="#static-SocketChannel-open-（∈-SocketChannel）" class="headerlink" title="static SocketChannel open()（∈ SocketChannel）"></a>static SocketChannel open()（∈ SocketChannel）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建一个未连接的 SocketChannel</span><br><span class="hljs-type">SocketChannel</span> <span class="hljs-variable">socketChannel</span> <span class="hljs-operator">=</span> SocketChannel.open();<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>使用这种方式构造的 SocketChannel，需要自己配合 <code>xxSocketChannel.connect(SocketAddress remote)</code> 来发起连接</li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 让 SocketChannel 连接到指定 IP 地址和端口</span><br>socketChannel.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
-<hr>
-<h3 id="static-SocketChannel-open-SocketAddress-remote-（∈-SocketChannel）"><a href="#static-SocketChannel-open-SocketAddress-remote-（∈-SocketChannel）" class="headerlink" title="static SocketChannel open(SocketAddress remote)（∈ SocketChannel）"></a>static SocketChannel open(SocketAddress remote)（∈ SocketChannel）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">SocketChannel</span> <span class="hljs-variable">socketChannel</span> <span class="hljs-operator">=</span> SocketChannel.open(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h2><h3 id="连接方法"><a href="#连接方法" class="headerlink" title="连接方法"></a>连接方法</h3><h4 id="boolean-connect-SocketAddress-remote"><a href="#boolean-connect-SocketAddress-remote" class="headerlink" title="boolean connect(SocketAddress remote)"></a>boolean connect(SocketAddress remote)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 让 SocketChannel 连接到指定 IP 地址和端口</span><br>socketChannel.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
+                <h2 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h2><h3 id="连接方法"><a href="#连接方法" class="headerlink" title="连接方法"></a>连接方法</h3><h4 id="boolean-connect-SocketAddress-remote"><a href="#boolean-connect-SocketAddress-remote" class="headerlink" title="boolean connect(SocketAddress remote)"></a>boolean connect(SocketAddress remote)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 让 SocketChannel 连接到指定 IP 地址和端口</span><br>socketChannel.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">8080</span>));<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="注册方法"><a href="#注册方法" class="headerlink" title="注册方法"></a>注册方法</h3><h4 id="SelectionKey-register-Selector-sel-int-ops"><a href="#SelectionKey-register-Selector-sel-int-ops" class="headerlink" title="SelectionKey register(Selector sel, int ops)"></a>SelectionKey register(Selector sel, int ops)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * SelectionKey register(Selector sel, int ops)</span><br><span class="hljs-comment"> * --------------------------------------------</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 参数</span><br><span class="hljs-comment"> *      1. Selector sel</span><br><span class="hljs-comment"> *          1. 要注册到那个 Selector</span><br><span class="hljs-comment"> *      2. int ops</span><br><span class="hljs-comment"> *          1. 关心的事件类型</span><br><span class="hljs-comment"> *          2. SelectionKey.OP_CONNECT</span><br><span class="hljs-comment"> *              1. 客户端发送连接就绪</span><br><span class="hljs-comment"> *          3. SelectionKey.OP_ACCEPT</span><br><span class="hljs-comment"> *              1. 服务端接收连接就绪</span><br><span class="hljs-comment"> *          4. SelectionKey.OP_READ</span><br><span class="hljs-comment"> *              1. 通道有数据可读</span><br><span class="hljs-comment"> *          5. SelectionKey.OP_WRITE</span><br><span class="hljs-comment"> *              1. 通道有数据可写</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 返回值</span><br><span class="hljs-comment"> *      1. 该 Channel 注册在某个 Selector 的关系对象（SelectionKey）</span><br><span class="hljs-comment"> *          1. 你可以使用该 Key 进行一系列操作</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 使用示例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 6. 作用</span><br><span class="hljs-comment"> *      1. 将该 Channel 注册到某个 Selector</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 7. 注意事项</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br><span class="hljs-type">SelectionKey</span> <span class="hljs-variable">register</span> <span class="hljs-operator">=</span> socketChannel.register(xxSelector, SelectionKey.OP_ACCEPT);<br></code></pre></td></tr></table></figure>
@@ -420,9 +407,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" title="方法：ObjectOutputStream 常用方法">
+                      <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AReentrantLock%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" title="方法：ReentrantLock 常用方法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">方法：ObjectOutputStream 常用方法</span>
+                        <span class="hidden-mobile">方法：ReentrantLock 常用方法</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -430,8 +417,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AThread%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95%EF%BC%88JUC%EF%BC%89/" title="方法：Thread 相关方法（JUC）">
-                        <span class="hidden-mobile">方法：Thread 相关方法（JUC）</span>
+                      <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" title="方法：ObjectOutputStream 常用方法">
+                        <span class="hidden-mobile">方法：ObjectOutputStream 常用方法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -19,18 +19,19 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. IO 流基础1.1. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程">
+    <meta name="description" content="1. 脑图 2. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程序既不能直">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：Java IO 流">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. IO 流基础1.1. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程">
+<meta property="og:description" content="1. 脑图 2. 用户态与内核态计算机 IO（输入、输出）本质上都是：用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡） 在理解 IO 之前，一个关键的基础概念就是 用户态（User Mode）和内核态（Kernel Mode），这决定了你的程序到底能不能直接操作硬件和系统资源。  用户态（User Mode） 这是应用程序（比如你的 Java 代码）运行的地方。 在这个级别下，程序既不能直">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-5.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png">
 <meta property="article:published_time" content="2025-08-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-28T00:37:09.554Z">
+<meta property="article:modified_time" content="2025-09-22T08:40:14.846Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png">
@@ -227,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          5.5k words
         
       </span>
     
@@ -238,7 +239,7 @@
         
         
         
-          43 mins
+          46 mins
         
       </span>
     
@@ -293,7 +294,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-28T08:37:09+08:00
+                    Last updated on 2025-09-22T16:40:14+08:00
                   
                   
 
@@ -303,7 +304,8 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-IO-流基础"><a href="#1-IO-流基础" class="headerlink" title="1. IO 流基础"></a>1. IO 流基础</h2><h3 id="1-1-用户态与内核态"><a href="#1-1-用户态与内核态" class="headerlink" title="1.1. 用户态与内核态"></a>1.1. 用户态与内核态</h3><p>计算机 IO（输入、输出）本质上都是：<strong>用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡）</strong></p>
+                <h2 id="1-脑图"><a href="#1-脑图" class="headerlink" title="1. 脑图"></a>1. 脑图</h2><hr>
+<h2 id="2-用户态与内核态"><a href="#2-用户态与内核态" class="headerlink" title="2. 用户态与内核态"></a>2. 用户态与内核态</h2><p>计算机 IO（输入、输出）本质上都是：<strong>用户空间 ↔ 内核空间 ↔ 硬件（磁盘&#x2F;网卡）</strong></p>
 <p>在理解 IO 之前，一个关键的基础概念就是 <strong>用户态（User Mode）和内核态（Kernel Mode）</strong>，这<strong>决定了你的程序到底能不能直接操作硬件和系统资源</strong>。</p>
 <ol>
 <li>用户态（User Mode）<ol>
@@ -320,7 +322,107 @@
 </ol>
 <p>当程序在用户态里想做 “越权操作” 时，必须通过 <strong>系统调用（System Call）</strong> 请求操作系统内核帮忙</p>
 <hr>
-<h3 id="1-2-文件流读写流程"><a href="#1-2-文件流读写流程" class="headerlink" title="1.2. 文件流读写流程"></a>1.2. 文件流读写流程</h3><h4 id="1-2-1-读流程"><a href="#1-2-1-读流程" class="headerlink" title="1.2.1. 读流程"></a>1.2.1. 读流程</h4><p>假设我们有这样一段 Java 代码：</p>
+<h2 id="3-IO-流基础体系"><a href="#3-IO-流基础体系" class="headerlink" title="3. IO 流基础体系"></a>3. IO 流基础体系</h2><p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="4-IO-流分类"><a href="#4-IO-流分类" class="headerlink" title="4. IO 流分类"></a>4. IO 流分类</h2><ol>
+<li>以数据流向分类<ol>
+<li>输入流<ol>
+<li>从数据源读取数据到程序中</li>
+</ol>
+</li>
+<li>输出流<ol>
+<li>将数据从程序写出到目标位置</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以数据单位分类<ol>
+<li>字节流<ol>
+<li>以字节（8 bit）为基本单位进行读写</li>
+<li>适合处理所有类型的文件，尤其是二进制文件（如图片、音频、视频等）</li>
+<li>以 <code>InputStream</code>、<code>OutputStream</code> 为抽象基类</li>
+</ol>
+</li>
+<li>字符流<ol>
+<li>以字符为基本单位进行读写</li>
+<li>专门为文本数据设计，仅适用于纯文本文件</li>
+<li>以 <code>Reader</code>、<code>Writer</code> 为抽象基类</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以来源&#x2F;目的地分类（节点流）<ol>
+<li>文件流<ol>
+<li>文件字节流<ol>
+<li>FileInputStream</li>
+<li>FileOutputStream</li>
+</ol>
+</li>
+<li>文件字符流<ol>
+<li>FileReader</li>
+<li>FileWriter</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>内存流</li>
+<li>管道流</li>
+<li>网络流<ol>
+<li>网络字节流（TCP 通信）<ol>
+<li>Socket.getInputStream()<ol>
+<li>用于服务端（Server）</li>
+</ol>
+</li>
+<li>Socket.getOutputStream()<ol>
+<li>用于客户端（Client）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在基础的节点流之上，Java 提供了一类处理流。<ol>
+<li>缓冲流<ol>
+<li>缓冲字节流<ol>
+<li>BufferedInputStream</li>
+<li>BufferedOutputStream</li>
+</ol>
+</li>
+<li>缓冲字符流<ol>
+<li>BufferedReader</li>
+<li>BufferedWriter</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>数据流<ol>
+<li>数据字节流<ol>
+<li>DataInputStream</li>
+<li>DataOutputStream</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对象流<ol>
+<li>对象字节流<ol>
+<li>ObjectInputStream</li>
+<li>ObjectOutputStream</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>转换流</li>
+<li>打印流</li>
+<li>压缩流</li>
+<li>序列化流</li>
+<li>需要注意的是，处理流不能单独存在，而是通过 “包裹节点流” 来对已有流进行功能增强。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="5-节点流"><a href="#5-节点流" class="headerlink" title="5. 节点流"></a>5. 节点流</h2><h3 id="5-1-文件流"><a href="#5-1-文件流" class="headerlink" title="5.1. 文件流"></a>5.1. 文件流</h3><h4 id="5-1-1-文件流读写流程"><a href="#5-1-1-文件流读写流程" class="headerlink" title="5.1.1. 文件流读写流程"></a>5.1.1. 文件流读写流程</h4><h5 id="5-1-1-1-读流程"><a href="#5-1-1-1-读流程" class="headerlink" title="5.1.1.1. 读流程"></a>5.1.1.1. 读流程</h5><p>假设我们有这样一段 Java 代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;a.txt&quot;</span>);<br><br><span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> fis.read();<br></code></pre></td></tr></table></figure>
 
 <p><font color="#92d050">1. 获取文件描述符</font><br>当我们执行 <code>new FileInputStream(&quot;a.txt&quot;)</code> 的时候，在 Java 层我们创建了一个 <code>FileInputStream</code> 对象，在系统层，这个构造函数内部会触发一个 open 系统调用，请求操作系统内核打开名为 “a.txt” 的文件</p>
@@ -362,11 +464,11 @@
 </ol>
 </li>
 <li>1<ol>
-<li>标准输出（stdout），默认连接到终端屏幕</li>
+<li>标准输出流（stdout），默认连接到终端屏幕</li>
 </ol>
 </li>
 <li>2<ol>
-<li>标准错误输出（stderr），默认连接到终端屏幕，独立于标准输出</li>
+<li>标准错误流（stderr），默认连接到终端屏幕，独立于标准输出</li>
 </ol>
 </li>
 <li>这就是为什么在 C 程序里常见的 <code>printf</code> 或者在 Java 里 <code>System.out.println</code>，最终都能直接在屏幕上看到结果。</li>
@@ -437,7 +539,7 @@
 
 <p><font color="#92d050">4. 唤醒线程</font><br>CPU 从<strong>内核态</strong>切换回<strong>用户态</strong>，把控制权交还给 Java 线程</p>
 <hr>
-<h4 id="1-2-2-写流程"><a href="#1-2-2-写流程" class="headerlink" title="1.2.2. 写流程"></a>1.2.2. 写流程</h4><p>假设我们有这样一段 Java 代码：</p>
+<h5 id="5-1-1-2-写流程"><a href="#5-1-1-2-写流程" class="headerlink" title="5.1.1.2. 写流程"></a>5.1.1.2. 写流程</h5><p>假设我们有这样一段 Java 代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;output.txt&quot;</span>);  <br>  <br>fos.write(<span class="hljs-string">&quot;Hello&quot;</span>.getBytes());  <br></code></pre></td></tr></table></figure>
 
 <p><font color="#92d050">1. 获取文件描述符</font></p>
@@ -498,136 +600,9 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="2-IO-流分类"><a href="#2-IO-流分类" class="headerlink" title="2. IO 流分类"></a>2. IO 流分类</h2><p>Java IO 流分类的核心是：</p>
-<ol>
-<li>以数据流向分类<ol>
-<li>输入流<ol>
-<li>从数据源读取数据到程序中</li>
-</ol>
-</li>
-<li>输出流<ol>
-<li>将数据从程序写出到目标位置</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>以数据单位分类<ol>
-<li>字节流<ol>
-<li>以字节（8 bit）为基本单位进行读写</li>
-<li>适合处理所有类型的文件，尤其是二进制文件（如图片、音频、视频等）</li>
-</ol>
-</li>
-<li>字符流<ol>
-<li>以字符为基本单位进行读写</li>
-<li>专门为文本数据设计，仅适用于纯文本文件</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>以来源&#x2F;目的地分类（节点流）<ol>
-<li>文件流</li>
-<li>内存流</li>
-<li>管道流</li>
-<li>网络流</li>
-</ol>
-</li>
-<li>在基础的节点流之上，Java 提供了一类处理流。<ol>
-<li>处理流不能单独存在，而是通过 “包裹其他流” 来对已有流进行功能增强。</li>
-<li>缓冲流</li>
-<li>数据流</li>
-<li>对象流</li>
-<li>转换流</li>
-<li>打印流</li>
-<li>压缩流</li>
-</ol>
-</li>
-</ol>
-<p>IO 流侧重于前两种分类方式，又形成 IO 世界的 “四大天王”：</p>
-<ol>
-<li>InputStream<ol>
-<li>字节输入流，抽象基类</li>
-</ol>
-</li>
-<li>OutputStream<ol>
-<li>字节输出流，抽象基类</li>
-</ol>
-</li>
-<li>Reader<ol>
-<li>字符输入流，抽象基类</li>
-</ol>
-</li>
-<li>Writer<ol>
-<li>字符输出流，抽象基类</li>
-</ol>
-</li>
-</ol>
-<p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-1.png" srcset="/img/loading.gif" lazyload></p>
-<p>在这四个抽象类的基础上，根据功能又可分为：</p>
-<ol>
-<li>文件流<ol>
-<li>文件字节流<ol>
-<li>FileInputStream</li>
-<li>FileOutputStream</li>
-</ol>
-</li>
-<li>文件字符流<ol>
-<li>FileReader</li>
-<li>FileWriter</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>缓冲流<ol>
-<li>缓冲字节流<ol>
-<li>BufferedInputStream</li>
-<li>BufferedOutputStream</li>
-</ol>
-</li>
-<li>缓冲字符流<ol>
-<li>BufferedReader</li>
-<li>BufferedWriter</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>数据流<ol>
-<li>数据字节流<ol>
-<li>DataInputStream</li>
-<li>DataOutputStream</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>对象流<ol>
-<li>对象字节流<ol>
-<li>ObjectInputStream</li>
-<li>ObjectOutputStream</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>转换流</li>
-<li>序列化流</li>
-<li>打印流</li>
-<li>压缩流</li>
-<li>Commons-io</li>
-</ol>
-<ul>
-<li><strong>文件流</strong>：<code>FileInputStream</code>, <code>FileOutputStream</code>, <code>FileReader</code>, <code>FileWriter</code></li>
-<li><strong>缓冲流</strong>（带缓存，加速读写）：<code>BufferedReader</code>, <code>BufferedWriter</code>, <code>BufferedInputStream</code>, <code>BufferedOutputStream</code></li>
-<li><strong>数据流</strong>（直接读写基本数据类型）：<code>DataInputStream</code>, <code>DataOutputStream</code></li>
-<li><strong>对象流</strong>（读写对象）：<code>ObjectInputStream</code>, <code>ObjectOutputStream</code></li>
-<li>随机访问流（在文件任意位置读写）RandomAccessFile</li>
-<li>转换流</li>
-<li>序列化流</li>
-<li>打印流</li>
-<li>压缩流</li>
-<li>Commons-io</li>
-</ul>
+<h4 id="5-1-2-文件字节流"><a href="#5-1-2-文件字节流" class="headerlink" title="5.1.2. 文件字节流"></a>5.1.2. 文件字节流</h4><h5 id="5-1-2-1-FileInputStream"><a href="#5-1-2-1-FileInputStream" class="headerlink" title="5.1.2.1. FileInputStream"></a>5.1.2.1. FileInputStream</h5><h6 id="5-1-2-1-1-FileInputStream-概述"><a href="#5-1-2-1-1-FileInputStream-概述" class="headerlink" title="5.1.2.1.1. FileInputStream 概述"></a>5.1.2.1.1. FileInputStream 概述</h6><p><code>FileInputStream</code> 是字节输入流，用于从文件中读取原始字节数据</p>
 <hr>
-<h2 id="3-节点流"><a href="#3-节点流" class="headerlink" title="3. 节点流"></a>3. 节点流</h2><h3 id="3-1-文件流"><a href="#3-1-文件流" class="headerlink" title="3.1. 文件流"></a>3.1. 文件流</h3><h4 id="3-1-1-文件字节流"><a href="#3-1-1-文件字节流" class="headerlink" title="3.1.1. 文件字节流"></a>3.1.1. 文件字节流</h4><h5 id="3-1-1-1-FileInputStream"><a href="#3-1-1-1-FileInputStream" class="headerlink" title="3.1.1.1. FileInputStream"></a>3.1.1.1. FileInputStream</h5><h6 id="3-1-1-1-1-FileInputStream-概述"><a href="#3-1-1-1-1-FileInputStream-概述" class="headerlink" title="3.1.1.1.1. FileInputStream 概述"></a>3.1.1.1.1. FileInputStream 概述</h6><p><code>FileInputStream</code> 是字节输入流，用于从文件中读取原始字节数据</p>
-<hr>
-<h6 id="3-1-1-1-2-FileInputStream-常用方法"><a href="#3-1-1-1-2-FileInputStream-常用方法" class="headerlink" title="3.1.1.1.2. FileInputStream 常用方法"></a>3.1.1.1.2. FileInputStream 常用方法</h6><ol>
+<h6 id="5-1-2-1-2-FileInputStream-常用方法"><a href="#5-1-2-1-2-FileInputStream-常用方法" class="headerlink" title="5.1.2.1.2. FileInputStream 常用方法"></a>5.1.2.1.2. FileInputStream 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileInputStream常用方法</a></li>
 </ol>
@@ -638,9 +613,9 @@
 </li>
 </ol>
 <hr>
-<h5 id="3-1-1-2-FileOutputStream"><a href="#3-1-1-2-FileOutputStream" class="headerlink" title="3.1.1.2. FileOutputStream"></a>3.1.1.2. FileOutputStream</h5><h6 id="3-1-1-2-1-FileOutputStream-概述"><a href="#3-1-1-2-1-FileOutputStream-概述" class="headerlink" title="3.1.1.2.1. FileOutputStream 概述"></a>3.1.1.2.1. FileOutputStream 概述</h6><p><code>FileOutputStream</code> 是字节输出流，用于向文件写入原始字节数据</p>
+<h5 id="5-1-2-2-FileOutputStream"><a href="#5-1-2-2-FileOutputStream" class="headerlink" title="5.1.2.2. FileOutputStream"></a>5.1.2.2. FileOutputStream</h5><h6 id="5-1-2-2-1-FileOutputStream-概述"><a href="#5-1-2-2-1-FileOutputStream-概述" class="headerlink" title="5.1.2.2.1. FileOutputStream 概述"></a>5.1.2.2.1. FileOutputStream 概述</h6><p><code>FileOutputStream</code> 是字节输出流，用于向文件写入原始字节数据</p>
 <hr>
-<h6 id="3-1-1-2-2-FileOutputStream-常用方法"><a href="#3-1-1-2-2-FileOutputStream-常用方法" class="headerlink" title="3.1.1.2.2. FileOutputStream 常用方法"></a>3.1.1.2.2. FileOutputStream 常用方法</h6><ol>
+<h6 id="5-1-2-2-2-FileOutputStream-常用方法"><a href="#5-1-2-2-2-FileOutputStream-常用方法" class="headerlink" title="5.1.2.2.2. FileOutputStream 常用方法"></a>5.1.2.2.2. FileOutputStream 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileOutputStream常用方法</a></li>
 </ol>
@@ -651,7 +626,7 @@
 </li>
 </ol>
 <hr>
-<h4 id="3-1-2-文件字符流"><a href="#3-1-2-文件字符流" class="headerlink" title="3.1.2. 文件字符流"></a>3.1.2. 文件字符流</h4><h5 id="3-1-2-1-FileReader"><a href="#3-1-2-1-FileReader" class="headerlink" title="3.1.2.1. FileReader"></a>3.1.2.1. FileReader</h5><h6 id="3-1-2-1-1-FileReader-概述"><a href="#3-1-2-1-1-FileReader-概述" class="headerlink" title="3.1.2.1.1. FileReader 概述"></a>3.1.2.1.1. FileReader 概述</h6><p><code>FileReader</code> 是字符输入流，它用于从文件中读取文件内容，并将底层的字节自动解码为字符（根据解码方式，自动取出合适数量的字节来解码成一个完整字符）</p>
+<h4 id="5-1-3-文件字符流"><a href="#5-1-3-文件字符流" class="headerlink" title="5.1.3. 文件字符流"></a>5.1.3. 文件字符流</h4><h5 id="5-1-3-1-FileReader"><a href="#5-1-3-1-FileReader" class="headerlink" title="5.1.3.1. FileReader"></a>5.1.3.1. FileReader</h5><h6 id="5-1-3-1-1-FileReader-概述"><a href="#5-1-3-1-1-FileReader-概述" class="headerlink" title="5.1.3.1.1. FileReader 概述"></a>5.1.3.1.1. FileReader 概述</h6><p><code>FileReader</code> 是字符输入流，它用于从文件中读取文件内容，并将底层的字节自动解码为字符（根据解码方式，自动取出合适数量的字节来解码成一个完整字符）</p>
 <p>虽然理论上字节流可以用于处理所有文件类型，但它是以 <strong>“一个字节一个字节”</strong> 的方式读数据。如果只是复制文件，这完全没问题。但如果直接拿来显示文本，就容易出现乱码，因为常见的编码方式（如 UTF-8）并不是 “一个字符 &#x3D; 一个字节”，而是<strong>可变长度编码</strong>（1～4 个字节一个字符）。这就导致逐字节解析时可能把字符拆断，显示结果自然就乱了。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -674,7 +649,7 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="3-1-2-1-2-FileReader-常用方法"><a href="#3-1-2-1-2-FileReader-常用方法" class="headerlink" title="3.1.2.1.2. FileReader 常用方法"></a>3.1.2.1.2. FileReader 常用方法</h6><ol>
+<h6 id="5-1-3-1-2-FileReader-常用方法"><a href="#5-1-3-1-2-FileReader-常用方法" class="headerlink" title="5.1.3.1.2. FileReader 常用方法"></a>5.1.3.1.2. FileReader 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileReader常用方法</a></li>
 </ol>
@@ -685,9 +660,9 @@
 </li>
 </ol>
 <hr>
-<h5 id="3-1-2-2-FileWriter"><a href="#3-1-2-2-FileWriter" class="headerlink" title="3.1.2.2. FileWriter"></a>3.1.2.2. FileWriter</h5><h6 id="3-1-2-2-1-FileWriter-概述"><a href="#3-1-2-2-1-FileWriter-概述" class="headerlink" title="3.1.2.2.1. FileWriter 概述"></a>3.1.2.2.1. FileWriter 概述</h6><p><code>FileWriter</code> 是字符输出流，用于向文件写入字符数据</p>
+<h5 id="5-1-3-2-FileWriter"><a href="#5-1-3-2-FileWriter" class="headerlink" title="5.1.3.2. FileWriter"></a>5.1.3.2. FileWriter</h5><h6 id="5-1-3-2-1-FileWriter-概述"><a href="#5-1-3-2-1-FileWriter-概述" class="headerlink" title="5.1.3.2.1. FileWriter 概述"></a>5.1.3.2.1. FileWriter 概述</h6><p><code>FileWriter</code> 是字符输出流，用于向文件写入字符数据</p>
 <hr>
-<h6 id="3-1-2-2-2-FileWriter-常用方法"><a href="#3-1-2-2-2-FileWriter-常用方法" class="headerlink" title="3.1.2.2.2. FileWriter 常用方法"></a>3.1.2.2.2. FileWriter 常用方法</h6><ol>
+<h6 id="5-1-3-2-2-FileWriter-常用方法"><a href="#5-1-3-2-2-FileWriter-常用方法" class="headerlink" title="5.1.3.2.2. FileWriter 常用方法"></a>5.1.3.2.2. FileWriter 常用方法</h6><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AFileWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：FileWriter常用方法</a></li>
 </ol>
@@ -698,7 +673,30 @@
 </li>
 </ol>
 <hr>
-<h2 id="4-缓冲流"><a href="#4-缓冲流" class="headerlink" title="4. 缓冲流"></a>4. 缓冲流</h2><h3 id="4-1-缓冲字节流"><a href="#4-1-缓冲字节流" class="headerlink" title="4.1. 缓冲字节流"></a>4.1. 缓冲字节流</h3><h4 id="4-1-1-BufferedInputStream"><a href="#4-1-1-BufferedInputStream" class="headerlink" title="4.1.1. BufferedInputStream"></a>4.1.1. BufferedInputStream</h4><h5 id="4-1-1-1-BufferedInputStream-概述"><a href="#4-1-1-1-BufferedInputStream-概述" class="headerlink" title="4.1.1.1. BufferedInputStream 概述"></a>4.1.1.1. BufferedInputStream 概述</h5><p><code>BufferedInputStream</code> 在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h3 id="5-2-网络流"><a href="#5-2-网络流" class="headerlink" title="5.2. 网络流"></a>5.2. 网络流</h3><h4 id="5-2-1-TCP-基础"><a href="#5-2-1-TCP-基础" class="headerlink" title="5.2.1. TCP 基础"></a>5.2.1. TCP 基础</h4><p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="5-2-2-Socket-getInputStream"><a href="#5-2-2-Socket-getInputStream" class="headerlink" title="5.2.2. Socket.getInputStream()"></a>5.2.2. Socket.getInputStream()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Server</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>		<br>        <span class="hljs-comment">// 1. 创建 ServerSocket 对象</span><br>        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">serverSocket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(<span class="hljs-number">10086</span>);<br>		<br>        <span class="hljs-comment">// 2. 监听客户端的连接</span><br>        <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> serverSocket.accept();<br>		<br>        <span class="hljs-comment">// 3. 从 TCP 连接通道中获取输入流（注意是从连接通道中获取，而不是从 ServerSocket 中获取）</span><br>        <span class="hljs-type">InputStream</span> <span class="hljs-variable">inputStream</span> <span class="hljs-operator">=</span> socket.getInputStream();<br>		<br>        <span class="hljs-comment">// 4. 输入数据</span><br>        <span class="hljs-type">int</span> b;<br>        <span class="hljs-keyword">while</span> ((b = inputStream.read()) != -<span class="hljs-number">1</span>) &#123;<br>            System.out.println((<span class="hljs-type">char</span>) b);<br>        &#125;<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于网络流只有 TCP 的字节流，没有字符流，如果想用字符流，可以使用转换流</li>
+<li>我们上面的代码，Server 只监听一次 Client，可以进行改善</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="5-2-3-Socket-getOutputStream"><a href="#5-2-3-Socket-getOutputStream" class="headerlink" title="5.2.3. Socket.getOutputStream()"></a>5.2.3. Socket.getOutputStream()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>		<br>        <span class="hljs-comment">// 1. 创建 Socket 对象（如果连接不上会抛 IOException）</span><br>        <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Socket</span>(); <br>		socket.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">10086</span>));<br>		<br>        <span class="hljs-comment">// 2. 从 TCP 连接通道获取中输出流（注意是获取而不是创建，所以 TCP 连接通道关闭，输出流自动关闭）</span><br>        <span class="hljs-type">OutputStream</span> <span class="hljs-variable">outputStream</span> <span class="hljs-operator">=</span> socket.getOutputStream();<br>		<br>        <span class="hljs-comment">// 3. 输出数据</span><br>        <span class="hljs-type">byte</span>[] bytes = <span class="hljs-string">&quot;Hello World&quot;</span>.getBytes();<br>        outputStream.write(bytes, <span class="hljs-number">0</span> , bytes.length);<br>		<br>        <span class="hljs-comment">// 4. 释放资源（先开后闭，其实不需要关闭输出流）</span><br>        outputStream.close();<br>        socket.close();<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>我们也可以手动触发连接：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Socket</span>(); <br><br>socket.connect(<span class="hljs-keyword">new</span> <span class="hljs-title class_">InetSocketAddress</span>(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-number">10086</span>));<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-缓冲流"><a href="#6-缓冲流" class="headerlink" title="6. 缓冲流"></a>6. 缓冲流</h2><h3 id="6-1-缓冲字节流"><a href="#6-1-缓冲字节流" class="headerlink" title="6.1. 缓冲字节流"></a>6.1. 缓冲字节流</h3><h4 id="6-1-1-BufferedInputStream"><a href="#6-1-1-BufferedInputStream" class="headerlink" title="6.1.1. BufferedInputStream"></a>6.1.1. BufferedInputStream</h4><h5 id="6-1-1-1-BufferedInputStream-概述"><a href="#6-1-1-1-BufferedInputStream-概述" class="headerlink" title="6.1.1.1. BufferedInputStream 概述"></a>6.1.1.1. BufferedInputStream 概述</h5><p><code>BufferedInputStream</code> 在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-2.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -708,7 +706,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="4-1-1-2-BufferedInputStream-常用方法"><a href="#4-1-1-2-BufferedInputStream-常用方法" class="headerlink" title="4.1.1.2. BufferedInputStream 常用方法"></a>4.1.1.2. BufferedInputStream 常用方法</h5><ol>
+<h5 id="6-1-1-2-BufferedInputStream-常用方法"><a href="#6-1-1-2-BufferedInputStream-常用方法" class="headerlink" title="6.1.1.2. BufferedInputStream 常用方法"></a>6.1.1.2. BufferedInputStream 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedInputStream常用方法</a></li>
 </ol>
@@ -719,9 +717,9 @@
 </li>
 </ol>
 <hr>
-<h4 id="4-1-2-BufferedOutputStream"><a href="#4-1-2-BufferedOutputStream" class="headerlink" title="4.1.2. BufferedOutputStream"></a>4.1.2. BufferedOutputStream</h4><h5 id="4-1-2-1-BufferedOutputStream-概述"><a href="#4-1-2-1-BufferedOutputStream-概述" class="headerlink" title="4.1.2.1. BufferedOutputStream 概述"></a>4.1.2.1. BufferedOutputStream 概述</h5><p><code>BufferedOutputStream</code> 同样在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h4 id="6-1-2-BufferedOutputStream"><a href="#6-1-2-BufferedOutputStream" class="headerlink" title="6.1.2. BufferedOutputStream"></a>6.1.2. BufferedOutputStream</h4><h5 id="6-1-2-1-BufferedOutputStream-概述"><a href="#6-1-2-1-BufferedOutputStream-概述" class="headerlink" title="6.1.2.1. BufferedOutputStream 概述"></a>6.1.2.1. BufferedOutputStream 概述</h5><p><code>BufferedOutputStream</code> 同样在字节节点流（任意字节节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="4-1-2-2-BufferedOutputStream-常用方法"><a href="#4-1-2-2-BufferedOutputStream-常用方法" class="headerlink" title="4.1.2.2. BufferedOutputStream 常用方法"></a>4.1.2.2. BufferedOutputStream 常用方法</h5><ol>
+<h5 id="6-1-2-2-BufferedOutputStream-常用方法"><a href="#6-1-2-2-BufferedOutputStream-常用方法" class="headerlink" title="6.1.2.2. BufferedOutputStream 常用方法"></a>6.1.2.2. BufferedOutputStream 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedOutputStream常用方法</a></li>
 </ol>
@@ -732,9 +730,9 @@
 </li>
 </ol>
 <hr>
-<h3 id="4-2-缓冲字符流"><a href="#4-2-缓冲字符流" class="headerlink" title="4.2. 缓冲字符流"></a>4.2. 缓冲字符流</h3><h4 id="4-2-1-BufferedReader"><a href="#4-2-1-BufferedReader" class="headerlink" title="4.2.1. BufferedReader"></a>4.2.1. BufferedReader</h4><h5 id="4-2-1-1-BufferedReader-概述"><a href="#4-2-1-1-BufferedReader-概述" class="headerlink" title="4.2.1.1. BufferedReader 概述"></a>4.2.1.1. BufferedReader 概述</h5><p><code>BufferedReader</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h3 id="6-2-缓冲字符流"><a href="#6-2-缓冲字符流" class="headerlink" title="6.2. 缓冲字符流"></a>6.2. 缓冲字符流</h3><h4 id="6-2-1-BufferedReader"><a href="#6-2-1-BufferedReader" class="headerlink" title="6.2.1. BufferedReader"></a>6.2.1. BufferedReader</h4><h5 id="6-2-1-1-BufferedReader-概述"><a href="#6-2-1-1-BufferedReader-概述" class="headerlink" title="6.2.1.1. BufferedReader 概述"></a>6.2.1.1. BufferedReader 概述</h5><p><code>BufferedReader</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="4-2-1-2-BufferedReader-常用方法"><a href="#4-2-1-2-BufferedReader-常用方法" class="headerlink" title="4.2.1.2. BufferedReader 常用方法"></a>4.2.1.2. BufferedReader 常用方法</h5><ol>
+<h5 id="6-2-1-2-BufferedReader-常用方法"><a href="#6-2-1-2-BufferedReader-常用方法" class="headerlink" title="6.2.1.2. BufferedReader 常用方法"></a>6.2.1.2. BufferedReader 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedReader%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedReader常用方法</a></li>
 </ol>
@@ -745,9 +743,9 @@
 </li>
 </ol>
 <hr>
-<h4 id="4-2-2-BufferedWriter"><a href="#4-2-2-BufferedWriter" class="headerlink" title="4.2.2. BufferedWriter"></a>4.2.2. BufferedWriter</h4><h5 id="4-2-2-1-BufferedWriter-概述"><a href="#4-2-2-1-BufferedWriter-概述" class="headerlink" title="4.2.2.1. BufferedWriter 概述"></a>4.2.2.1. BufferedWriter 概述</h5><p><code>BufferedWriter</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
+<h4 id="6-2-2-BufferedWriter"><a href="#6-2-2-BufferedWriter" class="headerlink" title="6.2.2. BufferedWriter"></a>6.2.2. BufferedWriter</h4><h5 id="6-2-2-1-BufferedWriter-概述"><a href="#6-2-2-1-BufferedWriter-概述" class="headerlink" title="6.2.2.1. BufferedWriter 概述"></a>6.2.2.1. BufferedWriter 概述</h5><p><code>BufferedWriter</code> 同样在字符节点流（任意字符节点流）之上，增加了一个默认大小为 8192 字节的内部缓冲区，从而减少底层 I&#x2F;O 调用，提高性能，同时免去了我们手动维护字节数组的麻烦。</p>
 <hr>
-<h5 id="4-2-2-2-BufferedWriter-常用方法"><a href="#4-2-2-2-BufferedWriter-常用方法" class="headerlink" title="4.2.2.2. BufferedWriter 常用方法"></a>4.2.2.2. BufferedWriter 常用方法</h5><ol>
+<h5 id="6-2-2-2-BufferedWriter-常用方法"><a href="#6-2-2-2-BufferedWriter-常用方法" class="headerlink" title="6.2.2.2. BufferedWriter 常用方法"></a>6.2.2.2. BufferedWriter 常用方法</h5><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9ABufferedWriter%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：BufferedWriter常用方法</a></li>
 </ol>
@@ -758,7 +756,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="5-转换流"><a href="#5-转换流" class="headerlink" title="5. 转换流"></a>5. 转换流</h2><h2 id="6-对象流"><a href="#6-对象流" class="headerlink" title="6. 对象流"></a>6. 对象流</h2><h3 id="6-1-对象流概述"><a href="#6-1-对象流概述" class="headerlink" title="6.1. 对象流概述"></a>6.1. 对象流概述</h3><p>对象流也常被称为 序列化流 &#x2F; 反序列化流，能够把 Java 内存中的对象序列化为 字节流，并且可以再从字节流中反序列化恢复成原始对象，这使得对象可以方便地 持久化到文件 或 通过网络传输。</p>
+<h2 id="7-转换流"><a href="#7-转换流" class="headerlink" title="7. 转换流"></a>7. 转换流</h2><h2 id="8-对象流"><a href="#8-对象流" class="headerlink" title="8. 对象流"></a>8. 对象流</h2><h3 id="8-1-对象流概述"><a href="#8-1-对象流概述" class="headerlink" title="8.1. 对象流概述"></a>8.1. 对象流概述</h3><p>对象流也常被称为 序列化流 &#x2F; 反序列化流，能够把 Java 内存中的对象序列化为 字节流，并且可以再从字节流中反序列化恢复成原始对象，这使得对象可以方便地 持久化到文件 或 通过网络传输。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -766,7 +764,7 @@
 <li>被序列化的类，必须实现 <code>Serializable</code> 接口。这个接口是一个标记接口，是通过 “接口” 的形式，给 JVM 或相关的类库打个标记，说：“这个类支持某种特性”，而只要我们 Implements Serializable，他就告诉 JVM 这个类的对象可以被序列化和反序列化</li>
 </ol>
 </blockquote>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-symbol">Serializable</span> &#123; <br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Serializable</span> &#123; <br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项<br>3. 序列化&#x2F;反序列化，一定要注意固定 serialVersionUID<br>    1. 我们之前定义了一个可序列化的类，如果对象已经序列化写入文件，当我们修改了类的结构（比如新增字段、修改字段类型等），在反序列化时就会报错<br>    2. 这是因为 Java 在序列化时会自动为类生成一个 serialVersionUID（版本号），并将其写入序列化文件。<br>    3. 反序列化时，JVM 会检查本地类的 serialVersionUID 是否与文件中存储的一致，如果不一致，就会抛出 <code>InvalidClassException</code>。<br>    4. 因此，我们通常会手动指定一个固定的 <strong>serialVersionUID</strong>，以避免因类结构的轻微调整导致反序列化失败：</p>
@@ -778,9 +776,20 @@
 </blockquote>
 <p><img src="/2025/08/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO%E6%B5%81-3.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="6-2-ObjectInputStream"><a href="#6-2-ObjectInputStream" class="headerlink" title="6.2. ObjectInputStream"></a>6.2. ObjectInputStream</h3><h4 id="6-2-1-ObjectInputStream-概述"><a href="#6-2-1-ObjectInputStream-概述" class="headerlink" title="6.2.1. ObjectInputStream 概述"></a>6.2.1. ObjectInputStream 概述</h4><p><code>ObjectInputStream</code> 用于从底层的字节输入流中 <strong>反序列化</strong>（deserialize）对象，也就是说，把字节流还原成 Java 对象</p>
+<h3 id="8-2-ObjectInputStream"><a href="#8-2-ObjectInputStream" class="headerlink" title="8.2. ObjectInputStream"></a>8.2. ObjectInputStream</h3><h4 id="8-2-1-ObjectInputStream-概述"><a href="#8-2-1-ObjectInputStream-概述" class="headerlink" title="8.2.1. ObjectInputStream 概述"></a>8.2.1. ObjectInputStream 概述</h4><p><code>ObjectInputStream</code> 用于从底层的字节输入流中反序列化（<code>deserialize</code>）对象，也就是说，把字节流还原成 <code>Java</code> 对象</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>JDK</code> 的反序列化是基于 <code>ObjectInputStream.readObject()</code>。在默认情况下，它可以反序列化任意实现了 <code>Serializable</code> 的类。但从 <code>Java 11</code> 开始，引入了 <code>ObjectInputFilter</code>，可以通过黑白名单或自定义规则来控制哪些类允许反序列化，哪些类禁止反序列化。这样做的目的主要是防止外部不可信数据在进入 <code>JVM</code> 时被随意反序列化，降低安全风险。</li>
+<li>在 <code>Spring Security 6</code> 之后，为了进一步防止反序列化漏洞，框架内部使用了 <code>ObjectInputFilter</code> 并内置了黑白名单策略，默认禁止任意类反序列化，只允许部分安全类。常见的解决方案包括：<ol>
+<li>直接禁用 <code>Jackson</code> 白名单限制</li>
+<li>将某类添加到 <code>Jackson</code> 反序列化白名单中</li>
+</ol>
+</li>
+</ol>
+</blockquote>
 <hr>
-<h4 id="6-2-2-ObjectInputStream-常用方法"><a href="#6-2-2-ObjectInputStream-常用方法" class="headerlink" title="6.2.2. ObjectInputStream 常用方法"></a>6.2.2. ObjectInputStream 常用方法</h4><ol>
+<h4 id="8-2-2-ObjectInputStream-常用方法"><a href="#8-2-2-ObjectInputStream-常用方法" class="headerlink" title="8.2.2. ObjectInputStream 常用方法"></a>8.2.2. ObjectInputStream 常用方法</h4><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectInputStream常用方法</a></li>
 </ol>
@@ -791,9 +800,9 @@
 </li>
 </ol>
 <hr>
-<h3 id="6-3-ObjectOutputStream"><a href="#6-3-ObjectOutputStream" class="headerlink" title="6.3. ObjectOutputStream"></a>6.3. ObjectOutputStream</h3><h4 id="6-3-1-ObjectOutputStream-概述"><a href="#6-3-1-ObjectOutputStream-概述" class="headerlink" title="6.3.1. ObjectOutputStream 概述"></a>6.3.1. ObjectOutputStream 概述</h4><p><code>ObjectOutputStream</code> 用于把 Java 内存中的对象序列化为字节流</p>
+<h3 id="8-3-ObjectOutputStream"><a href="#8-3-ObjectOutputStream" class="headerlink" title="8.3. ObjectOutputStream"></a>8.3. ObjectOutputStream</h3><h4 id="8-3-1-ObjectOutputStream-概述"><a href="#8-3-1-ObjectOutputStream-概述" class="headerlink" title="8.3.1. ObjectOutputStream 概述"></a>8.3.1. ObjectOutputStream 概述</h4><p><code>ObjectOutputStream</code> 用于把 <code>Java</code> 内存中的对象序列化为字节流</p>
 <hr>
-<h4 id="6-3-2-ObjectOutputStream-常用方法"><a href="#6-3-2-ObjectOutputStream-常用方法" class="headerlink" title="6.3.2. ObjectOutputStream 常用方法"></a>6.3.2. ObjectOutputStream 常用方法</h4><ol>
+<h4 id="8-3-2-ObjectOutputStream-常用方法"><a href="#8-3-2-ObjectOutputStream-常用方法" class="headerlink" title="8.3.2. ObjectOutputStream 常用方法"></a>8.3.2. ObjectOutputStream 常用方法</h4><ol>
 <li>obsidian 内部链接：<ol>
 <li><a href="%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95.md">方法：ObjectOutputStream常用方法</a></li>
 </ol>
@@ -804,8 +813,8 @@
 </li>
 </ol>
 <hr>
-<h2 id="7-打印流"><a href="#7-打印流" class="headerlink" title="7. 打印流"></a>7. 打印流</h2><h3 id="7-1-字节打印流"><a href="#7-1-字节打印流" class="headerlink" title="7.1. 字节打印流"></a>7.1. 字节打印流</h3><h4 id="7-1-1-PrintStream"><a href="#7-1-1-PrintStream" class="headerlink" title="7.1.1. PrintStream"></a>7.1.1. PrintStream</h4><h3 id="7-2-字符打印流"><a href="#7-2-字符打印流" class="headerlink" title="7.2. 字符打印流"></a>7.2. 字符打印流</h3><h4 id="7-2-1-PrintWriter"><a href="#7-2-1-PrintWriter" class="headerlink" title="7.2.1. PrintWriter"></a>7.2.1. PrintWriter</h4><hr>
-<h2 id="8-压缩流"><a href="#8-压缩流" class="headerlink" title="8. 压缩流"></a>8. 压缩流</h2><h3 id="8-1-压缩流"><a href="#8-1-压缩流" class="headerlink" title="8.1. 压缩流"></a>8.1. 压缩流</h3><h3 id="8-2-解压缩流"><a href="#8-2-解压缩流" class="headerlink" title="8.2. 解压缩流"></a>8.2. 解压缩流</h3>
+<h2 id="9-打印流"><a href="#9-打印流" class="headerlink" title="9. 打印流"></a>9. 打印流</h2><h3 id="9-1-字节打印流"><a href="#9-1-字节打印流" class="headerlink" title="9.1. 字节打印流"></a>9.1. 字节打印流</h3><h4 id="9-1-1-PrintStream"><a href="#9-1-1-PrintStream" class="headerlink" title="9.1.1. PrintStream"></a>9.1.1. PrintStream</h4><h3 id="9-2-字符打印流"><a href="#9-2-字符打印流" class="headerlink" title="9.2. 字符打印流"></a>9.2. 字符打印流</h3><h4 id="9-2-1-PrintWriter"><a href="#9-2-1-PrintWriter" class="headerlink" title="9.2.1. PrintWriter"></a>9.2.1. PrintWriter</h4><hr>
+<h2 id="10-压缩流"><a href="#10-压缩流" class="headerlink" title="10. 压缩流"></a>10. 压缩流</h2><h3 id="10-1-压缩流"><a href="#10-1-压缩流" class="headerlink" title="10.1. 压缩流"></a>10.1. 压缩流</h3><h3 id="10-2-解压缩流"><a href="#10-2-解压缩流" class="headerlink" title="10.2. 解压缩流"></a>10.2. 解压缩流</h3>
                 
               </div>
             

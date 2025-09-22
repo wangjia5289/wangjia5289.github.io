@@ -228,15 +228,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：RejectedExecutionHandler 源码解析
+        <a href="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9ARBAC%E6%80%9D%E6%83%B3/" target="_self">
+          笔记：RBAC 思想
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9ARejectedExecutionHandler%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/10/%E7%AC%94%E8%AE%B0%EF%BC%9ARBAC%E6%80%9D%E6%83%B3/" target="_self">
         <div>
-          1. 概述RejectedExecutionHandler 是一个接口。是专门用来处理 线程池无法接受新任务时该怎么办 的策略  2. 源码部分12345public interface RejectedExecutionHandler &#123;	    void rejectedExecution(Runnable r, ThreadPoolExecutor executor);    &#
+          RBAC 规范概述RBAC 的核心思想就是：“不直接给用户分配权限，而是把权限分配给角色，再把用户加入到相应角色”  用户（User）： 系统中的操作主体，比如某个登录系统的人。 需要注意的，用户的唯一性是关键，即用户名不能重复   角色（Role）： 一组权限的集合，例如管理员、编辑人员、普通用户等 命名方式按照 ROLE_职责 的方式进行命名，例如 ROLE_CEO、ROLE_ADMIN（命名
         </div>
       </a>
 
@@ -244,494 +244,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：ThreadFactory 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E6%BA%90%E7%A0%81%EF%BC%9AThreadFactory%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述ThreadFactory 是一个接口。负责如何创建线程  2. 源码部分12345public interface ThreadFactory &#123;	    Thread newThread(Runnable r);    &#125;   6. 接口方法6.1. 接口方法（无）Thread newThread(Runnable r)方法概述Thread newThread(R
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E7%AC%94%E8%AE%B0%EF%BC%9AIDEA/" target="_self">
-          笔记：IDEA
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E7%AC%94%E8%AE%B0%EF%BC%9AIDEA/" target="_self">
-        <div>
-          Code Copy To Obsidian
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%9E%E5%85%AC%E5%B7%A5%E5%85%B7/" class="category-chain-item">办公工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E7%AC%94%E8%AE%B0%EF%BC%9AWindows/" target="_self">
-          笔记：Windows
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E7%AC%94%E8%AE%B0%EF%BC%9AWindows/" target="_self">
-        <div>
-          输入法显示详见笔记：输入法显示小工具    1. obsidian 内部链接：        1. 输入法显示小工具    2. Hexo 链接：        1.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">操作系统</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/30/%E8%BE%93%E5%85%A5%E6%B3%95%E6%98%BE%E7%A4%BA%E5%B0%8F%E5%B7%A5%E5%85%B7/" target="_self">
-          输入法显示小工具
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/30/%E8%BE%93%E5%85%A5%E6%B3%95%E6%98%BE%E7%A4%BA%E5%B0%8F%E5%B7%A5%E5%85%B7/" target="_self">
-        <div>
-          1. Py 代码创建 输入法显示小工具.py 并编写代码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-30 00:00" pubdate>
-              2025-08-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%87%AA%E7%A0%94%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="category-chain-item">自研小工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/29/%E6%96%B9%E6%B3%95%EF%BC%9AArrayBlockingQueue%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：ArrayBlockingQueue 常用方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/29/%E6%96%B9%E6%B3%95%EF%BC%9AArrayBlockingQueue%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          1. 构造方法1.1. public ArrayBlockingQueue(int capacity)12// 创建一个固定容量的 ArrayBlockingQueueArrayBlockingQueue&lt;String&gt; queue = new ArrayBlockingQueue&lt;&gt;(3);   1.2. public ArrayBlockingQueue(int cap
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-29 08:00" pubdate>
-              2025-08-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/29/%E6%BA%90%E7%A0%81%EF%BC%9AIntFunction%EF%BC%9CR%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：IntFunction＜R＞ 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/29/%E6%BA%90%E7%A0%81%EF%BC%9AIntFunction%EF%BC%9CR%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述XXXX 是一个接口，定义了 “XXXX” 的规范  2. 源码部分123456@FunctionalInterface  public interface IntFunction&lt;R&gt; &#123;  	       R apply(int value);         &#125;   5. 接口方法5.1. 接口方法（无）
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-29 00:00" pubdate>
-              2025-08-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/29/%E6%BA%90%E7%A0%81%EF%BC%9AQueue%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Queue＜E＞ 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/29/%E6%BA%90%E7%A0%81%EF%BC%9AQueue%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. 概述Queue＜E＞ 是一个接口，定义了 “如何操作队列这种数据结构” 的规范  2. 源码部分12345678910111213public interface Queue&lt;E&gt; extends Collection&lt;E&gt; &#123;	    boolean offer(E e);        E remove();        E poll();	    E
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-29 00:00" pubdate>
-              2025-08-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/29/%E7%AC%94%E8%AE%B0%EF%BC%9AExcel/" target="_self">
-          笔记：Excel
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/29/%E7%AC%94%E8%AE%B0%EF%BC%9AExcel/" target="_self">
-        <div>
-          1. Obsidian Table ⟷ Excel1.1. Obsidian Table ➔ Excel1.1.1. 编写 VBA按 ALT + F11，新建模块 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-29 00:00" pubdate>
-              2025-08-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%8A%9E%E5%85%AC%E5%B7%A5%E5%85%B7/" class="category-chain-item">办公工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/" target="_self">
-          笔记：JUC
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/28/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/" target="_self">
-        <div>
-          1. 脑图 Xmind  Edraw    2. 线程基础2.1. 串行、并发、并行1. 串行串行是指任务按顺序一个接一个地执行，只有当前一个任务执行完成，后一个任务才会开始执行，严格遵循任务提交的先后顺序。即便系统拥有多个 CPU 核心，在串行模式下，任意时刻也只会有一个线程在运行。 2. 并发并发是指多个线程看起来像是在同时运行，其是通过时间片轮转机制实现，通过快速切换线程，让每个线程都获得运
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-28 00:00" pubdate>
-              2025-08-28
+            <time datetime="2025-09-10 00:00" pubdate>
+              2025-09-10
             </time>
           </div>
         
@@ -751,7 +265,528 @@
   
     <span>></span>
     
-  <a href="/categories/Java/JUC/" class="category-chain-item">JUC</a>
+  <a href="/categories/Java/Java-%E5%AE%89%E5%85%A8/" class="category-chain-item">Java 安全</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9AFileChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：FileChannel 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9AFileChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. XXXX 概述XXXX 是一个抽象类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX 是一个接口，是 XXXX 的 XX 接口，继承了 XXXX，XXXX XXXX 是一个具体类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX  [!NOTE] 注意事
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-09 08:00" pubdate>
+              2025-09-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9ASocketChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：SocketChannel 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9ASocketChannel%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. XXXX 概述XXXX 是一个抽象类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX 是一个接口，是 XXXX 的 XX 接口，继承了 XXXX，XXXX XXXX 是一个具体类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX  [!NOTE] 注意事
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-09 08:00" pubdate>
+              2025-09-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9ABuffer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Buffer 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/09/%E6%BA%90%E7%A0%81%EF%BC%9ABuffer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. XXXX 概述XXXX 是一个抽象类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX 是一个接口，是 XXXX 的 XX 接口，继承了 XXXX，XXXX XXXX 是一个具体类，是 XXXX 的 XX 内部类，继承了 XXXX，实现了 XXXX，XXXX XXXX  [!NOTE] 注意事
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-09 00:00" pubdate>
+              2025-09-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9ATCPSocket/" target="_self">
+          笔记：TCP Socket
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9ATCPSocket/" target="_self">
+        <div>
+          详见笔记：Java IO 流  obsidian 内部链接： 笔记：JavaIO流   Hexo 链接：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-08 00:00" pubdate>
+              2025-09-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="category-chain-item">Java 网络通信</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Socket-%E9%80%9A%E4%BF%A1/" class="category-chain-item">Socket 通信</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AUDPSocket/" target="_self">
+          笔记：UDP Socket
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AUDPSocket/" target="_self">
+        <div>
+          详见笔记：UDP、TCP 协议  obsidian 内部链接： 笔记：UDP、TCP协议   Hexo 链接：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-08 00:00" pubdate>
+              2025-09-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/" class="category-chain-item">Java 网络通信</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Socket-%E9%80%9A%E4%BF%A1/" class="category-chain-item">Socket 通信</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/" target="_self">
+          笔记：Zookeeper
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/08/%E7%AC%94%E8%AE%B0%EF%BC%9AZookeeper/" target="_self">
+        <div>
+          一、脑图 Xmind  Edraw    二、Zookeeper 基础1. Zookeeper 应用场景1.1. 分布式锁在分布式锁的实现中，所有客户端都会在 Zookeeper 的同一路径下创建临时顺序节点。Zookeeper 会按照节点的序号排序，序号最小的节点获得锁，其余客户端则处于等待状态。   当持锁客户端释放锁（即对应临时节点被删除）时，Zookeeper 会通知下一个顺序节点的客户端
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-08 00:00" pubdate>
+              2025-09-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" class="category-chain-item">分布式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1/" class="category-chain-item">分布式协调服务</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E6%9C%8D%E5%8A%A1/ZooKeeper/" class="category-chain-item">ZooKeeper</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/06/%E6%BA%90%E7%A0%81%EF%BC%9AInetAddress%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：InetAddress 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/06/%E6%BA%90%E7%A0%81%EF%BC%9AInetAddress%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 脑图 Xmind  Edraw    2. 基础部分2.1. InetAddress 概述InetAddress 是一个具体类，实现了 Serializable，用来表示 IP 地址和主机名之间的映射关系，可以实现：  域名解析 把一个主机名（比如 www.google.com）解析成 IP 地址   反向解析 给你一个 IP 地址，告诉你对应的主机名   获取本机信息   3. 常用方法3
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-06 08:00" pubdate>
+              2025-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/05/%E7%AC%94%E8%AE%B0%EF%BC%9AIP/" target="_self">
+          笔记：IP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/05/%E7%AC%94%E8%AE%B0%EF%BC%9AIP/" target="_self">
+        <div>
+          1. IP 概述IP（Internet Protocol）是互联网协议地址，也称 IP 地址，是分配给上网设备的数字标签  2. IP 分类 IPv4 IPv6   3. IPv43.1. IPv4 概述IPv4（Internet Protocol version 4）是互联网通信协议第四版，采用 32 位地址长度，分成 4 组，每组 8 bit  [!NOTE] 注意事项  常见的 192.16
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-05 00:00" pubdate>
+              2025-09-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="category-chain-item">网络基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/09/05/%E7%AC%94%E8%AE%B0%EF%BC%9AUDP%E3%80%81TCP%E5%8D%8F%E8%AE%AE/" target="_self">
+          笔记：UDP、TCP 协议
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/05/%E7%AC%94%E8%AE%B0%EF%BC%9AUDP%E3%80%81TCP%E5%8D%8F%E8%AE%AE/" target="_self">
+        <div>
+          1. UDP 协议1.1. UDP 协议概述UDP（User Datagram Protocol，用户数据报协议）是一种面向无连接的传输层协议 其优点是：  速度快 无需建立连接，开销小，适合对实时性要求高的场景（如语音、视频、游戏）    其缺点是：  数据大小限制 单个数据报的理论最大长度为 64 KB   数据丢失&#x2F;乱序风险 不保证数据一定送达，也不保证顺序，容易出现丢包或乱序
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-09-05 00:00" pubdate>
+              2025-09-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="category-chain-item">网络基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%8D%8F%E8%AE%AE/" class="category-chain-item">协议</a>
   
   
 
@@ -773,7 +808,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

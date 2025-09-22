@@ -1,0 +1,809 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、脑图 二、Canal 基础Canal 概述Canal（管道）是阿里巴巴开源的一款基于数据库增量日志解析的中间件，主要捕获 MySQL 的数据变更（增量数据），并将这些变更推送给下游应用或系统  Canal 核心原理传统的 MySQL 主从复制的原理如下： Canal 通过模拟 MySQL 从库的交互协议，将自己伪装成一个 MySQL Slave，向主库发送 dump 请求。MySQL Mast">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Canal">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、脑图 二、Canal 基础Canal 概述Canal（管道）是阿里巴巴开源的一款基于数据库增量日志解析的中间件，主要捕获 MySQL 的数据变更（增量数据），并将这些变更推送给下游应用或系统  Canal 核心原理传统的 MySQL 主从复制的原理如下： Canal 通过模拟 MySQL 从库的交互协议，将自己伪装成一个 MySQL Slave，向主库发送 dump 请求。MySQL Mast">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-2.png">
+<meta property="article:published_time" content="2025-09-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-22T15:29:35.046Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Canal - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Canal"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-11 00:00" pubdate>
+          September 11, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Canal</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-22T23:29:35+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、脑图"><a href="#一、脑图" class="headerlink" title="一、脑图"></a>一、脑图</h1><hr>
+<h1 id="二、Canal-基础"><a href="#二、Canal-基础" class="headerlink" title="二、Canal 基础"></a>二、Canal 基础</h1><h2 id="Canal-概述"><a href="#Canal-概述" class="headerlink" title="Canal 概述"></a>Canal 概述</h2><p><code>Canal</code>（管道）是阿里巴巴开源的一款基于数据库增量日志解析的中间件，主要捕获 <code>MySQL</code> 的数据变更（增量数据），并将这些变更推送给下游应用或系统</p>
+<hr>
+<h2 id="Canal-核心原理"><a href="#Canal-核心原理" class="headerlink" title="Canal 核心原理"></a>Canal 核心原理</h2><p>传统的 <code>MySQL</code> 主从复制的原理如下：<br><img src="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>Canal</code> 通过模拟 <code>MySQL</code> 从库的交互协议，将自己伪装成一个 <code>MySQL Slave</code>，向主库发送 <code>dump</code> 请求。<code>MySQL Master</code> 在接收到请求后，会将 <code>Binary Log</code> 推送给 <code>Canal</code>，<code>Canal</code> 再对日志进行解析并转发至应用侧，应用即可基于这些变更进行处理。<br><img src="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-1.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>要让 <code>Canal</code> 正常运作，<code>MySQL</code> 的 <code>Binary Log</code> 必须设置为 <code>Row</code> 模式</li>
+<li>Canal 的常见使用方式包括：<ol>
+<li>客户端直接连接 <code>Canal</code>，主动拉取和消费 <code>binlog</code> 事件</li>
+<li><code>Canal</code> 将解析后的事件推送到消息队列（目前支持 <code>Kafka</code>、<code>RocketMQ</code>、<code>RabbitMQ</code>、<code>Pulsar</code>），下游服务再各自从 MQ 消费</li>
+</ol>
+</li>
+<li>如果 Canal 已经拉取了 MySQL 的 binlog，但没有消费者及时处理，这些事件会滞留在 Canal 的内存队列中。当队列被占满时，Canal 就会暂停继续拉取新的 binlog，直到有消费进度释放空间。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Canal-命令"><a href="#Canal-命令" class="headerlink" title="Canal 命令"></a>Canal 命令</h2><h3 id="系统命令"><a href="#系统命令" class="headerlink" title="系统命令"></a>系统命令</h3><h4 id="启动-Canal"><a href="#启动-Canal" class="headerlink" title="启动 Canal"></a>启动 Canal</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">&#123;Canal_HOME&#125;/bin/startup.<span class="hljs-keyword">sh</span><br><br><br><span class="hljs-keyword">ps</span> -ef | <span class="hljs-keyword">grep</span> CanalLauncher<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="停止-Canal"><a href="#停止-Canal" class="headerlink" title="停止 Canal"></a>停止 Canal</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">&#123;Canal_HOME&#125;/bin/<span class="hljs-keyword">stop</span>.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="三、搭建-Canal-环境"><a href="#三、搭建-Canal-环境" class="headerlink" title="三、搭建 Canal 环境"></a>三、搭建 Canal 环境</h1><h2 id="单机测试环境"><a href="#单机测试环境" class="headerlink" title="单机测试环境"></a>单机测试环境</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h4 id="运行环境准备"><a href="#运行环境准备" class="headerlink" title="运行环境准备"></a>运行环境准备</h4><h5 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">command -v java &gt;/dev/<span class="hljs-keyword">null</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span> || &#123; sudo apt-<span class="hljs-keyword">get</span> <span class="hljs-keyword">update</span> &amp;&amp; sudo apt-<span class="hljs-keyword">get</span> install -y openjdk<span class="hljs-number">-8</span>-jdk; &#125;<br><br><br>java -<span class="hljs-keyword">version</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h4 id="下载-Canal"><a href="#下载-Canal" class="headerlink" title="下载 Canal"></a>下载 Canal</h4><p>在 <a target="_blank" rel="noopener" href="https://github.com/alibaba/canal/releases">Canal 官方下载地址</a> 选择合适的版本（<code>canal.deployer-1.1.8.tar.gz</code>），下载 <code>Canal</code> 安装包（后缀为 <code>tar.gz</code>）<br><img src="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal/%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-2.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="安装-Canal"><a href="#安装-Canal" class="headerlink" title="安装 Canal"></a>安装 Canal</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mkdir</span> -p /mystudy/canal<br><br><br><span class="hljs-comment"># 上传 Canal 软件包</span><br><br><br><span class="hljs-attribute">cd</span> /mystudy/canal<br><br><br><span class="hljs-attribute">tar</span> -zxvf canal.deployer-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.tar.gz -C /mystudy/canal<br><br><br><span class="hljs-attribute">rm</span> -rf canal.deployer-<span class="hljs-number">1</span>.<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.tar.gz<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="环境目录"><a href="#环境目录" class="headerlink" title="环境目录"></a>环境目录</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">/mystudy/canal<br>├── bin                                              <span class="hljs-comment"># 主要命令</span><br>│   ├── restart.sh<br>│   ├── startup.bat<br>│   ├── startup.sh<br>│   └── <span class="hljs-literal">stop</span>.sh<br>├── conf                                             <span class="hljs-comment"># 配置文件</span><br>│   ├── canal_local.properties<br>│   ├── canal.properties                             <span class="hljs-comment"># Server 级别配置</span><br>│   ├── example                                      <span class="hljs-comment"># Instance 级别配置</span><br>│   │   └── instance.properties<br>│   ├── logback.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│   ├── metrics</span><br>│   │   └── Canal_instances_tmpl.json<br>│   └── spring<br>│       ├── base-instance.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│       ├── default-instance</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│       ├── file-instance</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│       ├── group-instance</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│       ├── memory-instance</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│       └── tsdb</span><br>│           ├── h2-tsdb.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│           ├── mysql-tsdb</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│           ├── sql</span><br>│           │   └── create_table.sql<br>│           └── sql-map<br>│               ├── sqlmap-config.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│               ├── sqlmap_history</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">│               └── sqlmap_snapshot</span>.<span class="hljs-keyword">xml</span><br><span class="hljs-title">├── lib</span><br>├── logs                                             <span class="hljs-comment"># 日志</span><br>└── plugin                                           <span class="hljs-comment"># 插件</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><h4 id="Server-级别配置"><a href="#Server-级别配置" class="headerlink" title="Server 级别配置"></a>Server 级别配置</h4><h5 id="文件位置"><a href="#文件位置" class="headerlink" title="文件位置"></a>文件位置</h5><p>文件在：<code>&#123;Canal_Home&#125;/conf/canal.properties</code></p>
+<hr>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 对接 canal-admin</span><br><span class="hljs-comment"># canal-admin 的 ip + 端口</span><br><span class="hljs-attr">canal.admin.manager</span> = <span class="hljs-number">192.168</span>.<span class="hljs-number">136.8</span>:<span class="hljs-number">8089</span><br><br><span class="hljs-comment"># canal 自己的端口</span><br><span class="hljs-attr">canal.admin.port</span> = <span class="hljs-number">11110</span><br><br><span class="hljs-comment"># canal-admin 的用户名</span><br><span class="hljs-attr">canal.admin.user</span> = admin<br><br><span class="hljs-comment"># canal-admin 的密码</span><br><span class="hljs-attr">canal.admin.passwd</span> = a127bb2b107550db03caabbe91f056e4<br><br><br><span class="hljs-comment"># 是否在 canal  启动时自动去 canal-admin 注册自己，无需在 canal-admin 中手动注册</span><br><span class="hljs-attr">canal.admin.register.auto</span> = <span class="hljs-literal">true</span><br><span class="hljs-comment"># 注册到的集群，单机可以不写</span><br><span class="hljs-attr">canal.admin.register.cluster</span> =<br><span class="hljs-attr">canal.admin.register.name</span> = server-<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这里的密码必须使用 MD5 值，不能直接写明文，你可以在 Linux 上通过以下命令生成 MD5。</li>
+<li>需要注意的是，只需复制输出结果前面的 <strong>32 位十六进制串</strong>，不要把后面的空格或 <code>-</code> 一并复制进去</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;wq666666&quot;</span> | <span class="hljs-built_in">md5sum</span><br></code></pre></td></tr></table></figure>
+
+
+<h5 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h5><p><code>Server</code> 级别通常不需要修改，保持默认即可</p>
+<hr>
+<h4 id="Instance-级别配置"><a href="#Instance-级别配置" class="headerlink" title="Instance 级别配置"></a>Instance 级别配置</h4><h5 id="配置概述"><a href="#配置概述" class="headerlink" title="配置概述"></a>配置概述</h5><p><code>Canal</code> 支持同时监控多个 <code>MySQL</code> 实例，每个实例对应一个 <code>instance</code>。因此，每增加一个需要监控的 <code>MySQL</code> 实例，就必须新增并配置一个对应的 <code>Instance</code></p>
+<hr>
+<h5 id="文件位置-1"><a href="#文件位置-1" class="headerlink" title="文件位置"></a>文件位置</h5><p>文件在：<code>&#123;Canal_Home&#125;/conf/example/instance.properties</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这里的配置只是 <code>Canal</code> 提供的模板写法，若想监控新的 <code>MySQL</code> 实例，只需复制该模板一份，再按需调整参数</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> &#123;Canal_Home&#125;/conf<br><br><br><span class="hljs-built_in">cp</span> -r example/ mytest/<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="具体配置-1"><a href="#具体配置-1" class="headerlink" title="具体配置"></a>具体配置</h5><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><code class="hljs clean"># mysql serverId，通常由 canal 会自动生成，也可以手动指定<br>canal.<span class="hljs-keyword">instance</span>.mysql.slaveId=<span class="hljs-number">101</span><br><br><br># 是否启用 GITD 模式，如果 MySQL 启用了 GTID，这里也可以设置为 true<br>canal.<span class="hljs-keyword">instance</span>.gtidon=true<br><br><br># 云上场景，例如阿里云 RDS<br>canal.<span class="hljs-keyword">instance</span>.rds.accesskey=<br>canal.<span class="hljs-keyword">instance</span>.rds.secretkey=<br>canal.<span class="hljs-keyword">instance</span>.rds.instanceId=<br><br><br># 自建场景<br># 主库 ip + 端口<br>canal.<span class="hljs-keyword">instance</span>.master.address=<span class="hljs-number">192.168</span><span class="hljs-number">.136</span><span class="hljs-number">.8</span>:<span class="hljs-number">3306</span><br>canal.<span class="hljs-keyword">instance</span>.master.journal.name=<br>canal.<span class="hljs-keyword">instance</span>.master.position=<br>canal.<span class="hljs-keyword">instance</span>.master.timestamp=<br>canal.<span class="hljs-keyword">instance</span>.master.gtid=<br><br><br># 使用的 MySQL 用户<br># 用户名<br>canal.<span class="hljs-keyword">instance</span>.dbUsername=repl<br># 密码<br>canal.<span class="hljs-keyword">instance</span>.dbPassword=wq66666<br># Canal 与 MySQL 建立连接时的字符集<br>canal.<span class="hljs-keyword">instance</span>.connectionCharset = UTF<span class="hljs-number">-8</span><br># 是否启用 Druid 密码解密功能，写 false 就行，我们直接用明文密码即可<br>canal.<span class="hljs-keyword">instance</span>.enableDruid=false<br># 如果启用 Druid 密码解密功能，就要在这里写公钥<br>canal.<span class="hljs-keyword">instance</span>.pwdPublicKey=<br><br><br># Canal 的过滤规则（正则表达式）<br># 库.表 白名单<br>#     <span class="hljs-number">1.</span> Canal 要捕获的 库.表<br>#     <span class="hljs-number">2.</span> 例如 mydb\\.user,mydb\\.order<br>#     <span class="hljs-number">3.</span> .*\\..* 表示所有库的所有表<br>canal.<span class="hljs-keyword">instance</span>.filter.regex=.*\\..*<br># 库.表 黑名单<br>canal.<span class="hljs-keyword">instance</span>.filter.black.regex=<br># 字段 白名单<br>#     <span class="hljs-number">1.</span> Canal 要捕获的 库.表 中的字段<br>#     <span class="hljs-number">2.</span> 例如 mydb\\.user:id/name/age,mydb\\.order:id/amount<br>canal.<span class="hljs-keyword">instance</span>.filter.field=<br># 字段 黑名单<br>canal.<span class="hljs-keyword">instance</span>.filter.black.field=<br><br><br># mq config<br>canal.mq.topic=example<br># dynamic topic route by schema or table regex<br>#canal.mq.dynamicTopic=mytest1.user,topic2:mytest2\\..*,.*\\..*<br>canal.mq.partition=<span class="hljs-number">0</span><br># hash partition config<br>#canal.mq.enableDynamicQueuePartition=false<br>#canal.mq.partitionsNum=<span class="hljs-number">3</span><br>#canal.mq.dynamicTopicPartitionNum=test.*:<span class="hljs-number">4</span>,mycanal:<span class="hljs-number">6</span><br>#canal.mq.partitionHash=test.table:id^name,.*\\..*<br>#################################################<br><br><br># SSL 配置<br>#canal.<span class="hljs-keyword">instance</span>.master.sslMode=DISABLED<br>#canal.<span class="hljs-keyword">instance</span>.master.tlsVersions=<br>#canal.<span class="hljs-keyword">instance</span>.master.trustCertificateKeyStoreType=<br>#canal.<span class="hljs-keyword">instance</span>.master.trustCertificateKeyStoreUrl=<br>#canal.<span class="hljs-keyword">instance</span>.master.trustCertificateKeyStorePassword=<br>#canal.<span class="hljs-keyword">instance</span>.master.clientCertificateKeyStoreType=<br>#canal.<span class="hljs-keyword">instance</span>.master.clientCertificateKeyStoreUrl=<br>#canal.<span class="hljs-keyword">instance</span>.master.clientCertificateKeyStorePassword=<br><br><br># table meta tsdb info<br>canal.<span class="hljs-keyword">instance</span>.tsdb.enable=true<br>#canal.<span class="hljs-keyword">instance</span>.tsdb.url=jdbc:mysql:<span class="hljs-comment">//127.0.0.1:3306/canal_tsdb</span><br>#canal.<span class="hljs-keyword">instance</span>.tsdb.dbUsername=canal<br>#canal.<span class="hljs-keyword">instance</span>.tsdb.dbPassword=canal<br><br><br>#canal.<span class="hljs-keyword">instance</span>.standby.address =<br>#canal.<span class="hljs-keyword">instance</span>.standby.journal.name =<br>#canal.<span class="hljs-keyword">instance</span>.standby.position =<br>#canal.<span class="hljs-keyword">instance</span>.standby.timestamp =<br>#canal.<span class="hljs-keyword">instance</span>.standby.gtid=<br><br><br># 是否启用多流模式，适用于 PolarDB-X/DRDS 这样的分布式数据库<br>canal.<span class="hljs-keyword">instance</span>.multi.stream.on=false<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="四、Canal-相关工具"><a href="#四、Canal-相关工具" class="headerlink" title="四、Canal 相关工具"></a>四、Canal 相关工具</h1><h3 id="Canal-Admin"><a href="#Canal-Admin" class="headerlink" title="Canal-Admin"></a>Canal-Admin</h3><ol>
+<li>obsidian 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ACanal-Admin.md">笔记：Canal-Admin</a></li>
+</ol>
+</li>
+<li>Hexo 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/" class="category-chain-item">数据管理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">关系型数据库</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="category-chain-item">数据库中间件</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Canal</div>
+      <div>https://wangjia5289.github.io/2025/09/11/笔记：Canal/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 11, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/14/%E9%A1%B9%E7%9B%AE%EF%BC%9A%E5%BE%AE%E4%BF%A1%E4%BB%BF%E5%88%B6%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89/" title="项目：微信仿制（简单版）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">项目：微信仿制（简单版）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/11/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringWebSocket/" title="笔记：SpringWebSocket">
+                        <span class="hidden-mobile">笔记：SpringWebSocket</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

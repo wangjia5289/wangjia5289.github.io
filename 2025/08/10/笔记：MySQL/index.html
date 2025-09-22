@@ -19,16 +19,29 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="MySQL 基础1. MySQL 体系结构  [!NOTE] 注意事项  索引由存储引擎层实现，因此不同存储引擎的索引结构可能不同    2. MySQL 语法2.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   2.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   2.3. DDL（库、">
+    <meta name="description" content="一、脑图 Xmind  Edraw  目录结构    二、MySQL 基础1. MySQL 基本架构  [!NOTE] 注意事项  索引由存储引擎层实现，因此不同存储引擎的索引结构可能不同    2. MySQL 常用命令2.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB 在 MySQL 中，注释写法如下：12345">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：MySQL">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="MySQL 基础1. MySQL 体系结构  [!NOTE] 注意事项  索引由存储引擎层实现，因此不同存储引擎的索引结构可能不同    2. MySQL 语法2.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB   2.2. 注释写法1234567# 单行注释-- 单行注释&#x2F;*多行注释*&#x2F;   2.3. DDL（库、">
+<meta property="og:description" content="一、脑图 Xmind  Edraw  目录结构    二、MySQL 基础1. MySQL 基本架构  [!NOTE] 注意事项  索引由存储引擎层实现，因此不同存储引擎的索引结构可能不同    2. MySQL 常用命令2.1. 语法要求 SQL 语句可以单行或多行，但要以分号（;）结尾 MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB 在 MySQL 中，注释写法如下：12345">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.xmind">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-1.xmind">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-40.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-27.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-28.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-29.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-35.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-31.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-32.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-33.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-34.png">
 <meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-39.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-4.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-23.png">
@@ -50,11 +63,14 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-20.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-21.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-26.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-36.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-37.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-38.png">
 <meta property="article:published_time" content="2025-08-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-17T15:18:02.907Z">
+<meta property="article:modified_time" content="2025-09-20T02:42:23.456Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-3.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.xmind">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -248,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k words
+          20k words
         
       </span>
     
@@ -259,7 +275,7 @@
         
         
         
-          110 mins
+          166 mins
         
       </span>
     
@@ -314,7 +330,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-08-17T23:18:02+08:00
+                    Last updated on 2025-09-20T10:42:23+08:00
                   
                   
 
@@ -324,7 +340,16 @@
             
               <div class="markdown-body">
                 
-                <h1 id="MySQL-基础"><a href="#MySQL-基础" class="headerlink" title="MySQL 基础"></a>MySQL 基础</h1><h2 id="1-MySQL-体系结构"><a href="#1-MySQL-体系结构" class="headerlink" title="1. MySQL 体系结构"></a>1. MySQL 体系结构</h2><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-3.png" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="一、脑图"><a href="#一、脑图" class="headerlink" title="一、脑图"></a>一、脑图</h1><ol>
+<li><p>Xmind<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.xmind" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Edraw<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>目录结构<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-1.xmind" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h1 id="二、MySQL-基础"><a href="#二、MySQL-基础" class="headerlink" title="二、MySQL 基础"></a>二、MySQL 基础</h1><h2 id="1-MySQL-基本架构"><a href="#1-MySQL-基本架构" class="headerlink" title="1. MySQL 基本架构"></a>1. MySQL 基本架构</h2><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-3.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -332,15 +357,34 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="2-MySQL-语法"><a href="#2-MySQL-语法" class="headerlink" title="2. MySQL 语法"></a>2. MySQL 语法</h2><h3 id="2-1-语法要求"><a href="#2-1-语法要求" class="headerlink" title="2.1. 语法要求"></a>2.1. 语法要求</h3><ol>
+<h2 id="2-MySQL-常用命令"><a href="#2-MySQL-常用命令" class="headerlink" title="2. MySQL 常用命令"></a>2. MySQL 常用命令</h2><h3 id="2-1-语法要求"><a href="#2-1-语法要求" class="headerlink" title="2.1. 语法要求"></a>2.1. 语法要求</h3><ol>
 <li>SQL 语句可以单行或多行，但要以分号（<code>;</code>）结尾</li>
 <li>MySQL 默认情况下，每条 SQL 语句的最大长度为 4MB</li>
+<li>在 MySQL 中，注释写法如下：<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 单行注释</span><br><br><br><span class="hljs-comment">-- 单行注释</span><br><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">多行注释</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure></li>
 </ol>
 <hr>
-<h3 id="2-2-注释写法"><a href="#2-2-注释写法" class="headerlink" title="2.2. 注释写法"></a>2.2. 注释写法</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-comment"># 单行注释</span><br><br><span class="hljs-comment">-- 单行注释</span><br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">多行注释</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+<h3 id="2-2-系统命令"><a href="#2-2-系统命令" class="headerlink" title="2.2. 系统命令"></a>2.2. 系统命令</h3><h4 id="2-2-1-启动-MySQL"><a href="#2-2-1-启动-MySQL" class="headerlink" title="2.2.1. 启动 MySQL"></a>2.2.1. 启动 MySQL</h4><p><font color="#92d050">1. 启动和开机自启动</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl start mysql &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> mysql<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 重启</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart mysql<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 查看当前状态</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl status mysql<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="2-3-DDL（库、表、列操作）"><a href="#2-3-DDL（库、表、列操作）" class="headerlink" title="2.3. DDL（库、表、列操作）"></a>2.3. DDL（库、表、列操作）</h3><h4 id="2-3-1-库操作"><a href="#2-3-1-库操作" class="headerlink" title="2.3.1. 库操作"></a>2.3.1. 库操作</h4><h5 id="2-3-1-1-创建数据库"><a href="#2-3-1-1-创建数据库" class="headerlink" title="2.3.1.1. 创建数据库"></a>2.3.1.1. 创建数据库</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span>] &lt;repository-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">default</span> charset 字符集] [<span class="hljs-keyword">collate</span> 排序规则];<br></code></pre></td></tr></table></figure>
+<h4 id="2-2-2-停止-MySQL"><a href="#2-2-2-停止-MySQL" class="headerlink" title="2.2.2. 停止 MySQL"></a>2.2.2. 停止 MySQL</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">sudo systemctl stop mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-3-连接命令"><a href="#2-3-连接命令" class="headerlink" title="2.3. 连接命令"></a>2.3. 连接命令</h3><h4 id="2-3-1-连接-MySQL"><a href="#2-3-1-连接-MySQL" class="headerlink" title="2.3.1. 连接 MySQL"></a>2.3.1. 连接 MySQL</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -u root -<span class="hljs-selector-tag">p</span> <br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-2-取消连接-MySQL"><a href="#2-3-2-取消连接-MySQL" class="headerlink" title="2.3.2. 取消连接 MySQL"></a>2.3.2. 取消连接 MySQL</h4><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos"><span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-DDL（库、表、列操作）命令"><a href="#2-4-DDL（库、表、列操作）命令" class="headerlink" title="2.4. DDL（库、表、列操作）命令"></a>2.4. DDL（库、表、列操作）命令</h3><h4 id="2-4-1-库操作"><a href="#2-4-1-库操作" class="headerlink" title="2.4.1. 库操作"></a>2.4.1. 库操作</h4><h5 id="2-4-1-1-创建数据库"><a href="#2-4-1-1-创建数据库" class="headerlink" title="2.4.1.1. 创建数据库"></a>2.4.1.1. 创建数据库</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">exists</span>] &lt;repository-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">default</span> charset 字符集] [<span class="hljs-keyword">collate</span> 排序规则];<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -350,14 +394,14 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-3-1-2-删除数据库"><a href="#2-3-1-2-删除数据库" class="headerlink" title="2.3.1.2. 删除数据库"></a>2.3.1.2. 删除数据库</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">database</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">exists</span>] &lt;repository-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
+<h5 id="2-4-1-2-删除数据库"><a href="#2-4-1-2-删除数据库" class="headerlink" title="2.4.1.2. 删除数据库"></a>2.4.1.2. 删除数据库</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">database</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">exists</span>] &lt;repository-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-1-3-修改数据库"><a href="#2-3-1-3-修改数据库" class="headerlink" title="2.3.1.3. 修改数据库"></a>2.3.1.3. 修改数据库</h5><p><font color="#92d050">1. 修改数据库名</font></p>
+<h5 id="2-4-1-3-修改数据库"><a href="#2-4-1-3-修改数据库" class="headerlink" title="2.4.1.3. 修改数据库"></a>2.4.1.3. 修改数据库</h5><p><font color="#92d050">1. 修改数据库名</font></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 导出旧数据库（将旧数据库导出到一个 <span class="hljs-keyword">SQL</span> 文件中)<br>mysqldump -p &lt;<span class="hljs-built_in">old</span>-repository-<span class="hljs-type">name</span>&gt; &gt; &lt;<span class="hljs-built_in">old</span>-repository-<span class="hljs-type">name</span>&gt; .<span class="hljs-keyword">sql</span><br>	<br># <span class="hljs-number">2.</span> 创建新的数据库<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> &lt;<span class="hljs-built_in">new</span>-repository-<span class="hljs-type">name</span>&gt;;<br>	<br># <span class="hljs-number">3.</span> 将旧库文件导入新库<br>mysql -p &lt;<span class="hljs-built_in">new</span>-repository-<span class="hljs-type">name</span>&gt; &lt; &lt;<span class="hljs-built_in">new</span>-repository-<span class="hljs-type">name</span>&gt;.<span class="hljs-keyword">sql</span><br><br># <span class="hljs-number">4.</span> 删除旧数据库<br><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> &lt;<span class="hljs-built_in">old</span>-repository-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-1-4-查询数据库"><a href="#2-3-1-4-查询数据库" class="headerlink" title="2.3.1.4. 查询数据库"></a>2.3.1.4. 查询数据库</h5><p><font color="#92d050">1. 查询所有数据库</font></p>
+<h5 id="2-4-1-4-查询数据库"><a href="#2-4-1-4-查询数据库" class="headerlink" title="2.4.1.4. 查询数据库"></a>2.4.1.4. 查询数据库</h5><p><font color="#92d050">1. 查询所有数据库</font></p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">show databases<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 
@@ -365,32 +409,31 @@
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-function"><span class="hljs-keyword">select</span> <span class="hljs-title">databses</span>()</span>;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-1-5-使用数据库"><a href="#2-3-1-5-使用数据库" class="headerlink" title="2.3.1.5. 使用数据库"></a>2.3.1.5. 使用数据库</h5><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">use</span> &lt;repository-<span class="hljs-keyword">name</span>&gt;;<br></code></pre></td></tr></table></figure>
+<h5 id="2-4-1-5-使用数据库"><a href="#2-4-1-5-使用数据库" class="headerlink" title="2.4.1.5. 使用数据库"></a>2.4.1.5. 使用数据库</h5><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">use</span> &lt;repository-<span class="hljs-keyword">name</span>&gt;;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="2-3-2-表操作"><a href="#2-3-2-表操作" class="headerlink" title="2.3.2. 表操作"></a>2.3.2. 表操作</h4><h5 id="2-3-2-1-创建表"><a href="#2-3-2-1-创建表" class="headerlink" title="2.3.2.1. 创建表"></a>2.3.2.1. 创建表</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;id-<span class="hljs-keyword">column</span>&gt; &lt;数据类型&gt; AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span> [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>]<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=&lt;字符集&gt;] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explanation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
+<h4 id="2-4-2-表操作"><a href="#2-4-2-表操作" class="headerlink" title="2.4.2. 表操作"></a>2.4.2. 表操作</h4><h5 id="2-4-2-1-创建表"><a href="#2-4-2-1-创建表" class="headerlink" title="2.4.2.1. 创建表"></a>2.4.2.1. 创建表</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> [<span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; (<br>    &lt;id-<span class="hljs-keyword">column</span>&gt; &lt;数据类型&gt; AUTO_INCREMENT <span class="hljs-keyword">PRIMARY KEY</span> [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>],<br>    &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> [<span class="hljs-keyword">DEFAULT</span> &lt;默认值&gt;] [<span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;explanation for this column&#x27;</span>]<br>) [ENGINE=&lt;engine-<span class="hljs-keyword">type</span>&gt;] [<span class="hljs-keyword">DEFAULT</span> CHARSET=&lt;字符集&gt;] [<span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;explanation for this table&#x27;</span>];<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-2-2-删除表"><a href="#2-3-2-2-删除表" class="headerlink" title="2.3.2.2. 删除表"></a>2.3.2.2. 删除表</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">exists</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
+<h5 id="2-4-2-2-删除表"><a href="#2-4-2-2-删除表" class="headerlink" title="2.4.2.2. 删除表"></a>2.4.2.2. 删除表</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> [<span class="hljs-keyword">if</span> <span class="hljs-keyword">exists</span>] &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-2-3-修改表"><a href="#2-3-2-3-修改表" class="headerlink" title="2.3.2.3. 修改表"></a>2.3.2.3. 修改表</h5><p><font color="#92d050">1. 修改表名</font></p>
+<h5 id="2-4-2-3-修改表"><a href="#2-4-2-3-修改表" class="headerlink" title="2.4.2.3. 修改表"></a>2.4.2.3. 修改表</h5><p><font color="#92d050">1. 修改表名</font></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-built_in">old</span>-<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">rename</span> <span class="hljs-keyword">to</span> &lt;<span class="hljs-built_in">new</span>-<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;; <br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-2-4-查询表"><a href="#2-3-2-4-查询表" class="headerlink" title="2.3.2.4. 查询表"></a>2.3.2.4. 查询表</h5><p><font color="#92d050">1. 查看当前使用的数据库所有表</font></p>
+<h5 id="2-4-2-4-查询表"><a href="#2-4-2-4-查询表" class="headerlink" title="2.4.2.4. 查询表"></a>2.4.2.4. 查询表</h5><p><font color="#92d050">1. 查看当前使用的数据库所有表</font></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">show</span> <span class="hljs-keyword">tables</span>;<br></code></pre></td></tr></table></figure>
 
 
 <p><font color="#92d050">2. 查看表结构</font></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">desc</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
-
-
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-40.png" srcset="/img/loading.gif" lazyload></p>
 <p><font color="#92d050">3. 查看建表语句</font></p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">show</span> <span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="2-3-3-列操作"><a href="#2-3-3-列操作" class="headerlink" title="2.3.3. 列操作"></a>2.3.3. 列操作</h4><h5 id="2-3-3-1-添加列"><a href="#2-3-3-1-添加列" class="headerlink" title="2.3.3.1. 添加列"></a>2.3.3.1. 添加列</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">comment</span> <span class="hljs-string">&#x27;列的注释&#x27;</span>]<br></code></pre></td></tr></table></figure>
+<h4 id="2-4-3-列操作"><a href="#2-4-3-列操作" class="headerlink" title="2.4.3. 列操作"></a>2.4.3. 列操作</h4><h5 id="2-4-3-1-添加列"><a href="#2-4-3-1-添加列" class="headerlink" title="2.4.3.1. 添加列"></a>2.4.3.1. 添加列</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">add</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; &lt;数据类型&gt; [<span class="hljs-keyword">comment</span> <span class="hljs-string">&#x27;列的注释&#x27;</span>]<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -399,94 +442,164 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-3-3-2-删除列"><a href="#2-3-3-2-删除列" class="headerlink" title="2.3.3.2. 删除列"></a>2.3.3.2. 删除列</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+<h5 id="2-4-3-2-删除列"><a href="#2-4-3-2-删除列" class="headerlink" title="2.4.3.2. 删除列"></a>2.4.3.2. 删除列</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="2-3-3-3-修改列"><a href="#2-3-3-3-修改列" class="headerlink" title="2.3.3.3. 修改列"></a>2.3.3.3. 修改列</h5><p><font color="#92d050">1. 修改列名</font></p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 修改列名<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">rename</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-built_in">old</span>-<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">to</span> &lt;<span class="hljs-built_in">new</span>-<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+<h5 id="2-4-3-3-修改列"><a href="#2-4-3-3-修改列" class="headerlink" title="2.4.3.3. 修改列"></a>2.4.3.3. 修改列</h5><p><font color="#92d050">1. 修改列名</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">rename</span> <span class="hljs-keyword">column</span> &lt;<span class="hljs-built_in">old</span>-<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">to</span> &lt;<span class="hljs-built_in">new</span>-<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h3 id="2-4-DML（数据增删改）"><a href="#2-4-DML（数据增删改）" class="headerlink" title="2.4. DML（数据增删改）"></a>2.4. DML（数据增删改）</h3><h4 id="2-4-1-插入数据"><a href="#2-4-1-插入数据" class="headerlink" title="2.4.1. 插入数据"></a>2.4.1. 插入数据</h4><h5 id="2-4-1-1-高效插入数据的方法"><a href="#2-4-1-1-高效插入数据的方法" class="headerlink" title="2.4.1.1. 高效插入数据的方法"></a>2.4.1.1. 高效插入数据的方法</h5><h6 id="2-4-1-1-1-批量插入"><a href="#2-4-1-1-1-批量插入" class="headerlink" title="2.4.1.1.1. 批量插入"></a>2.4.1.1.1. 批量插入</h6><p>这是提升插入效率<strong>最最最关键</strong>的一步，效果立竿见影，单条 <code>INSERT</code> 语句的性能极差，因为每次插入都需要一次完整的 网络请求 -&gt; SQL 解析 -&gt; 执行 -&gt; 网络返回 流程，例如：</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> students <span class="hljs-keyword">values</span> (<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Alice&#x27;</span>, <span class="hljs-number">20</span>);<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> students <span class="hljs-keyword">values</span> (<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">22</span>);<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> students <span class="hljs-keyword">values</span> (<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Charlie&#x27;</span>, <span class="hljs-number">21</span>);<br></code></pre></td></tr></table></figure>
-
-<p>进行了 3 次 SQL 解析和3次网络往返，我们可以将多条 <code>INSERT</code> 语句合并成一条，这样只执行了一个网络往返和 SQL 解析：</p>
-<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> students <span class="hljs-keyword">values</span> <br>(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Alice&#x27;</span>, <span class="hljs-number">20</span>),<br>(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Bob&#x27;</span>, <span class="hljs-number">22</span>),<br>(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&#x27;Charlie&#x27;</span>, <span class="hljs-number">21</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="2-5-DML（数据增删改）命令"><a href="#2-5-DML（数据增删改）命令" class="headerlink" title="2.5. DML（数据增删改）命令"></a>2.5. DML（数据增删改）命令</h3><h4 id="2-5-1-插入数据"><a href="#2-5-1-插入数据" class="headerlink" title="2.5.1. 插入数据"></a>2.5.1. 插入数据</h4><p><font color="#92d050">1. 插入单条数据</font></p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnf">insert into <span class="hljs-attribute">&lt;table-name&gt;</span> [<span class="hljs-attribute">&lt;column1, column2,...&gt;</span>] values <span class="hljs-attribute">&lt;value1, value2, ...&gt;</span><br></code></pre></td></tr></table></figure>
 
 
-<hr>
-<h6 id="2-4-1-1-2-文件导入"><a href="#2-4-1-1-2-文件导入" class="headerlink" title="2.4.1.1.2. 文件导入"></a>2.4.1.1.2. 文件导入</h6><p>当数据量巨大时（如百万、千万级），<code>LOAD DATA INFILE</code> 是最快的插入方式，它绕过了大量的 SQL 解析，直接在服务端读取文件并插入数据，减少了网络传输和协议处理的开销。</p>
-<p>假设你有一个 <code>/tmp/data.csv</code> 文件：</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">data1</span>,<span class="hljs-number">100</span><br><span class="hljs-attribute">data2</span>,<span class="hljs-number">200</span><br><span class="hljs-attribute">data3</span>,<span class="hljs-number">300</span><br></code></pre></td></tr></table></figure>
-
-<p>你可以执行 SQL</p>
-<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas">LOAR DATA <span class="hljs-keyword">INFILE</span> <span class="hljs-string">&#x27;/tmp/data.csv&#x27;</span> <span class="hljs-keyword">INTO</span> <span class="hljs-keyword">TABLE</span> my_table FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;,&#x27;</span> LINES TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;\n&#x27;</span> (col1, col2);<br></code></pre></td></tr></table></figure>
-
-<p>需要注意的是，默认情况下，出于安全考虑，LOAD DATA LOCAL INFILE 可能被禁用，需要服务器和客户端同时开启 local_infile 选项</p>
-<p><font color="#92d050">1. 服务器端开启</font></p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-comment">// 1. 临时开启</span><br><span class="hljs-built_in">SET</span> <span class="hljs-built_in">GLOBAL</span> local_infile = <span class="hljs-keyword">ON</span>;<br><br><br><span class="hljs-comment">// 2. 永久开启</span><br><span class="hljs-meta">[</span>mysqld<span class="hljs-meta">]</span><br>local_infile=1<br></code></pre></td></tr></table></figure>
+<p><font color="#92d050">2. 批量插入数据</font></p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnf">insert into <span class="hljs-attribute">&lt;table-name&gt;</span> [<span class="hljs-attribute">&lt;column1, column2,...&gt;</span>] values <span class="hljs-attribute">&lt;value1, value2, ...&gt;</span>, <span class="hljs-attribute">&lt;value1, value2, ...&gt;</span>, ...<br></code></pre></td></tr></table></figure>
 
 
-<p><font color="#92d050">2. 客户端开启</font><br>启动客户端时加参数 <code>--local-infile=1</code></p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mysql <span class="hljs-attribute">--local-infile</span>=1 -u 用户名 -p<br></code></pre></td></tr></table></figure>
+<p><font color="#92d050">3. 主键回显</font></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-meta"># 1. 正常插入数据</span><br>insert <span class="hljs-keyword">into</span> &lt;table-name&gt; [&lt;column1, column2,...&gt;] values &lt;value1, value2, ...&gt;<br><br><br><span class="hljs-meta"># 2. 获取上一条插入记录在表中的主键值</span><br><span class="hljs-function">SELECT <span class="hljs-title">LAST_INSERT_ID</span>()</span>;<br></code></pre></td></tr></table></figure>
 
-<p>在使用 JDBC 的时候：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">jdbc:mysql://host:port/dbname?allowLoadLocalInfile=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h6 id="2-4-1-1-3-调整配置"><a href="#2-4-1-1-3-调整配置" class="headerlink" title="2.4.1.1.3. 调整配置"></a>2.4.1.1.3. 调整配置</h6><p>对于大规模数据导入，可以临时调整一些 MySQL 参数来换取更高的写入性能，注意：这些调整会牺牲一定的安全性（ACID特性），导入完成后务必改回默认值！</p>
-<p><font color="#92d050">1. innodb_flush_log_at_trx_commit</font><br>在批量导入时，临时设置为2，修改完成后再设置为 1</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
 <ol>
-<li>1（默认）<ol>
-<li>最安全，性能最差，每次事务提交都将 redo log 同步刷到磁盘。</li>
+<li>执行插入语句后，可以通过执行 <code>SELECT LAST_INSERT_ID()</code> 获取上一条插入记录的主键值。</li>
+<li>这样做的主要原因是，插入记录后，我们通常需要立即对该记录进行后续操作。</li>
+<li>如果再次使用 <code>SELECT</code> 查询来获取其 ID，这会增加额外的操作开销。</li>
+<li>通过主键回显，我们可以直接获得该记录的 ID，提高效率。</li>
 </ol>
-</li>
-<li>2<ol>
-<li>每次事务提交只写入操作系统的缓存，每秒刷盘一次，性能大幅提升。</li>
-<li>如果 MySQL 宕机（非操作系统宕机），可能丢失最后一秒的数据。</li>
-</ol>
-</li>
-<li>0<ol>
-<li>性能最好，安全性最差，每秒才将 redo log 写入 OS 缓存并刷盘。</li>
-<li>MySQL 和操作系统都宕机可能丢失最后一秒数据。</li>
-</ol>
-</li>
-</ol>
-<p><font color="#92d050">2. sync_binlog</font><br>在批量导入时，临时设置为 0 或者一个较大的值（如 1000），完成后改为 1</p>
+</blockquote>
+<hr>
+<h4 id="2-5-2-删除数据"><a href="#2-5-2-删除数据" class="headerlink" title="2.5.2. 删除数据"></a>2.5.2. 删除数据</h4><p><font color="#92d050">1. 删除部分行数据</font></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> <span class="hljs-operator">&lt;</span><span class="hljs-keyword">table</span><span class="hljs-operator">-</span>name<span class="hljs-operator">&gt;</span> [<span class="hljs-keyword">where</span> <span class="hljs-keyword">condition</span>];<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 删除表中所有数据</font></p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 常规删除<br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">where</span> id <span class="hljs-keyword">between</span> <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-number">2000</span><br><br><br># <span class="hljs-number">2.</span> <span class="hljs-keyword">truncate</span> 删除数据（高效）<br><span class="hljs-keyword">truncate</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt;;<br><br><br># <span class="hljs-number">3.</span> 删除分区以删除数据（高效）<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; <span class="hljs-keyword">drop</span> <span class="hljs-keyword">partition</span> &lt;<span class="hljs-keyword">partition</span>-<span class="hljs-type">name</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项：</p>
 <ol>
-<li>1（默认）<ol>
-<li>最安全，每次事务提交都将 binary log 同步刷到磁盘。</li>
+<li>在使用 <code>delete from</code> 时若不加条件，将清空整张表的数据。该方式效率较低，因此一般不推荐，如果确实需要使用，建议采用 <strong>分批删除</strong> 的方式，例如：<code>DELETE FROM table WHERE id BETWEEN 1 AND 2000</code></li>
+<li>使用 <code>TRUNCATE</code> 删除数据，或通过删除分区来清理数据时，无需开启事务，这些方法效率更高。</li>
 </ol>
-</li>
-<li>N（N &gt; 1）<ol>
-<li>每 N 次事务提交刷盘一次，性能提升。</li>
-</ol>
-</li>
-<li>0<ol>
-<li>不强制同步，由操作系统决定何时写盘，性能最高</li>
-</ol>
-</li>
-</ol>
-<p><font color="#92d050">3. innodb_autoinc_lock_mode</font></p>
+</blockquote>
+<hr>
+<h4 id="2-5-3-修改数据"><a href="#2-5-3-修改数据" class="headerlink" title="2.5.3. 修改数据"></a>2.5.3. 修改数据</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">update &lt;table-name&gt; <span class="hljs-built_in">set</span> &lt;<span class="hljs-attribute">column1</span>=value1&gt;, &lt;<span class="hljs-attribute">column2</span>=value2&gt;, <span class="hljs-built_in">..</span>. [where condition];<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-5-4-查询数据"><a href="#2-5-4-查询数据" class="headerlink" title="2.5.4. 查询数据"></a>2.5.4. 查询数据</h4><h5 id="2-5-4-1-Tiny-查询"><a href="#2-5-4-1-Tiny-查询" class="headerlink" title="2.5.4.1. Tiny 查询"></a>2.5.4.1. Tiny 查询</h5><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">select</span> [<span class="hljs-keyword">all</span> | <span class="hljs-keyword">distinct</span>] <br>&#123; * | &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">as</span> 列别名] | &lt;表达式 [<span class="hljs-keyword">as</span> 表达式别名]&gt; &#125;       # 选择列表，表达式支持聚合函数<br><span class="hljs-keyword">from</span> &lt;<span class="hljs-keyword">table</span>-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">as</span> 表别名]                                    # 普通查询<br>[&lt;<span class="hljs-keyword">join</span>-<span class="hljs-keyword">type</span>&gt; <span class="hljs-keyword">join</span> &lt;other-<span class="hljs-keyword">table</span>&gt; [<span class="hljs-keyword">as</span> 表别名] <span class="hljs-keyword">on</span> &lt;连接条件&gt;]         # 多表联查<br>[<span class="hljs-keyword">where</span> &lt;行级过滤条件&gt;]                                             # 过滤条件不可使用聚合函数<br>[<span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">having</span> &lt;组级过滤条件&gt;]]                  # 分组查询，过滤条件可使用聚合函数<br>[<span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> &lt;<span class="hljs-keyword">column</span>-<span class="hljs-type">name</span>&gt; [<span class="hljs-keyword">asc</span> | <span class="hljs-keyword">desc</span>]]                           # 排序查询<br>[<span class="hljs-keyword">limit</span> &lt;偏移量&gt;,&lt;行数&gt;]                                          # 分页查询<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
 <ol>
-<li>2（默认）<ol>
-<li>对于并发插入性能最好，允许自增锁不阻塞整个插入过程。通常不需要修改。</li>
-<li>如果遇到自增值不连续的问题，可以研究此参数。</li>
+<li>执行顺序为：<ol>
+<li>FROM ➔  JOIN ➔  WHERE ➔  GROUP BY ➔  HAVING ➔  SELECT ➔  DISTINCT ➔  ORDER BY ➔  LIMIT&#x2F;OFFSET</li>
+<li>WHERE 是第一层过滤，在完成数据来源的组合（FROM + JOIN）之后，先通过 WHERE 去掉不符合条件的行</li>
+<li>HAVING 是第二层过滤，99% 与聚合函数配合使用，对分组后的每个分组中所有成员的数据先做一次聚合运算，然后根据这个聚合结果决定是否保留该组</li>
+<li>DISTINCT 是第三层过滤，去除重复记录，保留唯一行</li>
 </ol>
 </li>
+<li>需要注意的是，<code>WHERE</code> 不能对聚合函数进行判断，而 <code>HAVING</code> 可以</li>
 </ol>
+</blockquote>
 <hr>
-<h6 id="2-4-1-1-4-删除索引"><a href="#2-4-1-1-4-删除索引" class="headerlink" title="2.4.1.1.4. 删除索引"></a>2.4.1.1.4. 删除索引</h6><p>插入数据时，每个索引都需要被更新，这是个不小的开销，如果是一次性地向一个<strong>空表</strong>导入大量数据，可以考虑先<strong>删除除唯一索引、主键索引外的其他索引</strong>，数据导入完成后，再重新创建索引，这通常比带着索引插入要快，除非你非要保留什么索引的</p>
+<h5 id="2-5-4-2-分组查询"><a href="#2-5-4-2-分组查询" class="headerlink" title="2.5.4.2. 分组查询"></a>2.5.4.2. 分组查询</h5><p>当我们在一张表中，发现<strong>某一列的值出现了多次</strong>，我们就可以按照这一列的值把数据分成一组一组的，这就是 “分组” 的基本概念。</p>
+<p>假设你是一家公司的老板，员工们分别隶属于不同的部门（如技术部、市场部、财务部等）。当你想统计每个部门一个月需要发放的工资总额时，就可以按照 “部门” 这一字段进行分组，然后将该部门下所有员工的工资进行汇总计算。</p>
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-27.png" srcset="/img/loading.gif" lazyload></p>
+<p>以下是一个分组查询的示例：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta"># 筛选出 “由工资高于 100 元的员工构成的部门中，部门工资总额超过 350 的部门”</span><br><span class="hljs-keyword">select</span> department, <span class="hljs-keyword">count</span>(staff_id) <span class="hljs-keyword">as</span> staff_count, <span class="hljs-keyword">sum</span>(amount) <span class="hljs-keyword">as</span> total_amounts<br><span class="hljs-keyword">from</span> employees<br><span class="hljs-keyword">where</span> amount &gt; <span class="hljs-number">100</span><br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> department<br>having <span class="hljs-keyword">sum</span>(amount) &gt; <span class="hljs-number">350</span>;<br></code></pre></td></tr></table></figure>
+
 <hr>
-<h6 id="2-4-1-1-5-顺序插入"><a href="#2-4-1-1-5-顺序插入" class="headerlink" title="2.4.1.1.5. 顺序插入"></a>2.4.1.1.5. 顺序插入</h6><ul>
-<li><strong>主键顺序插入</strong>：InnoDB 表是<strong>索引组织表</strong>（Clustered Index），数据本身是按主键顺序存储的。如果你能保证插入的数据是按主键（尤其是自增 ID）顺序排列的，可以避免页分裂（Page Split）和随机磁盘 I&#x2F;O，从而提高效率。</li>
-</ul>
+<h5 id="2-5-4-3-排序查询"><a href="#2-5-4-3-排序查询" class="headerlink" title="2.5.4.3. 排序查询"></a>2.5.4.3. 排序查询</h5><p><font color="#92d050">1. 升序排序</font></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta"># 根据年龄，对员工进行升序排序</span><br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> age;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 降序排序</font></p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta"># 根据入职时间，对员工进行降序排序</span><br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> entrydate <span class="hljs-keyword">desc</span>;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>ASC 是升序，DESC 是降序</li>
+<li>排序字段可以设置多个，系统将先根据第一个字段排序，若第一个字段的值相同，则在这些记录中再依据第二个字段排序，依此类推</li>
+</ol>
+</blockquote>
 <hr>
-<h2 id="3-MySQL-日志"><a href="#3-MySQL-日志" class="headerlink" title="3. MySQL 日志"></a>3. MySQL 日志</h2><h3 id="3-1-服务器层日志"><a href="#3-1-服务器层日志" class="headerlink" title="3.1. 服务器层日志"></a>3.1. 服务器层日志</h3><h4 id="3-1-1-错误日志（Error-Log）"><a href="#3-1-1-错误日志（Error-Log）" class="headerlink" title="3.1.1. 错误日志（Error Log）"></a>3.1.1. 错误日志（Error Log）</h4><h5 id="3-1-1-1-错误日志概述"><a href="#3-1-1-1-错误日志概述" class="headerlink" title="3.1.1.1. 错误日志概述"></a>3.1.1.1. 错误日志概述</h5><p>错误日志是 MySQL 服务器在启动、运行和停止过程中生成的文本文件，记录了各种错误、警告和启动信息，帮助你了解服务器的运行状态和故障原因。当 MySQL 出现问题时，第一步就是查看错误日志。</p>
+<h5 id="2-5-4-4-分页查询"><a href="#2-5-4-4-分页查询" class="headerlink" title="2.5.4.4. 分页查询"></a>2.5.4.4. 分页查询</h5><p>数据表中的记录可能从几百万到上亿条不等，直接一次性展示所有数据既不现实，也极其低效。</p>
+<p>因此，在网站中通常采用分页展示，假设起始行号为 n，需要获取的行数为 m，则会从第 n+1 行开始依次取出，共返回 m 行数据</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 1. 若每页 6 条记录，查询第一页数据</span><br><span class="hljs-attribute">select</span> * from emp limit <span class="hljs-number">0</span>,<span class="hljs-number">6</span>;<br><br><br><span class="hljs-comment"># 2. 若每页 6 条记录，查询第二页数据</span><br><span class="hljs-attribute">select</span> * from emp limit <span class="hljs-number">6</span>,<span class="hljs-number">12</span>;<br><br><br><span class="hljs-comment"># 3. 若每页 6 条记录，查询第三页数据</span><br><span class="hljs-attribute">select</span> * from emp limit <span class="hljs-number">12</span>,<span class="hljs-number">6</span>;<br></code></pre></td></tr></table></figure>
+
 <hr>
-<h5 id="3-1-1-2-错误日志定位"><a href="#3-1-1-2-错误日志定位" class="headerlink" title="3.1.1.2. 错误日志定位"></a>3.1.1.2. 错误日志定位</h5><p>我们可以通过查询 MySQL 的系统变量，来确认错误日志文件的位置和相关配置：</p>
+<h5 id="2-5-4-5-多表联查"><a href="#2-5-4-5-多表联查" class="headerlink" title="2.5.4.5. 多表联查"></a>2.5.4.5. 多表联查</h5><h6 id="2-5-4-5-1-笛卡尔积"><a href="#2-5-4-5-1-笛卡尔积" class="headerlink" title="2.5.4.5.1. 笛卡尔积"></a>2.5.4.5.1. 笛卡尔积</h6><p>执行多表查询时，若直接使用 <code>select * from emp,dept</code> 执行结果有笛卡尔积问题：<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-28.png" srcset="/img/loading.gif" lazyload></p>
+<p>在 SQL 语句中，如何去除无效的笛卡尔积？给多表查询加上连接查询的条件即可 <code>select * from emp,dept where emp.dept_id = dept.id</code> 执行结果如下：<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-29.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-5-4-5-2-数据准备"><a href="#2-5-4-5-2-数据准备" class="headerlink" title="2.5.4.5.2. 数据准备"></a>2.5.4.5.2. 数据准备</h6><p>假设我们有 <code>employees</code>（员工表）和 <code>departments</code>（部门表）：</p>
+<p><font color="#92d050">1. employess 表</font><br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-35.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. departments 表</font><br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-31.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-5-4-5-3-内连接"><a href="#2-5-4-5-3-内连接" class="headerlink" title="2.5.4.5.3. 内连接"></a>2.5.4.5.3. 内连接</h6><p>内连接是最常用的连接方式，当连接条件（如 <code>e.department_id = d.department_id</code>）满足时，它会返回两个表中所有符合条件的行及其所有列（满足才返回，不满足不返回）。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">select</span> <br>    <span class="hljs-built_in">e</span>.first_name, <br>    <span class="hljs-built_in">e</span>.last_name, <br>    <span class="hljs-built_in">e</span>.salary, <br>    d.department_name,<br>    d.location<br><span class="hljs-keyword">from</span> <br>    employees <span class="hljs-keyword">as</span> <span class="hljs-built_in">e</span><br><span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> <br>    departments <span class="hljs-keyword">as</span> d <span class="hljs-keyword">on</span> <span class="hljs-built_in">e</span>.department_id = d.department_id;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-32.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>根据 SQL 执行顺序（<code>FROM ➔  JOIN ➔  WHERE ➔  GROUP BY ➔  HAVING ➔  SELECT ➔  DISTINCT ➔  ORDER BY ➔  LIMIT/OFFSET</code>），先执行 <code>FROM</code>，再执行 <code>JOIN</code>，因此在 <code>FROM</code> 和 <code>INNER JOIN</code> 中为表指定的别名，可以在整个查询中使用</li>
+<li>在未为表指定别名之前，可以直接使用表名。然而一旦指定了别名，后续查询中必须使用该别名，不能再使用原表名</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-5-4-5-4-左连接"><a href="#2-5-4-5-4-左连接" class="headerlink" title="2.5.4.5.4. 左连接"></a>2.5.4.5.4. 左连接</h6><p>左连接会返回左表的所有行及其全部列，不论连接条件是否成立。而右表的返回情况取决于连接条件：</p>
+<ol>
+<li>若连接条件成立（例如 e.department_id &#x3D; d.department_id），右表会返回匹配的行及对应列</li>
+<li>若连接条件不成立，右表的所有列值将以 <code>NULL</code> 填充。<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">select</span> <br>    <span class="hljs-built_in">e</span>.first_name, <br>    <span class="hljs-built_in">e</span>.last_name, <br>    <span class="hljs-built_in">e</span>.salary, <br>    d.department_name<br><span class="hljs-keyword">from</span> <br>    employees <span class="hljs-built_in">e</span><br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> <br>    departments d <span class="hljs-keyword">on</span> <span class="hljs-built_in">e</span>.department_id = d.department_id;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-33.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-5-4-5-5-右连接"><a href="#2-5-4-5-5-右连接" class="headerlink" title="2.5.4.5.5. 右连接"></a>2.5.4.5.5. 右连接</h6><p>右连接和左连接类似，只不过是返回右表的所有行及其全部列</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs n1ql"><span class="hljs-keyword">select</span> <br>    <span class="hljs-built_in">e</span>.first_name, <br>    <span class="hljs-built_in">e</span>.last_name, <br>    <span class="hljs-built_in">e</span>.salary, <br>    d.department_name<br><span class="hljs-keyword">from</span> <br>    employees <span class="hljs-built_in">e</span><br><span class="hljs-keyword">right</span> <span class="hljs-keyword">join</span> <br>    departments d <span class="hljs-keyword">on</span> <span class="hljs-built_in">e</span>.department_id = d.department_id;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-34.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="2-5-4-5-6-自连接"><a href="#2-5-4-5-6-自连接" class="headerlink" title="2.5.4.5.6. 自连接"></a>2.5.4.5.6. 自连接</h6><p>自连接是同一张表与自身进行连接的操作，常用于比较表中不同行之间的关系或属性</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">SELECT</span> a.column1, b.column1<br><span class="hljs-keyword">FROM</span> table_a a<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> table_a b <span class="hljs-keyword">ON</span> a.common_column = b.common_column<br><span class="hljs-keyword">WHERE</span> a.id != b.id;  <span class="hljs-comment">-- 防止自身匹配</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h6 id="2-5-4-5-7-多表联查与外键约束结合"><a href="#2-5-4-5-7-多表联查与外键约束结合" class="headerlink" title="2.5.4.5.7. 多表联查与外键约束结合"></a>2.5.4.5.7. 多表联查与外键约束结合</h6><p>多表联查和外键约束本身并没有直接关系，因为外键约束主要用于保证数据的完整性，而不会直接影响联查的执行。</p>
+<p>但是，进行多表联查时，通常是基于外键字段进行匹配查询的。例如表 A 的 <code>dept_id</code> 外键与表 B 的 <code>dept_id</code> 进行关联，我们一般通过 <code>a.dept_id = b.dept_id</code> 来匹配数据。</p>
+<p>由于外键约束通常有一对一、一对多、多对多的关系，这里我们也分为一对一查询、一对多查询、多对多查询</p>
+<p><font color="#92d050">1. 一对一查询</font><br>我们上面讲的内连接、左连接、右连接都很适合进行一对一查询。假设有 <code>Employee</code>（员工表）和  <code>WorkCard</code>（工作证表），一个员工只有一个工作证：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Employee 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employee (<br>    EmpID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> WorkCard 表（从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> WorkCard (<br>    CardID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    EmpID <span class="hljs-type">INT</span>, // 从表的外键字段 -&gt; 主表的字段（一般命名相同）<br>    IssueDate <span class="hljs-type">DATE</span>,<br>    <span class="hljs-keyword">FOREIGN KEY</span> (EmpID) <span class="hljs-keyword">REFERENCES</span> Employee(EmpID)<br>);<br><br><br># <span class="hljs-number">3.</span> 一对一查询（以内连接为例）<br><span class="hljs-keyword">SELECT</span> <br>  e.EmpID,<br>  e.Name,<br>  w.CardID,<br>  w.IssueDate<br><span class="hljs-keyword">FROM</span> <br>  WorkCard w // <span class="hljs-keyword">FROM</span> 从表<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <br>  Employee e // <span class="hljs-keyword">JOIN</span> 主表<br><span class="hljs-keyword">ON</span> <br>  e.EmpID = w.EmpID;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 一对多查询</font><br>我们上面讲的内连接、左连接、右连接同样也都很适合进行一对多查询。假设有  <code>Employee</code>（员工表）和 <code>Department</code>（部门表），一个员工只属于一个部门，但一个部门可以有多个员工</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Department 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Department (<br>    DeptID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    DeptName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> Employee 表（从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employee (<br>    EmpID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>),<br>    DeptID <span class="hljs-type">INT</span>, // 从表的外键字段 -&gt; 主表的字段（一般命名相同）<br>    <span class="hljs-keyword">FOREIGN KEY</span> (DeptID) <span class="hljs-keyword">REFERENCES</span> Department(DeptID)<br>);<br><br><br># <span class="hljs-number">3.</span> 一对多查询（以内连接为例）<br><span class="hljs-keyword">SELECT</span> <br>  e.EmpID,<br>  e.Name,<br>  d.DeptName<br><span class="hljs-keyword">FROM</span> <br>  Employee e // <span class="hljs-keyword">FROM</span> 从表<br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> <br>  Department d // <span class="hljs-keyword">JOIN</span> 主表<br><span class="hljs-keyword">ON</span> <br>  e.DeptID = d.DeptID;<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 多对多查询</font><br>多对多查询的关键在于查中间表（从表），并对左右两侧的主表各做一次连接。假设有 <code>Student</code>（学生表）和 <code>Course</code>（课程表），一个学生可以选修多门课程，而每门课程也可以有多个学生选修，所以我们需要一个中间表 <code>Enrollment</code> 来记录学生与课程之间的关系。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> Student 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Student (<br>    StudentID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    <span class="hljs-type">Name</span> <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">2.</span> Course 表（主表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Course (<br>    CourseID <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY KEY</span>,<br>    CourseName <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">100</span>)<br>);<br><br><br># <span class="hljs-number">3.</span> Enrollment 表（中间表，从表）<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Enrollment (<br>    StudentID <span class="hljs-type">INT</span>,<br>    CourseID <span class="hljs-type">INT</span>,<br>    <span class="hljs-keyword">PRIMARY KEY</span> (StudentID, CourseID),<br>    <span class="hljs-keyword">FOREIGN KEY</span> (StudentID) <span class="hljs-keyword">REFERENCES</span> Student(StudentID),<br>    <span class="hljs-keyword">FOREIGN KEY</span> (CourseID) <span class="hljs-keyword">REFERENCES</span> Course(CourseID)<br>);<br><br><br># <span class="hljs-number">4.</span> 多对多查询<br><span class="hljs-keyword">SELECT</span><br>  s.Name <span class="hljs-keyword">AS</span> 学生名,<br>  c.CourseName <span class="hljs-keyword">AS</span> 课程名<br><span class="hljs-keyword">FROM</span><br>  Enrollment e // <span class="hljs-keyword">FROM</span> 中间表（从表）<br><span class="hljs-keyword">JOIN</span><br>  Student s <span class="hljs-keyword">ON</span> e.StudentID = s.StudentID // <span class="hljs-keyword">JOIN</span> 主表<br><span class="hljs-keyword">JOIN</span><br>  Course c <span class="hljs-keyword">ON</span> e.CourseID = c.CourseID // <span class="hljs-keyword">JOIN</span> 主表<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>我们平时常见的是两个表之间的多对多关系，但其实三个甚至更多表之间也能形成多对多关系，也是使用一个中间表</li>
+<li>查询的时候，只需要 FROM 中间表，多次 JOIN 主表，就能把信息都查出来</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="3-MySQL-常用日志"><a href="#3-MySQL-常用日志" class="headerlink" title="3. MySQL 常用日志"></a>3. MySQL 常用日志</h2><h3 id="3-1-服务器层日志"><a href="#3-1-服务器层日志" class="headerlink" title="3.1. 服务器层日志"></a>3.1. 服务器层日志</h3><h4 id="3-1-1-错误日志（Error-Log）"><a href="#3-1-1-错误日志（Error-Log）" class="headerlink" title="3.1.1. 错误日志（Error Log）"></a>3.1.1. 错误日志（Error Log）</h4><h5 id="3-1-1-1-错误日志概述"><a href="#3-1-1-1-错误日志概述" class="headerlink" title="3.1.1.1. 错误日志概述"></a>3.1.1.1. 错误日志概述</h5><p>错误日志是 MySQL 服务器在启动、运行和停止过程中生成的文本文件，记录了各种错误、警告和启动信息，帮助你了解服务器的运行状态和故障原因。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>当 MySQL 出现问题时，第一步要做的就是查看错误日志</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="3-1-1-2-错误日志位置"><a href="#3-1-1-2-错误日志位置" class="headerlink" title="3.1.1.2. 错误日志位置"></a>3.1.1.2. 错误日志位置</h5><p>我们可以通过查询 MySQL 的系统变量，来确认错误日志文件的位置和相关配置：</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">SHOW <span class="hljs-keyword">VARIABLES</span> LIKE <span class="hljs-comment">&#x27;log_err%&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <p><img src="/source/_posts/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL.png" srcset="/img/loading.gif" lazyload></p>
-<p><font color="#92d050">1. log_error</font><br>表示错误日志文件的路径。如果值为 <code>stderr</code>，说明日志不会写入硬盘文件，而是输出到 MySQL 进程的标准错误流。这个输出通常会被 <strong>systemd</strong> 或 <strong>docker</strong> 的日志收集器捕获，而对于标准错误输出，容器环境下通过 <code>docker logs</code> 查看，非容器环境则通过 <code>journalctl</code> 查看。</p>
+<p><font color="#92d050">1. log_error</font><br>表示错误日志文件的路径，这里是 <code>stderr</code>，说明日志不会写入硬盘文件，而是输出到 MySQL 进程的标准错误流。</p>
 <p><font color="#92d050">2. log_error_services</font><br>表示已启用的错误日志服务组件</p>
 <p><font color="#92d050">3. log_error_suppression_list</font><br>列出被过滤掉的特定错误信息对应的错误码</p>
 <p><font color="#92d050">4. log_error_verbosity</font><br>表示日志记录的详细等级：</p>
@@ -656,15 +769,45 @@
 <p><font color="#92d050">4. # Rows_affected: 0</font><br>表示影响的行数</p>
 <p><font color="#92d050">5. SET timestamp&#x3D;1754796610;</font><br>这条语句执行的开始时间，用秒级 Unix 时间戳表示</p>
 <hr>
-<h4 id="3-1-4-二进制日志（Binary-Log-Binlog）"><a href="#3-1-4-二进制日志（Binary-Log-Binlog）" class="headerlink" title="3.1.4. 二进制日志（Binary Log &#x2F; Binlog）"></a>3.1.4. 二进制日志（Binary Log &#x2F; Binlog）</h4><h5 id="3-1-4-1-二进制日志概述"><a href="#3-1-4-1-二进制日志概述" class="headerlink" title="3.1.4.1. 二进制日志概述"></a>3.1.4.1. 二进制日志概述</h5><p>二进制日志是一个记录了所有对数据库进行修改操作的事件的文件集，它以二进制格式存储，不能直接用文本编辑器查看，必须使用专门的工具（如 <code>mysqlbinlog</code>）来解析，因为其设计初衷不是为了人类阅读或调试，而是为了被机器（其他 MySQL 服务器或工具）消费。</p>
-<p>二进制日志的核心用途又三种：</p>
+<h4 id="3-1-4-二进制日志（Binary-Log-Binlog）"><a href="#3-1-4-二进制日志（Binary-Log-Binlog）" class="headerlink" title="3.1.4. 二进制日志（Binary Log &#x2F; Binlog）"></a>3.1.4. 二进制日志（Binary Log &#x2F; Binlog）</h4><h5 id="二进制日志概述"><a href="#二进制日志概述" class="headerlink" title="二进制日志概述"></a>二进制日志概述</h5><p>二进制日志是一个记录了所有对数据库进行修改操作的事件的文件集，由从库负责拉取和重放。它以二进制格式存储，不能直接用文本编辑器查看，必须使用专门的工具（如 <code>mysqlbinlog</code>）来解析，因为其设计初衷不是为了人类阅读或调试，而是为了被机器（其他 MySQL 服务器或工具）消费。</p>
+<p>二进制日志可以有三种格式：</p>
 <ol>
-<li>主从复制<ol>
-<li>在主从架构中，主库（Master）开启 Binlog，记录所有变更</li>
-<li>从库（Slave&#x2F;Replica）会请求主库的 Binlog，并在本地重放（Replay）这些事件，从而实现与主库的数据同步</li>
+<li>STATEMENT<ol>
+<li>语句模式</li>
+<li>直接记录原始 SQL 语句，例如 UPDATE user SET age&#x3D;age+1 WHERE id&#x3D;1;</li>
+<li>优点：<ol>
+<li>日志小，占用空间小</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>如果 SQL 中包含非确定性操作，例如非确定性函数 NOW()，各节点独立执行时就可能得到不同结果</li>
 </ol>
 </li>
 </ol>
+</li>
+<li>ROW<ol>
+<li>行模式</li>
+<li>记录每一行的变更结果，例如 id&#x3D;1 这一行的 age 从 20 改成 21</li>
+<li>优点：<ol>
+<li>保证数据的一致性，不会因语句的非确定性而出现主从数据不一致的情况</li>
+</ol>
+</li>
+<li>缺点：<ol>
+<li>日志文件可能会变得非常庞大，尤其是在一条 UPDATE 语句影响大量行记录的情况下</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>MIXED<ol>
+<li>混合模式</li>
+<li>MySQL 自动在 STATEMENT 和 ROW 之间切换，正常情况下使用 STATEMENT，遇到非确定性操作就使用 ROW</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h5 id="二进制日志定位"><a href="#二进制日志定位" class="headerlink" title="二进制日志定位"></a>二进制日志定位</h5><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs gams"># <span class="hljs-number">1.</span> 检查是否启用二进制日志<br>SHOW <span class="hljs-keyword">VARIABLES</span> LIKE <span class="hljs-comment">&#x27;log_bin&#x27;</span>;<br><br><br># <span class="hljs-number">2.</span> 查看二进制日志所在目录<br>SHOW <span class="hljs-keyword">VARIABLES</span> LIKE <span class="hljs-comment">&#x27;datadir&#x27;</span>;<br><br><br># <span class="hljs-number">3.</span> 查看二进制日志文件基名（路劲 + 前缀）<br>SHOW <span class="hljs-keyword">VARIABLES</span> LIKE <span class="hljs-comment">&#x27;log_bin_basename&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-39.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h5 id="3-1-4-2-二进制日志用途"><a href="#3-1-4-2-二进制日志用途" class="headerlink" title="3.1.4.2. 二进制日志用途"></a>3.1.4.2. 二进制日志用途</h5><h6 id="3-1-4-2-1-主从复制"><a href="#3-1-4-2-1-主从复制" class="headerlink" title="3.1.4.2.1. 主从复制"></a>3.1.4.2.1. 主从复制</h6><p>主从架构中，主库开启 Binlog，当客户端执行修改操作时，</p>
 <p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-2.png" srcset="/img/loading.gif" lazyload></p>
@@ -718,7 +861,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="常用存储引擎"><a href="#常用存储引擎" class="headerlink" title="常用存储引擎"></a>常用存储引擎</h3><h4 id="常用存储引擎对比表"><a href="#常用存储引擎对比表" class="headerlink" title="常用存储引擎对比表"></a>常用存储引擎对比表</h4><table>
+<h3 id="4-2-常用存储引擎"><a href="#4-2-常用存储引擎" class="headerlink" title="4.2. 常用存储引擎"></a>4.2. 常用存储引擎</h3><h4 id="4-2-1-常用存储引擎对比表"><a href="#4-2-1-常用存储引擎对比表" class="headerlink" title="4.2.1. 常用存储引擎对比表"></a>4.2.1. 常用存储引擎对比表</h4><table>
 <thead>
 <tr>
 <th>索引名称</th>
@@ -822,15 +965,15 @@
 </tr>
 </tbody></table>
 <hr>
-<h4 id="InnoDB（默认）"><a href="#InnoDB（默认）" class="headerlink" title="InnoDB（默认）"></a>InnoDB（默认）</h4><h5 id="InnoDB-概述"><a href="#InnoDB-概述" class="headerlink" title="InnoDB 概述"></a>InnoDB 概述</h5><p>InnoDB 是 MySQL 的默认存储引擎，功能强大。由于它支持事务处理和外键约束，具备良好的数据完整性与并发性能，因此被广泛应用于各类场景。<strong>对于绝大多数应用场景，强烈推荐使用 InnoDB</strong>。</p>
+<h4 id="4-2-2-InnoDB（默认）"><a href="#4-2-2-InnoDB（默认）" class="headerlink" title="4.2.2. InnoDB（默认）"></a>4.2.2. InnoDB（默认）</h4><h5 id="4-2-2-1-InnoDB-概述"><a href="#4-2-2-1-InnoDB-概述" class="headerlink" title="4.2.2.1. InnoDB 概述"></a>4.2.2.1. InnoDB 概述</h5><p>InnoDB 是 MySQL 的默认存储引擎，功能强大。由于它支持事务处理和外键约束，具备良好的数据完整性与并发性能，因此被广泛应用于各类场景。<strong>对于绝大多数应用场景，强烈推荐使用 InnoDB</strong>。</p>
 <p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-23.png" srcset="/img/loading.gif" lazyload></p>
 <p>关于表空间（Tablespaces），它的存储结构如下：</p>
 <hr>
-<h5 id="InnoDB-内存架构"><a href="#InnoDB-内存架构" class="headerlink" title="InnoDB 内存架构"></a>InnoDB 内存架构</h5><p>对于一台专用于运行 MySQL 的服务器来说，其 <strong>80% 左右的可用内存</strong> 通常会分配给 MySQL，用于缓存数据和提升查询性能。</p>
+<h5 id="4-2-2-2-InnoDB-内存架构"><a href="#4-2-2-2-InnoDB-内存架构" class="headerlink" title="4.2.2.2. InnoDB 内存架构"></a>4.2.2.2. InnoDB 内存架构</h5><p>对于一台专用于运行 MySQL 的服务器来说，其 <strong>80% 左右的可用内存</strong> 通常会分配给 MySQL，用于缓存数据和提升查询性能。</p>
 <p><font color="#92d050">1. Buffer Pool（缓冲池）</font></p>
 <p><font color="#92d050">2. Change Buffer（更改缓冲区）</font><br>更改缓冲区专门用于 非唯一的二级索引页（即不包括主键索引和唯一索引页）的延迟更新。</p>
 <hr>
-<h5 id="InnoDB-磁盘结构"><a href="#InnoDB-磁盘结构" class="headerlink" title="InnoDB 磁盘结构"></a>InnoDB 磁盘结构</h5><h6 id="System-Tablespace（系统表空间）"><a href="#System-Tablespace（系统表空间）" class="headerlink" title="System Tablespace（系统表空间）"></a>System Tablespace（系统表空间）</h6><p>系统表空间是一个磁盘文件（默认是 <code>ibdata1</code>），用来放所有 InnoDB 的“全局性”数据和内部结构，主要用来存放以下几种至关重要的数据：</p>
+<h5 id="4-2-2-3-InnoDB-磁盘结构"><a href="#4-2-2-3-InnoDB-磁盘结构" class="headerlink" title="4.2.2.3. InnoDB 磁盘结构"></a>4.2.2.3. InnoDB 磁盘结构</h5><h6 id="4-2-2-3-1-System-Tablespace（系统表空间）"><a href="#4-2-2-3-1-System-Tablespace（系统表空间）" class="headerlink" title="4.2.2.3.1. System Tablespace（系统表空间）"></a>4.2.2.3.1. System Tablespace（系统表空间）</h6><p>系统表空间是一个磁盘文件（默认是 <code>ibdata1</code>），用来放所有 InnoDB 的“全局性”数据和内部结构，主要用来存放以下几种至关重要的数据：</p>
 <ol>
 <li>数据字典<ol>
 <li>注意事项：<ol>
@@ -869,7 +1012,7 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">innodb_data_file_path</span> = ibdata1:<span class="hljs-number">12</span>M:autoextend<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h6 id="4-2-1-4-2-File-Per-Table-Tablespaces（独立表空间）"><a href="#4-2-1-4-2-File-Per-Table-Tablespaces（独立表空间）" class="headerlink" title="4.2.1.4.2. File-Per-Table Tablespaces（独立表空间）"></a>4.2.1.4.2. File-Per-Table Tablespaces（独立表空间）</h6><p>我们设置 <code>innodb_file_per_table = ON</code>（现代 MySQL 版本的默认设置）时，为每个表创建的那个 <code>.ibd</code> 文件就是一个独立的表空间。可以把它想象成一个<strong>为单张表量身定做的、自给自足的微型数据库文件</strong>。</p>
+<h6 id="4-2-2-3-2-File-Per-Table-Tablespaces（独立表空间）"><a href="#4-2-2-3-2-File-Per-Table-Tablespaces（独立表空间）" class="headerlink" title="4.2.2.3.2. File-Per-Table Tablespaces（独立表空间）"></a>4.2.2.3.2. File-Per-Table Tablespaces（独立表空间）</h6><p>我们设置 <code>innodb_file_per_table = ON</code>（现代 MySQL 版本的默认设置）时，为每个表创建的那个 <code>.ibd</code> 文件就是一个独立的表空间。可以把它想象成一个<strong>为单张表量身定做的、自给自足的微型数据库文件</strong>。</p>
 <p>这个 <code>.ibd</code> 文件的内部结构是高度组织化的，遵循一个清晰的层级：<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-22.png" srcset="/img/loading.gif" lazyload></p>
 <p>页是 InnoDB 进行磁盘 I&#x2F;O 和内存管理的<strong>最小单位</strong>。无论你只读取一行数据还是修改一个字节，InnoDB 都必须将包含该数据的整个页加载到内存中，修改后，再将整个页写回磁盘。默认大小是 <strong>16KB</strong>。这个大小可以在初始化数据库实例时通过 <code>innodb_page_size</code> 参数修改（但一旦设定就不能更改）</p>
 <p>每个表的文件表空间包含单个lnnoDB表的数据和索引l，并存储在文件系统上的单个数据文件中，就不会放到系统表空间了</p>
@@ -915,9 +1058,10 @@
 <td>临时测试场景，也不推荐使用</td>
 </tr>
 </tbody></table>
-<h4 id="4-2-1-InnoDB（默认）"><a href="#4-2-1-InnoDB（默认）" class="headerlink" title="4.2.1. InnoDB（默认）"></a>4.2.1. InnoDB（默认）</h4><p>在底层是使用 表明.ibd 进行存储，这是一个表空间文件，用于存储该表的表结构元数据（8.0 之前是 frm，8.0 之后是 sdi）、数据和索引，他们都是保存在页中，有一个变量 <code>innodb_file_per_table</code> 是来控制它的是不是每一个表名都对应一个表空间文件，默认是开启的<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-5.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="4-2-1-1-逻辑存储结构"><a href="#4-2-1-1-逻辑存储结构" class="headerlink" title="4.2.1.1. 逻辑存储结构"></a>4.2.1.1. 逻辑存储结构</h5><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-6.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="4-2-1-2-InnoDB-架构"><a href="#4-2-1-2-InnoDB-架构" class="headerlink" title="4.2.1.2. InnoDB 架构"></a>4.2.1.2. InnoDB 架构</h5><h5 id="4-2-1-3-内存架构"><a href="#4-2-1-3-内存架构" class="headerlink" title="4.2.1.3. 内存架构"></a>4.2.1.3. 内存架构</h5><h6 id="4-2-1-3-1-Buffer-Pool（缓冲池）"><a href="#4-2-1-3-1-Buffer-Pool（缓冲池）" class="headerlink" title="4.2.1.3.1. Buffer Pool（缓冲池）"></a>4.2.1.3.1. Buffer Pool（缓冲池）</h6><p>缓冲池是主内存中的一个区域，里面可以缓存磁盘上经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则先从磁盘中加载并缓存，然后进行操作），操作完成后，然后再以一定频率刷新到磁盘</p>
+<h4 id="4-2-3-InnoDB（默认）"><a href="#4-2-3-InnoDB（默认）" class="headerlink" title="4.2.3. InnoDB（默认）"></a>4.2.3. InnoDB（默认）</h4><p>在底层是使用 表明.ibd 进行存储，这是一个表空间文件，用于存储该表的表结构元数据（8.0 之前是 frm，8.0 之后是 sdi）、数据和索引，他们都是保存在页中，有一个变量 <code>innodb_file_per_table</code> 是来控制它的是不是每一个表名都对应一个表空间文件，默认是开启的<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-5.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-2-3-1-逻辑存储结构"><a href="#4-2-3-1-逻辑存储结构" class="headerlink" title="4.2.3.1. 逻辑存储结构"></a>4.2.3.1. 逻辑存储结构</h5><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-6.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-2-3-2-InnoDB-架构"><a href="#4-2-3-2-InnoDB-架构" class="headerlink" title="4.2.3.2. InnoDB 架构"></a>4.2.3.2. InnoDB 架构</h5><h5 id="4-2-3-3-内存架构"><a href="#4-2-3-3-内存架构" class="headerlink" title="4.2.3.3. 内存架构"></a>4.2.3.3. 内存架构</h5><h6 id="4-2-3-3-1-Buffer-Pool（缓冲池）"><a href="#4-2-3-3-1-Buffer-Pool（缓冲池）" class="headerlink" title="4.2.3.3.1. Buffer Pool（缓冲池）"></a>4.2.3.3.1. Buffer Pool（缓冲池）</h6><p>这里面的页，被修改了是脏页</p>
+<p>缓冲池是主内存中的一个区域，里面可以缓存磁盘上经常操作的真实数据，在执行增删改查操作时，先操作缓冲池中的数据（若缓冲池没有数据，则先从磁盘中加载并缓存，然后进行操作），操作完成后，然后再以一定频率刷新到磁盘</p>
 <ol>
 <li>读<ol>
 <li>先去 Buffer Pool 找数据页</li>
@@ -940,34 +1084,34 @@
 <p>缓冲池以Page页为单位，底层采用链表数据结构管理Page。根据状态，将Page分为三种类型：<br>free page：空闲page，未被使用。<br>clean page：被使用page，数据没有被修改过。<br>dirtypage：脏页，被使用page，数据被修改过，但是还没刷盘，也中数据与磁盘的数据产生了不一致。</p>
 <p>大小由innodb_buffer_pool_siz 控制</p>
 <hr>
-<h6 id="4-2-1-3-2-Change-Buffer（更改缓冲区）"><a href="#4-2-1-3-2-Change-Buffer（更改缓冲区）" class="headerlink" title="4.2.1.3.2. Change Buffer（更改缓冲区）"></a>4.2.1.3.2. Change Buffer（更改缓冲区）</h6><p>Change Buffer：更改缓冲区（针对于非唯一二级索引页，即除主键索引和唯一索引），在执行DML（数据增删改）语句时，如果这些数据Page没有在BufferPool中，不会直接操作磁盘，而会将数据变更存在更改缓冲区ChangeBuffer中，在未来数据被读取时，再将数据合并恢复到BufferPool中，再将合并后的数据刷新到磁盘中。</p>
+<h6 id="4-2-3-3-2-Change-Buffer（更改缓冲区）"><a href="#4-2-3-3-2-Change-Buffer（更改缓冲区）" class="headerlink" title="4.2.3.3.2. Change Buffer（更改缓冲区）"></a>4.2.3.3.2. Change Buffer（更改缓冲区）</h6><p>Change Buffer：更改缓冲区（针对于非唯一二级索引页，即除主键索引和唯一索引），在执行DML（数据增删改）语句时，如果这些数据Page没有在BufferPool中，不会直接操作磁盘，而会将数据变更存在更改缓冲区ChangeBuffer中，在未来数据被读取时，再将数据合并恢复到BufferPool中，再将合并后的数据刷新到磁盘中。</p>
 <p>与聚集索引不同，二级索引通常是非唯一的，并且以相对随机的顺序插入二级索引。同样，删除和更新可能会影响索引树中不相邻的二级索引页，如果每一次都操作磁盘，会造成大量的磁盘IO。有了ChangeBuffer之后，我们可以在缓冲池中进行合并处理，减少磁盘lO。</p>
 <p>对于聚集索引，通常都是按照主键顺序插入的，但是你二级索引就不是了，就是随机的了<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-24.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h6 id="4-2-1-3-3-Adaptive-Hash-Index（自适应哈希）"><a href="#4-2-1-3-3-Adaptive-Hash-Index（自适应哈希）" class="headerlink" title="4.2.1.3.3. Adaptive Hash Index（自适应哈希）"></a>4.2.1.3.3. Adaptive Hash Index（自适应哈希）</h6><p>AdaptiveHashIndex：自适应hash索引l，用于优化对BufferPool数据的查询。InnoDB存储引l擎会监控对表上各索引页的查询，如果观察到hash索引可以提升速度，则建立hash索引l，称之为自适应hash 索引。</p>
+<h6 id="4-2-3-3-3-Adaptive-Hash-Index（自适应哈希）"><a href="#4-2-3-3-3-Adaptive-Hash-Index（自适应哈希）" class="headerlink" title="4.2.3.3.3. Adaptive Hash Index（自适应哈希）"></a>4.2.3.3.3. Adaptive Hash Index（自适应哈希）</h6><p>AdaptiveHashIndex：自适应hash索引l，用于优化对BufferPool数据的查询。InnoDB存储引l擎会监控对表上各索引页的查询，如果观察到hash索引可以提升速度，则建立hash索引l，称之为自适应hash 索引。</p>
 <p>自适应哈希索引，无需人工干预，是系统根据情况自动完成。</p>
 <p>daptive_hash_index 是自适应哈希的开关</p>
 <p>因为哈希索引很快，如果没有哈希碰撞只需要一次检索就可以了，而 B+Tree 需要多次，所以如果可以的话还是哈希块，但是哈希不适合范围的查询</p>
 <hr>
-<h6 id="4-2-1-3-4-Log-Buffer"><a href="#4-2-1-3-4-Log-Buffer" class="headerlink" title="4.2.1.3.4. Log Buffer"></a>4.2.1.3.4. Log Buffer</h6><p>LogBuffer：日志缓冲区，用来保存要写入到磁盘中的log日志数据（redolog、undolog），默认大小为16MB，日志缓冲区的日志会定期刷新到磁盘中。如果需要更新、插入或删除许多行的事务，增加日志缓冲区的大小可以节省磁盘1&#x2F;0。</p>
+<h6 id="4-2-3-3-4-Log-Buffer"><a href="#4-2-3-3-4-Log-Buffer" class="headerlink" title="4.2.3.3.4. Log Buffer"></a>4.2.3.3.4. Log Buffer</h6><p>LogBuffer：日志缓冲区，用来保存要写入到磁盘中的log日志数据（redolog、undolog），默认大小为16MB，日志缓冲区的日志会定期刷新到磁盘中。如果需要更新、插入或删除许多行的事务，增加日志缓冲区的大小可以节省磁盘1&#x2F;0。</p>
 <p>参数：<br>innodb_log_buffer_size：缓冲区大小<br>innodb_flush_log_at_trx_commit：日志刷新到磁盘时机</p>
 <hr>
-<h5 id="4-2-1-4-磁盘结构"><a href="#4-2-1-4-磁盘结构" class="headerlink" title="4.2.1.4. 磁盘结构"></a>4.2.1.4. 磁盘结构</h5><h6 id="4-2-1-4-3-General-Tablespaces（通用表空间）"><a href="#4-2-1-4-3-General-Tablespaces（通用表空间）" class="headerlink" title="4.2.1.4.3. General Tablespaces（通用表空间）"></a>4.2.1.4.3. General Tablespaces（通用表空间）</h6><p>GeneralTablespaces：通用表空间，需要通过CREATETABLESPACE语法创建通用表空间，如果我们不去创建，那他就不会有，在创建表时，可以指定该表空间。</p>
+<h5 id="4-2-3-4-磁盘结构"><a href="#4-2-3-4-磁盘结构" class="headerlink" title="4.2.3.4. 磁盘结构"></a>4.2.3.4. 磁盘结构</h5><h6 id="4-2-3-4-1-General-Tablespaces（通用表空间）"><a href="#4-2-3-4-1-General-Tablespaces（通用表空间）" class="headerlink" title="4.2.3.4.1. General Tablespaces（通用表空间）"></a>4.2.3.4.1. General Tablespaces（通用表空间）</h6><p>GeneralTablespaces：通用表空间，需要通过CREATETABLESPACE语法创建通用表空间，如果我们不去创建，那他就不会有，在创建表时，可以指定该表空间。</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">CREATETABLESPACEXXXXADD<br>DATAFILE file<span class="hljs-emphasis">_name&#x27;</span><br><span class="hljs-emphasis">ENGINE engine_</span>name;<br></code></pre></td></tr></table></figure>
 
 <p>xxxxxxxx tablespace ts_itheima</p>
 <hr>
-<h6 id="4-2-1-4-4-Undo-Tablespaces（撤销表空间）"><a href="#4-2-1-4-4-Undo-Tablespaces（撤销表空间）" class="headerlink" title="4.2.1.4.4. Undo Tablespaces（撤销表空间）"></a>4.2.1.4.4. Undo Tablespaces（撤销表空间）</h6><p>UndoTablespaces：撤销表空间，MySQL实例在初始化时会自动创建两个默认的undo表空间（undo_001   undo_002   初始大小16M），用于存储undolog日志。</p>
+<h6 id="4-2-3-4-2-Undo-Tablespaces（撤销表空间）"><a href="#4-2-3-4-2-Undo-Tablespaces（撤销表空间）" class="headerlink" title="4.2.3.4.2. Undo Tablespaces（撤销表空间）"></a>4.2.3.4.2. Undo Tablespaces（撤销表空间）</h6><p>UndoTablespaces：撤销表空间，MySQL实例在初始化时会自动创建两个默认的undo表空间（undo_001   undo_002   初始大小16M），用于存储undolog日志。</p>
 <hr>
-<h6 id="4-2-1-4-5-Temporary-Tablespaces（临时表）"><a href="#4-2-1-4-5-Temporary-Tablespaces（临时表）" class="headerlink" title="4.2.1.4.5. Temporary Tablespaces（临时表）"></a>4.2.1.4.5. Temporary Tablespaces（临时表）</h6><p>nnoDB使用会话临时表空间和全局临时表空间。存储用户创建的临时表等数据。</p>
+<h6 id="4-2-3-4-3-Temporary-Tablespaces（临时表）"><a href="#4-2-3-4-3-Temporary-Tablespaces（临时表）" class="headerlink" title="4.2.3.4.3. Temporary Tablespaces（临时表）"></a>4.2.3.4.3. Temporary Tablespaces（临时表）</h6><p>nnoDB使用会话临时表空间和全局临时表空间。存储用户创建的临时表等数据。</p>
 <hr>
-<h6 id="4-2-1-4-6-Doublewrite-Buffer-Files（双写缓冲区）"><a href="#4-2-1-4-6-Doublewrite-Buffer-Files（双写缓冲区）" class="headerlink" title="4.2.1.4.6. Doublewrite Buffer Files（双写缓冲区）"></a>4.2.1.4.6. Doublewrite Buffer Files（双写缓冲区）</h6><p>双写缓冲区，innoDB引擎将数据页从BufferPool刷新到磁盘前，先将数据页写入双写缓冲区文件中，便于系统异常时恢复数据。</p>
+<h6 id="4-2-3-4-4-Doublewrite-Buffer-Files（双写缓冲区）"><a href="#4-2-3-4-4-Doublewrite-Buffer-Files（双写缓冲区）" class="headerlink" title="4.2.3.4.4. Doublewrite Buffer Files（双写缓冲区）"></a>4.2.3.4.4. Doublewrite Buffer Files（双写缓冲区）</h6><p>双写缓冲区，innoDB引擎将数据页从BufferPool刷新到磁盘前，先将数据页写入双写缓冲区文件中，便于系统异常时恢复数据。</p>
 <p>xx.dblwr<br><code>#ib_16384_0.dblwr</code><br><code>#ib_16384_1.dblwr</code></p>
 <hr>
-<h6 id="4-2-1-4-7-Redo-Log（重做日志）"><a href="#4-2-1-4-7-Redo-Log（重做日志）" class="headerlink" title="4.2.1.4.7. Redo Log（重做日志）"></a>4.2.1.4.7. Redo Log（重做日志）</h6><p>用来实现事务的持久性。该日志文件由两部分组成：重做日志缓冲（redologbuffer）以及重做日志文件（redolog），前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都会存到该日志中，用于在刷新脏页到磁盘时，发生错误时，进行数据恢复使用。</p>
+<h6 id="4-2-3-4-5-Redo-Log（重做日志）"><a href="#4-2-3-4-5-Redo-Log（重做日志）" class="headerlink" title="4.2.3.4.5. Redo Log（重做日志）"></a>4.2.3.4.5. Redo Log（重做日志）</h6><p>用来实现事务的持久性。该日志文件由两部分组成：重做日志缓冲（redologbuffer）以及重做日志文件（redolog），前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都会存到该日志中，用于在刷新脏页到磁盘时，发生错误时，进行数据恢复使用。</p>
 <p>它以循环方式写入重做日志文件，涉及两个文件：ib_logfile0   ib_logfile1</p>
 <hr>
-<h5 id="4-2-1-5-后台线程"><a href="#4-2-1-5-后台线程" class="headerlink" title="4.2.1.5. 后台线程"></a>4.2.1.5. 后台线程</h5><ol>
+<h5 id="4-2-3-5-后台线程"><a href="#4-2-3-5-后台线程" class="headerlink" title="4.2.3.5. 后台线程"></a>4.2.3.5. 后台线程</h5><ol>
 <li><p>Master Thread<br> 核心后台线程，负责调度其他线程，还负责将缓冲池中的数据异步刷新到磁盘中，保持数据的一致性，还包括脏页的刷新、合并插入缓存、undo 页的回收 。</p>
 </li>
 <li><p>IO Thread<br> 在 InnoDB 存储引擎中大量使用了 AIO 来处理 IO 请求，这样可以极大地提高数据库的性能，而 IO Thread 主要负责这些 IO 请求的回调。</p>
@@ -1009,9 +1153,9 @@
 </li>
 </ol>
 <hr>
-<h4 id="4-2-2-MyISAM"><a href="#4-2-2-MyISAM" class="headerlink" title="4.2.2. MyISAM"></a>4.2.2. MyISAM</h4><p>MyISAM在底层是使用表明.MYD（数据），表名.MYI（索引），表明.sdi（表结构） 用来存储</p>
+<h4 id="4-2-4-MyISAM"><a href="#4-2-4-MyISAM" class="headerlink" title="4.2.4. MyISAM"></a>4.2.4. MyISAM</h4><p>MyISAM在底层是使用表明.MYD（数据），表名.MYI（索引），表明.sdi（表结构） 用来存储</p>
 <hr>
-<h4 id="4-2-3-Memory"><a href="#4-2-3-Memory" class="headerlink" title="4.2.3. Memory"></a>4.2.3. Memory</h4><p>在底层使用 表民.sdi 用于存储表结构，因为其信息都在内存中进行存放</p>
+<h4 id="4-2-5-Memory"><a href="#4-2-5-Memory" class="headerlink" title="4.2.5. Memory"></a>4.2.5. Memory</h4><p>在底层使用 表民.sdi 用于存储表结构，因为其信息都在内存中进行存放</p>
 <hr>
 <h2 id="5-MySQL-索引"><a href="#5-MySQL-索引" class="headerlink" title="5. MySQL 索引"></a>5. MySQL 索引</h2><h3 id="5-1-索引概述"><a href="#5-1-索引概述" class="headerlink" title="5.1. 索引概述"></a>5.1. 索引概述</h3><p>索引（index）是帮助MySQL高效获取数据的数据结构(有序）。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些<br>数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法，这种数据结构就是索引。</p>
 <p>其优点是：</p>
@@ -1424,7 +1568,616 @@
 </ol>
 <hr>
 <h3 id="6-7-事务的原理"><a href="#6-7-事务的原理" class="headerlink" title="6.7. 事务的原理"></a>6.7. 事务的原理</h3><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-26.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="7-MVCC"><a href="#7-MVCC" class="headerlink" title="7. MVCC"></a>7. MVCC</h2>
+<hr>
+<h2 id="7-MVCC"><a href="#7-MVCC" class="headerlink" title="7. MVCC"></a>7. MVCC</h2><hr>
+<h2 id="MySQL-数据类型"><a href="#MySQL-数据类型" class="headerlink" title="MySQL 数据类型"></a>MySQL 数据类型</h2><h3 id="MySQL-数据类型总结"><a href="#MySQL-数据类型总结" class="headerlink" title="MySQL 数据类型总结"></a>MySQL 数据类型总结</h3><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>范围</th>
+<th>描述</th>
+<th>赋值示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数值类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TINYINT</code></td>
+<td>1 字节，-128 ~ 127</td>
+<td>小范</td>
+<td><code>INSERT INTO table (tinyint_column) VALUES (20);</code></td>
+</tr>
+<tr>
+<td><code>SMALLINT</code></td>
+<td>2 字节，-32768 ~ 32767</td>
+<td>稍大</td>
+<td><code>INSERT INTO table (smallint_column) VALUES (300);</code></td>
+</tr>
+<tr>
+<td><code>MEDIUMINT</code></td>
+<td>3 字节，-8,388,608 ~ 8,388,607</td>
+<td>中</td>
+<td><code>INSERT INTO table (mediumint_column) VALUES (500000);</code></td>
+</tr>
+<tr>
+<td><code>INT</code></td>
+<td>4 字节，-2<sup>31</sup> ~ 2<sup>31</sup> - 1（21 亿）</td>
+<td><code>INSERT INTO table (int_column) VALUES (1000000);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>BIGINT</code></td>
+<td>8 字节，-2<sup>63</sup> ~ 2<sup>63</sup> - 1</td>
+<td></td>
+<td><code>INSERT INTO table (bigint_column) VALUES (9223372036854775807);</code></td>
+</tr>
+<tr>
+<td><code>FLOAT</code></td>
+<td>4 字节，7 位十进制精度（7 位数字存储精确，8 位数字可能会丢失精度）</td>
+<td>常规浮点数，</td>
+<td><code>INSERT INTO table (float_column) VALUES (4.5);</code></td>
+</tr>
+<tr>
+<td><code>DOUBLE</code></td>
+<td>8 字节，15位十进制精度</td>
+<td>双精度浮点数，精</td>
+<td><code>INSERT INTO table (double_column) VALUES (0.000000123);</code></td>
+</tr>
+<tr>
+<td><code>DECIMAL</code></td>
+<td>精度由我们指定，最大精度为 65</td>
+<td>精确小数，不丢失精度</td>
+<td><code>INSERT INTO table (decimal_column) VALUES (1234567890.12);</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>字符串类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CHAR(n)</code></td>
+<td>0 ~ 255 字符（由编码规则决定占多少字节）</td>
+<td>定长字符串，无论实际存储多少内容，始终占用 <code>n</code> 个字符的空</td>
+<td><code>INSERT INTO table (char_column) VALUES (&#39;abc&#39;);</code></td>
+</tr>
+<tr>
+<td><code>VARCHAR(n)</code></td>
+<td>0 ~ 65535 字符</td>
+<td>变长字符串，根据实际内容动态分配空间，<code>n</code> 表示可存储</td>
+<td><code>INSERT INTO table (varchar_column) VALUES (&#39;Elasticsearch Guide&#39;);</code></td>
+</tr>
+<tr>
+<td><code>TINYTEXT</code></td>
+<td>最大 255 字符</td>
+<td><code>INSERT INTO table (tinytext_column) VALUES (&#39;Hello&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TEXT</code></td>
+<td>最大 65,535 字符</td>
+<td><code>INSERT INTO table (text_column) VALUES (&#39;This is a long text...&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>MEDIUMTEXT</code></td>
+<td>最大 16,777,215 字符</td>
+<td><code>INSERT INTO table (mediumtext_column) VALUES (&#39;Very long...&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>LONGTEXT</code></td>
+<td>最大 4,294,967,295 字符</td>
+<td><code>INSERT INTO table (longtext_column) VALUES (&#39;Extremely long...&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>原生数据类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>JSON</code></td>
+<td>1 - 2<sup>32</sup>-1 字节</td>
+<td><code>INSERT INTO table (json_column) VALUES (&#39;&#123; &quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30, &quot;skills&quot;: [&quot;Java&quot;, &quot;MySQL&quot;, &quot;JSON&quot;] &#125;&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>日期时间类型</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>YEAR</code></td>
+<td>1 字节，1901 - 2155</td>
+<td><code>INSERT INTO table (year_column) VALUES (2000);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATE</code></td>
+<td>3 字节，1000-01-01 - 9999-12-31</td>
+<td><code>INSERT INTO table (date_column) VALUES (&#39;2000-01-01&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TIME</code></td>
+<td>3 字节，-838:59:59 - 838:59:59</td>
+<td><code>INSERT INTO table (time_column) VALUES (&#39;14:30:00&#39;);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TIMESTAMP</code></td>
+<td>4 字节，1970-01-01 00:00: UTC 时间戳。<br>存储时，会将本地时间转换成 UTC 时间（去掉偏移量）。<br>读取时，会加上当前时区的偏移量，返回本地时间。<br>需要注意的是：显示为 <code>YYYY-MM-DD HH:MM:SS</code> 是 <code>MySQL</code> 自动为我们进行的转换 是 <code>MySQL</code> 自动为我们进行的转换<br>2.</td>
+<td><code>INSERT INTO table (timestamp_column) VALUES (CURRENT_TIMESTAMP);</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATETIME</code></td>
+<td>8 字节，1000-01-01 00:00:00 - 99</td>
+<td><code>INSERT INTO table (datetime_column) VALUES (&#39;2025-04-04 10:30:00&#39;);</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>关于 <code>TIMESTAMP</code> 类型，<code>MySQL</code> 会在取出来时做一次时区换算，但并不是所有 <code>Java</code> 类型接收后都会变成本地时间。</li>
+<li>例如当你在 <code>Java</code> 里用 <code>Instant</code> 接收 <code>TIMESTAMP</code> 时，<code>MySQL</code> 出库阶段确实会先按照 <code>session</code> 时区换算成一个 “本地时间” 发给 <code>JDBC</code></li>
+<li>但 <code>JDBC</code> 驱动在发现目标类型是 <code>Instant</code> 后，会再做一次转换，把这个 “本地时间” 还原成对应的 <code>UTC</code> 瞬时时间点</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="Java-与-MySQL-双剑合璧"><a href="#Java-与-MySQL-双剑合璧" class="headerlink" title="Java 与 MySQL 双剑合璧"></a>Java 与 MySQL 双剑合璧</h3><ol>
+<li>String<ol>
+<li>字符串类型 存储</li>
+</ol>
+</li>
+<li>Set＜String＞<ol>
+<li>字符串类型 存储<ol>
+<li>多个 <code>String</code> 之间以逗号分割，例如 <code>client_secret_basic,client_secret_post</code></li>
+</ol>
+</li>
+<li>原生数据类型（<code>JSON</code>）存储</li>
+</ol>
+</li>
+<li>tinyint<ol>
+<li>Boolean<ol>
+<li>可以直接映射</li>
+</ol>
+</li>
+<li>Integer<ol>
+<li>也可以直接映射</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Object<ol>
+<li>字符串类型 存储<ol>
+<li>存储 <code>Object</code> 序列化后的字符串</li>
+</ol>
+</li>
+<li>原生数据类型（<code>JSON</code>）存储</li>
+</ol>
+</li>
+<li>Instant<br> 1. <ol start="2">
+<li>日期时间类型（<code>TIMESTAMP</code>）存储，用LocalDataTime 就行阿</li>
+<li>MySQL 会在取出来时做一次时区换算，但并不是所有 Java 类型接收后都会变成本地时间。例如你使用 Instant 进行接收，MySQL 出库时确实</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="三、搭建-MySQL-环境"><a href="#三、搭建-MySQL-环境" class="headerlink" title="三、搭建 MySQL 环境"></a>三、搭建 MySQL 环境</h1><h2 id="1-单机测试环境"><a href="#1-单机测试环境" class="headerlink" title="1. 单机测试环境"></a>1. 单机测试环境</h2><h3 id="1-1-环境搭建"><a href="#1-1-环境搭建" class="headerlink" title="1.1. 环境搭建"></a>1.1. 环境搭建</h3><h4 id="1-1-1-创建宿主机数据挂载目录"><a href="#1-1-1-创建宿主机数据挂载目录" class="headerlink" title="1.1.1. 创建宿主机数据挂载目录"></a>1.1.1. 创建宿主机数据挂载目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> -p /mystudy/data/mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="1-1-2-启动-MySQL-容器"><a href="#1-1-2-启动-MySQL-容器" class="headerlink" title="1.1.2. 启动 MySQL 容器"></a>1.1.2. 启动 MySQL 容器</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  --name my_mysql <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -p <span class="hljs-number">3306</span>:<span class="hljs-number">3306</span> <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -e MYSQL_ROOT_PASSWORD=wq666666 <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  -v /mystudy/data/mysql:/var/lib/mysql <span class="hljs-punctuation">\</span><br><span class="hljs-punctuation"></span>  mysql:<span class="hljs-number">8</span>.<span class="hljs-number">0</span><br><br><br><span class="hljs-attribute">docker</span> logs -f my_mysql<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-主从复制集群环境"><a href="#2-主从复制集群环境" class="headerlink" title="2. 主从复制集群环境"></a>2. 主从复制集群环境</h2><h3 id="2-1-环境架构"><a href="#2-1-环境架构" class="headerlink" title="2.1. 环境架构"></a>2.1. 环境架构</h3><p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-36.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-环境特性"><a href="#2-2-环境特性" class="headerlink" title="2.2. 环境特性"></a>2.2. 环境特性</h3><h4 id="数据写入机制"><a href="#数据写入机制" class="headerlink" title="数据写入机制"></a>数据写入机制</h4><h5 id="元数据写入"><a href="#元数据写入" class="headerlink" title="元数据写入"></a>元数据写入</h5><h6 id="天枢剑（节点的拓扑结构）"><a href="#天枢剑（节点的拓扑结构）" class="headerlink" title="天枢剑（节点的拓扑结构）"></a>天枢剑（节点的拓扑结构）</h6><p>天枢剑：主从复制</p>
+<p><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-37.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h6 id="天璇剑（数据的组织形式）"><a href="#天璇剑（数据的组织形式）" class="headerlink" title="天璇剑（数据的组织形式）"></a>天璇剑（数据的组织形式）</h6><hr>
+<h6 id="天权剑（数据的分布策略）"><a href="#天权剑（数据的分布策略）" class="headerlink" title="天权剑（数据的分布策略）"></a>天权剑（数据的分布策略）</h6><p>天权剑：整体存储</p>
+<p>每一个节点（无论是主节点还是从节点）都拥有一份<strong>完整</strong>的元数据副本</p>
+<hr>
+<h6 id="开阳剑（数据的协调机制）"><a href="#开阳剑（数据的协调机制）" class="headerlink" title="开阳剑（数据的协调机制）"></a>开阳剑（数据的协调机制）</h6><p>开阳剑：单点写入、ACK 确认机制</p>
+<p><font color="#92d050">1. 单点写入</font><br>客户端向主节点发起事务请求时，主节点会执行事务（执行 SQL）并修改 InnoDB 内存区中的 内存缓冲池（Buffer Pool） 中的数据页。与此同时，会生成对应的 redo log，写入 InnoDB 内存区的 log buffer。生成对应的 binlog event，写入 Server 内存区的 binlog cache</p>
+<p>当事务提交时，MySQL 会执行两阶段提交（不是 2PC） ：</p>
+<ol>
+<li>首先会将 log buffer 中的内容写入 redo log 文件，根据 innodb_flush_log_at_trx_commit 参数决定是否立即 fsync 落盘（依赖 WAL，直接写入 WAL（redo log &#x3D; WAL）</li>
+<li>然后会将 binlog cache 中的内容写入 binlog 文件，根据 sync_binlog 参数决定是否立即 fsync 落盘（依赖 WAL，直接写入 WAL，binlog &#x3D; WAL）</li>
+<li>待 binlog 成功写入后，把 redo log 标记为 commit 状态</li>
+<li>此时，事务才算真正完成提交</li>
+</ol>
+<p>当事务完成提交后，主节点立即向客户端返回成功响应，不涉及到任何复制过程，后续依赖异步复制完成同步</p>
+<p><font color="#92d050">2. ACK 确认机制</font><br>在单点写入基础上，可以通过 ACK 确认机制 实现半同步复制。具体来说，事务在主库完成提交后，并不会立刻向客户端返回成功响应，而是等待主库的 binlog dump 线程 将刚写入的 binlog 推送给从库后</p>
+<p>从库的 IO 线程 接收到该 binlog event 后，写入本地的 relay log 文件，然后立即向主库返回一条 ACK 确认信号。只要有至少一个从库成功返回 ACK，主库就会向客户端返回成功响应（无需等待从库的 SQL 线程 将 relay log 应用到数据页）。</p>
+<hr>
+<h6 id="天玑剑（数据的同步时机）"><a href="#天玑剑（数据的同步时机）" class="headerlink" title="天玑剑（数据的同步时机）"></a>天玑剑（数据的同步时机）</h6><p>天玑剑：异步复制、半同步复制</p>
+<p><font color="#92d050">1. 异步复制（默认）</font><br>在主库上，当事务提交后会记录 binlog（Binary Log）。当某个从库发起复制请求到主库时，主库会为该连接创建一个 专用的 binlog dump 线程，负责从 binlog 文件中读取新的事件，并通过 TCP 实时推送给该从库，若有多个从库，就对应多个独立的 binlog dump 线程。</p>
+<p>从库启动复制时，会先向主库发送 <code>COM_BINLOG_DUMP</code> 请求，声明自己是从哪个 binlog 文件、哪个位置开始同步。主库随后启动相应的 binlog dump 线程，并从指定位置将 binlog event 逐条发送给从库。</p>
+<p>从库会有一个后台 IO 线程 与主库的 binlog dump 线程建立并保持连接，持续接收主库推送的 binlog event，并 “原封不动” 写入本地磁盘文件，即 relay log（中继日志，不依赖 WAL）</p>
+<p>并且，从库的后台 SQL 线程 会不断读取 relay log，对其中的事件逐条解析，并在本地重放这些操作，从而让从库的数据逐步追上主库。<br><img src="/2025/08/10/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL/%E7%AC%94%E8%AE%B0%EF%BC%9AMySQL-38.png" srcset="/img/loading.gif" lazyload></p>
+<p><font color="#92d050">2. 半同步复制</font><br>在单点写入基础上，可以通过 ACK 确认机制 实现半同步复制。具体来说，事务在主库完成提交后，并不会立刻向客户端返回成功响应，而是等待主库的 binlog dump 线程 将刚写入的 binlog 推送给从库后</p>
+<p>从库的 IO 线程 接收到该 binlog event 后，写入本地的 relay log 文件，然后立即向主库返回一条 ACK 确认信号。只要有至少一个从库成功返回 ACK，主库就会向客户端返回成功响应（无需等待从库的 SQL 线程 将 relay log 应用到数据页）。</p>
+<hr>
+<h6 id="玉衡剑（数据的同步传输）"><a href="#玉衡剑（数据的同步传输）" class="headerlink" title="玉衡剑（数据的同步传输）"></a>玉衡剑（数据的同步传输）</h6><p>玉衡剑：快照 + 增量（日志推送）</p>
+<hr>
+<h6 id="瑶光剑（数据的持久化保障）"><a href="#瑶光剑（数据的持久化保障）" class="headerlink" title="瑶光剑（数据的持久化保障）"></a>瑶光剑（数据的持久化保障）</h6><ol>
+<li>InnoDB<ol>
+<li>脏页<ol>
+<li>保存流程<ol>
+<li>Buffer Pool ➔ write ➔ OS Page Cache ➔ fsync ➔ 磁盘</li>
+<li>write 时机<ol>
+<li>Buffer Pool 空间不足<ol>
+<li>当 Buffer Pool 空间不足时，就需要写一批脏页到 Page Cache</li>
+</ol>
+</li>
+<li>redo log 空间不足<ol>
+<li>由于 redo log 是循环写入的，当 redo log 空间不足时，就需要写一批脏页到 Page Cache，以便能够覆盖旧日志</li>
+</ol>
+</li>
+<li>checkpoint 推进<ol>
+<li>Checkpoint 是数据库系统标记 “到某个位置之前的日志我已经可以不用管了”，就是用来解决 redo log 的问题的，会挑一些脏页搞到磁盘，然后就可以标记 redo log 中到哪里之前的部分已经持久化了，不但涉及到 write，还涉及到 fsync</li>
+<li>修复的时候，只需要修复 Checkpoint 之后的就行，之前的不用管，因为已经持久化了</li>
+<li>checkpoint 推进的时机有：<ol>
+<li>redo log 空间不足</li>
+<li>Buffer Pool 空间不足</li>
+<li>后台线程定期推进，防止脏页太多</li>
+<li>数据库正常关闭，强制全盘 checkpoint</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>用户主动 flush<ol>
+<li>当用户主动执行 flush 命令的时候，也会写</li>
+</ol>
+</li>
+<li>数据库正常关闭<ol>
+<li>正常关闭数据库时，MySQL shutdown 会把所有的脏页都写出去</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>fsync 时机<ol>
+<li>checkpoint 推进</li>
+<li>后台定期 flush</li>
+<li>数据库正常关闭</li>
+</ol>
+</li>
+<li>需要注意的是，为了避免 16KB 页被拆成多个 4KB 的 Page Cache 写时掉电导致 “撕裂页”，InnoDB搞了 “双写保护”，简单来说，就是先进行 Buffer Pool ➔ Doublewrite Buffer ➔ write ➔ OS Page Cache ➔ fsync ➔ 磁盘，然后再进行上述的保存流程</li>
+</ol>
+</li>
+<li>更新模型<ol>
+<li>原地更新模型</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>WAL（Redo Log）<ol>
+<li>更新模型<ol>
+<li>循环覆盖<ol>
+<li>Redo Log 是 固定大小 + 顺序写入 + 循环覆盖的</li>
+<li>当写到文件末尾后，再从头开始写，覆盖旧日志</li>
+<li>旧日志中未写到 Page Cache 中的，未必在从头开始写时一股脑的全写进去，而是可能写到哪里，发现前面还没写，我没办法覆盖你，就先把前面的写了，然后我再覆盖你</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>事务日志（Binary Log）</li>
+</ol>
+</li>
+</ol>
+<p><font color="#92d050">1. 持久化逻辑</font></p>
+<ol>
+<li>InnoDB 持久化逻辑：混合持久化（快照（脏页）+ 日志）</li>
+</ol>
+<p><font color="#92d050">2. 存储引擎实现</font></p>
+<ol>
+<li>InnoDB 存储引擎实现：原地更新（依赖 WAL）</li>
+</ol>
+<p><font color="#92d050">3. 操作系统交互</font></p>
+<ol>
+<li>InnoDB 操作系统交互<ol>
+<li>脏页<ol>
+<li>写入流程<ol>
+<li>脏页➔ write ➔ OS Page Cache ➔ fsync ➔ 磁盘</li>
+</ol>
+</li>
+<li>write 时机<ol>
+<li>Buffer Pool 空间不足<ol>
+<li>当 Buffer Pool 空间不足时，就需要先把脏页写出去</li>
+</ol>
+</li>
+<li>redo log 空间不足<ol>
+<li>由于 redo log 是循环写入的，当 redo log 空间不足时，InnoDB 必须写一批脏页到 Page Cache，以便释放 redo log 空间</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>WAL（Redo Log）<ol>
+<li>写入流程<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>：强制刷盘（同步刷盘、间隔刷盘、操作系统自由安排)</li>
+<li>事务日志（Binary Log）：强制刷盘（同步刷盘、条件刷盘、操作系统自由安排)</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2-3-环境限制"><a href="#2-3-环境限制" class="headerlink" title="2.3. 环境限制"></a>2.3. 环境限制</h3><hr>
+<h3 id="2-4-环境要求"><a href="#2-4-环境要求" class="headerlink" title="2.4. 环境要求"></a>2.4. 环境要求</h3><h4 id="2-4-1-操作系统要求"><a href="#2-4-1-操作系统要求" class="headerlink" title="2.4.1. 操作系统要求"></a>2.4.1. 操作系统要求</h4><p>不依赖特定操作系统，支持在 <code>Linux</code>、<code>macOS</code> 和 <code>Windows</code> 环境下运行</p>
+<hr>
+<h4 id="2-4-2-运行环境要求"><a href="#2-4-2-运行环境要求" class="headerlink" title="2.4.2. 运行环境要求"></a>2.4.2. 运行环境要求</h4><p>不需要 <code>JDK</code>、<code>JRE</code> 等类似的运行环境</p>
+<hr>
+<h4 id="2-4-3-时间要求"><a href="#2-4-3-时间要求" class="headerlink" title="2.4.3. 时间要求"></a>2.4.3. 时间要求</h4><p><code>MySQL</code> 主从复制 集群中的各节点之间必须保持时间同步。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在跨多集群时，时间同步要更加敏感</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-4-4-端口要求"><a href="#2-4-4-端口要求" class="headerlink" title="2.4.4. 端口要求"></a>2.4.4. 端口要求</h4><table>
+<thead>
+<tr>
+<th align="center">端口</th>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>3306</strong></td>
+<td align="center">TCP</td>
+<td align="center">- 主从节点的通信与数据复制端口</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-4-5-相互解析要求"><a href="#2-4-5-相互解析要求" class="headerlink" title="2.4.5. 相互解析要求"></a>2.4.5. 相互解析要求</h4><p><code>MySQL</code> 主从复制 集群各个节点之间不必须相互解析，但强烈推荐进行相互解析</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>小规模相互解析<ol>
+<li>主机名解析</li>
+</ol>
+</li>
+<li>中等规模相互解析<ol>
+<li>DNS 解析</li>
+</ol>
+</li>
+<li>大规模相互解析<ol>
+<li>服务发现</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-4-6-Swap-分区要求"><a href="#2-4-6-Swap-分区要求" class="headerlink" title="2.4.6. Swap 分区要求"></a>2.4.6. Swap 分区要求</h4><p><code>Swap</code> 分区是操作系统在系统内存不足时，将某些程序不活跃或暂时不需要的数据移动到 <code>Swap</code> 分区（位于硬盘），以释放内存资源供当前活跃程序使用。</p>
+<p>由于 <code>Swap</code> 分区依赖硬盘，其读写速度远低于内存，如果系统频繁使用 <code>Swap</code>，会造成大量磁盘 <code>IO</code>，严重影响系统性能，甚至导致系统响应迟缓或无响应。因此，在性能敏感的场景（如数据库、实时计算、大内存服务器）中，通常建议禁用 <code>Swap</code> 分区，确保数据始终在高速内存中运行。</p>
+<hr>
+<h3 id="2-5-环境准备"><a href="#2-5-环境准备" class="headerlink" title="2.5. 环境准备"></a>2.5. 环境准备</h3><h4 id="2-5-1-查看-Ubuntu-版本"><a href="#2-5-1-查看-Ubuntu-版本" class="headerlink" title="2.5.1. 查看 Ubuntu 版本"></a>2.5.1. 查看 Ubuntu 版本</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">lsb_release -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-5-2-运行环境准备"><a href="#2-5-2-运行环境准备" class="headerlink" title="2.5.2. 运行环境准备"></a>2.5.2. 运行环境准备</h4><hr>
+<h4 id="2-5-3-节点列表"><a href="#2-5-3-节点列表" class="headerlink" title="2.5.3. 节点列表"></a>2.5.3. 节点列表</h4><table>
+<thead>
+<tr>
+<th align="center">IP</th>
+<th align="center">磁盘</th>
+<th align="center">CPU</th>
+<th align="center">内存</th>
+<th align="center">主机名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">192.168.136.8</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">mysql1</td>
+<td align="center">主节点</td>
+</tr>
+<tr>
+<td align="center">192.168.136.9</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">mysql2</td>
+<td align="center">从节点-1</td>
+</tr>
+<tr>
+<td align="center">192.168.136.10</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">mysql3</td>
+<td align="center">从节点-2</td>
+</tr>
+<tr>
+<td align="center">192.168.136.11</td>
+<td align="center">Root 盘</td>
+<td align="center">1 核</td>
+<td align="center">1GB</td>
+<td align="center">mysql4</td>
+<td align="center">从节点-3</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-5-4-时间同步"><a href="#2-5-4-时间同步" class="headerlink" title="2.5.4. 时间同步"></a>2.5.4. 时间同步</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v chronyd &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="hljs-built_in">sudo</span> apt-get update &amp;&amp; <span class="hljs-built_in">sudo</span> apt-get install -y chrony; &#125;<br><br><br><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> chrony &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl start chrony<br><br><br><span class="hljs-comment"># 强制时钟对其</span><br><span class="hljs-built_in">sudo</span> chronyc makestep<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">// 命令行临时代理<br><span class="hljs-built_in">export</span> http_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> https_proxy=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> no_proxy=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-variable">$no_proxy</span><br><br><br>// docker 代理<br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf</span><br><span class="hljs-string">[Service]</span><br><span class="hljs-string">Environment=&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-string">Environment=&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br><span class="hljs-string">EOF</span><br><br><span class="hljs-built_in">sudo</span> systemctl daemon-reload &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-5-5-开放端口"><a href="#2-5-5-开放端口" class="headerlink" title="2.5.5. 开放端口"></a>2.5.5. 开放端口</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 3306</span><br><span class="hljs-attribute">sudo</span> ufw <span class="hljs-literal">allow</span> <span class="hljs-number">3306</span>/tcp<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果使用云服务器，同样需要开放安全组</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-5-7-设置相互解析"><a href="#2-5-7-设置相互解析" class="headerlink" title="2.5.7. 设置相互解析"></a>2.5.7. 设置相互解析</h4><h5 id="2-5-7-1-主机名解析"><a href="#2-5-7-1-主机名解析" class="headerlink" title="2.5.7.1. 主机名解析"></a>2.5.7.1. 主机名解析</h5><p><font color="#92d050">1. 设置本机主机名</font></p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-comment"># 1.1 192.168.136.8</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">mysql1</span><br><br><br><span class="hljs-comment"># 1.2 192.168.136.9</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">mysql2</span><br><br><br><span class="hljs-comment"># 1.3 192.168.136.10</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">mysql3</span><br><br><br><span class="hljs-comment"># 1.4 192.168.136.11</span><br><span class="hljs-string">sudo</span> <span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">mysql4</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 设置节点相互解析</font></p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">sudo sudo vim /etc/hosts<br><br><br><span class="hljs-number">192.168.136.8</span> mysql1<br><span class="hljs-number">192.168.136.9</span> mysql2<br><span class="hljs-number">192.168.136.10</span> mysql3<br><span class="hljs-number">192.168.136.11</span> mysql4<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-5-6-关闭-Swap-分区"><a href="#2-5-6-关闭-Swap-分区" class="headerlink" title="2.5.6. 关闭 Swap 分区"></a>2.5.6. 关闭 Swap 分区</h4><p><font color="#92d050">1. 立即关闭 Swap 分区</font></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">swapoff -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 配置关闭 Swap 分区</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> vim /etc/fstab<br><br><br><span class="hljs-comment"># 将以 /swap 开头的那行注释</span><br><span class="hljs-comment"># /swap.img       none    swap    sw      0       0</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-6-环境搭建"><a href="#2-6-环境搭建" class="headerlink" title="2.6. 环境搭建"></a>2.6. 环境搭建</h3><h4 id="2-6-1-安装-MySQL"><a href="#2-6-1-安装-MySQL" class="headerlink" title="2.6.1. 安装 MySQL"></a>2.6.1. 安装 MySQL</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">command</span> -v mysql &gt;/dev/null 2&gt;&amp;1 || &#123; <span class="hljs-built_in">sudo</span> apt-get update &amp;&amp; <span class="hljs-built_in">sudo</span> apt-get install -y mysql-server; &#125;<br><br><br><span class="hljs-built_in">command</span> -v mysql<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>设置代理</li>
+</ol>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 命令行临时代理</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=<span class="hljs-string">&quot;http://172.20.10.2:7890&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">no_proxy</span>=<span class="hljs-string">&quot;localhost,127.0.0.1,.svc,.cluster.local,192.168.136.0/24,10.96.0.1,10.244.0.0/16&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTP_PROXY</span>=<span class="hljs-variable">$http_proxy</span> &amp;&amp;<span class="hljs-built_in">export</span> <span class="hljs-attribute">HTTPS_PROXY</span>=<span class="hljs-variable">$https_proxy</span> &amp;&amp; <span class="hljs-built_in">export</span> <span class="hljs-attribute">NO_PROXY</span>=<span class="hljs-variable">$no_proxy</span><br><br><br><span class="hljs-comment"># docker 代理</span><br>cat &lt;&lt;EOF | sudo tee /etc/systemd/system/docker.service.d/proxy.conf<br>[Service]<br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTP_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;HTTPS_PROXY=http://172.20.10.2:7890&quot;</span><br><span class="hljs-attribute">Environment</span>=<span class="hljs-string">&quot;NO_PROXY=localhost,127.0.0.1,10.96.0.1,192.168.136.0/24,10.244.0.0/16,.svc,.cluster.local&quot;</span><br>EOF<br><br>sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-2-启动-MySQL-节点"><a href="#2-6-2-启动-MySQL-节点" class="headerlink" title="2.6.2. 启动 MySQL 节点"></a>2.6.2. 启动 MySQL 节点</h4><p>在 Ubuntu 中，当我们安装 MySQL 后，会自动启动和设置为开机自启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl start mysql &amp;&amp; <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> mysql<br><br><br><span class="hljs-built_in">sudo</span> systemctl status mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-3-修改-Root-密码"><a href="#2-6-3-修改-Root-密码" class="headerlink" title="2.6.3. 修改 Root 密码"></a>2.6.3. 修改 Root 密码</h4><p>MySQL 在首次启动后，默认会要求修改 root 用户密码。因此，在进行主从集群搭建之前，必须先完成 root 密码的设置</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-comment"># 1. 连接 MySQL（Ubuntu 可以在使用系统 Root 角色的情况下免密登录，其他需要先获取临时密码再登录）</span><br>sudo mysql<br><br><br><span class="hljs-comment"># 2. 修改 Root 密码</span><br>ALTER <span class="hljs-literal">USER</span> <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="hljs-string">&#x27;wq666666&#x27;</span><span class="hljs-comment">;</span><br><br><br><span class="hljs-comment"># 3. 退出连接 MySQL</span><br><span class="hljs-keyword">quit</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>MySQL 首次启动后，默认必须修改 Root 密码，所以我们先修改密码再去搭建集群</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-6-4-配置主节点"><a href="#2-6-4-配置主节点" class="headerlink" title="2.6.4. 配置主节点"></a>2.6.4. 配置主节点</h4><p><font color="#92d050">1. 修改配置文件</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo vim /etc/mysql/my.cnf<br><br><br>[mysqld]<br><span class="hljs-comment"># 服务器唯一 ID（一主多从情况下，主节点通常设置为 1）</span><br><span class="hljs-attribute">server_id</span>=1<br><br><br><span class="hljs-comment"># 开启 Binary Log（二进制日志），这是主从复制的核心（单写 WAL ➔ 双日志机制）</span><br><span class="hljs-attribute">log-bin</span>=mysql-bin<br><br><br><span class="hljs-comment"># 设置 Binary Log 的格式</span><br><span class="hljs-comment">#     1. STATEMENT</span><br><span class="hljs-comment">#         1. 语句模式（类似于请求转发）</span><br><span class="hljs-comment">#         2. 记录原始 SQL 语句，例如 UPDATE user SET age=age+1 WHERE id=1;</span><br><span class="hljs-comment">#         3. 如果 SQL 中包含非确定性函数，例如 NOW()，各节点独立执行时就可能得到不同结果</span><br><span class="hljs-comment">#     2. ROW</span><br><span class="hljs-comment">#         1. 行模式</span><br><span class="hljs-comment">#         2. 记录每一行的变更结果，例如 id=1 这一行的 age 从 20 改成 21</span><br><span class="hljs-comment">#     3. MIXED</span><br><span class="hljs-comment">#         1. 混合模式</span><br><span class="hljs-comment">#         2. MySQL 自动在 STATEMENT 和 ROW 之间切换，正常情况下使用 STATEMENT，遇到非确定性函数就使用 ROW</span><br><span class="hljs-attribute">binlog_format</span>=ROW<br><br><br><span class="hljs-comment"># 使用 GTID 模式</span><br><span class="hljs-attribute">gtid_mode</span>=ON<br><span class="hljs-attribute">enforce_gtid_consistency</span>=ON<br><br><br><span class="hljs-comment"># 允许 0.0.0.0 连接</span><br>bind-address = 0.0.0.0<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在搭建 MySQL 主从集群时，主库和从库的状态最好保持一致。</li>
+<li>通常的做法是先对主库做一次全量备份，然后将备份导入从库。</li>
+<li>这是因为主库在开启 Binary Log 之前的操作并不会被记录到日志中，因此从库无法通过复制机制获取这些历史变更。</li>
+<li>此外，这种情况下 SQL 线程容易出现错误，一旦发生故障，复制将会中断，不会继续执行。</li>
+</ol>
+</blockquote>
+<p><font color="#92d050">2. 重启 MySQL</font></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-5-创建复制用户"><a href="#2-6-5-创建复制用户" class="headerlink" title="2.6.5. 创建复制用户"></a>2.6.5. 创建复制用户</h4><p>从库需要通过复制用户连接主库，并读取主库的 Binary Log 以获取变更记录。因此，我们需要先连接到主库并创建主库的复制用户，以便从库能够使用该账号连接到主库。</p>
+<p>需要注意的是，这条 <code>CREATE USER</code> 语句会被记录到日志中，从库在拉取并重放日志时也会创建相同的用户。虽然从库上是否存在该用户并不影响复制功能，但在未来进行集群优化时，可能会提供主从切换的功能，这种用户同步仍然具有实际意义。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 连接到主库<br>mysql -u root -p<br><br><br># <span class="hljs-number">2.</span> 创建复制用户<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;repl&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">WITH</span> mysql_native_password <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;wq666666&#x27;</span>;<br><br><br># <span class="hljs-number">3.</span> 授予复制用户权限（这里授予的是复制所必须的最小权限）<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">REPLICATION</span> SLAVE <span class="hljs-keyword">ON</span> *.* <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;repl&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br><br><br># <span class="hljs-number">4.</span> 刷新权限，使权限表重新加载进内存<br>FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>远程复制用户的创建方法，与其他用户的创建方法不太一样</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-6-6-创建远程连接用户"><a href="#2-6-6-创建远程连接用户" class="headerlink" title="2.6.6. 创建远程连接用户"></a>2.6.6. 创建远程连接用户</h4><p>由于 root 用户默认仅允许 <code>&#39;root&#39;@&#39;localhost&#39;</code> 登录，因此不支持远程连接，除非对其进行扩展。我们在此专门创建一个用于远程连接的用户，同样是先连接到主库并创建主库的远程连接用户</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"># <span class="hljs-number">1.</span> 连接到主库<br>mysql -u root -p<br><br><br># <span class="hljs-number">2.</span> 创建远程连接用户<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;distance&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;wq666666&#x27;</span>;<br><br><br># <span class="hljs-number">3.</span> 授予远程连接用户权限（所有权限）<br><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">PRIVILEGES</span> <span class="hljs-keyword">ON</span> *.* <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;distance&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">OPTION</span>;<br><br><br># <span class="hljs-number">4.</span> 刷新权限，使权限表重新加载进内存<br>FLUSH <span class="hljs-keyword">PRIVILEGES</span>;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-7-配置从节点"><a href="#2-6-7-配置从节点" class="headerlink" title="2.6.7. 配置从节点"></a>2.6.7. 配置从节点</h4><p><font color="#92d050">1. 192.168.136.9</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo vim /etc/mysql/my.cnf<br><br><br>[mysqld]<br><span class="hljs-comment"># 服务器唯一 ID</span><br><span class="hljs-attribute">server_id</span>=2<br><br><br><span class="hljs-comment"># 使用 GTID 模式</span><br><span class="hljs-attribute">gtid_mode</span>=ON<br><span class="hljs-attribute">enforce_gtid_consistency</span>=ON<br><br><br><span class="hljs-comment"># 是否只读</span><br><span class="hljs-comment">#     1. 0</span><br><span class="hljs-comment">#         1. 可写模式</span><br><span class="hljs-comment">#     2. 1</span><br><span class="hljs-comment">#         1. 只读模式</span><br><span class="hljs-attribute">read_only</span>=1<br><br><br><span class="hljs-comment"># 允许 0.0.0.0 连接</span><br>bind-address = 0.0.0.0<br><br><br>sudo systemctl restart mysql<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 192.168.136.10</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo vim /etc/mysql/my.cnf<br><br><br>[mysqld]<br><span class="hljs-comment"># 服务器唯一 ID</span><br><span class="hljs-attribute">server_id</span>=3<br><br><br><span class="hljs-comment"># 使用 GTID 模式</span><br><span class="hljs-attribute">gtid_mode</span>=ON<br><span class="hljs-attribute">enforce_gtid_consistency</span>=ON<br><br><br><span class="hljs-comment"># 是否只读</span><br><span class="hljs-comment">#     1. 0</span><br><span class="hljs-comment">#         1. 可写模式</span><br><span class="hljs-comment">#     2. 1</span><br><span class="hljs-comment">#         1. 只读模式</span><br><span class="hljs-attribute">read_only</span>=1<br><br><br><span class="hljs-comment"># 允许 0.0.0.0 连接</span><br>bind-address = 0.0.0.0<br><br><br>sudo systemctl restart mysql<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. 192.168.136.11</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo vim /etc/mysql/my.cnf<br><br><br>[mysqld]<br><span class="hljs-comment"># 服务器唯一 ID</span><br><span class="hljs-attribute">server_id</span>=4<br><br><br><span class="hljs-comment"># 使用 GTID 模式</span><br><span class="hljs-attribute">gtid_mode</span>=ON<br><span class="hljs-attribute">enforce_gtid_consistency</span>=ON<br><br><br><span class="hljs-comment"># 是否只读</span><br><span class="hljs-comment">#     1. 0</span><br><span class="hljs-comment">#         1. 可写模式</span><br><span class="hljs-comment">#     2. 1</span><br><span class="hljs-comment">#         1. 只读模式</span><br><span class="hljs-attribute">read_only</span>=1<br><br><br><span class="hljs-comment"># 允许 0.0.0.0 连接</span><br>bind-address = 0.0.0.0<br><br><br>sudo systemctl restart mysql<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-6-8-启动-MySQL-主从复制集群"><a href="#2-6-8-启动-MySQL-主从复制集群" class="headerlink" title="2.6.8. 启动 MySQL 主从复制集群"></a>2.6.8. 启动 MySQL 主从复制集群</h4><p><font color="#92d050">1. 连接从节点</font></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -u root -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 让从节点连接到主节点</font></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 1. 停止 Slave 线程</span><br>STOP SLAVE;<br><br><br><span class="hljs-comment"># 2. 配置主节点信息</span><br>CHANGE MASTER <span class="hljs-keyword">TO</span><br>  <span class="hljs-attribute">MASTER_HOST</span>=<span class="hljs-string">&#x27;mysql1&#x27;</span>,<br>  <span class="hljs-attribute">MASTER_USER</span>=<span class="hljs-string">&#x27;repl&#x27;</span>,<br>  <span class="hljs-attribute">MASTER_PASSWORD</span>=<span class="hljs-string">&#x27;wq666666&#x27;</span>,<br>  <span class="hljs-attribute">MASTER_AUTO_POSITION</span>=1;<br>  <br>  <br><span class="hljs-comment"># 3. 启动 Slave 线程</span><br>START SLAVE;<br><br><br><span class="hljs-comment"># 4. 查看 Slave 线程状态</span><br>SHOW SLAVE STATUS\G<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果不使用 GTID，则需要手动指定 binlog 文件路径和起点位置</li>
+</ol>
+</blockquote>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">MASTER_LOG_FILE</span>=<span class="hljs-string">&#x27;mysql-bin.000001&#x27;</span>,<br><span class="hljs-attr">MASTER_LOG_POS</span>=<span class="hljs-number">157</span><span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-7-环境目录"><a href="#2-7-环境目录" class="headerlink" title="2.7. 环境目录"></a>2.7. 环境目录</h3><h4 id="2-7-1-数据目录"><a href="#2-7-1-数据目录" class="headerlink" title="2.7.1. 数据目录"></a>2.7.1. 数据目录</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-7-2-配置文件目录"><a href="#2-7-2-配置文件目录" class="headerlink" title="2.7.2. 配置文件目录"></a>2.7.2. 配置文件目录</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs stylus">/etc/mysql<br>├── conf<span class="hljs-selector-class">.d</span><br>│   ├── mysql<span class="hljs-selector-class">.cnf</span><br>│   └── mysqldump<span class="hljs-selector-class">.cnf</span><br>├── debian<span class="hljs-selector-class">.cnf</span><br>├── debian-start<br>├── my<span class="hljs-selector-class">.cnf</span> -&gt; /etc/alternatives/my<span class="hljs-selector-class">.cnf</span><br>├── my<span class="hljs-selector-class">.cnf</span><span class="hljs-selector-class">.fallback</span><br>├── mysql<span class="hljs-selector-class">.cnf</span><br>└── mysql<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.d</span><br>    ├── mysql<span class="hljs-selector-class">.cnf</span><br>    └── mysqld.cnf<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="四、MySQL-相关工具"><a href="#四、MySQL-相关工具" class="headerlink" title="四、MySQL 相关工具"></a>四、MySQL 相关工具</h1><hr>
+<h1 id="五、MyBatis"><a href="#五、MyBatis" class="headerlink" title="五、MyBatis"></a>五、MyBatis</h1><hr>
+<h1 id="六、Spring-Data-MyBatis"><a href="#六、Spring-Data-MyBatis" class="headerlink" title="六、Spring Data MyBatis"></a>六、Spring Data MyBatis</h1><hr>
+
                 
               </div>
             

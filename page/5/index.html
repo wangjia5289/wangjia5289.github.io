@@ -228,15 +228,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：ObjectInputStream 常用方法
+        <a href="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9ASync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Sync 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectInputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9ASync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          构造方法ObjectInputStream(InputStream in)1ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(&quot;test.txt&quot;));   实例方法读方法Object readObject1Object object = (Student) objec
+          1. 概述Sync 是一个抽象类，是 ReentrantLock 的 静态 内部类，继承了 AbstractQueuedSynchronizer，基于 AQS 封装了 ReentrantLock 的加锁&#x2F;解锁核心逻辑（使用了模板方法模式）  2. 源码部分1234567891011121314151617181920212223242526272829303132333435363738
         </div>
       </a>
 
@@ -244,332 +244,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9ASelectionKey%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：SelectionKey 常用方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9ASelectionKey%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          实例方法就绪状态判断方法boolean isAcceptable()12// 判断当前 SelectionKey 是否 accept 已就绪boolean acceptable = selectionKey.isAcceptable();   boolean isConnectable()12// 判断当前 SelectionKey 是否 connect 已就绪boolean connectabl
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AReentrantLock%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：ReentrantLock 常用方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AReentrantLock%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          构造方法public ReentrantLock()12// 构造非公平锁的 ReentrantLockReentrantLock reentrantLock = new ReentrantLock();   public ReentrantLock(boolean fair)1234567891011121314151617181920212223242526272829/** * ======
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：ObjectOutputStream 常用方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AObjectOutputStream%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          构造方法ObjectOutputStream(OutputStream out)1ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(&quot;test.txt&quot;));   实例方法写方法void writeObject(Object obj)1234567Student
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-          方法：SocketChannel 常用方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9ASocketChannel%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          构造方法static SocketChannel open()（∈ SocketChannel）12// 创建一个未连接的 SocketChannelSocketChannel socketChannel = SocketChannel.open();   [!NOTE] 注意事项  使用这种方式构造的 SocketChannel，需要自己配合 xxSocketChannel.connect(So
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AThread%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95%EF%BC%88JUC%EF%BC%89/" target="_self">
-          方法：Thread 相关方法（JUC）
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%96%B9%E6%B3%95%EF%BC%9AThread%E7%9B%B8%E5%85%B3%E6%96%B9%E6%B3%95%EF%BC%88JUC%EF%BC%89/" target="_self">
-        <div>
-          1. 构造方法1.1. 继承 Thread 类，重写 run 方法1. 匿名内部类继承 1234567891011121314151617public class Main &#123;  	      public static void main(String[] args) &#123;  	    		// 创建线程对象        Thread myThread = new Threa
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%96%B9%E6%B3%95/" class="category-chain-item">方法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9ACollection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Collection＜E＞ 源码解析
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9ACollection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-        <div>
-          1. Collection＜E＞ 概述Collection＜E＞ 是一个接口，定义了 “如何对一组对象（集合）进行操作” 的规范  2. 源码部分12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061public interfa
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
+            <time datetime="2025-09-02 00:00" pubdate>
+              2025-09-02
             </time>
           </div>
         
@@ -606,15 +282,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AConsumer%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Consumer＜T＞ 源码解析
+        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AAbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：AbstractQueuedSynchronizer源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AConsumer%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AAbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. Consumer＜T＞ 概述Consumer＜T＞ 是一个接口，定义了 “如何对一个参数执行某种操作，但不返回结果” 的规范  2. 源码部分12345678910111213@FunctionalInterfacepublic interface Consumer&lt;T&gt; &#123;		// 对传入参数执行一个操作    void accept(T t);		// 将两个 Co
+          1. 概述AbstractQueuedSynchronizer 是一个抽象类，继承了 AbstractOwnableSynchronizer，实现了 Serializable，是一个同步器框架，用来构建锁和其他同步器。 AQS 的核心属性是一个 state 字段，线程对同步器资源的竞争，本质上就是对这个 state 的修改尝试。不同的同步器对 state 的定义不同，例如在 ReentrantLo
         </div>
       </a>
 
@@ -622,8 +298,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
+            <time datetime="2025-09-01 00:00" pubdate>
+              2025-09-01
             </time>
           </div>
         
@@ -660,15 +336,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AIterable%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Iterable＜E＞ 源码解析
+        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：LockSupport 源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AIterable%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9ALockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. Iterable＜E＞概述Iterable&lt;E&gt; 是一个接口，定义了一个 “对象如何支持被迭代（遍历）” 的规范  2. 源码部分12345678910111213141516171819public interface Iterable&lt;T&gt; &#123;		// 1. 获取迭代器，它是一个实现了 Iterator&lt;T&gt; 接口的对象，内部维护着一个元素集
+          1. 概述LockSupport 是一个具体类，是整个 AQS 阻塞&#x2F;唤醒机制的基石，几乎所有同步器的 “挂起线程&#x2F;唤醒线程” 都是靠它完成的。 之所以不使用 Object 的 wait&#x2F;notify&#x2F;notifyAll，是因为在 Object 中，这些方法必须在 synchronized 块里调用，因为调用线程必须持有该对象的锁 而 LockSupport
         </div>
       </a>
 
@@ -676,8 +352,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
+            <time datetime="2025-09-01 00:00" pubdate>
+              2025-09-01
             </time>
           </div>
         
@@ -714,15 +390,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AIterator%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
-          源码：Iterator＜E＞ 源码解析
+        <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ManagedBlocker源码解析
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9AIterator%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9AManagedBlocker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
         <div>
-          1. Iterator ＜E＞ 概述Iterator&lt;E&gt; 是一个接口，定义了 “一个集合如何支持按顺序取出元素” 的规范  2. 源码部分123456789101112131415161718192021public interface Iterator&lt;E&gt; &#123;		// 1. 判断集合中是否还有下一个元素    boolean hasNext();		// 2
+          1. 概述ManagedBlocker 是一个接口，是 ForkJoinPool 的 静态 接口，用于 向 ForkJoinPool 声明 “这里可能会发生阻塞”，以便池子在 Worker 暂停时 临时补充线程，保证吞吐量不下降  2. 源码部分12345678public static interface ManagedBlocker &#123;		// 执行实际的阻塞操作	boolean b
         </div>
       </a>
 
@@ -730,8 +406,332 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-25 00:00" pubdate>
-              2025-08-25
+            <time datetime="2025-09-01 00:00" pubdate>
+              2025-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionNode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ConditionNode 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionNode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述ConditionNode 是一个具体类，是 AQS 的 静态 内部类，继承了 Node，实现了 ForkJoinPool.ManagedBlocker，是 AQS 在 Condition Queue 的节点，是一个比 Node 更简单的单向链表节点  [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 08:00" pubdate>
+              2025-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ANode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Node 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ANode%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述Node 是一个抽象类，是 AQS 的 静态 内部类，是 AQS 在 Sync Queue 的节点，是一个双向链表节点  [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 内部链接：      在最初的设计里，Node 只是一个具体类，职责非常单纯，充当同步队列中的链表节点。但随着
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 08:00" pubdate>
+              2025-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：ConditionObject 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述ConditionObject 是一个具体类，是 AQS 的 内部类，实现了 Condition，维护了一个等待队列，实现了线程间等待与唤醒的协调机制   [!NOTE] 注意事项  AQS 源码解析 obsidian 内部链接： 源码：AbstractQueuedSynchronizer源码解析   Hexo 链接：      Condition 源码解析 obsidian 内部链接：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 00:00" pubdate>
+              2025-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Condition 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ACondition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述Condition 是一个接口，定义了线程间等待与唤醒的协调机制，配合 Lock 使用，相当于 Object 的 wait&#x2F;notify&#x2F;notifyAll 的升级版。 我们先来想象以下 synchronized 锁，它配合 Object 的 wait&#x2F;notify&#x2F;notifyAll 使用。但是有一个关键限制，一个 synchronized 锁（
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 00:00" pubdate>
+              2025-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Executor 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9AExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述Executor 是一个接口，定义了一种统一的方式提交线程任务  2. 源码部分123456public interface Executor &#123;		// 定义提交任务的规范    void execute(Runnable command);    &#125;   3. 实现示例12345678910111213141516171819202122public class
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 00:00" pubdate>
+              2025-08-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          源码：Lock 源码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9ALock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          1. 概述Lock 是一个接口，定义了显式锁的基本操作规范  2. 源码部分1234567891011121314public interface Lock &#123;	    void lock();	    void lockInterruptibly() throws InterruptedException;	    boolean tryLock();	    boolean tryL
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-31 00:00" pubdate>
+              2025-08-31
             </time>
           </div>
         
@@ -766,7 +766,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

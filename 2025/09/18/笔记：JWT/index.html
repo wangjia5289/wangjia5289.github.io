@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="JWT 概述若是基于 HttpSession 的登录方式，如果后端服务器只有一台，那还算可行。然而在现实应用中，后端服务器显然不可能只有一台，通常是多台服务器协同处理请求 在这种场景下，假如用户在登录时被负载均衡到服务器 1，并在该服务器上创建了 HttpSession，该服务器确实保存了用户的 Authentication 信，但后续请求若被分配到服务器 2，由于该服务器并无用户的 HttpSe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：JWT">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/18/%E7%AC%94%E8%AE%B0%EF%BC%9AJWT/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="JWT 概述若是基于 HttpSession 的登录方式，如果后端服务器只有一台，那还算可行。然而在现实应用中，后端服务器显然不可能只有一台，通常是多台服务器协同处理请求 在这种场景下，假如用户在登录时被负载均衡到服务器 1，并在该服务器上创建了 HttpSession，该服务器确实保存了用户的 Authentication 信，但后续请求若被分配到服务器 2，由于该服务器并无用户的 HttpSe">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-09-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-19T10:36:57.577Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：JWT - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：JWT"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-18 00:00" pubdate>
+          September 18, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：JWT</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-09-19T18:36:57+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="JWT-概述"><a href="#JWT-概述" class="headerlink" title="JWT 概述"></a>JWT 概述</h2><p>若是基于 <code>HttpSession</code> 的登录方式，如果后端服务器只有一台，那还算可行。然而在现实应用中，后端服务器显然不可能只有一台，通常是多台服务器协同处理请求</p>
+<p>在这种场景下，假如用户在登录时被负载均衡到服务器 1，并在该服务器上创建了 <code>HttpSession</code>，该服务器确实保存了用户的 <code>Authentication</code> 信，但后续请求若被分配到服务器 2，由于该服务器并无用户的 <code>HttpSession</code> 信息，就会导致用户 “看似从未登录”，需要重新认证</p>
+<p>同理，如果接下来被路由到服务器 3、服务器 4……难道用户每次都要重新登录？显然，在多服务器环境下，单纯依赖 <code>HttpSession</code> 并不可靠</p>
+<p>而 <code>JWT（JSON Web Token）</code> 则无需依赖服务器端的会话存储（如 <code>HttpSession</code>），便可安全地完成用户身份验证，并携带必要的用户信息进行传递。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>常用 “记住我” 实现方式包括：<ol>
+<li>无状态<ol>
+<li>JWT</li>
+<li>Remeber-Me Cookie</li>
+</ol>
+</li>
+<li>有状态<ol>
+<li>Cookie + HttpSession&#x2F;分布式 Session</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="JWT-分类"><a href="#JWT-分类" class="headerlink" title="JWT 分类"></a>JWT 分类</h2><ol>
+<li>JWS<ol>
+<li>签名过的 JWT</li>
+</ol>
+</li>
+<li>JWE<ol>
+<li>加密过的 JWT</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="JWS"><a href="#JWS" class="headerlink" title="JWS"></a>JWS</h2><p>JWT 由三部分组成：<strong>Header</strong>、<strong>Payload</strong> 和 <strong>Signature</strong>，中间用英文句点 <code>.</code> 分隔，形成 <code>xxxxx.yyyyy.zzzzz</code> 的格式，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jwt">eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjE1NTY3NzkxMjUzMDksImV4cCI6MTU1NzM4MzkyNX0.d-iki0193X0bBOETf2UN3r3PotNIEAV7mzIxxeI5IxFyzzkOZxS0PGfF_SK6wxCv2K8S0cZjMkv6b5bCqc0VBw<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">1. Header（头部）</font><br><code>Header</code> 用于声明该令牌的类型，以及 <code>JWT</code> 中用于生成和验证签名（即 <code>Signature</code>）的加密算法的种类（如 <code>HMAC-SHA256</code>、<code>RSA</code> 等，作用于签名的算法）</p>
+<p>其是一个 <code>JSON</code> 对象，通常长这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;alg&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HS256&quot;</span><span class="hljs-punctuation">,</span>     <span class="hljs-comment">// 表示签名使用的算法，这里是 HMAC-SHA256</span><br>  <span class="hljs-attr">&quot;typ&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JWT&quot;</span>        <span class="hljs-comment">// 表示类型是 JWT</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>在生成 <code>JWT</code> 时会对其进行 <code>Base64URL</code> 编码，形成：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9<br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. Payload（负载）</font><br><code>Payload</code> 用于携带信息，一般包含两部分内容：</p>
+<ol>
+<li>Registered Claims 部分<ol>
+<li><code>JWT</code> 推荐的标准字段，具有约定俗成的意义</li>
+<li>这些字段虽然是可选的，但非常推荐使用，因为它们有助于后端进行有效的校验，比如判断 Token 是否已过期、是否有效、是否来自合法的客户端等。</li>
+<li>常用 <code>Registered Claims</code> 包括：<ol>
+<li>iss<ol>
+<li>签发者</li>
+</ol>
+</li>
+<li>sub<ol>
+<li>主题，通常用于标识用户身份</li>
+</ol>
+</li>
+<li>aud<ol>
+<li>接收方</li>
+</ol>
+</li>
+<li>exp<ol>
+<li>过期时间</li>
+</ol>
+</li>
+<li>nbf<ol>
+<li>生效时间</li>
+</ol>
+</li>
+<li>iat<ol>
+<li>签发时间</li>
+</ol>
+</li>
+<li>jti<ol>
+<li><code>JWT</code> 唯一 ID</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Private Claims 部分<ol>
+<li>根据业务场景自定义的数据字段，可以根据实际需求灵活添加</li>
+<li>前端与后端需要对这些字段的格式和含义达成一致约定</li>
+</ol>
+</li>
+</ol>
+<p>最终，我们 <code>JWT</code> 的 <code>Payload</code> 写法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jwt">&#123;<br>  &quot;userId&quot;: &quot;123456&quot;,<br>  &quot;username&quot;: &quot;alice&quot;,<br>  &quot;role&quot;: &quot;admin&quot;,<br>  &quot;iat&quot;: 1710000000,<br>  &quot;exp&quot;: 1710003600<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在生成 <code>JWT</code> 时会对其进行 <code>Base64URL</code> 编码，形成：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">eyJ<span class="hljs-number">1</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>VySWQiOiIxMjM<span class="hljs-number">0</span>NTYiLCJ<span class="hljs-number">1</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>VybmFtZSI<span class="hljs-number">6</span>ImFsaWNlIiwicm<span class="hljs-number">9</span>sZSI<span class="hljs-number">6</span>ImFkbWluIiwiaWF<span class="hljs-number">0</span>IjoxNzEwMDAwMDAwLCJleHAiOjE<span class="hljs-number">3</span>MTAwMDM<span class="hljs-number">2</span>MDB<span class="hljs-number">9</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">3. Signature（签名）</font><br><code>Signature</code> 用于防止数据被篡改、伪造，它的生成方式大致如下：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs lisp">Signature = HMAC-SHA256(<br>  <span class="hljs-name">base64UrlEncode</span>(<span class="hljs-name">header</span>) + <span class="hljs-string">&quot;.&quot;</span> + base64UrlEncode(<span class="hljs-name">payload</span>),<br>  secret<br>)<br></code></pre></td></tr></table></figure>
+
+<p>由前两部分的 <code>Base64URL</code> 编码拼接而成的字符串，会结合我们的密钥 <code>secret</code> 以及 Header 中指定的签名算法（<code>alg</code>）生成签名。</p>
+<p>这个 <code>secret</code> 是保存在我们的服务器中，当 <code>JWT</code> 被客户端发送回来时，服务器会使用这个密钥和签名算法对前两部分重新计算签名，并将其与 <code>JWT</code> 中附带的签名部分进行比对</p>
+<ol>
+<li>如果比对一致<ol>
+<li>该令牌未被篡改，可信</li>
+</ol>
+</li>
+<li>如果对比不一致<ol>
+<li>令牌可能已被伪造或篡改，不可信</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对于 <code>JWT</code> 的安全性，我们必须对其进行了解：<ol>
+<li>由于密钥是保存在服务器中的，只有你掌握，即使攻击者截获了 <code>JWT</code>，也无法伪造一个合法的 <code>Token</code>。因为即便他可以从 <code>JWT</code> 中解析出 <code>Header</code> 和 <code>Payload</code>，但没有你的密钥，就无法生成一个正确的签名。使用其他密钥伪造出来的签名，无法通过我们服务器使用原密钥重新计算的签名比对，因此验证会失败。</li>
+<li>虽然 <code>JWT</code> 的 <code>Header</code> 和 <code>Payload</code> 看起来像一串很高端的字符，但实际上它们只是经过了 <code>Base64URL</code> 编码（注意不是 <code>Base64</code> 编码），目的是便于传输，并没有加密。因此任何人都可以解码查看其中的内容。例如在网站 <a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io/</a> 上，就可以轻松将一个 <code>JWT</code> 解码并查看 <code>Header</code> 和 <code>Payload</code> 中的信息。</li>
+<li>这也提醒我们：<code>JWT</code> 虽然具有防伪能力，能够有效防止前端伪造 <code>Token</code>，但由于其前两部分很容易被解码，因此不能将敏感信息（如密码、邮箱、手机号等）放入 <code>Header</code> 或 <code>Payload</code> 中。一般来说，像过期时间、生效时间、签发时间、用户 ID、用户名等信息已经足够。同时，为防止 <code>Token</code> 在传输过程中被截获，应通过 <code>HTTPS</code> 进行传输，而非明文 <code>HTTP</code></li>
+<li>如果攻击者真的截获了 <code>JWT</code>，在其未过期的有效时间内，是可以冒充用户发起请求的。如果系统只靠 <code>Token</code> 的签名来识别身份，因此无法判断是真用户还是伪装者。因此我们应尽量缩短 <code>JWT</code> 的有效期，例如设置为 15 分钟，以减小安全风险。</li>
+<li>除此之外，我们还应配合一系列安全机制，辅助判断用户行为是否异常或存在风险。例如，在执行敏感操作时，可以要求用户进行额外验证，如输入身份证号码、手机验证码或进行人脸识别等，以增强身份校验的可靠性，这类多因子验证手段有助于防止 <code>Token</code> 被盗用后的非法操作，进一步提升系统的整体安全性。</li>
+</ol>
+</li>
+<li>前端发送 JWT 的格式一般为：<code>Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...</code></li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="JWE"><a href="#JWE" class="headerlink" title="JWE"></a>JWE</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E5%AE%89%E5%85%A8/" class="category-chain-item">Java 安全</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：JWT</div>
+      <div>https://wangjia5289.github.io/2025/09/18/笔记：JWT/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 18, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/22/%E7%AC%94%E8%AE%B0%EF%BC%9ACookie/" title="笔记：Cookie">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Cookie</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/18/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringBoot/" title="笔记：Spring Boot">
+                        <span class="hidden-mobile">笔记：Spring Boot</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
