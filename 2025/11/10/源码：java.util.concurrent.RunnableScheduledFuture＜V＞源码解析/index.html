@@ -19,16 +19,16 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. RunnableScheduledFuture＜V＞ 概述RunnableScheduledFuture＜V＞ 是一个接口，继承了 java.util.concurrent.RunnableFuture＜V＞、java.util.concurrent.ScheduledFuture＜V＞ RunnableSched">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;05&#x2F;05&#x2F;源码：java.util.concurrent.RunnableScheduledFuture＜V＞源码解析&#x2F;    3. 基础部分3.1. RunnableScheduledFuture＜V＞ 概述RunnableScheduledFuture＜V＞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.RunnableScheduledFuture＜V＞ 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/10/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. RunnableScheduledFuture＜V＞ 概述RunnableScheduledFuture＜V＞ 是一个接口，继承了 java.util.concurrent.RunnableFuture＜V＞、java.util.concurrent.ScheduledFuture＜V＞ RunnableSched">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;05&#x2F;05&#x2F;源码：java.util.concurrent.RunnableScheduledFuture＜V＞源码解析&#x2F;    3. 基础部分3.1. RunnableScheduledFuture＜V＞ 概述RunnableScheduledFuture＜V＞">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/10/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T11:31:57.615Z">
+<meta property="article:modified_time" content="2025-11-23T13:13:26.853Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/10/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          176 words
+          233 words
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T19:31:57+08:00
+                    Last updated on 2025-11-23T21:13:26+08:00
                   
                   
 
@@ -306,6 +306,8 @@
 <li><p>Xmind</p>
 </li>
 <li><p>Edraw</p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/05/05/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/05/05/源码：java.util.concurrent.RunnableScheduledFuture＜V＞源码解析/</a></p>
 </li>
 </ol>
 <hr>
@@ -324,7 +326,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/03/源码：java.util.concurrent.RunnableFuture＜V＞源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -335,7 +337,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/04/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/04/源码：java.util.concurrent.ScheduledFuture＜V＞源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -353,6 +355,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>

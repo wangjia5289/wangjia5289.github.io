@@ -19,16 +19,16 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分RecursiveTask 概述RecursiveTask 是一个抽象类，继承了 java.util.concurrent.ForkJoinTask＜V＞  [!NOTE] 注意事项  详见源码：ForkJoinTask＜V＞ obsidian 内部链接： 源码：java.util.concurrent.ForkJoinTa">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;15&#x2F;源码：java.util.concurrent.RecursiveTask＜V＞源码解析&#x2F;    3. 基础部分RecursiveTask 概述RecursiveTask 是一个抽象类，继承了 java.util.concurrent.ForkJoinT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.RecursiveTask＜V＞ 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分RecursiveTask 概述RecursiveTask 是一个抽象类，继承了 java.util.concurrent.ForkJoinTask＜V＞  [!NOTE] 注意事项  详见源码：ForkJoinTask＜V＞ obsidian 内部链接： 源码：java.util.concurrent.ForkJoinTa">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;15&#x2F;源码：java.util.concurrent.RecursiveTask＜V＞源码解析&#x2F;    3. 基础部分RecursiveTask 概述RecursiveTask 是一个抽象类，继承了 java.util.concurrent.ForkJoinT">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
-<meta property="article:published_time" content="2025-11-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T11:41:13.075Z">
+<meta property="article:published_time" content="2025-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-23T13:13:21.502Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
@@ -213,7 +213,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-15 08:00" pubdate>
+        <time datetime="2025-11-15 00:00" pubdate>
           November 15, 2025 am
         </time>
       </span>
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          189 words
+          228 words
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T19:41:13+08:00
+                    Last updated on 2025-11-23T21:13:21+08:00
                   
                   
 
@@ -307,6 +307,8 @@
 </li>
 <li><p>Edraw</p>
 </li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/15/源码：java.util.concurrent.RecursiveTask＜V＞源码解析/</a></p>
+</li>
 </ol>
 <hr>
 <h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="RecursiveTask-概述"><a href="#RecursiveTask-概述" class="headerlink" title="RecursiveTask 概述"></a>RecursiveTask 概述</h3><p><code>RecursiveTask</code> 是一个抽象类，继承了 <code>java.util.concurrent.ForkJoinTask＜V＞</code><br><img src="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
@@ -319,7 +321,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/15/源码：java.util.concurrent.ForkJoinTask＜V＞源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -338,6 +340,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -393,9 +416,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountDownLatch%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.CountDownLatch 源码解析">
+                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveAction%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.RecursiveAction 源码解析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.concurrent.CountDownLatch 源码解析</span>
+                        <span class="hidden-mobile">源码：java.util.concurrent.RecursiveAction 源码解析</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -403,8 +426,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.CountedCompleter＜T＞ 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.CountedCompleter＜T＞ 源码解析</span>
+                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask＜V＞ 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask＜V＞ 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -19,16 +19,16 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ReentrantLock.Sync 概述Sync 是一个抽象类，是 java.util.concurrent.locks.ReentrantLock 的静态内部类，继承了 java.util.concurrent.locks.AbstractQueuedSynchronizer  [!NOTE] 注意事项  详见">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;09&#x2F;02&#x2F;源码：java.util.concurrent.locks.ReentrantLock.Sync源码解析&#x2F;    3. 基础部分3.1. ReentrantLock.Sync 概述Sync 是一个抽象类，是 java.util.concurrent.lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.locks.ReentrantLock.Sync 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ReentrantLock.Sync 概述Sync 是一个抽象类，是 java.util.concurrent.locks.ReentrantLock 的静态内部类，继承了 java.util.concurrent.locks.AbstractQueuedSynchronizer  [!NOTE] 注意事项  详见">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;09&#x2F;02&#x2F;源码：java.util.concurrent.locks.ReentrantLock.Sync源码解析&#x2F;    3. 基础部分3.1. ReentrantLock.Sync 概述Sync 是一个抽象类，是 java.util.concurrent.lo">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-09-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-19T13:52:37.089Z">
+<meta property="article:modified_time" content="2025-11-23T12:37:18.199Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          234 words
+          292 words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          2 mins
+          3 mins
         
       </span>
     
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-19T21:52:37+08:00
+                    Last updated on 2025-11-23T20:37:18+08:00
                   
                   
 
@@ -307,6 +307,8 @@
 </li>
 <li><p>Edraw</p>
 </li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/02/源码：java.util.concurrent.locks.ReentrantLock.Sync源码解析/</a></p>
+</li>
 </ol>
 <hr>
 <h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ReentrantLock-Sync-概述"><a href="#3-1-ReentrantLock-Sync-概述" class="headerlink" title="3.1. ReentrantLock.Sync 概述"></a>3.1. ReentrantLock.Sync 概述</h3><p><code>Sync</code> 是一个抽象类，是 <code>java.util.concurrent.locks.ReentrantLock</code> 的静态内部类，继承了 <code>java.util.concurrent.locks.AbstractQueuedSynchronizer</code><br><img src="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock.Sync%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
@@ -319,7 +321,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/31/源码：java.util.concurrent.locks.ReentrantLock源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -330,7 +332,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/01/源码：java.util.concurrent.locks.AbstractQueuedSynchronizer源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -434,8 +436,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.AbstractQueuedSynchronizer源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.locks.AbstractQueuedSynchronizer源码解析</span>
+                      <a href="/2025/09/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.AbstractQueuedSynchronizer 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.locks.AbstractQueuedSynchronizer 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

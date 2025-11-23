@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. CyclicBarrier 概述CyclicBarrier 是一个具体类 循环栅栏（CyclicBarrier）可以简单的理解为 CountDownLatch 的一个变种。我们使用 CountDownLatch 实现汇总模式（主线程等待、子线程减数）、发令枪模式（子线程等待，主线程减数）时，会发现它们总是需要另一方">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;19&#x2F;源码：java.util.concurrent.CyclicBarrier源码解析&#x2F;    3. 基础部分3.1. CyclicBarrier 概述CyclicBarrier 是一个具体类 循环栅栏（CyclicBarrier）可以简单的理解为 Coun">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.CyclicBarrier 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CyclicBarrier%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. CyclicBarrier 概述CyclicBarrier 是一个具体类 循环栅栏（CyclicBarrier）可以简单的理解为 CountDownLatch 的一个变种。我们使用 CountDownLatch 实现汇总模式（主线程等待、子线程减数）、发令枪模式（子线程等待，主线程减数）时，会发现它们总是需要另一方">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;19&#x2F;源码：java.util.concurrent.CyclicBarrier源码解析&#x2F;    3. 基础部分3.1. CyclicBarrier 概述CyclicBarrier 是一个具体类 循环栅栏（CyclicBarrier）可以简单的理解为 Coun">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-22T05:41:16.309Z">
+<meta property="article:modified_time" content="2025-11-23T13:12:34.748Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          312 words
+          332 words
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-22T13:41:16+08:00
+                    Last updated on 2025-11-23T21:12:34+08:00
                   
                   
 
@@ -304,6 +304,8 @@
 <li><p>Xmind</p>
 </li>
 <li><p>Edraw</p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CyclicBarrier%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/19/源码：java.util.concurrent.CyclicBarrier源码解析/</a></p>
 </li>
 </ol>
 <hr>
@@ -332,6 +334,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -387,9 +410,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Semaphore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.Semaphore 源码解析">
+                      <a href="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/" title="笔记：JUC">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.concurrent.Semaphore 源码解析</span>
+                        <span class="hidden-mobile">笔记：JUC</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -397,8 +420,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedLongSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.AbstractQueuedLongSynchronizer 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.locks.AbstractQueuedLongSynchronizer 源码解析</span>
+                      <a href="/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Semaphore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.Semaphore 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.Semaphore 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

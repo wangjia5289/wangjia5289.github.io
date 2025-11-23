@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. CountDownLatch 概述CountDownLatch 是一个具体类 倒计时门闩（CountDownLatch）是使用 AQS 实现的共享模式的同步器。State 和共享资源分别表示以下含义：  State 表示门闩是否开启 0 门闩开启   n（n &gt; 0） 门闩关闭     共享资源表示门闩开启后">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.util.concurrent.CountDownLatch源码解析&#x2F;    3. 基础部分3.1. CountDownLatch 概述CountDownLatch 是一个具体类 倒计时门闩（CountDownLatch）是使用 AQS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.CountDownLatch 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountDownLatch%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. CountDownLatch 概述CountDownLatch 是一个具体类 倒计时门闩（CountDownLatch）是使用 AQS 实现的共享模式的同步器。State 和共享资源分别表示以下含义：  State 表示门闩是否开启 0 门闩开启   n（n &gt; 0） 门闩关闭     共享资源表示门闩开启后">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.util.concurrent.CountDownLatch源码解析&#x2F;    3. 基础部分3.1. CountDownLatch 概述CountDownLatch 是一个具体类 倒计时门闩（CountDownLatch）是使用 AQS">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-11-16T00:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T11:21:42.367Z">
+<meta property="article:published_time" content="2025-11-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-23T13:12:29.217Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -211,7 +211,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-11-16 08:00" pubdate>
+        <time datetime="2025-11-16 00:00" pubdate>
           November 16, 2025 am
         </time>
       </span>
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          527 words
+          547 words
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T19:21:42+08:00
+                    Last updated on 2025-11-23T21:12:29+08:00
                   
                   
 
@@ -304,6 +304,8 @@
 <li><p>Xmind</p>
 </li>
 <li><p>Edraw</p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountDownLatch%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/16/源码：java.util.concurrent.CountDownLatch源码解析/</a></p>
 </li>
 </ol>
 <hr>
@@ -356,6 +358,27 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -421,8 +444,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.RecursiveTask＜V＞ 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.RecursiveTask＜V＞ 源码解析</span>
+                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.CountedCompleter＜T＞ 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.CountedCompleter＜T＞ 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -19,16 +19,16 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ThreadPoolExecutor 概述ThreadPoolExecutor 是一个具体类，继承了 java.util.concurrent.AbstractExecutorService  [!NOTE] 注意事项  详见源码：AbstractExecutorService obsidian 内部链接： 源码：">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;09&#x2F;03&#x2F;源码：java.util.concurrent.ThreadPoolExecutor源码解析&#x2F;    3. 基础部分3.1. ThreadPoolExecutor 概述ThreadPoolExecutor 是一个具体类，继承了 java.util.con">
 <meta property="og:type" content="article">
-<meta property="og:title" content="源码：java.util.concurrent.ThreadPoolExecutor源码解析">
+<meta property="og:title" content="源码：java.util.concurrent.ThreadPoolExecutor 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ThreadPoolExecutor 概述ThreadPoolExecutor 是一个具体类，继承了 java.util.concurrent.AbstractExecutorService  [!NOTE] 注意事项  详见源码：AbstractExecutorService obsidian 内部链接： 源码：">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;09&#x2F;03&#x2F;源码：java.util.concurrent.ThreadPoolExecutor源码解析&#x2F;    3. 基础部分3.1. ThreadPoolExecutor 概述ThreadPoolExecutor 是一个具体类，继承了 java.util.con">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-09-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T11:27:25.947Z">
+<meta property="article:modified_time" content="2025-11-23T13:13:46.159Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
@@ -37,7 +37,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>源码：java.util.concurrent.ThreadPoolExecutor源码解析 - 咸阳猴🐒的博客</title>
+  <title>源码：java.util.concurrent.ThreadPoolExecutor 源码解析 - 咸阳猴🐒的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="源码：java.util.concurrent.ThreadPoolExecutor源码解析"></span>
+            <span id="subtitle" data-typed-text="源码：java.util.concurrent.ThreadPoolExecutor 源码解析"></span>
           
         </div>
 
@@ -286,12 +286,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">源码：java.util.concurrent.ThreadPoolExecutor源码解析</h1>
+            <h1 id="seo-header">源码：java.util.concurrent.ThreadPoolExecutor 源码解析</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T19:27:25+08:00
+                    Last updated on 2025-11-23T21:13:46+08:00
                   
                   
 
@@ -307,6 +307,8 @@
 </li>
 <li><p>Edraw</p>
 </li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/03/源码：java.util.concurrent.ThreadPoolExecutor源码解析/</a></p>
+</li>
 </ol>
 <hr>
 <h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ThreadPoolExecutor-概述"><a href="#3-1-ThreadPoolExecutor-概述" class="headerlink" title="3.1. ThreadPoolExecutor 概述"></a>3.1. ThreadPoolExecutor 概述</h3><p><code>ThreadPoolExecutor</code> 是一个具体类，继承了 <code>java.util.concurrent.AbstractExecutorService</code><br><img src="/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
@@ -319,7 +321,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/03/源码：java.util.concurrent.AbstractExecutorService源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -373,7 +375,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/04/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor.Worker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/04/源码：java.util.concurrent.ThreadPoolExecutor.Worker源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -458,7 +460,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>源码：java.util.concurrent.ThreadPoolExecutor源码解析</div>
+      <div>源码：java.util.concurrent.ThreadPoolExecutor 源码解析</div>
       <div>https://wangjia5289.github.io/2025/09/03/源码：java.util.concurrent.ThreadPoolExecutor源码解析/</div>
     </div>
     <div class="license-meta">
@@ -513,8 +515,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurren.Future%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurren.Future＜V＞源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurren.Future＜V＞源码解析</span>
+                      <a href="/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurren.Future%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurren.Future＜V＞ 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurren.Future＜V＞ 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
