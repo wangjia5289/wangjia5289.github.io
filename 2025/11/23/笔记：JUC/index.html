@@ -1,0 +1,1586 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="霸天">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层操作系统层的线程状态，是操作系统内核对线程的实际调度反映  1.2. Java 应用层Java 应用层的线程状态，是 JVM 对线程生命周期的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：JUC">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层操作系统层的线程状态，是操作系统内核对线程的实际调度反映  1.2. Java 应用层Java 应用层的线程状态，是 JVM 对线程生命周期的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-9.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-10.png">
+<meta property="article:published_time" content="2025-11-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-23T11:37:27.406Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：JUC - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：JUC"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-23 00:00" pubdate>
+          November 23, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          62 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：JUC</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-11-23T19:37:27+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>代码洪荒（面试宝典）<br>👉 <a target="_blank" rel="noopener" href="https://www.notion.so/JUC-2b2974fbda5e8012975ef0197d6e8237">https://www.notion.so/JUC-2b2974fbda5e8012975ef0197d6e8237</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="三、JUC-前置基础"><a href="#三、JUC-前置基础" class="headerlink" title="三、JUC 前置基础"></a>三、JUC 前置基础</h1><h2 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1. 线程的状态"></a>1. 线程的状态</h2><h3 id="1-1-操作系统层"><a href="#1-1-操作系统层" class="headerlink" title="1.1. 操作系统层"></a>1.1. 操作系统层</h3><p>操作系统层的线程状态，是操作系统内核对线程的实际调度反映<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="1-2-Java-应用层"><a href="#1-2-Java-应用层" class="headerlink" title="1.2. Java 应用层"></a>1.2. Java 应用层</h3><p><code>Java</code> 应用层的线程状态，是 <code>JVM</code> 对线程生命周期的抽象和管理，主要反映线程在 <code>Java</code> 内存模型中的行为<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><code>NEW</code><ol>
+<li>在 <code>Java</code> 应用层，<code>Thread</code> 实例已创建，但尚未调用 <code>Thread#start</code>，处于未启动状态</li>
+<li>需要注意的是，我们只是创建了线程实例，但是该实例尚未与操作系统层面的线程建立关联</li>
+</ol>
+</li>
+<li><code>RUNNABLE</code><ol>
+<li>可运行状态<ol>
+<li>当我们调用 <code>Thread#start</code> 后，<code>JVM</code> 会在操作系统层面请求创建一个本地线程</li>
+<li>一旦操作系统创建了这个本地线程，并将其与 <code>Thread</code> 实例 “绑定”，<code>Thread</code> 实例就会进入可运行状态</li>
+<li>可运行状态表示 <code>Thread</code> 实例已经准备好运行了，然而，能否真正运行还要取决于操作系统的调度</li>
+</ol>
+</li>
+<li>运行状态<ol>
+<li>本地线程被分配到 <code>CPU</code> 时间片后，开始执行 <code>Java</code> 代码</li>
+</ol>
+</li>
+<li>阻塞状态<ol>
+<li>阻塞状态其实就是本地线程进入 <code>IO</code> 阻塞</li>
+<li>需要注意的是：<ol>
+<li>在 <code>Java</code> 应用层的 <code>IO</code> 阻塞、<code>BLOCKED</code>、<code>WAITING</code>、<code>TIMED_WAITING</code>，在操作系统层都属于阻塞状态，<code>CPU</code> 不再调用这个线程</li>
+<li><code>IO</code> 阻塞严格来说是操作系统层的阻塞，但是我们没必要划分的那么清晰，知道它是什么东西即可</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>TERMINATED</code><ol>
+<li>当线程执行完任务后，线程实例就会进入<code>TERMINATED</code> 状态</li>
+<li>在 <code>Java</code> 层面上，线程是一个线程对象，当这个线程对象不再被引用时，会在下一次 GC 时被垃圾回收。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-线程相关分类"><a href="#2-线程相关分类" class="headerlink" title="2. 线程相关分类"></a>2. 线程相关分类</h2><p>在 <code>Java</code> 应用层，线程分为：</p>
+<ol>
+<li>用户线程</li>
+<li>守护线程</li>
+</ol>
+<p>我们平时创建的 <code>Thread</code> 实例默认都是用户线程，<code>main</code> 方法的主线程也是一个用户线程。很多人误以为：只要主线程结束后，<code>JVM</code> 进程就会结束。事实上，这种理解是错误的，只要仍有用户线程在运行，<code>JVM</code> 进程就会继续存活。</p>
+<p>但是守护线程的行为则非如此，当所有用户线程都执行完毕后，<code>JVM</code> 进程将自动退出，而不管是否还有守护线程在运行。此时守护线程会被强制终止，其 <code>finally</code> 块中的代码也不保证一定执行。因此守护线程常用于后台服务，例如垃圾回收、心跳监控、日志清理等任务</p>
+<hr>
+<h2 id="3-线程阻塞相关分类"><a href="#3-线程阻塞相关分类" class="headerlink" title="3. 线程阻塞相关分类"></a>3. 线程阻塞相关分类</h2><ol>
+<li><code>IO</code> 阻塞<ol>
+<li><code>Java</code> 程序在与操作系统交互时，由操作系统层代我们执行的阻塞，让我们的本地线程进入阻塞状态</li>
+<li>虽然 <code>IO</code> 阻塞在操作系统层面也属于阻塞状态，但对 <code>Java</code> 应用层来说，它并不能直接感知本地线程是否正处于 <code>IO</code> 阻塞，因此 <code>Thread</code> 实例的状态仍为 <code>RUNNABLE</code>。简单来说就是：因为感知不到，所以认为还在运行</li>
+</ol>
+</li>
+<li><code>BLOCKED</code> 阻塞、<code>WAITING</code> 阻塞、<code>TIMED_WAITING</code> 阻塞<ol>
+<li><code>Java</code> 应用层还提供了多种 <code>API</code> 让本地线程主动进入阻塞状态，<code>Thread</code> 实例进入 <code>BWTW</code> 状态</li>
+<li>因为调用了 <code>Java</code> 应用层提供的 <code>API</code>，所以 <code>Java</code> 应用层能知道线程进入了阻塞状态，并且还知道线程进入阻塞状态的 “原因”，所以 <code>Thread</code> 实例能进入对应的 <code>BLOCKED</code>、<code>WAITING</code> 或 <code>TIMED_WAITING</code> 状态</li>
+<li><code>Java</code> 应用层提供的相关 <code>API</code> 主要包括：<ol>
+<li><code>Thread.sleep</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态，等待被中断（<code>Thread#interrupt</code>）、阻塞超时</li>
+</ol>
+</li>
+<li>基于 <code>Monitor</code> 的阻塞<ol>
+<li>竞争 <code>Monitor</code> 锁失败<ol>
+<li><code>synchronized</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>BLOCKED</code> 状态，并被投递到 <code>Monitor</code> 的 <code>EntryList</code> 队列（竞争队列），等待被唤醒（<code>Monitor</code> 锁被释放时，由 <code>JVM</code> 唤醒）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>Object#wait</code><ol>
+<li><code>Object#wait()</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态，并被投递到 <code>Monitor</code> 的 <code>WaitSet</code> 队列（等待队列），等待被唤醒（<code>Object#notify</code>）、被中断</li>
+</ol>
+</li>
+<li><code>Object#wait(long timeoutMillis)</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态，并被投递到 <code>Monitor</code> 的 <code>WaitSet</code> 队列（等待队列），等待被唤醒（<code>Object#notify</code>）、被中断、阻塞超时</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>Thread#join</code><ol>
+<li><code>Thread#join()</code><ol>
+<li>没什么好说的，因为其本质是基于 <code>Object#wait</code> 实现的阻塞</li>
+</ol>
+</li>
+<li><code>Thread#join(final long millis)</code></li>
+<li><code>Thread#join(long millis, int nanos)</code></li>
+</ol>
+</li>
+<li>需要注意的是：<ol>
+<li><code>Object#wait</code> 和 <code>Thread#join</code> 都会使 <code>Thread</code> 实例进入 <code>Monitor</code> 的等待队列。那么为什么要进入等待队列，而不是进入竞争队列呢？</li>
+<li>进入等待队列是因为 <code>Thread</code> 实例在竞争到 <code>Monitor</code> 锁后，发现某个条件尚未满足，为了不影响其他线程继续获取 <code>Monitor</code> 锁，所以会主动释放锁，并进入等待队列中等待条件被满足</li>
+<li>所以 <code>Object#wait</code> 和 <code>Thread#join</code> 的前置条件是：竞争到 <code>Monitor</code> 锁。只有先竞争到 <code>Monitor</code> 锁，才知道某个条件尚未满足</li>
+<li>我的意思是：<code>Object#wait</code>、<code>Thread#join</code> 和 <code>synchronized</code> 是绑定的，它们必须出现在 <code>synchronized</code> 代码块中，否则会抛出异常。而 <code>Thread.sleep</code>、基于 <code>Park</code> 的阻塞没有这种限制，可以在任何地方使用</li>
+<li>需要注意的是：如果竞争到 <code>Monitor</code> 锁，但是使用了 <code>Thread.sleep</code>、基于 <code>Park</code> 的阻塞的情况下，<code>Monitor</code> 锁是不会被释放的</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>基于 <code>Park</code> 的阻塞<ol>
+<li><code>LockSupport.park</code><ol>
+<li><code>LockSupport.park()</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态，等待被唤醒（<code>LockSupport.unpark</code>）、被中断（<code>Thread#interrupt</code>）</li>
+</ol>
+</li>
+<li><code>LockSupport.parkNanos(long nanos)</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态，等待被唤醒（<code>LockSupport.unpark</code>）、被中断（<code>Thread#interrupt</code>）、阻塞超时</li>
+</ol>
+</li>
+<li><code>LockSupport.parkUntil(long deadline)</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态，等待被唤醒（<code>LockSupport.unpark</code>）、被中断（<code>Thread#interrupt</code>）、阻塞超时</li>
+</ol>
+</li>
+<li>需要注意的是，具体的过程比上述描述稍微复杂一点，详见源码：<code>LockSupport</code>（<code>obsidian</code> 内部链接：<a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.LockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.LockSupport源码解析</a>，<code>Hexo</code> 链接：）</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>IO</code> 阻塞、<code>Threa.sleep</code> 都依赖于操作系统层的队列</li>
+<li>基于 <code>Monitor</code> 的阻塞依赖于 <code>Java</code> 应用层的 <code>Monitor</code> 中的 <code>EntryList</code>、<code>WaitSet</code> 队列</li>
+<li>而基于 <code>Park</code> 的阻塞，原则上是不依赖于任何数据结构，不过在实际中，几乎所有基于 <code>Park</code> 阻塞的产品，都会维护一个数据结构（可能是队列，也可能是其他数据结构）。因为如果没有这个数据结构，就无法记录哪些线程被阻塞、以及应当唤醒哪些线程</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="4-线程之间的执行关系"><a href="#4-线程之间的执行关系" class="headerlink" title="4. 线程之间的执行关系"></a>4. 线程之间的执行关系</h2><p><font color="#92d050">1. 串行</font><br>串行是指任务按顺序一个接一个地执行，只有当前一个任务执行完成，后一个任务才会开始执行，严格遵循任务提交的先后顺序。即便系统拥有多个 <code>CPU</code> 核心，在串行模式下，任意时刻也只会有一个线程在运行。</p>
+<p><font color="#92d050">2. 并发</font><br>并发是指多个线程看起来像是在同时运行，其是通过时间片轮转机制实现，通过快速切换线程，让每个线程都获得运行机会，因此并发特性在单核环境中体现得尤为明显。</p>
+<p>而在多核 <code>CPU</code> 上，线程有可能被分配到不同的核心上并行执行，但当线程数量多于核心数量时，<code>CPU</code> 仍需通过时间片轮转进行调度，以确保所有线程都能获得执行机会。</p>
+<p><font color="#92d050">3. 并行</font><br>并行是指多个线程在真正意义上同时运行，分别占用不同的 <code>CPU</code> 核心，在同一时刻执行各自的任务，体现出真正的同时处理能力。</p>
+<hr>
+<h2 id="5-线程的活跃性"><a href="#5-线程的活跃性" class="headerlink" title="5. 线程的活跃性"></a>5. 线程的活跃性</h2><h3 id="5-1-死锁"><a href="#5-1-死锁" class="headerlink" title="5.1. 死锁"></a>5.1. 死锁</h3><h4 id="5-1-1-死锁概述"><a href="#5-1-1-死锁概述" class="headerlink" title="5.1.1. 死锁概述"></a>5.1.1. 死锁概述</h4><p>死锁是指：两个或两个以上的线程在执行过程中，因互相持有对方所需的资源而造成的一种互相等待的现象。如果没有外力干涉，这些线程都将无法推进下去，永远处于阻塞状态</p>
+<p>例如线程 $T_1$ 已经持有了锁 <code>A</code>，现在想去竞争锁 <code>B</code>。线程 $T_2$ 已经持有了锁 <code>B</code>，现在想去竞争锁 <code>A</code>，这便形成了死锁</p>
+<p>需要注意的是：在 <code>JUC</code> 中，所谓的 “资源” 是指：锁</p>
+<hr>
+<h4 id="5-1-2-死锁的必要条件"><a href="#5-1-2-死锁的必要条件" class="headerlink" title="5.1.2. 死锁的必要条件"></a>5.1.2. 死锁的必要条件</h4><ol>
+<li>互斥条件<ol>
+<li>资源是独占的，同一时刻只能被一个线程持有</li>
+</ol>
+</li>
+<li>不剥夺条件<ol>
+<li>线程已持有的资源，在末使用完之前，不能被其他线程强行剥夺，只能由线程自己主动释放</li>
+</ol>
+</li>
+<li>循环等待条件<ol>
+<li>若干线程之间形成一种头尾相接的循环等待资源的关系（例如 <code>A</code> 等 <code>B</code>，<code>B</code> 等 <code>A</code>）</li>
+</ol>
+</li>
+<li>请求与保持条件<ol>
+<li>线程在等待新资源时，对已经持有的资源保持不放（吃着碗里的，看着锅里的）</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>解决死锁的核心思路，就是破坏上述四个条件的任意一个。由于 “互斥条件” 是锁的基本特性，通常我们无法破坏，因此主要针对后三个条件进行破坏</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="5-1-3-死锁的解决方案"><a href="#5-1-3-死锁的解决方案" class="headerlink" title="5.1.3. 死锁的解决方案"></a>5.1.3. 死锁的解决方案</h4><h5 id="5-1-3-1-破坏不剥夺条件"><a href="#5-1-3-1-破坏不剥夺条件" class="headerlink" title="5.1.3.1. 破坏不剥夺条件"></a>5.1.3.1. 破坏不剥夺条件</h5><p>破坏不剥夺条件是指：线程等待资源超过一段时间，就放弃等待，并释放已持有的资源</p>
+<hr>
+<h5 id="5-1-3-2-破坏循环等待条件（最常用）"><a href="#5-1-3-2-破坏循环等待条件（最常用）" class="headerlink" title="5.1.3.2. 破坏循环等待条件（最常用）"></a>5.1.3.2. 破坏循环等待条件（最常用）</h5><p>破坏循环等待条件是指：规定所有线程必须按照相同的顺序获取资源。例如规定所有线程必须先获取锁 <code>A</code>，再获取锁 <code>B</code>，再获取锁 <code>C</code></p>
+<hr>
+<h5 id="5-1-3-3-破坏请求与保持条件"><a href="#5-1-3-3-破坏请求与保持条件" class="headerlink" title="5.1.3.3. 破坏请求与保持条件"></a>5.1.3.3. 破坏请求与保持条件</h5><p>破坏请求与保持条件是指：采用 “预先申请” 的方式，让所有线程必须一次性申请它所需要的所有资源。如果能申请到所有资源，线程继续向下执行。如果不能申请到所有资源，则释放已持有的资源</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>破坏请求与保持条件，通常和破坏不剥夺条件结合使用</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="5-2-活锁"><a href="#5-2-活锁" class="headerlink" title="5.2. 活锁"></a>5.2. 活锁</h3><h4 id="5-2-1-活锁概述"><a href="#5-2-1-活锁概述" class="headerlink" title="5.2.1. 活锁概述"></a>5.2.1. 活锁概述</h4><p>活锁是指：两个或两个以上的线程在执行过程种，因为不断互相改变对方的终止条件，导致所有线程都无法继续向下执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestLiveLock</span> &#123;<br>	<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">(<span class="hljs-type">double</span> seconds)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            Thread.sleep((<span class="hljs-type">long</span>) (seconds * <span class="hljs-number">1000</span>));<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>            Thread.currentThread().interrupt();<br>        &#125;<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            <span class="hljs-comment">// 期望减到 0 退出循环</span><br>            <span class="hljs-keyword">while</span> (count &gt; <span class="hljs-number">0</span>) &#123;<br>                sleep(<span class="hljs-number">0.2</span>);<br>                count--;<br>                log.debug(<span class="hljs-string">&quot;count: &#123;&#125;&quot;</span>, count);<br>            &#125;<br>        &#125;, <span class="hljs-string">&quot;t1&quot;</span>).start();<br>        <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>            <span class="hljs-comment">// 期望加到 20 退出循环</span><br>            <span class="hljs-keyword">while</span> (count &lt; <span class="hljs-number">20</span>) &#123;<br>                sleep(<span class="hljs-number">0.2</span>);<br>                count++;<br>                log.debug(<span class="hljs-string">&quot;count: &#123;&#125;&quot;</span>, count);<br>            &#125;<br>        &#125;, <span class="hljs-string">&quot;t2&quot;</span>).start();<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>活锁本质上是 ”重试“ 导致的冲突</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="5-2-2-活锁的解决方案"><a href="#5-2-2-活锁的解决方案" class="headerlink" title="5.2.2. 活锁的解决方案"></a>5.2.2. 活锁的解决方案</h4><h5 id="5-2-2-1-加锁"><a href="#5-2-2-1-加锁" class="headerlink" title="5.2.2.1. 加锁"></a>5.2.2.1. 加锁</h5><p>活锁本质上并不是 “锁” 本身，但解决活锁时，却是可以使用 ”加锁“ 来解决</p>
+<hr>
+<h5 id="5-2-2-2-随机避让（最常用）"><a href="#5-2-2-2-随机避让（最常用）" class="headerlink" title="5.2.2.2. 随机避让（最常用）"></a>5.2.2.2. 随机避让（最常用）</h5><p>随即避让是指：当多个 ”请求“ 同时争抢资源失败时，不要立即重试，也不要使用固定的休眠时间。更合理的做法是采用 ”指数退避 + 随机抖动“ 的策略，降低竞争冲突</p>
+<p>这里同样能使用随即避让能避免这个问题，不过场景不再是 “争抢资源”，而是 “重试” 导致的冲突。我们可以在重试时加入随机避让，减少重试之间的同步碰撞</p>
+<hr>
+<h5 id="5-2-2-3-限制重试次数"><a href="#5-2-2-3-限制重试次数" class="headerlink" title="5.2.2.3. 限制重试次数"></a>5.2.2.3. 限制重试次数</h5><hr>
+<h3 id="5-3-饥饿"><a href="#5-3-饥饿" class="headerlink" title="5.3. 饥饿"></a>5.3. 饥饿</h3><h4 id="5-3-1-饥饿概述"><a href="#5-3-1-饥饿概述" class="headerlink" title="5.3.1. 饥饿概述"></a>5.3.1. 饥饿概述</h4><p>饥饿是指：某个线程虽然长期处于可运行状态，但是却一直无法获取所需要的资源（例如 <code>CPU</code> 时间片、锁、资源池资源等），导致线程无法继续执行</p>
+<hr>
+<h4 id="5-3-2-饥饿的解决方案"><a href="#5-3-2-饥饿的解决方案" class="headerlink" title="5.3.2. 饥饿的解决方案"></a>5.3.2. 饥饿的解决方案</h4><p>无论是线程饥饿、流量控制，还是 <code>IO</code> 阻塞，这些问题的本质都是相同的：因无法获取所需要的资源，导致无法继续执行。</p>
+<p>针对这种 ”资源匮乏“ 的问题，通常有五种解决方案：</p>
+<ol>
+<li>强制排队</li>
+<li>资源预留</li>
+<li>及时止损<ol>
+<li>异步处理</li>
+<li>降级处理</li>
+<li>启动告警</li>
+<li>异步编程回调</li>
+</ol>
+</li>
+<li>随机避让</li>
+<li>调整优先级</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>流量控制主要包括并发控制和速率限制</li>
+</ol>
+</blockquote>
+<h5 id="5-3-2-1-强制排队"><a href="#5-3-2-1-强制排队" class="headerlink" title="5.3.2.1. 强制排队"></a>5.3.2.1. 强制排队</h5><p>强制排队是指：放弃 “自由竞争”，严格遵循 “先来后到” 原则，保证每个 ”请求“ 最终都能得到处理</p>
+<p>以锁资源为例，我们可以使用公平锁，而不是非公平锁</p>
+<hr>
+<h5 id="5-3-2-2-资源预留"><a href="#5-3-2-2-资源预留" class="headerlink" title="5.3.2.2. 资源预留"></a>5.3.2.2. 资源预留</h5><p>资源预留是指：提前划分好资源配额，实行资源隔离，做到 ”专款专用“，防止某单一 ”请求“ 耗尽所有资源</p>
+<p>以线程资源为例，我们可以为每个业务分配一个独立的线程池，而不是共用一个大的线程池</p>
+<hr>
+<h5 id="5-3-2-3-及时止损"><a href="#5-3-2-3-及时止损" class="headerlink" title="5.3.2.3. 及时止损"></a>5.3.2.3. 及时止损</h5><p>及时止损是指：当通过限时阻塞（超时未获取）或非阻塞（尝试一次未获取）确定拿不到资源的时候，不再继续等待，而是采取以下策略：</p>
+<ol>
+<li>异步处理<ol>
+<li>利用 ”削峰填谷“ 的思想，将请求写入 <code>MQ</code></li>
+</ol>
+</li>
+<li>降级处理</li>
+<li>启动告警</li>
+<li>异步编程回调</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>可能是限时阻塞，也可能是非阻塞，还可能是直接使用异步编程回调（连非阻塞也不用，直接使用异步编程回调）</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="5-3-2-4-随机避让"><a href="#5-3-2-4-随机避让" class="headerlink" title="5.3.2.4. 随机避让"></a>5.3.2.4. 随机避让</h5><p>随即避让是指：当多个 ”请求“ 同时争抢资源失败时，不要立即重试，也不要使用固定的休眠时间。更合理的做法是采用 ”指数退避 + 随机抖动“ 的策略，降低竞争冲突</p>
+<hr>
+<h5 id="5-3-2-5-调整优先级"><a href="#5-3-2-5-调整优先级" class="headerlink" title="5.3.2.5. 调整优先级"></a>5.3.2.5. 调整优先级</h5><p>调整优先级是指：调整竞争权重，让核心的 ”请求“ 拥有更高的优先级</p>
+<p>以 <code>CPU</code> 时间片资源为例，我们动态调整线程的优先级</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然 <code>Java</code> 提供了 <code>Thread#setPriority</code>，但这通常不是一个靠谱的解决方案，更多时候我们要反其道而行之：尽量不要修改线程的优先级，让所有线程的优先级保持同等水平</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="8-线程相关常用方法"><a href="#8-线程相关常用方法" class="headerlink" title="8. 线程相关常用方法"></a>8. 线程相关常用方法</h2><p>线程相关的常用方法主要包括：</p>
+<ol>
+<li><code>Thread</code> 中的一些的方法</li>
+<li><code>TimeUnit</code> 中的一些方法<ol>
+<li><code>TimeUnit#sleep</code></li>
+<li><code>TimeUnit#timedJoin</code></li>
+<li><code>TimeUnit#timedWait</code></li>
+</ol>
+</li>
+<li><code>Object</code> 中的一些方法<ol>
+<li><code>Object#wait</code></li>
+<li><code>Object#notify</code></li>
+</ol>
+</li>
+<li><code>LockSupport</code> 中的一些方法</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>详见源码：<code>Thread</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Thread源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Object</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Object%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Object源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>LockSupport</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.LockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.LockSupport源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h1 id="四、ThreadLocal"><a href="#四、ThreadLocal" class="headerlink" title="四、ThreadLocal"></a>四、ThreadLocal</h1><p><code>ThreadLocal</code> 是指：<code>Thread-&gt;threadLocals</code>，用于记录该 <code>Thread</code> 实例独属的一些信息。而 <code>Thread-&gt;threadLocals</code> 又是 <code>ThreadLocal.ThreadLocalMap</code> 类型，详见源码：<code>ThreadLocal&lt;T&gt;.ThreadLocalMap</code>（<code>obsidian</code> 内部连接：<a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap源码解析</a>，<code>Hexo</code> 链接：）</p>
+<hr>
+<h1 id="五、锁"><a href="#五、锁" class="headerlink" title="五、锁"></a>五、锁</h1><h2 id="1-锁基础体系"><a href="#1-锁基础体系" class="headerlink" title="1. 锁基础体系"></a>1. 锁基础体系</h2><p><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-2.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Serializable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.io.Serializable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Lock</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.Lock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.Lock源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ReadWriteLock</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.ReadWriteLock源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Condition</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.Condition%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.Condition源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>AbstractOwnableSynchronizer</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractOwnableSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.AbstractOwnableSynchronizer源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>AbstractQueuedSynchronizer</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.AbstractQueuedSynchronizer源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>AbstractQueuedLongSynchronizer</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedLongSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.AbstractQueuedLongSynchronizer源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-synchronized"><a href="#2-synchronized" class="headerlink" title="2. synchronized"></a>2. synchronized</h2><h3 id="2-1-synchronized-前置基础"><a href="#2-1-synchronized-前置基础" class="headerlink" title="2.1. synchronized 前置基础"></a>2.1. synchronized 前置基础</h3><h4 id="2-1-1-Java-对象头"><a href="#2-1-1-Java-对象头" class="headerlink" title="2.1.1. Java 对象头"></a>2.1.1. Java 对象头</h4><p>通常我们的一个 <code>Java</code> 实例，他在堆内存中由三部分组成：</p>
+<ol>
+<li><code>Java</code> 对象头（<code>Object Header</code>）</li>
+<li>实例数据（<code>Instance Data</code>）</li>
+<li>对齐填充（<code>Padding</code>）</li>
+</ol>
+<p>以 <code>32</code> 位虚拟机为例：<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-3.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>这里的 <code>Klass Word</code> 应该叫做 <code>Klass Pointer</code></li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-2-synchronized-概述"><a href="#2-2-synchronized-概述" class="headerlink" title="2.2. synchronized 概述"></a>2.2. synchronized 概述</h3><p><code>synchronized</code> 是一种可重入、悲观、非公平、互斥的锁</p>
+<hr>
+<h3 id="2-3-synchronized-使用方式"><a href="#2-3-synchronized-使用方式" class="headerlink" title="2.3. synchronized 使用方式"></a>2.3. synchronized 使用方式</h3><p>以如下代码为例，如果 <code>Room#increment</code> 竞争到了锁，那么 <code>Room#decrement</code>、<code>Room#getCounter</code> 都无法再竞争到锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Room</span> &#123;<br>	<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">counter</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>        counter++;<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">decrement</span><span class="hljs-params">()</span> &#123;<br>        counter--;<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getCounter</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> counter;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>当我们为静态具体方法加上 <code>synchronized</code> 修饰符，锁的是类对象（即 <code>Class</code> 对象）</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 原写法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	counter++;<br>&#125;<br><br><br><span class="hljs-comment">// 等价写法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">synchronized</span> (Room.Class) &#123;<br>		counter++;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 当我们为实例普通方法加上 <code>synchronized</code> 修饰符，锁的是仅是当前对象（即 <code>this</code>）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 原写法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	counter++;<br>&#125;<br><br><br><span class="hljs-comment">// 等价写法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>) &#123;<br>		counter++;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>3. 普通实例方法并不必然只能锁当前对象 (<code>this</code>)，静态方法也并非只能锁类对象（<code>Class</code> 对象）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>) &#123;<br>		counter++;<br>	&#125;<br>&#125;<br><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">increment</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">synchronized</span> (Room.class) &#123;<br>		counter++;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>4. 以如下代码为例，虽然 <code>Room#sleep</code> 和 <code>Room#study</code> 本身没有逻辑上的交集，我们可以通过引入多把锁来进行优化：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 原代码</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Room</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span> &#123;<br>		System.out.println(<span class="hljs-string">&quot;sleeping 2 小时&quot;</span>);<br>    &#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">study</span><span class="hljs-params">()</span> &#123;<br>		System.out.println(<span class="hljs-string">&quot;study 1 小时&quot;</span>);<br>    &#125;<br>    <br>&#125;<br><br><br><span class="hljs-comment">// 引入多把锁进行优化</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Room</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">studyRoom</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">bedRoom</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">sleep</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (bedRoom) &#123;<br>            System.out.println(<span class="hljs-string">&quot;sleeping 2 小时&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">study</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">synchronized</span> (studyRoom) &#123;<br>            System.out.println(<span class="hljs-string">&quot;study 1 小时&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>5. 即便一个方法中，只涉及到了共享变量的读操作，我们仍然要为其加锁。这主要是为了其可见性、原子性。可见性可以通过多种方式来保证，因此并不一定需要加锁。但原子性必须依赖锁来确保，避免 <code>B</code> 线程在进行读操作时，<code>A</code> 线程进行写操作，从根本上杜绝脏读、不可重复读、幻读等问题<br>6. 对于 <code>synchronized</code> 的本质，我们可以简单的理解为：通过为某对象或某类对象的加锁，从而控制多线程对共享资源的读写操作</p>
+</blockquote>
+<hr>
+<h3 id="2-4-synchrnoized-锁升级"><a href="#2-4-synchrnoized-锁升级" class="headerlink" title="2.4. synchrnoized 锁升级"></a>2.4. synchrnoized 锁升级</h3><p>锁升级的流程为：<code>偏向锁 ➔ 轻量级锁 ➔ 重量级锁</code></p>
+<h4 id="2-4-1-偏向锁"><a href="#2-4-1-偏向锁" class="headerlink" title="2.4.1. 偏向锁"></a>2.4.1. 偏向锁</h4><p>偏向锁的设计初衷，是在无竞争场景下进一步降低竞争锁的开销，从而提升锁操作的性能</p>
+<p>当某线程（例如 $T_1$） 要去执行临界区代码，<code>JVM</code> 会通过 <code>CAS</code> 尝试将 $T_1$ 的 <code>Thread ID</code> 写入被加锁对象或被加锁类对象的对象头中的 <code>Mark Word</code> 中。</p>
+<p>如果写入成功， $T_1$ 顺利执行临界区代码。如果 $T_1$ 后续再次执行临界区代码，只需检查 <code>Mark Word</code> 中的 <code>Thread ID</code> 是否与自身一致（由于偏向锁在释放时并不会主动重置对象头，因此在无竞争场景下，<code>Mark Word</code> 中依旧保留着 $T_1$ 的 <code>Thread ID</code>，所以能直接执行）</p>
+<p>如果写入失败，则是其他线程（例如 $T_2$）正在持有偏向锁（无论 $T_2$ 是否在执行临界区代码），而这就发生了竞争，偏向锁模式就会宣告失败。此时 <code>JVM</code> 会将偏向锁升级为轻量级锁</p>
+<p>我们可以简单的理解为：一旦某个线程持有了偏向锁，它就 “偏向” 这个线程，从头到尾都只认它，无论该线程是否在执行临界区代码。但是一旦出现第二个线程尝试竞争锁，偏向锁就会被撤销并升级为轻量级锁</p>
+<p>然而，随着硬件性能提升和虚拟机其他优化手段的发展，偏向锁带来的性能收益已逐渐减弱，同时其实现的复杂性也成为阻碍 <code>JVM</code> 进一步优化的负担。除此之外，在高并发场景中，偏向锁撤销的开销往往大于其带来的收益。因此，<code>Oracle</code> 在 <code>Java15</code> 之后将偏向锁标记为废弃，并在 <code>Java17</code> 中将其彻底移除。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>如果使用的是 <code>Java8</code>，偏向锁默认是开启的，我们可以通过 <code>JVM</code> 启动参数来关闭偏向锁</li>
+</ol>
+</blockquote>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">-<span class="hljs-variable constant_">XX</span><span class="hljs-symbol">:-UseBiasedLocking</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 由于 <code>Mark Word</code> 的空间是有限的，存储了 <code>HashCode</code> 就没地方存 <code>Thread ID</code> 了。因此，如果在无锁状态计算了 <code>HashCode</code>，就无法再使用偏向锁，而是直接使用轻量级锁。如果在持有偏向锁时计算了 <code>HashCode</code>，偏向锁会被立即撤销，并直接升级为重量级锁（因为重量级锁的 <code>Monitor</code> 中可以存储 <code>HashCode</code>）</p>
+</blockquote>
+<hr>
+<h4 id="2-4-2-轻量级锁"><a href="#2-4-2-轻量级锁" class="headerlink" title="2.4.2. 轻量级锁"></a>2.4.2. 轻量级锁</h4><p>轻量级锁的设计初衷，是在轻量竞争场景下进一步降低竞争锁的开销，从而提升锁操作的性能</p>
+<p>当某线程（例如 $T_1$）要去执行临界区代码，<code>JVM</code> 会在 $T_1$ 的虚拟机栈的栈帧中创建一个锁记录（<code>Lock Record</code>）<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-4.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后 <code>JVM</code> 将 <code>Lock Record</code> 的 <code>Object reference</code> 指向被加锁对象或被加锁类对象，并且通过 <code>CAS</code> 尝试将 <code>Lock Record</code> 的 <code>lock record</code> 地址 <code>00</code> 与被加锁对象或被加锁类对象的 <code>MarkWord</code>（即 <code>Hashcode Age Bias 01</code>）进行交换</p>
+<p>如果交换成功， $T_1$ 顺利执行临界区代码。如果在 $T_1$ 执行临界区代码时发生了重入，同样会添加新的 <code>Lock Record</code>。$T_1$ 的虚拟机栈的栈帧中有多少个 <code>Lock Record</code>，说明发生了多少次重入<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-5.png" srcset="/img/loading.gif" lazyload></p>
+<p>当 $T_1$ 执行完临界区的代码，<code>JVM</code> 会将两者再交换回来<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-6.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果交换失败，则是其他线程（例如 $T_2$）持有轻量级锁，那么 $T_1$ 会进行多次自旋。如果多次自旋仍热未成功，<code>JVM</code> 会将轻量级锁升级为重量级锁<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-3-重量级锁"><a href="#2-4-3-重量级锁" class="headerlink" title="2.4.3. 重量级锁"></a>2.4.3. 重量级锁</h4><p>监视器（<code>Monitor</code>、管程）是 <code>JVM</code> 内部专门用于实现重量级锁的结构。当升级为重量级锁时，<code>JVM</code> 会为被加锁对象或被加锁类对象创建一个 <code>Monitor</code> 对象<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>当 $T_1$ 执行完临界区代码后，会根据线程中保存的指向被加锁对象或被加锁类对象的地址，找到该对象或类对象，然后再根据该对象的对象头的 <code>Mark Word</code> 找到 <code>Monitor</code>，将其 <code>Owner</code> 设置为 <code>null</code>，并唤醒 <code>Monitor</code> 中 <code>EntryList</code> 中所有等待的线程，这些线程随后开始竞争重量级锁（ <code>Monitor</code> 的 <code>Owner</code>）</p>
+<hr>
+<h2 id="3-ReentrantLock"><a href="#3-ReentrantLock" class="headerlink" title="3. ReentrantLock"></a>3. ReentrantLock</h2><p>详见源码：<code>ReentrantLock</code></p>
+<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.ReentrantLock源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="4-ReentrantReadWriteLock"><a href="#4-ReentrantReadWriteLock" class="headerlink" title="4. ReentrantReadWriteLock"></a>4. ReentrantReadWriteLock</h2><p>详见源码：<code>ReentrantReadWriteLock</code></p>
+<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.locks.ReentrantReadWriteLock源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="5-CAS"><a href="#5-CAS" class="headerlink" title="5. CAS"></a>5. CAS</h2><h3 id="5-1-CAS-概述"><a href="#5-1-CAS-概述" class="headerlink" title="5.1. CAS 概述"></a>5.1. CAS 概述</h3><p><code>CAS</code> 是一种思想，其核心思想是：当前线程在进行写操作时，当 <code>V = E</code> 时，修改为 <code>N</code>。当 <code>V ≠ E</code> 时，不进行任何操作。其中 <code>V</code>、<code>E</code>、<code>N</code> 是指：</p>
+<ol>
+<li><code>V</code>（<code>Current Value</code>）<ol>
+<li>当前线程在进行写操作时，共享变量在主内存中的实际值</li>
+</ol>
+</li>
+<li><code>E</code>（<code>Expected Value</code>）<ol>
+<li>当前线程在进行写操作时，期望共享变量在主内存中的实际值</li>
+<li>简单来说就是：$t_1$ 时从主内存拿到的共享变量，我们期望 $t_2$ 时主内存中的共享变量仍然是这个值</li>
+</ol>
+</li>
+<li><code>N</code>（<code>New Value</code>）<ol>
+<li>当前线程在进行写操作时，要把共享变量修改为该值</li>
+</ol>
+</li>
+</ol>
+<p>为了实现 <code>CAS</code> 思想，不同的 <code>CPU</code> 厂商提供了不同的原子性的机器码指令（例如 <code>x86</code> 是 <code>CMPXCHG</code>，<code>ARM</code> 是 <code>LDXR/STXR</code> 组合），我们一般把这些机器码指令称之为 “<code>CAS</code> 指令”</p>
+<p>在日常交流中，我们常把把 <code>CAS</code> 和 <code>CAS</code> 指令混为一谈。在 <code>Java</code> 中，说到 “使用 <code>CAS</code>”，其实就是通过 <code>Unsafe</code> 调用了 <code>CAS</code> 指令</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>CAS</code> 本质上并不是一种锁，而是一种更新机制</li>
+<li>虽然 <code>V</code> 说是 ”当前线程在进行写操作时，共享变量在主内存中的实际值“，但是由于 <code>JMM</code> 的存在，我们可能仍从工作内存读 <code>V</code>，所以有可见性问题。除此之外，还有有序性问题。因此即便使用 <code>CAS</code>，通常结合 <code>volatile</code> 修饰符使用，<code>CAS</code> 保证原子性，<code>volatile</code> 保证可见性、顺序性</li>
+<li>当我们使用 <code>CAS</code> 时，目标肯定是希望写操作成功。所以我们通常会循环执行 <code>CAS</code>，直到写操作成功</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="5-2-CAS-问题爆破"><a href="#5-2-CAS-问题爆破" class="headerlink" title="5.2. CAS 问题爆破"></a>5.2. CAS 问题爆破</h3><h4 id="5-2-1-ABA-问题"><a href="#5-2-1-ABA-问题" class="headerlink" title="5.2.1. ABA 问题"></a>5.2.1. ABA 问题</h4><h5 id="5-2-1-1-ABA-问题概述"><a href="#5-2-1-1-ABA-问题概述" class="headerlink" title="5.2.1.1. ABA 问题概述"></a>5.2.1.1. ABA 问题概述</h5><p><code>ABA</code> 问题是指：当 <code>V = E</code> 时，尽管 <code>CAS</code> 操作成功了，但实际上该位置的数据可能曾经发生过变化。例如我们桌子上有一杯水（<code>A</code>），你离开了一会儿。期间别人把你杯子里的水喝了（变成 <code>B</code>），然后又重新倒满水（变回 <code>A</code>）。等你回来时，看到水还是满的，你以为没人动过，但实际上里面的水已经变了</p>
+<p>很多时候 <code>ABA</code> 问题可能无伤大雅。但是在一些业务逻辑时，这个问题可能是致命的</p>
+<hr>
+<h5 id="5-2-1-2-ABA-问题解决方案"><a href="#5-2-1-2-ABA-问题解决方案" class="headerlink" title="5.2.1.2. ABA 问题解决方案"></a>5.2.1.2. ABA 问题解决方案</h5><h6 id="5-2-1-2-1-版本号"><a href="#5-2-1-2-1-版本号" class="headerlink" title="5.2.1.2.1. 版本号"></a>5.2.1.2.1. 版本号</h6><p>版本号是指：不仅比较值（即 <code>V = E</code>），还要比较版本号。即 $CAS(E, N)➔CAS(E + Version_E, B + Version_B)$，当线程在进行写操作时，不仅要 <code>V = E</code>，还要 $Version_V&#x3D;Version_E$</p>
+<p>而 <code>AtomicStampedReference</code> 就采用了这种方式解决了 <code>ABA</code> 问题。</p>
+<p>除此之外，<code>AtomicMarkableReference</code> 可以看作是 <code>AtomicStampedReference</code> 的简化版，但是它并没有严格使用版本号。<code>AtomicMarkableReference</code> 是为了解决 “很多时候我们并不需要知道它被修改了多少次，而是只需要知道它是否被修改过” 的问题</p>
+<hr>
+<h3 id="5-3-Atomic-原子类"><a href="#5-3-Atomic-原子类" class="headerlink" title="5.3. Atomic* 原子类"></a>5.3. Atomic* 原子类</h3><h4 id="5-3-1-Atomic-原子类概述"><a href="#5-3-1-Atomic-原子类概述" class="headerlink" title="5.3.1. Atomic* 原子类概述"></a>5.3.1. Atomic* 原子类概述</h4><p><code>Atomic*</code> 原子类是使用 <code>CAS</code> 实现多线程并发安全的一些类</p>
+<hr>
+<h4 id="5-3-2-Atomic-原子类相关分类"><a href="#5-3-2-Atomic-原子类相关分类" class="headerlink" title="5.3.2. Atomic* 原子类相关分类"></a>5.3.2. Atomic* 原子类相关分类</h4><ol>
+<li><code>AtomicBoolean</code></li>
+<li><code>AtomicInteger</code></li>
+<li><code>AtomicIntegerArray</code></li>
+<li><code>AtomicIntegerFieldUpdater</code></li>
+<li><code>AtomicIntegerFieldUpdaterImpl</code></li>
+<li><code>AtomicLong</code></li>
+<li><code>AtomicLongArray</code></li>
+<li><code>AtomicLongFieldUpdater</code></li>
+<li><code>AtomicReference</code></li>
+<li><code>AtomicReferenceArray</code></li>
+<li><code>AtomicReferenceFieldUpdater</code></li>
+<li><code>AtomicReferenceFieldUpdaterImpl</code></li>
+<li><code>AtomicMarkableReference</code></li>
+<li><code>AtomicStampedReference</code></li>
+<li><code>LongAdder</code></li>
+<li><code>DoubleAdder</code></li>
+</ol>
+<hr>
+<h1 id="六、并发工具"><a href="#六、并发工具" class="headerlink" title="六、并发工具"></a>六、并发工具</h1><h2 id="1-CountDownLatch"><a href="#1-CountDownLatch" class="headerlink" title="1. CountDownLatch"></a>1. CountDownLatch</h2><p>详见源码：<code>CountDownLatch</code></p>
+<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountDownLatch%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.CountDownLatch源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-CyclicBarrier"><a href="#2-CyclicBarrier" class="headerlink" title="2. CyclicBarrier"></a>2. CyclicBarrier</h2><p>详见源码：<code>CyclicBarrier</code></p>
+<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CyclicBarrier%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.CyclicBarrier源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="3-Semaphore"><a href="#3-Semaphore" class="headerlink" title="3. Semaphore"></a>3. Semaphore</h2><p>详见源码：<code>Semaphore</code></p>
+<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Semaphore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Semaphore源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="七、线程池"><a href="#七、线程池" class="headerlink" title="七、线程池"></a>七、线程池</h1><h2 id="1-线程池基础体系"><a href="#1-线程池基础体系" class="headerlink" title="1. 线程池基础体系"></a>1. 线程池基础体系</h2><p><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-9.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Executor</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Executor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Executor源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ExecutorService</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ExecutorService源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>AbstractExecutorService</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.AbstractExecutorService源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ScheduledExecutorService</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ScheduledExecutorService源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ThreadPoolExecutor</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ThreadPoolExecutor源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ScheduledThreadPoolExecutor</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ScheduledThreadPoolExecutor源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ForkJoinPool</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ForkJoinPool源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p> 	   </p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>线程池的三架马车：<code>ThreadPoolExecutor</code>、<code>ScheduledThreadPoolExecutor</code>、<code>ForkJoinPool</code></li>
+</ol>
+</blockquote>
+<hr>
+<h1 id="八、异步编程"><a href="#八、异步编程" class="headerlink" title="八、异步编程"></a>八、异步编程</h1><h2 id="1-异步编程基础体系"><a href="#1-异步编程基础体系" class="headerlink" title="1. 异步编程基础体系"></a>1. 异步编程基础体系</h2><p><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-10.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Serializable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.io.Serializable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Comparable&lt;T&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Comparable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Comparable＜T＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Callable&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Callable%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Callable＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Runnable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Runnable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Runnable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Delayed</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Delayed%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Delayed源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Future＜V＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurren.Future%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurren.Future＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>RunnableFuture&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.RunnableFuture＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ScheduledFuture＜V＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ScheduledFuture＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ForkJoinTask&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ForkJoinTask＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>FutureTask&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.FutureTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.FutureTask＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>RunnableScheduledFuture＜V＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableScheduledFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.RunnableScheduledFuture＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>ScheduledFutureTask＜V＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>RecursiveAction</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveAction%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.RecursiveAction源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>RecursiveTask&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RecursiveTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.RecursiveTask＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>CountedCompleter&lt;T&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.CountedCompleter＜T＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-异步编程实现方式"><a href="#2-异步编程实现方式" class="headerlink" title="2. 异步编程实现方式"></a>2. 异步编程实现方式</h2><h3 id="2-1-伪异步"><a href="#2-1-伪异步" class="headerlink" title="2.1. 伪异步"></a>2.1. 伪异步</h3><p>伪异步是指：当前线程将我们执行的 <code>Java</code> 代码中，一些耗时的操作交给其他线程（通常使用专门的线程池）去执行，当前线程可以直接继续向下执行</p>
+<hr>
+<h3 id="2-2-伪异步-异步编程等待"><a href="#2-2-伪异步-异步编程等待" class="headerlink" title="2.2. 伪异步 + 异步编程等待"></a>2.2. 伪异步 + 异步编程等待</h3><p> 伪异步 + 异步编程等待是指：虽然当前线程将我们执行的 <code>Java</code> 代码中，一些耗时的操作交给其他线程（通常使用专门的线程池）去执行，但当前线程仍然需要该任务的返回结果，所以当前线程必须在后续某个时刻获取该任务的返回结果</p>
+<p>通常的做法是：提交任务后返回一个凭证（即 <code>Future</code>，常见具体实现类主要包括 <code>FutureTask</code>、<code>ScheduledFutureTask</code>、<code>ForkJoinTask</code>），然后根据这个凭证在需要结果时获取结果，然后再继续向下执行</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>异步编程等待既可能是阻塞的也可能是限时阻塞的</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-3-伪异步-异步编程回调"><a href="#2-3-伪异步-异步编程回调" class="headerlink" title="2.3. 伪异步 + 异步编程回调"></a>2.3. 伪异步 + 异步编程回调</h3><p>这部分内容涉及到了 <code>CompletableFuture</code>，详见笔记：<code>Java</code> 函数式编程（<code>obsidian</code> 内部链接：<a href="%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B.md">笔记：Java函数式编程</a>，<code>Hexo</code> 链接：）</p>
+<hr>
+<h3 id="伪异步-异步流式回调（响应式）"><a href="#伪异步-异步流式回调（响应式）" class="headerlink" title="伪异步 + 异步流式回调（响应式）"></a>伪异步 + 异步流式回调（响应式）</h3><hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/JUC/" class="category-chain-item">JUC</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：JUC</div>
+      <div>https://wangjia5289.github.io/2025/11/23/笔记：JUC/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>霸天</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 23, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AHexo+Obsidian+GitHubPages/" title="笔记：Hexo + Obsidian + GitHub Pages">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Hexo + Obsidian + GitHub Pages</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Semaphore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.Semaphore 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.Semaphore 源码解析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

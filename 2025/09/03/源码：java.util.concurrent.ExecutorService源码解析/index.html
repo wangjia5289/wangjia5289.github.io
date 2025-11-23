@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分ExecutorService 概述ExecutorService 是一个接口，继承了 java.util.concurrent.Executor ExecutorService 在 Executor 的基础上，为我们提供了以下方法：  关闭线程池（非阻塞） 等待线程池关闭（限时阻塞） 查看线程池是否关闭（非阻塞） 查看线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码：java.util.concurrent.ExecutorService 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分ExecutorService 概述ExecutorService 是一个接口，继承了 java.util.concurrent.Executor ExecutorService 在 Executor 的基础上，为我们提供了以下方法：  关闭线程池（非阻塞） 等待线程池关闭（限时阻塞） 查看线程池是否关闭（非阻塞） 查看线程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="article:published_time" content="2025-09-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-22T07:09:41.121Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>源码：java.util.concurrent.ExecutorService 源码解析 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="源码：java.util.concurrent.ExecutorService 源码解析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-03 00:00" pubdate>
+          September 3, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">源码：java.util.concurrent.ExecutorService 源码解析</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-11-22T15:09:41+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-TODO"><a href="#1-TODO" class="headerlink" title="1. TODO"></a>1. TODO</h2><hr>
+<h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw</p>
+</li>
+</ol>
+<hr>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="ExecutorService-概述"><a href="#ExecutorService-概述" class="headerlink" title="ExecutorService 概述"></a>ExecutorService 概述</h3><p><code>ExecutorService</code> 是一个接口，继承了 <code>java.util.concurrent.Executor</code><br><img src="/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>ExecutorService</code> 在 <code>Executor</code> 的基础上，为我们提供了以下方法：</p>
+<ol>
+<li>关闭线程池（非阻塞）</li>
+<li>等待线程池关闭（限时阻塞）</li>
+<li>查看线程池是否关闭（非阻塞）</li>
+<li>查看线程池是否被执行过 <code>ExecutorService#shutdown</code> 或 <code>ExecutorService#shutdownNow</code>（非阻塞）</li>
+<li>提交一个 <code>Callable</code> 任务（非阻塞）</li>
+<li>提交一个 <code>Runnable</code> 任务（非阻塞）</li>
+<li>提交一批 <code>Callable</code> 任务（阻塞、限时阻塞）</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>详见源码：<code>Executor</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Executor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Executor源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-源码部分"><a href="#2-源码部分" class="headerlink" title="2. 源码部分"></a>2. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ExecutorService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Executor</span> &#123;<br>	<br>	<span class="hljs-comment">// 用于非阻塞有序关闭线程池</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// </span><br>	<span class="hljs-comment">// 已提交的任务会继续执行，但线程池不会再接收新的任务</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">shutdown</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 用于非阻塞强制关闭线程池</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 正在运行的任务会被停止，并且返回还没开始执行的 Runnable 任务列表，线程池不会再接收新的任务</span><br>    List&lt;Runnable&gt; <span class="hljs-title function_">shutdownNow</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 用于非阻塞查看线程池是否被执行过 ExecutorService#shutdown 或 ExecutorService#shutdownNow</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isShutdown</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 用于非阻塞查看线程池是否关闭</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">isTerminated</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-comment">// 用于限时阻塞等待线程池关闭</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 限时阻塞被允许的最长时间为：timeout unit</span><br>	<span class="hljs-comment">//     1. 如果超时，返回 false</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 如果线程池未关闭，本地线程进入阻塞状态，Thread 实例进入 TIMED_WAITING 状态，并被投递到 ExecutorService 接口的具体实现类维护的某数据结构，等待被唤醒（LockSupport.unpark）、被中断（Thread#interrupt）、阻塞超时</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 本地线程进入阻塞状态，Thread 实例进入 TIMED_WAITING 状态后，能响应中断。线程被唤醒，重新获得 CPU 时间片后，会抛出 InterruptedException 异常，并清除 Thread 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）</span><br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">awaitTermination</span><span class="hljs-params">(<span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>	<span class="hljs-comment">// 用于非阻塞提交一个 Callable 任务</span><br>    &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span>;<br>	<br>	<span class="hljs-comment">// 用于非阻塞提交一个 Runnable 任务，并手动指定一个任务结果</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 因为 Runnable 任务没有返回结果，如果你需要一个返回结果的话，可以手动指定</span><br>    &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Runnable task, T result)</span>;<br>	<br>	<span class="hljs-comment">// 用于非阻塞提交一个 Runnable 任务</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 该方法与 Executor#execute 的区别在于：</span><br>	<span class="hljs-comment">//     1. Executor#execute 只管提交，不问结果。它没有返回值，你无法知道任务是否执行成功，也无法知道任务的执行结果</span><br>	<span class="hljs-comment">//     2. 而 ExecutorService.submit 是提交任务，返回该任务对应的 Future 接口的具体实现类实例。我们可以根据返回的 Future 接口的具体实现类实例对该任务进行一系列操作</span><br>	<span class="hljs-comment">//     3. 需要注意的是，如果你提交的是 Runnable 任务，即便你使用 Future 接口的具体实现类实例获取该任务的结果，也只会是 null 或我们手动指定的任务结果。我们通常使用 Future 接口的具体实现类实例获取 Callable 任务的结果</span><br>    Future&lt;?&gt; submit(Runnable task);<br>    <br>    <span class="hljs-comment">// 用于阻塞提交一批 Callable 任务，并等待所有任务执行完毕（正常退出、异常退出、取消任务）后，再返回这些任务对应的 Future接口的具体实现类实例列表</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 在等待任务执行完毕的过程中，本地线程进入阻塞状态，Thread 实例进入 WAITING 状态，等待被唤醒（LockSupport.unpark）、被中断（Thread#interrupt）</span><br>    <span class="hljs-comment">// </span><br>    <span class="hljs-comment">// 本地线程进入阻塞状态，Thread 实例进入 WAITING 状态后，能响应中断。线程被唤醒，重新获得 CPU 时间片后，会抛出 InterruptedException 异常，并清除 Thread 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 需要注意的是：</span><br>    <span class="hljs-comment">//     1. 它并不像传统模式那样将任务统一投递到某个固定的数据结构中，而是循环调用每个 Future 接口的具体实现类实例的 Future#get</span><br>    <span class="hljs-comment">//     2. 因此 Thread 实例可能被投递到多个 Future 接口的具体实现类实例维护的某数据结构</span><br>    <span class="hljs-comment">//     3. 除此之外，这还意味着阻塞状态也是一段一段的，而不是从头到尾一直阻塞</span><br>    &lt;T&gt; List&lt;Future&lt;T&gt;&gt; <span class="hljs-title function_">invokeAll</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>    <span class="hljs-comment">// 用于限时阻塞提交一批 Callable 任务，并等待所有任务执行完毕（正常退出、异常退出、取消任务）后，再返回这些任务对应的 Future 接口的具体实现类实例列表</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 限时阻塞被允许的最长时间为：timeout unit</span><br>    <span class="hljs-comment">//     1. 如果超时，会撤销尚未执行的任务</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 在等待任务执行完毕的过程中，本地线程进入阻塞状态，Thread 实例进入 TIMED_WAITING 状态，等待被唤醒（LockSupport.unpark）、被中断（Thread#interrupt）、阻塞超时</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 本地线程进入阻塞状态，Thread 实例进入 TIMED_WAITING 状态后，能响应中断。线程被唤醒，重新获得 CPU 时间片后，会抛出 InterruptedException 异常，并清除 Thread 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）</span><br>    <span class="hljs-comment">//</span><br>    <span class="hljs-comment">// 需要注意的是：</span><br>    <span class="hljs-comment">//     1. 它并不像传统模式那样将任务统一投递到某个固定的数据结构中，而是循环调用每个 Future 接口的具体实现类实例的 Future#get</span><br>    <span class="hljs-comment">//     2. 因此 Thread 实例可能被投递到多个 Future 接口的具体实现类实例维护的某数据结构</span><br>    <span class="hljs-comment">//     3. 除此之外，这还意味着阻塞状态也是一段一段的，而不是从头到尾一直阻塞</span><br>	&lt;T&gt; List&lt;Future&lt;T&gt;&gt; <span class="hljs-title function_">invokeAll</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,</span><br><span class="hljs-params">							  <span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>	<span class="hljs-keyword">throws</span> InterruptedException;<br>	<br>	<span class="hljs-comment">// 用于阻塞提交一批 Callable 任务，等待 “任意” 且 “第一个” 任务执行成功（正常退出），立即返回该任务的结果（并不是该任务对应的 Future 接口的具体实现类实例），并撤销尚未执行的任务和停止正在执行的任务</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 在等待 “任意” 且 “第一个” 任务执行程序的过程中，本地线程进入 WAITING 状态，并被投递到 ExecutorCompletionService 维护的某数据结构，等待被唤醒（LockSupport.unpark）、被中断（Thread#interrupt）</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 本地线程进入阻塞状态，Thread 实例进入 WAITING 状态后，能响应中断。线程被唤醒，重新获得 CPU 时间片后，会抛出 InterruptedException 异常，并清除 Thread 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 如果所有任务都执行失败，会抛出 ExecutionException 异常</span><br>    &lt;T&gt; T <span class="hljs-title function_">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</span><br>        <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException;<br>	<br>	<span class="hljs-comment">// 用于限时阻塞提交一批 Callable 任务，等待 “任意” 且 “第一个” 任务执行成功（正常退出），立即返回该任务的结果（并不是该任务对应的 Future 实例），并 “尽力” 取消未执行的任务和停止正在执行的任务</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 限时阻塞被允许的最长时间为：timeout unit</span><br>	<span class="hljs-comment">//     1. 如果超时，会抛出 TimeoutException 异常</span><br>	<span class="hljs-comment">// </span><br>	<span class="hljs-comment">// 在等待 “任意” 且 “第一个” 任务执行程序的过程中，本地线程进入 TIMED_WAITING 状态，并被投递到 ExecutorCompletionService 维护的某数据结构，等待被唤醒（LockSupport.unpark）、被中断（Thread#interrupt）、阻塞超时</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 本地线程进入阻塞状态，Thread 实例进入 TIMED_WAITING 状态后，能响应中断。线程被唤醒，重新获得 CPU 时间片后，会抛出 InterruptedException 异常，并清除 Thread 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 如果所有任务都执行失败，会抛出 ExecutionException 异常</span><br>	&lt;T&gt; T <span class="hljs-title function_">invokeAny</span><span class="hljs-params">(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,</span><br><span class="hljs-params">				<span class="hljs-type">long</span> timeout, TimeUnit unit)</span><br>	<span class="hljs-keyword">throws</span> InterruptedException, ExecutionException, TimeoutException;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>取消任务和停止任务还是有所区别的：取消任务是指取消那些尚未执行的任务。而停止任务则是任务正在执行时，你通过中断去让它停下来。如果任务能够响应中断，那就算是成功停止。但问题在于，如果任务没有响应中断，那么即使你发出了中断请求，它仍然会继续执行。所以 “停止任务” 并不一定能让它 “停止下来”</li>
+</ol>
+</blockquote>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>源码：java.util.concurrent.ExecutorService 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/09/03/源码：java.util.concurrent.ExecutorService源码解析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 3, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/24/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Object%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.lang.Object 源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：java.lang.Object 源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.ThreadPoolExecutor源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.ThreadPoolExecutor源码解析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ForkJoinPool 概述ForkJoinPool 是一个具体类，继承了 java.util.concurrent.AbstractExecutorService ForkJoinPool 被设计用于高效执行那些可以被 ”递归拆分“ 的任务，其核心特性是：  分而治之 递归拆分 工作窃取   [!NOTE] 注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码：java.util.concurrent.ForkJoinPool 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw    3. 基础部分3.1. ForkJoinPool 概述ForkJoinPool 是一个具体类，继承了 java.util.concurrent.AbstractExecutorService ForkJoinPool 被设计用于高效执行那些可以被 ”递归拆分“ 的任务，其核心特性是：  分而治之 递归拆分 工作窃取   [!NOTE] 注">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
+<meta property="article:published_time" content="2025-11-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-23T11:35:46.725Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>源码：java.util.concurrent.ForkJoinPool 源码解析 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="源码：java.util.concurrent.ForkJoinPool 源码解析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-14 00:00" pubdate>
+          November 14, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">源码：java.util.concurrent.ForkJoinPool 源码解析</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-11-23T19:35:46+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-TODO"><a href="#1-TODO" class="headerlink" title="1. TODO"></a>1. TODO</h2><hr>
+<h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+</ol>
+<hr>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ForkJoinPool-概述"><a href="#3-1-ForkJoinPool-概述" class="headerlink" title="3.1. ForkJoinPool 概述"></a>3.1. ForkJoinPool 概述</h3><p><code>ForkJoinPool</code> 是一个具体类，继承了 <code>java.util.concurrent.AbstractExecutorService</code></p>
+<p><code>ForkJoinPool</code> 被设计用于高效执行那些可以被 ”递归拆分“ 的任务，其核心特性是：</p>
+<ol>
+<li>分而治之</li>
+<li>递归拆分</li>
+<li>工作窃取</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>详见源码：<code>AbstractExecutorService</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.AbstractExecutorService源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对于 <code>ForkJoinPool</code>、<code>ForkJoinTask&lt;V&gt;</code>、<code>RecursiveAction</code>、<code>RecursiveTask&lt;V&gt;</code>，可以说是整个 <code>JUC</code> 中最复杂的一部分，<code>Doug Lea</code> 当初为它们投入了大量心血。对于我们而言，只需要掌握它们的使用方式即可，没必要对源码进行过度深究</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="3-2-ForkJoinPool-相关流程"><a href="#3-2-ForkJoinPool-相关流程" class="headerlink" title="3.2. ForkJoinPool 相关流程"></a>3.2. ForkJoinPool 相关流程</h3><p>我们知道：<code>ThreadPoolExecutor</code> 和 <code>ScheduledThreadPoolExecutor</code> 的线程执行流程大致为：<code>本地线程 ➔ Thread#run ➔ Worker#run</code></p>
+<p>而 <code>ForkJoinPool</code> 并没有使用 <code>Worker</code>，甚至没有使用原生的 <code>Thread</code>，而是直接使用了 <code>ForkJoinWorkerThread</code>（<code>ForkJoinWorkerThread</code> 继承了 <code>Thread</code>）</p>
+<p>你可能会疑惑：为什么要让 <code>ForkJoinWorkerThread</code> 继承 <code>Thread</code>，而不是继续使用 <code>Worker</code> 或者在 <code>Worker</code> 的基础上 “魔改” 呢？原因很简单，因为我们要为每个线程单独维护一个任务队列</p>
+<p>每个线程都会维护一个 <code>ForkJoinPool.WorkQueue</code>，这是一个双端队列。并且这些队列都会被注册到 <code>ForkJoinPool-&gt;queues</code> 中<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<p>当线程去执行一个大任务 <code>A</code> 时，可以把 <code>A</code> 拆分成多个子任务（例如 <code>B</code>、<code>C</code>、<code>D</code>），这些子任务会被投递到该本地线程维护的任务队列中。然后你是不是认为 “线程需要阻塞等待 <code>B</code>、<code>C</code>、<code>D</code> 的完成呢？”</p>
+<p>接下来的一部分，是 <code>ForkJoinPool</code> 设计最精妙的地方：</p>
+<ol>
+<li>当一个任务 <code>A</code> 被拆分成子任务 <code>B</code>、<code>C</code>、<code>D</code>，并被投递到任务队列后，按理说当前线程应该阻塞并等待 <code>B</code>、<code>C</code>、<code>D</code> 的完成。然而并非如此：当前线程确实在等待，但并没有阻塞。相反，它会继续执行当前线程维护的任务队列中的其他任务</li>
+<li>假如执行到了 <code>B</code>，在执行 <code>B</code> 的过程中，<code>B</code> 又可以进一步拆分成更小的子任务 <code>E</code>、<code>F</code>、<code>G</code>，并被投递到任务队列后，同样在等待子任务的结果的同时，当前线程并不会立即阻塞，而是会继续执行当前线程维护的任务队列中的其他任务。以此类推…直到任务被拆分到足够小</li>
+<li>当子任务完成后，它的结果会返回给父任务。父任务在收到所有子任务结果后，再将汇总结果返回给自己的父任务。以此类推…直到最初的大任务最终得到完整的计算结果</li>
+<li>需要注意的是：<ol>
+<li>如果当前线程维护的任务队列中没有其他任务了，它会根据 <code>ForkJoinPool-&gt;queues</code> 随机选择一个其他线程维护的任务队列，从队尾 “窃取” 一个任务来执行</li>
+<li>如果当前线程维护的任务队列中没有其他任务了，也 “窃取” 不到任务了，就会有以下两种情况：<ol>
+<li>如果当前线程还在等待任务<ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态，并被投递到（XXXXX，肯定是 ForkJOinPoolTask 的队列啊） <code>Task</code> 的某队列，等待被唤醒（<code>LockSupport.unpark</code>）、被中断</li>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态后，能响应中断。线程被唤醒，重新获得 <code>CPU</code> 时间片后，会抛出 <code>InterruptedException</code> 异常，并清除 <code>Thread</code> 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）。不过我们无需对此过多关注，因为相关逻辑已由 <code>ForkJoinPool</code> 处理好了。一旦发生中断，为了不污染我们的代码，<code>ForkJoinPool</code> 会抛出 <code>CancellationException</code> 非受检异常</li>
+</ol>
+</li>
+<li>如果当前线程未在等待任务（“空闲”）<ol>
+<li>如果线程池中的线程的数量 ≤ <code>corePoolSize</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态，并被投递到 ForkJoinPool 的某队列，等待被唤醒（<code>LockSupport.unpark</code>）、被中断（<code>Thread#interrupt</code>）</li>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>WAITING</code> 状态后，能响应中断。线程被唤醒，重新获得 <code>CPU</code> 时间片后，会抛出 <code>InterruptedException</code> 异常，并清除 <code>Thread</code> 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）。不过我们无需对此过多关注，因为相关逻辑已由 <code>ForkJoinPool</code> 处理好了。一旦发生中断，我们不会感知到任何异常</li>
+</ol>
+</li>
+<li>如果线程池中的线程的数量 ＞<code>corePoolSize</code><ol>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态，并被投递到 <code>ForkJoinPool</code> 的某队列，等待被唤醒（<code>LockSupport.unpark</code>）、被中断（<code>Thread#interrupt</code>）、阻塞超时<ol>
+<li>如果超时，<code>ForkJoinPool</code> 会销毁该线程</li>
+</ol>
+</li>
+<li>本地线程进入阻塞状态，<code>Thread</code> 实例进入 <code>TIMED_WAITING</code> 状态后，能响应中断。线程被唤醒，重新获得 <code>CPU</code> 时间片后，会抛出 <code>InterruptedException</code> 异常，并清除 <code>Thread</code> 实例的中断状态（异常退出或正常退出（发生异常），要看我们是否对该异常进行捕获并处理）。不过我们无需对此过多关注，因为相关逻辑已由 <code>ForkJoinPool</code> 处理好了。一旦发生中断，我们不会感知到任何异常</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>我们以 <code>1</code> 累加到 <code>10000</code> 为例，来看一看究竟是怎么执行的：<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>猴哥的烦恼箱 <code>(｡•́︿•̀｡)</code>：<ol>
+<li>为什么我们不能采取 <code>ForkJoinPool</code> 的 “一个任务尚未完成，但是可以去执行其他任务” 思想，用于同步阻塞 <code>IO</code> 工作模式下的服务端，从而避免 “伪异步 + 异步编程回调”？</li>
+<li>为什么不 “魔改” <code>Worker</code>，在 <code>Worker</code> 中添加任务队列呢？</li>
+<li>为什么当前线程维护的任务队列中没有其他任务了，也 “窃取” 不到任务了，就要阻塞？<ol>
+<li>防止 CPU 空转</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="4-构造方法"><a href="#4-构造方法" class="headerlink" title="4. 构造方法"></a>4. 构造方法</h2><h3 id="4-1-public-ForkJoinPool-int-parallelism-ForkJoinWorkerThreadFactory-factory-UncaughtExceptionHandler-handler-boolean-asyncMode-int-corePoolSize-int-maximumPoolSize-int-minimumRunnable-Predicate＜-super-ForkJoinPool＞-saturate-long-keepAliveTime-TimeUnit-unit"><a href="#4-1-public-ForkJoinPool-int-parallelism-ForkJoinWorkerThreadFactory-factory-UncaughtExceptionHandler-handler-boolean-asyncMode-int-corePoolSize-int-maximumPoolSize-int-minimumRunnable-Predicate＜-super-ForkJoinPool＞-saturate-long-keepAliveTime-TimeUnit-unit" class="headerlink" title="4.1. public ForkJoinPool(int parallelism, ForkJoinWorkerThreadFactory factory, UncaughtExceptionHandler handler, boolean asyncMode, int corePoolSize, int maximumPoolSize, int minimumRunnable, Predicate＜? super ForkJoinPool＞ saturate, long keepAliveTime,TimeUnit unit)"></a>4.1. public ForkJoinPool(int parallelism, ForkJoinWorkerThreadFactory factory, UncaughtExceptionHandler handler, boolean asyncMode, int corePoolSize, int maximumPoolSize, int minimumRunnable, Predicate＜? super ForkJoinPool＞ saturate, long keepAliveTime,TimeUnit unit)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 构造方法：</span><br><span class="hljs-comment"> * public ForkJoinPool(int parallelism,</span><br><span class="hljs-comment"> *         ForkJoinWorkerThreadFactory factory,</span><br><span class="hljs-comment"> *         UncaughtExceptionHandler handler,</span><br><span class="hljs-comment"> *         boolean asyncMode,</span><br><span class="hljs-comment"> *         int corePoolSize,</span><br><span class="hljs-comment"> *         int maximumPoolSize,</span><br><span class="hljs-comment"> *         int minimumRunnable,</span><br><span class="hljs-comment"> *         Predicate&lt;? super ForkJoinPool&gt; saturate,</span><br><span class="hljs-comment"> *         long keepAliveTime,</span><br><span class="hljs-comment"> *         TimeUnit unit)</span><br><span class="hljs-comment"> * --------------------------------------------</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *      1. public</span><br><span class="hljs-comment"> *          1. 天下皆公（EveryWhere）</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 方法参数</span><br><span class="hljs-comment"> *      1. int parallelism</span><br><span class="hljs-comment"> *          1. 指定我们期望线程池中 ”活跃“ 线程的线程数量</span><br><span class="hljs-comment"> *          2. 所谓的 “活跃” 是指：正在执行任务或正在 ”窃取“ 任务的线程的线程数量</span><br><span class="hljs-comment"> *          3. ForkJoinPool 会尽力维持这个数量，但不能保证</span><br><span class="hljs-comment"> *      2. ForkJoinWorkerThreadFactory factory</span><br><span class="hljs-comment"> *          1. 指定创建 ForkJoinWorkerThread 实例的线程工厂</span><br><span class="hljs-comment"> *      3. UncaughtExceptionHandler handler</span><br><span class="hljs-comment"> *          1. 指定未捕获异常的处理器</span><br><span class="hljs-comment"> *          2. 当一个本地线程在执行任务时因未捕获的异常而终止（异常退出）时，会调用未捕获异常的处理器</span><br><span class="hljs-comment"> *      4. boolean asyncMode</span><br><span class="hljs-comment"> *          1. 指定本地线程从其维护的任务队列获取任务的顺序</span><br><span class="hljs-comment"> *          2. 可选参数包括：</span><br><span class="hljs-comment"> *              1. true</span><br><span class="hljs-comment"> *                  1. FIFO</span><br><span class="hljs-comment"> *              2. false</span><br><span class="hljs-comment"> *                  1. LIFO</span><br><span class="hljs-comment"> *      5. int corePoolSize</span><br><span class="hljs-comment"> *          1. 指定线程池中 “存活” 的线程被允许的最小数量</span><br><span class="hljs-comment"> *          2. 当某本地线程 “空闲” 的时间超过 keepAliveTime unit，会在销毁前检查该参数，然后再决定是否销毁</span><br><span class="hljs-comment"> *          3. 需要注意的是：该参数可以为 0</span><br><span class="hljs-comment"> *      6. int maximumPoolSize</span><br><span class="hljs-comment"> *          1. 指定线程池中的线程被允许的最大数量</span><br><span class="hljs-comment"> *      7. int minimumRunnable</span><br><span class="hljs-comment"> *          1. 指定线程池中没有调用 ForkJoinTask#join 的线程被允许的最小数量</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> *          1. 指定可运行的工作线程被允许的最小数量</span><br><span class="hljs-comment"> *          2. 如果低于，将创建新的工作线程，直到达到 maximumPoolSize</span><br><span class="hljs-comment"> *      8. Predicate&lt;? super ForkJoinPool&gt; saturate</span><br><span class="hljs-comment"> *          1. 指定饱和策略</span><br><span class="hljs-comment"> *          2. 当没有调用 ForkJoinTask#join 的线程低于 minimumRunnable，但是也达到了 maximumPoolSize 时，会调用饱和策略</span><br><span class="hljs-comment"> *      9. long keepAliveTime</span><br><span class="hljs-comment"> *          1. 指定线程 “空闲”被允许的最长时间为：keepAliveTime unit</span><br><span class="hljs-comment"> *          2. 所谓的 “空闲” 是指：某本地线程维护的任务队列没有任务了，并且也 “窃取” 不到任务了</span><br><span class="hljs-comment"> *          3. 当某本地线程 “空闲” 的时间超过 keepAliveTime unit，</span><br><span class="hljs-comment"> *      10. TimeUnit unit</span><br><span class="hljs-comment"> *          1. 指定线程 “空闲”被允许的最长时间为：keepAliveTime unit</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 抛出异常</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 构造示例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-title function_">ForkJoinPool</span><span class="hljs-params">(<span class="hljs-type">int</span> parallelism,</span><br><span class="hljs-params">					ForkJoinWorkerThreadFactory factory,</span><br><span class="hljs-params">					UncaughtExceptionHandler handler,</span><br><span class="hljs-params">					<span class="hljs-type">boolean</span> asyncMode,</span><br><span class="hljs-params">					<span class="hljs-type">int</span> corePoolSize,</span><br><span class="hljs-params">					<span class="hljs-type">int</span> maximumPoolSize,</span><br><span class="hljs-params">					<span class="hljs-type">int</span> minimumRunnable,</span><br><span class="hljs-params">					Predicate&lt;? <span class="hljs-built_in">super</span> ForkJoinPool&gt; saturate,</span><br><span class="hljs-params">					<span class="hljs-type">long</span> keepAliveTime,</span><br><span class="hljs-params">					TimeUnit unit)</span> &#123;<br>	<br>	checkPermission();<br>	<span class="hljs-type">int</span> <span class="hljs-variable">p</span> <span class="hljs-operator">=</span> parallelism;<br>	<span class="hljs-keyword">if</span> (p &lt;= <span class="hljs-number">0</span> || p &gt; MAX_CAP || p &gt; maximumPoolSize || keepAliveTime &lt;= <span class="hljs-number">0L</span>)<br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>();<br>	<span class="hljs-keyword">if</span> (factory == <span class="hljs-literal">null</span> || unit == <span class="hljs-literal">null</span>)<br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>	<span class="hljs-built_in">this</span>.factory = factory;<br>	<span class="hljs-built_in">this</span>.ueh = handler;<br>	<span class="hljs-built_in">this</span>.saturate = saturate;<br>	<span class="hljs-built_in">this</span>.keepAlive = Math.max(unit.toMillis(keepAliveTime), TIMEOUT_SLOP);<br>	<span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> &lt;&lt; (<span class="hljs-number">33</span> - Integer.numberOfLeadingZeros(p - <span class="hljs-number">1</span>));<br>	<span class="hljs-type">int</span> <span class="hljs-variable">corep</span> <span class="hljs-operator">=</span> Math.min(Math.max(corePoolSize, p), MAX_CAP);<br>	<span class="hljs-type">int</span> <span class="hljs-variable">maxSpares</span> <span class="hljs-operator">=</span> Math.min(maximumPoolSize, MAX_CAP) - p;<br>	<span class="hljs-type">int</span> <span class="hljs-variable">minAvail</span> <span class="hljs-operator">=</span> Math.min(Math.max(minimumRunnable, <span class="hljs-number">0</span>), MAX_CAP);<br>	<span class="hljs-built_in">this</span>.bounds = ((minAvail - p) &amp; SMASK) | (maxSpares &lt;&lt; SWIDTH);<br>	<span class="hljs-built_in">this</span>.mode = p | (asyncMode ? FIFO : <span class="hljs-number">0</span>);<br>	<span class="hljs-built_in">this</span>.ctl = ((((<span class="hljs-type">long</span>)(-corep) &lt;&lt; TC_SHIFT) &amp; TC_MASK) |<br>				(((<span class="hljs-type">long</span>)(-p)     &lt;&lt; RC_SHIFT) &amp; RC_MASK));<br>	<span class="hljs-built_in">this</span>.registrationLock = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReentrantLock</span>();<br>	<span class="hljs-built_in">this</span>.queues = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WorkQueue</span>[size];<br>	<span class="hljs-type">String</span> <span class="hljs-variable">pid</span> <span class="hljs-operator">=</span> Integer.toString(getAndAddPoolIds(<span class="hljs-number">1</span>) + <span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">this</span>.workerNamePrefix = <span class="hljs-string">&quot;ForkJoinPool-&quot;</span> + pid + <span class="hljs-string">&quot;-worker-&quot;</span>;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%BA%90%E7%A0%81/" class="category-chain-item">源码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>源码：java.util.concurrent.ForkJoinPool 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/11/14/源码：java.util.concurrent.ForkJoinPool源码解析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 14, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask＜V＞源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：java.util.concurrent.ScheduledThreadPoolExecutor.ScheduledFutureTask＜V＞源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/13/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.LockSupport%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.LockSupport 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.locks.LockSupport 源码解析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
