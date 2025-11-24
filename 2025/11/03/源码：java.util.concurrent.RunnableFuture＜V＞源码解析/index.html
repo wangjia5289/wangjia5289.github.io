@@ -19,25 +19,25 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;03&#x2F;源码：java.util.concurrent.AbstractExecutorService源码解析&#x2F;    3. 基础部分3.1. AbstractExecutorService 概述AbstractExecutorService 是一个抽象类，实现">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;03&#x2F;源码：java.util.concurrent.RunnableFuture＜V＞源码解析&#x2F;    3. 基础部分3.1. RunnableFuture 概述RunnableFuture 是一个接口，继承了 java.util.concurrent.Ru">
 <meta property="og:type" content="article">
-<meta property="og:title" content="源码：java.util.concurrent.AbstractExecutorService 源码解析">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;03&#x2F;源码：java.util.concurrent.AbstractExecutorService源码解析&#x2F;    3. 基础部分3.1. AbstractExecutorService 概述AbstractExecutorService 是一个抽象类，实现">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;03&#x2F;源码：java.util.concurrent.RunnableFuture＜V＞源码解析&#x2F;    3. 基础部分3.1. RunnableFuture 概述RunnableFuture 是一个接口，继承了 java.util.concurrent.Ru">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T13:12:22.044Z">
+<meta property="article:modified_time" content="2025-11-23T13:00:41.034Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>源码：java.util.concurrent.AbstractExecutorService 源码解析 - 咸阳猴🐒的博客</title>
+  <title>源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析 - 咸阳猴🐒的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="源码：java.util.concurrent.AbstractExecutorService 源码解析"></span>
+            <span id="subtitle" data-typed-text="源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析"></span>
           
         </div>
 
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          541 words
+          158 words
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          5 mins
+          2 mins
         
       </span>
     
@@ -286,12 +286,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">源码：java.util.concurrent.AbstractExecutorService 源码解析</h1>
+            <h1 id="seo-header">源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T21:12:22+08:00
+                    Last updated on 2025-11-23T21:00:41+08:00
                   
                   
 
@@ -307,22 +307,32 @@
 </li>
 <li><p>Edraw</p>
 </li>
-<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/03/源码：java.util.concurrent.AbstractExecutorService源码解析/</a></p>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/03/源码：java.util.concurrent.RunnableFuture＜V＞源码解析/</a></p>
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-AbstractExecutorService-概述"><a href="#3-1-AbstractExecutorService-概述" class="headerlink" title="3.1. AbstractExecutorService 概述"></a>3.1. AbstractExecutorService 概述</h3><p><code>AbstractExecutorService</code> 是一个抽象类，实现了 <code>java.util.concurrent.ExecutorService</code><br><img src="/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.AbstractExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
-<p><code>AbstractExecutorService</code> 为 <code>ExecutorService</code> 中的部分通用逻辑提供了实现</p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-RunnableFuture-概述"><a href="#3-1-RunnableFuture-概述" class="headerlink" title="3.1. RunnableFuture 概述"></a>3.1. RunnableFuture 概述</h3><p><code>RunnableFuture</code> 是一个接口，继承了 <code>java.util.concurrent.Runnable</code>、<code>java.util.concurrent.Future&lt;V&gt;</code><br><img src="/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>详见源码：<code>ExecutorService</code><ol>
+<li>详见源码：<code>Runnable</code><ol>
 <li><code>obsidian</code> 内部链接：<ol>
-<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.ExecutorService源码解析</a></li>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Runnable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Runnable源码解析</a></li>
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/03/源码：java.util.concurrent.ExecutorService源码解析/</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Runnable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/02/源码：java.util.concurrent.Runnable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Future&lt;V&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurren.Future%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurren.Future＜V＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/09/02/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurren.Future%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/09/02/源码：java.util.concurren.Future＜V＞源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -330,21 +340,7 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="4-实例方法"><a href="#4-实例方法" class="headerlink" title="4. 实例方法"></a>4. 实例方法</h2><h3 id="4-1-实例具体方法"><a href="#4-1-实例具体方法" class="headerlink" title="4.1. 实例具体方法"></a>4.1. 实例具体方法</h3><h4 id="4-1-1-具体方法（普通）"><a href="#4-1-1-具体方法（普通）" class="headerlink" title="4.1.1. 具体方法（普通）"></a>4.1.1. 具体方法（普通）</h4><h5 id="4-1-1-1-＜T＞-RunnableFuture＜T＞-newTaskFor-Callable＜T＞-callable"><a href="#4-1-1-1-＜T＞-RunnableFuture＜T＞-newTaskFor-Callable＜T＞-callable" class="headerlink" title="4.1.1.1. ＜T＞ RunnableFuture＜T＞ newTaskFor(Callable＜T＞ callable)"></a>4.1.1.1. ＜T＞ RunnableFuture＜T＞ newTaskFor(Callable＜T＞ callable)</h5><p>该方法用于非阻塞将 <code>Callable</code> 任务封装成 <code>RunnableFuture</code> 类型（实则是封装成 <code>FutureTask</code>）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> &lt;T&gt; RunnableFuture&lt;T&gt; <span class="hljs-title function_">newTaskFor</span><span class="hljs-params">(Callable&lt;T&gt; callable)</span> &#123;<br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FutureTask</span>&lt;T&gt;(callable);<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="4-1-1-2-＜T＞-RunnableFuture＜T＞-newTaskFor-Runnable-runnable-T-value"><a href="#4-1-1-2-＜T＞-RunnableFuture＜T＞-newTaskFor-Runnable-runnable-T-value" class="headerlink" title="4.1.1.2. ＜T＞ RunnableFuture＜T＞ newTaskFor(Runnable runnable, T value)"></a>4.1.1.2. ＜T＞ RunnableFuture＜T＞ newTaskFor(Runnable runnable, T value)</h5><p>该方法用于非阻塞将 <code>Runnable</code> 任务封装成 <code>RunnableFuture</code> 类型（实则是封装成 <code>FutureTask</code>）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> &lt;T&gt; RunnableFuture&lt;T&gt; <span class="hljs-title function_">newTaskFor</span><span class="hljs-params">(Runnable runnable, T value)</span> &#123;<br>	<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FutureTask</span>&lt;T&gt;(runnable, value);<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="4-1-2-具体方法（实现）"><a href="#4-1-2-具体方法（实现）" class="headerlink" title="4.1.2. 具体方法（实现）"></a>4.1.2. 具体方法（实现）</h4><h5 id="4-1-2-1-ExecutorService-中接口方法的实现"><a href="#4-1-2-1-ExecutorService-中接口方法的实现" class="headerlink" title="4.1.2.1. ExecutorService 中接口方法的实现"></a>4.1.2.1. ExecutorService 中接口方法的实现</h5><h6 id="4-1-2-1-1-Future＜-＞-submit-Runnable-task"><a href="#4-1-2-1-1-Future＜-＞-submit-Runnable-task" class="headerlink" title="4.1.2.1.1. Future＜?＞ submit(Runnable task)"></a>4.1.2.1.1. Future＜?＞ submit(Runnable task)</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> * 实例具体方法（ExecutorService 接口方法 实现）：</span><br><span class="hljs-comment"> * public Future&lt;?&gt; submit(Runnable task)</span><br><span class="hljs-comment"> * --------------------------------------------</span><br><span class="hljs-comment"> * 1. 访问修饰符</span><br><span class="hljs-comment"> *      1. public</span><br><span class="hljs-comment"> *          1. 天下皆公（EveryWhere）</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 2. 非访问修饰符</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 3. 方法参数</span><br><span class="hljs-comment"> *      1. Runnable task</span><br><span class="hljs-comment"> *          1. 提交的 Runnable 任务</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 4. 返回值</span><br><span class="hljs-comment"> *      1. Runnable 任务封装成的 FutureTask 实例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 5. 抛出异常</span><br><span class="hljs-comment"> *      1. NullPointerException</span><br><span class="hljs-comment"> *          1. 传入的 Runnable 任务为 null</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * 6. 使用示例</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * ============================================</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> Future&lt;?&gt; submit(Runnable task) &#123;<br>	<br>	<span class="hljs-keyword">if</span> (task == <span class="hljs-literal">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>	<br>	<span class="hljs-comment">// 调用 AbstractExecutorService#newTaskFor，将 Runnable 任务封装成一种 RunnableFuture（实则是封装成 FutureTask）</span><br>	RunnableFuture&lt;Void&gt; ftask = newTaskFor(task, <span class="hljs-literal">null</span>);<br>	<br>	<span class="hljs-comment">// 调用 Executor#execute，提交一个 Runnable 任务</span><br>	execute(ftask);<br>	<br>	<span class="hljs-comment">// 返回 Runnable 任务封装成的 FutureTask</span><br>	<span class="hljs-comment">//</span><br>	<span class="hljs-comment">// 之所以返回该 FutureTask 实例，是因为我们可能需要通过该 FutureTask 实例，调用 Future&lt;V&gt; 相关的方法，去对该任务进行一系才足以</span><br>	<span class="hljs-keyword">return</span> ftask;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h6 id="4-1-2-1-2-＜T＞-Future＜T＞-submit-Runnable-task-T-result"><a href="#4-1-2-1-2-＜T＞-Future＜T＞-submit-Runnable-task-T-result" class="headerlink" title="4.1.2.1.2. ＜T＞ Future＜T＞ submit(Runnable task, T result)"></a>4.1.2.1.2. ＜T＞ Future＜T＞ submit(Runnable task, T result)</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Runnable task, T result)</span> &#123;<br>	<br>	<span class="hljs-keyword">if</span> (task == <span class="hljs-literal">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>	<br>	RunnableFuture&lt;T&gt; ftask = newTaskFor(task, result);<br>	<br>	execute(ftask);<br>	<br>	<span class="hljs-keyword">return</span> ftask;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h6 id="4-1-2-1-3-＜T＞-Future＜T＞-submit-Callable＜T＞-task"><a href="#4-1-2-1-3-＜T＞-Future＜T＞-submit-Callable＜T＞-task" class="headerlink" title="4.1.2.1.3. ＜T＞ Future＜T＞ submit(Callable＜T＞ task)"></a>4.1.2.1.3. ＜T＞ Future＜T＞ submit(Callable＜T＞ task)</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> &lt;T&gt; Future&lt;T&gt; <span class="hljs-title function_">submit</span><span class="hljs-params">(Callable&lt;T&gt; task)</span> &#123;<br>	<br>	<span class="hljs-keyword">if</span> (task == <span class="hljs-literal">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NullPointerException</span>();<br>	<br>	RunnableFuture&lt;T&gt; ftask = newTaskFor(task);<br>	<br>	execute(ftask);<br>	<br>	<span class="hljs-keyword">return</span> ftask;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="4-源码部分"><a href="#4-源码部分" class="headerlink" title="4. 源码部分"></a>4. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">RunnableFuture</span>&lt;V&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Runnable</span>, Future&lt;V&gt; &#123;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
 
@@ -385,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>源码：java.util.concurrent.AbstractExecutorService 源码解析</div>
-      <div>https://wangjia5289.github.io/2025/11/03/源码：java.util.concurrent.AbstractExecutorService源码解析/</div>
+      <div>源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/11/03/源码：java.util.concurrent.RunnableFuture＜V＞源码解析/</div>
     </div>
     <div class="license-meta">
       
@@ -430,9 +426,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/04/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ThreadPoolExecutor.Worker%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.ThreadPoolExecutor.Worker 源码解析">
+                      <a href="/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.FutureTask%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.FutureTask＜V＞ 源码解析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.concurrent.ThreadPoolExecutor.Worker 源码解析</span>
+                        <span class="hidden-mobile">源码：java.util.concurrent.FutureTask＜V＞ 源码解析</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -440,8 +436,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.RunnableFuture%EF%BC%9CV%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.RunnableFuture＜V＞ 源码解析</span>
+                      <a href="/2025/11/03/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ScheduledExecutorService%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.ScheduledExecutorService 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.ScheduledExecutorService 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
