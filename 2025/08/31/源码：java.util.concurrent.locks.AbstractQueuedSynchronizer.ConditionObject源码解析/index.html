@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;08&#x2F;31&#x2F;源码：java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject源码解析&#x2F;    3. 基础部分3.1. AbstractQueuedSynchronizer.Conditi">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
 <meta property="article:published_time" content="2025-08-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-18T11:23:20.295Z">
+<meta property="article:modified_time" content="2025-12-18T11:55:45.497Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-18T19:23:20+08:00
+                    Last updated on 2025-12-18T19:55:45+08:00
                   
                   
 
@@ -307,14 +307,14 @@
 <h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
 <li><p>Xmind</p>
 </li>
-<li><p>Edraw<br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx" srcset="/img/loading.gif" lazyload></p>
+<li><p>Edraw<br><img src="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/31/源码：java.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject源码解析/</a></p>
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-AbstractQueuedSynchronizer-ConditionObject-概述"><a href="#3-1-AbstractQueuedSynchronizer-ConditionObject-概述" class="headerlink" title="3.1. AbstractQueuedSynchronizer.ConditionObject 概述"></a>3.1. AbstractQueuedSynchronizer.ConditionObject 概述</h3><p><code>ConditionObject</code> 是一个具体类，是 <code>java.util.concurrent.locks.AbstractQueuedSynchronizer</code>. 的普通内部类，实现了 <code>java.util.concurrent.locks.Condition</code>、<code>java.io.Serializable</code><br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
-<p><code>ConditionObject</code> 维护了一个由 <code>AbstractQueuedSynchronizer.ConditionNode</code> 构建的，基于单向链表的队列。所谓的 “<code>AQS</code> 的条件队列” 其实就是在说 <code>ConditionObject</code> 维护的这条件队列<br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-AbstractQueuedSynchronizer-ConditionObject-概述"><a href="#3-1-AbstractQueuedSynchronizer-ConditionObject-概述" class="headerlink" title="3.1. AbstractQueuedSynchronizer.ConditionObject 概述"></a>3.1. AbstractQueuedSynchronizer.ConditionObject 概述</h3><p><code>ConditionObject</code> 是一个具体类，是 <code>java.util.concurrent.locks.AbstractQueuedSynchronizer</code>. 的普通内部类，实现了 <code>java.util.concurrent.locks.Condition</code>、<code>java.io.Serializable</code><br><img src="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<p><code>ConditionObject</code> 维护了一个由 <code>AbstractQueuedSynchronizer.ConditionNode</code> 构建的，基于单向链表的队列。所谓的 “<code>AQS</code> 的条件队列” 其实就是在说 <code>ConditionObject</code> 维护的这条件队列<br><img src="/2025/08/31/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedSynchronizer.ConditionObject%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
