@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;15&#x2F;源码：java.util.concurrent.CountedCompleter＜T＞源码解析&#x2F;    3. 基础部分3.1. CountedCompleter 概述CountedCompleter 是一个抽象类，继承了 java.util.concur">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T13:12:31.867Z">
+<meta property="article:modified_time" content="2025-12-18T11:23:19.912Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T21:12:31+08:00
+                    Last updated on 2025-12-18T19:23:19+08:00
                   
                   
 
@@ -311,7 +311,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-CountedCompleter-概述"><a href="#3-1-CountedCompleter-概述" class="headerlink" title="3.1. CountedCompleter 概述"></a>3.1. CountedCompleter 概述</h3><p><code>CountedCompleter</code> 是一个抽象类，继承了 <code>java.util.concurrent.ForkJoinTask＜V＞</code><br><img src="/2025/11/15/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-CountedCompleter-概述"><a href="#3-1-CountedCompleter-概述" class="headerlink" title="3.1. CountedCompleter 概述"></a>3.1. CountedCompleter 概述</h3><p><code>CountedCompleter</code> 是一个抽象类，继承了 <code>java.util.concurrent.ForkJoinTask＜V＞</code><br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CountedCompleter%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>CountedCompleter</code> 是一个 ”天书“ 级别的类，它设计的初衷是：解决 ”当一组任务完成后触发一个回调“ 的问题，但是它用起来非常的反直觉，并且极易出错</p>
 <p>而 <code>CompletableFuture</code> 就是 <code>CountedCompleter</code> 的 ”现代易用版“，我们可以直接使用 <code>CompletableFuture</code></p>
 <blockquote>
