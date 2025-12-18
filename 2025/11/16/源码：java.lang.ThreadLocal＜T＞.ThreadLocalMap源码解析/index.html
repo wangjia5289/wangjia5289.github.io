@@ -19,17 +19,17 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap源码解析&#x2F;    3. 基础部分3.1. ThreadLocal.ThreadLocalMap 概述ThreadLocal.ThreadLocalMap 是一个具体类，是">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap源码解析&#x2F;    3. 基础部分3.1. ThreadLocal.ThreadLocalMap 述ThreadLocal.ThreadLocalMap 是一个具体类，是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap源码解析&#x2F;    3. 基础部分3.1. ThreadLocal.ThreadLocalMap 概述ThreadLocal.ThreadLocalMap 是一个具体类，是">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;16&#x2F;源码：java.lang.ThreadLocal＜T＞.ThreadLocalMap源码解析&#x2F;    3. 基础部分3.1. ThreadLocal.ThreadLocalMap 述ThreadLocal.ThreadLocalMap 是一个具体类，是">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T12:12:56.637Z">
+<meta property="article:modified_time" content="2025-12-10T11:54:55.933Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          975 words
+          1k words
         
       </span>
     
@@ -292,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T20:12:56+08:00
+                    Last updated on 2025-12-10T19:54:55+08:00
                   
                   
 
@@ -312,8 +312,11 @@
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ThreadLocal-ThreadLocalMap-概述"><a href="#3-1-ThreadLocal-ThreadLocalMap-概述" class="headerlink" title="3.1. ThreadLocal.ThreadLocalMap 概述"></a>3.1. ThreadLocal.ThreadLocalMap 概述</h3><p><code>ThreadLocal.ThreadLocalMap</code> 是一个具体类，是 <code>ThreadLocal</code> 的静态内部类</p>
-<p><code>ThreadLocal.ThreadLocalMap</code> 是通过 <code>ThreadLocal.ThreadLocalMap-&gt;table</code> 存储数据的，该数组是由 <code>Entry</code> 构建的数组。每个 <code>Entry</code> 的 <code>key</code> 必须是 <code>ThreadLocal</code> 类型，而 <code>value</code> 是 <code>Object</code> 类型。因此，我们可以把它简单理解为：<br><img src="/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ThreadLocal-ThreadLocalMap-述"><a href="#3-1-ThreadLocal-ThreadLocalMap-述" class="headerlink" title="3.1. ThreadLocal.ThreadLocalMap 述"></a>3.1. ThreadLocal.ThreadLocalMap 述</h3><p><code>ThreadLocal.ThreadLocalMap</code> 是一个具体类，是 <code>ThreadLocal</code> 的静态内部类</p>
+<p><code>ThreadLocal.ThreadLocalMap</code> 是通过 <code>ThreadLocal.ThreadLocalMap-&gt;table</code> 存储数据的，而它又是一个由 <code>Entry</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">WeakReference</span>&lt;ThreadLocal&lt;?&gt;&gt; &#123;<br>	<br>	Object value;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>每个 <code>Entry</code> 的 <code>key</code> 必须是 <code>ThreadLocal</code> 类型，而 <code>value</code> 是 <code>Object</code> 类型。因此，我们可以把它简单理解为：<br><img src="/2025/11/16/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.ThreadLocal%EF%BC%9CT%EF%BC%9E.ThreadLocalMap%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -334,6 +337,7 @@
 </li>
 <li><code>ThreadLocal.ThreadLocalMap</code> 有没有位置冲突？它是如何解决位置冲突的？<ol>
 <li>有，它是采取 “线性探测” 的方式解决位置冲突的。即 如果 <code>i</code> 已经被占用，就尝试 <code>i + 1</code>，以此类推…</li>
+<li>在调用 <code>ThreadLocal#set</code> 或 <code>ThreadLocal#get</code> 后，如果发生了线性探测，那么在探测的过程中遇到某位置的 <code>Key</code> 为 <code>null</code> 时，会顺手把这个位置的 <code>Value</code> 清理了</li>
 </ol>
 </li>
 </ol>
@@ -357,7 +361,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="3-3-ThreadLocal-ThreadLocalMap-问题爆破"><a href="#3-3-ThreadLocal-ThreadLocalMap-问题爆破" class="headerlink" title="3.3. ThreadLocal.ThreadLocalMap 问题爆破"></a>3.3. ThreadLocal.ThreadLocalMap 问题爆破</h3><h4 id="3-3-1-数据-“脏读”"><a href="#3-3-1-数据-“脏读”" class="headerlink" title="3.3.1. 数据 “脏读”"></a>3.3.1. 数据 “脏读”</h4><p>某线程在处理上一个任务时，向 <code>ThreadLocal</code> 写入了数据，但是任务结束后没有清理。当该线程去处理下一个任务的时候，调用 <code>ThreadLocal#get</code> 会读到上一个任务遗留下来的数据</p>
+<h3 id="3-3-ThreadLocal-ThreadLocalMap-问题爆破"><a href="#3-3-ThreadLocal-ThreadLocalMap-问题爆破" class="headerlink" title="3.3. ThreadLocal.ThreadLocalMap 问题爆破"></a>3.3. ThreadLocal.ThreadLocalMap 问题爆破</h3><h4 id="3-3-1-数据-“脏读”"><a href="#3-3-1-数据-“脏读”" class="headerlink" title="3.3.1. 数据 “脏读”"></a>3.3.1. 数据 “脏读”</h4><p>某线程在处理上一个任务时，向 <code>ThreadLocal</code> 写入了数据，但是任务结束后没有清理数据。当该线程去处理下一个任务的时候，调用 <code>ThreadLocal#get</code> 会读到上一个任务遗留下来的数据</p>
 <p>为了解决这一问题，我们需要任务结束后调用 <code>Thread#remove</code> 删除数据</p>
 <hr>
 <h4 id="3-3-2-内存泄漏"><a href="#3-3-2-内存泄漏" class="headerlink" title="3.3.2. 内存泄漏"></a>3.3.2. 内存泄漏</h4><p>由于 <code>ThreadLocal.ThreadLocalMap</code> 的 <code>Key</code> 是弱引用，而 <code>Value</code> 是强引用。所以当 <code>ThreadLocal</code> 实例被回收后，<code>Key</code> 会变成 <code>null</code>，但是对应的 <code>Value</code> 仍然存在，无法被回收</p>
@@ -452,9 +456,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/19/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.AbstractQueuedLongSynchronizer%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.AbstractQueuedLongSynchronizer 源码解析">
+                      <a href="/2025/11/18/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.function.Supplier%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.function.Supplier＜T＞ 源码解析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.concurrent.locks.AbstractQueuedLongSynchronizer 源码解析</span>
+                        <span class="hidden-mobile">源码：java.util.function.Supplier＜T＞ 源码解析</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     

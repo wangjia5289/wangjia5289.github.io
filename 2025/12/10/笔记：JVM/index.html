@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 基础1. 类的加载阶段1.1. 类的加载阶段">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：JVM">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 基础1. 类的加载阶段1.1. 类的加载阶段">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-11.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-12.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-13.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png">
+<meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-18T11:04:06.656Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：JVM - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：JVM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-10 00:00" pubdate>
+          December 10, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：JVM</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-12-18T19:04:06+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/">http://blog.wangjia.ink/2025/12/10/笔记：JVM/</a></p>
+</li>
+<li><p>代码洪荒（面试宝典）<br>👉 <a target="_blank" rel="noopener" href="https://www.notion.so/JVM-2c5974fbda5e8009850fdcc845fe0424?source=copy_link">https://www.notion.so/JVM-2c5974fbda5e8009850fdcc845fe0424?source=copy_link</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="1-类的加载阶段"><a href="#1-类的加载阶段" class="headerlink" title="1. 类的加载阶段"></a>1. 类的加载阶段</h2><h3 id="1-1-类的加载阶段组成部分"><a href="#1-1-类的加载阶段组成部分" class="headerlink" title="1.1. 类的加载阶段组成部分"></a>1.1. 类的加载阶段组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-10.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><h3 id="2-1-运行时数据区组成部分"><a href="#2-1-运行时数据区组成部分" class="headerlink" title="2.1. 运行时数据区组成部分"></a>2.1. 运行时数据区组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-11.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-程序计数器"><a href="#2-2-程序计数器" class="headerlink" title="2.2. 程序计数器"></a>2.2. 程序计数器</h3><h4 id="2-2-1-程序计数器组成部分"><a href="#2-2-1-程序计数器组成部分" class="headerlink" title="2.2.1. 程序计数器组成部分"></a>2.2.1. 程序计数器组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-12.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-2-2-程序计数器概述"><a href="#2-2-2-程序计数器概述" class="headerlink" title="2.2.2. 程序计数器概述"></a>2.2.2. 程序计数器概述</h4><p>程序计数器（<code>PC</code> 寄存器）是用于记录当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址（需要注意的是：实际记录的是这条 <code>JVM</code> 字节码指令的偏移量）</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>程序寄存器既不会发生 <code>GC</code>，也不会抛出 <code>OutOfMemoryError</code> 错误</li>
+<li>程序寄存器是线程私有的区域，每个线程都拥有独立的程序寄存器</li>
+<li>执行引擎负责读取并执行该 <code>JVM</code> 字节码指令。执行引擎在进行读取时，会将 <code>JVM</code> 字节码指令的偏移量转换为 <code>JVM</code> 字节码指令的内存地址。当执行引擎读取到 JVM 字节码指令后，程序计数器就记录当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址，然后执行引擎才开始执行该 <code>JVM</code> 字节码指令</li>
+<li>如果线程执行的是 <code>native</code> 方法，那么程序计数器会记录 <code>undefined</code>（因为 <code>native</code> 方法本质上是离开了 <code>JVM</code> 的控制）</li>
+<li>猴哥的烦恼箱 <code>(｡•́︿•̀｡)</code>:<ol>
+<li>程序计数器为什么要记录当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址？<ol>
+<li>由于 <code>CPU</code> 需要频繁进行线程上下文切换，切换回来时必须知道从那里继续执行</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-2-3-程序计数器空间大小"><a href="#2-2-3-程序计数器空间大小" class="headerlink" title="2.2.3. 程序计数器空间大小"></a>2.2.3. 程序计数器空间大小</h4><p>程序计数器的内存空间大小几乎可以忽略不计（因为只需要记录一个内存地址）：</p>
+<ol>
+<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占 <code>4 byte</code></li>
+<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占 <code>8 byte</code></li>
+</ol>
+<hr>
+<h3 id="2-3-虚拟机栈—–"><a href="#2-3-虚拟机栈—–" class="headerlink" title="2.3. 虚拟机栈—–&gt;"></a>2.3. 虚拟机栈—–&gt;</h3><h4 id="2-3-1-虚拟机栈组成部分"><a href="#2-3-1-虚拟机栈组成部分" class="headerlink" title="2.3.1. 虚拟机栈组成部分"></a>2.3.1. 虚拟机栈组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-3-2-局部变量表"><a href="#2-3-2-局部变量表" class="headerlink" title="2.3.2. 局部变量表"></a>2.3.2. 局部变量表</h4><h5 id="2-3-2-1-局部变量表概述"><a href="#2-3-2-1-局部变量表概述" class="headerlink" title="2.3.2.1. 局部变量表概述"></a>2.3.2.1. 局部变量表概述</h5><p>局部变量表用于存储方法参数、局部变量<br><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-13.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>局部变量表是线程私有的区域，每个线程都拥有独立的局部变量表</li>
+<li>局部变量表能够存储基本数据类型的元素、引用数据类型的元素（需要注意的是：实际存储的是引用数据类型的元素的引用）、返回地址（即 <code>Java5</code> 的 <code>returnAddress</code> 类型，了解即可）</li>
+<li>静态变量、静态常量、实例变量、实例常量在不同阶段会被赋默认值，然而方法参数、局部变量并不会在某阶段被赋默认值。因此我们在使用方法参数、局部变量之前，必须对其进行手动赋值，否则会导致编译错误（例如你在实例变量中 <code>int i</code>，不手动赋值就可以正常使用。但是你在局部变量中 <code>int i</code>，不手动赋值肯定不可以正常使用）</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-3-2-2-局部变量表底层实现"><a href="#2-3-2-2-局部变量表底层实现" class="headerlink" title="2.3.2.2. 局部变量表底层实现"></a>2.3.2.2. 局部变量表底层实现</h5><p>局部变量表底层是基于一个一维数组实现的，该数组的基本存储单元是变量槽（<code>Slot</code>）：</p>
+<ol>
+<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>4 byte</code> 的内存空间</li>
+<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>8 byte</code> 的内存空间</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>当线程调用某类的构造方法、某实例的实例方法时，指向被构造的实例、调用的实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中<ol>
+<li>需要注意的是：<ol>
+<li>这是 <code>Java</code> 中的一个语法糖，也是为什么我们能在实例方法中使用 <code>this</code> 的原因</li>
+<li>由于线程调用某类、某实例的静态方法时，根本不存在 <code>this</code>，也就导致我们不能在静态方法中使用 <code>this</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-3-2-3-局部变量表空间大小"><a href="#2-3-2-3-局部变量表空间大小" class="headerlink" title="2.3.2.3. 局部变量表空间大小"></a>2.3.2.3. 局部变量表空间大小</h5><p>局部变量表的内存空间大小在编译阶段就已经确定了，在运行时无法更改：</p>
+<ol>
+<li>占用内存空间 <code>32 bit</code> 及以下的数据（例如 <code>byte</code>、<code>short</code>、<code>int</code>、<code>float</code>、<code>char</code>、<code>boolean</code> 数据类型的数据、引用数据类型的数据、返回地址）占用一个 <code>Slot</code></li>
+<li>占用内存空间 <code>64 bit</code> 的数据（例如 <code>long</code>、<code>double</code> 数据类型的数据）占用两个 <code>Slot</code></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在 <code>JVM</code> 中，<code>byte</code>、<code>short</code>、<code>char</code>、<code>boolean</code> 数据类型的数据，实际上是被当作 <code>int</code> 数据类型的数据进行处理的（因为 <code>int</code> 数据类型的范围涵盖它们，而且 <code>JVM</code> 中并没有专门处理 <code>byte</code>、<code>short</code>、<code>char</code>、<code>boolean</code> 数据类型的数据的 <code>JVM</code> 字节码指令（需要注意的是：如果这些数据类型的数据在堆区中（例如是某实例的实例变量），该占用多少内存空间就占用多少内存空间））</li>
+<li><code>Slot</code> 是可以复用的（例如当局部变量 <code>A</code> 的生命周期结束后，如果声明了新的局部变量 <code>B</code>，那么 <code>B</code> 可能会复用 <code>A</code> 的 <code>Slot</code>，从而达到节省内存空间的目的）以如下代码为例，局部变量 <code>b</code> 会复用局部变量 <code>a</code> 的 <code>Slot</code>，因此整个 <code>main</code> 方法的局部变量表最大只需要 <code>2</code> 个 <code>Slot</code></li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>	    <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;  <br>            System.out.println(a);  <br>        &#125;  <br>		  <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;  <br>            System.out.println(b);  <br>        &#125;  <br>        <br>    &#125;  <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-4-方法返回地址"><a href="#2-4-方法返回地址" class="headerlink" title="2.4. 方法返回地址"></a>2.4. 方法返回地址</h4><p>当线程调用某方法时，<code>JVM</code> 会先把程序计数器中的内容（即当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址）记录在该方法对应的栈帧中的方法返回地址中，然后再开始执行该方法</p>
+<p>如果线程执行方法的过程中未抛出异常，那么当线程执行到以下 <code>JVM</code> 字节码指令时，就会将执行的方法对应的栈帧中的方法返回地址中的内容取出来，并记录在程序计数器中（需要注意的是：这就是正常退出（未抛出异常））：<br>    1. <code>ireturn</code><br>        1. 返回 <code>byte</code>、<code>short</code>、<code>int</code>、<code>char</code>、<code>boolean</code>  数据类型的数据<br>    2. <code>lreturn</code><br>        1. 返回 <code>long</code> 数据类型的数据<br>    3. <code>freturn</code><br>        1. 返回 <code>float</code> 数据类型的数据<br>    4. <code>dreturn</code><br>        1. 返回 <code>double</code> 数据类型的数据<br>    5. <code>areturn</code><br>        1. 返回引用数据类型的数据<br>    6. <code>return</code><br>        1. 返回（需要注意的是：适用于无返回值的方法）</p>
+<p>但是如果线程执行方法的过程中抛出了异常，那么线程就会查找方法区中该方法对应的类对应的类元数据区中的方法信息中的异常处理器表，这个表中记录了 From、To、Target、Type，线程会拿着行号从 From 和 To 之间检查，如果 Type 匹配，就跳到 Target 处执行（即 catch 块），如果未匹配，就将该栈帧弹出，将异常抛给调用者</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>方法退出分为方法正常退出（发生异常、未发生异常）、方法异常退出（需要注意的是：方法正常退出（发生异常）是在 catch 块中捕获并处理了异常，并且没有抛出新的异常）</li>
+<li>如果我们捕获并处理异常时，抛出一个新的异常，同样会再去查表，但是如果我们没有在 catch 块中嵌套 catch，很可能无法捕获并处理这个新的异常</li>
+<li>在正常退出（发生异常）中，发生异常时，程序的执行流程会立即跳转到对应的 <code>catch</code> 块进行处理。异常被捕获并处理后，不会回到原先抛出异常的位置继续向下执行，而是直接退出</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-5-一些附加信息"><a href="#2-5-一些附加信息" class="headerlink" title="2.5. 一些附加信息"></a>2.5. 一些附加信息</h4><p>在 <code>JVM</code> 规范中，允许在栈帧中添加一些附加信息（例如调试信息、性能分析信息等），从而达到优化、调试等的目的</p>
+<hr>
+<h3 id="2-6-本地方法栈"><a href="#2-6-本地方法栈" class="headerlink" title="2.6. 本地方法栈"></a>2.6. 本地方法栈</h3><p>本地方法栈主要用于 <code>native</code> 方法</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在 <code>HotSpot JVM</code> 中，虚拟机栈、本地方法栈被合并为同一个栈</li>
+<li>并非所有类型的 <code>JVM</code> 都支持 <code>native</code> 方法（因为在 <code>JVM</code> 规范中，并没有明确要求实现本地方法栈时使用的语言、实现的方式等。甚至如果不打算支持 <code>native</code> 方法，也可以无需实现本地方法栈）</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-7-堆区"><a href="#2-7-堆区" class="headerlink" title="2.7. 堆区"></a>2.7. 堆区</h3><h4 id="2-7-1-堆区组成部分"><a href="#2-7-1-堆区组成部分" class="headerlink" title="2.7.1. 堆区组成部分"></a>2.7.1. 堆区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-2.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-7-2-堆区概述"><a href="#2-7-2-堆区概述" class="headerlink" title="2.7.2. 堆区概述"></a>2.7.2. 堆区概述</h4><p>堆区是 <code>JVM</code> 管理内存空间的核心区域，也是整个 <code>JVM</code> 中内存空间最大的区域，几乎所有的实例都会在堆区分配内存空间（因为需要考虑逃逸分析）</p>
+<blockquote>
+<p>[!NOTE] Title</p>
+<ol>
+<li>堆区既会发生 <code>GC</code>，也会抛出 <code>OutOfMemoryError</code> 错误：<ol>
+<li><code>OutOfMemoryError: Java heap space</code><ol>
+<li>堆区内存空间不足</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>堆区是线程共享的区域（但是需要考虑 <code>TLAB</code>），在单个 <code>JVM</code> 中全局唯一</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-7-3-堆区空间大小"><a href="#2-7-3-堆区空间大小" class="headerlink" title="2.7.3. 堆区空间大小"></a>2.7.3. 堆区空间大小</h4><p>堆区在运行时具有初始的内存空间的大小（需要注意的是：由 <code>-Xms512m</code> 决定），并支持动态扩展内存空间，但是受到最大内存空间的限制（需要注意的是：由 <code>-Xmx2048m</code> 决定），一旦超出该限制，可能会抛出 <code>OOM</code> 错误（因为需要考虑 <code>GC</code>）</p>
+<hr>
+<h4 id="2-7-4-实例在堆区分配内存空间相关流程"><a href="#2-7-4-实例在堆区分配内存空间相关流程" class="headerlink" title="2.7.4. 实例在堆区分配内存空间相关流程"></a>2.7.4. 实例在堆区分配内存空间相关流程</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-3.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-7-5-TLAB"><a href="#2-7-5-TLAB" class="headerlink" title="2.7.5. TLAB"></a>2.7.5. TLAB</h4><h5 id="2-7-5-1-TLAB-概述"><a href="#2-7-5-1-TLAB-概述" class="headerlink" title="2.7.5.1. TLAB 概述"></a>2.7.5.1. TLAB 概述</h5><p>想象这样一个问题：<code>JVM</code> 为了快速为实例在堆区分配内存空间，采用了 “指针碰撞” 技术（即使用一个指针指向 <code>Eden</code> 区已经使用的内存空间的边界，在为实例分配内存空间时，只需要检查剩余的内存空间是否足够，然后按需顺序偏移指针，即可完成实例在堆区分配内存空间）。</p>
+<p>但是我们知道：堆区是线程共享的区域。那么在多线程并发场景下，就会出现多线程并发对堆区进行修改的情况。传统的解决方案是加锁，但这会成为一个显著的性能瓶颈</p>
+<p>为了解决这一问题，<code>JVM</code> 提供了 <code>TLAB</code>。它将实例在线程共享的堆区分配内存空间，变成实例在线程私有的 <code>TLAB</code> 分配内存空间</p>
+<hr>
+<h5 id="2-7-5-2-TLAB-相关流程"><a href="#2-7-5-2-TLAB-相关流程" class="headerlink" title="2.7.5.2. TLAB 相关流程"></a>2.7.5.2. TLAB 相关流程</h5><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>申请新 <code>TLAB</code> 时，是通过 <code>CAS</code> 保证多线程并发安全的（需要注意的是：旧 <code>TLAB</code> 的剩余空间会使用一个 <code>int</code> 类型的数组填充，这部分空间会被 <code>GC</code>）</li>
+<li><code>JVM</code> 为了快速为实例在 <code>TLAB</code> 分配内存空间，采用了 “指针碰撞” 技术（因为 <code>TLAB</code> 是线程私有的，因此不存在多线程并发场景下的安全问题）</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-7-6-逃逸分析"><a href="#2-7-6-逃逸分析" class="headerlink" title="2.7.6. 逃逸分析"></a>2.7.6. 逃逸分析</h4><h5 id="2-7-6-1-逃逸分析概述"><a href="#2-7-6-1-逃逸分析概述" class="headerlink" title="2.7.6.1. 逃逸分析概述"></a>2.7.6.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的方法之外的方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>从工程实践的角度来看：能使用方法参数、局部变量，就使用方法参数、局部变量</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-7-6-2-逃逸分析相关分类"><a href="#2-7-6-2-逃逸分析相关分类" class="headerlink" title="2.7.6.2. 逃逸分析相关分类"></a>2.7.6.2. 逃逸分析相关分类</h5><ol>
+<li>方法逃逸</li>
+<li>线程逃逸</li>
+</ol>
+<h5 id="2-7-6-3-方法逃逸"><a href="#2-7-6-3-方法逃逸" class="headerlink" title="2.7.6.3. 方法逃逸"></a>2.7.6.3. 方法逃逸</h5><p>方法逃逸是指：在某方法中调用某对象的构造方法，创建某实例，但是该实例作为该方法的返回结果返回给了其他方法，导致其他方法可能访问该实例</p>
+<hr>
+<h5 id="2-7-6-4-线程逃逸"><a href="#2-7-6-4-线程逃逸" class="headerlink" title="2.7.6.4. 线程逃逸"></a>2.7.6.4. 线程逃逸</h5><p>线程逃逸是指：某实例被赋值给静态变量、静态常量，导致其他线程可能访问该实例</p>
+<hr>
+<h5 id="2-7-6-5-实例没有逃逸时，JIT-对其进行的优化"><a href="#2-7-6-5-实例没有逃逸时，JIT-对其进行的优化" class="headerlink" title="2.7.6.5. 实例没有逃逸时，JIT 对其进行的优化"></a>2.7.6.5. 实例没有逃逸时，JIT 对其进行的优化</h5><ol>
+<li>栈上分配</li>
+<li>标量替换</li>
+<li>锁消除</li>
+</ol>
+<h6 id="2-7-6-5-1-栈上分配"><a href="#2-7-6-5-1-栈上分配" class="headerlink" title="2.7.6.5.1. 栈上分配"></a>2.7.6.5.1. 栈上分配</h6><p>我们知道 “几乎所有的实例都会在堆区分配内存空间”，但是堆区中的实例是需要被 <code>GC</code> 的</p>
+<p>而栈上分配是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将实例在堆区分配内存空间，变成实例在栈帧分配内存空间。这样实例就可以随栈帧被弹出而被自动销毁，完全不需要被 <code>GC</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>HotSpot JVM</code> 并没有实现真正意义上的栈上分配（因为 <code>HotSpot JVM</code> 主要是通过标量替换实现优化的）</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-7-6-5-2-标量替换"><a href="#2-7-6-5-2-标量替换" class="headerlink" title="2.7.6.5.2. 标量替换"></a>2.7.6.5.2. 标量替换</h6><hr>
+<h6 id="2-7-6-5-3-锁销除"><a href="#2-7-6-5-3-锁销除" class="headerlink" title="2.7.6.5.3. 锁销除"></a>2.7.6.5.3. 锁销除</h6><p>锁销除是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将该实例上加的 <code>synchronized</code> 锁去掉（因为根本不存在多线程并发场景下的安全问题）</p>
+<hr>
+<h3 id="2-8-方法区"><a href="#2-8-方法区" class="headerlink" title="2.8. 方法区"></a>2.8. 方法区</h3><h4 id="2-8-1-方法区具体细节"><a href="#2-8-1-方法区具体细节" class="headerlink" title="2.8.1. 方法区具体细节"></a>2.8.1. 方法区具体细节</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>每一个实例都会持有一个指向其对应的类的类元数据区的引用（需要注意的是：持有的位置是对象头中的 <code>Klass Word</code>）</li>
+<li>在 <code>Java8</code> 之前，静态遍历、静态常量保存在方法区。但是在 <code>Java8</code> 之后，静态变量、静态常量保存在堆区中（因为静态变量、静态常量保存在实例对应的类的类对象中，而类对象一定是在堆区分配内存空间的（因为 <code>JIT</code> 不会对类对象进行逃逸分析，因为无需也不应该对其进行逃逸分析，而且也无法对其进行逃逸分析），所以静态变量、静态常量保存在堆区）</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="3-执行引擎"><a href="#3-执行引擎" class="headerlink" title="3. 执行引擎"></a>3. 执行引擎</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/JVM/" class="category-chain-item">JVM</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：JVM</div>
+      <div>https://wangjia5289.github.io/2025/12/10/笔记：JVM/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 10, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/11/%E7%AC%94%E8%AE%B0%EF%BC%9AKafka/" title="笔记：Kafka">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Kafka</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%80%A7%E8%83%BD/" title="笔记：Java 性能">
+                        <span class="hidden-mobile">笔记：Java 性能</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

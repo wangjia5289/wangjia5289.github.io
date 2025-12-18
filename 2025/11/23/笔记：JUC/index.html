@@ -16,7 +16,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#373737">
-  <meta name="author" content="霸天">
+  <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
     <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;23&#x2F;笔记：JUC&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层操作系统层的线程状态，是操作系统内">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-9.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-10.png">
 <meta property="article:published_time" content="2025-11-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T13:18:18.720Z">
+<meta property="article:modified_time" content="2025-12-07T07:50:52.350Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
@@ -302,7 +302,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T21:18:18+08:00
+                    Last updated on 2025-12-07T15:50:52+08:00
                   
                   
 
@@ -528,7 +528,6 @@
 <li>异步处理</li>
 <li>降级处理</li>
 <li>启动告警</li>
-<li>异步编程回调</li>
 </ol>
 </li>
 <li>随机避让</li>
@@ -549,7 +548,7 @@
 <h5 id="5-3-2-3-及时止损"><a href="#5-3-2-3-及时止损" class="headerlink" title="5.3.2.3. 及时止损"></a>5.3.2.3. 及时止损</h5><p>及时止损是指：当通过限时阻塞（超时未获取）或非阻塞（尝试一次未获取）确定拿不到资源的时候，不再继续等待，而是采取以下策略：</p>
 <ol>
 <li>异步处理<ol>
-<li>利用 ”削峰填谷“ 的思想，将请求写入 <code>MQ</code></li>
+<li>异步编程或借助 <code>MQ</code> 实现 “削峰填谷”</li>
 </ol>
 </li>
 <li>降级处理</li>
@@ -806,7 +805,7 @@
 </ol>
 </li>
 <li><code>Hexo</code> 链接：<ol>
-<li></li>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/09/源码：java.util.concurrent.locks.ReentrantReadWriteLock源码解析/</a></li>
 </ol>
 </li>
 </ol>
@@ -1158,7 +1157,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="2-异步编程实现方式"><a href="#2-异步编程实现方式" class="headerlink" title="2. 异步编程实现方式"></a>2. 异步编程实现方式</h2><h3 id="2-1-伪异步"><a href="#2-1-伪异步" class="headerlink" title="2.1. 伪异步"></a>2.1. 伪异步</h3><p>伪异步是指：当前线程将我们执行的 <code>Java</code> 代码中，一些耗时的操作交给其他线程（通常使用专门的线程池）去执行，当前线程可以直接继续向下执行</p>
+<h2 id="2-异步编程的实现方式"><a href="#2-异步编程的实现方式" class="headerlink" title="2. 异步编程的实现方式"></a>2. 异步编程的实现方式</h2><h3 id="2-1-伪异步"><a href="#2-1-伪异步" class="headerlink" title="2.1. 伪异步"></a>2.1. 伪异步</h3><p>伪异步是指：当前线程将我们执行的 <code>Java</code> 代码中，一些耗时的操作交给其他线程（通常使用专门的线程池）去执行，当前线程可以直接继续向下执行</p>
 <hr>
 <h3 id="2-2-伪异步-异步编程等待"><a href="#2-2-伪异步-异步编程等待" class="headerlink" title="2.2. 伪异步 + 异步编程等待"></a>2.2. 伪异步 + 异步编程等待</h3><p> 伪异步 + 异步编程等待是指：虽然当前线程将我们执行的 <code>Java</code> 代码中，一些耗时的操作交给其他线程（通常使用专门的线程池）去执行，但当前线程仍然需要该任务的返回结果，所以当前线程必须在后续某个时刻获取该任务的返回结果</p>
 <p>通常的做法是：提交任务后返回一个凭证（即 <code>Future</code>，常见具体实现类主要包括 <code>FutureTask</code>、<code>ScheduledFutureTask</code>、<code>ForkJoinTask</code>），然后根据这个凭证在需要结果时获取结果，然后再继续向下执行</p>
@@ -1224,7 +1223,7 @@
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>霸天</div>
+          <div>咸阳猴🐒</div>
         </div>
       
       

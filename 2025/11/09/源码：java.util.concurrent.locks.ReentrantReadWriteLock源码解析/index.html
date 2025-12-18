@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T13:13:17.443Z">
+<meta property="article:modified_time" content="2025-12-01T15:01:27.082Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T21:13:17+08:00
+                    Last updated on 2025-12-01T23:01:27+08:00
                   
                   
 
@@ -312,7 +312,7 @@
 </ol>
 <hr>
 <h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ReentrantReadWriteLock-概述"><a href="#3-1-ReentrantReadWriteLock-概述" class="headerlink" title="3.1. ReentrantReadWriteLock 概述"></a>3.1. ReentrantReadWriteLock 概述</h3><p><code>ReentrantReadWriteLock</code> 是一个具体类，实现了 <code>java.util.concurrent.locks.ReadWriteLock</code>、<code>java.io.Serializable</code><br><img src="/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
-<p><code>ReentrantReadWriteLock</code> 是一种可重入、悲观、公平或非公平、互斥或共享的锁，并且是使用 <code>AQS</code> 实现的混合模式的同步器。State 和共享资源分别表示以下含义：</p>
+<p><code>ReentrantReadWriteLock</code> 是一种可重入、悲观、公平或非公平、互斥或共享的锁，并且是使用 <code>AQS</code> 实现的混合模式的同步器。<code>State</code> 和共享资源分别表示以下含义：</p>
 <ol>
 <li><code>State</code> 表示写锁或读锁的重入次数<ol>
 <li><code>State</code> 被 <code>ReentrantReadWriteLock</code> 拆分为两部分，分别表示写锁和读锁的重入次数<ol>
@@ -391,7 +391,7 @@
 </blockquote>
 <hr>
 <h3 id="3-3-ReentrantReadWriteLock-适用场景"><a href="#3-3-ReentrantReadWriteLock-适用场景" class="headerlink" title="3.3. ReentrantReadWriteLock 适用场景"></a>3.3. ReentrantReadWriteLock 适用场景</h3><h4 id="3-3-1-读多写少"><a href="#3-3-1-读多写少" class="headerlink" title="3.3.1. 读多写少"></a>3.3.1. 读多写少</h4><hr>
-<h2 id="4-内部类"><a href="#4-内部类" class="headerlink" title="4. 内部类"></a>4. 内部类</h2><h3 id="4-1-Sync"><a href="#4-1-Sync" class="headerlink" title="4.1. Sync"></a>4.1. Sync</h3><figure class="highlight node-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs node-repl"><span class="hljs-meta prompt_">...</span><br></code></pre></td></tr></table></figure>
+<h2 id="4-内部类"><a href="#4-内部类" class="headerlink" title="4. 内部类"></a>4. 内部类</h2><h3 id="4-1-Sync"><a href="#4-1-Sync" class="headerlink" title="4.1. Sync"></a>4.1. Sync</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// ...</span><br></code></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="4-2-FairSync"><a href="#4-2-FairSync" class="headerlink" title="4.2. FairSync"></a>4.2. FairSync</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FairSync</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Sync</span> &#123;<br><br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> -<span class="hljs-number">2274990926593161451L</span>;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">writerShouldBlock</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> hasQueuedPredecessors();<br>	&#125;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">readerShouldBlock</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> hasQueuedPredecessors();<br>	&#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -505,8 +505,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/11/07/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.Lock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.Lock 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.locks.Lock 源码解析</span>
+                      <a href="/2025/11/07/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.ReadWriteLock 源码解析">
+                        <span class="hidden-mobile">源码：java.util.concurrent.locks.ReadWriteLock 源码解析</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

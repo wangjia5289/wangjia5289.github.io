@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. Py 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具：Obsidian 图片排序与重命名">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/12/16/%E5%B7%A5%E5%85%B7%EF%BC%9AObsidian%E5%9B%BE%E7%89%87%E6%8E%92%E5%BA%8F%E4%B8%8E%E9%87%8D%E5%91%BD%E5%90%8D/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. Py 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-16T14:04:12.363Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>工具：Obsidian 图片排序与重命名 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="工具：Obsidian 图片排序与重命名"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-16 00:00" pubdate>
+          December 16, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">工具：Obsidian 图片排序与重命名</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-12-16T22:04:12+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-Py-代码"><a href="#1-Py-代码" class="headerlink" title="1. Py 代码"></a>1. Py 代码</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> tkinter <span class="hljs-keyword">as</span> tk<br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> filedialog, messagebox, ttk<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> uuid<br><span class="hljs-keyword">import</span> zipfile<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">from</span> urllib.parse <span class="hljs-keyword">import</span> unquote<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ModernRenamerApp</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, root</span>):<br>        <span class="hljs-variable language_">self</span>.root = root<br>        <span class="hljs-variable language_">self</span>.root.title(<span class="hljs-string">&quot;Obsidian 图片排序与重命名&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.root.geometry(<span class="hljs-string">&quot;780x750&quot;</span>)<br>        <br>        <span class="hljs-comment"># --- 现代 UI 配色与字体配置 ---</span><br>        <span class="hljs-variable language_">self</span>.colors = &#123;<br>            <span class="hljs-string">&quot;bg&quot;</span>: <span class="hljs-string">&quot;#f0f2f5&quot;</span>,          <span class="hljs-comment"># 整体背景灰</span><br>            <span class="hljs-string">&quot;card_bg&quot;</span>: <span class="hljs-string">&quot;#ffffff&quot;</span>,     <span class="hljs-comment"># 卡片背景白</span><br>            <span class="hljs-string">&quot;primary&quot;</span>: <span class="hljs-string">&quot;#1890ff&quot;</span>,     <span class="hljs-comment"># 主色调蓝</span><br>            <span class="hljs-string">&quot;success&quot;</span>: <span class="hljs-string">&quot;#52c41a&quot;</span>,     <span class="hljs-comment"># 成功色绿</span><br>            <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;#333333&quot;</span>,        <span class="hljs-comment">#由于文字</span><br>            <span class="hljs-string">&quot;gray_text&quot;</span>: <span class="hljs-string">&quot;#888888&quot;</span>    <span class="hljs-comment"># 辅助文字</span><br>        &#125;<br>        <span class="hljs-variable language_">self</span>.root.configure(bg=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;bg&quot;</span>])<br>        <br>        <span class="hljs-comment"># 配置全局样式</span><br>        <span class="hljs-variable language_">self</span>.setup_styles()<br><br>        <span class="hljs-comment"># --- 变量初始化 ---</span><br>        <span class="hljs-variable language_">self</span>.md_path = tk.StringVar()<br>        <span class="hljs-variable language_">self</span>.attachment_dir = tk.StringVar()<br>        <span class="hljs-variable language_">self</span>.enable_backup_var = tk.BooleanVar(value=<span class="hljs-literal">True</span>) <br>        <span class="hljs-variable language_">self</span>.backup_path_var = tk.StringVar()<br>        <span class="hljs-variable language_">self</span>.ext_var = tk.StringVar(value=<span class="hljs-string">&quot;png&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.delete_unused_var = tk.BooleanVar(value=<span class="hljs-literal">False</span>)<br><br>        <span class="hljs-comment"># --- 构建界面 ---</span><br>        <span class="hljs-variable language_">self</span>.create_widgets()<br>        <span class="hljs-variable language_">self</span>.toggle_backup_state()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_styles</span>(<span class="hljs-params">self</span>):<br>        style = ttk.Style()<br>        style.theme_use(<span class="hljs-string">&#x27;clam&#x27;</span>)  <span class="hljs-comment"># 使用 clam 作为基础来自定义</span><br><br>        <span class="hljs-comment"># 自定义 Frame 背景（用于卡片效果）</span><br>        style.configure(<span class="hljs-string">&quot;Card.TLabelframe&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>], relief=<span class="hljs-string">&quot;flat&quot;</span>, borderwidth=<span class="hljs-number">0</span>)<br>        style.configure(<span class="hljs-string">&quot;Card.TLabelframe.Label&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>], foreground=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;primary&quot;</span>], font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-string">&quot;bold&quot;</span>))<br>        style.configure(<span class="hljs-string">&quot;Card.TFrame&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>])<br>        <br>        <span class="hljs-comment"># 普通按钮</span><br>        style.configure(<span class="hljs-string">&quot;TButton&quot;</span>, padding=<span class="hljs-number">6</span>, relief=<span class="hljs-string">&quot;flat&quot;</span>, background=<span class="hljs-string">&quot;#e6e6e6&quot;</span>, foreground=<span class="hljs-string">&quot;#333&quot;</span>)<br>        style.<span class="hljs-built_in">map</span>(<span class="hljs-string">&quot;TButton&quot;</span>, background=[(<span class="hljs-string">&quot;active&quot;</span>, <span class="hljs-string">&quot;#d9d9d9&quot;</span>)])<br><br>        <span class="hljs-comment"># 强调按钮 (Action Button)</span><br>        style.configure(<span class="hljs-string">&quot;Accent.TButton&quot;</span>, font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">12</span>, <span class="hljs-string">&quot;bold&quot;</span>), background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;primary&quot;</span>], foreground=<span class="hljs-string">&quot;white&quot;</span>, borderwidth=<span class="hljs-number">0</span>)<br>        style.<span class="hljs-built_in">map</span>(<span class="hljs-string">&quot;Accent.TButton&quot;</span>, background=[(<span class="hljs-string">&quot;active&quot;</span>, <span class="hljs-string">&quot;#40a9ff&quot;</span>)]) <span class="hljs-comment"># 悬停变亮</span><br><br>        <span class="hljs-comment"># 勾选框和标签</span><br>        style.configure(<span class="hljs-string">&quot;TCheckbutton&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>], font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">10</span>))<br>        style.configure(<span class="hljs-string">&quot;TLabel&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>], font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">10</span>), foreground=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;text&quot;</span>])<br>        style.configure(<span class="hljs-string">&quot;Gray.TLabel&quot;</span>, background=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;card_bg&quot;</span>], font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">9</span>), foreground=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;gray_text&quot;</span>])<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_widgets</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-comment"># 主容器 (带内边距)</span><br>        main_container = tk.Frame(<span class="hljs-variable language_">self</span>.root, bg=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;bg&quot;</span>])<br>        main_container.pack(fill=<span class="hljs-string">&quot;both&quot;</span>, expand=<span class="hljs-literal">True</span>, padx=<span class="hljs-number">20</span>, pady=<span class="hljs-number">20</span>)<br><br>        <span class="hljs-comment"># === 卡片 1：资源选择 ===</span><br>        <span class="hljs-variable language_">self</span>.create_card(main_container, <span class="hljs-string">&quot;1. 资源选择&quot;</span>, <span class="hljs-variable language_">self</span>.build_resource_section)<br><br>        <span class="hljs-comment"># === 卡片 2：备份设置 ===</span><br>        <span class="hljs-variable language_">self</span>.create_card(main_container, <span class="hljs-string">&quot;2. 安全备份&quot;</span>, <span class="hljs-variable language_">self</span>.build_backup_section)<br><br>        <span class="hljs-comment"># === 卡片 3：规则与执行 ===</span><br>        <span class="hljs-variable language_">self</span>.create_card(main_container, <span class="hljs-string">&quot;3. 执行配置&quot;</span>, <span class="hljs-variable language_">self</span>.build_action_section)<br><br>        <span class="hljs-comment"># === 日志区域 (不带卡片标题，显得更像控制台) ===</span><br>        log_frame = tk.Frame(main_container, bg=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;bg&quot;</span>])<br>        log_frame.pack(fill=<span class="hljs-string">&quot;both&quot;</span>, expand=<span class="hljs-literal">True</span>, pady=(<span class="hljs-number">10</span>, <span class="hljs-number">0</span>))<br>        <br>        tk.Label(log_frame, text=<span class="hljs-string">&quot;运行日志&quot;</span>, bg=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;bg&quot;</span>], fg=<span class="hljs-variable language_">self</span>.colors[<span class="hljs-string">&quot;gray_text&quot;</span>], font=(<span class="hljs-string">&quot;微软雅黑&quot;</span>, <span class="hljs-number">9</span>)).pack(anchor=<span class="hljs-string">&quot;w&quot;</span>, pady=(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>))<br>        <br>        <span class="hljs-variable language_">self</span>.log_text = tk.Text(log_frame, height=<span class="hljs-number">10</span>, font=(<span class="hljs-string">&quot;Consolas&quot;</span>, <span class="hljs-number">10</span>), relief=<span class="hljs-string">&quot;flat&quot;</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">10</span>, borderwidth=<span class="hljs-number">0</span>)<br>        <span class="hljs-variable language_">self</span>.log_text.pack(fill=<span class="hljs-string">&quot;both&quot;</span>, expand=<span class="hljs-literal">True</span>)<br>        <br>        <span class="hljs-comment"># 给日志加个简单的边框效果</span><br>        <span class="hljs-variable language_">self</span>.log_text.config(highlightbackground=<span class="hljs-string">&quot;#d9d9d9&quot;</span>, highlightthickness=<span class="hljs-number">1</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_card</span>(<span class="hljs-params">self, parent, title, build_func</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;辅助函数：快速创建白色卡片风格的区域&quot;&quot;&quot;</span><br>        card = ttk.LabelFrame(parent, text=<span class="hljs-string">f&quot; <span class="hljs-subst">&#123;title&#125;</span> &quot;</span>, style=<span class="hljs-string">&quot;Card.TLabelframe&quot;</span>, padding=<span class="hljs-number">15</span>)<br>        card.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>))<br>        build_func(card)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_resource_section</span>(<span class="hljs-params">self, parent</span>):<br>        <span class="hljs-comment"># 使用 Grid 布局让输入框对其</span><br>        parent.columnconfigure(<span class="hljs-number">1</span>, weight=<span class="hljs-number">1</span>) <span class="hljs-comment"># 让中间列自动拉伸</span><br><br>        ttk.Label(parent, text=<span class="hljs-string">&quot;MD 文件:&quot;</span>).grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">0</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>, pady=<span class="hljs-number">5</span>)<br>        ttk.Entry(parent, textvariable=<span class="hljs-variable language_">self</span>.md_path).grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">1</span>, sticky=<span class="hljs-string">&quot;ew&quot;</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">5</span>)<br>        ttk.Button(parent, text=<span class="hljs-string">&quot;📂 浏览&quot;</span>, command=<span class="hljs-variable language_">self</span>.select_md, width=<span class="hljs-number">8</span>).grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">2</span>, pady=<span class="hljs-number">5</span>)<br><br>        ttk.Label(parent, text=<span class="hljs-string">&quot;附件文件夹:&quot;</span>).grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">0</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>, pady=<span class="hljs-number">5</span>)<br>        ttk.Entry(parent, textvariable=<span class="hljs-variable language_">self</span>.attachment_dir).grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">1</span>, sticky=<span class="hljs-string">&quot;ew&quot;</span>, padx=<span class="hljs-number">10</span>, pady=<span class="hljs-number">5</span>)<br>        ttk.Button(parent, text=<span class="hljs-string">&quot;📂 浏览&quot;</span>, command=<span class="hljs-variable language_">self</span>.select_dir, width=<span class="hljs-number">8</span>).grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">2</span>, pady=<span class="hljs-number">5</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_backup_section</span>(<span class="hljs-params">self, parent</span>):<br>        parent.columnconfigure(<span class="hljs-number">1</span>, weight=<span class="hljs-number">1</span>)<br><br>        <span class="hljs-comment"># 第一行：开关</span><br>        ttk.Checkbutton(parent, text=<span class="hljs-string">&quot;启用自动备份 (强烈推荐)&quot;</span>, variable=<span class="hljs-variable language_">self</span>.enable_backup_var, <br>                        command=<span class="hljs-variable language_">self</span>.toggle_backup_state).grid(row=<span class="hljs-number">0</span>, column=<span class="hljs-number">0</span>, columnspan=<span class="hljs-number">3</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>)<br>        <br>        <span class="hljs-comment"># 第二行：路径选择</span><br>        ttk.Label(parent, text=<span class="hljs-string">&quot;备份保存位置:&quot;</span>).grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">0</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>, pady=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))<br>        <span class="hljs-variable language_">self</span>.entry_backup = ttk.Entry(parent, textvariable=<span class="hljs-variable language_">self</span>.backup_path_var)<br>        <span class="hljs-variable language_">self</span>.entry_backup.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">1</span>, sticky=<span class="hljs-string">&quot;ew&quot;</span>, padx=<span class="hljs-number">10</span>, pady=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))<br>        <span class="hljs-variable language_">self</span>.btn_backup = ttk.Button(parent, text=<span class="hljs-string">&quot;📂 选择&quot;</span>, command=<span class="hljs-variable language_">self</span>.select_backup_dir, width=<span class="hljs-number">8</span>)<br>        <span class="hljs-variable language_">self</span>.btn_backup.grid(row=<span class="hljs-number">1</span>, column=<span class="hljs-number">2</span>, pady=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))<br><br>        <span class="hljs-comment"># 提示文字</span><br>        ttk.Label(parent, text=<span class="hljs-string">&quot;命名格式: 笔记名_backup_YYYY-MM-DDTHH-mm.zip&quot;</span>, style=<span class="hljs-string">&quot;Gray.TLabel&quot;</span>).grid(row=<span class="hljs-number">2</span>, column=<span class="hljs-number">1</span>, sticky=<span class="hljs-string">&quot;w&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_action_section</span>(<span class="hljs-params">self, parent</span>):<br>        <span class="hljs-comment"># 选项行</span><br>        opt_frame = ttk.Frame(parent, style=<span class="hljs-string">&quot;Card.TFrame&quot;</span>)<br>        opt_frame.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, pady=(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>))<br>        <br>        ttk.Label(opt_frame, text=<span class="hljs-string">&quot;处理图片后缀:&quot;</span>).pack(side=<span class="hljs-string">&quot;left&quot;</span>)<br>        ttk.Combobox(opt_frame, textvariable=<span class="hljs-variable language_">self</span>.ext_var, values=[<span class="hljs-string">&quot;png&quot;</span>, <span class="hljs-string">&quot;jpg&quot;</span>, <span class="hljs-string">&quot;jpeg&quot;</span>], width=<span class="hljs-number">8</span>, state=<span class="hljs-string">&quot;readonly&quot;</span>).pack(side=<span class="hljs-string">&quot;left&quot;</span>, padx=<span class="hljs-number">10</span>)<br>        <br>        ttk.Separator(opt_frame, orient=<span class="hljs-string">&quot;vertical&quot;</span>).pack(side=<span class="hljs-string">&quot;left&quot;</span>, fill=<span class="hljs-string">&quot;y&quot;</span>, padx=<span class="hljs-number">15</span>)<br>        <br>        ttk.Checkbutton(opt_frame, text=<span class="hljs-string">&quot;删除未引用的冗余图片 (慎用)&quot;</span>, variable=<span class="hljs-variable language_">self</span>.delete_unused_var).pack(side=<span class="hljs-string">&quot;left&quot;</span>)<br><br>        <span class="hljs-comment"># 大按钮</span><br>        <span class="hljs-variable language_">self</span>.run_btn = ttk.Button(parent, text=<span class="hljs-string">&quot;🚀 立即备份并处理&quot;</span>, style=<span class="hljs-string">&quot;Accent.TButton&quot;</span>, command=<span class="hljs-variable language_">self</span>.start_process)<br>        <span class="hljs-variable language_">self</span>.run_btn.pack(fill=<span class="hljs-string">&quot;x&quot;</span>, ipady=<span class="hljs-number">5</span>) <span class="hljs-comment"># ipady 增加按钮高度</span><br><br>    <span class="hljs-comment"># --- 逻辑功能保持不变 (V4.3的核心逻辑) ---</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">log</span>(<span class="hljs-params">self, msg</span>):<br>        <span class="hljs-variable language_">self</span>.log_text.insert(<span class="hljs-string">&quot;end&quot;</span>, <span class="hljs-string">f&quot;[<span class="hljs-subst">&#123;datetime.now().strftime(<span class="hljs-string">&#x27;%H:%M:%S&#x27;</span>)&#125;</span>] <span class="hljs-subst">&#123;msg&#125;</span>\n&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.log_text.see(<span class="hljs-string">&quot;end&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">toggle_backup_state</span>(<span class="hljs-params">self</span>):<br>        state = <span class="hljs-string">&quot;normal&quot;</span> <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.enable_backup_var.get() <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;disabled&quot;</span><br>        <span class="hljs-variable language_">self</span>.entry_backup.config(state=state)<br>        <span class="hljs-variable language_">self</span>.btn_backup.config(state=state)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">select_md</span>(<span class="hljs-params">self</span>):<br>        f = filedialog.askopenfilename(filetypes=[(<span class="hljs-string">&quot;Markdown&quot;</span>, <span class="hljs-string">&quot;*.md&quot;</span>)])<br>        <span class="hljs-keyword">if</span> f: <span class="hljs-variable language_">self</span>.md_path.<span class="hljs-built_in">set</span>(f)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">select_dir</span>(<span class="hljs-params">self</span>):<br>        d = filedialog.askdirectory()<br>        <span class="hljs-keyword">if</span> d: <span class="hljs-variable language_">self</span>.attachment_dir.<span class="hljs-built_in">set</span>(d)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">select_backup_dir</span>(<span class="hljs-params">self</span>):<br>        d = filedialog.askdirectory()<br>        <span class="hljs-keyword">if</span> d: <span class="hljs-variable language_">self</span>.backup_path_var.<span class="hljs-built_in">set</span>(d)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">start_process</span>(<span class="hljs-params">self</span>):<br>        md_file = <span class="hljs-variable language_">self</span>.md_path.get()<br>        att_dir = <span class="hljs-variable language_">self</span>.attachment_dir.get()<br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> md_file <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> att_dir:<br>            <span class="hljs-keyword">return</span> messagebox.showwarning(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;请先选择 [Markdown笔记] 和 [附件目录]&quot;</span>)<br><br>        <span class="hljs-comment"># 1. 备份流程</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.enable_backup_var.get():<br>            backup_dest = <span class="hljs-variable language_">self</span>.backup_path_var.get()<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> backup_dest:<br>                <span class="hljs-keyword">return</span> messagebox.showwarning(<span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;请选择备份保存的文件夹！&quot;</span>)<br>            <br>            success = <span class="hljs-variable language_">self</span>.perform_backup(md_file, att_dir, backup_dest)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> success:<br>                <span class="hljs-keyword">return</span> <br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;用户跳过备份步骤。&quot;</span>)<br><br>        <span class="hljs-comment"># 2. 重命名流程</span><br>        <span class="hljs-variable language_">self</span>.process_renaming_logic(md_file, att_dir)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">perform_backup</span>(<span class="hljs-params">self, md_file, att_dir, backup_dest</span>):<br>        <span class="hljs-keyword">try</span>:<br>            note_name = os.path.splitext(os.path.basename(md_file))[<span class="hljs-number">0</span>]<br>            <span class="hljs-comment"># 格式：_backup_YYYY-MM-DDTHH-mm</span><br>            timestamp = datetime.now().strftime(<span class="hljs-string">&quot;%Y-%m-%dT%H-%M&quot;</span>)<br>            zip_name = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;note_name&#125;</span>_backup_<span class="hljs-subst">&#123;timestamp&#125;</span>.zip&quot;</span><br>            zip_path = os.path.join(backup_dest, zip_name)<br><br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;正在创建备份: <span class="hljs-subst">&#123;zip_name&#125;</span> ...&quot;</span>)<br><br>            <span class="hljs-keyword">with</span> zipfile.ZipFile(zip_path, <span class="hljs-string">&#x27;w&#x27;</span>, zipfile.ZIP_DEFLATED) <span class="hljs-keyword">as</span> zf:<br>                zf.write(md_file, arcname=os.path.basename(md_file))<br>                <span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> os.walk(att_dir):<br>                    <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files:<br>                        full_path = os.path.join(root, file)<br>                        rel_path = os.path.relpath(full_path, os.path.dirname(att_dir))<br>                        zf.write(full_path, arcname=rel_path)<br>            <br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;✅ 备份成功！&quot;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;❌ 备份失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            messagebox.showerror(<span class="hljs-string">&quot;备份失败&quot;</span>, <span class="hljs-string">f&quot;备份操作出错，已终止。\n错误信息: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">process_renaming_logic</span>(<span class="hljs-params">self, md_file, att_dir</span>):<br>        ext = <span class="hljs-variable language_">self</span>.ext_var.get().lower()<br>        note_name = os.path.splitext(os.path.basename(md_file))[<span class="hljs-number">0</span>]<br>        note_name = re.sub(<span class="hljs-string">r&#x27;[\\/*?:&quot;&lt;&gt;|]&#x27;</span>, <span class="hljs-string">&quot;_&quot;</span>, note_name)<br><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(md_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                content = f.read()<br><br>            pattern = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;!\[(.*?)\]\((.*?)\)&#x27;</span>)<br>            matches = <span class="hljs-built_in">list</span>(pattern.finditer(content))<br>            <br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;--- 开始分析笔记内容 ---&quot;</span>)<br>            <br>            rename_map = &#123;&#125; <br>            new_files_generated = <span class="hljs-built_in">set</span>()<br>            count = <span class="hljs-number">1</span><br>            <br>            <span class="hljs-keyword">for</span> <span class="hljs-keyword">match</span> <span class="hljs-keyword">in</span> matches:<br>                rel_path = unquote(<span class="hljs-keyword">match</span>.group(<span class="hljs-number">2</span>))<br>                img_name = os.path.basename(rel_path)<br>                <br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> img_name.lower().endswith(<span class="hljs-string">f&quot;.<span class="hljs-subst">&#123;ext&#125;</span>&quot;</span>): <span class="hljs-keyword">continue</span><br>                <span class="hljs-keyword">if</span> img_name <span class="hljs-keyword">in</span> rename_map: <span class="hljs-keyword">continue</span><br><br>                full_old_path = os.path.join(att_dir, img_name)<br>                <br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(full_old_path):<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;⚠ 找不到附件: <span class="hljs-subst">&#123;img_name&#125;</span>&quot;</span>)<br>                    <span class="hljs-keyword">continue</span><br>                <br>                <span class="hljs-keyword">if</span> count == <span class="hljs-number">1</span>:<br>                    new_name = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;note_name&#125;</span>.<span class="hljs-subst">&#123;ext&#125;</span>&quot;</span><br>                <span class="hljs-keyword">else</span>:<br>                    new_name = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;note_name&#125;</span>-<span class="hljs-subst">&#123;count - <span class="hljs-number">1</span>&#125;</span>.<span class="hljs-subst">&#123;ext&#125;</span>&quot;</span><br>                <br>                new_files_generated.add(new_name)<br>                temp_name = <span class="hljs-string">f&quot;TEMP_<span class="hljs-subst">&#123;uuid.uuid4().<span class="hljs-built_in">hex</span>&#125;</span>.<span class="hljs-subst">&#123;ext&#125;</span>&quot;</span><br>                <br>                rename_map[img_name] = &#123;<br>                    <span class="hljs-string">&quot;temp&quot;</span>: temp_name, <span class="hljs-string">&quot;final&quot;</span>: new_name,<br>                    <span class="hljs-string">&quot;old_path&quot;</span>: full_old_path,<br>                    <span class="hljs-string">&quot;temp_path&quot;</span>: os.path.join(att_dir, temp_name),<br>                    <span class="hljs-string">&quot;final_path&quot;</span>: os.path.join(att_dir, new_name)<br>                &#125;<br>                count += <span class="hljs-number">1</span><br><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> rename_map:<br>                <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">&quot;没有发现需要重命名的图片。&quot;</span>)<br>                <span class="hljs-keyword">return</span><br><br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;计划重命名 <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(rename_map)&#125;</span> 个文件...&quot;</span>)<br><br>            <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> rename_map.items():<br>                <span class="hljs-keyword">try</span>: os.rename(v[<span class="hljs-string">&quot;old_path&quot;</span>], v[<span class="hljs-string">&quot;temp_path&quot;</span>])<br>                <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e: <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;Error (Temp): <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>            <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> rename_map.items():<br>                <span class="hljs-keyword">try</span>:<br>                    <span class="hljs-keyword">if</span> os.path.exists(v[<span class="hljs-string">&quot;final_path&quot;</span>]): os.remove(v[<span class="hljs-string">&quot;final_path&quot;</span>])<br>                    os.rename(v[<span class="hljs-string">&quot;temp_path&quot;</span>], v[<span class="hljs-string">&quot;final_path&quot;</span>])<br>                    <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;重命名: <span class="hljs-subst">&#123;k&#125;</span> -&gt; <span class="hljs-subst">&#123;v[<span class="hljs-string">&#x27;final&#x27;</span>]&#125;</span>&quot;</span>)<br>                <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e: <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;Error (Final): <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><br>            <span class="hljs-keyword">def</span> <span class="hljs-title function_">replace_link</span>(<span class="hljs-params">m</span>):<br>                path_decoded = unquote(m.group(<span class="hljs-number">2</span>))<br>                name = os.path.basename(path_decoded)<br>                <span class="hljs-keyword">if</span> name <span class="hljs-keyword">in</span> rename_map:<br>                    <span class="hljs-keyword">return</span> <span class="hljs-string">f&quot;![<span class="hljs-subst">&#123;m.group(<span class="hljs-number">1</span>)&#125;</span>](<span class="hljs-subst">&#123;rename_map[name][<span class="hljs-string">&#x27;final&#x27;</span>]&#125;</span>)&quot;</span><br>                <span class="hljs-keyword">return</span> m.group(<span class="hljs-number">0</span>)<br><br>            new_content = pattern.sub(replace_link, content)<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(md_file, <span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>                f.write(new_content)<br><br>            deleted = <span class="hljs-number">0</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.delete_unused_var.get():<br>                <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> os.listdir(att_dir):<br>                    <span class="hljs-keyword">if</span> f.lower().endswith(<span class="hljs-string">f&quot;.<span class="hljs-subst">&#123;ext&#125;</span>&quot;</span>) <span class="hljs-keyword">and</span> f <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> new_files_generated:<br>                        <span class="hljs-keyword">try</span>:<br>                            os.remove(os.path.join(att_dir, f))<br>                            deleted += <span class="hljs-number">1</span><br>                            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;已删除冗余: <span class="hljs-subst">&#123;f&#125;</span>&quot;</span>)<br>                        <span class="hljs-keyword">except</span>: <span class="hljs-keyword">pass</span><br>            <br>            msg = <span class="hljs-string">f&quot;处理完成！\n共重命名 <span class="hljs-subst">&#123;<span class="hljs-built_in">len</span>(rename_map)&#125;</span> 张图片。&quot;</span><br>            <span class="hljs-keyword">if</span> deleted &gt; <span class="hljs-number">0</span>: msg += <span class="hljs-string">f&quot;\n已清理 <span class="hljs-subst">&#123;deleted&#125;</span> 张废弃图片。&quot;</span><br>            messagebox.showinfo(<span class="hljs-string">&quot;成功&quot;</span>, msg)<br><br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;❌ 运行错误: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>            messagebox.showerror(<span class="hljs-string">&quot;Error&quot;</span>, <span class="hljs-built_in">str</span>(e))<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    root = tk.Tk()<br>    app = ModernRenamerApp(root)<br>    root.mainloop()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-打包成-exe-文件"><a href="#2-打包成-exe-文件" class="headerlink" title="2. 打包成 exe 文件"></a>2. 打包成 exe 文件</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 安装打包工具</span><br>pip install pyinstaller<br><br><br><span class="hljs-comment"># 2. 打包成 exe 文件</span><br>pyinstaller <span class="hljs-operator">-</span>-onefile <span class="hljs-operator">-</span>-windowed <span class="hljs-operator">-</span>-icon<span class="hljs-operator">=</span><span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\I</span>CO<span class="hljs-char escape_">\O</span>bsidian 图片排序与重命名.ico&quot;</span> <span class="hljs-operator">-</span>-distpath <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合&quot;</span> <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\O</span>bsidian 图片排序与重命名.py&quot;</span><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. --onefile</span><br><span class="hljs-string">	1. 打包为单个 .exe 文件。</span><br><span class="hljs-string">2. --windowed</span><br><span class="hljs-string">	1. 确保 GUI 程序无控制台窗口</span><br><span class="hljs-string">3. --distpath &quot;</span>D:\文件集合\<span class="hljs-string">&quot;  &quot;</span>D:\文件集合\Obsidian 图片排序与重命名.py<span class="hljs-string">&quot;</span><br><span class="hljs-string">	1. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>是输出位置</span><br><span class="hljs-string">	2. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\O</span>bsidian 图片排序与重命名.py 是输入位置</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>工具：Obsidian 图片排序与重命名</div>
+      <div>https://wangjia5289.github.io/2025/12/16/工具：Obsidian图片排序与重命名/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 16, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/18/%E9%A9%AC%E4%B8%8A/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/14/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8/" title="笔记：Java 异常">
+                        <span class="hidden-mobile">笔记：Java 异常</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

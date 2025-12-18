@@ -1,0 +1,732 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. Py 代码1. 安装相关依赖 1pip install keyboard  pyperclip pyautogui PyQt6 -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple   2. 编写 Py 代码 123456789101112131415161718192021222324252627282930313233343536373839404142">
+<meta property="og:type" content="article">
+<meta property="og:title" content="工具：快捷语料管理">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="1. Py 代码1. 安装相关依赖 1pip install keyboard  pyperclip pyautogui PyQt6 -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple   2. 编写 Py 代码 123456789101112131415161718192021222324252627282930313233343536373839404142">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png">
+<meta property="article:published_time" content="2025-12-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-11T03:40:17.518Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>工具：快捷语料管理 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="工具：快捷语料管理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-11 00:00" pubdate>
+          December 11, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          26 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">工具：快捷语料管理</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-12-11T11:40:17+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-Py-代码"><a href="#1-Py-代码" class="headerlink" title="1. Py 代码"></a>1. Py 代码</h2><p><font color="#92d050">1. 安装相关依赖</font></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">pip install keyboard  pyperclip pyautogui PyQt6 -<span class="hljs-selector-tag">i</span> https:<span class="hljs-comment">//pypi.tuna.tsinghua.edu.cn/simple</span><br></code></pre></td></tr></table></figure>
+
+
+<p><font color="#92d050">2. 编写 Py 代码</font></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> keyboard<br><span class="hljs-keyword">import</span> pyperclip<br><span class="hljs-keyword">import</span> pyautogui<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> PyQt6.QtWidgets <span class="hljs-keyword">import</span> (QApplication, QMainWindow, QWidget, QVBoxLayout,<br>                             QHBoxLayout, QListWidget, QPushButton, QLabel,<br>                             QDialog, QMessageBox, QInputDialog, QGridLayout,<br>                             QFrame, QSizePolicy, QGraphicsDropShadowEffect, QLineEdit, QTextEdit,<br>                             QAbstractItemView)<br><span class="hljs-keyword">from</span> PyQt6.QtCore <span class="hljs-keyword">import</span> Qt, pyqtSignal, QObject<br><span class="hljs-keyword">from</span> PyQt6.QtGui <span class="hljs-keyword">import</span> QColor, QFont, QCursor, QScreen<br><span class="hljs-comment"># --- 数据存储 ---</span><br>DEFAULT_DATA_FILE = <span class="hljs-string">r&quot;D:\文件集合\快捷语料管理.json&quot;</span><br>DATA_FILE = DEFAULT_DATA_FILE  <span class="hljs-comment"># 可以自定义修改此变量</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_data</span>():<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(DATA_FILE):<br>        <span class="hljs-comment"># 如果文件不存在，创建默认数据</span><br>        default_data = &#123;<span class="hljs-string">&quot;常用回复&quot;</span>: [<span class="hljs-string">&quot;你好，请问有什么可以帮您？&quot;</span>, <span class="hljs-string">&quot;当前进度：&#123;0% | 50% | 100%&#125;&quot;</span>],<br>                        <span class="hljs-string">&quot;代码片段&quot;</span>: [<span class="hljs-string">&quot;print(f&#x27;结果是: &#123;result&#125;&#x27;)&quot;</span>, <span class="hljs-string">&quot;SELECT * FROM &#123;table&#125; WHERE id = &#123;id&#125;&quot;</span>]&#125;<br>        save_data(default_data)<br>        <span class="hljs-keyword">return</span> default_data<br>    <span class="hljs-keyword">try</span>:<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(DATA_FILE, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            <span class="hljs-keyword">return</span> json.load(f)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;加载数据失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;常用回复&quot;</span>: [], <span class="hljs-string">&quot;代码片段&quot;</span>: []&#125;<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">save_data</span>(<span class="hljs-params">data</span>):<br>    <span class="hljs-keyword">try</span>:<br>        os.makedirs(os.path.dirname(DATA_FILE), exist_ok=<span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(DATA_FILE, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            json.dump(data, f, ensure_ascii=<span class="hljs-literal">False</span>, indent=<span class="hljs-number">4</span>)<br>    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;保存数据失败: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span>)<br><span class="hljs-comment"># --- 全局样式表 (QSS) ---</span><br><span class="hljs-comment"># 这是一个现代深色主题的 CSS 配置</span><br>STYLESHEET = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">QMainWindow, QDialog &#123;</span><br><span class="hljs-string">    background-color: #1e1e1e;</span><br><span class="hljs-string">    color: #e0e0e0;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">/* 列表控件样式 */</span><br><span class="hljs-string">QListWidget &#123;</span><br><span class="hljs-string">    background-color: #252526;</span><br><span class="hljs-string">    border: 1px solid #3e3e42;</span><br><span class="hljs-string">    border-radius: 6px;</span><br><span class="hljs-string">    padding: 5px;</span><br><span class="hljs-string">    outline: none;</span><br><span class="hljs-string">    font-size: 14px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QListWidget::item &#123;</span><br><span class="hljs-string">    padding: 8px;</span><br><span class="hljs-string">    border-radius: 4px;</span><br><span class="hljs-string">    color: #cccccc;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QListWidget::item:selected &#123;</span><br><span class="hljs-string">    background-color: #37373d;</span><br><span class="hljs-string">    color: #ffffff;</span><br><span class="hljs-string">    border-left: 3px solid #007acc; /* 选中时左侧蓝色条 */</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QListWidget::item:hover &#123;</span><br><span class="hljs-string">    background-color: #2a2d2e;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">/* 按钮通用样式 */</span><br><span class="hljs-string">QPushButton &#123;</span><br><span class="hljs-string">    background-color: #333333;</span><br><span class="hljs-string">    color: #ffffff;</span><br><span class="hljs-string">    border: 1px solid #454545;</span><br><span class="hljs-string">    padding: 6px 12px;</span><br><span class="hljs-string">    border-radius: 4px;</span><br><span class="hljs-string">    font-size: 13px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QPushButton:hover &#123;</span><br><span class="hljs-string">    background-color: #3e3e42;</span><br><span class="hljs-string">    border-color: #555;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QPushButton:pressed &#123;</span><br><span class="hljs-string">    background-color: #2d2d30;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">/* 蓝色强调按钮 (用于主要操作) */</span><br><span class="hljs-string">QPushButton.primary &#123;</span><br><span class="hljs-string">    background-color: #007acc;</span><br><span class="hljs-string">    border: 1px solid #007acc;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QPushButton.primary:hover &#123;</span><br><span class="hljs-string">    background-color: #0062a3;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">/* 标签样式 */</span><br><span class="hljs-string">QLabel &#123;</span><br><span class="hljs-string">    color: #cccccc;</span><br><span class="hljs-string">    font-family: &quot;Segoe UI&quot;, &quot;Microsoft YaHei&quot;, sans-serif;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QLabel.header &#123;</span><br><span class="hljs-string">    font-size: 16px;</span><br><span class="hljs-string">    font-weight: bold;</span><br><span class="hljs-string">    color: #ffffff;</span><br><span class="hljs-string">    margin-bottom: 5px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QLabel.hint &#123;</span><br><span class="hljs-string">    color: #888888;</span><br><span class="hljs-string">    font-size: 12px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">/* 快捷窗口输入框风格 */</span><br><span class="hljs-string">QDialog#QuickSelector &#123;</span><br><span class="hljs-string">    border: 1px solid #454545;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QLineEdit &#123;</span><br><span class="hljs-string">    background-color: #252526;</span><br><span class="hljs-string">    border: 1px solid #3e3e42;</span><br><span class="hljs-string">    border-radius: 4px;</span><br><span class="hljs-string">    padding: 6px;</span><br><span class="hljs-string">    color: #e0e0e0;</span><br><span class="hljs-string">    font-size: 14px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QLineEdit:focus &#123;</span><br><span class="hljs-string">    border-color: #007acc;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QTextEdit &#123;</span><br><span class="hljs-string">    background-color: #252526;</span><br><span class="hljs-string">    border: 1px solid #3e3e42;</span><br><span class="hljs-string">    border-radius: 4px;</span><br><span class="hljs-string">    padding: 6px;</span><br><span class="hljs-string">    color: #e0e0e0;</span><br><span class="hljs-string">    font-size: 14px;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">QTextEdit:focus &#123;</span><br><span class="hljs-string">    border-color: #007acc;</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-comment"># --- 信号处理 ---</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">HotkeySignal</span>(<span class="hljs-title class_ inherited__">QObject</span>):<br>    trigger = pyqtSignal()<br><span class="hljs-comment"># --- 自定义输入对话框 (用于拉长新建语句对话框) ---</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomInputDialog</span>(<span class="hljs-title class_ inherited__">QDialog</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, title, label, initial_text=<span class="hljs-string">&quot;&quot;</span>, parent=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-built_in">super</span>().__init__(parent)<br>        <span class="hljs-variable language_">self</span>.setWindowTitle(title)<br>        <span class="hljs-variable language_">self</span>.setMinimumWidth(<span class="hljs-number">600</span>)  <span class="hljs-comment"># 拉长对话框</span><br>        layout = QVBoxLayout(<span class="hljs-variable language_">self</span>)<br>        lbl = QLabel(label)<br>        layout.addWidget(lbl)<br>        <span class="hljs-variable language_">self</span>.text_edit = QTextEdit()<br>        <span class="hljs-variable language_">self</span>.text_edit.setPlainText(initial_text)<br>        <span class="hljs-variable language_">self</span>.text_edit.setMinimumHeight(<span class="hljs-number">100</span>)  <span class="hljs-comment"># 增加高度</span><br>        layout.addWidget(<span class="hljs-variable language_">self</span>.text_edit)<br>        buttons = QHBoxLayout()<br>        ok_btn = QPushButton(<span class="hljs-string">&quot;确定&quot;</span>)<br>        ok_btn.clicked.connect(<span class="hljs-variable language_">self</span>.accept)<br>        cancel_btn = QPushButton(<span class="hljs-string">&quot;取消&quot;</span>)<br>        cancel_btn.clicked.connect(<span class="hljs-variable language_">self</span>.reject)<br>        buttons.addWidget(ok_btn)<br>        buttons.addWidget(cancel_btn)<br>        layout.addLayout(buttons)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getText</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.text_edit.toPlainText()<br><span class="hljs-comment"># --- 快捷选择窗口 (类似 Alfred/Spotlight 风格) ---</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">QuickSelector</span>(<span class="hljs-title class_ inherited__">QDialog</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data, parent=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-built_in">super</span>().__init__(parent)<br>        <span class="hljs-variable language_">self</span>.setObjectName(<span class="hljs-string">&quot;QuickSelector&quot;</span>) <span class="hljs-comment"># 用于QSS定位</span><br>        <span class="hljs-variable language_">self</span>.data = data<br>        <span class="hljs-variable language_">self</span>.current_text = <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-variable language_">self</span>.drag_position = <span class="hljs-literal">None</span>  <span class="hljs-comment"># 用于拖拽</span><br>        <span class="hljs-variable language_">self</span>.option_buttons = []  <span class="hljs-comment"># 存储选项按钮</span><br>        <br>        <span class="hljs-comment"># 窗口设置</span><br>        <span class="hljs-variable language_">self</span>.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.Tool)<br>        <span class="hljs-variable language_">self</span>.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground) <span class="hljs-comment"># 允许圆角透明</span><br>        <span class="hljs-variable language_">self</span>.resize(<span class="hljs-number">500</span>, <span class="hljs-number">400</span>)  <span class="hljs-comment"># 略微增加高度以容纳搜索框</span><br>        <br>        <span class="hljs-comment"># 主布局容器 (用于绘制背景和圆角)</span><br>        <span class="hljs-variable language_">self</span>.container = QFrame(<span class="hljs-variable language_">self</span>)<br>        <span class="hljs-variable language_">self</span>.container.setGeometry(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">500</span>, <span class="hljs-number">400</span>)<br>        <span class="hljs-variable language_">self</span>.container.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            QFrame &#123;</span><br><span class="hljs-string">                background-color: #1e1e1e;</span><br><span class="hljs-string">                border: 1px solid #454545;</span><br><span class="hljs-string">                border-radius: 10px;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>)<br>        <br>        <span class="hljs-comment"># 添加阴影效果</span><br>        shadow = QGraphicsDropShadowEffect(<span class="hljs-variable language_">self</span>)<br>        shadow.setBlurRadius(<span class="hljs-number">20</span>)<br>        shadow.setColor(QColor(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">150</span>))<br>        shadow.setOffset(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>)<br>        <span class="hljs-variable language_">self</span>.container.setGraphicsEffect(shadow)<br>        <span class="hljs-variable language_">self</span>.layout = QVBoxLayout(<span class="hljs-variable language_">self</span>.container)<br>        <span class="hljs-variable language_">self</span>.layout.setContentsMargins(<span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>)<br>        <br>        <span class="hljs-comment"># 顶部提示区</span><br>        <span class="hljs-variable language_">self</span>.info_label = QLabel(<span class="hljs-string">&quot;选择模块&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.info_label.setStyleSheet(<span class="hljs-string">&quot;font-size: 18px; font-weight: bold; color: #fff; border: none;&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(<span class="hljs-variable language_">self</span>.info_label)<br>        <span class="hljs-comment"># 分割线</span><br>        line = QFrame()<br>        line.setFrameShape(QFrame.Shape.HLine)<br>        line.setStyleSheet(<span class="hljs-string">&quot;background-color: #333; border: none; max-height: 1px;&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(line)<br>        <br>        <span class="hljs-comment"># 搜索框</span><br>        <span class="hljs-variable language_">self</span>.search_edit = QLineEdit()<br>        <span class="hljs-variable language_">self</span>.search_edit.setPlaceholderText(<span class="hljs-string">&quot;搜索...&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.search_edit.textChanged.connect(<span class="hljs-variable language_">self</span>.filter_list)<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(<span class="hljs-variable language_">self</span>.search_edit)<br>        <br>        <span class="hljs-comment"># 列表控件</span><br>        <span class="hljs-variable language_">self</span>.list_widget = QListWidget()<br>        <span class="hljs-variable language_">self</span>.list_widget.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            QListWidget &#123; border: none; background: transparent; &#125;</span><br><span class="hljs-string">            QListWidget::item &#123; padding: 10px; font-size: 15px; &#125;</span><br><span class="hljs-string">            QListWidget::item:selected &#123; background-color: #2d2d30; color: #4fc1ff; border: none; border-radius: 6px; &#125;</span><br><span class="hljs-string">        &quot;&quot;&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.list_widget.itemActivated.connect(<span class="hljs-variable language_">self</span>.on_item_clicked)  <span class="hljs-comment"># Enter 键触发</span><br>        <span class="hljs-variable language_">self</span>.list_widget.itemClicked.connect(<span class="hljs-variable language_">self</span>.on_item_clicked)<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(<span class="hljs-variable language_">self</span>.list_widget)<br>        <br>        <span class="hljs-comment"># 选项按钮区域</span><br>        <span class="hljs-variable language_">self</span>.options_container = QWidget()<br>        <span class="hljs-variable language_">self</span>.options_container.setStyleSheet(<span class="hljs-string">&quot;background: transparent; border: none;&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.options_layout = QGridLayout()<br>        <span class="hljs-variable language_">self</span>.options_layout.setSpacing(<span class="hljs-number">10</span>) <span class="hljs-comment"># 按钮间距</span><br>        <span class="hljs-variable language_">self</span>.options_container.setLayout(<span class="hljs-variable language_">self</span>.options_layout)<br>        <span class="hljs-variable language_">self</span>.options_container.hide()<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(<span class="hljs-variable language_">self</span>.options_container)<br>        <span class="hljs-comment"># 底部提示</span><br>        <span class="hljs-variable language_">self</span>.hint_label = QLabel(<span class="hljs-string">&quot;Esc 退出 | ↑↓Enter 选择 | 鼠标点击/拖拽&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.hint_label.setStyleSheet(<span class="hljs-string">&quot;color: #666; font-size: 11px; border: none;&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.hint_label.setAlignment(Qt.AlignmentFlag.AlignRight)<br>        <span class="hljs-variable language_">self</span>.layout.addWidget(<span class="hljs-variable language_">self</span>.hint_label)<br>        <span class="hljs-variable language_">self</span>.step = <span class="hljs-string">&quot;MODULE&quot;</span><br>        <span class="hljs-variable language_">self</span>.all_items = []  <span class="hljs-comment"># 用于搜索过滤</span><br>        <span class="hljs-variable language_">self</span>.load_modules()<br>        <span class="hljs-variable language_">self</span>.search_edit.setFocus()  <span class="hljs-comment"># 默认焦点在搜索框</span><br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_modules</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.step = <span class="hljs-string">&quot;MODULE&quot;</span><br>        <span class="hljs-variable language_">self</span>.info_label.setText(<span class="hljs-string">&quot;📦 选择模块&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.list_widget.clear()<br>        <span class="hljs-variable language_">self</span>.list_widget.show()<br>        <span class="hljs-variable language_">self</span>.options_container.hide()<br>        <span class="hljs-variable language_">self</span>.all_items = <span class="hljs-built_in">list</span>(<span class="hljs-variable language_">self</span>.data.keys())<br>        <span class="hljs-variable language_">self</span>.list_widget.addItems(<span class="hljs-variable language_">self</span>.all_items)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.list_widget.count() &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.list_widget.setCurrentRow(<span class="hljs-number">0</span>) <span class="hljs-comment"># 默认选中第一个</span><br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">load_sentences</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.step = <span class="hljs-string">&quot;SENTENCE&quot;</span><br>        <span class="hljs-variable language_">self</span>.info_label.setText(<span class="hljs-string">f&quot;📄 [<span class="hljs-subst">&#123;self.selected_module&#125;</span>] 选择内容&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.list_widget.clear()<br>        sentences = <span class="hljs-variable language_">self</span>.data.get(<span class="hljs-variable language_">self</span>.selected_module, [])<br>        <span class="hljs-variable language_">self</span>.all_items = sentences[:]<br>        <span class="hljs-variable language_">self</span>.list_widget.addItems(<span class="hljs-variable language_">self</span>.all_items)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.list_widget.count() &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.list_widget.setCurrentRow(<span class="hljs-number">0</span>)<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">filter_list</span>(<span class="hljs-params">self, text</span>):<br>        <span class="hljs-variable language_">self</span>.list_widget.clear()<br>        filtered = [item <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.all_items <span class="hljs-keyword">if</span> text.lower() <span class="hljs-keyword">in</span> item.lower()]<br>        <span class="hljs-variable language_">self</span>.list_widget.addItems(filtered)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.list_widget.count() &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.list_widget.setCurrentRow(<span class="hljs-number">0</span>)<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_item_clicked</span>(<span class="hljs-params">self, item</span>):<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.step == <span class="hljs-string">&quot;MODULE&quot;</span>:<br>            <span class="hljs-variable language_">self</span>.selected_module = item.text()<br>            <span class="hljs-variable language_">self</span>.search_edit.clear()  <span class="hljs-comment"># 清空搜索</span><br>            <span class="hljs-variable language_">self</span>.load_sentences()<br>        <span class="hljs-keyword">elif</span> <span class="hljs-variable language_">self</span>.step == <span class="hljs-string">&quot;SENTENCE&quot;</span>:<br>            <span class="hljs-variable language_">self</span>.current_text = item.text()<br>            <span class="hljs-variable language_">self</span>.start_resolving()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">start_resolving</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.step = <span class="hljs-string">&quot;RESOLVING&quot;</span><br>        <span class="hljs-variable language_">self</span>.search_edit.hide()  <span class="hljs-comment"># 隐藏搜索框</span><br>        <span class="hljs-variable language_">self</span>.list_widget.hide()<br>        <span class="hljs-variable language_">self</span>.options_container.show()<br>        <span class="hljs-variable language_">self</span>.hint_label.setText(<span class="hljs-string">&quot;Esc 退出 | ←→Enter 选择 | 鼠标点击&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.resolve_next_variable()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">resolve_next_variable</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">match</span> = re.search(<span class="hljs-string">r&#x27;\&#123;([^&#123;&#125;]+?)\&#125;&#x27;</span>, <span class="hljs-variable language_">self</span>.current_text)<br>        <br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">match</span>:<br>            full_match = <span class="hljs-keyword">match</span>.group(<span class="hljs-number">0</span>)<br>            content = <span class="hljs-keyword">match</span>.group(<span class="hljs-number">1</span>)<br>            options = [opt.strip() <span class="hljs-keyword">for</span> opt <span class="hljs-keyword">in</span> content.split(<span class="hljs-string">&#x27;|&#x27;</span>)]<br>            options.append(<span class="hljs-string">&quot;Null&quot;</span>)  <span class="hljs-comment"># 添加 Null 选项</span><br>            <br>            <span class="hljs-comment"># 计算调整后的起始和结束位置</span><br>            start = <span class="hljs-keyword">match</span>.start()<br>            end = <span class="hljs-keyword">match</span>.end()<br>            adj_start = start - <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> start &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.current_text[start - <span class="hljs-number">1</span>] == <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-keyword">else</span> start<br>            adj_end = end + <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> end &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.current_text) <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.current_text[end] == <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-keyword">else</span> end<br>            <br>            <span class="hljs-comment"># 高亮显示当前要填空的部分</span><br>            display_text = <span class="hljs-variable language_">self</span>.current_text.replace(full_match, <span class="hljs-string">f&quot;&lt;span style=&#x27;color: #4fc1ff;&#x27;&gt;[ ??? ]&lt;/span&gt;&quot;</span>, <span class="hljs-number">1</span>)<br>            <br>            <span class="hljs-variable language_">self</span>.info_label.setText(<span class="hljs-string">f&quot;✏️ 填空模式&quot;</span>)<br>            <span class="hljs-variable language_">self</span>.info_label.setTextFormat(Qt.TextFormat.RichText) <span class="hljs-comment"># 允许HTML</span><br>            <br>            <span class="hljs-comment"># 显示上下文预览</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(<span class="hljs-variable language_">self</span>, <span class="hljs-string">&#x27;preview_label&#x27;</span>):<br>                <span class="hljs-variable language_">self</span>.preview_label = QLabel(display_text)<br>                <span class="hljs-variable language_">self</span>.preview_label.setStyleSheet(<span class="hljs-string">&quot;color: #bbb; font-size: 14px; padding: 10px; background: #252526; border-radius: 5px;&quot;</span>)<br>                <span class="hljs-variable language_">self</span>.preview_label.setWordWrap(<span class="hljs-literal">True</span>)<br>                <span class="hljs-comment"># 插入到 layout 中间</span><br>                <span class="hljs-variable language_">self</span>.layout.insertWidget(<span class="hljs-number">3</span>, <span class="hljs-variable language_">self</span>.preview_label)  <span class="hljs-comment"># 调整插入位置，因为添加了搜索框</span><br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-variable language_">self</span>.preview_label.setText(display_text)<br>                <span class="hljs-variable language_">self</span>.preview_label.show()<br>            <span class="hljs-comment"># 清除旧按钮</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">reversed</span>(<span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.options_layout.count())):<br>                <span class="hljs-variable language_">self</span>.options_layout.itemAt(i).widget().setParent(<span class="hljs-literal">None</span>)<br>            <br>            <span class="hljs-variable language_">self</span>.option_buttons = []<br>            <span class="hljs-comment"># 生成大号卡片式按钮</span><br>            <span class="hljs-keyword">for</span> idx, opt <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(options):<br>                btn = QPushButton(opt <span class="hljs-keyword">if</span> opt != <span class="hljs-string">&quot;Null&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Null (空)&quot;</span>)<br>                btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))<br>                btn.setFocusPolicy(Qt.FocusPolicy.StrongFocus)  <span class="hljs-comment"># 允许键盘焦点</span><br>                <span class="hljs-comment"># 针对选项按钮的特殊样式</span><br>                btn.setStyleSheet(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">                    QPushButton &#123;</span><br><span class="hljs-string">                        background-color: #2d2d30;</span><br><span class="hljs-string">                        border: 1px solid #3e3e42;</span><br><span class="hljs-string">                        font-size: 16px;</span><br><span class="hljs-string">                        padding: 15px;</span><br><span class="hljs-string">                        text-align: left;</span><br><span class="hljs-string">                    &#125;</span><br><span class="hljs-string">                    QPushButton:hover &#123;</span><br><span class="hljs-string">                        background-color: #37373d;</span><br><span class="hljs-string">                        border-left: 4px solid #007acc;</span><br><span class="hljs-string">                    &#125;</span><br><span class="hljs-string">                    QPushButton:focus &#123;</span><br><span class="hljs-string">                        border: 2px solid #007acc;</span><br><span class="hljs-string">                    &#125;</span><br><span class="hljs-string">                &quot;&quot;&quot;</span>)<br>                btn.clicked.connect(<span class="hljs-keyword">lambda</span> checked, o=opt, s=adj_start, e=adj_end: <span class="hljs-variable language_">self</span>.choice_made(o, s, e))<br>                <span class="hljs-variable language_">self</span>.options_layout.addWidget(btn, idx // <span class="hljs-number">2</span>, idx % <span class="hljs-number">2</span>)<br>                <span class="hljs-variable language_">self</span>.option_buttons.append(btn)<br>            <br>            <span class="hljs-comment"># 设置焦点到第一个按钮</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.option_buttons:<br>                <span class="hljs-variable language_">self</span>.option_buttons[<span class="hljs-number">0</span>].setFocus()<br>                <br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(<span class="hljs-variable language_">self</span>, <span class="hljs-string">&#x27;preview_label&#x27;</span>): <span class="hljs-variable language_">self</span>.preview_label.hide()<br>            <span class="hljs-variable language_">self</span>.finish_and_paste()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">choice_made</span>(<span class="hljs-params">self, option, adj_start, adj_end</span>):<br>        replace_with = <span class="hljs-string">&quot;&quot;</span> <span class="hljs-keyword">if</span> option == <span class="hljs-string">&quot;Null&quot;</span> <span class="hljs-keyword">else</span> option<br>        <span class="hljs-variable language_">self</span>.current_text = <span class="hljs-variable language_">self</span>.current_text[:adj_start] + replace_with + <span class="hljs-variable language_">self</span>.current_text[adj_end:]<br>        <span class="hljs-variable language_">self</span>.resolve_next_variable()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">finish_and_paste</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.hide()<br>        time.sleep(<span class="hljs-number">0.1</span>)<br>        pyperclip.copy(<span class="hljs-variable language_">self</span>.current_text)<br>        ctrl_key = <span class="hljs-string">&quot;command&quot;</span> <span class="hljs-keyword">if</span> sys.platform == <span class="hljs-string">&quot;darwin&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;ctrl&quot;</span><br>        pyautogui.hotkey(ctrl_key, <span class="hljs-string">&#x27;v&#x27;</span>)<br>        <span class="hljs-variable language_">self</span>.close()<br>    <br>    <span class="hljs-comment"># 实现拖拽</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">mousePressEvent</span>(<span class="hljs-params">self, event</span>):<br>        <span class="hljs-keyword">if</span> event.button() == Qt.MouseButton.LeftButton:<br>            <span class="hljs-variable language_">self</span>.drag_position = event.globalPosition().toPoint() - <span class="hljs-variable language_">self</span>.frameGeometry().topLeft()<br>            event.accept()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">mouseMoveEvent</span>(<span class="hljs-params">self, event</span>):<br>        <span class="hljs-keyword">if</span> event.buttons() == Qt.MouseButton.LeftButton <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.drag_position <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-variable language_">self</span>.move(event.globalPosition().toPoint() - <span class="hljs-variable language_">self</span>.drag_position)<br>            event.accept()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">mouseReleaseEvent</span>(<span class="hljs-params">self, event</span>):<br>        <span class="hljs-variable language_">self</span>.drag_position = <span class="hljs-literal">None</span><br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">keyPressEvent</span>(<span class="hljs-params">self, event</span>):<br>        <span class="hljs-keyword">if</span> event.key() == Qt.Key.Key_Escape:<br>            <span class="hljs-variable language_">self</span>.close()<br>        <span class="hljs-keyword">elif</span> <span class="hljs-variable language_">self</span>.step == <span class="hljs-string">&quot;RESOLVING&quot;</span>:<br>            <span class="hljs-keyword">if</span> event.key() <span class="hljs-keyword">in</span> (Qt.Key.Key_Left, Qt.Key.Key_Right, Qt.Key.Key_Up, Qt.Key.Key_Down):<br>                current_focus = <span class="hljs-variable language_">self</span>.focusWidget()<br>                <span class="hljs-keyword">if</span> current_focus <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.option_buttons:<br>                    idx = <span class="hljs-variable language_">self</span>.option_buttons.index(current_focus)<br>                    rows, cols = <span class="hljs-variable language_">self</span>.options_layout.rowCount(), <span class="hljs-variable language_">self</span>.options_layout.columnCount()<br>                    row, col = <span class="hljs-built_in">divmod</span>(idx, cols)<br>                    <span class="hljs-keyword">if</span> event.key() == Qt.Key.Key_Left:<br>                        col = (col - <span class="hljs-number">1</span>) % cols<br>                    <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Right:<br>                        col = (col + <span class="hljs-number">1</span>) % cols<br>                    <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Up:<br>                        row = (row - <span class="hljs-number">1</span>) % rows<br>                    <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Down:<br>                        row = (row + <span class="hljs-number">1</span>) % rows<br>                    new_idx = row * cols + col<br>                    <span class="hljs-keyword">if</span> new_idx &lt; <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.option_buttons):<br>                        <span class="hljs-variable language_">self</span>.option_buttons[new_idx].setFocus()<br>            <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Return <span class="hljs-keyword">or</span> event.key() == Qt.Key.Key_Enter:<br>                current_focus = <span class="hljs-variable language_">self</span>.focusWidget()<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(current_focus, QPushButton):<br>                    current_focus.click()<br>        <span class="hljs-keyword">elif</span> <span class="hljs-variable language_">self</span>.search_edit.hasFocus():<br>            <span class="hljs-keyword">if</span> event.key() == Qt.Key.Key_Down:<br>                <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.list_widget.count() &gt; <span class="hljs-number">0</span>:<br>                    <span class="hljs-variable language_">self</span>.list_widget.setFocus()<br>                    <span class="hljs-variable language_">self</span>.list_widget.setCurrentRow(<span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Up:<br>                <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.list_widget.count() &gt; <span class="hljs-number">0</span>:<br>                    <span class="hljs-variable language_">self</span>.list_widget.setFocus()<br>                    <span class="hljs-variable language_">self</span>.list_widget.setCurrentRow(<span class="hljs-variable language_">self</span>.list_widget.count() - <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">elif</span> <span class="hljs-variable language_">self</span>.list_widget.hasFocus():<br>            <span class="hljs-keyword">if</span> event.key() == Qt.Key.Key_Up <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.list_widget.currentRow() == <span class="hljs-number">0</span>:<br>                <span class="hljs-variable language_">self</span>.search_edit.setFocus()<br>            <span class="hljs-keyword">elif</span> event.key() == Qt.Key.Key_Down <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.list_widget.currentRow() == <span class="hljs-variable language_">self</span>.list_widget.count() - <span class="hljs-number">1</span>:<br>                <span class="hljs-variable language_">self</span>.search_edit.setFocus()<br>        <span class="hljs-built_in">super</span>().keyPressEvent(event)<br><span class="hljs-comment"># --- 主管理界面 (VS Code 风格) ---</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">ManagerWindow</span>(<span class="hljs-title class_ inherited__">QMainWindow</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.setWindowTitle(<span class="hljs-string">&quot;快捷语料管理&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.resize(<span class="hljs-number">900</span>, <span class="hljs-number">600</span>)<br>        <span class="hljs-variable language_">self</span>.data = load_data()<br>        <span class="hljs-variable language_">self</span>.init_ui()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">init_ui</span>(<span class="hljs-params">self</span>):<br>        central_widget = QWidget()<br>        <span class="hljs-variable language_">self</span>.setCentralWidget(central_widget)<br>        main_layout = QHBoxLayout(central_widget)<br>        main_layout.setSpacing(<span class="hljs-number">0</span>)<br>        main_layout.setContentsMargins(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)<br>        <span class="hljs-comment"># --- 左侧栏 (模块) ---</span><br>        left_panel = QWidget()<br>        left_panel.setStyleSheet(<span class="hljs-string">&quot;background-color: #252526; border-right: 1px solid #1e1e1e;&quot;</span>)<br>        left_layout = QVBoxLayout(left_panel)<br>        left_layout.setContentsMargins(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span>)<br>        lbl_mod = QLabel(<span class="hljs-string">&quot;📂 模块列表&quot;</span>)<br>        lbl_mod.setProperty(<span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;header&quot;</span>) <span class="hljs-comment"># 使用 QSS 类选择器</span><br>        left_layout.addWidget(lbl_mod)<br>        <span class="hljs-variable language_">self</span>.module_list = QListWidget()<br>        <span class="hljs-variable language_">self</span>.module_list.setStyleSheet(<span class="hljs-string">&quot;border: none; background-color: transparent;&quot;</span>) <span class="hljs-comment"># 让列表融入背景</span><br>        <span class="hljs-variable language_">self</span>.module_list.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)<br>        <span class="hljs-variable language_">self</span>.module_list.model().rowsMoved.connect(<span class="hljs-variable language_">self</span>.on_module_reordered)<br>        <span class="hljs-variable language_">self</span>.module_list.itemClicked.connect(<span class="hljs-variable language_">self</span>.refresh_sentences)<br>        left_layout.addWidget(<span class="hljs-variable language_">self</span>.module_list)<br>        <span class="hljs-comment"># 左侧按钮组</span><br>        btn_layout_l = QHBoxLayout()<br>        btn_add_mod = QPushButton(<span class="hljs-string">&quot;+&quot;</span>)<br>        btn_add_mod.setToolTip(<span class="hljs-string">&quot;添加模块&quot;</span>)<br>        btn_add_mod.clicked.connect(<span class="hljs-variable language_">self</span>.add_module)<br>        btn_del_mod = QPushButton(<span class="hljs-string">&quot;-&quot;</span>)<br>        btn_del_mod.setToolTip(<span class="hljs-string">&quot;删除模块&quot;</span>)<br>        btn_del_mod.clicked.connect(<span class="hljs-variable language_">self</span>.del_module)<br>        btn_layout_l.addWidget(btn_add_mod)<br>        btn_layout_l.addWidget(btn_del_mod)<br>        left_layout.addLayout(btn_layout_l)<br>        <span class="hljs-comment"># --- 右侧栏 (句子) ---</span><br>        right_panel = QWidget()<br>        right_panel.setStyleSheet(<span class="hljs-string">&quot;background-color: #1e1e1e;&quot;</span>)<br>        right_layout = QVBoxLayout(right_panel)<br>        right_layout.setContentsMargins(<span class="hljs-number">20</span>, <span class="hljs-number">15</span>, <span class="hljs-number">20</span>, <span class="hljs-number">15</span>)<br>        lbl_sent = QLabel(<span class="hljs-string">&quot;📝 句子内容&quot;</span>)<br>        lbl_sent.setProperty(<span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;header&quot;</span>)<br>        right_layout.addWidget(lbl_sent)<br>        <br>        lbl_hint = QLabel(<span class="hljs-string">&quot;双击条目进行编辑，使用 &#123;A | B&#125; 创建选项&quot;</span>)<br>        lbl_hint.setProperty(<span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;hint&quot;</span>)<br>        right_layout.addWidget(lbl_hint)<br>        <span class="hljs-variable language_">self</span>.sentence_list = QListWidget()<br>        <span class="hljs-variable language_">self</span>.sentence_list.setDragDropMode(QAbstractItemView.DragDropMode.InternalMove)<br>        <span class="hljs-variable language_">self</span>.sentence_list.model().rowsMoved.connect(<span class="hljs-variable language_">self</span>.on_sentence_reordered)<br>        <span class="hljs-variable language_">self</span>.sentence_list.itemDoubleClicked.connect(<span class="hljs-variable language_">self</span>.edit_sentence)<br>        right_layout.addWidget(<span class="hljs-variable language_">self</span>.sentence_list)<br>        <span class="hljs-comment"># 右侧按钮组</span><br>        btn_layout_r = QHBoxLayout()<br>        btn_add_sent = QPushButton(<span class="hljs-string">&quot;添加句子&quot;</span>)<br>        btn_add_sent.setProperty(<span class="hljs-string">&quot;class&quot;</span>, <span class="hljs-string">&quot;primary&quot;</span>) <span class="hljs-comment"># 设为主要按钮样式</span><br>        btn_add_sent.setCursor(Qt.CursorShape.PointingHandCursor)<br>        btn_add_sent.clicked.connect(<span class="hljs-variable language_">self</span>.add_sentence)<br>        <br>        btn_del_sent = QPushButton(<span class="hljs-string">&quot;删除选中&quot;</span>)<br>        btn_del_sent.clicked.connect(<span class="hljs-variable language_">self</span>.del_sentence)<br>        <br>        btn_layout_r.addStretch() <span class="hljs-comment"># 把按钮推到右边</span><br>        btn_layout_r.addWidget(btn_del_sent)<br>        btn_layout_r.addWidget(btn_add_sent)<br>        right_layout.addLayout(btn_layout_r)<br>        <span class="hljs-comment"># 设置左右比例 1:2</span><br>        main_layout.addWidget(left_panel, <span class="hljs-number">1</span>)<br>        main_layout.addWidget(right_panel, <span class="hljs-number">2</span>)<br>        <span class="hljs-variable language_">self</span>.refresh_modules()<br>    <span class="hljs-comment"># --- CRUD 逻辑 ---</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">refresh_modules</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.module_list.clear()<br>        modules = <span class="hljs-built_in">list</span>(<span class="hljs-variable language_">self</span>.data.keys())<br>        <span class="hljs-keyword">for</span> i, mod <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(modules, <span class="hljs-number">1</span>):<br>            <span class="hljs-variable language_">self</span>.module_list.addItem(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;i&#125;</span>. <span class="hljs-subst">&#123;mod&#125;</span>&quot;</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.module_list.count() &gt; <span class="hljs-number">0</span>:<br>            <span class="hljs-variable language_">self</span>.module_list.setCurrentRow(<span class="hljs-number">0</span>)<br>            <span class="hljs-variable language_">self</span>.refresh_sentences()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">refresh_sentences</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-variable language_">self</span>.sentence_list.clear()<br>        current_item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        <span class="hljs-keyword">if</span> current_item:<br>            <span class="hljs-comment"># 提取实际模块名（去除编号）</span><br>            current_mod = current_item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            items = <span class="hljs-variable language_">self</span>.data.get(current_mod, [])<br>            <span class="hljs-keyword">for</span> i, sent <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(items, <span class="hljs-number">1</span>):<br>                <span class="hljs-variable language_">self</span>.sentence_list.addItem(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;i&#125;</span>. <span class="hljs-subst">&#123;sent&#125;</span>&quot;</span>)<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_module_reordered</span>(<span class="hljs-params">self, parent, start, end, destination, row</span>):<br>        <span class="hljs-comment"># 重新排序数据中的模块</span><br>        modules = <span class="hljs-built_in">list</span>(<span class="hljs-variable language_">self</span>.data.keys())<br>        moved_mod = modules.pop(start)<br>        modules.insert(row, moved_mod)<br>        <span class="hljs-variable language_">self</span>.data = &#123;mod: <span class="hljs-variable language_">self</span>.data[mod] <span class="hljs-keyword">for</span> mod <span class="hljs-keyword">in</span> modules&#125;<br>        <span class="hljs-variable language_">self</span>.save()<br>        <span class="hljs-variable language_">self</span>.refresh_modules()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_sentence_reordered</span>(<span class="hljs-params">self, parent, start, end, destination, row</span>):<br>        current_item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        <span class="hljs-keyword">if</span> current_item:<br>            current_mod = current_item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            sentences = <span class="hljs-variable language_">self</span>.data[current_mod]<br>            moved_sent = sentences.pop(start)<br>            sentences.insert(row, moved_sent)<br>            <span class="hljs-variable language_">self</span>.save()<br>            <span class="hljs-variable language_">self</span>.refresh_sentences()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_module</span>(<span class="hljs-params">self</span>):<br>        name, ok = QInputDialog.getText(<span class="hljs-variable language_">self</span>, <span class="hljs-string">&quot;新建模块&quot;</span>, <span class="hljs-string">&quot;模块名称:&quot;</span>)<br>        <span class="hljs-keyword">if</span> ok <span class="hljs-keyword">and</span> name:<br>            <span class="hljs-keyword">if</span> name <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>.data:<br>                <span class="hljs-variable language_">self</span>.data[name] = []<br>                <span class="hljs-variable language_">self</span>.save()<br>                <span class="hljs-variable language_">self</span>.refresh_modules()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">del_module</span>(<span class="hljs-params">self</span>):<br>        item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        <span class="hljs-keyword">if</span> item:<br>            mod_name = item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            confirm = QMessageBox.question(<span class="hljs-variable language_">self</span>, <span class="hljs-string">&quot;确认&quot;</span>, <span class="hljs-string">f&quot;删除模块 &#x27;<span class="hljs-subst">&#123;mod_name&#125;</span>&#x27; 及其所有句子?&quot;</span>, QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)<br>            <span class="hljs-keyword">if</span> confirm == QMessageBox.StandardButton.Yes:<br>                <span class="hljs-keyword">del</span> <span class="hljs-variable language_">self</span>.data[mod_name]<br>                <span class="hljs-variable language_">self</span>.save()<br>                <span class="hljs-variable language_">self</span>.refresh_modules()<br>                <span class="hljs-variable language_">self</span>.sentence_list.clear()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_sentence</span>(<span class="hljs-params">self</span>):<br>        current_item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> current_item:<br>            <span class="hljs-keyword">return</span> QMessageBox.warning(<span class="hljs-variable language_">self</span>, <span class="hljs-string">&quot;提示&quot;</span>, <span class="hljs-string">&quot;请先选择一个模块&quot;</span>)<br>        current_mod = current_item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>        dialog = CustomInputDialog(<span class="hljs-string">&quot;新建句子&quot;</span>, <span class="hljs-string">&quot;输入句子 (支持 &#123;A|B&#125; 格式):&quot;</span>)<br>        <span class="hljs-keyword">if</span> dialog.<span class="hljs-built_in">exec</span>() == QDialog.DialogCode.Accepted:<br>            text = dialog.getText()<br>            <span class="hljs-keyword">if</span> text:<br>                <span class="hljs-variable language_">self</span>.data[current_mod].append(text)<br>                <span class="hljs-variable language_">self</span>.save()<br>                <span class="hljs-variable language_">self</span>.refresh_sentences()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">del_sentence</span>(<span class="hljs-params">self</span>):<br>        current_item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        row = <span class="hljs-variable language_">self</span>.sentence_list.currentRow()<br>        <span class="hljs-keyword">if</span> current_item <span class="hljs-keyword">and</span> row &gt;= <span class="hljs-number">0</span>:<br>            current_mod = current_item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">del</span> <span class="hljs-variable language_">self</span>.data[current_mod][row]<br>            <span class="hljs-variable language_">self</span>.save()<br>            <span class="hljs-variable language_">self</span>.refresh_sentences()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">edit_sentence</span>(<span class="hljs-params">self, item</span>):<br>        current_item = <span class="hljs-variable language_">self</span>.module_list.currentItem()<br>        <span class="hljs-keyword">if</span> current_item:<br>            current_mod = current_item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            <span class="hljs-comment"># 提取实际句子（去除编号）</span><br>            sent_text = item.text().split(<span class="hljs-string">&#x27;. &#x27;</span>, <span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            dialog = CustomInputDialog(<span class="hljs-string">&quot;编辑句子&quot;</span>, <span class="hljs-string">&quot;内容:&quot;</span>, sent_text)<br>            <span class="hljs-keyword">if</span> dialog.<span class="hljs-built_in">exec</span>() == QDialog.DialogCode.Accepted:<br>                text = dialog.getText()<br>                <span class="hljs-keyword">if</span> text:<br>                    row = <span class="hljs-variable language_">self</span>.sentence_list.currentRow()<br>                    <span class="hljs-variable language_">self</span>.data[current_mod][row] = text<br>                    <span class="hljs-variable language_">self</span>.save()<br>                    <span class="hljs-variable language_">self</span>.refresh_sentences()<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self</span>):<br>        save_data(<span class="hljs-variable language_">self</span>.data)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    app = QApplication(sys.argv)<br>    <br>    <span class="hljs-comment"># 应用全局样式表</span><br>    app.setStyleSheet(STYLESHEET)<br>    <br>    manager = ManagerWindow()<br>    manager.show()<br>    hotkey_signal = HotkeySignal()<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">show_quick_selector</span>():<br>        latest_data = load_data()<br>        selector = QuickSelector(latest_data)<br>        <br>        <span class="hljs-comment"># 让窗口出现在屏幕中心</span><br>        screen = app.primaryScreen()<br>        screen_geometry = screen.geometry()<br>        center_point = screen_geometry.center()<br>        frame_geometry = selector.frameGeometry()<br>        frame_geometry.moveCenter(center_point)<br>        selector.move(frame_geometry.topLeft())<br>        <br>        selector.<span class="hljs-built_in">exec</span>()<br>    hotkey_signal.trigger.connect(show_quick_selector)<br>    <span class="hljs-comment"># 非阻塞热键监听</span><br>    keyboard.add_hotkey(<span class="hljs-string">&#x27;ctrl + alt&#x27;</span>, <span class="hljs-keyword">lambda</span>: hotkey_signal.trigger.emit())<br>    sys.exit(app.<span class="hljs-built_in">exec</span>())<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-打包成-exe-文件"><a href="#2-打包成-exe-文件" class="headerlink" title="2. 打包成 exe 文件"></a>2. 打包成 exe 文件</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 安装打包工具</span><br>pip install pyinstaller<br><br><br><span class="hljs-comment"># 2. 打包成 exe 文件</span><br>pyinstaller <span class="hljs-operator">-</span>-onefile <span class="hljs-operator">-</span>-windowed <span class="hljs-operator">-</span>-icon<span class="hljs-operator">=</span><span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\I</span>CO<span class="hljs-char escape_">\快</span>捷语料管理.ico&quot;</span> <span class="hljs-operator">-</span>-distpath <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合&quot;</span> <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\快</span>捷语料管理.py&quot;</span><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. --onefile</span><br><span class="hljs-string">	1. 打包为单个 .exe 文件。</span><br><span class="hljs-string">2. --windowed</span><br><span class="hljs-string">	1. 确保 GUI 程序无控制台窗口</span><br><span class="hljs-string">3. --distpath &quot;</span>D:\文件集合\<span class="hljs-string">&quot;  &quot;</span>D:\文件集合\快捷语料管理.py<span class="hljs-string">&quot;</span><br><span class="hljs-string">	1. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>是输出位置</span><br><span class="hljs-string">	2. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\快</span>捷语料管理.py 是输入位置</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-注意事项"><a href="#3-注意事项" class="headerlink" title="3. 注意事项"></a>3. 注意事项</h2><h3 id="3-1-数据存储位置"><a href="#3-1-数据存储位置" class="headerlink" title="3.1. 数据存储位置"></a>3.1. 数据存储位置</h3><p><img src="/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="3-2-快捷键位置"><a href="#3-2-快捷键位置" class="headerlink" title="3.2. 快捷键位置"></a>3.2. 快捷键位置</h3><p><img src="/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E5%B7%A5%E5%85%B7/%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/" class="category-chain-item">快捷语料管理</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>工具：快捷语料管理</div>
+      <div>https://wangjia5289.github.io/2025/12/11/工具：快捷语料管理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 11, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/12/11/%E5%90%8D%E8%A8%80/" title="名言">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">名言</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E8%AF%AD%E6%B3%95%E7%B3%96/" title="笔记：Java 语法糖">
+                        <span class="hidden-mobile">笔记：Java 语法糖</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

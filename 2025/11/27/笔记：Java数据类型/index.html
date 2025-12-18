@@ -1,0 +1,1959 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO  List  ArrayList  LinkedList  CopyOnWriteArrayList    Set 去重，去重，去重！！！！说啊  TreeSet  HashSet  EnumSet  LinkedHashSet 最重要的就是 LRU  CopyOnWriteArraySet    Map  TreeMap  HashMap  EnumMap  WeakHashMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Java 数据类型">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO  List  ArrayList  LinkedList  CopyOnWriteArrayList    Set 去重，去重，去重！！！！说啊  TreeSet  HashSet  EnumSet  LinkedHashSet 最重要的就是 LRU  CopyOnWriteArraySet    Map  TreeMap  HashMap  EnumMap  WeakHashMap">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-27.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-28.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-29.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-26.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-11.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-9.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-12.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-24.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-25.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-13.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-14.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-15.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-16.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-17.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-18.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-19.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-20.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-21.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-22.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-23.png">
+<meta property="article:published_time" content="2025-11-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-18T03:31:21.628Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-3.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Java 数据类型 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Java 数据类型"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-27 00:00" pubdate>
+          November 27, 2025 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          109 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Java 数据类型</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2025-12-18T11:31:21+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><ul>
+<li><input disabled="" type="checkbox"> List<ul>
+<li><input checked="" disabled="" type="checkbox"> ArrayList</li>
+<li><input checked="" disabled="" type="checkbox"> LinkedList</li>
+<li><input disabled="" type="checkbox"> CopyOnWriteArrayList</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Set 去重，去重，去重！！！！说啊<ul>
+<li><input disabled="" type="checkbox"> TreeSet</li>
+<li><input disabled="" type="checkbox"> HashSet</li>
+<li><input disabled="" type="checkbox"> EnumSet</li>
+<li><input disabled="" type="checkbox"> LinkedHashSet 最重要的就是 LRU</li>
+<li><input disabled="" type="checkbox"> CopyOnWriteArraySet</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Map<ul>
+<li><input checked="" disabled="" type="checkbox"> TreeMap</li>
+<li><input checked="" disabled="" type="checkbox"> HashMap</li>
+<li><input disabled="" type="checkbox"> EnumMap</li>
+<li><input checked="" disabled="" type="checkbox"> WeakHashMap</li>
+<li><input checked="" disabled="" type="checkbox"> LinkedHashMap</li>
+<li><input checked="" disabled="" type="checkbox"> ConcurrentHashMap</li>
+<li><input disabled="" type="checkbox"> ConcurrentSkipListMap</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Queue<ul>
+<li><input checked="" disabled="" type="checkbox"> LinkedList</li>
+<li><input disabled="" type="checkbox"> ArrayBlockingQueue</li>
+<li><input disabled="" type="checkbox"> LinkedBlockingQueue</li>
+<li><input disabled="" type="checkbox"> PriorityBlockingQueue</li>
+<li><input disabled="" type="checkbox"> DelayQueue</li>
+<li><input disabled="" type="checkbox"> SynchronousQueue</li>
+<li><input disabled="" type="checkbox"> LinkedTransferQueue</li>
+<li><input disabled="" type="checkbox"> PriorityQueue</li>
+<li><input disabled="" type="checkbox"> ConcurrentLinkedQueue</li>
+<li><input disabled="" type="checkbox"> ScheduledThreadPoolExecutor.DelayedWorkQueue</li>
+<li><input disabled="" type="checkbox"> ForkJoinPool.WorkQueue</li>
+<li><input disabled="" type="checkbox"> ArrayDeque</li>
+<li><input disabled="" type="checkbox"> LinkedBlockingDeque</li>
+<li><input disabled="" type="checkbox"> ConcurrentLinkedDeque</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> instanceof 的原理</li>
+<li><input disabled="" type="checkbox"> 为什么 Java 要设计成 “伪泛型”</li>
+<li><input disabled="" type="checkbox"> 为什么无法使用 instanceof 检查泛型类型（泛型类型是指什么）</li>
+<li><input disabled="" type="checkbox"> 内部类之后，继续回到 Java 函数式编程从lambda 表达式继续开始</li>
+</ul>
+<hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw</p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://blog.wangjia.ink/2025/11/27/笔记：Java数据类型/</a></p>
+</li>
+<li><p>代码洪荒（面试宝典）<br>👉 <a target="_blank" rel="noopener" href="https://www.notion.so/Java-2b7974fbda5e80849377f2d49f812c50?source=copy_link">https://www.notion.so/Java-2b7974fbda5e80849377f2d49f812c50?source=copy_link</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="四、引用数据类型"><a href="#四、引用数据类型" class="headerlink" title="四、引用数据类型"></a>四、引用数据类型</h1><h2 id="1-类"><a href="#1-类" class="headerlink" title="1. 类"></a>1. 类</h2><h3 id="1-1-具体类"><a href="#1-1-具体类" class="headerlink" title="1.1. 具体类"></a>1.1. 具体类</h3><h4 id="1-1-1-内部类"><a href="#1-1-1-内部类" class="headerlink" title="1.1.1. 内部类"></a>1.1.1. 内部类</h4><ol>
+<li>实例内部类</li>
+<li>静态内部类</li>
+<li>局部内部类</li>
+<li>匿名内部类</li>
+<li><code>Lambda</code> 表达式</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th><strong>实例内部类</strong></th>
+<th><strong>静态内部类</strong></th>
+<th><strong>局部内部类</strong></th>
+<th><strong>匿名内部类</strong></th>
+<th>Lambda 表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>位置</strong></td>
+<td>类内部，但是在方法外部</td>
+<td>类内部，但是在方法外部</td>
+<td>方法内部</td>
+<td>1. 类内部，但是在方法外部（赋值）<br>2. 方法参数<br>3. 方法内部</td>
+<td>1. 类内部，但是在方法外部（赋值）<br>2. 方法参数<br>3. 方法内部</td>
+</tr>
+<tr>
+<td><strong>对象的实例化方式</strong></td>
+<td>先创建上层类实例，再通过上层类实例创建内部类实例</td>
+<td>直接创建内部类实例</td>
+<td>直接创建内部类实例（只能在创建局部内部类的方法内部创建内部类实例）</td>
+<td>创建内部类的同时，会自动创建内部类实例</td>
+<td>创建 <code>Lambda</code> 表达式的同时，会自动创建内部类实例</td>
+</tr>
+<tr>
+<td><strong>this 指向的位置</strong></td>
+<td>内部类实例本身</td>
+<td>内部类实例本身</td>
+<td>内部类实例本身</td>
+<td>内部类实例本身</td>
+<td>1. 如果 <code>Lambda</code> 表达式被创建在类的内部，但是在方法外：上层类实例<br>2. 如果 <code>Lambda</code> 表达式被创建在实例方法的方法参数或方法内部：调用这个实例方法的实例<br>3. 如果 <code>Lambda</code> 表达式被创建在静态方法的方法参数或方法内部：没有 <code>this</code>，不能使用 <code>this</code></td>
+</tr>
+<tr>
+<td><strong>是否持有上层类的引用</strong></td>
+<td>✅（<code>this$0</code>）</td>
+<td>❌</td>
+<td>1. 如果局部内部类被创建在实例方法的内部：✅<br>2. 如果局部内部类被创建在静态方法的内部：❌</td>
+<td>1. 如果不涉及到静态：✅<br>2. 如果涉及到静态：❌（例如匿名内部类实例被赋值给静态变量或静态常量，又或者匿名内部类被创建在静态方法的方法参数或方法内部）</td>
+<td>1. 如果 <code>Lambda</code> 表达式的方法体中涉及到上层类的非静态变量、常量、方法、内部类：✅<br>2. 如果 <code>Lambda</code> 表达式的方法体中没有涉及到上层类的非静态变量、常量、方法、内部类：❌</td>
+</tr>
+<tr>
+<td><strong>支持的访问修饰符</strong></td>
+<td>所有</td>
+<td>所有</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><strong>支持的类级别的非访问修饰符</strong></td>
+<td><code>final</code>、<code>strictfp</code>、<code>abstract</code>、<code>sealed</code>、<code>non-sealed</code></td>
+<td><code>final</code>、<code>static</code>、<code>strictfp</code>、<code>abstract</code>、<code>sealed</code>、<code>non-sealed</code></td>
+<td><code>final</code>、<code>strictfp</code>、<code>asbtract</code></td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><strong>支持的属性级别的非访问修饰符</strong></td>
+<td><code>final</code>、<code>volatile</code>、<code>transient</code></td>
+<td><code>final</code>、<code>static</code>、<code>volatile</code>、<code>tr</code>abstract<code>、</code>sealed<code>、</code>non-sealed<code>ansient</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td><code>final</code>、<code>static</code>、<code>volatile</code>、<code>transient</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td><code>final</code>、<code>static</code>、<code>volatile</code>、<code>transient</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td><code>final</code>（<code>Lambda</code> 表达式和其他四种内部类终究是不同。创建四种内部类是真的在创建一个类，属性是正儿八经的属性。但是我们创建 <code>Lambda</code> 表达式，其方法体本质上对某函数式接口的接口方法（普通）的实现，所以属性其实是局部变量。而局部变量只支持 <code>final</code> 非访问修饰符</td>
+</tr>
+<tr>
+<td><strong>支持的方法级别的非访问修饰符</strong></td>
+<td><code>final</code>、<code>native</code>、<code>strictfp</code>、<code>synchronized</code></td>
+<td><code>final</code>、<code>static</code>、<code>native</code>、<code>strictfp</code>、<code>synchronized</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td><code>final</code>、<code>static</code>、<code>native</code>、<code>strictfp</code>、<code>synchronized</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td><code>final</code>、<code>static</code>、<code>native</code>、<code>strictfp</code>、<code>synchronized</code>（在 <code>Java16</code> 之后，允许在内部类中使用 <code>static</code> 非访问修饰符）</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><strong>是否能直接访问上层类中的非静态的变量、常量、方法、内部类</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>1. 如果局部内部类被创建在实例方法的内部：✅<br>2. 如果局部内部类被创建在静态方法的内部：❌</td>
+<td>1. 如果不涉及到静态：✅<br>2. 如果涉及到静态：❌</td>
+<td>1. 如果 <code>Lambda</code> 表达式的方法体中涉及到上层类的非静态变量、常量、方法、内部类：✅<br>2. 如果 <code>Lambda</code> 表达式的方法体中没有涉及到上层类的非静态变量、常量、方法、内部类：❌</td>
+</tr>
+<tr>
+<td><strong>.class 文件的文件名</strong></td>
+<td><code>Outer$Inner.class</code></td>
+<td><code>Outer$Inner.class</code></td>
+<td><code>Outer$1Inner.class</code>（有数字编号）</td>
+<td><code>Outer$1.class</code>（纯数字编号）</td>
+<td>无 <code>.class</code> 文件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>局部内部类中的变量、常量并不是局部变量，因为它是一个正儿八经的类，只不过被创建在某方法的内部。而方法中的变量才是真正的局部变量</li>
+<li>匿名内部类和 <code>Lambda</code> 表达式不像其他内部类一样，需要先创建类然后再创建其实例，而是我们在创建匿名内部类和 <code>Lambda</code> 表达式的时候，就自动创建了其实例并返回。所以我们说 “匿名内部类和 <code>Lambda</code> 表达式可以创建在类内部，但是在方法外部”，其实就是将其返回的实例赋值给类的变量或常量：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo</span> &#123;<br>	<br>    <span class="hljs-type">Runnable</span> <span class="hljs-variable">memberLambda</span> <span class="hljs-operator">=</span> () -&gt; System.out.println(<span class="hljs-string">&quot;...&quot;</span>);<br>    <br>	<span class="hljs-comment">// ...</span><br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] Title<br>3. 静态内部类与上层类在地位上是一样的，因为静态内部类除了在上层类的内部，其他的和上层类一点关系没有，所以不会持有上层类的引用<br>4. 所谓的 “持有上层类的引用” 是指：在编译阶段，编译器会自动为内部类添加一个实例变量，用于记录上层类的引用（需要注意的是：只会记录上层类的引用，并不会记录上层类的上层类的引用。如果确实需要访问上层类的上层类，需要借助上层类持有的引用来访问）<br>5. 如果内部类能直接访问上层类中的非静态的变量、常量、方法、内部类，那么即便是使用 <code>private</code> 访问修饰符修饰，也能访问<br>6. 局部内部类、匿名内部类、<code>Lambda</code> 表达式如果需要访问局部变量，只能访问 <code>final</code> 修饰的局部变量或 <code>Effectively Final</code> 的局部变量（在编译阶段，编译器会自动判断出哪些变量在初始化后就没有再被修改过，那么这些变量就算 <code>Effectively Final</code> 的变量）<br>7. 局部变量也只能是 <code>final</code> 修饰的局部变量或 <code>Effectively Final</code> 的局部变量，否则在编译阶段，编译器会报错<br>8. 个人推荐规范一些语法：<br>    1. 访问本方法中的成员时：<br>        1. 变量、常量<br>            1. 局部变量<br>                1. 使用 <code>secret</code><br>        2. 内部类<br>            1. 局部内部类<br>                1. 创建实例时使用 <code>new Inner()</code><br>    2. 访问本类实例中的成员时：<br>        1. 变量、常量<br>            1. 普通常量、实例变量<br>                1. 使用 <code>this.secret</code><br>            2. 静态常量、静态变量<br>                1. 使用  <code>类名.secret</code><br>        2. 方法<br>            1. 实例方法<br>                1. 使用 <code>this.run()</code><br>            2. 静态方法<br>                1. 使用 <code>类名.run()</code><br>        3. 内部类<br>            1. 实例内部类<br>                1. 创建实例时使用 <code>this.new Inner()</code><br>            2. 静态内部类<br>                1. 创建实例时使用 <code>new 类名.Inner()</code><br>    3. 访问上层类实例中的成员时：<br>        1. 变量、常量<br>            1. 普通常量、实例变量<br>                1. 使用 <code>Outer.this.secret</code><br>            2. 静态常量、静态变量<br>                1. 使用  <code>类名.secret</code><br>        2. 方法<br>            1. 实例方法<br>                1. 使用 <code>Outer.this.run()</code><br>            2. 静态方法<br>                1. 使用 <code>类名.run()</code><br>        3. 内部类<br>            1. 实例内部类<br>                1. 创建实例时使用 <code>Outer.this.new Inner()</code><br>            2. 静态内部类<br>                1. 创建实例时使用 <code>new 类名.Inner()</code><br>        4. 需要注意的是：访问上层类实例中的成员，需要内部类实例持有上层类的引用<br>    4. 访问其他类实例中的成员时：<br>        1. 变量、常量<br>            1. 普通常量、实例变量<br>                1. 使用 <code>new Outer() </code>和 <code>outer.secret</code><br>            2. 静态常量、静态变量<br>                1. 使用  <code>类名.secret</code><br>        2. 方法<br>            1. 实例方法<br>                1. 使用 <code>new Outer() </code>和 <code>outer.run()</code><br>            2. 静态方法<br>                1. 使用 <code>类名.run()</code><br>        3. 内部类<br>            1. 实例内部类<br>                1. 创建实例时使用 <code>new Outer() </code>和 <code>outer.new Inner()</code><br>            2. 静态内部类<br>                1. 创建实例时使用 <code>new 类名.Inner()</code></p>
+</blockquote>
+<hr>
+<h2 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a>2. 集合</h2><h3 id="2-1-Set＜E＞"><a href="#2-1-Set＜E＞" class="headerlink" title="2.1. Set＜E＞"></a>2.1. Set＜E＞</h3><h4 id="2-1-1-Set＜E＞-基础体系"><a href="#2-1-1-Set＜E＞-基础体系" class="headerlink" title="2.1.1. Set＜E＞ 基础体系"></a>2.1.1. Set＜E＞ 基础体系</h4><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-3.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Serializable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.io.Serializable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/10/28/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/10/28/源码：java.io.Serializable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Cloneable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Cloneable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/06/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/06/源码：java.lang.Cloneable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Iterable＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<br> 1. <a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Iterable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Iterable＜T＞源码解析</a></li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Iterable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/25/源码：java.lang.Iterable＜T＞源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Collection＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Collection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.Collection＜E＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Collection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/25/源码：java.util.Collection＜E＞源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Set＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Set%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.Set＜E＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Set%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/12/01/源码：java.util.Set＜E＞源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="2-1-2-Set＜E＞-相关分类"><a href="#2-1-2-Set＜E＞-相关分类" class="headerlink" title="2.1.2. Set＜E＞ 相关分类"></a>2.1.2. Set＜E＞ 相关分类</h4><ol>
+<li><code>TreeSet＜E＞</code></li>
+<li><code>HashSet＜E＞</code></li>
+<li><code>EnumSet＜E＞</code></li>
+<li><code>LinkedHashSet＜E＞</code></li>
+<li><code>CopyOnWriteArraySet＜E＞</code></li>
+<li><code>ConcurrentSkipListSet＜E＞</code></li>
+<li><code>ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt;</code></li>
+</ol>
+<h4 id="2-1-3-TreeSet＜E＞"><a href="#2-1-3-TreeSet＜E＞" class="headerlink" title="2.1.3. TreeSet＜E＞"></a>2.1.3. TreeSet＜E＞</h4><h5 id="2-1-3-1-TreeSet＜E＞-体系结构"><a href="#2-1-3-1-TreeSet＜E＞-体系结构" class="headerlink" title="2.1.3.1. TreeSet＜E＞ 体系结构"></a>2.1.3.1. TreeSet＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-3-2-TreeSet＜E＞-底层实现"><a href="#2-1-3-2-TreeSet＜E＞-底层实现" class="headerlink" title="2.1.3.2. TreeSet＜E＞ 底层实现"></a>2.1.3.2. TreeSet＜E＞ 底层实现</h5><p><code>TreeSet＜E＞</code> 底层是基于一个 <code>TreeMap＜K, V＞</code> 实现的</p>
+<p><code>TreeSet＜E＞</code> 是通过 <code>TreeSet＜E＞➔m</code> 存储数据的，而它又是 <code>NavigableMap＜K, V＞</code> 类型（实际初始化时就是一个 <code>TreeMap＜K, V＞</code>）</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>TreeSet＜E＞</code> 底层是基于 <code>TreeMap＜K, V＞</code> 实现的，但是只使用了 <code>TreeMap＜K, V＞</code> 的 <code>Key</code> 来存储数据</li>
+<li>由于 <code>TreeSet＜E＞</code> 底层是基于 <code>TreeMap＜K, V＞</code> 实现的，所以 <code>TreeSet＜E＞</code> 能够自动对元素进行排序（自然排序、定制排序）</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-1-3-3-TreeSet＜E＞-问题爆破"><a href="#2-1-3-3-TreeSet＜E＞-问题爆破" class="headerlink" title="2.1.3.3. TreeSet＜E＞ 问题爆破"></a>2.1.3.3. TreeSet＜E＞ 问题爆破</h5><p>由于<code>TreeSet＜E＞</code> 底层是基于一个 <code>TreeMap＜K, V＞</code> 实现的，所以 <code>TreeMap＜K, V＞</code> 拥有的问题，<code>TreeSet＜E＞</code> 一般都有。详见下文：<code>TreeMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>TreeSet＜E＞</code> 底层是基于 <code>TreeMap＜K, V＞</code> 实现的，但是只使用了 <code>TreeMap＜K, V＞</code> 的 <code>Key</code> 来存储数据。所以我们着重看 <code>TreeMap＜K, V＞</code> 的 <code>Key</code></li>
+<li>为了解决 <code>TreeSet＜E＞</code> 多线程并发安全性问题，我们通常为其加锁或者使用另外一种数据结构：<code>ConcurrentSkipListSet＜E＞</code></li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-4-HashSet＜E＞"><a href="#2-1-4-HashSet＜E＞" class="headerlink" title="2.1.4. HashSet＜E＞"></a>2.1.4. HashSet＜E＞</h4><h5 id="2-1-4-1-HashSet＜E＞-体系结构"><a href="#2-1-4-1-HashSet＜E＞-体系结构" class="headerlink" title="2.1.4.1. HashSet＜E＞ 体系结构"></a>2.1.4.1. HashSet＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-6.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-4-2-HashSet＜E＞-底层实现"><a href="#2-1-4-2-HashSet＜E＞-底层实现" class="headerlink" title="2.1.4.2. HashSet＜E＞ 底层实现"></a>2.1.4.2. HashSet＜E＞ 底层实现</h5><p><code>HashSet＜E＞</code> 底层是基于一个 <code>HashMap＜K, V＞</code> 实现的</p>
+<p><code>HashSet＜E＞</code> 是通过 <code>HashSet＜E＞➔map</code> 存储数据的，而它又是 <code>HashMap＜K, V＞</code> 类型</p>
+<hr>
+<h5 id="2-1-4-3-HashSet＜E＞-问题爆破"><a href="#2-1-4-3-HashSet＜E＞-问题爆破" class="headerlink" title="2.1.4.3. HashSet＜E＞ 问题爆破"></a>2.1.4.3. HashSet＜E＞ 问题爆破</h5><p>由于<code>HashSet＜E＞</code> 底层是基于一个 <code>HashMap＜K, V＞</code> 实现的，所以 <code>HashMap＜K, V＞</code> 拥有的问题，<code>HashSet＜E＞</code> 一般都有。详见下文：<code>HashMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>HashSet＜E＞</code> 底层是基于 <code>HashMap＜K, V＞</code> 实现的，但是只使用了 <code>HashMap＜K, V＞</code> 的 <code>Key</code> 来存储数据。所以我们着重看 <code>HashMap＜K, V＞</code> 的 <code>Key</code></li>
+<li>为了解决 <code>HashSet＜E＞</code> 多线程并发安全性问题，我们通常为其加锁或者使用另外一种数据结构：<code>ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt;</code></li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-5-LinkedHashSet＜E＞"><a href="#2-1-5-LinkedHashSet＜E＞" class="headerlink" title="2.1.5. LinkedHashSet＜E＞"></a>2.1.5. LinkedHashSet＜E＞</h4><h5 id="2-1-5-1-LinkedHashSet＜E＞-体系结构"><a href="#2-1-5-1-LinkedHashSet＜E＞-体系结构" class="headerlink" title="2.1.5.1. LinkedHashSet＜E＞ 体系结构"></a>2.1.5.1. LinkedHashSet＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-27.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-5-2-LinkedHashSet＜E＞-底层实现"><a href="#2-1-5-2-LinkedHashSet＜E＞-底层实现" class="headerlink" title="2.1.5.2. LinkedHashSet＜E＞ 底层实现"></a>2.1.5.2. LinkedHashSet＜E＞ 底层实现</h5><p><code>LinkedHashSet＜E＞</code> 底层是基于一个 <code>LinkedHashMap＜K, V＞</code> 实现的</p>
+<p><code>LinkedHashSet＜E＞</code> 是通过父类的 <code>HashSet＜E＞-&gt;map</code> 来存储数据的，而它又是 <code>HashMap＜K, V＞</code> 类型（实际初始化时就是一个 <code>LinkedHashMap＜K, V＞</code>）</p>
+<hr>
+<h5 id="2-1-5-3-LinkedHashSet＜E＞-问题爆破"><a href="#2-1-5-3-LinkedHashSet＜E＞-问题爆破" class="headerlink" title="2.1.5.3. LinkedHashSet＜E＞ 问题爆破"></a>2.1.5.3. LinkedHashSet＜E＞ 问题爆破</h5><p>由于<code>LinkedHashSet＜E＞</code> 底层是基于一个 <code>LinkedHashMap＜K, V＞</code> 实现的，所以 <code>LinkedHashMap＜K, V＞</code> 拥有的问题，<code>LinkedHashSet＜E＞</code> 一般都有。详见下文：<code>LinkedHashMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>LinkedHashSet＜E＞</code> 底层是基于 <code>LinkedHashMap＜K, V＞</code> 实现的，但是只使用了 <code>LinkedHashMap＜K, V＞</code> 的 <code>Key</code> 来存储数据。所以我们着重看 <code>LinkedHashMap＜K, V＞</code> 的 <code>Key</code></li>
+<li>为了解决 <code>LinkedHashSet＜E＞</code> 多线程并发安全性问题，我们通常为其加锁</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-6-CopyOnWriteArraySet＜E＞"><a href="#2-1-6-CopyOnWriteArraySet＜E＞" class="headerlink" title="2.1.6. CopyOnWriteArraySet＜E＞"></a>2.1.6. CopyOnWriteArraySet＜E＞</h4><h5 id="2-1-6-1-CopyOnWriteArraySet＜E＞-体系结构"><a href="#2-1-6-1-CopyOnWriteArraySet＜E＞-体系结构" class="headerlink" title="2.1.6.1. CopyOnWriteArraySet＜E＞ 体系结构"></a>2.1.6.1. CopyOnWriteArraySet＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-6-2-CopyOnWriteArraySet＜E＞-底层实现"><a href="#2-1-6-2-CopyOnWriteArraySet＜E＞-底层实现" class="headerlink" title="2.1.6.2. CopyOnWriteArraySet＜E＞ 底层实现"></a>2.1.6.2. CopyOnWriteArraySet＜E＞ 底层实现</h5><p><code>CopyOnWriteArraySet＜E＞</code> 底层是基于一个 <code>CopyOnWriteArrayList＜E＞</code> 实现的</p>
+<p><code>CopyOnWriteArraySet＜E＞</code> 是通过 <code>CopyOnWriteArraySet＜E＞➔al</code> 存储数据的，而它又是 <code>CopyOnWriteArrayList＜E＞</code> 类型</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>CopyOnWriteArraySet＜E＞</code> 本质上就是 <code>CopyOnWriteArrayList＜E＞</code> 的一个装饰器，它所有的操作最终都是委托给  <code>CopyOnWriteArrayList＜E＞</code> 去执行的，只不过在 “增” 操作的时候多做了一个 “去重” 操作。即在 “增” 操作时，会先遍历整个数组，发现该元素不存在后，再创建一个新数组，并在这个新数组上执行 “写” 操作</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-1-6-3-CopyOnWriteArraySet＜E＞-问题爆破"><a href="#2-1-6-3-CopyOnWriteArraySet＜E＞-问题爆破" class="headerlink" title="2.1.6.3. CopyOnWriteArraySet＜E＞ 问题爆破"></a>2.1.6.3. CopyOnWriteArraySet＜E＞ 问题爆破</h5><p>由于<code>CopyOnWriteArraySet＜E＞</code> 底层是基于一个 <code>CopyOnWriteArrayList＜K, V＞</code> 实现的，所以 <code>CopyOnWriteArrayList＜K, V＞</code> 拥有的问题，<code>CopyOnWriteArraySet＜E＞</code> 一般都有。详见上文：<code>CopyOnWriteArrayList＜K, V＞</code></p>
+<hr>
+<h4 id="2-1-7-ConcurrentSkipListSet＜E＞"><a href="#2-1-7-ConcurrentSkipListSet＜E＞" class="headerlink" title="2.1.7. ConcurrentSkipListSet＜E＞"></a>2.1.7. ConcurrentSkipListSet＜E＞</h4><h5 id="2-1-7-1-ConcurrentSkipListSet＜E＞-体系结构"><a href="#2-1-7-1-ConcurrentSkipListSet＜E＞-体系结构" class="headerlink" title="2.1.7.1. ConcurrentSkipListSet＜E＞ 体系结构"></a>2.1.7.1. ConcurrentSkipListSet＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-28.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-7-2-ConcurrentSkipListSet＜E＞-底层实现"><a href="#2-1-7-2-ConcurrentSkipListSet＜E＞-底层实现" class="headerlink" title="2.1.7.2. ConcurrentSkipListSet＜E＞ 底层实现"></a>2.1.7.2. ConcurrentSkipListSet＜E＞ 底层实现</h5><p><code>ConcurrentSkipListSet＜E＞</code> 底层是基于一个 <code>ConcurrentSkipListMap＜K, V＞</code> 实现的</p>
+<p><code>ConcurrentSkipListSet＜E＞</code> 是通过 <code>ConcurrentSkipListSet＜E＞➔m</code> 存储数据的，而它又是 <code>ConcurrentNavigableMap＜K, V＞</code> 类型（实际初始化时就是一个 <code>ConcurrentSkipListMap＜K, V＞</code>）</p>
+<hr>
+<h5 id="2-1-7-3-ConcurrentSkipListSet＜E＞-问题爆破"><a href="#2-1-7-3-ConcurrentSkipListSet＜E＞-问题爆破" class="headerlink" title="2.1.7.3. ConcurrentSkipListSet＜E＞ 问题爆破"></a>2.1.7.3. ConcurrentSkipListSet＜E＞ 问题爆破</h5><p>由于<code>ConcurrentSkipListSet＜E＞</code> 底层是基于一个 <code>ConcurrentSkipListMap＜K, V＞</code> 实现的，所以 <code>ConcurrentSkipListMap＜K, V＞</code> 拥有的问题，<code>ConcurrentSkipListSet＜E＞</code> 一般都有。详见下文：<code>ConcurrentSkipListMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>ConcurrentSkipListSet＜E＞</code> 底层是基于 <code>ConcurrentSkipListMap＜K, V＞</code> 实现的，但是只使用了 <code>ConcurrentSkipListMap＜K, V＞</code> 的 <code>Key</code> 来存储数据。所以我们着重看 <code>ConcurrentSkipListMap＜K, V＞</code> 的 <code>Key</code></li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-1-8-ConcurrentHashMap＜K-V＞-KeySetView"><a href="#2-1-8-ConcurrentHashMap＜K-V＞-KeySetView" class="headerlink" title="2.1.8. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt;"></a>2.1.8. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt;</h4><h5 id="2-1-8-1-ConcurrentHashMap＜K-V＞-KeySetView-体系结构"><a href="#2-1-8-1-ConcurrentHashMap＜K-V＞-KeySetView-体系结构" class="headerlink" title="2.1.8.1. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 体系结构"></a>2.1.8.1. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-29.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-1-8-2-ConcurrentHashMap＜K-V＞-KeySetView-底层实现"><a href="#2-1-8-2-ConcurrentHashMap＜K-V＞-KeySetView-底层实现" class="headerlink" title="2.1.8.2. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 底层实现"></a>2.1.8.2. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 底层实现</h5><p><code>ConcurrentHashMap＜K, V＞.KeySetView＜K, V＞</code> 底层是基于一个 <code>ConcurrentHashMap＜K, V＞</code> 实现的</p>
+<p><code>ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt;</code> 是通过父类的 <code>CollectionView＜K, V, E＞-&gt;map</code> 来存储数据的，而它又是 <code>ConcurrentHashMap＜K, V＞</code> 类型</p>
+<hr>
+<h5 id="2-1-8-3-ConcurrentHashMap＜K-V＞-KeySetView-问题爆破"><a href="#2-1-8-3-ConcurrentHashMap＜K-V＞-KeySetView-问题爆破" class="headerlink" title="2.1.8.3. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 问题爆破"></a>2.1.8.3. ConcurrentHashMap＜K, V＞.KeySetView&lt;K,V&gt; 问题爆破</h5><p>由于 <code>ConcurrentHashMap＜K, V＞.KeySetView＜K, V＞</code> 底层是基于一个 <code>ConcurrentHashMap＜K, V＞</code> 实现的，所以 <code>ConcurrentHashMap＜K, V＞</code> 拥有的问题，<code>ConcurrentHashMap＜K, V＞.KeySetView＜K, V＞</code> 一般都有。详见下文：<code>ConcurrentHashMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>虽然说 <code>ConcurrentHashMap＜K, V＞.KeySetView＜K, V＞</code> 底层是基于 <code>ConcurrentHashMap＜K, V＞</code> 实现的，但是只使用了 <code>ConcurrentHashMap＜K, V＞</code> 的 <code>Key</code> 来存储数据。所以我们着重看 <code>ConcurrentHashMap＜K, V＞</code> 的 <code>Key</code></li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-2-List＜E＞"><a href="#2-2-List＜E＞" class="headerlink" title="2.2. List＜E＞"></a>2.2. List＜E＞</h3><h4 id="2-2-1-List＜E＞-基础体系"><a href="#2-2-1-List＜E＞-基础体系" class="headerlink" title="2.2.1. List＜E＞ 基础体系"></a>2.2.1. List＜E＞ 基础体系</h4><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-4.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Serializable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.io.Serializable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/10/28/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/10/28/源码：java.io.Serializable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Cloneable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Cloneable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/06/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/06/源码：java.lang.Cloneable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>RandomAccess</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.RandomAccess%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.RandomAccess源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/30/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.RandomAccess%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/30/源码：java.util.RandomAccess源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Iterable＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<br> 1. <a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Iterable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Iterable＜T＞源码解析</a></li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Iterable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/25/源码：java.lang.Iterable＜T＞源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Collection＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Collection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.Collection＜E＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/08/25/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Collection%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/08/25/源码：java.util.Collection＜E＞源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>List＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.List%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.List＜E＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/12/01/源码：java.io.Serializable源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="2-2-2-List＜E＞-相关分类"><a href="#2-2-2-List＜E＞-相关分类" class="headerlink" title="2.2.2. List＜E＞ 相关分类"></a>2.2.2. List＜E＞ 相关分类</h4><ol>
+<li><code>ArrayList＜E＞</code></li>
+<li><code>LinkedList＜E＞</code></li>
+<li><code>CopyOnWriteArrayList＜E＞</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ArrayList＜E＞</th>
+<th>LinkedList＜E＞</th>
+<th>CopyOnWriteArrayList＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td>✅（<code>FIFO</code> 顺序，可手动排序）</td>
+<td>✅（<code>FIFO</code> 顺序、<code>LIFO</code> 顺序，可手动排序）</td>
+<td>✅（<code>FIFO </code>顺序、可手动排序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td>❌（需要扩容）</td>
+<td>—</td>
+<td>❌（需要扩容）</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td>一个数组</td>
+<td>一条双向链表</td>
+<td>1. <code>Java11</code> 之前：一个数组 + 一个 <code>ReentrantLock</code>（无条件队列）<br>2. <code>Java11</code> 之后：一个数组 + <code>synchronized</code></td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-2-3-ArrayList＜E＞"><a href="#2-2-3-ArrayList＜E＞" class="headerlink" title="2.2.3. ArrayList＜E＞"></a>2.2.3. ArrayList＜E＞</h4><h5 id="2-2-3-1-ArrayList＜E＞-体系结构"><a href="#2-2-3-1-ArrayList＜E＞-体系结构" class="headerlink" title="2.2.3.1. ArrayList＜E＞ 体系结构"></a>2.2.3.1. ArrayList＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-2-3-2-ArrayList＜E＞-底层实现"><a href="#2-2-3-2-ArrayList＜E＞-底层实现" class="headerlink" title="2.2.3.2. ArrayList＜E＞ 底层实现"></a>2.2.3.2. ArrayList＜E＞ 底层实现</h5><p><code>ArrayList＜E＞</code> 底层是基于一个数组实现的</p>
+<p><code>ArrayList＜E＞</code> 是通过 <code>ArrayList＜E＞-&gt;elementData</code> 存储数据的，而它又是一个由 <code>Object</code> 构建的数组</p>
+<hr>
+<h5 id="2-2-3-3-ArrayList＜E＞-扩容机制"><a href="#2-2-3-3-ArrayList＜E＞-扩容机制" class="headerlink" title="2.2.3.3. ArrayList＜E＞ 扩容机制"></a>2.2.3.3. ArrayList＜E＞ 扩容机制</h5><p>在 <code>Java8</code> 之后，<code>ArrayList＜E＞</code> 采用了懒加载策略。如果我们使用无参构造方法创建 <code>ArrayList＜E＞</code> 实例，底层数组其实是一个空数组，只有在第一次执行 “增” 操作时才会真正分配内存空间</p>
+<p>当数组已满时就会触发扩容（数组已满后，在下一次 “增” 操作时先扩容再 “增” 元素）。<code>ArrayList＜E＞</code> 扩容时会创建一个容量为原来 <code>1.5</code> 倍的新数组，并调用 <code>Arrays#copyOf</code> 将旧数组中的元素拷贝到新数组中（这里并不是遍历，而是调用了 <code>native</code> 方法，实现整个内存块的拷贝）</p>
+<hr>
+<h5 id="2-2-3-4-ArrayList＜E＞-问题爆破"><a href="#2-2-3-4-ArrayList＜E＞-问题爆破" class="headerlink" title="2.2.3.4. ArrayList＜E＞ 问题爆破"></a>2.2.3.4. ArrayList＜E＞ 问题爆破</h5><h6 id="2-2-3-4-1-元素类型问题"><a href="#2-2-3-4-1-元素类型问题" class="headerlink" title="2.2.3.4.1. 元素类型问题"></a>2.2.3.4.1. 元素类型问题</h6><p>由于<code>ArrayList＜E＞</code> 是通过 <code>ArrayList＜E＞-&gt;elementData</code> 存储数据的，而它又是一个由 <code>Object</code> 构建的数组。所以 <code>ArrayList＜E＞</code> 只能存储 <code>Object</code> 类型的元素</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>猴哥的烦恼箱 <code>(｡•́︿•̀｡)</code>：<ol>
+<li>不是说  <code>ArrayList＜E＞</code> 只能存储 <code>Object</code> 类型的元素吗？为什么我们还可以执行例如 <code>ArrayList＜E＞.add(10)</code> 的操作？<ol>
+<li>其实这和 <code>ArrayList＜E＞</code> 没多大关系，而是涉及到 <code>Java</code> 应用中一个通用的机制，即装箱机制：在编译阶段，如果编译器发现你传入的是基本数据类型的方法参数，但是方法参数要求的类型是引用数据类型，就会触发装箱机制（例如将这个 <code>int</code> 装箱为 <code>Integer</code>）</li>
+<li>需要注意的是：装箱机制仅适用于基本数据类型</li>
+</ol>
+</li>
+<li><code>Java</code> 泛型是如何工作的？<ol>
+<li><code>Java</code> 泛型的工作机制涉及到编译阶段的数据类型检查以及类型擦除</li>
+<li>编译阶段的数据类型检查：<ol>
+<li>如果我们正常使用编译阶段的数据类型检查（例如 <code>List&lt;String&gt; myList = new ArrayList&lt;&gt;()</code>，使用 <code>Java</code> 泛型约束数据类型）<ol>
+<li>在编译阶段会进行数据类型检查，如果数据类型检查未通过会导致编译失败（需要注意的是：对于基本数据类型，会先对其进行装箱，然后再对其进行数据类型检查）</li>
+<li>如果我们想绕过编译阶段的数据类型检查，我们可以通过反射机制或 “走后门” 的方式，强行将与预期不符的类型的元素 “增” 进去。这些方法并不会导致编译失败，但是可能会因为类型擦除而导致的数据类型转换，在调用这些方法时抛出 <code>ClassCastException</code> 非受检异常</li>
+<li>所谓的 “走后门” 是指：你原本 <code>List&lt;String&gt; myList = new ArrayList&lt;&gt;()</code> 的 <code>myList</code> 正常进行类型检查的。但是如果你再  <code>List rawList = myList</code> 的 <code>rawList</code> 是放弃类型检查的。但是 <code>rawList</code> 和 <code>myList</code> 实际上指向同一块内存地址，所以我们可以通过 <code>rawList</code>  “增” 一些与预期不符的类型的元素（这是一个历史包袱）</li>
+</ol>
+</li>
+<li>如果我们放弃使用编译阶段的数据类型检查（例如 <code>List myList = new ArrayList&lt;&gt;()</code>，虽然它提供了 <code>Java</code> 泛型，但是我们并没有指定数据类型）<ol>
+<li>在编译阶段并不会进行数据类型检查</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>类型擦除：<ol>
+<li>我们可以简单理解为：在编译之后，数据类型会被擦除为泛型参数的数据类型的上界数据类型（例如 <code>E</code> 的上界数据类型是 <code>Object</code>、<code>? extends MyClass</code> 的上界数据类型是 <code>MyClass</code>）。以 <code>ArrayList&lt;E&gt;#add(E e)</code> 为例，本来我们写的是：<code>List&lt;String&gt; myList = new ArrayList&lt;&gt;()</code>。按照语义，它应该是 <code>myList#add(String E)</code>，但是在编译之后，实际应该是 <code>myList#add(Object E)</code></li>
+<li>那么这就有一个问题：<code>ArrayList＜E＞#get</code> 按照语义应该返回 <code>String</code> 类型的数据，但是在编译后，实际应该返回 <code>Object</code> 类型的数据。但是我们的方法的具体逻辑本身是按照返回 <code>String</code> 类型的数据所写的，是返回一个 <code>String</code> 类型的结果，而这和返回一个 <code>Object</code> 类型的数据不符。所以编译器会在返回值处自动插入一个数据类型转换（例如  <code>String str = (String) myList.get(0)</code>）。所以在调用这些方法时，就有可能因为数据类型转换而抛出 <code>ClassCastException</code> 非受检异常（需要注意的是：对于基本数据类型，会先对其进行装箱，然后再对其进行数据类型转换）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>站在技术角度，不类型擦除绝对比类型擦除好，那么 <code>Java</code> 泛型为什么还要进行类型擦除？<ol>
+<li>历史包袱，没有办法</li>
+</ol>
+</li>
+<li>为什么 <code>Java</code> 泛型不能约束数据类型为基本数据类型，导致我们处理基本数据类型时，要先对其进行装箱？<ol>
+<li>因为在类型擦除后，会被擦除为引用数据类型</li>
+</ol>
+</li>
+<li><code>Java</code> 泛型为什么会导致频繁的自动装箱、自动拆箱？<ol>
+<li>我们知道：由于 <code>Java</code> 泛型不能约束数据类型为基本数据类型，导致我们处理基本数据类型时，要先对其进行装箱</li>
+<li>但是在运算时，包装类本身并不能直接参与计算。所以要先对其进行拆箱，完成计算后再装箱</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-2-3-4-2-多线程并发安全问题"><a href="#2-2-3-4-2-多线程并发安全问题" class="headerlink" title="2.2.3.4.2. 多线程并发安全问题"></a>2.2.3.4.2. 多线程并发安全问题</h6><p>为了解决这一问题，我们通常为其加锁或者使用另外一种数据结构：<code>CopyOnWriteArrayList＜E＞</code></p>
+<hr>
+<h6 id="2-2-3-4-3-迭代器的-“增”、“删”-异常问题"><a href="#2-2-3-4-3-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.2.3.4.3. 迭代器的 “增”、“删” 异常问题"></a>2.2.3.4.3. 迭代器的 “增”、“删” 异常问题</h6><p>因为 <code>ArrayList＜E＞</code> 的迭代器本质上是按照数组索引进行遍历的（例如 <code>0 ➔ 1 ➔ 2 ➔ …</code>）。如果在遍历过程中进行了 “增” 或 “删” 操作，会导致数组中后续元素发生位置变化，但是迭代器仍会按照原先的数组索引往后走。这两个动作叠加，就可能造成漏读或重复读的问题</p>
+<p>例如 <code>ArrayList＜E＞</code> 有 <code>A</code>、<code>B</code>、<code>C</code> 三个元素，迭代器按照数组索引进行遍历。如果我们让迭代器走到 <code>A</code> 时执行 “删” 操作，让后面的元素整体左移。此时 <code>B</code> 元素的数组索引为 <code>0</code>，<code>C</code> 元素的数组索引为 <code>1</code>。迭代器会按照原先的数组索引往后走，于是就走到数组索引 <code>1</code> 对应的位置（即 <code>C</code>），这就出现了漏读的问题</p>
+<p>在例如 <code>ArrayList＜E＞</code> 有 <code>A</code> 一个元素，迭代器按照数组索引进行遍历。如果我们让迭代器遍历到 <code>A</code> 元素时，就在 <code>A</code> 元素的数组位置 “增” 一个新元素（例如 <code>temp</code>），让 <code>A</code> 元素右移动。此时 <code>temp</code> 元素的数组索引为 <code>0</code>，<code>A</code> 元素的数组索引为 <code>1</code>。迭代器会按照原先的数组索引往后走，于是就走到数组索引 <code>1</code> 对应的位置（即 <code>A</code>），就又 “增” 了一个新元素（<code>temp</code>），于是就出现 <code>temp</code>、<code>temp</code>、<code>temp</code>、<code>...</code>、<code>A</code> 的情况，这就出现了重复读的问题</p>
+<p>为了解决这一问题，<code>ArrayList＜E＞</code> 采取了快速失败（<code>Fail-fast</code>）策略。当 <code>ArrayList＜E＞</code> 开始遍历时，会记下一个版本号（即 <code>Itr-&gt;expectedModCount</code>），当 <code>ArrayList＜E＞</code> 调用 <code>Iterator＜E＞#next</code> 后，会先检查这个版本号。如果版本号对不上，说明在遍历过程中进行了 “增” 或 “删” 操作，会抛出 <code>ConcurrentModificationException</code> 非受检异常</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对于 <code>Fail-fast</code> 策略，我们是不能调用 <code>ArrayList＜E＞</code> 的相关方法进行 “增” 或 “删” 操作的。如果我们真的有这方面的需求，可以调用 <code>Iterator＜E＞</code> 的相关方法或 <code>ListIterator＜E＞</code> 的相关方法</li>
+<li><code>Iterator＜E＞</code> 是 <code>List＜E＞</code>、<code>Set＜E＞</code>、<code>Map＜K, V＞</code>、<code>Queue＜E＞</code> 通用的迭代器，而 <code>ListIterator＜E＞</code> 是专门为 <code>List＜E＞</code> 提供的迭代器，提供了更多的方法</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-2-3-4-4-频繁扩容导致的性能抖动问题"><a href="#2-2-3-4-4-频繁扩容导致的性能抖动问题" class="headerlink" title="2.2.3.4.4. 频繁扩容导致的性能抖动问题"></a>2.2.3.4.4. 频繁扩容导致的性能抖动问题</h6><p>为了解决这一问题，我们在已知要存储大量数据的情况下，可以在创建 <code>ArrayList＜E＞</code> 实例的时候，指定一个较大的初始容量，避免频繁扩容</p>
+<hr>
+<h4 id="2-2-4-LinkedList＜E＞"><a href="#2-2-4-LinkedList＜E＞" class="headerlink" title="2.2.4. LinkedList＜E＞"></a>2.2.4. LinkedList＜E＞</h4><h5 id="2-2-4-1-LinkedList＜E＞-体系结构"><a href="#2-2-4-1-LinkedList＜E＞-体系结构" class="headerlink" title="2.2.4.1. LinkedList＜E＞ 体系结构"></a>2.2.4.1. LinkedList＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-1.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-2-4-2-LinkedList-底层实现"><a href="#2-2-4-2-LinkedList-底层实现" class="headerlink" title="2.2.4.2. LinkedList 底层实现"></a>2.2.4.2. LinkedList 底层实现</h5><p><code>LinkedList＜E＞</code> 底层是基于一条双向链表实现的</p>
+<p><code>LinkedList＜E＞</code> 是通过一条由 <code>LinkedList＜E＞.Node＜E＞</code> 构建的双向链表存储数据的，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;E&gt; &#123;<br>	<br>	E item;<br>	<br>	Node&lt;E&gt; next;<br>	<br>	Node&lt;E&gt; prev;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-2-4-3-LinkedList＜E＞-问题爆破"><a href="#2-2-4-3-LinkedList＜E＞-问题爆破" class="headerlink" title="2.2.4.3. LinkedList＜E＞ 问题爆破"></a>2.2.4.3. LinkedList＜E＞ 问题爆破</h5><h6 id="2-2-4-3-1-元素类型问题"><a href="#2-2-4-3-1-元素类型问题" class="headerlink" title="2.2.4.3.1. 元素类型问题"></a>2.2.4.3.1. 元素类型问题</h6><p>由于 <code>LinkedList＜E＞</code> 是通过一条由 <code>LinkedList＜E＞.Node＜E＞</code> 构建的双向链表存储数据的，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;E&gt; &#123;<br>	<br>	E item;<br>	<br>	Node&lt;E&gt; next;<br>	<br>	Node&lt;E&gt; prev;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而 <code>E</code> 本质上是一个对象引用，所以 <code>LinkedList＜E＞</code> 只能存储 <code>Object</code> 类型的元素。</p>
+<hr>
+<h6 id="2-2-4-3-2-多线程并发安全问题"><a href="#2-2-4-3-2-多线程并发安全问题" class="headerlink" title="2.2.4.3.2. 多线程并发安全问题"></a>2.2.4.3.2. 多线程并发安全问题</h6><p>为了解决这一问题，我们通常为其加锁</p>
+<hr>
+<h6 id="2-2-4-3-3-迭代器的-“增”、“删”-异常问题"><a href="#2-2-4-3-3-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.2.4.3.3. 迭代器的 “增”、“删” 异常问题"></a>2.2.4.3.3. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>LinkedList＜E＞</code> 采取了快速失败（<code>Fail-fast</code>）策略。</p>
+<hr>
+<h4 id="2-2-5-CopyOnWriteArrayList"><a href="#2-2-5-CopyOnWriteArrayList" class="headerlink" title="2.2.5. CopyOnWriteArrayList"></a>2.2.5. CopyOnWriteArrayList</h4><h5 id="2-2-5-1-CopyOnWriteArrayList-体系结构"><a href="#2-2-5-1-CopyOnWriteArrayList-体系结构" class="headerlink" title="2.2.5.1. CopyOnWriteArrayList 体系结构"></a>2.2.5.1. CopyOnWriteArrayList 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-2.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-2-5-2-CopyOnWriteArrayList＜E＞-底层实现"><a href="#2-2-5-2-CopyOnWriteArrayList＜E＞-底层实现" class="headerlink" title="2.2.5.2. CopyOnWriteArrayList＜E＞ 底层实现"></a>2.2.5.2. CopyOnWriteArrayList＜E＞ 底层实现</h5><p>在 <code>Java11</code> 之前，<code>CopyOnWriteArrayList＜E＞</code> 底层是基于一个数组 + 一个 <code>ReentrantLock</code>（无条件队列）实现的。在 <code>Jav11</code> 之后，<code>CopyOnWriteArrayList＜E＞</code> 底层是基于一个数组 +<code>synchronized</code> 实现的</p>
+<p><code>CopyOnWriteArrayList＜E＞</code> 是通过 <code>CopyOnWriteArrayList＜E＞-&gt;array</code> 存储数据的，而它又是一个由 <code>Object</code> 构建的数组</p>
+<hr>
+<h5 id="2-2-5-3-CopyOnWriteArrayList＜E＞-相关流程"><a href="#2-2-5-3-CopyOnWriteArrayList＜E＞-相关流程" class="headerlink" title="2.2.5.3. CopyOnWriteArrayList＜E＞ 相关流程"></a>2.2.5.3. CopyOnWriteArrayList＜E＞ 相关流程</h5><h6 id="2-2-5-3-1-读操作相关流程"><a href="#2-2-5-3-1-读操作相关流程" class="headerlink" title="2.2.5.3.1. 读操作相关流程"></a>2.2.5.3.1. 读操作相关流程</h6><p>虽然 <code>CopyOnWriteArrayList＜E＞</code> 是一个多线程并发安全的数据结构，但是读操作完全不加锁</p>
+<hr>
+<h6 id="2-2-5-3-2-写操作相关流程"><a href="#2-2-5-3-2-写操作相关流程" class="headerlink" title="2.2.5.3.2. 写操作相关流程"></a>2.2.5.3.2. 写操作相关流程</h6><p>但是 <code>CopyOnWriteArrayList＜E＞</code> 的写操作会加锁。在 <code>Java11</code> 之前，<code>CopyOnWriteArrayList＜E＞</code> 是使用 <code>ReentrantLock</code>。在 <code>Java11</code> 之后，<code>CopyOnWriteArrayList＜E＞</code> 是使用 <code>synchronized</code></p>
+<p>当执行 <code>CopyOnWriteArrayList＜E＞</code> 的写操作的线程竞争到锁后，会创建一个新数组，并调用 <code>Arrays#copyOf</code> 将旧数组中的元素拷贝到新数组中（这里并不是遍历，而是调用了 <code>native</code> 方法，实现整个内存块的拷贝）。然后线程就会在这个新数组上执行写操作。当线程执行完写操作后，就会将旧数组的引用替换成新数组的引用</p>
+<hr>
+<h5 id="2-2-5-4-CopyOnWriteArrayList-问题爆破"><a href="#2-2-5-4-CopyOnWriteArrayList-问题爆破" class="headerlink" title="2.2.5.4. CopyOnWriteArrayList 问题爆破"></a>2.2.5.4. CopyOnWriteArrayList 问题爆破</h5><h6 id="2-2-5-4-1-元素类型问题"><a href="#2-2-5-4-1-元素类型问题" class="headerlink" title="2.2.5.4.1. 元素类型问题"></a>2.2.5.4.1. 元素类型问题</h6><p>由于<code>CopyOnWriteArrayList＜E＞</code> 是通过 <code>CopyOnWriteArrayList＜E＞-&gt;array</code> 存储数据的，而它又是一个由 <code>Object</code> 构建的数组。所以 <code>ArrayList＜E＞</code> 只能存储 <code>Object</code> 类型的元素</p>
+<hr>
+<h6 id="2-2-5-4-2-迭代器的-“增”、“删”-异常问题"><a href="#2-2-5-4-2-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.2.5.4.2. 迭代器的 “增”、“删” 异常问题"></a>2.2.5.4.2. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>CopyOnWriteArrayList＜E＞</code> 采取了安全失败（<code>Fail-safe</code>）策略。我们知道 “线程会在创建的新数组上执行写操作，当线程执行完写操作后，就会将旧数组的引用替换成新数组的引用”。所以 <code>CopyOnWriteArrayList＜E＞</code> 遍历的永远是那个旧数组，不受后续 “增”、“删” 操作的影响（即便主内存中的数组已经被写好几轮了，但是迭代器看到的仍然是最初的那一个旧数组）</p>
+<hr>
+<h3 id="2-3-Map＜K-V＞"><a href="#2-3-Map＜K-V＞" class="headerlink" title="2.3. Map＜K, V＞"></a>2.3. Map＜K, V＞</h3><h4 id="2-3-1-Map＜K-V＞-基础体系"><a href="#2-3-1-Map＜K-V＞-基础体系" class="headerlink" title="2.3.1. Map＜K, V＞ 基础体系"></a>2.3.1. Map＜K, V＞ 基础体系</h4><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-26.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-3-2-Map＜K-V＞-相关分类"><a href="#2-3-2-Map＜K-V＞-相关分类" class="headerlink" title="2.3.2. Map＜K, V＞ 相关分类"></a>2.3.2. Map＜K, V＞ 相关分类</h4><ol>
+<li><code>TreeMap＜K, V＞</code></li>
+<li><code>HashMap＜K, V＞</code></li>
+<li><code>EnumMap＜K, V＞</code></li>
+<li><code>WeakHashMap＜K, V＞</code></li>
+<li><code>LinkedHashMap＜K, V＞</code></li>
+<li><code>ConcurrentHashMap＜K, V＞</code></li>
+<li><code>ConcurrentSkipListMap＜K, V＞</code></li>
+</ol>
+<hr>
+<h4 id="2-3-3-TreeMap＜K-V＞"><a href="#2-3-3-TreeMap＜K-V＞" class="headerlink" title="2.3.3. TreeMap＜K, V＞"></a>2.3.3. TreeMap＜K, V＞</h4><h5 id="2-3-3-1-TreeMap＜K-V＞-体系结构"><a href="#2-3-3-1-TreeMap＜K-V＞-体系结构" class="headerlink" title="2.3.3.1. TreeMap＜K, V＞ 体系结构"></a>2.3.3.1. TreeMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-8.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-3-2-TreeMap＜K-V＞-底层实现"><a href="#2-3-3-2-TreeMap＜K-V＞-底层实现" class="headerlink" title="2.3.3.2. TreeMap＜K, V＞ 底层实现"></a>2.3.3.2. TreeMap＜K, V＞ 底层实现</h5><p><code>TreeMap＜K, V＞</code> 底层是基于一个红黑树实现的</p>
+<p><code>TreeMap＜K, V＞</code> 是通过一个由 <code>TreeMap＜K, V＞.Entry＜K, V＞</code> 构建的红黑树存储数据的，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	K key;<br>	<br>	V value;<br>	<br>	Entry&lt;K,V&gt; left;<br>	<br>	Entry&lt;K,V&gt; right;<br>	<br>	Entry&lt;K,V&gt; parent;<br>	<br>	<span class="hljs-type">boolean</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> BLACK;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于 <code>TreeMap＜K, V＞</code> 底层是基于红黑树实现的，而红黑树本质上是一个自平衡的二叉查找树，所以 <code>TreeMap＜K, V＞</code> 能够自动对元素进行排序（自然排序、定制排序）</li>
+<li>默认情况下，<code>TreeMap＜K, V＞</code> 采用自然排序。即根据 <code>Key</code> 实例所属类实现的 <code>Comparable＜T＞#compareTo</code> 对元素进行排序。详见源码：<code>Comparable&lt;T&gt;</code>（<code>obsidian</code> 内部链接：<a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Comparable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Comparable＜T＞源码解析</a>，<code>Hexo</code> 链接： <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/06/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Comparable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/06/源码：java.lang.Comparable＜T＞源码解析/</a> ）</li>
+<li>除此之外，我们也可以采用定制排序。即在创建 <code>TreeMap＜K, V＞</code> 实例时，传入一个 <code>Comparator＜T＞</code> 接口的具体实现类实例，然后 <code>TreeMap＜K, V＞</code> 会根据 <code>Comparator＜T＞#compare</code> 对元素进行排序。详见源码：<code>Comparator&lt;T&gt;</code>（<code>obsidian</code> 内部链接：，<code>Hexo</code> 链接：）</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-3-3-3-TreeMap＜K-V＞-问题爆破"><a href="#2-3-3-3-TreeMap＜K-V＞-问题爆破" class="headerlink" title="2.3.3.3. TreeMap＜K, V＞ 问题爆破"></a>2.3.3.3. TreeMap＜K, V＞ 问题爆破</h5><h6 id="2-3-3-3-1-Key-类型问题"><a href="#2-3-3-3-1-Key-类型问题" class="headerlink" title="2.3.3.3.1. Key 类型问题"></a>2.3.3.3.1. Key 类型问题</h6><p>由于 <code>TreeMap＜K, V＞</code> 是通过一个由 <code>TreeMap＜K, V＞.Entry＜K, V＞</code> 构建的红黑树存储数据的，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	K key;<br>	<br>	V value;<br>	<br>	Entry&lt;K,V&gt; left;<br>	<br>	Entry&lt;K,V&gt; right;<br>	<br>	Entry&lt;K,V&gt; parent;<br>	<br>	<span class="hljs-type">boolean</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> BLACK;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>而 <code>K</code> 本质上是一个对象引用，所以 <code>TreeMap＜K, V＞</code> 只能存储 <code>Key</code> 为 <code>Object</code> 类型的元素</p>
+<p>除此之外，<code>TreeMap＜K, V＞</code> 在自然排序下是通过 <code>Comparable＜T＞#compareTo</code> 来判断元素的 <code>Key</code> 是否重复的，所以元素的 <code>Key</code> 必须是 <code>Comparable</code> 类型的</p>
+<hr>
+<h6 id="2-3-3-3-2-多线程并发安全性问题"><a href="#2-3-3-3-2-多线程并发安全性问题" class="headerlink" title="2.3.3.3.2. 多线程并发安全性问题"></a>2.3.3.3.2. 多线程并发安全性问题</h6><p>为了解决这一问题，我们通常为其加锁或者使用另外一种数据结构：<code>ConcurrentSkipListMap＜K, V＞</code></p>
+<hr>
+<h6 id="2-3-3-3-3-迭代器的-“增”、“删”-异常问题"><a href="#2-3-3-3-3-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.3.3.3.3. 迭代器的 “增”、“删” 异常问题"></a>2.3.3.3.3. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>TreeMap＜K, V＞</code> 采取了快速失败（<code>Fail-fast</code>）策略。</p>
+<hr>
+<h6 id="2-3-3-3-4-Key-Value-重复问题"><a href="#2-3-3-3-4-Key-Value-重复问题" class="headerlink" title="2.3.3.3.4. Key-Value 重复问题"></a>2.3.3.3.4. Key-Value 重复问题</h6><p><code>TreeMap＜K, V＞</code> 严禁元素的 <code>Key</code> 重复，它是通过 <code>Comparable＜T＞#compareTo</code> 或 <code>Comparator＜T＞#compare</code> 来判断元素的 <code>Key</code> 是否重复的</p>
+<p><code>TreeMap＜K, V＞</code> 允许元素的 <code>Value</code> 重复</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于 <code>TreeMap＜K, V＞</code> 是通过 <code>Comparable＜T＞#compareTo</code> 或 <code>Comparator＜T＞#compare</code> 来判断元素的 <code>Key</code> 是否重复的。如果两个实例的 <code>Object#equals</code> 为 <code>false</code>（即逻辑上不相等），但是 <code>TreeMap＜K, V＞</code> 也有可能认为它们相等，从而产生覆盖</li>
+<li>为了解决这一问题，我们需要在定义 <code>Key</code> 的保证：当且仅当 <code>Object#euqals</code> 返回 <code>true</code> 时，<code>Comparable＜T＞#compareTo</code> 或 <code>Comparator＜T＞#compare</code> 才返回 <code>0</code></li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-3-3-3-5-Key-Value-为-null-问题"><a href="#2-3-3-3-5-Key-Value-为-null-问题" class="headerlink" title="2.3.3.3.5. Key-Value 为 null 问题"></a>2.3.3.3.5. Key-Value 为 null 问题</h6><p>如果采用的是自然排序，<code>TreeMap＜K, V＞</code> 不允许元素的 <code>Key</code> 为 <code>null</code>，因为调用 <code>Comparable＜T＞#compareTo</code> 时就直接抛出 <code>NullPointerException</code> 非受检异常了</p>
+<p>但是如果采用的是定制排序，<code>TreeMap＜K, V＞</code> 允不允许元素的 <code>Key</code> 为 <code>null</code>，就要看我们传入的 <code>Comparator＜T＞</code> 接口的具体实现类实例。如果 <code>Comparator＜T＞#compare</code> 处理了元素的 <code>Key</code> 为 <code>null</code> 的情况，那么 <code>TreeMap＜K, V＞</code> 是允许元素的 <code>Key</code> 为 <code>null</code> 的</p>
+<p><code>TreeMap＜K, V＞</code> 允许元素的 <code>Value</code> 为 <code>null</code>，并且数量不限制</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>由于 <code>TreeMap＜K, V＞</code> 在自然排序下不允许元素的 <code>Key</code> 为 <code>null</code>，所以在对 <code>TreeMap＜K, V＞</code> 进行 “增” 操作之前要进行非空判断</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-3-3-3-6-红黑树读操作失效问题"><a href="#2-3-3-3-6-红黑树读操作失效问题" class="headerlink" title="2.3.3.3.6. 红黑树读操作失效问题"></a>2.3.3.3.6. 红黑树读操作失效问题</h6><p>这是红黑树一个非常典型的问题：当你把一个元素 “增” 到 <code>TreeMap＜K, V＞</code> 中，它会被 TreeMap＜K, V＞ 调整到红黑树的某个位置。如果你在 “增” 之后，“改” 了元素的 <code>Key</code>，影响到了 <code>Comparable＜T＞#compareTo</code> 或 <code>Comparator＜T＞#compare</code>，<code>TreeMap＜K, V＞</code> 并不会再调整它的位置了。</p>
+<p>所以当你去读该元素时，<code>TreeMap＜K, V＞</code> 会根据元素的新 <code>Key</code> 对应的红黑树路径去读数据。但是该元素仍然在元素的旧 <code>Key</code> 对应的红黑树路径，所以根本无法被正确读到。除此之外，这也造成了一个内存泄漏问题</p>
+<p>为了解决这一问题，我们元素的 <code>Key</code> 必须是不可变的（即不可变类）</p>
+<hr>
+<h4 id="2-3-4-HashMap＜K-V＞"><a href="#2-3-4-HashMap＜K-V＞" class="headerlink" title="2.3.4. HashMap＜K, V＞"></a>2.3.4. HashMap＜K, V＞</h4><h5 id="2-3-4-1-HashMap＜K-V＞-体系结构"><a href="#2-3-4-1-HashMap＜K-V＞-体系结构" class="headerlink" title="2.3.4.1. HashMap＜K, V＞ 体系结构"></a>2.3.4.1. HashMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-11.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-4-2-HashMap＜K-V＞-底层实现"><a href="#2-3-4-2-HashMap＜K-V＞-底层实现" class="headerlink" title="2.3.4.2. HashMap＜K, V＞ 底层实现"></a>2.3.4.2. HashMap＜K, V＞ 底层实现</h5><p>在 <code>Java8</code> 之前，<code>HashMap＜K, V＞</code> 底层是基于一个数组 + 多条单向链表实现的。在 <code>Java8</code> 之后，<code>HashMap＜K, V＞</code> 底层是基于一个数组 + 多条单向链表 + 多个红黑树实现的</p>
+<p><code>HashMap＜K, V＞</code> 是通过 <code>HashMap＜K, V＞➔table</code> 存储数据的，而它又是一个由 <code>HashMap＜K, V＞.Node＜K, V＞</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>	<br>	<span class="hljs-keyword">final</span> K key;<br>	<br>	V value;<br>	<br>	Node&lt;K,V&gt; next;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>除此之外，每一个 <code>HashMap＜K, V＞.Node＜K, V＞</code> 还维护了一条由 <code>HashMap＜K, V＞.Node＜K, V＞</code> 构建的单向链表</p>
+<hr>
+<h5 id="2-3-4-3-HashMap＜K-V＞-相关流程"><a href="#2-3-4-3-HashMap＜K-V＞-相关流程" class="headerlink" title="2.3.4.3. HashMap＜K, V＞ 相关流程"></a>2.3.4.3. HashMap＜K, V＞ 相关流程</h5><p>由于 <code>HashMap＜K, V＞</code> 底层基于一个数组 + 多条单向链表或者一个数组 + 多条单向链表 + 多个红黑树。所以我们要了解 <code>HashMap＜K, V＞</code>，就必须要先了解一下哈希表：</p>
+<ol>
+<li>写操作相关流程<ol>
+<li>当我们向数组中 “增” 元素（例如 <code>apple:1</code>）时，<code>HashMap＜K, V＞</code> 首先会根据元素的 <code>Key</code> 通过哈希函数（即 <code>Object#hashCode</code>）计算出哈希值（即 <code>Hash</code>），并将其转换成数组索引（使用 <code>Hash &amp; (Capacity - 1)</code>），然后定位到数组索引对应的位置，并将该元素 “增” 到该位置</li>
+</ol>
+</li>
+<li>读操作相关流程<ol>
+<li>当我们向数组读某元素（例如 <code>Key = apple</code>）时，<code>HashMap＜K, V＞</code> 同样会根据元素的 <code>Key</code> 通过哈希函数（即 <code>Object#hashCode</code>）计算出哈希值（即 <code>Hash</code>），并将其转换成数组索引（使用 <code>Hash &amp; (Capacity - 1)</code>），然后定位到数组索引对应的位置，并将该元素读出</li>
+</ol>
+</li>
+</ol>
+<p>理想状态下，无论 <code>HashMap＜K, V＞</code> 中有多少元素（<code>10</code> 个或 <code>1000</code> 万个），我们 “查” 操作的平均时间复杂度都是 $O(1)$</p>
+<p>但是如果发生哈希冲突（例如 <code>banana:555</code> 也被写到数组索引 <code>5</code> 对应的位置）时，那么数组索引 <code>5</code> 对应的位置不仅仅要存放 <code>apple</code>，还要存放 <code>banana</code>，我们通常是使用链表来解决这个问题</p>
+<p>但是这也带来一个问题：我们需要遍历这个链表，直到找到我们需要的值。如果哈希冲突非常严重，即同一个索引位置的链表变得非常长，我们遍历的时间也会变的非常长</p>
+<p>我们在 <code>MySQL</code> 中也接触过，一个链表如果非常长，我们可以通过红黑树来优化这个问题，于是 <code>Java8</code> 引入了一个重大优化：当同一个索引位置的链表长度达到一定阈值（默认为 <code>8</code>），并且整个哈希表的大小（即数组长度）也达到一定阈值（默认为 <code>64</code>）时，这个链表会自动转换成一棵红黑树</p>
+<hr>
+<h5 id="2-3-4-4-HashMap＜K-V＞-扩容机制"><a href="#2-3-4-4-HashMap＜K-V＞-扩容机制" class="headerlink" title="2.3.4.4. HashMap＜K, V＞ 扩容机制"></a>2.3.4.4. HashMap＜K, V＞ 扩容机制</h5><p>当数组中的元素的数量达到 “数组容量 * 负载因子” 时就会触发扩容。例如默认的数组容量是 <code>16</code>，默认的负载因子是 <code>0.75</code>，那么元素数量达到 <code>12</code> 时便会开始扩容</p>
+<p>在 <code>Java8</code> 之前，<code>HashMap＜K, V＞</code> 扩容时会创建一个容量为原来 <code>2</code> 倍的新数组。<code>HashMap＜K, V＞</code> 会遍历旧数组，如果某数组位置上有元素（例如是链表），<code>HashMap＜K, V＞</code> 会遍历链表，并将每个元素的哈希值重新转换成新数组的数组索引，然后定位到数组索引对应的新数组位置，并将元素拷贝到该位置（并不是调用 <code>Arrays#copyOf</code>）。但是由于遍历的顺序是 <code>A ➔ B ➔ C</code>（<code>C</code> 先 “增” 进来的），所以在新数组位置上它们的顺序可能就变成了 <code>C ➔ B ➔ A</code>（<code>A</code> 先 “增” 进来的），这就是大名鼎鼎的 “头插法”（）</p>
+<p>在 <code>Java8</code> 之后，<code>HashMap＜K, V＞</code> 扩容时同样会创建一个容量为原来 <code>2</code> 倍的新数组。<code>HashMap＜K, V＞</code> 同样会遍历旧数组，如果某数组位置上有元素（例如是链表），<code>HashMap＜K, V＞</code> 会遍历链表，但是并不会将每个元素的哈希值重新转换成新数组的数组索引，而是利用了一种基于位运算的优化</p>
+<p>这个位运算的优化是指：由于数组的长度始终是 <code>2</code> 的幂（例如从 <code>16</code>（<code>10000</code>） 扩到 <code>32</code>（<code>100000</code>）），新长度相比旧长度仅多出一位高位。<code>HashMap＜K, V＞</code> 只需要检查元素的哈希值在这一新增高位上的值（使用 <code>Hash &amp; OldCapacity</code>，而不是 <code>Hash &amp; (OldCapacity - 1)</code>）：</p>
+<ol>
+<li>如果该位为 <code>0</code><ol>
+<li>该元素在新数组中的数组索引保持不变</li>
+</ol>
+</li>
+<li>如果该位为 <code>1</code><ol>
+<li>该元素在新数组中的数组索引 &#x3D; 元素在旧数组上的数组索引 + 旧数组的数组长度</li>
+</ol>
+</li>
+</ol>
+<p>除此之外，为了解决 “头插法” 在多线程并发情况下出现的严重问题，<code>HashMap＜K, V＞</code> 还引入了两条链表，这里简称为 “低位链表”、“高位链表”。当 <code>HashMap＜K, V＞</code> 检查元素的哈希值在这一新增高位上的值为 <code>0</code> 时，就会把元素链接到低位链表。如果为 <code>1</code> 时，就会把元素链接到高位链表。然后当我们遍历完这个链表后，就把低位链表和高位链表放到新数组对应的位置。由于遍历的顺序是 <code>A ➔ B ➔ C</code>，而在低位链表或高位链表中可能仍然是 <code>A ➔ B ➔ C</code>，这就是大名鼎鼎的 “尾插法”</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>所谓的 “可能” 是指：它们未必还会在同一个数组位置上</li>
+<li>哈希冲突是指：可能是 <code>Key</code> 不同，也可能是计算出的哈希值不同，但是转换成的数组索引是相同的</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-3-4-5-HashMap-问题爆破"><a href="#2-3-4-5-HashMap-问题爆破" class="headerlink" title="2.3.4.5. HashMap 问题爆破"></a>2.3.4.5. HashMap 问题爆破</h5><h6 id="2-3-4-5-1-多线程并发安全性问题"><a href="#2-3-4-5-1-多线程并发安全性问题" class="headerlink" title="2.3.4.5.1. 多线程并发安全性问题"></a>2.3.4.5.1. 多线程并发安全性问题</h6><p>为了解决这一问题，我们通常为其加锁或者使用另外一种数据结构：<code>ConcurrentHashMap＜K, V＞</code></p>
+<hr>
+<h6 id="2-3-4-5-2-迭代器的-“增”、“删”-异常问题"><a href="#2-3-4-5-2-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.3.4.5.2. 迭代器的 “增”、“删” 异常问题"></a>2.3.4.5.2. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>HashMap＜K, V＞</code> 采取了快速失败（<code>Fail-fast</code>）策略。</p>
+<hr>
+<h6 id="2-3-4-5-3-Key-Value-重复问题"><a href="#2-3-4-5-3-Key-Value-重复问题" class="headerlink" title="2.3.4.5.3. Key-Value 重复问题"></a>2.3.4.5.3. Key-Value 重复问题</h6><p><code>HashMap＜K, V＞</code> 严禁元素的 <code>Key</code> 重复，它是通过 <code>（元素的 Key 的 Hash 相等） &amp;&amp; （元素的 Key 相等）</code>来判断元素的 <code>Key</code> 是否重复的</p>
+<p><code>HashMap＜K, V＞</code> 允许元素的 <code>Value</code> 重复</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>要判断两个元素的 <code>Key</code> 的 <code>Hash</code> 是否相等，前提是我们必须能计算出 <code>Key</code> 的 <code>Hash</code>。因此我们的 <code>Key</code> 必须重写 <code>Object#hashCode</code>（<code>Object#hashCode</code> 默认基于实例的内存地址计算）</li>
+<li>同样的，要判断两个元素的 <code>Key</code> 是否相等，我们的 <code>Key</code> 必须重写 <code>Object#equals</code>（<code>Object#equals</code> 默认比较的是实例的内存地址）</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-3-4-5-4-Key-Value-为-null-问题"><a href="#2-3-4-5-4-Key-Value-为-null-问题" class="headerlink" title="2.3.4.5.4. Key-Value 为 null 问题"></a>2.3.4.5.4. Key-Value 为 null 问题</h6><p><code>HashMap＜K, V＞</code> 允许元素的 <code>Key</code> 为 <code>null</code>，但是由于元素的 <code>Key</code> 不可重复，所以 <code>HashMap＜K, V＞</code> 中最多只能有一个元素的 <code>Key</code> 为 <code>null</code>。如果某元素的元素的 <code>Key</code> 为 <code>null</code>，<code>HashMap＜K, V＞</code> 并不会计算它的 <code>Key</code> 的哈希值，而是强制将其哈希值视为 <code>0</code>。因此，<code>Key</code> 为 <code>null</code> 的元素的数组索引总是为 <code>0</code></p>
+<p><code>HashMap＜K, V＞</code> 允许元素的 <code>Value</code> 为 <code>null</code>，并且数量不限制</p>
+<hr>
+<h6 id="2-3-4-5-5-频繁扩容导致的性能抖动问题"><a href="#2-3-4-5-5-频繁扩容导致的性能抖动问题" class="headerlink" title="2.3.4.5.5. 频繁扩容导致的性能抖动问题"></a>2.3.4.5.5. 频繁扩容导致的性能抖动问题</h6><p>为了解决这一问题，我们在已知要存储大量数据的情况下，可以在创建 <code>HashMap＜K, V＞</code> 实例的时候，指定一个较大的初始容量，避免频繁扩容</p>
+<hr>
+<h6 id="2-3-4-5-6-哈希表读操作失效问题"><a href="#2-3-4-5-6-哈希表读操作失效问题" class="headerlink" title="2.3.4.5.6. 哈希表读操作失效问题"></a>2.3.4.5.6. 哈希表读操作失效问题</h6><p>这是哈希表一个非常典型的问题：当你把一个元素 “增” 到了 <code>HashMap＜K, V＞</code> 中，它会被 <code>HashMap＜K, V＞</code> “增” 到数组的某个位置。如果你在 “增” 之后，“改” 了元素的 <code>Key</code>，影响到了哈希值的计算，但是 <code>HashMap＜K, V＞</code> 并不会再调整它的位置了</p>
+<p>所以当你去读该元素时，<code>HashMap＜K, V＞</code> 会根据元素的新 <code>Key</code> 通过哈希函数计算出哈希值，并将其转换成数组索引，然后定位到数组索引对应的位置。但是该元素仍然在元素的旧 <code>Key</code> 对应的数组位置，所以根本无法被正确读到。除此之外，这也造成了一个内存泄漏问题</p>
+<p>为了解决这一问题，我们元素的 <code>Key</code> 必须是不可变的（即不可变类）</p>
+<hr>
+<h4 id="2-3-5-WeakHashMap＜K-V＞"><a href="#2-3-5-WeakHashMap＜K-V＞" class="headerlink" title="2.3.5. WeakHashMap＜K, V＞"></a>2.3.5. WeakHashMap＜K, V＞</h4><h5 id="2-3-5-1-WeakHashMap＜K-V＞-体系结构"><a href="#2-3-5-1-WeakHashMap＜K-V＞-体系结构" class="headerlink" title="2.3.5.1. WeakHashMap＜K, V＞ 体系结构"></a>2.3.5.1. WeakHashMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-9.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-5-2-WeakHashMap＜K-V＞-底层实现"><a href="#2-3-5-2-WeakHashMap＜K-V＞-底层实现" class="headerlink" title="2.3.5.2. WeakHashMap＜K, V＞ 底层实现"></a>2.3.5.2. WeakHashMap＜K, V＞ 底层实现</h5><p><code>WeakHashMap＜K, V＞</code> 底层是基于一个数组 + 多条单向链表实现的（类似于 <code>Java8</code> 之前的 <code>HashMap＜K, V＞</code> 的底层实现，没有红黑树）</p>
+<p><code>WeakHashMap＜K, V＞</code> 是通过 <code>HashMap＜K, V＞➔table</code> 存储数据的，而它又是一个由 <code>WeakHashMap＜K, V＞.Entry＜K, V＞</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span>&lt;K,V&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">WeakReference</span>&lt;Object&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	V value;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>	<br>	Entry&lt;K,V&gt; next;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>除此之外，每一个 <code>WeakHashMap＜K, V＞.Entry＜K, V＞</code> 还维护了一条由 <code>WeakHashMap＜K, V＞.Entry＜K, V＞</code> 构建的单向链表</p>
+<hr>
+<h5 id="2-3-5-3-WeakHashMap＜K-V＞-扩容机制"><a href="#2-3-5-3-WeakHashMap＜K-V＞-扩容机制" class="headerlink" title="2.3.5.3. WeakHashMap＜K, V＞ 扩容机制"></a>2.3.5.3. WeakHashMap＜K, V＞ 扩容机制</h5><p><code>WeakHashMap＜K, V＞</code> 的扩容机制和 <code>Java8</code> 之前的 <code>HashMap＜K, V＞</code> 的扩容机制相似，只不过在扩容前会进行一次清理。如果清理后发现又不超过 ”数组容量 * 负载因子“ 了，则不会再进行扩容。详见上文：<code>HashMap＜K, V＞</code></p>
+<hr>
+<h5 id="2-3-5-4-WeakHashMap＜K-V＞-问题爆破"><a href="#2-3-5-4-WeakHashMap＜K-V＞-问题爆破" class="headerlink" title="2.3.5.4. WeakHashMap＜K, V＞ 问题爆破"></a>2.3.5.4. WeakHashMap＜K, V＞ 问题爆破</h5><p>由于 <code>WeakHashMap＜K, V＞</code> 底层实现类似于 <code>Java8</code> 之前的 <code>HashMap＜K, V＞</code> 的底层实现，所以 <code>HashMap＜K, V＞</code> 拥有的问题，<code>WeakHashMap＜K, V＞</code> 一般都有。详见上文：<code>HashMap＜K, V＞</code></p>
+<hr>
+<h4 id="2-3-6-LinkedHashMap＜K-V＞"><a href="#2-3-6-LinkedHashMap＜K-V＞" class="headerlink" title="2.3.6. LinkedHashMap＜K, V＞"></a>2.3.6. LinkedHashMap＜K, V＞</h4><h5 id="2-3-6-1-LinkedHashMap＜K-V＞-概述"><a href="#2-3-6-1-LinkedHashMap＜K-V＞-概述" class="headerlink" title="2.3.6.1. LinkedHashMap＜K, V＞ 概述"></a>2.3.6.1. LinkedHashMap＜K, V＞ 概述</h5><p>想象这样几个问题：</p>
+<ol>
+<li>如果我们用 <code>HashMap＜K, V＞</code> 来实现“购物车”，用户按顺序加入了 <code>A</code>、<code>B</code>、<code>C</code>，但由于 <code>HashMap＜K, V＞</code> 本身是无序结构，遍历时可能得到 <code>B</code>、<code>C</code>、<code>A</code>。更糟糕的是，一旦 <code>HashMap＜K, V＞</code> 发生扩容，遍历的顺序还可能再次变化（简单来说就是 <code>HashMap＜K, V＞</code> 不支持 <code>FIFO</code> 顺序）</li>
+<li>由于 <code>HashMap＜K, V＞</code> 底层使用了数组，这意味着它不可避免地具有数组的典型问题：数组的容量为 <code>10000</code>，但实际只存储了 <code>3</code> 个元素（你不知道究竟存储了多少元素），而且这 <code>3</code> 个元素存储在哪里你不知道。所以在遍历的时候（注意是遍历的时候）只能把 <code>10000</code> 个位置遍历一遍</li>
+</ol>
+<p>为了解决这些问题，<code>LinkedHashMap＜K, V＞</code> 在 <code>HashMap＜K, V＞</code> 的基础上，还维护了一条由 <code>LinkedHashMap＜K, V＞.Entry＜K, V＞</code> 构建的双向链表</p>
+<p>在执行 ”增删改“ 操作时，会同时操作 <code>HashMap＜K, V＞</code> 和双向链表。常规的 ”查“ 操作仍然依赖 <code>HashMap＜K, V＞</code> 来获得高性能，但是只要涉及到遍历，我们就会使用双向链表</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>LinkedHashMap＜K, V＞</code> 除了支持插入顺序外，还支持最近访问顺序，天然符合 <code>LRU</code> 内存淘汰策略</li>
+</ol>
+</blockquote>
+<hr>
+<h5 id="2-3-6-2-LinkedHashMap＜K-V＞-体系结构"><a href="#2-3-6-2-LinkedHashMap＜K-V＞-体系结构" class="headerlink" title="2.3.6.2. LinkedHashMap＜K, V＞ 体系结构"></a>2.3.6.2. LinkedHashMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-12.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-6-3-LinkedHashMap＜K-V＞-底层实现"><a href="#2-3-6-3-LinkedHashMap＜K-V＞-底层实现" class="headerlink" title="2.3.6.3. LinkedHashMap＜K, V＞ 底层实现"></a>2.3.6.3. LinkedHashMap＜K, V＞ 底层实现</h5><p><code>LinkedHashMap＜K, V＞</code> 底层是基于一个 <code>HashMap＜K, V＞</code> + 一条双向链表实现的</p>
+<p><code>LinkedHashMap＜K, V＞</code> 是通过以下方式存储数据的：</p>
+<ol>
+<li><code>HashMap＜K, V＞-&gt;table</code>，而它又是一个由 <code>HashMap＜K, V＞.Node＜K, V＞</code> 构建的数组</li>
+<li>一条由 <code>LinkedHashMap＜K, V＞.Entry＜K, V＞</code> 构建的双向链表</li>
+</ol>
+<p>它们的基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// HashMap＜K, V＞-&gt;Node＜K, V＞</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>	<br>	<span class="hljs-keyword">final</span> K key;<br>	<br>	V value;<br>	<br>	Node&lt;K,V&gt; next;<br>	<br>&#125;<br><br><span class="hljs-comment">// LinkedHashMap＜K, V＞.Entry＜K, V＞</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Entry</span>&lt;K,V&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HashMap</span>.Node&lt;K,V&gt; &#123;<br>	<br>	Entry&lt;K,V&gt; before, after;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-3-6-4-LinkedHashMap-问题爆破"><a href="#2-3-6-4-LinkedHashMap-问题爆破" class="headerlink" title="2.3.6.4. LinkedHashMap 问题爆破"></a>2.3.6.4. LinkedHashMap 问题爆破</h5><p>由于<code>LinkedHashMap＜K, V＞</code> 底层是基于 <code>HashMap＜K, V＞</code> 实现的，所以 <code>HashMap＜K, V＞</code> 拥有的问题，<code>LinkedHashMap＜K, V＞</code> 一般都有。详见上文：<code>HashMap＜K, V＞</code></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>为了解决 <code>LinkedHashMap＜K, V＞</code> 多线程并发安全性问题，我们通常为其加锁</li>
+<li><code>LinkedHashMap＜K, V＞</code> 比较奇怪，其 ”查“ 操作也会导致迭代器的 “增”、“删” 异常问题</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-3-7-ConcurrentHashMap＜K-V＞"><a href="#2-3-7-ConcurrentHashMap＜K-V＞" class="headerlink" title="2.3.7. ConcurrentHashMap＜K, V＞"></a>2.3.7. ConcurrentHashMap＜K, V＞</h4><h5 id="2-3-7-1-ConcurrentHashMap＜K-V＞-体系结构"><a href="#2-3-7-1-ConcurrentHashMap＜K-V＞-体系结构" class="headerlink" title="2.3.7.1. ConcurrentHashMap＜K, V＞ 体系结构"></a>2.3.7.1. ConcurrentHashMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-24.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-7-2-ConcurrentHashMap＜K-V＞-底层实现"><a href="#2-3-7-2-ConcurrentHashMap＜K-V＞-底层实现" class="headerlink" title="2.3.7.2. ConcurrentHashMap＜K, V＞ 底层实现"></a>2.3.7.2. ConcurrentHashMap＜K, V＞ 底层实现</h5><h6 id="2-3-7-2-1-Java8-之前"><a href="#2-3-7-2-1-Java8-之前" class="headerlink" title="2.3.7.2.1. Java8 之前"></a>2.3.7.2.1. Java8 之前</h6><p>在 <code>Java8</code> 之前，<code>ConcurrentHashMap＜K, V＞</code> 底层是基于多个数组 + 多条单向链表 + 多个 <code>ReentrantLock</code> （无条件队列）实现的</p>
+<p><code>ConcurrentHashMap＜K, V＞</code> 是通过 <code>ConcurrentHashMap＜K, V＞-&gt;segments</code> 存储数据的，而它又是一个由 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Segment</span>&lt;K,V&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ReentrantLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br>	<br>    <span class="hljs-keyword">transient</span> <span class="hljs-keyword">volatile</span> HashEntry&lt;K,V&gt;[] table;<br>	<br>    <span class="hljs-keyword">transient</span> <span class="hljs-type">int</span> count;<br>	<br>    <span class="hljs-keyword">transient</span> <span class="hljs-type">int</span> threshold;<br>	<br>    <span class="hljs-keyword">final</span> <span class="hljs-type">float</span> loadFactor;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>每一个 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 还维护了一个由 <code>ConcurrentHashMap＜K, V＞.HashEntry＜K, V＞</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HashEntry</span>&lt;K,V&gt; &#123;<br>	<br>    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>	<br>    <span class="hljs-keyword">final</span> K key;<br>	<br>    <span class="hljs-keyword">volatile</span> V value;<br>	<br>    <span class="hljs-keyword">volatile</span> HashEntry&lt;K,V&gt; next;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>除此之外，每一个 <code>ConcurrentHashMap＜K, V＞.HashEntry＜K, V＞</code> 还维护了一条由 <code>ConcurrentHashMap＜K, V＞.HashEntry＜K, V＞</code> 构建的单向链表</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>数据的存储实际上是由 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 维护的数组进行的</li>
+</ol>
+</blockquote>
+<hr>
+<h6 id="2-3-7-2-2-Java8-之后"><a href="#2-3-7-2-2-Java8-之后" class="headerlink" title="2.3.7.2.2. Java8 之后"></a>2.3.7.2.2. Java8 之后</h6><p>在 <code>Java8</code> 之后，<code>ConcurrentHashMap＜K, V＞</code> 底层是基于一个数组 + 多条单向链表 + 多个红黑树 + <code>CAS</code> + <code>synchronized</code> 实现的（类似于 <code>Java8</code> 之后的 <code>HashMap＜K, V＞</code> 的底层实现）</p>
+<p><code>ConcurrentHashMap＜K, V＞</code> 是通过 <code>ConcurrentHashMap＜K, V＞➔table</code> 存储数据的，而它又是一个由 <code>ConcurrentHashMap＜K, V＞.Node＜K, V＞</code> 构建的数组，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;K,V&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Map</span>.Entry&lt;K,V&gt; &#123;<br>	<br>	<span class="hljs-keyword">final</span> <span class="hljs-type">int</span> hash;<br>	<br>	<span class="hljs-keyword">final</span> K key;<br>	<br>	<span class="hljs-keyword">volatile</span> V val;<br>	<br>	<span class="hljs-keyword">volatile</span> Node&lt;K,V&gt; next;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>除此之外，每一个 <code>ConcurrentHashMap＜K, V＞.Node＜K, V＞</code> 还维护了一条由 <code>ConcurrentHashMap＜K, V＞.Node＜K, V＞</code> 构建的单向链表</p>
+<hr>
+<h5 id="2-3-7-3-ConcurrentHashMap＜K-V＞-扩容机制"><a href="#2-3-7-3-ConcurrentHashMap＜K-V＞-扩容机制" class="headerlink" title="2.3.7.3. ConcurrentHashMap＜K, V＞ 扩容机制"></a>2.3.7.3. ConcurrentHashMap＜K, V＞ 扩容机制</h5><p><code>ConcurrentHashMap＜K, V＞</code> 的扩容机制和 <code>HashMap＜K, V＞</code> 的扩容机制相似，只不过在 <code>Java8</code> 之前的 <code>ConcurrentHashMap＜K, V＞</code> 在扩容时，并不是所有的 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 维护的数组都扩容，而是某个 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 维护的数组在需要扩容时才扩容。详见上文：<code>HashMap＜K, V＞</code></p>
+<hr>
+<h5 id="2-3-7-4-ConcurrentHashMap＜K-V＞-相关流程"><a href="#2-3-7-4-ConcurrentHashMap＜K-V＞-相关流程" class="headerlink" title="2.3.7.4. ConcurrentHashMap＜K, V＞ 相关流程"></a>2.3.7.4. ConcurrentHashMap＜K, V＞ 相关流程</h5><h6 id="2-3-7-4-1-Java8-之前"><a href="#2-3-7-4-1-Java8-之前" class="headerlink" title="2.3.7.4.1. Java8 之前"></a>2.3.7.4.1. Java8 之前</h6><p><font color="#92d050">1. 读操作相关流程</font><br><code>ConcurrentHashMap＜K, V＞</code> 的读操作全程不加锁</p>
+<p><font color="#92d050">2. 写操作相关流程</font><br>在 <code>Java8</code> 之前，<code>ConcurrentHashMap＜K, V＞</code> 的读操作的核心理念是 “分段锁”</p>
+<p>当线程执行写操作时，会先根据元素的 <code>Key</code> 通过哈希函数计算出哈希值，并将其转换成数组索引，然后定位的数组索引对应的 <code>ConcurrentHashMap＜K, V＞-&gt;segments</code> 位置（某个 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code>）</p>
+<p>接着线程会竞争该 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 的 <code>Lock</code> 锁。当线程持有锁后，会再将 <code>Key</code> 的哈希值转换成 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 的数组索引，然后定位到数组索引对应的位置，并对其进行写操作</p>
+<hr>
+<h6 id="2-3-7-4-2-Java8-之后"><a href="#2-3-7-4-2-Java8-之后" class="headerlink" title="2.3.7.4.2. Java8 之后"></a>2.3.7.4.2. Java8 之后</h6><p><font color="#92d050">1. 读操作相关流程</font><br><code>ConcurrentHashMap＜K, V＞</code> 的读操作全程不加锁</p>
+<p><font color="#92d050">2. 写操作相关流程</font><br>在 <code>Java8</code> 之前，我们要竞争一个 <code>ConcurrentHashMap＜K, V＞.Segment＜K, V＞</code> 的 <code>Lock</code> 锁，锁的范围非常大。在 <code>Java8</code> 之后，当线程执行写操作时，会先根据元素的 <code>Key</code> 通过哈希函数计算出哈希值，并将其转换成数组索引，然后定位到数组索引对应的位置。如果该数组位置上没有元素，就使用 <code>CAS</code> 对其进行写操作。如果该数组位置上已有元素，就对该数组位置的首个元素加 <code>synchronized</code> 锁，然后再进行写操作</p>
+<hr>
+<h5 id="2-3-7-5-ConcurrentHashMap＜K-V＞-问题爆破"><a href="#2-3-7-5-ConcurrentHashMap＜K-V＞-问题爆破" class="headerlink" title="2.3.7.5. ConcurrentHashMap＜K, V＞ 问题爆破"></a>2.3.7.5. ConcurrentHashMap＜K, V＞ 问题爆破</h5><h6 id="2-3-7-5-1-迭代器的-“增”、“删”-异常问题"><a href="#2-3-7-5-1-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.3.7.5.1. 迭代器的 “增”、“删” 异常问题"></a>2.3.7.5.1. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>ConcurrentHashMap＜K, V＞</code> 采取了弱一致性（<code>Weakly Consistent</code>）策略。在遍历过程中进行了 “增” 或 “删” 操作，不会抛出任何异常，而是继续向下遍历</p>
+<hr>
+<h4 id="2-3-8-ConcurrentSkipListMap＜K-V＞"><a href="#2-3-8-ConcurrentSkipListMap＜K-V＞" class="headerlink" title="2.3.8. ConcurrentSkipListMap＜K, V＞"></a>2.3.8. ConcurrentSkipListMap＜K, V＞</h4><h5 id="2-3-8-1-ConcurrentSkipListMap＜K-V＞-体系结构"><a href="#2-3-8-1-ConcurrentSkipListMap＜K-V＞-体系结构" class="headerlink" title="2.3.8.1. ConcurrentSkipListMap＜K, V＞ 体系结构"></a>2.3.8.1. ConcurrentSkipListMap＜K, V＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-25.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h5 id="2-3-8-2-ConcurrentSkipListMap＜K-V＞-底层实现"><a href="#2-3-8-2-ConcurrentSkipListMap＜K-V＞-底层实现" class="headerlink" title="2.3.8.2. ConcurrentSkipListMap＜K, V＞ 底层实现"></a>2.3.8.2. ConcurrentSkipListMap＜K, V＞ 底层实现</h5><p><code>ConcurrentSkipListMap＜K, V＞</code> 底层是基于一个跳表 + <code>CAS</code> 实现的</p>
+<p><code>ConcurrentSkipListMap＜K, V＞</code> 是通过一个由 <code>ConcurrentSkipListMap＜K, V＞.Node＜K, V＞</code> 构建的，基于单向链表的跳表存储数据的，其基本属性如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Node</span>&lt;K,V&gt; &#123;<br>	<br>	<span class="hljs-keyword">final</span> K key; <br>	<br>	V val;<br>	<br>	Node&lt;K,V&gt; next;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="2-3-8-3-ConcurrentSkipListMap＜K-V＞-问题爆破"><a href="#2-3-8-3-ConcurrentSkipListMap＜K-V＞-问题爆破" class="headerlink" title="2.3.8.3. ConcurrentSkipListMap＜K, V＞ 问题爆破"></a>2.3.8.3. ConcurrentSkipListMap＜K, V＞ 问题爆破</h5><h6 id="2-3-8-3-1-迭代器的-“增”、“删”-异常问题"><a href="#2-3-8-3-1-迭代器的-“增”、“删”-异常问题" class="headerlink" title="2.3.8.3.1. 迭代器的 “增”、“删” 异常问题"></a>2.3.8.3.1. 迭代器的 “增”、“删” 异常问题</h6><p>为了解决这一问题，<code>ConcurrentSkipListMap＜K, V＞</code> 采取了弱一致性（<code>Weakly Consistent</code>）策略。在遍历过程中进行了 “增” 或 “删” 操作，不会抛出任何异常，而是继续向下遍历</p>
+<hr>
+<h3 id="2-4-Queue＜E＞"><a href="#2-4-Queue＜E＞" class="headerlink" title="2.4. Queue＜E＞"></a>2.4. Queue＜E＞</h3><h4 id="2-4-1-Queue＜E＞-基础体系"><a href="#2-4-1-Queue＜E＞-基础体系" class="headerlink" title="2.4.1. Queue＜E＞ 基础体系"></a>2.4.1. Queue＜E＞ 基础体系</h4><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-10.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>详见源码：<code>Serializable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.io.Serializable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.io.Serializable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Cloneable</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Cloneable源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Comparable&lt;T&gt;</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Comparable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Comparable＜T＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Delayed</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.Delayed%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.util.concurrent.Delayed源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>Iterable＜E＞</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Iterable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：java.lang.Iterable＜T＞源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="2-4-2-Queue＜E＞-相关分类"><a href="#2-4-2-Queue＜E＞-相关分类" class="headerlink" title="2.4.2. Queue＜E＞ 相关分类"></a>2.4.2. Queue＜E＞ 相关分类</h4><ol>
+<li><code>LinkedList＜E＞</code></li>
+<li><code>DelayQueue＜E＞</code></li>
+<li><code>PriorityQueue＜E＞</code></li>
+<li><code>SynchronousQueue＜E＞</code></li>
+<li><code>ArrayBlockingQueue＜E＞</code></li>
+<li><code>LinkedTransferQueue＜E＞</code></li>
+<li><code>LinkedBlockingQueue＜E＞</code></li>
+<li><code>PriorityBlockingQueue＜E＞</code></li>
+<li><code>ConcurrentLinkedQueue＜E＞</code></li>
+<li><code>ForkJoinPool.WorkQueue＜E＞</code></li>
+<li><code>ScheduledThreadPoolExecutor.DelayedWorkQueue＜E＞</code></li>
+<li><code>ArrayDeque＜E＞</code></li>
+<li><code>LinkedBlockingDeque＜E＞</code></li>
+<li><code>ConcurrentLinkedDeque＜E＞</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>LinkedList＜E＞</th>
+<th>DelayQueue＜E＞</th>
+<th>PriorityQueue＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td>✅（<code>FIFO</code> 顺序、<code>LIFO</code> 顺序）</td>
+<td>✅（<code>TTL</code> 顺序）</td>
+<td>✅（优先级顺序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td>—</td>
+<td>❌</td>
+<td>❌（需要扩容）</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td>—</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>支持双端</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持延迟</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持优先级</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td>一条双向链表</td>
+<td>一个 <code>PriorityQueue</code> + 一个 <code>ReentrantLock</code>（一个条件队列）</td>
+<td>一个二叉堆</td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>synchronousQueue＜E＞</th>
+<th>ArrayBlockingQueue＜E＞</th>
+<th>LinkedTransferQueue＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td>—</td>
+<td>✅（<code>FIFO</code> 顺序）</td>
+<td>✅（<code>FIFO</code> 顺序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td>—</td>
+<td>❌</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持双端</strong></td>
+<td>—</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持延迟</strong></td>
+<td>—</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持优先级</strong></td>
+<td>—</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td>—</td>
+<td>一个数组 + 一个 <code>ReentrantLock</code>（两个条件队列）</td>
+<td>一条单向链表 + <code>CAS</code></td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td>—</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>LinkedBlockingQueue＜E＞</th>
+<th>PriorityBlockingQueue＜E＞</th>
+<th>ConcurrentLinkedQueue＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td>✅（<code>FIFO</code> 顺序）</td>
+<td>✅（优先级顺序）</td>
+<td>✅（<code>FIFO</code> 顺序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td>✅（人为限制）</td>
+<td>❌（需要扩容）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持双端</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持延迟</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持优先级</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td>一条单向链表 + 两个 <code>ReentrantLock</code>（各一个条件队列）</td>
+<td>一个二叉堆 + 一个 <code>ReentrantLock</code>（一个条件队列）</td>
+<td>一条单向链表 + <code>CAS</code></td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>ForkJoinPool.WorkQueue＜E＞</th>
+<th>ScheduledThreadPoolExecutor.DelayedWorkQueue＜E＞</th>
+<th>ArrayDeque＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td></td>
+<td></td>
+<td>✅（<code>FIFO</code> 顺序、<code>LIFO</code> 顺序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td></td>
+<td></td>
+<td>❌（需要扩容）</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td></td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>支持双端</strong></td>
+<td></td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>支持延迟</strong></td>
+<td></td>
+<td></td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持优先级</strong></td>
+<td></td>
+<td></td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td></td>
+<td></td>
+<td>一个数组</td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td></td>
+<td></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td></td>
+<td></td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td></td>
+<td></td>
+<td>❌</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>LinkedBlockingDeque＜E＞</th>
+<th>ConcurrentLinkedDeque＜E＞</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>顺序性</strong></td>
+<td>✅（<code>FIFO</code> 顺序、<code>LIFO</code> 顺序）</td>
+<td>✅（<code>FIFO</code> 顺序、<code>LIFO</code> 顺序）</td>
+</tr>
+<tr>
+<td><strong>有界性</strong></td>
+<td>✅（人为限制）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持扩容</strong></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>支持双端</strong></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>支持延迟</strong></td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>支持优先级</strong></td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>底层实现</strong></td>
+<td>一条双向链表 + 一个 <code>ReentrantLock</code>（两个条件队列）</td>
+<td>一条双向链表 + <code>CAS</code></td>
+</tr>
+<tr>
+<td><strong>允许元素重复</strong></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>允许元素为 null</strong></td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>多线程并发安全性</strong></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="2-4-2-1-LinkedList＜E＞"><a href="#2-4-2-1-LinkedList＜E＞" class="headerlink" title="2.4.2.1. LinkedList＜E＞"></a>2.4.2.1. LinkedList＜E＞</h4><p>详见上文：<code>LinkedList＜E＞</code></p>
+<hr>
+<h4 id="2-4-3-DelayQueue＜E＞"><a href="#2-4-3-DelayQueue＜E＞" class="headerlink" title="2.4.3. DelayQueue＜E＞"></a>2.4.3. DelayQueue＜E＞</h4><h5 id="2-4-3-1-DelayQueue＜E＞-体系结构"><a href="#2-4-3-1-DelayQueue＜E＞-体系结构" class="headerlink" title="2.4.3.1. DelayQueue＜E＞ 体系结构"></a>2.4.3.1. DelayQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-13.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-4-PriorityQueue＜E＞"><a href="#2-4-4-PriorityQueue＜E＞" class="headerlink" title="2.4.4. PriorityQueue＜E＞"></a>2.4.4. PriorityQueue＜E＞</h4><h5 id="2-4-4-1-PriorityQueue＜E＞-体系结构"><a href="#2-4-4-1-PriorityQueue＜E＞-体系结构" class="headerlink" title="2.4.4.1. PriorityQueue＜E＞ 体系结构"></a>2.4.4.1. PriorityQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-14.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-5-SynchronousQueue＜E＞"><a href="#2-4-5-SynchronousQueue＜E＞" class="headerlink" title="2.4.5. SynchronousQueue＜E＞"></a>2.4.5. SynchronousQueue＜E＞</h4><h5 id="2-4-5-1-SynchronousQueue＜E＞-体系结构"><a href="#2-4-5-1-SynchronousQueue＜E＞-体系结构" class="headerlink" title="2.4.5.1. SynchronousQueue＜E＞ 体系结构"></a>2.4.5.1. SynchronousQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-15.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-6-ArrayBlockingQueue＜E＞"><a href="#2-4-6-ArrayBlockingQueue＜E＞" class="headerlink" title="2.4.6. ArrayBlockingQueue＜E＞"></a>2.4.6. ArrayBlockingQueue＜E＞</h4><h5 id="2-4-6-1-ArrayBlockingQueue＜E＞-体系结构"><a href="#2-4-6-1-ArrayBlockingQueue＜E＞-体系结构" class="headerlink" title="2.4.6.1. ArrayBlockingQueue＜E＞ 体系结构"></a>2.4.6.1. ArrayBlockingQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-16.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-7-LinkedTransferQueue＜E＞"><a href="#2-4-7-LinkedTransferQueue＜E＞" class="headerlink" title="2.4.7. LinkedTransferQueue＜E＞"></a>2.4.7. LinkedTransferQueue＜E＞</h4><h5 id="2-4-7-1-LinkedTransferQueue＜E＞-体系结构"><a href="#2-4-7-1-LinkedTransferQueue＜E＞-体系结构" class="headerlink" title="2.4.7.1. LinkedTransferQueue＜E＞ 体系结构"></a>2.4.7.1. LinkedTransferQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-17.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-8-LinkedBlockingQueue＜E＞"><a href="#2-4-8-LinkedBlockingQueue＜E＞" class="headerlink" title="2.4.8. LinkedBlockingQueue＜E＞"></a>2.4.8. LinkedBlockingQueue＜E＞</h4><h5 id="2-4-8-1-LinkedBlockingQueue＜E＞-体系结构"><a href="#2-4-8-1-LinkedBlockingQueue＜E＞-体系结构" class="headerlink" title="2.4.8.1. LinkedBlockingQueue＜E＞ 体系结构"></a>2.4.8.1. LinkedBlockingQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-18.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-9-PriorityBlockingQueue＜E＞"><a href="#2-4-9-PriorityBlockingQueue＜E＞" class="headerlink" title="2.4.9. PriorityBlockingQueue＜E＞"></a>2.4.9. PriorityBlockingQueue＜E＞</h4><h5 id="2-4-9-1-PriorityBlockingQueue＜E＞-体系结构"><a href="#2-4-9-1-PriorityBlockingQueue＜E＞-体系结构" class="headerlink" title="2.4.9.1. PriorityBlockingQueue＜E＞ 体系结构"></a>2.4.9.1. PriorityBlockingQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-19.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-10-ConcurrentLinkedQueue＜E＞"><a href="#2-4-10-ConcurrentLinkedQueue＜E＞" class="headerlink" title="2.4.10. ConcurrentLinkedQueue＜E＞"></a>2.4.10. ConcurrentLinkedQueue＜E＞</h4><h5 id="2-4-10-1-ConcurrentLinkedQueue＜E＞-体系结构"><a href="#2-4-10-1-ConcurrentLinkedQueue＜E＞-体系结构" class="headerlink" title="2.4.10.1. ConcurrentLinkedQueue＜E＞ 体系结构"></a>2.4.10.1. ConcurrentLinkedQueue＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-20.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-11-ArrayDeque＜E＞"><a href="#2-4-11-ArrayDeque＜E＞" class="headerlink" title="2.4.11. ArrayDeque＜E＞"></a>2.4.11. ArrayDeque＜E＞</h4><h5 id="2-4-11-1-ArrayDeque＜E＞-体系结构"><a href="#2-4-11-1-ArrayDeque＜E＞-体系结构" class="headerlink" title="2.4.11.1. ArrayDeque＜E＞ 体系结构"></a>2.4.11.1. ArrayDeque＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-21.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-12-LinkedBlockingDeque＜E＞"><a href="#2-4-12-LinkedBlockingDeque＜E＞" class="headerlink" title="2.4.12. LinkedBlockingDeque＜E＞"></a>2.4.12. LinkedBlockingDeque＜E＞</h4><h5 id="2-4-12-1-LinkedBlockingDeque＜E＞-体系结构"><a href="#2-4-12-1-LinkedBlockingDeque＜E＞-体系结构" class="headerlink" title="2.4.12.1. LinkedBlockingDeque＜E＞ 体系结构"></a>2.4.12.1. LinkedBlockingDeque＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-22.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="2-4-13-ConcurrentLinkedDeque＜E＞"><a href="#2-4-13-ConcurrentLinkedDeque＜E＞" class="headerlink" title="2.4.13. ConcurrentLinkedDeque＜E＞"></a>2.4.13. ConcurrentLinkedDeque＜E＞</h4><h5 id="2-4-13-1-ConcurrentLinkedDeque＜E＞-体系结构"><a href="#2-4-13-1-ConcurrentLinkedDeque＜E＞-体系结构" class="headerlink" title="2.4.13.1. ConcurrentLinkedDeque＜E＞ 体系结构"></a>2.4.13.1. ConcurrentLinkedDeque＜E＞ 体系结构</h5><p><img src="/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-23.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Java/Java-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="category-chain-item">Java 数据类型</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Java 数据类型</div>
+      <div>https://wangjia5289.github.io/2025/11/27/笔记：Java数据类型/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 27, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/11/30/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.RandomAccess%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.RandomAccess 源码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">源码：java.util.RandomAccess 源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/24/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%97%A5%E5%BF%97%E6%A1%86%E6%9E%B6/" title="笔记：Java日志框架">
+                        <span class="hidden-mobile">笔记：Java日志框架</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

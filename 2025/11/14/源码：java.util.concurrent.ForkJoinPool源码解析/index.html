@@ -19,18 +19,18 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;14&#x2F;源码：java.util.concurrent.ForkJoinPool源码解析&#x2F;    3. 基础部分3.1. ForkJoinPool 概述ForkJoinPool 是一个具体类，继承了 java.util.concurrent.AbstractEx">
+    <meta name="description" content="1. TODO  使用场景和严禁 XXXX  ForkJoinPool.commonPool()  数据的迭代拆分   2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;14&#x2F;源码：java.util.concurrent.ForkJoinPool源码解析&#x2F;    3. 基础部分3.1. ForkJoinPool 概述For">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.util.concurrent.ForkJoinPool 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;14&#x2F;源码：java.util.concurrent.ForkJoinPool源码解析&#x2F;    3. 基础部分3.1. ForkJoinPool 概述ForkJoinPool 是一个具体类，继承了 java.util.concurrent.AbstractEx">
+<meta property="og:description" content="1. TODO  使用场景和严禁 XXXX  ForkJoinPool.commonPool()  数据的迭代拆分   2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;14&#x2F;源码：java.util.concurrent.ForkJoinPool源码解析&#x2F;    3. 基础部分3.1. ForkJoinPool 概述For">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
 <meta property="article:published_time" content="2025-11-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T13:02:17.265Z">
+<meta property="article:modified_time" content="2025-12-10T13:54:00.243Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T21:02:17+08:00
+                    Last updated on 2025-12-10T21:54:00+08:00
                   
                   
 
@@ -303,7 +303,12 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-TODO"><a href="#1-TODO" class="headerlink" title="1. TODO"></a>1. TODO</h2><hr>
+                <h2 id="1-TODO"><a href="#1-TODO" class="headerlink" title="1. TODO"></a>1. TODO</h2><ul>
+<li><input disabled="" type="checkbox"> 使用场景和严禁 XXXX</li>
+<li><input disabled="" type="checkbox"> ForkJoinPool.commonPool()</li>
+<li><input disabled="" type="checkbox"> 数据的迭代拆分</li>
+</ul>
+<hr>
 <h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
 <li><p>Xmind</p>
 </li>
@@ -314,10 +319,10 @@
 </ol>
 <hr>
 <h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ForkJoinPool-概述"><a href="#3-1-ForkJoinPool-概述" class="headerlink" title="3.1. ForkJoinPool 概述"></a>3.1. ForkJoinPool 概述</h3><p><code>ForkJoinPool</code> 是一个具体类，继承了 <code>java.util.concurrent.AbstractExecutorService</code></p>
-<p><code>ForkJoinPool</code> 被设计用于高效执行那些可以被 ”递归拆分“ 的任务，其核心特性是：</p>
+<p><code>ForkJoinPool</code> 被设计用于高效执行那些可以被 ”迭代拆分“ 的任务，其核心特性是：</p>
 <ol>
 <li>分而治之</li>
-<li>递归拆分</li>
+<li>迭代拆分</li>
 <li>工作窃取</li>
 </ol>
 <blockquote>

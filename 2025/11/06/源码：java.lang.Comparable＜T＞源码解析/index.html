@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;06&#x2F;源码：java.lang.Comparable＜T＞源码解析&#x2F;    3. 基础部分3.1. Comparable 概述Comparable 是一个接口 Comparable 为我们提供了以下方法：  配置自然排序的规则  一些需要排序的 Java 数据">
+    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;06&#x2F;源码：java.lang.Comparable＜T＞源码解析&#x2F;    3. 基础部分3.1. Comparable＜T＞ 概述Comparable＜T＞ 是一个接口 Comparable＜T＞ 为我们提供了以下方法：  配置自然排序的规则  一些需要排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="源码：java.lang.Comparable＜T＞ 源码解析">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/06/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Comparable%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;06&#x2F;源码：java.lang.Comparable＜T＞源码解析&#x2F;    3. 基础部分3.1. Comparable 概述Comparable 是一个接口 Comparable 为我们提供了以下方法：  配置自然排序的规则  一些需要排序的 Java 数据">
+<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;06&#x2F;源码：java.lang.Comparable＜T＞源码解析&#x2F;    3. 基础部分3.1. Comparable＜T＞ 概述Comparable＜T＞ 是一个接口 Comparable＜T＞ 为我们提供了以下方法：  配置自然排序的规则  一些需要排序">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-11-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-11-23T12:58:29.132Z">
+<meta property="article:modified_time" content="2025-11-29T03:39:23.574Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          123 words
+          138 words
         
       </span>
     
@@ -289,7 +289,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-11-23T20:58:29+08:00
+                    Last updated on 2025-11-29T11:39:23+08:00
                   
                   
 
@@ -309,12 +309,12 @@
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-Comparable-概述"><a href="#3-1-Comparable-概述" class="headerlink" title="3.1. Comparable 概述"></a>3.1. Comparable 概述</h3><p><code>Comparable</code> 是一个接口</p>
-<p><code>Comparable</code> 为我们提供了以下方法：</p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-Comparable＜T＞-概述"><a href="#3-1-Comparable＜T＞-概述" class="headerlink" title="3.1. Comparable＜T＞ 概述"></a>3.1. Comparable＜T＞ 概述</h3><p><code>Comparable＜T＞</code> 是一个接口</p>
+<p><code>Comparable＜T＞</code> 为我们提供了以下方法：</p>
 <ol>
 <li>配置自然排序的规则</li>
 </ol>
-<p>一些需要排序的 <code>Java</code> 数据类型（例如 <code>TreeSet</code>、<code>TreeMap</code>、<code>ConcurrentSkipListMap</code>、<code>PriorityQueue</code>、<code>PriorityBlockingQueue</code>、<code>DelayQueue</code>、<code>ScheduledThreadPoolExecutor.DelayedWorkQueue</code>），默认会使用 <code>Comparable#compareTo</code> 进行比较，从而进行自然排序</p>
+<p>一些需要排序的 <code>Java</code> 数据类型（例如 <code>TreeSet＜E＞</code>、<code>TreeMap＜K, V＞</code>、<code>ConcurrentSkipListMap＜K, V＞</code>、<code>PriorityQueue＜E＞</code>、<code>PriorityBlockingQueue＜E＞</code>、<code>DelayQueue＜E＞</code>、<code>ScheduledThreadPoolExecutor.DelayedWorkQueue＜E＞</code>），默认会使用 <code>Comparable＜T＞#compareTo</code> 进行比较，从而进行自然排序</p>
 <hr>
 <h2 id="4-源码部分"><a href="#4-源码部分" class="headerlink" title="4. 源码部分"></a>4. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Comparable</span>&lt;T&gt; &#123;<br>	<br>	<span class="hljs-comment">// 用于配置自然排序的规则</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(T o)</span>;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -402,9 +402,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/11/07/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.locks.ReadWriteLock 源码解析">
+                      <a href="/2025/11/06/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Cloneable%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.lang.Cloneable 源码解析">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.concurrent.locks.ReadWriteLock 源码解析</span>
+                        <span class="hidden-mobile">源码：java.lang.Cloneable 源码解析</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
