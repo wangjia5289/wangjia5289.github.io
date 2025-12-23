@@ -19,12 +19,12 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;23&#x2F;笔记：JUC&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层操作系统层的线程状态，是操作系统内">
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;23&#x2F;笔记：JUC&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层 🌈操作系统层的线程状态是指：操">
 <meta property="og:type" content="article">
 <meta property="og:title" content="笔记：JUC">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;23&#x2F;笔记：JUC&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层操作系统层的线程状态，是操作系统内">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;23&#x2F;笔记：JUC&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JUC-2b2974fbda5e8012975ef0197d6e8237    三、JUC 前置基础1. 线程的状态1.1. 操作系统层 🌈操作系统层的线程状态是指：操">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-9.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-10.png">
 <meta property="article:published_time" content="2025-11-22T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-18T11:55:45.512Z">
+<meta property="article:modified_time" content="2025-12-21T06:58:00.742Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.eddx">
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.1k words
+          8.2k words
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          68 mins
+          69 mins
         
       </span>
     
@@ -302,7 +302,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-18T19:55:45+08:00
+                    Last updated on 2025-12-21T14:58:00+08:00
                   
                   
 
@@ -324,9 +324,9 @@
 </li>
 </ol>
 <hr>
-<h1 id="三、JUC-前置基础"><a href="#三、JUC-前置基础" class="headerlink" title="三、JUC 前置基础"></a>三、JUC 前置基础</h1><h2 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1. 线程的状态"></a>1. 线程的状态</h2><h3 id="1-1-操作系统层"><a href="#1-1-操作系统层" class="headerlink" title="1.1. 操作系统层"></a>1.1. 操作系统层</h3><p>操作系统层的线程状态，是操作系统内核对线程的实际调度反映<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="三、JUC-前置基础"><a href="#三、JUC-前置基础" class="headerlink" title="三、JUC 前置基础"></a>三、JUC 前置基础</h1><h2 id="1-线程的状态"><a href="#1-线程的状态" class="headerlink" title="1. 线程的状态"></a>1. 线程的状态</h2><h3 id="1-1-操作系统层-🌈"><a href="#1-1-操作系统层-🌈" class="headerlink" title="1.1. 操作系统层 🌈"></a>1.1. 操作系统层 🌈</h3><p>操作系统层的线程状态是指：操作系统内核调度本地线程的实际反映<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="1-2-Java-应用层"><a href="#1-2-Java-应用层" class="headerlink" title="1.2. Java 应用层"></a>1.2. Java 应用层</h3><p><code>Java</code> 应用层的线程状态，是 <code>JVM</code> 对线程生命周期的抽象和管理，主要反映线程在 <code>Java</code> 内存模型中的行为<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="1-2-Java-应用层"><a href="#1-2-Java-应用层" class="headerlink" title="1.2. Java 应用层"></a>1.2. Java 应用层</h3><p><code>Java</code> 应用层的线程状态是指： <code>JVM</code> 对线程生命周期的抽象和管理，主要反映线程在 <code>Java</code> 内存模型中的行为<br><img src="/2025/11/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC/%E7%AC%94%E8%AE%B0%EF%BC%9AJUC-1.png" srcset="/img/loading.gif" lazyload></p>
 <ol>
 <li><code>NEW</code><ol>
 <li>在 <code>Java</code> 应用层，<code>Thread</code> 实例已创建，但尚未调用 <code>Thread#start</code>，处于未启动状态</li>
@@ -338,6 +338,7 @@
 <li>当我们调用 <code>Thread#start</code> 后，<code>JVM</code> 会在操作系统层面请求创建一个本地线程</li>
 <li>一旦操作系统创建了这个本地线程，并将其与 <code>Thread</code> 实例 “绑定”，<code>Thread</code> 实例就会进入可运行状态</li>
 <li>可运行状态表示 <code>Thread</code> 实例已经准备好运行了，然而，能否真正运行还要取决于操作系统的调度</li>
+<li>本地线启动时JVM 会为该本地线程分配虚拟机栈和程序计数器（？？），</li>
 </ol>
 </li>
 <li>运行状态<ol>
@@ -369,6 +370,24 @@
 </ol>
 <p>我们平时创建的 <code>Thread</code> 实例默认都是用户线程，<code>main</code> 方法的主线程也是一个用户线程。很多人误以为：只要主线程结束后，<code>JVM</code> 进程就会结束。事实上，这种理解是错误的，只要仍有用户线程在运行，<code>JVM</code> 进程就会继续存活。</p>
 <p>但是守护线程的行为则非如此，当所有用户线程都执行完毕后，<code>JVM</code> 进程将自动退出，而不管是否还有守护线程在运行。此时守护线程会被强制终止，其 <code>finally</code> 块中的代码也不保证一定执行。因此守护线程常用于后台服务，例如垃圾回收、心跳监控、日志清理等任务</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>从 <code>GC</code> 的角度来看，线程可以分为两类:<ol>
+<li>用户线程<ol>
+<li>即应用程序自身创建和管理的线程</li>
+<li>常见的主线程、工作线程、守护线程都属于用户线程</li>
+</ol>
+</li>
+<li><code>VM</code> 线程<ol>
+<li>由 <code>JVM</code> 内部维护，用于支撑虚拟机运行的必要线程，例如 <code>GC</code> 线程、<code>JIT</code> 编译线程、信号分发线程等</li>
+<li><code>VM</code> 线程不同于守护线程，守护线程是 <code>Java</code> 程序可见、可控的，而 <code>VM</code> 线程则完全对 <code>Java</code> 代码不可见</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
 <hr>
 <h2 id="3-线程阻塞相关分类"><a href="#3-线程阻塞相关分类" class="headerlink" title="3. 线程阻塞相关分类"></a>3. 线程阻塞相关分类</h2><ol>
 <li><code>IO</code> 阻塞<ol>
