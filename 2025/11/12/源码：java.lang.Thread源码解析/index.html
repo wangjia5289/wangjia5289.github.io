@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;12&#x2F;源码：java.lang.Thread源码解析&#x2F;    3. 基础部分3.1. Thread 概述Thread 是一个具体类，实现了 java.util.concurrent.Runnable Thread 实例是一个 Runnable 任务，当我们调用">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/12/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-24T00:38:36.147Z">
+<meta property="article:modified_time" content="2025-12-24T12:08:02.436Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/12/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-24T08:38:36+08:00
+                    Last updated on 2025-12-24T20:08:02+08:00
                   
                   
 
@@ -311,7 +311,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-Thread-概述"><a href="#3-1-Thread-概述" class="headerlink" title="3.1. Thread 概述"></a>3.1. Thread 概述</h3><p><code>Thread</code> 是一个具体类，实现了 <code>java.util.concurrent.Runnable</code><br><img src="/2025/11/12/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-Thread-概述"><a href="#3-1-Thread-概述" class="headerlink" title="3.1. Thread 概述"></a>3.1. Thread 概述</h3><p><code>Thread</code> 是一个具体类，实现了 <code>java.util.concurrent.Runnable</code><br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.lang.Thread%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>Thread</code> 实例是一个 <code>Runnable</code> 任务，当我们调用 <code>Thread#start</code> 后，<code>JVM</code> 会在操作系统层面请求创建一个本地线程。一旦操作系统创建了这个本地线程，并将其与 <code>Thread</code> 实例 “绑定”，<code>Thread</code> 实例就会进入可运行状态。当本地线程被分配到 <code>CPU</code> 时间片后，开始执行 <code>Java</code> 代码，执行的就是 <code>Thread#run</code> </p>
 <p>然而，由于 <code>Thread#run</code> 的源码又是：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>	<br>	<span class="hljs-keyword">if</span> (target != <span class="hljs-literal">null</span>) &#123;<br>		target.run();<br>	&#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>

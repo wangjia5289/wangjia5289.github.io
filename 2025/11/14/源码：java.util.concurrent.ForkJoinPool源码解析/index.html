@@ -26,14 +26,14 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. TODO  使用场景和严禁 XXXX  ForkJoinPool.commonPool()  数据的迭代拆分   2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;14&#x2F;源码：java.util.concurrent.ForkJoinPool源码解析&#x2F;    3. 基础部分3.1. ForkJoinPool 概述For">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png">
 <meta property="article:published_time" content="2025-11-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-24T00:38:36.167Z">
+<meta property="article:modified_time" content="2025-12-24T12:08:02.658Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
+<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -293,7 +293,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-24T08:38:36+08:00
+                    Last updated on 2025-12-24T20:08:02+08:00
                   
                   
 
@@ -312,7 +312,7 @@
 <h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
 <li><p>Xmind</p>
 </li>
-<li><p>Edraw<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx" srcset="/img/loading.gif" lazyload></p>
+<li><p>Edraw<br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.eddx" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/11/14/源码：java.util.concurrent.ForkJoinPool源码解析/</a></p>
 </li>
@@ -346,7 +346,7 @@
 <h3 id="3-2-ForkJoinPool-相关流程"><a href="#3-2-ForkJoinPool-相关流程" class="headerlink" title="3.2. ForkJoinPool 相关流程"></a>3.2. ForkJoinPool 相关流程</h3><p>我们知道：<code>ThreadPoolExecutor</code> 和 <code>ScheduledThreadPoolExecutor</code> 的线程执行流程大致为：<code>本地线程 ➔ Thread#run ➔ Worker#run</code></p>
 <p>而 <code>ForkJoinPool</code> 并没有使用 <code>Worker</code>，甚至没有使用原生的 <code>Thread</code>，而是直接使用了 <code>ForkJoinWorkerThread</code>（<code>ForkJoinWorkerThread</code> 继承了 <code>Thread</code>）</p>
 <p>你可能会疑惑：为什么要让 <code>ForkJoinWorkerThread</code> 继承 <code>Thread</code>，而不是继续使用 <code>Worker</code> 或者在 <code>Worker</code> 的基础上 “魔改” 呢？原因很简单，因为我们要为每个线程单独维护一个任务队列</p>
-<p>每个线程都会维护一个 <code>ForkJoinPool.WorkQueue</code>，这是一个双端队列。并且这些队列都会被注册到 <code>ForkJoinPool-&gt;queues</code> 中<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<p>每个线程都会维护一个 <code>ForkJoinPool.WorkQueue</code>，这是一个双端队列。并且这些队列都会被注册到 <code>ForkJoinPool-&gt;queues</code> 中<br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <p>当线程去执行一个大任务 <code>A</code> 时，可以把 <code>A</code> 拆分成多个子任务（例如 <code>B</code>、<code>C</code>、<code>D</code>），这些子任务会被投递到该本地线程维护的任务队列中。然后你是不是认为 “线程需要阻塞等待 <code>B</code>、<code>C</code>、<code>D</code> 的完成呢？”</p>
 <p>接下来的一部分，是 <code>ForkJoinPool</code> 设计最精妙的地方：</p>
 <ol>
@@ -382,7 +382,7 @@
 </ol>
 </li>
 </ol>
-<p>我们以 <code>1</code> 累加到 <code>10000</code> 为例，来看一看究竟是怎么执行的：<br><img src="/2025/11/14/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们以 <code>1</code> 累加到 <code>10000</code> 为例，来看一看究竟是怎么执行的：<br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.ForkJoinPool%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-1.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
