@@ -26,13 +26,13 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. Py 代码1. 安装相关依赖 1pip install keyboard  pyperclip pyautogui PyQt6 -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple   2. 编写 Py 代码 123456789101112131415161718192021222324252627282930313233343536373839404142">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png">
 <meta property="article:published_time" content="2025-12-10T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-24T12:08:02.420Z">
+<meta property="article:modified_time" content="2025-12-24T12:14:58.221Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -292,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-24T20:08:02+08:00
+                    Last updated on 2025-12-24T20:14:58+08:00
                   
                   
 
@@ -313,9 +313,9 @@
 <h2 id="2-打包成-exe-文件"><a href="#2-打包成-exe-文件" class="headerlink" title="2. 打包成 exe 文件"></a>2. 打包成 exe 文件</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-comment"># 1. 安装打包工具</span><br>pip install pyinstaller<br><br><br><span class="hljs-comment"># 2. 打包成 exe 文件</span><br>pyinstaller <span class="hljs-operator">-</span>-onefile <span class="hljs-operator">-</span>-windowed <span class="hljs-operator">-</span>-icon<span class="hljs-operator">=</span><span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\I</span>CO<span class="hljs-char escape_">\快</span>捷语料管理.ico&quot;</span> <span class="hljs-operator">-</span>-distpath <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合&quot;</span> <span class="hljs-string">&quot;D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\快</span>捷语料管理.py&quot;</span><br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">1. --onefile</span><br><span class="hljs-string">	1. 打包为单个 .exe 文件。</span><br><span class="hljs-string">2. --windowed</span><br><span class="hljs-string">	1. 确保 GUI 程序无控制台窗口</span><br><span class="hljs-string">3. --distpath &quot;</span>D:\文件集合\<span class="hljs-string">&quot;  &quot;</span>D:\文件集合\快捷语料管理.py<span class="hljs-string">&quot;</span><br><span class="hljs-string">	1. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\ </span>是输出位置</span><br><span class="hljs-string">	2. D:<span class="hljs-char escape_">\文</span>件集合<span class="hljs-char escape_">\快</span>捷语料管理.py 是输入位置</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="3-注意事项"><a href="#3-注意事项" class="headerlink" title="3. 注意事项"></a>3. 注意事项</h2><h3 id="3-1-数据存储位置"><a href="#3-1-数据存储位置" class="headerlink" title="3.1. 数据存储位置"></a>3.1. 数据存储位置</h3><p><img src="/source/_posts/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-注意事项"><a href="#3-注意事项" class="headerlink" title="3. 注意事项"></a>3. 注意事项</h2><h3 id="3-1-数据存储位置"><a href="#3-1-数据存储位置" class="headerlink" title="3.1. 数据存储位置"></a>3.1. 数据存储位置</h3><p><img src="/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="3-2-快捷键位置"><a href="#3-2-快捷键位置" class="headerlink" title="3.2. 快捷键位置"></a>3.2. 快捷键位置</h3><p><img src="/source/_posts/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="3-2-快捷键位置"><a href="#3-2-快捷键位置" class="headerlink" title="3.2. 快捷键位置"></a>3.2. 快捷键位置</h3><p><img src="/2025/12/11/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86/%E5%B7%A5%E5%85%B7%EF%BC%9A%E5%BF%AB%E6%8D%B7%E8%AF%AD%E6%96%99%E7%AE%A1%E7%90%86-1.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 
                 

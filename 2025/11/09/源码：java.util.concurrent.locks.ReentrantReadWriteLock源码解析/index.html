@@ -26,12 +26,12 @@
 <meta property="og:site_name" content="咸阳猴🐒的博客">
 <meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;11&#x2F;09&#x2F;源码：java.util.concurrent.locks.ReentrantReadWriteLock源码解析&#x2F;    3. 基础部分3.1. ReentrantReadWriteLock 概述ReentrantReadWriteLock 是一个具体类">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
 <meta property="article:published_time" content="2025-11-08T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-24T12:08:02.784Z">
+<meta property="article:modified_time" content="2025-12-24T12:14:58.328Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wangjia5289.github.io/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -291,7 +291,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-24T20:08:02+08:00
+                    Last updated on 2025-12-24T20:14:58+08:00
                   
                   
 
@@ -311,7 +311,7 @@
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ReentrantReadWriteLock-概述"><a href="#3-1-ReentrantReadWriteLock-概述" class="headerlink" title="3.1. ReentrantReadWriteLock 概述"></a>3.1. ReentrantReadWriteLock 概述</h3><p><code>ReentrantReadWriteLock</code> 是一个具体类，实现了 <code>java.util.concurrent.locks.ReadWriteLock</code>、<code>java.io.Serializable</code><br><img src="/source/_posts/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-ReentrantReadWriteLock-概述"><a href="#3-1-ReentrantReadWriteLock-概述" class="headerlink" title="3.1. ReentrantReadWriteLock 概述"></a>3.1. ReentrantReadWriteLock 概述</h3><p><code>ReentrantReadWriteLock</code> 是一个具体类，实现了 <code>java.util.concurrent.locks.ReadWriteLock</code>、<code>java.io.Serializable</code><br><img src="/2025/11/09/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.locks.ReentrantReadWriteLock%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>ReentrantReadWriteLock</code> 是一种可重入、悲观、公平或非公平、互斥或共享的锁，并且是使用 <code>AQS</code> 实现的混合模式的同步器。<code>State</code> 和共享资源分别表示以下含义：</p>
 <ol>
 <li><code>State</code> 表示写锁或读锁的重入次数<ol>
