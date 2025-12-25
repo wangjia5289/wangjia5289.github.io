@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-26.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-25.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-25T07:56:47.215Z">
+<meta property="article:modified_time" content="2025-12-25T08:55:30.990Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
@@ -305,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-25T15:56:47+08:00
+                    Last updated on 2025-12-25T16:55:30+08:00
                   
                   
 
@@ -369,7 +369,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-3-程序计数器"><a href="#2-3-程序计数器" class="headerlink" title="2.3. 程序计数器"></a>2.3. 程序计数器</h3><h4 id="2-3-1-程序计数器概述-🐉"><a href="#2-3-1-程序计数器概述-🐉" class="headerlink" title="2.3.1. 程序计数器概述 🐉"></a>2.3.1. 程序计数器概述 🐉</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址（需要注意的是：实际记录的是这条 <code>JVM</code> 字节码指令的偏移量）</p>
+<h3 id="2-3-程序计数器"><a href="#2-3-程序计数器" class="headerlink" title="2.3. 程序计数器"></a>2.3. 程序计数器</h3><h4 id="2-3-1-程序计数器概述-🐉"><a href="#2-3-1-程序计数器概述-🐉" class="headerlink" title="2.3.1. 程序计数器概述 🐉"></a>2.3.1. 程序计数器概述 🐉</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -381,7 +381,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-3-2-程序计数器空间大小-🐉"><a href="#2-3-2-程序计数器空间大小-🐉" class="headerlink" title="2.3.2. 程序计数器空间大小 🐉"></a>2.3.2. 程序计数器空间大小 🐉</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为只需要记录一个内存地址）：</p>
+<h4 id="2-3-2-程序计数器空间大小-🐉"><a href="#2-3-2-程序计数器空间大小-🐉" class="headerlink" title="2.3.2. 程序计数器空间大小 🐉"></a>2.3.2. 程序计数器空间大小 🐉</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为程序计数器只需要记录一个内存地址）：</p>
 <ol>
 <li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>4 byte</code> 的内存空间</li>
 <li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>8 byte</code> 的内存空间</li>
@@ -389,21 +389,21 @@
 <hr>
 <h4 id="2-3-3-程序计数器组成部分-🐉"><a href="#2-3-3-程序计数器组成部分-🐉" class="headerlink" title="2.3.3. 程序计数器组成部分 🐉"></a>2.3.3. 程序计数器组成部分 🐉</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="2-4-虚拟机栈"><a href="#2-4-虚拟机栈" class="headerlink" title="2.4. 虚拟机栈"></a>2.4. 虚拟机栈</h3><h4 id="2-4-1-虚拟机栈概述"><a href="#2-4-1-虚拟机栈概述" class="headerlink" title="2.4.1. 虚拟机栈概述"></a>2.4.1. 虚拟机栈概述</h4><blockquote>
+<h3 id="2-4-虚拟机栈-🐉"><a href="#2-4-虚拟机栈-🐉" class="headerlink" title="2.4. 虚拟机栈 🐉"></a>2.4. 虚拟机栈 🐉</h3><h4 id="2-4-1-虚拟机栈概述-🐉"><a href="#2-4-1-虚拟机栈概述-🐉" class="headerlink" title="2.4.1. 虚拟机栈概述 🐉"></a>2.4.1. 虚拟机栈概述 🐉</h4><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>虚拟机栈是线程私有的内存空间，每个线程都拥有独立的虚拟机栈</li>
 <li><code>JVM</code> 既会垃圾回收虚拟机栈，也会因为虚拟机栈而抛出 <code>OutOfMemoryError</code> 错误、<code>StackOverflowError</code> 错误：<ol>
 <li><code>OutOfMemoryError</code> 错误<ol>
 <li><code>OutOfMemoryError: unable to create new native thread</code><ol>
-<li>如果虚拟机栈可以动态扩展内存空间，当 <code>JVM</code> 的内存空间已满，无法再为虚拟机栈分配内存空间时，就会抛出 <code>OutOfMemoryError</code> 错误（需要注意的是：<code>HotSpot JVM</code> 并不支持虚拟机栈动态扩展内存空间）</li>
-<li>当创建本地线程，<code>JVM</code> 的内存空间已满，无法再为该本地线程对应的程序计数器、虚拟机栈分配内存空间时，也会抛出 <code>OutOfMemoryError</code> 错误</li>
+<li>如果虚拟机栈可以动态扩展内存空间，当 <code>JVM</code> 的内存空间已满，无法再分配虚拟机栈的内存空间时，就会抛出 <code>OutOfMemoryError</code> 错误（需要注意的是：<code>HotSpot JVM</code> 并不支持虚拟机栈动态扩展内存空间）</li>
+<li>当创建本地线程，<code>JVM</code> 的内存空间已满，无法再分配该本地线程对应的程序计数器的内存空间、该本地线程对应的虚拟机栈的内存空间时，也会抛出 <code>OutOfMemoryError</code> 错误</li>
 </ol>
 </li>
 </ol>
 </li>
 <li><code>StackOverflowError</code> 错误<ol>
-<li>当虚拟机栈的内存空间已满，无法再为线程执行的方法对应的栈帧分配内存空间时，就会抛出 <code>StackOverflowError</code> 错误</li>
+<li>当虚拟机栈的内存空间已满，无法再分配线程执行的方法对应的栈帧的内存空间时，<code>JVM</code> 就会抛出 <code>StackOverflowError</code> 错误</li>
 </ol>
 </li>
 </ol>
@@ -411,18 +411,19 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-4-2-虚拟机栈组成部分"><a href="#2-4-2-虚拟机栈组成部分" class="headerlink" title="2.4.2. 虚拟机栈组成部分"></a>2.4.2. 虚拟机栈组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-4-2-虚拟机栈组成部分-🐉"><a href="#2-4-2-虚拟机栈组成部分-🐉" class="headerlink" title="2.4.2. 虚拟机栈组成部分 🐉"></a>2.4.2. 虚拟机栈组成部分 🐉</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="2-4-3-局部变量表"><a href="#2-4-3-局部变量表" class="headerlink" title="2.4.3. 局部变量表"></a>2.4.3. 局部变量表</h4><h5 id="2-4-3-1-局部变量表概述"><a href="#2-4-3-1-局部变量表概述" class="headerlink" title="2.4.3.1. 局部变量表概述"></a>2.4.3.1. 局部变量表概述</h5><p>局部变量表用于存储方法参数、局部变量</p>
+<h4 id="2-4-3-局部变量表"><a href="#2-4-3-局部变量表" class="headerlink" title="2.4.3. 局部变量表"></a>2.4.3. 局部变量表</h4><h5 id="2-4-3-1-局部变量表概述-🐉"><a href="#2-4-3-1-局部变量表概述-🐉" class="headerlink" title="2.4.3.1. 局部变量表概述 🐉"></a>2.4.3.1. 局部变量表概述 🐉</h5><p>局部变量表用于存储方法参数、局部变量</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>局部变量表能够存储基本数据类型的元素、引用数据类型的元素（需要注意的是：实际存储的是引用数据类型的元素的引用）、返回地址（即 <code>Java5</code> 之前的 <code>returnAddress</code> 类型，了解即可）</li>
-<li>静态变量、静态常量、实例变量、实例常量在不同阶段会被赋默认值，然而方法参数、局部变量并不会在某阶段被赋默认值。因此我们在使用方法参数、局部变量之前，必须对其进行手动赋值，否则会导致类的编译错误（例如你在实例变量中 <code>int i</code>，不手动赋值就可以正常使用。但是你在局部变量中 <code>int i</code>，不手动赋值肯定不可以正常使用）</li>
+<li>局部变量表能够存储基本数据类型的元素、引用数据类型的元素（需要注意的是：局部变量表实际存储的是引用数据类型的元素的引用）、返回地址（即在 <code>Java5</code> 之前的 <code>returnAddress</code> 类型，我们知道有这个东西就行）</li>
+<li>静态变量、静态常量、实例变量、实例常量在不同阶段会被赋予默认。但是方法参数、局部变量并不会被赋予默认值。因此我们在使用方法参数、局部变量之前，必须对其进行手动赋值，否则会导致类的编译错误</li>
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-4-3-2-局部变量表底层实现"><a href="#2-4-3-2-局部变量表底层实现" class="headerlink" title="2.4.3.2. 局部变量表底层实现"></a>2.4.3.2. 局部变量表底层实现</h5><p>局部变量表底层是基于一个一维数组实现的，该数组的基本存储单元是变量槽（<code>Slot</code>）：</p>
+<h5 id="2-4-3-2-局部变量表底层实现-🐉"><a href="#2-4-3-2-局部变量表底层实现-🐉" class="headerlink" title="2.4.3.2. 局部变量表底层实现 🐉"></a>2.4.3.2. 局部变量表底层实现 🐉</h5><p>局部变量表的底层是：一个一维数组</p>
+<p>局部变量表使用的一维数组的基本存储单元是变量槽（<code>Slot</code>）</p>
 <ol>
 <li>在 <code>32 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>4 byte</code> 的内存空间</li>
 <li>在 <code>64 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>8 byte</code> 的内存空间</li>
@@ -430,15 +431,9 @@
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>当线程调用某类的构造方法时，指向被构造的实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是我们为什么能在构造方法中使用 <code>this</code> 的原因）</li>
-<li>当线程调用某实例的实例方法时，指向该方法所属实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中<ol>
-<li>需要注意的是：<ol>
-<li>这是 <code>Java</code> 中的一个语法糖，也是为什么我们能在实例方法中使用 <code>this</code> 的原因</li>
-<li>由于线程调用某类、某实例的静态方法时，根本不存在 <code>this</code>，也就导致我们不能在静态方法中使用 <code>this</code></li>
-</ol>
-</li>
-</ol>
-</li>
+<li>当线程调用某类的构造方法时，指向被构造的实例的内存地址的引用（即 <code>this</code>），就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是我们为什么能在构造方法中使用 <code>this</code> 的原因）</li>
+<li>当线程调用某实例的实例方法时，指向该方法所属实例的内存地址的引用（即 <code>this</code>），就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是为什么我们能在实例方法中使用 <code>this</code> 的原因）</li>
+<li>当线程调用某类的静态方法时，根本就不存在 <code>this</code>，导致我们不能在静态方法中使用 <code>this</code></li>
 </ol>
 </blockquote>
 <hr>
@@ -998,7 +993,7 @@
 <li>在 <code>G1 GC</code> 执行完 <code>Minor GC</code> 后，<code>G1 GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h6 id="3-3-4-2-2-Mixed-GC-流程-🌈"><a href="#3-3-4-2-2-Mixed-GC-流程-🌈" class="headerlink" title="3.3.4.2.2. Mixed GC 流程 🌈"></a>3.3.4.2.2. Mixed GC 流程 🌈</h6><p>当堆区中的老年代的内存空间的使用率达到某阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
+<h6 id="3-3-4-2-2-Mixed-GC-流程-🌈"><a href="#3-3-4-2-2-Mixed-GC-流程-🌈" class="headerlink" title="3.3.4.2.2. Mixed GC 流程 🌈"></a>3.3.4.2.2. Mixed GC 流程 🌈</h6><p>当堆区中的老年代的内存空间的使用率达到阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
 <ol>
 <li>初始标记阶段（<code>Initial Mark Phase</code>）<ol>
 <li>在 <code>G1 GC</code> 进行初始标记阶段的过程中，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，标记出 <code>GC Roots</code> 直接可达的实例（需要注意的是：不做深度遍历）</li>
@@ -1029,8 +1024,8 @@
 <hr>
 <h6 id="3-3-4-2-3-Full-GC-流程-🌈"><a href="#3-3-4-2-3-Full-GC-流程-🌈" class="headerlink" title="3.3.4.2.3. Full GC 流程 🌈"></a>3.3.4.2.3. Full GC 流程 🌈</h6><p>虽然 <code>G1 GC</code> 的策略也是 “主动预防”。但是在运行 <code>Java</code> 程序的过程中，也可能出现一些极端情况。为了解决这一问题，<code>G1 GC</code> 会执行 <code>Full GC</code>：</p>
 <ol>
-<li><code>HotSpot JVM</code> 在 <code>Java 10</code> 之前，是使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
-<li><code>HotSpot JVM</code> 在 <code>Java10</code> 及以后，是使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
+<li><code>HotSpot JVM</code> 在 <code>Java 10</code> 之前，<code>G1 GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
+<li><code>HotSpot JVM</code> 在 <code>Java10</code> 及以后，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 </ol>
 <p>触发 <code>G1 GC</code> 执行 <code>Full GC</code> 的条件相似于触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件，只不过 <code>G1 GC</code> 并不存在传统意义上的 “空间担保分配”（因为它是基于 <code>Region</code> 的）。但是当堆区中的空闲的 <code>Region</code> 的数量不足，<code>G1 GC</code> 在执行 <code>Minor GC</code>、<code>Major GC</code> 的过程中，将 <code>Region</code> 中的实例复制到另一个 <code>Region</code> 失败时，就会触发 <code>G1 GC</code> 执行 <code>Full GC</code>（需要注意的是：这本质上也是一种 “空间担保分配”）</p>
 <hr>
@@ -1151,9 +1146,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/11/%E7%AC%94%E8%AE%B0%EF%BC%9AKafka/" title="笔记：Kafka">
+                      <a href="/2025/12/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E8%AF%AD%E6%B3%95%E7%B3%96/" title="笔记：Java 语法糖">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">笔记：Kafka</span>
+                        <span class="hidden-mobile">笔记：Java 语法糖</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
