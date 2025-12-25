@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;01&#x2F;源码：java.util.Set＜E＞源码解析&#x2F;    3. 基础部分3.1. Set＜E＞ 概述Set＜E＞ 是一个接口  4. 源码部分123456789101112131415161718192021222324252627282930313233">
+    <meta name="description" content="TODO 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;25&#x2F;源码：String源码解析&#x2F;  代码洪荒（面试宝典）    常用方法构造方法根据 byte 类型的数组创建 String 对象根据 int 类型的数组创建 String 对象根据 char 类型的数组创建 String 对象根据 String 对象创建 String">
 <meta property="og:type" content="article">
-<meta property="og:title" content="源码：java.util.Set＜E＞ 源码解析">
-<meta property="og:url" content="https://wangjia5289.github.io/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Set%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="源码：String 源码解析">
+<meta property="og:url" content="https://wangjia5289.github.io/2025/12/25/%E6%BA%90%E7%A0%81%EF%BC%9AString%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="1. TODO 2. 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;01&#x2F;源码：java.util.Set＜E＞源码解析&#x2F;    3. 基础部分3.1. Set＜E＞ 概述Set＜E＞ 是一个接口  4. 源码部分123456789101112131415161718192021222324252627282930313233">
+<meta property="og:description" content="TODO 脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;25&#x2F;源码：String源码解析&#x2F;  代码洪荒（面试宝典）    常用方法构造方法根据 byte 类型的数组创建 String 对象根据 int 类型的数组创建 String 对象根据 char 类型的数组创建 String 对象根据 String 对象创建 String">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-11-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-01T03:19:21.228Z">
+<meta property="article:published_time" content="2025-12-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-25T07:19:20.639Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>源码：java.util.Set＜E＞ 源码解析 - 咸阳猴🐒的博客</title>
+  <title>源码：String 源码解析 - 咸阳猴🐒的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="源码：java.util.Set＜E＞ 源码解析"></span>
+            <span id="subtitle" data-typed-text="源码：String 源码解析"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-12-01 00:00" pubdate>
-          December 1, 2025 am
+        <time datetime="2025-12-25 00:00" pubdate>
+          December 25, 2025 am
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          409 words
+          100 words
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          4 mins
+          1 mins
         
       </span>
     
@@ -284,12 +284,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">源码：java.util.Set＜E＞ 源码解析</h1>
+            <h1 id="seo-header">源码：String 源码解析</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-01T11:19:21+08:00
+                    Last updated on 2025-12-25T15:19:20+08:00
                   
                   
 
@@ -299,22 +299,19 @@
             
               <div class="markdown-body">
                 
-                <h2 id="1-TODO"><a href="#1-TODO" class="headerlink" title="1. TODO"></a>1. TODO</h2><hr>
-<h2 id="2-脑图"><a href="#2-脑图" class="headerlink" title="2. 脑图"></a>2. 脑图</h2><ol>
+                <h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><hr>
+<h2 id="脑图"><a href="#脑图" class="headerlink" title="脑图"></a>脑图</h2><ol>
 <li><p>Xmind</p>
 </li>
 <li><p>Edraw</p>
 </li>
-<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.Set%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/12/01/源码：java.util.Set＜E＞源码解析/</a></p>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/25/%E6%BA%90%E7%A0%81%EF%BC%9AString%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/12/25/源码：String源码解析/</a></p>
+</li>
+<li><p>代码洪荒（面试宝典）</p>
 </li>
 </ol>
 <hr>
-<h2 id="3-基础部分"><a href="#3-基础部分" class="headerlink" title="3. 基础部分"></a>3. 基础部分</h2><h3 id="3-1-Set＜E＞-概述"><a href="#3-1-Set＜E＞-概述" class="headerlink" title="3.1. Set＜E＞ 概述"></a>3.1. Set＜E＞ 概述</h3><p><code>Set＜E＞</code> 是一个接口</p>
-<hr>
-<h2 id="4-源码部分"><a href="#4-源码部分" class="headerlink" title="4. 源码部分"></a>4. 源码部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Set</span>&lt;E&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Collection</span>&lt;E&gt; &#123;<br>	<br>    <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span><br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> (Set&lt;E&gt;) ImmutableCollections.EMPTY_SET;<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.Set12&lt;&gt;(e1);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.Set12&lt;&gt;(e1, e2);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5, E e6)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5, e6);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5, E e6, E e7)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5, e6, e7);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5, e6, e7, e8);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5, e6, e7, e8, e9);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E e1, E e2, E e3, E e4, E e5, E e6, E e7, E e8, E e9, E e10)</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImmutableCollections</span>.SetN&lt;&gt;(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10);<br>    &#125;<br>	<br>    <span class="hljs-meta">@SafeVarargs</span><br>    <span class="hljs-meta">@SuppressWarnings(&quot;varargs&quot;)</span><br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">of</span><span class="hljs-params">(E... elements)</span> &#123;<br>        <span class="hljs-keyword">return</span> ImmutableCollections.setOf(elements);<br>    &#125;<br>	<br>    <span class="hljs-keyword">static</span> &lt;E&gt; Set&lt;E&gt; <span class="hljs-title function_">copyOf</span><span class="hljs-params">(Collection&lt;? extends E&gt; coll)</span> &#123;<br>        <span class="hljs-keyword">if</span> (coll <span class="hljs-keyword">instanceof</span> ImmutableCollections.AbstractImmutableSet &amp;&amp; coll.getClass() != ImmutableCollections.SubList.class) &#123;<br>            <span class="hljs-keyword">return</span> (Set&lt;E&gt;) coll;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> (Set&lt;E&gt;) Set.of(<span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;(coll).toArray());<br>        &#125;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><h4 id="根据-byte-类型的数组创建-String-对象"><a href="#根据-byte-类型的数组创建-String-对象" class="headerlink" title="根据 byte 类型的数组创建 String 对象"></a>根据 byte 类型的数组创建 String 对象</h4><h4 id="根据-int-类型的数组创建-String-对象"><a href="#根据-int-类型的数组创建-String-对象" class="headerlink" title="根据 int 类型的数组创建 String 对象"></a>根据 int 类型的数组创建 String 对象</h4><h4 id="根据-char-类型的数组创建-String-对象"><a href="#根据-char-类型的数组创建-String-对象" class="headerlink" title="根据 char 类型的数组创建 String 对象"></a>根据 char 类型的数组创建 String 对象</h4><h4 id="根据-String-对象创建-String-对象"><a href="#根据-String-对象创建-String-对象" class="headerlink" title="根据 String 对象创建 String 对象"></a>根据 String 对象创建 String 对象</h4><h4 id="根据字面量创建-String-对象"><a href="#根据字面量创建-String-对象" class="headerlink" title="根据字面量创建 String 对象"></a>根据字面量创建 String 对象</h4><h4 id="根据字符串拼接语法糖创建-String-对象"><a href="#根据字符串拼接语法糖创建-String-对象" class="headerlink" title="根据字符串拼接语法糖创建 String 对象"></a>根据字符串拼接语法糖创建 String 对象</h4>
                 
               </div>
             
@@ -352,8 +349,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>源码：java.util.Set＜E＞ 源码解析</div>
-      <div>https://wangjia5289.github.io/2025/12/01/源码：java.util.Set＜E＞源码解析/</div>
+      <div>源码：String 源码解析</div>
+      <div>https://wangjia5289.github.io/2025/12/25/源码：String源码解析/</div>
     </div>
     <div class="license-meta">
       
@@ -365,7 +362,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>December 1, 2025</div>
+          <div>December 25, 2025</div>
         </div>
       
       
@@ -397,18 +394,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.SortedSet%EF%BC%9CE%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.SortedSet＜E＞ 源码解析">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">源码：java.util.SortedSet＜E＞ 源码解析</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/12/01/%E6%BA%90%E7%A0%81%EF%BC%9Ajava.util.concurrent.CompletableFuture%EF%BC%9CT%EF%BC%9E%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" title="源码：java.util.concurrent.CompletableFuture＜T＞ 源码解析">
-                        <span class="hidden-mobile">源码：java.util.concurrent.CompletableFuture＜T＞ 源码解析</span>
+                      <a href="/2025/12/19/%E5%98%8E%E5%98%8E%E4%B9%B1%E6%9D%80/" title="嘎嘎乱杀">
+                        <span class="hidden-mobile">嘎嘎乱杀</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -27,7 +27,7 @@
 <meta property="og:description" content="一、TODO  从 2025&#x2F;12&#x2F;21T10:28 锁定彩虹   二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-26.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-25.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-24T12:14:58.484Z">
+<meta property="article:modified_time" content="2025-12-25T07:56:47.215Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
@@ -250,7 +250,7 @@
         
         
         
-          84 mins
+          87 mins
         
       </span>
     
@@ -305,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-24T20:14:58+08:00
+                    Last updated on 2025-12-25T15:56:47+08:00
                   
                   
 
@@ -330,12 +330,38 @@
 </li>
 </ol>
 <hr>
-<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="1-类的加载阶段"><a href="#1-类的加载阶段" class="headerlink" title="1. 类的加载阶段"></a>1. 类的加载阶段</h2><h3 id="1-1-类的加载阶段组成部分"><a href="#1-1-类的加载阶段组成部分" class="headerlink" title="1.1. 类的加载阶段组成部分"></a>1.1. 类的加载阶段组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-10.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="类的编译过程"><a href="#类的编译过程" class="headerlink" title="类的编译过程"></a>类的编译过程</h2><h2 id="1-类的加载过程"><a href="#1-类的加载过程" class="headerlink" title="1. 类的加载过程"></a>1. 类的加载过程</h2><h3 id="1-1-类的加载过程组成部分-🐉"><a href="#1-1-类的加载过程组成部分-🐉" class="headerlink" title="1.1. 类的加载过程组成部分 🐉"></a>1.1. 类的加载过程组成部分 🐉</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="验证阶段"><a href="#验证阶段" class="headerlink" title="验证阶段"></a>验证阶段</h4><h5 id="验证阶段概述"><a href="#验证阶段概述" class="headerlink" title="验证阶段概述"></a>验证阶段概述</h5><p>验证阶段是类的加载过程中的第二个阶段，用于：</p>
+<ol>
+<li>格式验证</li>
+<li>语义验证</li>
+<li>字节码验证</li>
+<li>符号引用验证</li>
+</ol>
+<p>从而达到确保 <code>JVM</code> 加载合法的、合理的、符合规范的字节码的目的</p>
+<hr>
+<h5 id="验证阶段相关流程"><a href="#验证阶段相关流程" class="headerlink" title="验证阶段相关流程"></a>验证阶段相关流程</h5><hr>
+<h4 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h4><p>准备阶段是类的加载过程中的第三个阶段，用于：</p>
+<ol>
+<li>分配静态变量、静态常量的内存空间</li>
+<li>赋予默认值给静态变量</li>
+<li>赋予真实值给静态常量 ❌❌❌</li>
+</ol>
+<p>从而达到为静态变量、静态常量提供一个 “安全” 的初始状态，防止出现野指针或非法内存访问的目的</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>HotSpot JVM 在 Java8 之前，静态变量、静态常量存储在方法区。HotSpot JVM 在 Java8 及以后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中）</li>
+</ol>
+</blockquote>
+<p>在 <code>Java8</code> 之前，静态变量、静态常量存储在方法区。但是在 <code>Java8</code> 及之后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中，而类对象一定是在堆区被 <code>JVM</code> 分配内存空间的（因为 <code>JIT</code> 不会对类对象进行逃逸分析，因为无需也不应该对类对象进行逃逸分析，而且也无法对类对象进行逃逸分析），所以静态变量、静态常量存储在堆区）</p>
+<hr>
+<h4 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h4><h5 id="解析阶段概述"><a href="#解析阶段概述" class="headerlink" title="解析阶段概述"></a>解析阶段概述</h5><p>解析阶段是类的加载过程中的第四个阶段</p>
 <hr>
 <h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><h3 id="2-1-运行时数据区组成部分"><a href="#2-1-运行时数据区组成部分" class="headerlink" title="2.1. 运行时数据区组成部分"></a>2.1. 运行时数据区组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="2-2-本地方法栈"><a href="#2-2-本地方法栈" class="headerlink" title="2.2. 本地方法栈"></a>2.2. 本地方法栈</h3><p>本地方法栈主要用于 <code>native</code> 方法</p>
-<blockquote>
+<h3 id="2-2-本地方法栈-🐉"><a href="#2-2-本地方法栈-🐉" class="headerlink" title="2.2. 本地方法栈 🐉"></a>2.2. 本地方法栈 🐉</h3><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>在 <code>HotSpot JVM</code> 中，虚拟机栈、本地方法栈被合并为同一个栈</li>
@@ -343,30 +369,31 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-3-程序计数器"><a href="#2-3-程序计数器" class="headerlink" title="2.3. 程序计数器"></a>2.3. 程序计数器</h3><h4 id="2-3-1-程序计数器概述"><a href="#2-3-1-程序计数器概述" class="headerlink" title="2.3.1. 程序计数器概述"></a>2.3.1. 程序计数器概述</h4><p>程序计数器（<code>PC</code> 寄存器）是用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址（需要注意的是：实际记录的是这条 <code>JVM</code> 字节码指令的偏移量）</p>
+<h3 id="2-3-程序计数器"><a href="#2-3-程序计数器" class="headerlink" title="2.3. 程序计数器"></a>2.3. 程序计数器</h3><h4 id="2-3-1-程序计数器概述-🐉"><a href="#2-3-1-程序计数器概述-🐉" class="headerlink" title="2.3.1. 程序计数器概述 🐉"></a>2.3.1. 程序计数器概述 🐉</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址（需要注意的是：实际记录的是这条 <code>JVM</code> 字节码指令的偏移量）</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>程序寄存器是线程私有的内存，每个线程都拥有独立的程序寄存器</li>
-<li><code>JVM</code> 既不会对程序计数器进行 <code>GC</code>，也不会因为程序计数器而抛出 <code>OutOfMemoryError</code> 错误、、<code>StackOverflowError</code> 错误</li>
+<li><code>JVM</code> 既不会垃圾回收程序计数器，也不会因为程序计数器而抛出 <code>OutOfMemoryError</code> 错误、、<code>StackOverflowError</code> 错误</li>
+<li>程序计数器实际记录的是 <code>JVM</code> 字节码指令的偏移量</li>
 <li>执行引擎负责读取并执行 <code>JVM</code> 字节码指令。当执行引擎读取 <code>JVM</code> 字节码指令时，会将该 <code>JVM</code> 字节码指令的偏移量转换为其内存地址，然后再读取该 <code>JVM</code> 字节码指令。在执行引擎读取到 <code>JVM</code> 字节码指令后，程序计数器就会存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址，然后执行引擎才开始执行该 <code>JVM</code> 字节码指令（需要注意的是：这是一个非常重要的细节）</li>
-<li>如果线程执行的是 <code>native</code> 方法，那么程序计数器存储的是 <code>undefined</code>（因为 <code>native</code> 方法本质上是离开了 <code>JVM</code> 的控制）</li>
+<li>如果线程执行的是 <code>native</code> 方法，那么程序计数器存储的是 <code>undefined</code>（因为 <code>native</code> 方法本质上是离开了 <code>JVM</code> 的控制范围）</li>
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-3-2-程序计数器空间大小"><a href="#2-3-2-程序计数器空间大小" class="headerlink" title="2.3.2. 程序计数器空间大小"></a>2.3.2. 程序计数器空间大小</h4><p>程序计数器的内存空间几乎可以忽略不计（因为只需要记录一个内存地址）：</p>
+<h4 id="2-3-2-程序计数器空间大小-🐉"><a href="#2-3-2-程序计数器空间大小-🐉" class="headerlink" title="2.3.2. 程序计数器空间大小 🐉"></a>2.3.2. 程序计数器空间大小 🐉</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为只需要记录一个内存地址）：</p>
 <ol>
-<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占 <code>4 byte</code></li>
-<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占 <code>8 byte</code></li>
+<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>4 byte</code> 的内存空间</li>
+<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>8 byte</code> 的内存空间</li>
 </ol>
 <hr>
-<h4 id="2-3-3-程序计数器组成部分"><a href="#2-3-3-程序计数器组成部分" class="headerlink" title="2.3.3. 程序计数器组成部分"></a>2.3.3. 程序计数器组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="2-3-3-程序计数器组成部分-🐉"><a href="#2-3-3-程序计数器组成部分-🐉" class="headerlink" title="2.3.3. 程序计数器组成部分 🐉"></a>2.3.3. 程序计数器组成部分 🐉</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
 <h3 id="2-4-虚拟机栈"><a href="#2-4-虚拟机栈" class="headerlink" title="2.4. 虚拟机栈"></a>2.4. 虚拟机栈</h3><h4 id="2-4-1-虚拟机栈概述"><a href="#2-4-1-虚拟机栈概述" class="headerlink" title="2.4.1. 虚拟机栈概述"></a>2.4.1. 虚拟机栈概述</h4><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>虚拟机栈是线程私有的内存空间，每个线程都拥有独立的虚拟机栈</li>
-<li><code>JVM</code> 既会对虚拟机栈进行 <code>GC</code>，也会因为虚拟机栈而抛出 <code>OutOfMemoryError</code> 错误、<code>StackOverflowError</code> 错误：<ol>
+<li><code>JVM</code> 既会垃圾回收虚拟机栈，也会因为虚拟机栈而抛出 <code>OutOfMemoryError</code> 错误、<code>StackOverflowError</code> 错误：<ol>
 <li><code>OutOfMemoryError</code> 错误<ol>
 <li><code>OutOfMemoryError: unable to create new native thread</code><ol>
 <li>如果虚拟机栈可以动态扩展内存空间，当 <code>JVM</code> 的内存空间已满，无法再为虚拟机栈分配内存空间时，就会抛出 <code>OutOfMemoryError</code> 错误（需要注意的是：<code>HotSpot JVM</code> 并不支持虚拟机栈动态扩展内存空间）</li>
@@ -403,7 +430,7 @@
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>当线程调用某类的构造方法时，指向被构造的实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 Java 中的一个语法糖，也是我们为什么能在构造方法中使用 this 的原因）</li>
+<li>当线程调用某类的构造方法时，指向被构造的实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是我们为什么能在构造方法中使用 <code>this</code> 的原因）</li>
 <li>当线程调用某实例的实例方法时，指向该方法所属实例的内存地址的引用（即 <code>this</code>）就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中<ol>
 <li>需要注意的是：<ol>
 <li>这是 <code>Java</code> 中的一个语法糖，也是为什么我们能在实例方法中使用 <code>this</code> 的原因</li>
