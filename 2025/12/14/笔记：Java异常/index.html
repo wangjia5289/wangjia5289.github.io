@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/14/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/14/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8.png">
 <meta property="article:published_time" content="2025-12-13T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-26T04:19:20.713Z">
+<meta property="article:modified_time" content="2025-12-26T05:16:02.358Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/14/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E5%BC%82%E5%B8%B8.eddx">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          1.9k words
         
       </span>
     
@@ -292,7 +292,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-26T12:19:20+08:00
+                    Last updated on 2025-12-26T13:16:02+08:00
                   
                   
 
@@ -324,11 +324,11 @@
 </ol>
 </li>
 </ol>
-<h3 id="2-1-错误-🐉"><a href="#2-1-错误-🐉" class="headerlink" title="2.1. 错误 🐉"></a>2.1. 错误 🐉</h3><p>错误是指：<u><code>Error</code> 普通类及其子类</u>。<u>当 <code>JVM</code> 出现严重的系统级问题时</u>，会<font color="#00b050">抛出</font><u>该异常</u>。<u><code>Java</code> 程序</u>通常无法自行<font color="#00b050">修复</font><u>该问题</u></p>
+<h3 id="2-1-错误-🐉"><a href="#2-1-错误-🐉" class="headerlink" title="2.1. 错误 🐉"></a>2.1. 错误 🐉</h3><p>错误是指：<code>Error</code> 普通类及其子类。当 <code>JVM</code> 出现严重的系统级问题时，会抛出该异常。<code>Java</code> 程序通常无法自行修复该问题</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li><u>在方法中</u>，<u>我们</u>不应该<font color="#00b050">抛出</font><u>错误</u>、<font color="#00b050">捕获并处理</font><u>错误</u></li>
+<li>在方法中，我们不应该抛出错误、捕获并处理错误</li>
 </ol>
 </blockquote>
 <hr>
@@ -337,30 +337,30 @@
 <li>非受检异常</li>
 </ol>
 <hr>
-<h4 id="2-2-2-受检异常"><a href="#2-2-2-受检异常" class="headerlink" title="2.2.2. 受检异常"></a>2.2.2. 受检异常</h4><h5 id="2-2-2-1-受检异常概述-🐉"><a href="#2-2-2-1-受检异常概述-🐉" class="headerlink" title="2.2.2.1. 受检异常概述 🐉"></a>2.2.2.1. 受检异常概述 🐉</h5><p>受检异常是指：<u><code>Exception</code> 普通类及其子类</u>（需要注意的是：<u>受检异常</u><font color="#00b050">不是</font><u> <code>RuntimeException</code> 普通类及其子类</u>）。<u>当 <code>JVM</code> 出现 <code>Java</code> 程序外部的问题（例如：文件读写问题）时</u>，会<font color="#00b050">抛出</font><u>该异常</u>。<u>在我们捕获并处理受检异常的过程中</u>，可以<font color="#00b050">使用</font>间隔重试的<u>方式</u>、其他的<u>方式</u>，最终<font color="#00b050">实现</font>抛出该异常的<u>任务</u>执行成功，从而达到 “保住 <code>Java</code> 程序、保住任务” 的目的</p>
+<h4 id="2-2-2-受检异常"><a href="#2-2-2-受检异常" class="headerlink" title="2.2.2. 受检异常"></a>2.2.2. 受检异常</h4><h5 id="2-2-2-1-受检异常概述-🐉"><a href="#2-2-2-1-受检异常概述-🐉" class="headerlink" title="2.2.2.1. 受检异常概述 🐉"></a>2.2.2.1. 受检异常概述 🐉</h5><p>受检异常是指：<code>Exception</code> 普通类及其子类（需要注意的是：受检异常不是 <code>RuntimeException</code> 普通类及其子类）。当 <code>JVM</code> 出现 <code>Java</code> 程序外部的问题（例如：文件读写问题）时，会抛出该异常。在我们捕获并处理受检异常的过程中，可以使用间隔重试的方式、其他的方式，最终实现抛出该异常的任务执行成功，从而达到 “保住 <code>Java</code> 程序、保住任务” 的目的</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>如果<u>在方法中</u><font color="#00b050">抛出</font><u>受检异常</u>，<u>编译器</u>会<font color="#00b050">强制</font><u>我们</u>，必须<font color="#00b050">处理</font>该<u>异常</u></li>
+<li>如果在方法中抛出受检异常，编译器会强制我们，必须处理该异常</li>
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-2-2-2-受检异常处理方式-🐉"><a href="#2-2-2-2-受检异常处理方式-🐉" class="headerlink" title="2.2.2.2. 受检异常处理方式  🐉"></a>2.2.2.2. 受检异常处理方式  🐉</h5><p>如果在方法中抛出受检异常，编译器会强制我，们必须处理该异常：</p>
+<h5 id="2-2-2-2-受检异常处理方式-🐉"><a href="#2-2-2-2-受检异常处理方式-🐉" class="headerlink" title="2.2.2.2. 受检异常处理方式  🐉"></a>2.2.2.2. 受检异常处理方式  🐉</h5><p>如果在方法中抛出受检异常，编译器会强制我们，必须处理该异常：</p>
 <ol>
 <li>声明抛出异常</li>
 <li>捕获并处理异常</li>
 </ol>
-<h6 id="2-2-2-2-1-声明抛出异常-🐉"><a href="#2-2-2-2-1-声明抛出异常-🐉" class="headerlink" title="2.2.2.2.1. 声明抛出异常 🐉"></a>2.2.2.2.1. 声明抛出异常 🐉</h6><p>声明抛出异常是指：<u>在方法中</u>并不会<font color="#00b050">捕获并处理</font><u>该异常</u>，而是继续向上<font color="#00b050">抛出</font><u>该异常</u>，让<font color="#00b050">调用</font>该方法的<u>方法</u>（术语是：<u>调用方</u>），去<font color="#00b050">处理</font><u>该异常</u>。<u>在调用方处理该受检异常的过程中</u>，既可以<font color="#00b050">声明抛出</font><u>异常</u>，又可以<font color="#00b050">捕获并处理</font><u>异常</u></p>
+<h6 id="2-2-2-2-1-声明抛出异常-🐉"><a href="#2-2-2-2-1-声明抛出异常-🐉" class="headerlink" title="2.2.2.2.1. 声明抛出异常 🐉"></a>2.2.2.2.1. 声明抛出异常 🐉</h6><p>声明抛出异常是指：并不会捕获并处理该异常，而是继续向上抛出该异常，让调用该方法的方法（术语是：调用方），去处理该异常。在调用方处理该受检异常的过程中，既可以声明抛出异常，又可以捕获并处理异常</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IOException</span>(<span class="hljs-string">&quot;...&quot;</span>);<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li><code>throws</code> 用于告诉调用方 “我可能会抛出这些异常，你应该处理这些异常”（需要注意的是：<code>throws</code> 可以告诉调用方 “我可能会抛出这些非受检异常”，但是没必要）</li>
+<li>简单来说：<code>throws</code>，告诉调用方 “我可能会抛出这些异常，你应该处理这些异常”（需要注意的是：<code>throws</code>，可以告诉调用方 “我可能会抛出这些非受检异常”，但是没必要）</li>
 <li><code>Java</code> 有一个规定：当我们重写方法时，我们不能抛出在原方法中，未声明抛出的受检异常<ol>
 <li>需要注意的是：<ol>
 <li>这个规定只针对受检异常，不针对非受检异常</li>
-<li>这也是 Runnable 任务不能抛出受检异常的原因</li>
+<li>这也是 <code>Runnable</code> 任务，不能抛出受检异常的原因</li>
 </ol>
 </li>
 </ol>
@@ -373,16 +373,16 @@
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li><u>在上述代码中</u>，<u>我们</u>在 <code>catch</code> 块中<font color="#00b050">编写的</font>处理异常的 <u><code>Java</code> 代码</u>，其实<font color="#00b050">是</font>一种 “吞噬异常” 的<u>行为</u>，<font color="#00b050">是</font>非常坏的<u>习惯</u>，因为<u>我们</u>可能永远无法<font color="#00b050">知道</font>这个异常的<u>存在</u></li>
+<li>在上述代码中，我们在 <code>catch</code> 块中编写的处理异常的 <code>Java</code> 代码，其实是一种 “吞噬异常” 的行为，是非常坏的习惯，因为我们可能永远无法知道这个异常的存在</li>
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-2-3-非受检异常-🐉"><a href="#2-2-3-非受检异常-🐉" class="headerlink" title="2.2.3. 非受检异常 🐉"></a>2.2.3. 非受检异常 🐉</h4><h5 id="2-2-3-1-非受检异常概述-🐉"><a href="#2-2-3-1-非受检异常概述-🐉" class="headerlink" title="2.2.3.1. 非受检异常概述 🐉"></a>2.2.3.1. 非受检异常概述 🐉</h5><p>非受检异常（运行时异常）是指：<u><code>RuntimeException</code> 普通类及其子类的类</u>。<u>当 <code>JVM</code> 出现 <code>Java</code> 程序内部的问题时</u>，会<font color="#00b050">抛出</font><u>该异常</u>。虽然<u>我们</u>可以<font color="#00b050">通过捕获并处理</font><u>非受检异常</u>，从而达到 “保住 <code>Java</code> 程序” 的目的。但是如果<u>我们</u><font color="#00b050">不修改</font> <u><code>Java</code> 代码</u>，我们的 <u><code>Java</code> 程序</u>就会一直<font color="#00b050">存在</font><u>该问题</u>。我的意思是：如果<u>我们</u><font color="#00b050">不修改</font> <u><code>Java</code> 代码</u>，虽然能<font color="#00b050">实现保住</font> <u><code>Java</code> 程序</u>，但是不能<font color="#00b050">实现保住</font><u>任务</u></p>
+<h4 id="2-2-3-非受检异常-🐉"><a href="#2-2-3-非受检异常-🐉" class="headerlink" title="2.2.3. 非受检异常 🐉"></a>2.2.3. 非受检异常 🐉</h4><h5 id="2-2-3-1-非受检异常概述-🐉"><a href="#2-2-3-1-非受检异常概述-🐉" class="headerlink" title="2.2.3.1. 非受检异常概述 🐉"></a>2.2.3.1. 非受检异常概述 🐉</h5><p>非受检异常（运行时异常）是指：<code>RuntimeException</code> 普通类及其子类的类。当 <code>JVM</code> 出现 <code>Java</code> 程序内部的问题时，会抛出该异常。虽然我们可以通过捕获并处理非受检异常，从而达到 “保住 <code>Java</code> 程序” 的目的。但是如果我们不修改 <code>Java</code> 代码，我们的 <code>Java</code> 程序就会一直存在该问题。我的意思是：如果我们不修改 <code>Java</code> 代码，虽然能实现保住 <code>Java</code> 程序，但是不能实现保住任务</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>如果<u>在方法</u>中<font color="#00b050">抛出</font><u>非受检异常</u>，<u>编译器</u>并不会<font color="#00b050">强制</font><u>我们</u>，必须<font color="#00b050">处理</font><u>该异常</u></li>
-<li>一些内置的<u>非受检异常</u>，即便<u>在方法中</u>并没有<font color="#00b050">抛出</font><u>它们</u>，但是也可能<u>在运行 <code>Java</code> 程序的过程中</u>，<code>JVM</code> <font color="#00b050">抛出</font><u>该异常</u>（需要注意的是：<u>受检异常</u>并不会<font color="#00b050">出现</font>这样的<u>情况</u>）</li>
+<li>如果在方法中抛出非受检异常，编译器并不会强制我们，必须处理该异常</li>
+<li>一些内置的非受检异常，即便在方法中并没有抛出它们，但是也可能在运行 <code>Java</code> 程序的过程中，<code>JVM</code> 抛出该异常（需要注意的是：受检异常并不会出现这样的情况）</li>
 </ol>
 </blockquote>
 <hr>
@@ -401,14 +401,14 @@
 </li>
 </ol>
 <hr>
-<h2 id="5-Java-异常链-🐉"><a href="#5-Java-异常链-🐉" class="headerlink" title="5. Java 异常链 🐉"></a>5. Java 异常链 🐉</h2><p><code>Java</code> 异常链是指：<u>在我们捕获并处理异常的过程中</u>，<font color="#00b050">抛出</font>一个新的<u>异常</u>，并且被<font color="#00b050">处理的</font><u>异常</u>（术语是：原始异常），要<font color="#00b050">作为</font>新异常的<u>构造方法参数</u>（即<font color="#00b050">作为</font>新异常的 <u><code>Throwable-&gt;cause</code></u>）</p>
-<p><u>在日常开发中</u>，<u>当我们捕获并处理一个低层的异常时</u>，可以<font color="#00b050">抛出</font>一个高层的、贴近业务的<u>异常</u>（例如：<u>在三层架构中</u>，可以<u>在 <code>DAO</code> 层中</u><font color="#00b050">抛出</font>一个低层的<u>异常</u>。<u>当 <code>Serivice</code> 层捕获并处理该异常时</u>，<font color="#00b050">抛出</font>一个高层的、贴近业务的<u>异常</u>。<u>当 <code>Controller</code> 层捕获并处理该异常时</u>，<font color="#00b050">返回</font>该异常的<u>异常信息</u>，<font color="#00b050">给</font><u>客户端</u>）</p>
+<h2 id="5-Java-异常链-🐉"><a href="#5-Java-异常链-🐉" class="headerlink" title="5. Java 异常链 🐉"></a>5. Java 异常链 🐉</h2><p><code>Java</code> 异常链是指：在我们捕获并处理异常的过程中抛出一个新的异常，并且被我们处理的异常（术语是：原始异常），要作为新异常的构造方法参数（即被我们处理的异常要作为新异常的 <code>Throwable-&gt;cause</code>）</p>
+<p>在日常开发中，当我们捕获并处理一个低层的异常时，可以抛出一个高层的、贴近业务的异常（例如：在三层架构中，可以在 <code>DAO</code> 层中抛出一个低层的异常。当 <code>Serivice</code> 层捕获并处理该异常时，抛出一个高层的、贴近业务的异常。当 <code>Controller</code> 层捕获并处理该异常时，返回该异常的异常信息，给客户端）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// DAO 层</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserDao</span> &#123;<br>    <br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">findUserById</span><span class="hljs-params">(<span class="hljs-type">long</span> id)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IOException</span>(<span class="hljs-string">&quot;...&quot;</span>);<br>    &#125;<br>    <br>&#125;<br><br><span class="hljs-comment">// Service 层</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserService</span> &#123;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">UserDao</span> <span class="hljs-variable">userDao</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserDao</span>();<br>	<br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getUserName</span><span class="hljs-params">(<span class="hljs-type">long</span> id)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">return</span> userDao.findUserById(id);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserQueryException</span>(<span class="hljs-string">&quot;...&quot;</span>, e);<br>        &#125;<br>    &#125;<br>    <br>&#125;<br><br><span class="hljs-comment">// Controller 层</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserController</span> &#123;<br>    <br>    <span class="hljs-keyword">private</span> <span class="hljs-type">UserService</span> <span class="hljs-variable">userService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserService</span>();<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getUserProfile</span><span class="hljs-params">(<span class="hljs-type">long</span> id)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">userName</span> <span class="hljs-operator">=</span> userService.getUserName(id);<br>            System.out.println(<span class="hljs-string">&quot;...&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (UserQueryException e) &#123;<br>	        <span class="hljs-comment">// ...</span><br>        &#125;<br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li><u>在我们使用 <code>Java</code> 异常链的过程中</u>，一定要<font color="#00b050">保留</font><u>原始异常</u>（即被处理的<u>异常</u>），<font color="#00b050">方便</font>后续的<u>排查工作</u>（因为<u>我们</u>需要<font color="#00b050">根据</font>原始异常的<u>堆栈信息</u>，来<font color="#00b050">追溯</font>异常链的<u>根本原因</u>）</li>
+<li>在我们使用 <code>Java</code> 异常链的过程中，一定要保留原始异常（即被处理的异常），方便后续的排查工作（因为我们需要根据原始异常的堆栈信息，来追溯异常链的根本原因）</li>
 </ol>
 </blockquote>
 <hr>
@@ -418,18 +418,18 @@
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>猴哥的烦恼箱 <code>(｡•́︿•̀｡)</code>：<ol>
-<li><u>在 <code>try-catch-finally</code> 语句中</u>，<u>当线程执行 <code>catch</code> 块中的 <code>Java</code> 代码时</u>，如果<font color="#00b050">调用</font> <u><code>return</code></u> 了，那么还会<font color="#00b050">执行</font> <code>finally</code> 块中的 <u><code>Java</code> 代码</u>吗？<ol>
-<li><u>线程</u>会<font color="#00b050">执行</font> <code>finally</code> 块中的 <u><code>Java</code> 代码</u></li>
-<li>我们可以简单理解为：<u>当线程调用 <code>return</code> 时</u>，会先<font color="#00b050">执行</font> <code>finally</code> 块中的<u> <code>Java</code> 代码</u>，再<font color="#00b050">执行</font> <u><code>return</code></u></li>
-<li><u>当线程执行 <code>finally</code> 块中的 <code>Java</code> 代码时</u>，如果<font color="#00b050">调用</font>了 <u><code>return</code></u>，也会<font color="#00b050">是</font><u>这个流程</u></li>
+<li>在 <code>try-catch-finally</code> 语句中，当线程执行 <code>catch</code> 块中的 <code>Java</code> 代码时，如果调用 <code>return</code> 了，那么还会执行 <code>finally</code> 块中的 <code>Java</code> 代码吗？<ol>
+<li>线程会执行 <code>finally</code> 块中的 <code>Java</code> 代码</li>
+<li>我们可以简单理解为：当线程调用 <code>return</code> 时，会先执行 <code>finally</code> 块中的 <code>Java</code> 代码，再执行 <code>return</code></li>
+<li>当线程执行 <code>finally</code> 块中的 <code>Java</code> 代码时，如果调用了 <code>return</code>，也会是这个流程</li>
 </ol>
 </li>
-<li><u>在 <code>try-catch-finally</code> 语句中</u>，如果 <u><code>finally</code> 块</u>也<font color="#00b050">有</font> <u><code>return</code></u>，那么<u>该语句</u>会<font color="#00b050">发生</font>什么样的<u>情况</u>？<ol>
-<li><code>finally</code> 块中的 <u><code>return</code></u>，会<font color="#00b050">覆盖</font> <code>try</code> 块中的<u> <code>return</code></u>、<code>catch</code> 块中的 <u><code>return</code></u></li>
+<li>在 <code>try-catch-finally</code> 语句中，如果 <code>finally</code> 块也有 <code>return</code>，那么该语句会发生什么样的情况？<ol>
+<li><code>finally</code> 块中的 <code>return</code>，会覆盖 <code>try</code> 块中的 <code>return</code>、<code>catch</code> 块中的 <code>return</code></li>
 </ol>
 </li>
-<li><u>当线程执行 <code>try-catch-finally</code> 语句时</u>，<u>在什么情况中</u>，并<font color="#00b050">不会执行</font> <code>finally</code> 块中的 <u><code>Java</code> 代码</u>（需要注意的是：如果<u>我们</u><font color="#00b050">不考虑</font><u>服务故障</u>）？<ol>
-<li><u>当线程执行 <code>try</code> 块中的 <code>Java</code> 代码、<code>catch</code> 块中的 <code>Java</code> 代码时</u>，<font color="#00b050">调用</font>了 <u><code>System.exit</code></u>，强制<font color="#00b050">关闭</font>了 <u><code>JVM</code></u></li>
+<li>当线程执行 <code>try-catch-finally</code> 语句时，在什么情况中并不会执行 <code>finally</code> 块中的 <code>Java</code> 代码（需要注意的是：如果我们不考虑服务故障）？<ol>
+<li>当线程执行 <code>try</code> 块中的 <code>Java</code> 代码、<code>catch</code> 块中的 <code>Java</code> 代码时，调用了 <code>System.exit</code>，强制关闭了 <code>JVM</code></li>
 </ol>
 </li>
 </ol>
