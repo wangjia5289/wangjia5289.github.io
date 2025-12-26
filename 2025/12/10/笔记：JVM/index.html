@@ -27,8 +27,6 @@
 <meta property="og:description" content="一、TODO  从 2025&#x2F;12&#x2F;21T10:28 锁定彩虹   二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-29.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-30.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png">
@@ -44,7 +42,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-26.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-25.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-26T02:14:47.785Z">
+<meta property="article:modified_time" content="2025-12-26T08:31:31.893Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
@@ -252,7 +250,7 @@
         
         
         
-          92 mins
+          93 mins
         
       </span>
     
@@ -307,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2025-12-26T10:14:47+08:00
+                    Last updated on 2025-12-26T16:31:31+08:00
                   
                   
 
@@ -332,22 +330,20 @@
 </li>
 </ol>
 <hr>
-<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="JVM-概述"><a href="#JVM-概述" class="headerlink" title="JVM 概述"></a>JVM 概述</h2><p>我们知道：<code>Java</code> 的口号是： ”一次编写，到处运行“。那么问题来了：像 <code>C</code>、<code>C++</code> 等语言，可能需要针对不同的操作系统、不同的 <code>CPU</code> 架构，编写多个版本的代码。那么为什么 <code>Java</code> 能实现一次编写，到处运行？</p>
-<p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-29.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-30.png" srcset="/img/loading.gif" lazyload></p>
-<p>为了解决这一问题，我们首先要了解一个概念：执行 Java 代码的，是 CPU。而 CPU 只看得懂该 CPU 对应的机器码。所以想要被 CPU 执行的 Java 代码，必须将 Java 代码编译成 CPU 对应的机器码。但是我们发现了，如果我们要将 Java 代码编译成 CPU 对应的机器码，那 CPU 有很多的，甚至即便是同一个 CPU，如果操作系统不同，那么调用约定也不同（C++ 也需要这样编写吗？同一个 CPU 也需要写几套代码？）。例如在 Windows 上 “调用一个方法时，前 4 个参数放在寄存器重，剩下的放栈里”，在 Linux 上 “不行，前 6 个参数都放在寄存器里”。我们也就要像 C、C++ 等语言一样，针对不同的 CPU 写多个代码，那就不符合 Java 的 “一次编写，到处运行 ” 的口号了。所以其实<br>Java 语言的设计团队，就设计了 JVM。其实 JVM 是由 C++ 代码编写的，我们安装 JVM 其实就是安装它已经在那个操作系统上的 CPU 上的机器码了。我们只需要把 Java 代码解释成 Java 字节码，当 JVM 执行 Java 字节码的时候，其实就是 JVM 根据 Java 字节码调用其对应的方法</p>
-<p>所以 Java “一次编写，到处运行” 的秘密是：Java 设计团队帮我们做了不同操作系统、不同 CPU 的 JVM，例如：</p>
+<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="1-JVM-概述-🐉"><a href="#1-JVM-概述-🐉" class="headerlink" title="1. JVM 概述 🐉"></a>1. JVM 概述 🐉</h2><p>我们知道：<code>Java</code> 的口号是： ”一次编写，到处运行“。那么问题来了：<u>在我们编写 <code>C</code> 代码、<code>C++</code>代码、…时</u>，可能需要<font color="#00b050">针对</font>不同的<u>操作系统</u>、不同的 <u><code>CPU</code> 架构</u>，<font color="#00b050">编写</font>多个版本的<u>代码</u>。那么为什么 <u><code>Java</code></u> 能<font color="#00b050">实现</font><u>一次编写，到处运行</u>？</p>
+<p>为了解决这一问题，我们要知道一个概念：<u><code>CPU</code></u> <font color="#00b050">是执行</font> <u><code>Java</code> 代码</u>的，而 <u><code>CPU</code></u> 只 <font color="#00b050">“看得懂”</font> 该 <code>CPU</code> 对应的<u>机器码指令</u>。但是如果直接把 <u><code>Java</code> 代码</u><font color="#00b050">编译</font>成 <code>CPU</code> 对应的<u>机器码指令</u>，那么 <u><code>Java</code></u> 就<font color="#00b050">相似于</font> <u><code>C</code>、<code>C++</code> 等语言</u>了。因此， <code>Java</code> 语言的<u>设计团队</u>绝对不会<font color="#00b050">采取</font><u>这种做法</u></p>
+<p>于是，<u><code>Java</code> 语言的设计团队</u>就<font color="#00b050">设计</font>了 <u><code>JVM</code></u>。<u><code>Java</code> 语言的设计团队</u><font color="#00b050">针对</font>不同的<u>操作系统</u>、不同的 <u><code>CPU</code> 架构</u>，<font color="#00b050">编写了</font>多个版本的 <font color="#00b050"><code>JVM</code></font>。<u>我们</u>需要<font color="#00b050">针对</font>不同的<u>操作系统</u>、不同的 <u><code>CPU</code> 架构</u>，<font color="#00b050">安装</font>对应的 <u><code>JVM</code></u></p>
 <ol>
-<li>Windows + x86_64 &#x3D; Windows-x64 JVM</li>
-<li>Linux + x86_64 &#x3D; Linux-x64 JVM</li>
-<li>Linux + ARM64 &#x3D; Linux-aarch64 JVM</li>
+<li><code>Windows + x86_64 ➔ Windows-x64 JVM</code></li>
+<li><code>Linux + x86_64 ➔ Linux-x64 JVM</code></li>
+<li><code>Linux + ARM64 ➔ Linux-aarch64 JVM</code></li>
 <li>…</li>
 </ol>
-<p>因为这些 JVM 它们都是根据相同的一套字节码，区调用对应的方法，所以我们只需要编写一次 Java 代码就可以到处运行了，不需要我们自己去适配，我们只需要编写 Java 代码，至于 JVM 如何根据不同操作系统、不同 CPU 的特点，如何调用方法，那是 JVM 的事情，和我们无关了</p>
+<p>除此之外，<u><code>Java</code> 语言的设计团队</u>还<font color="#00b050">设计</font>了 <u><code>Java</code> 字节码</u>。<u>在 <code>JVM</code> 的类的编译阶段的过程中</u>，<u><code>Java</code> 代码</u>不是直接被<font color="#00b050">编译</font>成 <code>CPU</code> 对应的<u>机器码指令</u>，而是被<font color="#00b050">解释</font>成<u> <code>Java</code> 字节码指令</u>。所有版本的 <code>JVM</code> 都适配这套 <code>Java</code> 字节码指令，当 <code>JVM</code> 执行 <code>Java</code> 字节码指令时，其实就是调用该 <code>Java</code> 字节码指令对应的 <code>C++</code> 方法（需要注意的是：至于 <code>JVM</code> 如何针对不同的操作系统、不同的 <code>CPU</code> 架构，编写 <code>C++</code> 方法，那是 <code>JVM</code> 的事情，和我们没有关系）</p>
 <hr>
-<h2 id="类的编译过程"><a href="#类的编译过程" class="headerlink" title="类的编译过程"></a>类的编译过程</h2><h2 id="1-类的加载过程"><a href="#1-类的加载过程" class="headerlink" title="1. 类的加载过程"></a>1. 类的加载过程</h2><h3 id="1-1-类的加载过程组成部分-🐉"><a href="#1-1-类的加载过程组成部分-🐉" class="headerlink" title="1.1. 类的加载过程组成部分 🐉"></a>1.1. 类的加载过程组成部分 🐉</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2-类的编译过程"><a href="#2-类的编译过程" class="headerlink" title="2. 类的编译过程"></a>2. 类的编译过程</h2><h2 id="3-类的加载过程"><a href="#3-类的加载过程" class="headerlink" title="3. 类的加载过程"></a>3. 类的加载过程</h2><h3 id="3-1-类的加载过程组成部分-🐉"><a href="#3-1-类的加载过程组成部分-🐉" class="headerlink" title="3.1. 类的加载过程组成部分 🐉"></a>3.1. 类的加载过程组成部分 🐉</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="验证阶段"><a href="#验证阶段" class="headerlink" title="验证阶段"></a>验证阶段</h4><h5 id="验证阶段概述"><a href="#验证阶段概述" class="headerlink" title="验证阶段概述"></a>验证阶段概述</h5><p>验证阶段是类的加载过程中的第二个阶段，用于：</p>
+<h4 id="3-1-1-验证阶段"><a href="#3-1-1-验证阶段" class="headerlink" title="3.1.1. 验证阶段"></a>3.1.1. 验证阶段</h4><h5 id="3-1-1-1-验证阶段概述"><a href="#3-1-1-1-验证阶段概述" class="headerlink" title="3.1.1.1. 验证阶段概述"></a>3.1.1.1. 验证阶段概述</h5><p>验证阶段是类的加载过程中的第二个阶段，用于：</p>
 <ol>
 <li>格式验证</li>
 <li>语义验证</li>
@@ -356,8 +352,8 @@
 </ol>
 <p>从而达到确保 <code>JVM</code> 加载合法的、合理的、符合规范的字节码的目的</p>
 <hr>
-<h5 id="验证阶段相关流程"><a href="#验证阶段相关流程" class="headerlink" title="验证阶段相关流程"></a>验证阶段相关流程</h5><hr>
-<h4 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h4><p>准备阶段是类的加载过程中的第三个阶段，用于：</p>
+<h5 id="3-1-1-2-验证阶段相关流程"><a href="#3-1-1-2-验证阶段相关流程" class="headerlink" title="3.1.1.2. 验证阶段相关流程"></a>3.1.1.2. 验证阶段相关流程</h5><hr>
+<h4 id="3-1-2-准备阶段"><a href="#3-1-2-准备阶段" class="headerlink" title="3.1.2. 准备阶段"></a>3.1.2. 准备阶段</h4><p>准备阶段是类的加载过程中的第三个阶段，用于：</p>
 <ol>
 <li>分配静态变量、静态常量的内存空间</li>
 <li>赋予默认值给静态变量</li>
@@ -372,11 +368,11 @@
 </blockquote>
 <p>在 <code>Java8</code> 之前，静态变量、静态常量存储在方法区。但是在 <code>Java8</code> 及之后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中，而类对象一定是在堆区被 <code>JVM</code> 分配内存空间的（因为 <code>JIT</code> 不会对类对象进行逃逸分析，因为无需也不应该对类对象进行逃逸分析，而且也无法对类对象进行逃逸分析），所以静态变量、静态常量存储在堆区）</p>
 <hr>
-<h4 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h4><h5 id="解析阶段概述"><a href="#解析阶段概述" class="headerlink" title="解析阶段概述"></a>解析阶段概述</h5><p>解析阶段是类的加载过程中的第四个阶段</p>
+<h4 id="3-1-3-解析阶段"><a href="#3-1-3-解析阶段" class="headerlink" title="3.1.3. 解析阶段"></a>3.1.3. 解析阶段</h4><h5 id="3-1-3-1-解析阶段概述"><a href="#3-1-3-1-解析阶段概述" class="headerlink" title="3.1.3.1. 解析阶段概述"></a>3.1.3.1. 解析阶段概述</h5><p>解析阶段是类的加载过程中的第四个阶段</p>
 <hr>
-<h2 id="2-运行时数据区"><a href="#2-运行时数据区" class="headerlink" title="2. 运行时数据区"></a>2. 运行时数据区</h2><h3 id="2-1-运行时数据区组成部分-🐉"><a href="#2-1-运行时数据区组成部分-🐉" class="headerlink" title="2.1. 运行时数据区组成部分 🐉"></a>2.1. 运行时数据区组成部分 🐉</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="4-运行时数据区"><a href="#4-运行时数据区" class="headerlink" title="4. 运行时数据区"></a>4. 运行时数据区</h2><h3 id="4-1-运行时数据区组成部分"><a href="#4-1-运行时数据区组成部分" class="headerlink" title="4.1. 运行时数据区组成部分"></a>4.1. 运行时数据区组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="2-2-本地方法栈-🐉"><a href="#2-2-本地方法栈-🐉" class="headerlink" title="2.2. 本地方法栈 🐉"></a>2.2. 本地方法栈 🐉</h3><blockquote>
+<h3 id="4-2-本地方法栈"><a href="#4-2-本地方法栈" class="headerlink" title="4.2. 本地方法栈"></a>4.2. 本地方法栈</h3><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>在 <code>HotSpot JVM</code> 中，虚拟机栈、本地方法栈被合并为同一个栈</li>
@@ -384,7 +380,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-3-程序计数器"><a href="#2-3-程序计数器" class="headerlink" title="2.3. 程序计数器"></a>2.3. 程序计数器</h3><h4 id="2-3-1-程序计数器概述-🐉"><a href="#2-3-1-程序计数器概述-🐉" class="headerlink" title="2.3.1. 程序计数器概述 🐉"></a>2.3.1. 程序计数器概述 🐉</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址</p>
+<h3 id="4-3-程序计数器"><a href="#4-3-程序计数器" class="headerlink" title="4.3. 程序计数器"></a>4.3. 程序计数器</h3><h4 id="4-3-1-程序计数器概述"><a href="#4-3-1-程序计数器概述" class="headerlink" title="4.3.1. 程序计数器概述"></a>4.3.1. 程序计数器概述</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -396,15 +392,15 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-3-2-程序计数器空间大小-🐉"><a href="#2-3-2-程序计数器空间大小-🐉" class="headerlink" title="2.3.2. 程序计数器空间大小 🐉"></a>2.3.2. 程序计数器空间大小 🐉</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为程序计数器只需要记录一个内存地址）：</p>
+<h4 id="4-3-2-程序计数器空间大小"><a href="#4-3-2-程序计数器空间大小" class="headerlink" title="4.3.2. 程序计数器空间大小"></a>4.3.2. 程序计数器空间大小</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为程序计数器只需要记录一个内存地址）：</p>
 <ol>
 <li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>4 byte</code> 的内存空间</li>
 <li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>8 byte</code> 的内存空间</li>
 </ol>
 <hr>
-<h4 id="2-3-3-程序计数器组成部分-🐉"><a href="#2-3-3-程序计数器组成部分-🐉" class="headerlink" title="2.3.3. 程序计数器组成部分 🐉"></a>2.3.3. 程序计数器组成部分 🐉</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-3-3-程序计数器组成部分"><a href="#4-3-3-程序计数器组成部分" class="headerlink" title="4.3.3. 程序计数器组成部分"></a>4.3.3. 程序计数器组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="2-4-虚拟机栈-🐉"><a href="#2-4-虚拟机栈-🐉" class="headerlink" title="2.4. 虚拟机栈 🐉"></a>2.4. 虚拟机栈 🐉</h3><h4 id="2-4-1-虚拟机栈概述-🐉"><a href="#2-4-1-虚拟机栈概述-🐉" class="headerlink" title="2.4.1. 虚拟机栈概述 🐉"></a>2.4.1. 虚拟机栈概述 🐉</h4><blockquote>
+<h3 id="4-4-虚拟机栈"><a href="#4-4-虚拟机栈" class="headerlink" title="4.4. 虚拟机栈"></a>4.4. 虚拟机栈</h3><h4 id="4-4-1-虚拟机栈概述"><a href="#4-4-1-虚拟机栈概述" class="headerlink" title="4.4.1. 虚拟机栈概述"></a>4.4.1. 虚拟机栈概述</h4><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>虚拟机栈是线程私有的内存空间，每个线程都拥有独立的虚拟机栈</li>
@@ -426,9 +422,9 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-4-2-虚拟机栈组成部分-🐉"><a href="#2-4-2-虚拟机栈组成部分-🐉" class="headerlink" title="2.4.2. 虚拟机栈组成部分 🐉"></a>2.4.2. 虚拟机栈组成部分 🐉</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-4-2-虚拟机栈组成部分"><a href="#4-4-2-虚拟机栈组成部分" class="headerlink" title="4.4.2. 虚拟机栈组成部分"></a>4.4.2. 虚拟机栈组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="2-4-3-局部变量表"><a href="#2-4-3-局部变量表" class="headerlink" title="2.4.3. 局部变量表"></a>2.4.3. 局部变量表</h4><h5 id="2-4-3-1-局部变量表概述-🐉"><a href="#2-4-3-1-局部变量表概述-🐉" class="headerlink" title="2.4.3.1. 局部变量表概述 🐉"></a>2.4.3.1. 局部变量表概述 🐉</h5><p>局部变量表用于存储方法参数、局部变量</p>
+<h4 id="4-4-3-局部变量表"><a href="#4-4-3-局部变量表" class="headerlink" title="4.4.3. 局部变量表"></a>4.4.3. 局部变量表</h4><h5 id="4-4-3-1-局部变量表概述"><a href="#4-4-3-1-局部变量表概述" class="headerlink" title="4.4.3.1. 局部变量表概述"></a>4.4.3.1. 局部变量表概述</h5><p>局部变量表用于存储方法参数、局部变量</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -437,7 +433,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-4-3-2-局部变量表底层实现-🐉"><a href="#2-4-3-2-局部变量表底层实现-🐉" class="headerlink" title="2.4.3.2. 局部变量表底层实现 🐉"></a>2.4.3.2. 局部变量表底层实现 🐉</h5><p>局部变量表的底层是：一个一维数组</p>
+<h5 id="4-4-3-2-局部变量表底层实现"><a href="#4-4-3-2-局部变量表底层实现" class="headerlink" title="4.4.3.2. 局部变量表底层实现"></a>4.4.3.2. 局部变量表底层实现</h5><p>局部变量表的底层是：一个一维数组</p>
 <p>局部变量表使用的一维数组的基本存储单元是变量槽（<code>Slot</code>）</p>
 <ol>
 <li>在 <code>32 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>4 byte</code> 的内存空间</li>
@@ -452,7 +448,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-4-3-3-局部变量表空间大小-🐉"><a href="#2-4-3-3-局部变量表空间大小-🐉" class="headerlink" title="2.4.3.3. 局部变量表空间大小 🐉"></a>2.4.3.3. 局部变量表空间大小 🐉</h5><p>在类的编译过程中，<code>JVM</code> 中的解释器就已经确定了局部变量表的内存空间，在运行 <code>Java</code> 程序的过程中无法更改局部变量表的内存空间：</p>
+<h5 id="4-4-3-3-局部变量表空间大小"><a href="#4-4-3-3-局部变量表空间大小" class="headerlink" title="4.4.3.3. 局部变量表空间大小"></a>4.4.3.3. 局部变量表空间大小</h5><p>在类的编译过程中，<code>JVM</code> 中的解释器就已经确定了局部变量表的内存空间，在运行 <code>Java</code> 程序的过程中无法更改局部变量表的内存空间：</p>
 <ol>
 <li>占用 <code>32 bit</code> 及以下的内存空间的数据（例如 <code>byte</code>、<code>short</code>、<code>int</code>、<code>float</code>、<code>char</code>、<code>boolean</code> 类型的数据、引用数据类型的数据、返回地址）占用一个 <code>Slot</code></li>
 <li>占用 <code>64 bit</code> 的内存空间的数据（例如 <code>long</code>、<code>double</code> 类型的数据）占用两个 <code>Slot</code></li>
@@ -468,7 +464,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>	    <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;  <br>            System.out.println(a);  <br>        &#125;  <br>		  <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;  <br>            System.out.println(b);  <br>        &#125;  <br>        <br>    &#125;  <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="2-4-4-方法返回地址-🐉"><a href="#2-4-4-方法返回地址-🐉" class="headerlink" title="2.4.4. 方法返回地址 🐉"></a>2.4.4. 方法返回地址 🐉</h4><p>当线程调用方法时，会先把程序计数器中的内容（当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址）存储在被调用的方法对应的方法返回地址中，然后再开始执行该方法</p>
+<h4 id="4-4-4-方法返回地址"><a href="#4-4-4-方法返回地址" class="headerlink" title="4.4.4. 方法返回地址"></a>4.4.4. 方法返回地址</h4><p>当线程调用方法时，会先把程序计数器中的内容（当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址）存储在被调用的方法对应的方法返回地址中，然后再开始执行该方法</p>
 <p>如果线程在执行方法的过程中未抛出异常，那么当线程执行到以下 <code>JVM</code> 字节码指令时，就会取出该方法对应的栈帧中的方法返回地址中的内容，并存储在程序计数器中（需要注意的是：这就是方法正常退出（未抛出异常））：<br>    1. <code>ireturn</code><br>        1. 返回 <code>byte</code> 类型的数据、<code>short</code> 类型的数据、<code>int</code> 类型的数据、<code>char</code> 类型的数据、<code>boolean</code>  类型的数据<br>    2. <code>lreturn</code><br>        1. 返回 <code>long</code> 类型的数据<br>    3. <code>freturn</code><br>        1. 返回 <code>float</code> 类型的数据<br>    4. <code>dreturn</code><br>        1. 返回 <code>double</code> 类型的数据<br>    5. <code>areturn</code><br>        1. 返回引用数据类型的数据<br>    6. <code>return</code><br>        1. 仅返回（需要注意的是：仅返回适用于无返回值的方法）</p>
 <p>但是如果线程在执行方法的过程中抛出了异常，那么线程就会去查该方法对应的异常处理器表（需要注意的是：异常处理器表被存储在方法区）：</p>
 <ol>
@@ -489,20 +485,20 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-4-5-动态链接-🐉"><a href="#2-4-5-动态链接-🐉" class="headerlink" title="2.4.5. 动态链接 🐉"></a>2.4.5. 动态链接 🐉</h4><p>动态链接用于存储栈帧对应的方法对应的类的类的元数据区中的运行时常量池的内存地址</p>
+<h4 id="4-4-5-动态链接"><a href="#4-4-5-动态链接" class="headerlink" title="4.4.5. 动态链接"></a>4.4.5. 动态链接</h4><p><u>动态链接</u>用于<font color="#00b050">存储</font>栈帧对应的方法对应的类的类的元数据区中的运行时常量池的<u>内存地址</u></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>动态链接是一个指针，动态链接存储的是一个内存地址</li>
+<li><u>动态链接</u><font color="#00b050">是</font>一个<u>指针</u>，<u>动态链接</u><font color="#00b050">存储的是</font>一个<u>内存地址</u></li>
 </ol>
 </blockquote>
 <hr>
-<h4 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h4><hr>
-<h4 id="2-4-6-一些附加信息-🐉"><a href="#2-4-6-一些附加信息-🐉" class="headerlink" title="2.4.6. 一些附加信息 🐉"></a>2.4.6. 一些附加信息 🐉</h4><p>在 <code>JVM</code> 规范中，栈帧被允许添加一些附加信息（例如添加一些调试信息，从而达到调试的目的）</p>
+<h4 id="4-4-6-操作数栈"><a href="#4-4-6-操作数栈" class="headerlink" title="4.4.6. 操作数栈"></a>4.4.6. 操作数栈</h4><hr>
+<h4 id="4-4-7-一些附加信息"><a href="#4-4-7-一些附加信息" class="headerlink" title="4.4.7. 一些附加信息"></a>4.4.7. 一些附加信息</h4><p><u>在 <code>JVM</code> 规范中</u>，<u>栈帧</u>被<font color="#00b050">允许添加</font>一些<u>附加信息</u>（例如：<u>我们</u>可以<font color="#00b050">添加</font>一些<u>调试信息</u>，从而达到调试的目的）</p>
 <hr>
-<h3 id="2-5-堆区"><a href="#2-5-堆区" class="headerlink" title="2.5. 堆区"></a>2.5. 堆区</h3><h4 id="2-5-1-堆区组成部分"><a href="#2-5-1-堆区组成部分" class="headerlink" title="2.5.1. 堆区组成部分"></a>2.5.1. 堆区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-19.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="4-5-堆区"><a href="#4-5-堆区" class="headerlink" title="4.5. 堆区"></a>4.5. 堆区</h3><h4 id="4-5-1-堆区组成部分"><a href="#4-5-1-堆区组成部分" class="headerlink" title="4.5.1. 堆区组成部分"></a>4.5.1. 堆区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-19.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="2-5-2-堆区概述"><a href="#2-5-2-堆区概述" class="headerlink" title="2.5.2. 堆区概述"></a>2.5.2. 堆区概述</h4><p>堆区是 <code>JVM</code> 管理内存空间的核心区域，也是整个 <code>JVM</code> 中内存空间最大的区域，几乎所有的实例都会在堆区被 <code>JVM</code> 分配内存空间（因为需要考虑逃逸分析）</p>
+<h4 id="4-5-2-堆区概述"><a href="#4-5-2-堆区概述" class="headerlink" title="4.5.2. 堆区概述"></a>4.5.2. 堆区概述</h4><p>堆区是 <code>JVM</code> 管理内存空间的核心区域，也是整个 <code>JVM</code> 中内存空间最大的区域，几乎所有的实例都会在堆区被 <code>JVM</code> 分配内存空间（因为需要考虑逃逸分析）</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -517,9 +513,9 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-5-3-堆区空间大小"><a href="#2-5-3-堆区空间大小" class="headerlink" title="2.5.3. 堆区空间大小"></a>2.5.3. 堆区空间大小</h4><p>堆区在运行时具有初始的内存空间（需要注意的是：堆区的初始的内存空间由 <code>-Xms512m</code> 决定），并且 <code>JVM</code> 支持动态扩展、动态缩减堆区的内存空间，但是受到堆区的最大的内存空间的限制（需要注意的是：堆区的最大的内存空间由 <code>-Xmx2048m</code> 决定）。一旦堆区的内存空间超出堆区的最大的内存空间的限制，<code>JVM</code> 就可能会抛出 <code>OutOfMemoryError</code> 错误（因为需要考虑 <code>GC</code>）</p>
+<h4 id="4-5-3-堆区空间大小"><a href="#4-5-3-堆区空间大小" class="headerlink" title="4.5.3. 堆区空间大小"></a>4.5.3. 堆区空间大小</h4><p>堆区在运行时具有初始的内存空间（需要注意的是：堆区的初始的内存空间由 <code>-Xms512m</code> 决定），并且 <code>JVM</code> 支持动态扩展、动态缩减堆区的内存空间，但是受到堆区的最大的内存空间的限制（需要注意的是：堆区的最大的内存空间由 <code>-Xmx2048m</code> 决定）。一旦堆区的内存空间超出堆区的最大的内存空间的限制，<code>JVM</code> 就可能会抛出 <code>OutOfMemoryError</code> 错误（因为需要考虑 <code>GC</code>）</p>
 <hr>
-<h4 id="2-5-4-实例被-JVM-在堆区分配内存空间-🌈"><a href="#2-5-4-实例被-JVM-在堆区分配内存空间-🌈" class="headerlink" title="2.5.4. 实例被 JVM 在堆区分配内存空间 🌈"></a>2.5.4. 实例被 JVM 在堆区分配内存空间 🌈</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-20.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="4-5-4-实例被-JVM-在堆区分配内存空间"><a href="#4-5-4-实例被-JVM-在堆区分配内存空间" class="headerlink" title="4.5.4. 实例被 JVM 在堆区分配内存空间"></a>4.5.4. 实例被 JVM 在堆区分配内存空间</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-20.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -527,11 +523,11 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-5-5-TLAB"><a href="#2-5-5-TLAB" class="headerlink" title="2.5.5. TLAB"></a>2.5.5. TLAB</h4><h5 id="2-5-5-1-TLAB-概述"><a href="#2-5-5-1-TLAB-概述" class="headerlink" title="2.5.5.1. TLAB 概述"></a>2.5.5.1. TLAB 概述</h5><p>想象这样一个问题：<code>JVM</code> 为了快速为实例在堆区分配内存空间，采用了 “指针碰撞” 技术（即使用一个指针指向 <code>Eden</code> 区已经使用的内存空间的边界，当 <code>JVM</code> 为实例分配内存空间时，只需要检查剩余的内存空间是否足够，然后按需顺序偏移指针，即可完成为实例在堆区分配内存空间）</p>
+<h4 id="4-5-5-TLAB"><a href="#4-5-5-TLAB" class="headerlink" title="4.5.5. TLAB"></a>4.5.5. TLAB</h4><h5 id="4-5-5-1-TLAB-概述"><a href="#4-5-5-1-TLAB-概述" class="headerlink" title="4.5.5.1. TLAB 概述"></a>4.5.5.1. TLAB 概述</h5><p>想象这样一个问题：<code>JVM</code> 为了快速为实例在堆区分配内存空间，采用了 “指针碰撞” 技术（即使用一个指针指向 <code>Eden</code> 区已经使用的内存空间的边界，当 <code>JVM</code> 为实例分配内存空间时，只需要检查剩余的内存空间是否足够，然后按需顺序偏移指针，即可完成为实例在堆区分配内存空间）</p>
 <p>但是我们知道 “堆区是线程共享的内存空间”，在多线程并发场景下，就会出现多线程并发对堆区进行修改的情况。传统的解决方案是加锁，但这会成为一个显著的性能瓶颈</p>
 <p>为了解决这一问题，<code>JVM</code> 提供了 <code>TLAB</code>。<code>TLAB</code> 将实例在线程共享的堆区被 <code>JVM</code> 分配内存空间，变成了实例在线程私有的 <code>TLAB</code> 被 <code>JVM</code> 分配内存空间</p>
 <hr>
-<h5 id="2-5-5-2-TLAB-相关流程"><a href="#2-5-5-2-TLAB-相关流程" class="headerlink" title="2.5.5.2. TLAB 相关流程"></a>2.5.5.2. TLAB 相关流程</h5><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="4-5-5-2-TLAB-相关流程"><a href="#4-5-5-2-TLAB-相关流程" class="headerlink" title="4.5.5.2. TLAB 相关流程"></a>4.5.5.2. TLAB 相关流程</h5><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -540,7 +536,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-5-6-逃逸分析"><a href="#2-5-6-逃逸分析" class="headerlink" title="2.5.6. 逃逸分析"></a>2.5.6. 逃逸分析</h4><h5 id="2-5-6-1-逃逸分析概述"><a href="#2-5-6-1-逃逸分析概述" class="headerlink" title="2.5.6.1. 逃逸分析概述"></a>2.5.6.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的方法之外的方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
+<h4 id="4-5-6-逃逸分析"><a href="#4-5-6-逃逸分析" class="headerlink" title="4.5.6. 逃逸分析"></a>4.5.6. 逃逸分析</h4><h5 id="4-5-6-1-逃逸分析概述"><a href="#4-5-6-1-逃逸分析概述" class="headerlink" title="4.5.6.1. 逃逸分析概述"></a>4.5.6.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的方法之外的方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -548,20 +544,20 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="2-5-6-2-逃逸分析相关分类"><a href="#2-5-6-2-逃逸分析相关分类" class="headerlink" title="2.5.6.2. 逃逸分析相关分类"></a>2.5.6.2. 逃逸分析相关分类</h5><ol>
+<h5 id="4-5-6-2-逃逸分析相关分类"><a href="#4-5-6-2-逃逸分析相关分类" class="headerlink" title="4.5.6.2. 逃逸分析相关分类"></a>4.5.6.2. 逃逸分析相关分类</h5><ol>
 <li>方法逃逸</li>
 <li>线程逃逸</li>
 </ol>
-<h5 id="2-5-6-3-方法逃逸"><a href="#2-5-6-3-方法逃逸" class="headerlink" title="2.5.6.3. 方法逃逸"></a>2.5.6.3. 方法逃逸</h5><p>方法逃逸是指：在某方法中调用某对象的构造方法，创建某实例，但是该实例作为该方法的返回结果返回给了其他方法，导致其他方法可能访问该实例</p>
+<h5 id="4-5-6-3-方法逃逸"><a href="#4-5-6-3-方法逃逸" class="headerlink" title="4.5.6.3. 方法逃逸"></a>4.5.6.3. 方法逃逸</h5><p>方法逃逸是指：在某方法中调用某对象的构造方法，创建某实例，但是该实例作为该方法的返回结果返回给了其他方法，导致其他方法可能访问该实例</p>
 <hr>
-<h5 id="2-5-6-4-线程逃逸"><a href="#2-5-6-4-线程逃逸" class="headerlink" title="2.5.6.4. 线程逃逸"></a>2.5.6.4. 线程逃逸</h5><p>线程逃逸是指：某实例被赋值给静态变量、静态常量，导致其他线程可能访问该实例</p>
+<h5 id="4-5-6-4-线程逃逸"><a href="#4-5-6-4-线程逃逸" class="headerlink" title="4.5.6.4. 线程逃逸"></a>4.5.6.4. 线程逃逸</h5><p>线程逃逸是指：某实例被赋值给静态变量、静态常量，导致其他线程可能访问该实例</p>
 <hr>
-<h5 id="2-5-6-5-实例没有逃逸时，JIT-对其进行的优化"><a href="#2-5-6-5-实例没有逃逸时，JIT-对其进行的优化" class="headerlink" title="2.5.6.5. 实例没有逃逸时，JIT 对其进行的优化"></a>2.5.6.5. 实例没有逃逸时，JIT 对其进行的优化</h5><ol>
+<h5 id="4-5-6-5-实例没有逃逸时，JIT-对其进行的优化"><a href="#4-5-6-5-实例没有逃逸时，JIT-对其进行的优化" class="headerlink" title="4.5.6.5. 实例没有逃逸时，JIT 对其进行的优化"></a>4.5.6.5. 实例没有逃逸时，JIT 对其进行的优化</h5><ol>
 <li>栈上分配</li>
 <li>标量替换</li>
 <li>锁消除</li>
 </ol>
-<h6 id="2-5-6-5-1-栈上分配"><a href="#2-5-6-5-1-栈上分配" class="headerlink" title="2.5.6.5.1. 栈上分配"></a>2.5.6.5.1. 栈上分配</h6><p>我们知道 “几乎所有的实例都会在堆区分配内存空间”，但是堆区中的实例是需要被 <code>GC</code> 的</p>
+<h6 id="4-5-6-5-1-栈上分配"><a href="#4-5-6-5-1-栈上分配" class="headerlink" title="4.5.6.5.1. 栈上分配"></a>4.5.6.5.1. 栈上分配</h6><p>我们知道 “几乎所有的实例都会在堆区分配内存空间”，但是堆区中的实例是需要被 <code>GC</code> 的</p>
 <p>而栈上分配是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将实例在堆区分配内存空间，变成实例在栈帧分配内存空间。这样实例就可以随栈帧被弹出而被自动销毁，完全不需要被 <code>GC</code></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -570,12 +566,12 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="2-5-6-5-2-标量替换"><a href="#2-5-6-5-2-标量替换" class="headerlink" title="2.5.6.5.2. 标量替换"></a>2.5.6.5.2. 标量替换</h6><hr>
-<h6 id="2-5-6-5-3-锁销除"><a href="#2-5-6-5-3-锁销除" class="headerlink" title="2.5.6.5.3. 锁销除"></a>2.5.6.5.3. 锁销除</h6><p>锁销除是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将该实例上加的 <code>synchronized</code> 锁去掉（因为根本不存在多线程并发场景下的安全问题）</p>
+<h6 id="4-5-6-5-2-标量替换"><a href="#4-5-6-5-2-标量替换" class="headerlink" title="4.5.6.5.2. 标量替换"></a>4.5.6.5.2. 标量替换</h6><hr>
+<h6 id="4-5-6-5-3-锁销除"><a href="#4-5-6-5-3-锁销除" class="headerlink" title="4.5.6.5.3. 锁销除"></a>4.5.6.5.3. 锁销除</h6><p>锁销除是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将该实例上加的 <code>synchronized</code> 锁去掉（因为根本不存在多线程并发场景下的安全问题）</p>
 <hr>
-<h3 id="2-6-方法区"><a href="#2-6-方法区" class="headerlink" title="2.6. 方法区"></a>2.6. 方法区</h3><h4 id="2-6-1-方法区组成部分"><a href="#2-6-1-方法区组成部分" class="headerlink" title="2.6.1. 方法区组成部分"></a>2.6.1. 方法区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="4-6-方法区"><a href="#4-6-方法区" class="headerlink" title="4.6. 方法区"></a>4.6. 方法区</h3><h4 id="4-6-1-方法区组成部分"><a href="#4-6-1-方法区组成部分" class="headerlink" title="4.6.1. 方法区组成部分"></a>4.6.1. 方法区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h4 id="2-6-2-方法区概述"><a href="#2-6-2-方法区概述" class="headerlink" title="2.6.2. 方法区概述"></a>2.6.2. 方法区概述</h4><blockquote>
+<h4 id="4-6-2-方法区概述"><a href="#4-6-2-方法区概述" class="headerlink" title="4.6.2. 方法区概述"></a>4.6.2. 方法区概述</h4><blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
 <li>方法区是线程共享的内存空间，在单个 <code>JVM</code> 中全局唯一</li>
@@ -600,7 +596,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-6-3-类型信息"><a href="#2-6-3-类型信息" class="headerlink" title="2.6.3. 类型信息"></a>2.6.3. 类型信息</h4><p>类型信息主要包括：</p>
+<h4 id="4-6-3-类型信息"><a href="#4-6-3-类型信息" class="headerlink" title="4.6.3. 类型信息"></a>4.6.3. 类型信息</h4><p>类型信息主要包括：</p>
 <ol>
 <li>类的全限定名</li>
 <li>类继承的类（即父类）的全限定名</li>
@@ -693,54 +689,36 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="3-垃圾回收器"><a href="#3-垃圾回收器" class="headerlink" title="3. 垃圾回收器"></a>3. 垃圾回收器</h2><h3 id="3-1-垃圾回收器前置基础"><a href="#3-1-垃圾回收器前置基础" class="headerlink" title="3.1. 垃圾回收器前置基础"></a>3.1. 垃圾回收器前置基础</h3><h4 id="3-1-1-垃圾回收相关策略-🌈"><a href="#3-1-1-垃圾回收相关策略-🌈" class="headerlink" title="3.1.1. 垃圾回收相关策略 🌈"></a>3.1.1. 垃圾回收相关策略 🌈</h4><ol>
+<h2 id="5-垃圾回收器"><a href="#5-垃圾回收器" class="headerlink" title="5. 垃圾回收器"></a>5. 垃圾回收器</h2><h3 id="5-1-垃圾回收器前置基础"><a href="#5-1-垃圾回收器前置基础" class="headerlink" title="5.1. 垃圾回收器前置基础"></a>5.1. 垃圾回收器前置基础</h3><h4 id="5-1-1-垃圾回收相关策略-🐉"><a href="#5-1-1-垃圾回收相关策略-🐉" class="headerlink" title="5.1.1. 垃圾回收相关策略 🐉"></a>5.1.1. 垃圾回收相关策略 🐉</h4><ol>
 <li>串行垃圾回收策略<ol>
-<li>在同一时间段内，垃圾回收器仅允许一个线程执行垃圾回收。在线程执行垃圾回收的过程中，垃圾回收器会 “暂停” 所有执行 <code>Java</code> 代码的线程，直到该线程执行完垃圾回收（术语是：<code>STW</code>）</li>
+<li><u>在同一时间段中</u>，<u>垃圾回收器</u>仅<font color="#00b050">允许</font>一个<u>线程</u>，<font color="#00b050">执行</font><u>垃圾回收</u>。<u>在线程执行垃圾回收的过程中</u>，<u>垃圾回收器</u>会 <font color="#00b050">“暂停” 所有执行</font> <code>Java</code> 代码的<u>线程</u>，直到<u>该线程</u><font color="#00b050">执行</font><u>垃圾回收</u>完毕（术语是：<code>STW</code>）</li>
 </ol>
 </li>
 <li>并行垃圾回收策略<ol>
-<li>在同一时间段内，垃圾回收器使用多个线程同时执行垃圾回收。在线程执行垃圾回收的过程中，垃圾回收器会执行 <code>STW</code></li>
+<li><u>在同一时间段内</u>，<u>垃圾回收器</u><font color="#00b050">使用</font><u>多个线程</u>，同时<font color="#00b050">执行</font><u>垃圾回收</u>。<u>在线程执行垃圾回收的过程中</u>，<u>垃圾回收器</u>会<font color="#00b050">执行</font> <u><code>STW</code></u></li>
 </ol>
 </li>
 <li>并发垃圾回收策略<ol>
-<li>在线程执行垃圾回收的过程中，垃圾回收器允许同时运行其他的执行 <code>Java</code> 代码的线程、执行垃圾回收的线程</li>
-<li>需要注意的是：<ol>
-<li>如果 <code>CPU</code> 的核数不足，执行垃圾回收的线程、其他的执行 <code>Java</code> 代码的线程可能会以交替的方式运行，这种情况才符合传统意义上的并发</li>
-<li>即便并发垃圾回收器采用了并发垃圾回收策略，也并不代表 <code>Java</code> 程序不会垃圾回收器执行 <code>STW</code> 的情况，只不过这个情况没有被体现在并发垃圾回收策略中</li>
+<li><u>在线程执行垃圾回收的过程中</u>，<u>垃圾回收器</u><font color="#00b050">不会执行</font> <u><code>STW</code></u></li>
+<li><u>当 <code>CPU</code> 的核数不足时</u>，<u>垃圾回收器</u><font color="#00b050">执行</font>垃圾回收的<u>线程</u>、其他的<u>在 <code>JVM</code> 中</u><font color="#00b050">执行</font> <code>Java</code> 代码的<u>线程</u>，可能会<font color="#00b050">出现</font>交替运行的<u>情况</u>（需要注意的是：<u>交替运行的情况</u>才<font color="#00b050">符合</font>传统意义上的<u>并发</u>）</li>
+<li>即便<u>并发垃圾回收器</u><font color="#00b050">采用</font>了<u>并发垃圾回收策略</u>，也并不<font color="#00b050">代表</font><u>在运行 <code>Java</code> 程序的过程中</u>，<u>垃圾回收器</u><font color="#00b050">不会执行</font> <u><code>STW</code></u>。但是<u>这个情况</u>没有被<font color="#00b050">体现</font>在<u>并发垃圾回收策略</u>中<br><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-18.png" srcset="/img/loading.gif" lazyload></li>
 </ol>
 </li>
 </ol>
-</li>
-</ol>
-<p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-18.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>迄今为止，并不存在任何一种垃圾回收器能够实现 <code>Java</code> 程序不会出现垃圾回收器执行 <code>STW</code> 的情况</li>
+<li>迄今为止，<u>市面上</u>并<font color="#00b050">不存在</font>任何一种<u>垃圾回收器</u>，能够<font color="#00b050">实现</font><u>在运行 <code>Java</code> 程序的过程中</u>，<u>垃圾回收器</u><font color="#00b050">不会执行</font> <u><code>STW</code></u></li>
 </ol>
 </blockquote>
 <hr>
-<h4 id="垃圾标记相关算法"><a href="#垃圾标记相关算法" class="headerlink" title="垃圾标记相关算法"></a>垃圾标记相关算法</h4><h5 id="垃圾标记算法概述"><a href="#垃圾标记算法概述" class="headerlink" title="垃圾标记算法概述"></a>垃圾标记算法概述</h5><p>我们知道 “几乎所有的实例都会被 <code>JVM</code> 分配堆区的内存空间”，而 <code>JVM</code> 中的垃圾回收器在清理堆区之前，必须区分该堆区中哪些实例是 “存活的”，哪些实例是 “死亡” 的</p>
+<h4 id="5-1-4-垃圾回收相关事件"><a href="#5-1-4-垃圾回收相关事件" class="headerlink" title="5.1.4. 垃圾回收相关事件"></a>5.1.4. 垃圾回收相关事件</h4><h5 id="5-1-4-1-新生代回收"><a href="#5-1-4-1-新生代回收" class="headerlink" title="5.1.4.1. 新生代回收"></a>5.1.4.1. 新生代回收</h5><h6 id="5-1-4-1-1-新生代回收概述-🐉"><a href="#5-1-4-1-1-新生代回收概述-🐉" class="headerlink" title="5.1.4.1.1. 新生代回收概述 🐉"></a>5.1.4.1.1. 新生代回收概述 🐉</h6><p>新生代回收（<code>Minor GC</code>、<code>Young GC</code>）是指：<u>垃圾回收器</u><font color="#00b050">垃圾回收</font>堆区中的新生代的<u>内存空间</u></p>
 <hr>
-<h5 id="垃圾标记算法相关分类"><a href="#垃圾标记算法相关分类" class="headerlink" title="垃圾标记算法相关分类"></a>垃圾标记算法相关分类</h5><ol>
-<li>引用计数算法</li>
-<li>可达性分析算法</li>
+<h6 id="5-1-4-1-2-新生代回收触发条件-🐉"><a href="#5-1-4-1-2-新生代回收触发条件-🐉" class="headerlink" title="5.1.4.1.2. 新生代回收触发条件 🐉"></a>5.1.4.1.2. 新生代回收触发条件 🐉</h6><ol>
+<li>当堆区中的 <code>Eden</code> 区的剩余的内存空间不足，导致在堆区中，<code>JVM</code> 不能直接分配新的实例的内存空间时，就会触发垃圾回收器执行 <code>Minor GC</code></li>
 </ol>
 <hr>
-<h4 id="垃圾清除相关算法"><a href="#垃圾清除相关算法" class="headerlink" title="垃圾清除相关算法"></a>垃圾清除相关算法</h4><ol>
-<li>标记-清除算法</li>
-<li>标记-复制算法</li>
-<li>标记-整理算法</li>
-</ol>
-<h5 id="3-1-4-1-标记-清除算法"><a href="#3-1-4-1-标记-清除算法" class="headerlink" title="3.1.4.1. 标记-清除算法"></a>3.1.4.1. 标记-清除算法</h5><h6 id="3-1-4-1-1-标记-清除算法概述"><a href="#3-1-4-1-1-标记-清除算法概述" class="headerlink" title="3.1.4.1.1. 标记-清除算法概述"></a>3.1.4.1.1. 标记-清除算法概述</h6><p>标记-清除算法是垃圾清除算法中最基本、最古老的一种，也是许多垃圾清除算法的基础</p>
-<hr>
-<h6 id="标记-清除算法相关流程"><a href="#标记-清除算法相关流程" class="headerlink" title="标记-清除算法相关流程"></a>标记-清除算法相关流程</h6><h4 id="3-1-2-垃圾回收相关事件-🌈"><a href="#3-1-2-垃圾回收相关事件-🌈" class="headerlink" title="3.1.2. 垃圾回收相关事件 🌈"></a>3.1.2. 垃圾回收相关事件 🌈</h4><h5 id="3-1-2-1-新生代回收-🌈"><a href="#3-1-2-1-新生代回收-🌈" class="headerlink" title="3.1.2.1. 新生代回收 🌈"></a>3.1.2.1. 新生代回收 🌈</h5><h6 id="3-1-2-1-1-新生代回收概述-🌈"><a href="#3-1-2-1-1-新生代回收概述-🌈" class="headerlink" title="3.1.2.1.1. 新生代回收概述 🌈"></a>3.1.2.1.1. 新生代回收概述 🌈</h6><p>新生代回收（<code>Minor GC</code>、<code>Young GC</code>）是指：垃圾回收器垃圾回收堆区中的新生代的内存空间</p>
-<hr>
-<h6 id="3-1-2-1-2-新生代回收触发条件-🌈"><a href="#3-1-2-1-2-新生代回收触发条件-🌈" class="headerlink" title="3.1.2.1.2. 新生代回收触发条件 🌈"></a>3.1.2.1.2. 新生代回收触发条件 🌈</h6><ol>
-<li>当堆区中的 <code>Eden</code> 区的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发垃圾回收器执行 <code>Minor GC</code></li>
-</ol>
-<hr>
-<h5 id="3-1-2-2-老年代回收-🌈"><a href="#3-1-2-2-老年代回收-🌈" class="headerlink" title="3.1.2.2. 老年代回收  🌈"></a>3.1.2.2. 老年代回收  🌈</h5><p>老年代回收（<code>Major GC</code>）是指：垃圾回收器垃圾回收堆区中的老年代的内存空间</p>
+<h5 id="5-1-4-2-老年代回收"><a href="#5-1-4-2-老年代回收" class="headerlink" title="5.1.4.2. 老年代回收"></a>5.1.4.2. 老年代回收</h5><p>老年代回收（<code>Major GC</code>）是指：垃圾回收器垃圾回收堆区中的老年代的内存空间</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -752,7 +730,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-1-2-3-整堆回收-🌈"><a href="#3-1-2-3-整堆回收-🌈" class="headerlink" title="3.1.2.3. 整堆回收 🌈"></a>3.1.2.3. 整堆回收 🌈</h5><p>整堆回收（<code>Full GC</code>）是指：垃圾回收器垃圾回收堆区的内存空间、方法区的内存空间</p>
+<h5 id="5-1-4-3-整堆回收"><a href="#5-1-4-3-整堆回收" class="headerlink" title="5.1.4.3. 整堆回收"></a>5.1.4.3. 整堆回收</h5><p>整堆回收（<code>Full GC</code>）是指：垃圾回收器垃圾回收堆区的内存空间、方法区的内存空间</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -760,9 +738,24 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-1-2-4-混合回收-🌈"><a href="#3-1-2-4-混合回收-🌈" class="headerlink" title="3.1.2.4. 混合回收 🌈"></a>3.1.2.4. 混合回收 🌈</h5><p>混合回收是 <code>G1 GC</code> 独有的概念，同时也是该垃圾回收器的精髓。混合回收（<code>Mixed GC</code>）是指：垃圾回收器垃圾回收堆区中的新生代的 <code>Region</code> 的内存空间、部分堆区中的老年代的 <code>Region</code> 的内存空间</p>
+<h5 id="5-1-4-4-混合回收"><a href="#5-1-4-4-混合回收" class="headerlink" title="5.1.4.4. 混合回收"></a>5.1.4.4. 混合回收</h5><p>混合回收是 <code>G1 GC</code> 独有的概念，同时也是该垃圾回收器的精髓。混合回收（<code>Mixed GC</code>）是指：垃圾回收器垃圾回收堆区中的新生代的 <code>Region</code> 的内存空间、部分堆区中的老年代的 <code>Region</code> 的内存空间</p>
 <hr>
-<h3 id="3-2-垃圾回收器相关分类-🌈"><a href="#3-2-垃圾回收器相关分类-🌈" class="headerlink" title="3.2. 垃圾回收器相关分类 🌈"></a>3.2. 垃圾回收器相关分类 🌈</h3><ol>
+<h4 id="5-1-2-垃圾标记相关算法"><a href="#5-1-2-垃圾标记相关算法" class="headerlink" title="5.1.2. 垃圾标记相关算法"></a>5.1.2. 垃圾标记相关算法</h4><h5 id="5-1-2-1-垃圾标记算法概述"><a href="#5-1-2-1-垃圾标记算法概述" class="headerlink" title="5.1.2.1. 垃圾标记算法概述"></a>5.1.2.1. 垃圾标记算法概述</h5><p>我们知道 “几乎所有的实例都会被 <code>JVM</code> 分配堆区的内存空间”，而 <code>JVM</code> 中的垃圾回收器在</p>
+<p>堆区之前，必须区分该堆区中哪些实例是 “存活的”，哪些实例是 “死亡” 的</p>
+<hr>
+<h5 id="5-1-2-2-垃圾标记算法相关分类"><a href="#5-1-2-2-垃圾标记算法相关分类" class="headerlink" title="5.1.2.2. 垃圾标记算法相关分类"></a>5.1.2.2. 垃圾标记算法相关分类</h5><ol>
+<li>引用计数算法</li>
+<li>可达性分析算法</li>
+</ol>
+<hr>
+<h4 id="5-1-3-垃圾清除相关算法"><a href="#5-1-3-垃圾清除相关算法" class="headerlink" title="5.1.3. 垃圾清除相关算法"></a>5.1.3. 垃圾清除相关算法</h4><ol>
+<li>标记-清除算法</li>
+<li>标记-复制算法</li>
+<li>标记-整理算法</li>
+</ol>
+<h5 id="5-1-3-1-标记-清除算法"><a href="#5-1-3-1-标记-清除算法" class="headerlink" title="5.1.3.1. 标记-清除算法"></a>5.1.3.1. 标记-清除算法</h5><h6 id="5-1-3-1-1-标记-清除算法概述"><a href="#5-1-3-1-1-标记-清除算法概述" class="headerlink" title="5.1.3.1.1. 标记-清除算法概述"></a>5.1.3.1.1. 标记-清除算法概述</h6><p>标记-清除算法是垃圾清除算法中最基本、最古老的一种，也是许多垃圾清除算法的基础</p>
+<hr>
+<h6 id="5-1-3-1-2-标记-清除算法相关流程"><a href="#5-1-3-1-2-标记-清除算法相关流程" class="headerlink" title="5.1.3.1.2. 标记-清除算法相关流程"></a>5.1.3.1.2. 标记-清除算法相关流程</h6><h3 id="5-2-垃圾回收器相关分类"><a href="#5-2-垃圾回收器相关分类" class="headerlink" title="5.2. 垃圾回收器相关分类"></a>5.2. 垃圾回收器相关分类</h3><ol>
 <li>以垃圾回收器垃圾回收的内存区域分类：<ol>
 <li>整堆垃圾回收器<ol>
 <li><code>ZGC</code></li>
@@ -806,7 +799,7 @@
 </ol>
 <p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-21.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="3-3-垃圾回收器常用组合-🌈"><a href="#3-3-垃圾回收器常用组合-🌈" class="headerlink" title="3.3. 垃圾回收器常用组合 🌈"></a>3.3. 垃圾回收器常用组合 🌈</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-23.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="5-3-垃圾回收器常用组合"><a href="#5-3-垃圾回收器常用组合" class="headerlink" title="5.3. 垃圾回收器常用组合"></a>5.3. 垃圾回收器常用组合</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-23.png" srcset="/img/loading.gif" lazyload></p>
 <table>
 <thead>
 <tr>
@@ -860,20 +853,20 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-3-1-Serial-GC-Serial-Old-GC-🌈"><a href="#3-3-1-Serial-GC-Serial-Old-GC-🌈" class="headerlink" title="3.3.1. Serial GC + Serial Old GC 🌈"></a>3.3.1. Serial GC + Serial Old GC 🌈</h4><h5 id="3-3-1-1-Serial-GC-Serial-Old-GC-概述-🌈"><a href="#3-3-1-1-Serial-GC-Serial-Old-GC-概述-🌈" class="headerlink" title="3.3.1.1. Serial GC + Serial Old GC 概述 🌈"></a>3.3.1.1. Serial GC + Serial Old GC 概述 🌈</h5><p><code>Serial GC + Serial Old GC</code> 支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
+<h4 id="5-3-1-Serial-GC-Serial-Old-GC"><a href="#5-3-1-Serial-GC-Serial-Old-GC" class="headerlink" title="5.3.1. Serial GC + Serial Old GC"></a>5.3.1. Serial GC + Serial Old GC</h4><h5 id="5-3-1-1-Serial-GC-Serial-Old-GC-概述"><a href="#5-3-1-1-Serial-GC-Serial-Old-GC-概述" class="headerlink" title="5.3.1.1. Serial GC + Serial Old GC 概述"></a>5.3.1.1. Serial GC + Serial Old GC 概述</h5><p><code>Serial GC + Serial Old GC</code> 支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>Serial GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>Serial Old GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 </ol>
 <hr>
-<h5 id="3-3-1-2-Serial-GC-Serial-Old-GC-相关流程-🌈"><a href="#3-3-1-2-Serial-GC-Serial-Old-GC-相关流程-🌈" class="headerlink" title="3.3.1.2. Serial GC + Serial Old GC 相关流程 🌈"></a>3.3.1.2. Serial GC + Serial Old GC 相关流程 🌈</h5><h6 id="3-3-1-2-1-Minor-GC-流程-🌈"><a href="#3-3-1-2-1-Minor-GC-流程-🌈" class="headerlink" title="3.3.1.2.1. Minor GC 流程  🌈"></a>3.3.1.2.1. Minor GC 流程  🌈</h6><p>当堆区中的 <code>Eden</code> 区的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>Serial GC</code> 执行 <code>Minor GC</code>:</p>
+<h5 id="5-3-1-2-Serial-GC-Serial-Old-GC-相关流程"><a href="#5-3-1-2-Serial-GC-Serial-Old-GC-相关流程" class="headerlink" title="5.3.1.2. Serial GC + Serial Old GC 相关流程"></a>5.3.1.2. Serial GC + Serial Old GC 相关流程</h5><h6 id="5-3-1-2-1-Minor-GC-流程"><a href="#5-3-1-2-1-Minor-GC-流程" class="headerlink" title="5.3.1.2.1. Minor GC 流程"></a>5.3.1.2.1. Minor GC 流程</h6><p>当堆区中的 <code>Eden</code> 区的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>Serial GC</code> 执行 <code>Minor GC</code>:</p>
 <ol>
 <li><code>Serial GC</code> 首先会执行 <code>STW</code></li>
 <li>然后 <code>Serial GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li>在 <code>Serial GC</code> 执行完 <code>Minor GC</code> 后，<code>Serial GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h6 id="3-3-1-2-2-Full-GC-流程-🌈"><a href="#3-3-1-2-2-Full-GC-流程-🌈" class="headerlink" title="3.3.1.2.2. Full GC 流程 🌈"></a>3.3.1.2.2. Full GC 流程 🌈</h6><p>触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件：</p>
+<h6 id="5-3-1-2-2-Full-GC-流程"><a href="#5-3-1-2-2-Full-GC-流程" class="headerlink" title="5.3.1.2.2. Full GC 流程"></a>5.3.1.2.2. Full GC 流程</h6><p>触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件：</p>
 <ol>
 <li>当堆区中的老年代的剩余的内存空间不足，垃圾回收器在执行 <code>Minor GC</code> 的过程中，堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代失败时，就会触发 <code>Serial Old GC</code> 执行 <code>Full GC</code></li>
 <li>当堆区中的老年代的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的老年代的内存空间时，就会触发 <code>Serial Old GC</code> 执行 <code>Full GC</code></li>
@@ -891,7 +884,7 @@
 <li>在 <code>Serial Old GC</code> 执行完 <code>Full GC</code> 后，<code>Serial Old GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h4 id="3-3-2-Parallel-Scavenge-GC-Parallel-Old-GC-🌈"><a href="#3-3-2-Parallel-Scavenge-GC-Parallel-Old-GC-🌈" class="headerlink" title="3.3.2. Parallel Scavenge GC + Parallel Old GC 🌈"></a>3.3.2. Parallel Scavenge GC + Parallel Old GC 🌈</h4><h5 id="3-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述-🌈"><a href="#3-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述-🌈" class="headerlink" title="3.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述 🌈"></a>3.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述 🌈</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java8</code> 的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
+<h4 id="5-3-2-Parallel-Scavenge-GC-Parallel-Old-GC"><a href="#5-3-2-Parallel-Scavenge-GC-Parallel-Old-GC" class="headerlink" title="5.3.2. Parallel Scavenge GC + Parallel Old GC"></a>5.3.2. Parallel Scavenge GC + Parallel Old GC</h4><h5 id="5-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述"><a href="#5-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述" class="headerlink" title="5.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述"></a>5.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java8</code> 的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>Parallel Scavenge GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>Parallel Old GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
@@ -918,9 +911,9 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程-🌈"><a href="#3-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程-🌈" class="headerlink" title="3.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程 🌈"></a>3.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程 🌈</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 的流程相似于 <code>Serial GC + Serial Old GC</code> 的流程，只不过 <code>Parallel Scavenge GC + Parallel Old GC</code> 是使用多线程执行垃圾回收，并且具备自适应的调节的能力</p>
+<h5 id="5-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程"><a href="#5-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程" class="headerlink" title="5.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程"></a>5.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 的流程相似于 <code>Serial GC + Serial Old GC</code> 的流程，只不过 <code>Parallel Scavenge GC + Parallel Old GC</code> 是使用多线程执行垃圾回收，并且具备自适应的调节的能力</p>
 <hr>
-<h4 id="3-3-3-ParNew-GC-CMS-GC-🌈"><a href="#3-3-3-ParNew-GC-CMS-GC-🌈" class="headerlink" title="3.3.3. ParNew GC + CMS GC 🌈"></a>3.3.3. ParNew GC + CMS GC 🌈</h4><h5 id="3-3-3-1-ParNew-GC-CMS-GC-概述-🌈"><a href="#3-3-3-1-ParNew-GC-CMS-GC-概述-🌈" class="headerlink" title="3.3.3.1. ParNew GC + CMS GC 概述 🌈"></a>3.3.3.1. ParNew GC + CMS GC 概述 🌈</h5><p><code>ParNew GC + CMS GC</code> 支持 <code>Minor GC</code>、<code>Major GC</code>、<code>Full GC</code>：</p>
+<h4 id="5-3-3-ParNew-GC-CMS-GC"><a href="#5-3-3-ParNew-GC-CMS-GC" class="headerlink" title="5.3.3. ParNew GC + CMS GC"></a>5.3.3. ParNew GC + CMS GC</h4><h5 id="5-3-3-1-ParNew-GC-CMS-GC-概述"><a href="#5-3-3-1-ParNew-GC-CMS-GC-概述" class="headerlink" title="5.3.3.1. ParNew GC + CMS GC 概述"></a>5.3.3.1. ParNew GC + CMS GC 概述</h5><p><code>ParNew GC + CMS GC</code> 支持 <code>Minor GC</code>、<code>Major GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>ParNew GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>CMS GC</code> 使用多线程，采用并行垃圾回收策略、并发垃圾回收策略，使用标记-清除算法执行 <code>Major GC</code></li>
@@ -942,9 +935,9 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-3-2-ParNew-GC-CMS-GC-相关流程-🌈"><a href="#3-3-3-2-ParNew-GC-CMS-GC-相关流程-🌈" class="headerlink" title="3.3.3.2. ParNew GC + CMS GC 相关流程 🌈"></a>3.3.3.2. ParNew GC + CMS GC 相关流程 🌈</h5><h6 id="3-3-3-2-1-Minor-GC-流程-🌈"><a href="#3-3-3-2-1-Minor-GC-流程-🌈" class="headerlink" title="3.3.3.2.1. Minor GC 流程 🌈"></a>3.3.3.2.1. Minor GC 流程 🌈</h6><p><code>ParNew GC</code> 执行 <code>Minor GC</code> 的流程相似于 <code>Parallel Scavenge GC</code> 执行 <code>Minor GC</code> 的流程，只不过 <code>ParNew GC</code> 不具备自适应调节的能力</p>
+<h5 id="5-3-3-2-ParNew-GC-CMS-GC-相关流程"><a href="#5-3-3-2-ParNew-GC-CMS-GC-相关流程" class="headerlink" title="5.3.3.2. ParNew GC + CMS GC 相关流程"></a>5.3.3.2. ParNew GC + CMS GC 相关流程</h5><h6 id="5-3-3-2-1-Minor-GC-流程"><a href="#5-3-3-2-1-Minor-GC-流程" class="headerlink" title="5.3.3.2.1. Minor GC 流程"></a>5.3.3.2.1. Minor GC 流程</h6><p><code>ParNew GC</code> 执行 <code>Minor GC</code> 的流程相似于 <code>Parallel Scavenge GC</code> 执行 <code>Minor GC</code> 的流程，只不过 <code>ParNew GC</code> 不具备自适应调节的能力</p>
 <hr>
-<h6 id="3-3-3-2-2-Major-GC-流程-🌈"><a href="#3-3-3-2-2-Major-GC-流程-🌈" class="headerlink" title="3.3.3.2.2. Major GC 流程 🌈"></a>3.3.3.2.2. Major GC 流程 🌈</h6><p>当堆区中的剩余的老年代的内存空间的使用率达到某阈值时，就会触发 <code>CMS GC</code> 执行 <code>Major GC</code>：</p>
+<h6 id="5-3-3-2-2-Major-GC-流程"><a href="#5-3-3-2-2-Major-GC-流程" class="headerlink" title="5.3.3.2.2. Major GC 流程"></a>5.3.3.2.2. Major GC 流程</h6><p>当堆区中的剩余的老年代的内存空间的使用率达到某阈值时，就会触发 <code>CMS GC</code> 执行 <code>Major GC</code>：</p>
 <ol>
 <li>初始标记阶段（<code>Initial Mark Phase</code>）<ol>
 <li>在<code>CMS GC</code> 进行初始标记阶段的过程中，<code>CMS GC</code> 使用多线程，采用并行垃圾回收策略，标记出 <code>GC Roots</code> 直接可达的实例（需要注意的是：不做深度遍历)</li>
@@ -973,10 +966,10 @@
 </li>
 </ol>
 <hr>
-<h6 id="3-3-3-2-3-Full-GC-流程-🌈"><a href="#3-3-3-2-3-Full-GC-流程-🌈" class="headerlink" title="3.3.3.2.3. Full GC 流程 🌈"></a>3.3.3.2.3. Full GC 流程 🌈</h6><p>想象这样一个问题：虽然 <code>CMS GC</code> 的策略是 “主动预防“。但是在运行 <code>Java</code> 程序的过程中，仍然可能出现一些极端的情况（例如：<code>CMS GC</code> 执行 <code>Major GC</code> 垃圾回收堆区中的老年代中的实例的速度，赶不上堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代的速度）</p>
+<h6 id="5-3-3-2-3-Full-GC-流程"><a href="#5-3-3-2-3-Full-GC-流程" class="headerlink" title="5.3.3.2.3. Full GC 流程"></a>5.3.3.2.3. Full GC 流程</h6><p>想象这样一个问题：虽然 <code>CMS GC</code> 的策略是 “主动预防“。但是在运行 <code>Java</code> 程序的过程中，仍然可能出现一些极端的情况（例如：<code>CMS GC</code> 执行 <code>Major GC</code> 垃圾回收堆区中的老年代中的实例的速度，赶不上堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代的速度）</p>
 <p>为了解决这一问题，<code>CMS GC</code> 会使用 <code>CMS GC</code> 的后备垃圾回收器（即 <code>Serial Old GC</code>）执行 <code>Full GC</code></p>
 <hr>
-<h4 id="3-3-4-G1-GC-🌈"><a href="#3-3-4-G1-GC-🌈" class="headerlink" title="3.3.4. G1 GC 🌈"></a>3.3.4. G1 GC 🌈</h4><h5 id="3-3-4-1-G1-GC-概述-🌈"><a href="#3-3-4-1-G1-GC-概述-🌈" class="headerlink" title="3.3.4.1. G1 GC 概述 🌈"></a>3.3.4.1. G1 GC 概述 🌈</h5><p><code>G1 GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java9</code> 及以后的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Mixed GC</code>、<code>Full GC</code>：</p>
+<h4 id="5-3-4-G1-GC"><a href="#5-3-4-G1-GC" class="headerlink" title="5.3.4. G1 GC"></a>5.3.4. G1 GC</h4><h5 id="5-3-4-1-G1-GC-概述"><a href="#5-3-4-1-G1-GC-概述" class="headerlink" title="5.3.4.1. G1 GC 概述"></a>5.3.4.1. G1 GC 概述</h5><p><code>G1 GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java9</code> 及以后的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Mixed GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>G1 GC</code> 使用多线程，采用并发垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>G1 GC</code> 使用多线程，采用并行垃圾回收策略、并发垃圾回收策略，使用标记-清除算法、标记-复制算法执行 <code>Mixed GC</code>（需要注意的是：<code>G1 GC</code> 使用标记-清除算法垃圾回收的是 <code>Humongous</code> 区）</li>
@@ -1007,7 +1000,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-4-2-G1-GC-相关流程-🌈"><a href="#3-3-4-2-G1-GC-相关流程-🌈" class="headerlink" title="3.3.4.2. G1 GC 相关流程 🌈"></a>3.3.4.2. G1 GC 相关流程 🌈</h5><h6 id="3-3-4-2-1-Minor-GC-流程-🌈"><a href="#3-3-4-2-1-Minor-GC-流程-🌈" class="headerlink" title="3.3.4.2.1. Minor GC 流程 🌈"></a>3.3.4.2.1. Minor GC 流程 🌈</h6><p>当堆区中的 <code>Eden</code> 区的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>G1 GC</code> 执行 <code>Minor GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Minor GC</code> 被称之为 “<code>Yong-Only Phase</code>”）：</p>
+<h5 id="5-3-4-2-G1-GC-相关流程"><a href="#5-3-4-2-G1-GC-相关流程" class="headerlink" title="5.3.4.2. G1 GC 相关流程"></a>5.3.4.2. G1 GC 相关流程</h5><h6 id="5-3-4-2-1-Minor-GC-流程"><a href="#5-3-4-2-1-Minor-GC-流程" class="headerlink" title="5.3.4.2.1. Minor GC 流程"></a>5.3.4.2.1. Minor GC 流程</h6><p>当堆区中的 <code>Eden</code> 区的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>G1 GC</code> 执行 <code>Minor GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Minor GC</code> 被称之为 “<code>Yong-Only Phase</code>”）：</p>
 <ol>
 <li><code>G1 GC</code> 首先会执行 <code>STW</code></li>
 <li>然后 <code>G1 GC</code> 会将所有堆区中的新生代的 <code>Region</code> 存储到回收集合（<code>Cset</code>、<code>Collection Set</code>）</li>
@@ -1015,7 +1008,7 @@
 <li>在 <code>G1 GC</code> 执行完 <code>Minor GC</code> 后，<code>G1 GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h6 id="3-3-4-2-2-Mixed-GC-流程-🌈"><a href="#3-3-4-2-2-Mixed-GC-流程-🌈" class="headerlink" title="3.3.4.2.2. Mixed GC 流程 🌈"></a>3.3.4.2.2. Mixed GC 流程 🌈</h6><p>当堆区中的老年代的内存空间的使用率达到阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
+<h6 id="5-3-4-2-2-Mixed-GC-流程"><a href="#5-3-4-2-2-Mixed-GC-流程" class="headerlink" title="5.3.4.2.2. Mixed GC 流程"></a>5.3.4.2.2. Mixed GC 流程</h6><p>当堆区中的老年代的内存空间的使用率达到阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
 <ol>
 <li>初始标记阶段（<code>Initial Mark Phase</code>）<ol>
 <li>在 <code>G1 GC</code> 进行初始标记阶段的过程中，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，标记出 <code>GC Roots</code> 直接可达的实例（需要注意的是：不做深度遍历）</li>
@@ -1044,14 +1037,14 @@
 </li>
 </ol>
 <hr>
-<h6 id="3-3-4-2-3-Full-GC-流程-🌈"><a href="#3-3-4-2-3-Full-GC-流程-🌈" class="headerlink" title="3.3.4.2.3. Full GC 流程 🌈"></a>3.3.4.2.3. Full GC 流程 🌈</h6><p>虽然 <code>G1 GC</code> 的策略也是 “主动预防”。但是在运行 <code>Java</code> 程序的过程中，也可能出现一些极端情况。为了解决这一问题，<code>G1 GC</code> 会执行 <code>Full GC</code>：</p>
+<h6 id="5-3-4-2-3-Full-GC-流程"><a href="#5-3-4-2-3-Full-GC-流程" class="headerlink" title="5.3.4.2.3. Full GC 流程"></a>5.3.4.2.3. Full GC 流程</h6><p>虽然 <code>G1 GC</code> 的策略也是 “主动预防”。但是在运行 <code>Java</code> 程序的过程中，也可能出现一些极端情况。为了解决这一问题，<code>G1 GC</code> 会执行 <code>Full GC</code>：</p>
 <ol>
 <li><code>HotSpot JVM</code> 在 <code>Java 10</code> 之前，<code>G1 GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 <li><code>HotSpot JVM</code> 在 <code>Java10</code> 及以后，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 </ol>
 <p>触发 <code>G1 GC</code> 执行 <code>Full GC</code> 的条件相似于触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件，只不过 <code>G1 GC</code> 并不存在传统意义上的 “空间担保分配”（因为它是基于 <code>Region</code> 的）。但是当堆区中的空闲的 <code>Region</code> 的数量不足，<code>G1 GC</code> 在执行 <code>Minor GC</code>、<code>Major GC</code> 的过程中，将 <code>Region</code> 中的实例复制到另一个 <code>Region</code> 失败时，就会触发 <code>G1 GC</code> 执行 <code>Full GC</code>（需要注意的是：这本质上也是一种 “空间担保分配”）</p>
 <hr>
-<h4 id="3-3-5-对象的-finalization-机制"><a href="#3-3-5-对象的-finalization-机制" class="headerlink" title="3.3.5. 对象的 finalization 机制"></a>3.3.5. 对象的 finalization 机制</h4><p><code>Object</code> 类提供了 <code>void finalize()</code> 方法，若某个类对其进行了重写，那么在 <code>GC</code> 该对象之前，会先调用 <code>finalize()</code>，允许对象在销毁前执行一些自定义逻辑</p>
+<h4 id="5-3-5-对象的-finalization-机制"><a href="#5-3-5-对象的-finalization-机制" class="headerlink" title="5.3.5. 对象的 finalization 机制"></a>5.3.5. 对象的 finalization 机制</h4><p><code>Object</code> 类提供了 <code>void finalize()</code> 方法，若某个类对其进行了重写，那么在 <code>GC</code> 该对象之前，会先调用 <code>finalize()</code>，允许对象在销毁前执行一些自定义逻辑</p>
 <p>然而，在调用 <code>finalize()</code> 的时候，可能导致对象 “复活”（即重新与引用链上的某个对象建立关联）。因此，<code>JVM</code> 在判断对象是否可回收时，通常需要经历两次标记过程：</p>
 <ol>
 <li>第一次标记<ol>
@@ -1077,6 +1070,24 @@
 </li>
 </ol>
 <p>需要注意的是，从 <code>Java9</code> 开始，<code>Object</code> 类的 <code>void finalize()</code> 方法已经被正式弃用了</p>
+<hr>
+<h2 id="6-Java-字节码指令"><a href="#6-Java-字节码指令" class="headerlink" title="6. Java 字节码指令"></a>6. Java 字节码指令</h2><h3 id="6-1-虚拟机栈中的栈帧相关的-Java-字节码指令"><a href="#6-1-虚拟机栈中的栈帧相关的-Java-字节码指令" class="headerlink" title="6.1. 虚拟机栈中的栈帧相关的 Java 字节码指令"></a>6.1. 虚拟机栈中的栈帧相关的 Java 字节码指令</h3><h4 id="6-1-1-istore-n"><a href="#6-1-1-istore-n" class="headerlink" title="6.1.1. istore_ n"></a>6.1.1. istore_ n</h4><p><code>istore_n</code> 用于 <u><code>JVM</code></u> 把<font color="#00b050">存储</font>在操作数栈的栈顶中的 <code>int</code> 类型的<u>数据</u>，<font color="#00b050">存储</font>在局部变量表的数组索引 <code>n</code> 对应的<u>数组位置</u></p>
+<hr>
+<h4 id="6-1-2-iload-n"><a href="#6-1-2-iload-n" class="headerlink" title="6.1.2. iload_n"></a>6.1.2. iload_n</h4><p><code>iload_n</code> 用于 <u><code>JVM</code></u> 把<font color="#00b050">存储</font>在局部变量表的数组索引 <code>n</code> 对应的数组位置中的<u>数据</u>，<font color="#00b050">存储</font>在操作数栈的<u>栈顶</u></p>
+<hr>
+<h4 id="6-1-3-iconst-n"><a href="#6-1-3-iconst-n" class="headerlink" title="6.1.3. iconst_n"></a>6.1.3. iconst_n</h4><p><code>iconst_n</code> 用于把 <code>-1 - 5</code> 的<u>数据</u><font color="#00b050">存储</font>在操作数栈的<u>栈顶</u></p>
+<hr>
+<h4 id="6-1-4-bipush-n"><a href="#6-1-4-bipush-n" class="headerlink" title="6.1.4. bipush n"></a>6.1.4. bipush n</h4><p><code>binpush n</code> 用于把 <code>byte</code> 类型的数据（即 <code>-128 - 127</code>）存储在操作数栈的栈顶</p>
+<hr>
+<h4 id="6-1-5-sipush-n"><a href="#6-1-5-sipush-n" class="headerlink" title="6.1.5. sipush n"></a>6.1.5. sipush n</h4><p><code>sinpush n</code> 用于把 <code>short</code> 类型的数据（即 <code>-32768 - 32767</code>）存储在操作数栈的栈顶</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>数值更大的<u>数据</u>就不是直接<font color="#00b050">存储</font>在操作数栈的<u>栈顶</u>了。而是<font color="#00b050">作为</font><u>字面量</u>，<font color="#00b050">存储</font>在<u>方法区</u>。<u>当 <code>JVM</code> 加载字面量时</u>，需要<font color="#00b050">使用</font> <u><code>ldc</code></u> ，将<u>字面量</u><font color="#00b050">加载</font>到操作数栈的<u>栈顶</u>：</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 实例变量</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-variable">instanceBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">32768</span>;<br><br><span class="hljs-comment">// 字节码</span><br>ldc #<span class="hljs-number">7</span> &lt;<span class="hljs-number">32768</span>&gt;<br>putfield #<span class="hljs-number">8</span> &lt;org/example/test/Test.instanceBasicTypeValue : I&gt;<br></code></pre></td></tr></table></figure>
+
 <hr>
 
                 
