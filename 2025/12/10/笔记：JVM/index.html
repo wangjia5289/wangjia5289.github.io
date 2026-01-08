@@ -27,7 +27,6 @@
 <meta property="og:description" content="[!NOTE] 注意事项  操作数栈的存在意义： 存放这些数据 当数据过多时，存放数据 操作数栈的意义本质上就是存放数据   当线程持有 CPU 的时间片时，其实就是这个线程是拥有寄存器的所有操控权的（因为上一个持有 CPU 的时间片已经被保存了嘛） C++ 编译器在编译 C++ 代码时，在拥有全局视野的情况下，哪个 CPU 对应的机器码指令使用哪个寄存器，干了什么，其实是见缝插针，哪一个空闲就">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-41.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-37.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-40.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-39.png">
@@ -43,7 +42,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-44.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-36.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-06T10:25:36.048Z">
+<meta property="article:modified_time" content="2026-01-08T13:37:55.786Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-41.png">
@@ -251,7 +250,7 @@
         
         
         
-          95 mins
+          94 mins
         
       </span>
     
@@ -306,7 +305,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2026-01-06T18:25:36+08:00
+                    Last updated on 2026-01-08T21:37:55+08:00
                   
                   
 
@@ -357,37 +356,7 @@
 <p>JIT 编译器通过逃逸分析，发现某个加锁的对象<strong>不可能被其他线程访问</strong>（因为它根本没有逃逸出当前线程），那么这个锁就是完全多余的、无效的。此时，JIT 就会大胆地将这个 <code>synchronized</code> 锁操作给<strong>直接消除掉</strong></p>
 <p>这样避免了不必要的同步开销，提升了单线程的执行性能</p>
 <hr>
-<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="3-类的加载过程-TODO"><a href="#3-类的加载过程-TODO" class="headerlink" title="3. 类的加载过程 TODO"></a>3. 类的加载过程 TODO</h2><h2 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h2><h3 id="类的加载过程触发条件"><a href="#类的加载过程触发条件" class="headerlink" title="类的加载过程触发条件"></a>类的加载过程触发条件</h3><hr>
-<h3 id="3-2-类的加载过程相关流程"><a href="#3-2-类的加载过程相关流程" class="headerlink" title="3.2. 类的加载过程相关流程"></a>3.2. 类的加载过程相关流程</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-28.png" srcset="/img/loading.gif" lazyload alt="|700"></p>
-<hr>
-<h4 id="3-2-1-验证阶段"><a href="#3-2-1-验证阶段" class="headerlink" title="3.2.1. 验证阶段"></a>3.2.1. 验证阶段</h4><h5 id="3-2-1-1-验证阶段概述"><a href="#3-2-1-1-验证阶段概述" class="headerlink" title="3.2.1.1. 验证阶段概述"></a>3.2.1.1. 验证阶段概述</h5><p>验证阶段是类的加载过程中的第二个阶段，用于：</p>
-<ol>
-<li>格式验证</li>
-<li>语义验证</li>
-<li>字节码验证</li>
-<li>符号引用验证</li>
-</ol>
-<p>从而达到确保 <code>JVM</code> 加载合法的、合理的、符合规范的字节码的目的</p>
-<hr>
-<h5 id="3-2-1-2-验证阶段相关流程"><a href="#3-2-1-2-验证阶段相关流程" class="headerlink" title="3.2.1.2. 验证阶段相关流程"></a>3.2.1.2. 验证阶段相关流程</h5><hr>
-<h4 id="3-2-2-准备阶段"><a href="#3-2-2-准备阶段" class="headerlink" title="3.2.2. 准备阶段"></a>3.2.2. 准备阶段</h4><p>准备阶段是类的加载过程中的第三个阶段，用于：</p>
-<ol>
-<li>分配静态变量、静态常量的内存空间</li>
-<li>赋予默认值给静态变量</li>
-<li>赋予真实值给静态常量 ❌❌❌</li>
-</ol>
-<p>从而达到为静态变量、静态常量提供一个 “安全” 的初始状态，防止出现野指针或非法内存访问的目的</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>HotSpot JVM 在 Java8 之前，静态变量、静态常量存储在方法区。HotSpot JVM 在 Java8 及以后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中）</li>
-</ol>
-</blockquote>
-<p>在 <code>Java8</code> 之前，静态变量、静态常量存储在方法区。但是在 <code>Java8</code> 及之后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中，而类对象一定是在堆区被 <code>JVM</code> 分配内存空间的（因为 <code>JIT</code> 不会对类对象进行逃逸分析，因为无需也不应该对类对象进行逃逸分析，而且也无法对类对象进行逃逸分析），所以静态变量、静态常量存储在堆区）</p>
-<hr>
-<h4 id="3-2-3-解析阶段"><a href="#3-2-3-解析阶段" class="headerlink" title="3.2.3. 解析阶段"></a>3.2.3. 解析阶段</h4><h5 id="3-2-3-1-解析阶段概述"><a href="#3-2-3-1-解析阶段概述" class="headerlink" title="3.2.3.1. 解析阶段概述"></a>3.2.3.1. 解析阶段概述</h5><p>解析阶段是类的加载过程中的第四个阶段</p>
-<hr>
-<h2 id="4-对象的实例化过程"><a href="#4-对象的实例化过程" class="headerlink" title="4. 对象的实例化过程"></a>4. 对象的实例化过程</h2><h3 id="4-1-对象的实例化过程前置基础"><a href="#4-1-对象的实例化过程前置基础" class="headerlink" title="4.1. 对象的实例化过程前置基础"></a>4.1. 对象的实例化过程前置基础</h3><h4 id="4-1-1-实例组成部分"><a href="#4-1-1-实例组成部分" class="headerlink" title="4.1.1. 实例组成部分"></a>4.1.1. 实例组成部分</h4><p><code>32 bit</code> 的 <code>JVM</code> 中的实例的组成部分：<br><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-37.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="三、JVM-基础"><a href="#三、JVM-基础" class="headerlink" title="三、JVM 基础"></a>三、JVM 基础</h1><h2 id="4-对象的实例化过程"><a href="#4-对象的实例化过程" class="headerlink" title="4. 对象的实例化过程"></a>4. 对象的实例化过程</h2><h3 id="4-1-对象的实例化过程前置基础"><a href="#4-1-对象的实例化过程前置基础" class="headerlink" title="4.1. 对象的实例化过程前置基础"></a>4.1. 对象的实例化过程前置基础</h3><h4 id="4-1-1-实例组成部分"><a href="#4-1-1-实例组成部分" class="headerlink" title="4.1.1. 实例组成部分"></a>4.1.1. 实例组成部分</h4><p><code>32 bit</code> 的 <code>JVM</code> 中的实例的组成部分：<br><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-37.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -844,7 +813,7 @@
 </ol>
 </li>
 <li>类在类的加载阶段涉及到的加载器</li>
-<li>指向 Java 堆中的 <code>Class</code> 对象</li>
+<li>指向 Java 堆中的类对象</li>
 </ol>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -917,13 +886,8 @@
 <hr>
 <h5 id="2-4-5-运行时常量池"><a href="#2-4-5-运行时常量池" class="headerlink" title="2.4.5. 运行时常量池"></a>2.4.5. 运行时常量池</h5><p>存储了各种 <strong>字面量（如字符串常量、数值常量）</strong> 和<strong>符号引用</strong>，符号引用将在解析阶段或者程序运行时被解析为直接引用。</p>
 <hr>
-<h3 id="———————-1"><a href="#———————-1" class="headerlink" title="———————-"></a>———————-</h3><h1 id="四、JVM-相关流程-1"><a href="#四、JVM-相关流程-1" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="加载类的过程"><a href="#加载类的过程" class="headerlink" title="加载类的过程"></a>加载类的过程</h2><hr>
-<h2 id="实例化对象的过程"><a href="#实例化对象的过程" class="headerlink" title="实例化对象的过程"></a>实例化对象的过程</h2><hr>
+<h3 id="———————-1"><a href="#———————-1" class="headerlink" title="———————-"></a>———————-</h3><h1 id="四、JVM-相关流程-1"><a href="#四、JVM-相关流程-1" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="实例化对象的过程"><a href="#实例化对象的过程" class="headerlink" title="实例化对象的过程"></a>实例化对象的过程</h2><hr>
 <h2 id="执行方法的过程"><a href="#执行方法的过程" class="headerlink" title="执行方法的过程"></a>执行方法的过程</h2><hr>
-<h2 id="解释执行的流程"><a href="#解释执行的流程" class="headerlink" title="解释执行的流程"></a>解释执行的流程</h2><p>详见上文：JVM 架构体系-解释器</p>
-<hr>
-<h2 id="垃圾回收的过程"><a href="#垃圾回收的过程" class="headerlink" title="垃圾回收的过程"></a>垃圾回收的过程</h2><p>详见上文：<code>JVM</code> 架构体系&#x2F;垃圾回收器</p>
-<hr>
 <p>字节码解释器优缺点</p>
 <p>缺点</p>
 <h3 id="解释器相关分类"><a href="#解释器相关分类" class="headerlink" title="解释器相关分类"></a>解释器相关分类</h3><ol>
@@ -978,7 +942,11 @@
 </ol>
 <hr>
 <hr>
-<h2 id="8-JIT-即时编译器"><a href="#8-JIT-即时编译器" class="headerlink" title="8. JIT 即时编译器"></a>8. JIT 即时编译器</h2><h2 id="10-Java-字节码指令"><a href="#10-Java-字节码指令" class="headerlink" title="10. Java 字节码指令"></a>10. Java 字节码指令</h2><h3 id="10-1-虚拟机栈中的栈帧相关的-Java-字节码指令"><a href="#10-1-虚拟机栈中的栈帧相关的-Java-字节码指令" class="headerlink" title="10.1. 虚拟机栈中的栈帧相关的 Java 字节码指令"></a>10.1. 虚拟机栈中的栈帧相关的 Java 字节码指令</h3><h4 id="10-1-1-istore-n"><a href="#10-1-1-istore-n" class="headerlink" title="10.1.1. istore_ n"></a>10.1.1. istore_ n</h4><p><code>istore_n</code> 用于 <code>JVM</code> 把存储在操作数栈的栈顶中的 <code>int</code> 类型的数据，存储在局部变量表的数组索引 <code>n</code> 对应的数组位置</p>
+<h2 id="8-JIT-即时编译器"><a href="#8-JIT-即时编译器" class="headerlink" title="8. JIT 即时编译器"></a>8. JIT 即时编译器</h2><h2 id="10-Java-字节码指令"><a href="#10-Java-字节码指令" class="headerlink" title="10. Java 字节码指令"></a>10. Java 字节码指令</h2><p>其 <code>clinit</code> 字节码是：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-comment">// 加载运行时常量池中索引 52 处的值，并将其推入操作数栈，这里加载的是 50000</span><br><span class="hljs-number">0</span> ldc #52 &lt;<span class="hljs-number">50000</span>&gt;<br><br><span class="hljs-comment">// 将栈顶的值赋值给运行时常量池索引 16 处的静态字段，这里是将栈顶的 50000 赋值给 staticBasicTypeValue</span><br><span class="hljs-number">2</span> putstatic #16 &lt;org/example/test/Test.staticBasicTypeValue : I&gt;<br><br><span class="hljs-number">5</span> ldc #53 &lt;abc&gt;<br><span class="hljs-number">7</span> putstatic #30 &lt;org/example/test/Test.staticStringTypeValue1 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 为运行时常量池中索引 55 处的对象在堆上为其分配空间（仅分配内存空间并赋默认值，不执行接下来的对象实例化步骤）</span><br><span class="hljs-comment"> * 这里是为java/lang/String 对象分配空间</span><br><span class="hljs-comment"> */</span><br><span class="hljs-number">10</span> <span class="hljs-literal">new</span> #55 &lt;java/lang/<span class="hljs-built_in">String</span>&gt;<br><br><span class="hljs-comment">// 复制栈顶的对象引用，现在操作数栈中有两份对象引用：[ uninitRef, uninitRef ]</span><br><span class="hljs-number">13</span> dup<br><br><span class="hljs-comment">// 加载运行时常量池中索引 57 处的值，并将其推入操作数栈，这里加载的是 def 对象的引用</span><br><span class="hljs-number">14</span> ldc #57 &lt;def&gt;<br><br><span class="hljs-comment">// 调用运行时常量池中索引 59 处的方法，方法执行完操作数栈中只剩：[ initRef ]</span><br><span class="hljs-number">16</span> invokespecial #59 &lt;java/lang/<span class="hljs-built_in">String</span>.&lt;init&gt; : (Ljava/lang/<span class="hljs-built_in">String</span>;)V&gt;<br><br><span class="hljs-comment">// 将栈顶的值赋值给运行时常量池索引 37 处的静态字段，这里是将栈顶的 initRef 赋值给 staticStringTypeValue2</span><br><span class="hljs-number">19</span> putstatic #37 &lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><br><span class="hljs-number">22</span> getstatic #37 &lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">25</span> invokevirtual #61 &lt;java/lang/<span class="hljs-built_in">String</span>.intern : ()Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">28</span> putstatic #41 &lt;org/example/test/Test.staticStringTypeValue3 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">31</span> <span class="hljs-literal">new</span> #65 &lt;org/example/test/Demo&gt;<br><span class="hljs-number">34</span> dup<br><span class="hljs-number">35</span> invokespecial #67 &lt;org/example/test/Demo.&lt;init&gt; : ()V&gt;<br><span class="hljs-number">38</span> putstatic #45 &lt;org/example/test/Test.staticReferenceTypeValue : Lorg/example/test/Demo;&gt;<br><span class="hljs-number">41</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="10-1-虚拟机栈中的栈帧相关的-Java-字节码指令"><a href="#10-1-虚拟机栈中的栈帧相关的-Java-字节码指令" class="headerlink" title="10.1. 虚拟机栈中的栈帧相关的 Java 字节码指令"></a>10.1. 虚拟机栈中的栈帧相关的 Java 字节码指令</h3><h4 id="10-1-1-istore-n"><a href="#10-1-1-istore-n" class="headerlink" title="10.1.1. istore_ n"></a>10.1.1. istore_ n</h4><p><code>istore_n</code> 用于 <code>JVM</code> 把存储在操作数栈的栈顶中的 <code>int</code> 类型的数据，存储在局部变量表的数组索引 <code>n</code> 对应的数组位置</p>
 <hr>
 <h4 id="10-1-2-iload-n"><a href="#10-1-2-iload-n" class="headerlink" title="10.1.2. iload_n"></a>10.1.2. iload_n</h4><p><code>iload_n</code> 用于 <code>JVM</code> 把存储在局部变量表的数组索引 <code>n</code> 对应的数组位置中的数据，存储在操作数栈的栈顶</p>
 <hr>

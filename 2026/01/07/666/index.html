@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="咸阳猴🐒">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程1. 类编译的过程（🐂）类编译的过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="666">
+<meta property="og:url" content="https://wangjia5289.github.io/2026/01/07/666/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程1. 类编译的过程（🐂）类编译的过">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-8.png">
+<meta property="article:published_time" content="2026-01-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-08T13:41:30.819Z">
+<meta property="article:author" content="Ba Yuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2026/01/07/666/666.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>666 - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="666"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-07 00:00" pubdate>
+          January 7, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">666</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2026-01-08T21:41:30+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2026/01/07/666/666.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Hexo 地址<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/">http://blog.wangjia.ink/2025/12/10/笔记：JVM/</a></p>
+</li>
+<li><p>代码洪荒（面试宝典）<br>👉 <a target="_blank" rel="noopener" href="https://www.notion.so/JVM-2c5974fbda5e8009850fdcc845fe0424?source=copy_link">https://www.notion.so/JVM-2c5974fbda5e8009850fdcc845fe0424?source=copy_link</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="四、JVM-相关流程"><a href="#四、JVM-相关流程" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="1-类编译的过程（🐂）"><a href="#1-类编译的过程（🐂）" class="headerlink" title="1. 类编译的过程（🐂）"></a>1. 类编译的过程（🐂）</h2><p>类编译的过程（前端编译）是指：<code>javac</code> 编译器把 <code>.java</code> 文件编译成 <code>.class</code> 文件（即把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令）</p>
+<p>在类编译的过程中，<code>javac</code> 编译器会把语法糖转换为该语法糖对应的逻辑，并对 <code>Java</code> 代码进行严格的语义检查（例如：检查某类是否有父类），然后再把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>我们称类编译的过程为前端编译，称分层编译的过程为后端编译</li>
+<li>详见笔记：<code>Java</code> 语法糖<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E8%AF%AD%E6%B3%95%E7%B3%96.md">笔记：Java语法糖</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/11/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E8%AF%AD%E6%B3%95%E7%B3%96/">http://blog.wangjia.ink/2025/12/11/笔记：Java语法糖/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="2-类加载的过程"><a href="#2-类加载的过程" class="headerlink" title="2. 类加载的过程"></a>2. 类加载的过程</h2><p><img src="/2026/01/07/666/666.png" srcset="/img/loading.gif" lazyload alt="|725"></p>
+<h3 id="2-2-验证阶段（🐂）"><a href="#2-2-验证阶段（🐂）" class="headerlink" title="2.2. 验证阶段（🐂）"></a>2.2. 验证阶段（🐂）</h3><p>在验证阶段中，<code>JVM</code> 会进行：</p>
+<ol>
+<li>格式检查<ol>
+<li>检查 <code>.class</code> 文件中的开头是否为 <code>OxCAFEBABE</code></li>
+<li>检查 <code>.class</code> 文件中的（主版本号 <code>&amp;&amp;</code> 副版本号）是否在该 <code>JVM</code> 支持的范围中</li>
+<li>检查 <code>.class</code> 文件中的结构是否（完整 <code>&amp;&amp;</code> 符合 <code>JVM</code> 规范）（需要注意的是：<code>JVM</code> 会着重检查常量池）</li>
+</ol>
+</li>
+<li>语义检查</li>
+<li>字节码验证</li>
+<li>符号引用验证</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>其实 <code>JVM</code> 是交叉进行（加载阶段 <code>&amp;&amp;</code> 验证阶段）的。<code>JVM</code> 会先进行（验证阶段 ➔ 格式检查），再进行加载阶段，然后再进行（验证阶段 ➔ 其他的（检查 <code>&amp;&amp;</code> 验证））</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><hr>
+<h3 id="2-3-解析阶段"><a href="#2-3-解析阶段" class="headerlink" title="2.3. 解析阶段"></a>2.3. 解析阶段</h3><p>在解析阶段中，<code>JVM</code> 会将（类的类元数据区 ➔ 运行时常量池 ➔ 符号引用）解析成直接引用（即将符号形式的文本信息转换为可被 <code>JVM</code> 直接定位的内存地址）</p>
+<p><code>JVM</code> 规范规定的符号引用主要包括：</p>
+<ol>
+<li><code>CONSTANT_Class_info</code><ol>
+<li>在解析阶段之前，存储类的全限定名</li>
+<li>在解析阶段之后，存储一个指向该类的类元数据区的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_Fieldref_info</code><ol>
+<li>在解析阶段之前，存储（类的全限定名 <code>&amp;&amp;</code> 字段的（名词 <code>&amp;&amp;</code> 描述符））</li>
+<li>在解析阶段之后，存储一个指向（该类的类元数据区 ➔ 该字段对于的字段信息）的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_Methodref_info</code><ol>
+<li>在解析阶段之前，存储（类的全限定名 <code>&amp;&amp;</code> 方法的（名字 <code>&amp;&amp;</code> 描述符））</li>
+<li>在解析阶段之后，存储一个指向（该类的类元数据区 ➔ 该方法对于的方法信息）的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_InterfaceMethodref_info</code><ol>
+<li><code>CONSTANT_InterfaceMethodref_info</code> 于 <code>CONSTANT_Methodref_info</code> 相似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 针对的是接口方法</li>
+</ol>
+</li>
+<li><code>CONSTANT_MethodType_info</code></li>
+<li><code>CONSTANT_MethodHandle_info</code></li>
+<li><code>CONSTANT_InvokeDynamic_info</code></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>（<code>CONSTANT_MethodType_info</code> <code>&amp;&amp;</code> <code>CONSTANT_MethodHandle_info</code> <code>&amp;&amp;</code> <code>CONSTANT_InvokeDynamic_info</code>）是在 <code>Java 7</code> 中，<code>Java</code> 语言的设计团队为了引入 <code>invokedynamic</code> <code>JVM</code> 字节码指令，修改了 JVM 规范，将这三个符号引用引入了进来</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 不同 <code>JVM</code> 对解析阶段的处理方式可能存在差异：<br>    1. 一些 JVM 实现会在解析阶段，遍历运行时常量池中的所有符号引用，并尝试将其立即解析为直接引用<br>    2. 也有一些 JVM 实现会在解析阶段，选择只解析其中关键或高频使用的符号引用，比如 java.lang.Object 这类核心类<br>    3. 我们的 HotSpot JVM 采用的是延迟解析的策略<br>        1. 在解析阶段，HotSpot 会遍历并识别出所有类和接口的符号引用（CONSTANT_Class_info）<br>        2. 对于像 java.lang.Object 这样的基础核心类，JVM 会尝试解析它<br>        3. 而对于大多数的符号引用，通常采用按需解析，即在首次使用时才触发解析<br>        4. 例如在初始化阶段执行 clinit 方法时，或在运行 init、main 方法，甚至其他方法的字节码时，如果某个符号引用还未被解析，就会在那一刻解析<br>3. 所以符号引用将在 解析阶段 或者 程序运行时 被解析为直接引用，并不一定在解析阶段就被解析成直接引用</p>
+</blockquote>
+<h4 id="2-3-1-CONSTANT-Class-info"><a href="#2-3-1-CONSTANT-Class-info" class="headerlink" title="2.3.1. CONSTANT_Class_info"></a>2.3.1. CONSTANT_Class_info</h4><p>在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了一个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而该 <code>CONSTANT_Utf8_info</code> 又存储了类的全限定名。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了类的全限定名<br><img src="/2026/01/07/666/666-5.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Class_info</code> 存储了一个指向该类的类元数据区的内存地址</p>
+<hr>
+<h4 id="2-3-2-CONSTANT-Utf8-info"><a href="#2-3-2-CONSTANT-Utf8-info" class="headerlink" title="2.3.2. CONSTANT_Utf8_info"></a>2.3.2. CONSTANT_Utf8_info</h4><p><code>CONSTANT_Utf8_info</code> 用于存储在 Java 程序中的各种文本信息（例如：类名）<br><img src="/2026/01/07/666/666-7.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Utf8_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_Utf8_info</code> 本质上只是为 Java 程序提供各种文本信息的符号引用</p>
+<hr>
+<h4 id="2-3-3-CONSTANT-NameAndType-info"><a href="#2-3-3-CONSTANT-NameAndType-info" class="headerlink" title="2.3.3. CONSTANT_NameAndType_info"></a>2.3.3. CONSTANT_NameAndType_info</h4><p>在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了两个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而这两个 <code>CONSTANT_Utf8_info</code> 又分别存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）<br><img src="/2026/01/07/666/666-6.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_NameAndType_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_NameAndType_info</code> 本质上只是为（<code>CONSTANT_Fieldref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_Methodref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_InterfaceMethodref_info</code>）提供描述信息的符号引用）</p>
+<hr>
+<h4 id="2-3-4-CONSTANT-Fieldref-info"><a href="#2-3-4-CONSTANT-Fieldref-info" class="headerlink" title="2.3.4. CONSTANT_Fieldref_info"></a>2.3.4. CONSTANT_Fieldref_info</h4><p>在解析阶段之前，<code>CONSTANT_Fieldref_info</code> 存储了一个（<code>CONSTANT_Class_info</code> <code>&amp;&amp;</code> <code>CONSTANT_NameAndType_info</code>）的常量池索引，而该 <code>CONSTANT_Class_info</code> 存储了类的全限定名，该 <code>CONSTANT_NameAndType_info</code> 存储了字段的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该字段对应的字段信息）的内存地址</p>
+<hr>
+<h4 id="2-3-5-CONSTANT-Methodref-info"><a href="#2-3-5-CONSTANT-Methodref-info" class="headerlink" title="2.3.5. CONSTANT_Methodref_info"></a>2.3.5. CONSTANT_Methodref_info</h4><p>在解析阶段之前，CONSTANT_Fieldref_info 存储了一个（CONSTANT_Class_info &amp;&amp; CONSTANT_NameAndType_info）的常量池索引，而 CONSTANT_Class_info 存储类的全限定名，CONSTANT_NameAndType_info 存储方法的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-4.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该方法对应的方法信息）的内存地址</p>
+<hr>
+<h4 id="2-3-6-CONSTANT-String-info"><a href="#2-3-6-CONSTANT-String-info" class="headerlink" title="2.3.6. CONSTANT_String_info"></a>2.3.6. CONSTANT_String_info</h4><p>在解析阶段之前，CONSTANT_String_info 存储了一个 CONSTANT_Utf8_info 的常量池索引，而该 CONSTANT_Utf8_info 又存储了一个根据字面量构建 String 实例的构造方法的字面量</p>
+<p>在解析阶段之后，CONSTANT_String_info 存储了一个指向使用该构造方法构造的 String 实例的内存地址</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对于静态常量的解析阶段，就算说，很多东西嘛，顺序肯定是不一样的</li>
+<li></li>
+<li>在解析阶段之后，CONSTANT_String_info 存储的是一个堆区的内存地址，而其他的存储的是方法区的内存地址</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="2-3-7-CONSTANT-InterfaceMethodref-info"><a href="#2-3-7-CONSTANT-InterfaceMethodref-info" class="headerlink" title="2.3.7. CONSTANT_InterfaceMethodref_info"></a>2.3.7. CONSTANT_InterfaceMethodref_info</h4><p><code>CONSTANT_InterfaceMethodref_info</code> 与 <code>CONSTANT_Methodref_info</code> 类似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 指向的是接口方法的描述信息</p>
+<hr>
+<h4 id="2-3-8-CONSTANT-Integer-info"><a href="#2-3-8-CONSTANT-Integer-info" class="headerlink" title="2.3.8. CONSTANT_Integer_info"></a>2.3.8. CONSTANT_Integer_info</h4><p><code>CONSTANT_Integer_info</code> 用于存储整数常量。虽然它的名字里虽然带有 <code>Integer</code>，但与 <code>Integer</code> 对象本身没有任何关系，只是单纯地用来存储一个整数常量。至于 <code>Integer</code> 对象，它和其他对象一样，依然遵循普通对象的处理方式。</p>
+<p>我们知道，小整数常量（<code>-1 - 5</code>）会通过 <code>iconst_n</code> 字节码指令直接压入操作数栈，而不需要像前面提到的那样，在执行字节码时先去运行时常量池查找、必要时再解析，然后再取值。简单来说，这些常量可以直接获得，而无需额外解析或查找步骤。同样地，取值范围在 <code>-128 - 127</code> 的整数会使用 <code>bipush n</code> 指令，范围在 <code>-32768 ~ 32767</code> 的整数会使用 <code>sipush n</code> 指令</p>
+<p>然而，如果超出这个范围，就必须通过常量池来获取。但需要注意的是，<code>CONSTANT_Integer_info</code> 常量并不像其他符号引用那样需要解析，它本身就直接存储了数值，因此字节码在执行时只需从常量池中取出即可，无需再进行解析过程<br><img src="/2026/01/07/666/666-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>与此类似的几种主要包括：</p>
+<ol>
+<li>CONSTANT_Integer_info<ol>
+<li>整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Float_info<ol>
+<li>浮点数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Long_info<ol>
+<li>长整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Double_info<ol>
+<li>双精度浮点数常量</li>
+</ol>
+</li>
+</ol>
+<p>这些符号引用都无需经过解析，因为它们本身就直接包含了数值</p>
+<blockquote>
+<p>[!NOTE] 注意实习</p>
+<ol>
+<li><code>boolean</code>、<code>byte</code>、<code>short</code>、<code>char</code> 都是使用 <code>iconst_n</code>、<code>bipush n</code>、<code>sipush n</code> 压入操作数栈的<ol>
+<li>boolean<ol>
+<li>0 表示 false</li>
+<li>1 表示 true</li>
+</ol>
+</li>
+<li>char<ol>
+<li>不要忘记，我们存储 char 是根据 Unicode 字符集存储的，所以 ‘a’ ➔ 97</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h3><p>需要注意的是，类的加载过程并不一定会进入初始化阶段，例如下面几种情况就不会触发初始化，这被称为 “被动引用”：</p>
+<ol>
+<li>通过子类引用父类的静态字段<ol>
+<li>例如，System.out.println(SubClass.parentStaticField);</li>
+<li>这只会初始化父类，而不会初始化子类</li>
+</ol>
+</li>
+<li>通过数组定义来引用类<ol>
+<li>例如，MyClass［］ mcArray &#x3D; new MyClass［10］;</li>
+<li>这并不会触发 MyClass 类的初始化，它只是创建了一个 MyClass 类型的数组对象</li>
+</ol>
+</li>
+<li>引用类的常量<ol>
+<li>例如，System.out.println(MyClass.MY_CONSTANT);</li>
+<li>如果常量在编译阶段就被放入了调用类的常量池中（例如被 final 修饰的基本类型或字符串常量），那么本质上并没有直接引用定义常量的类，因此不会触发该类的初始化</li>
+</ol>
+</li>
+</ol>
+<p>但是 <code>JVM</code> 规范中规定了，在以下几种情况中，必须进行初始化：</p>
+<ol>
+<li><p>遇到 new、getstatic、putstatic 或 invokestatic 字节码指令时</p>
+<ol>
+<li>使用 new 关键字实例化对象</li>
+<li>访问类的静态字段时<ol>
+<li>被 final 修饰的静态字段，如果其值已在编译期确定，则不会触发初始化</li>
+</ol>
+</li>
+<li>访问类的静态方法时</li>
+</ol>
+</li>
+<li><p>使用 java.lang.reflect 包的方法对类型进行反射调用时</p>
+<ol>
+<li>例如，使用 Class.forName(“com.example.MyClass”) 或 MyClass.class.newInstance()</li>
+</ol>
+</li>
+<li><p>初始化一个类的子类时</p>
+<ol>
+<li>如果一个类还没有初始化，它的任何一个子类在初始化之前，父类都必须先初始化。</li>
+</ol>
+</li>
+<li><p>JVM 启动时指定的主类</p>
+<ol>
+<li>包含 main() 方法的那个类，JVM 在启动时会先初始化这个类</li>
+</ol>
+</li>
+<li><p>JDK 7 引入的动态语言支持</p>
+<ol>
+<li>当一个 java.lang.invoke.MethodHandle 实例的解析结果是 REF_getStatic、REF_putStatic、REF_invokeStatic、REF_newInvokeSpecial 四种类型的方法句柄时，并且这个方法句柄对应的类没有初始化时，需要先触发其初始化</li>
+</ol>
+</li>
+<li><p>遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。这四条指令分别对应：</p>
+<ul>
+<li>使用 <code>new</code> 关键字实例化对象。</li>
+<li>读取一个类的静态字段（被 <code>final</code> 修饰，已在编译期把结果放入常量池的静态字段除外）。</li>
+<li>设置一个类的静态字段。</li>
+<li>调用一个类的静态方法。</li>
+</ul>
+</li>
+<li><p>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时，如果类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</p>
+</li>
+<li><p>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</p>
+</li>
+<li><p>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当一个接口中定义了 <code>JDK 8</code> 新加入的默认方法（<code>default</code> 方法）时，如果有这个接口的实现类发生了初始化，那该接口要在其之前被初始化。</p>
+</li>
+</ol>
+<p>在初始化阶段，<code>JVM</code> 会进行：</p>
+<ol>
+<li>执行 <code>&lt;clinit&gt;</code> 方法<ol>
+<li>赋予真实值给该类的静态变量（术语是：显式初始化）</li>
+<li>执行静态代码块（即 <code>static &#123;...&#125;</code>）</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h1 id="五、JVM-相关产品（🐂）"><a href="#五、JVM-相关产品（🐂）" class="headerlink" title="五、JVM 相关产品（🐂）"></a>五、JVM 相关产品（🐂）</h1><ol>
+<li><code>ZeroVM</code></li>
+<li><code>HotSpot</code></li>
+<li><code>GraalVM</code></li>
+<li><code>Eclipse OpenJ9</code></li>
+<li><code>Azul Platform Prime</code></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li><code>HotSpot</code> 是 <code>Java</code> 语言的官方提供的 <code>JVM</code></li>
+</ol>
+</blockquote>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>666</div>
+      <div>https://wangjia5289.github.io/2026/01/07/666/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>咸阳猴🐒</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 7, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/07/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E7%89%88%E6%9C%AC/" title="笔记：Java 版本">
+                        <span class="hidden-mobile">笔记：Java 版本</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

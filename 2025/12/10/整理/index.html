@@ -19,15 +19,15 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 解释器1.1. 解释器概述解">
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 类加载器 2. 解释器2.1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="整理">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 解释器1.1. 解释器概述解">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 类加载器 2. 解释器2.1">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-15.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-19.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-14.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-2.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-3.png">
@@ -39,9 +39,11 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-9.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-10.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-11.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-16.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-20.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-21.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-22.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-06T13:40:19.851Z">
+<meta property="article:modified_time" content="2026-01-08T13:41:26.994Z">
 <meta property="article:author" content="Ba Yuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
@@ -238,7 +240,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k words
+          17k words
         
       </span>
     
@@ -249,7 +251,7 @@
         
         
         
-          113 mins
+          139 mins
         
       </span>
     
@@ -304,7 +306,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2026-01-06T21:40:19+08:00
+                    Last updated on 2026-01-08T21:41:26+08:00
                   
                   
 
@@ -326,26 +328,27 @@
 </li>
 </ol>
 <hr>
-<h1 id="三、JVM-架构体系"><a href="#三、JVM-架构体系" class="headerlink" title="三、JVM 架构体系"></a>三、JVM 架构体系</h1><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-15.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="1-解释器"><a href="#1-解释器" class="headerlink" title="1. 解释器"></a>1. 解释器</h2><h3 id="1-1-解释器概述"><a href="#1-1-解释器概述" class="headerlink" title="1.1. 解释器概述"></a>1.1. 解释器概述</h3><p>解释器（<code>Interpreter</code>）用于解释执行 <code>JVM</code> 字节码指令</p>
+<h1 id="三、JVM-架构体系"><a href="#三、JVM-架构体系" class="headerlink" title="三、JVM 架构体系"></a>三、JVM 架构体系</h1><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-19.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="1-类加载器"><a href="#1-类加载器" class="headerlink" title="1. 类加载器"></a>1. 类加载器</h2><hr>
+<h2 id="2-解释器"><a href="#2-解释器" class="headerlink" title="2. 解释器"></a>2. 解释器</h2><h3 id="2-1-解释器概述"><a href="#2-1-解释器概述" class="headerlink" title="2.1. 解释器概述"></a>2.1. 解释器概述</h3><p>解释器（<code>Interpreter</code>）用于解释执行 <code>JVM</code> 字节码指令</p>
 <hr>
-<h3 id="1-2-解释器相关分类"><a href="#1-2-解释器相关分类" class="headerlink" title="1.2. 解释器相关分类"></a>1.2. 解释器相关分类</h3><ol>
+<h3 id="2-2-解释器相关分类"><a href="#2-2-解释器相关分类" class="headerlink" title="2.2. 解释器相关分类"></a>2.2. 解释器相关分类</h3><ol>
 <li>字节码解释器</li>
 <li>模板解释器</li>
 </ol>
-<h4 id="1-2-1-字节码解释器"><a href="#1-2-1-字节码解释器" class="headerlink" title="1.2.1. 字节码解释器"></a>1.2.1. 字节码解释器</h4><h5 id="1-2-1-1-字节码解释器概述"><a href="#1-2-1-1-字节码解释器概述" class="headerlink" title="1.2.1.1. 字节码解释器概述"></a>1.2.1.1. 字节码解释器概述</h5><p>字节码解释器（<code>C++</code> 解释器）是指：<code>JVM</code> 的设计团队使用 <code>C++</code> 语言编写的解释器</p>
+<h4 id="2-2-1-字节码解释器"><a href="#2-2-1-字节码解释器" class="headerlink" title="2.2.1. 字节码解释器"></a>2.2.1. 字节码解释器</h4><h5 id="2-2-1-1-字节码解释器概述"><a href="#2-2-1-1-字节码解释器概述" class="headerlink" title="2.2.1.1. 字节码解释器概述"></a>2.2.1.1. 字节码解释器概述</h5><p>字节码解释器（<code>C++</code> 解释器）是指：<code>JVM</code> 的设计团队使用 <code>C++</code> 语言编写的解释器</p>
 <hr>
-<h5 id="1-2-1-2-字节码解释器底层原理"><a href="#1-2-1-2-字节码解释器底层原理" class="headerlink" title="1.2.1.2. 字节码解释器底层原理"></a>1.2.1.2. 字节码解释器底层原理</h5><p>字节码解释器本质上就<strong>是</strong>一个 <code>while</code> 循环，该 <code>while</code> 循环中<strong>嵌套</strong>了一个巨大的 <code>switch-case</code> 语句</p>
+<h5 id="2-2-1-2-字节码解释器底层原理"><a href="#2-2-1-2-字节码解释器底层原理" class="headerlink" title="2.2.1.2. 字节码解释器底层原理"></a>2.2.1.2. 字节码解释器底层原理</h5><p>字节码解释器本质上就<strong>是</strong>一个 <code>while</code> 循环，该 <code>while</code> 循环中<strong>嵌套</strong>了一个巨大的 <code>switch-case</code> 语句</p>
 <p>当字节码解释器<strong>解释执行</strong> <code>JVM</code> 字节码指令时，其实就是该解释器<strong>进行</strong>一次 <code>while</code> 循环，然后<strong>根据</strong> <code>switch-case</code> 语句<strong>调用</strong>一次该 <code>JVM</code> 字节码指令对应的 <code>C++</code> 方法</p>
 <hr>
-<h5 id="1-2-1-3-字节码解释器利弊分析"><a href="#1-2-1-3-字节码解释器利弊分析" class="headerlink" title="1.2.1.3. 字节码解释器利弊分析"></a>1.2.1.3. 字节码解释器利弊分析</h5><h6 id="1-2-1-3-1-优势"><a href="#1-2-1-3-1-优势" class="headerlink" title="1.2.1.3.1. 优势"></a>1.2.1.3.1. 优势</h6><ol>
+<h5 id="2-2-1-3-字节码解释器利弊分析"><a href="#2-2-1-3-字节码解释器利弊分析" class="headerlink" title="2.2.1.3. 字节码解释器利弊分析"></a>2.2.1.3. 字节码解释器利弊分析</h5><h6 id="2-2-1-3-1-优势"><a href="#2-2-1-3-1-优势" class="headerlink" title="2.2.1.3.1. 优势"></a>2.2.1.3.1. 优势</h6><ol>
 <li>移植性高<ol>
 <li>由于字节码解释器是 <code>JVM</code> 的设计团队<strong>使用</strong> <code>C++</code> 语言编写的，所以只要 <code>C++</code> 语言<strong>适配</strong>了的系统（即该系统<strong>拥有</strong>兼容的 <code>C++</code> 编译器、<code>C++</code> 运行时环境），我们就可以在该系统上<strong>使用</strong>字节码解释器</li>
 </ol>
 </li>
 </ol>
 <hr>
-<h6 id="1-2-1-3-2-劣势"><a href="#1-2-1-3-2-劣势" class="headerlink" title="1.2.1.3.2. 劣势"></a>1.2.1.3.2. 劣势</h6><ol>
+<h6 id="2-2-1-3-2-劣势"><a href="#2-2-1-3-2-劣势" class="headerlink" title="2.2.1.3.2. 劣势"></a>2.2.1.3.2. 劣势</h6><ol>
 <li><hr>
 <ol>
 <li>我们知道：当字节码解释器解释执行 <code>JVM</code> 字节码指令时，其实就是该解释器进行一次 <code>while</code> 循环，然后根据 <code>switch-case</code> 语句调用一次该 <code>JVM</code> 字节码指令对应的 <code>C++</code> 方法</li>
@@ -377,15 +380,15 @@
 </li>
 </ol>
 <hr>
-<h5 id="1-2-1-4-字节码解释器相关产品"><a href="#1-2-1-4-字节码解释器相关产品" class="headerlink" title="1.2.1.4. 字节码解释器相关产品"></a>1.2.1.4. 字节码解释器相关产品</h5><ol>
+<h5 id="2-2-1-4-字节码解释器相关产品"><a href="#2-2-1-4-字节码解释器相关产品" class="headerlink" title="2.2.1.4. 字节码解释器相关产品"></a>2.2.1.4. 字节码解释器相关产品</h5><ol>
 <li><code>Zero</code> 解释器</li>
 </ol>
 <hr>
-<h4 id="1-2-2-模板解释器"><a href="#1-2-2-模板解释器" class="headerlink" title="1.2.2. 模板解释器"></a>1.2.2. 模板解释器</h4><h5 id="1-2-2-1-模板解释器概述"><a href="#1-2-2-1-模板解释器概述" class="headerlink" title="1.2.2.1. 模板解释器概述"></a>1.2.2.1. 模板解释器概述</h5><p>模板解释器是指：<code>JVM</code> 的设计团队使用汇编语言编写的解释器</p>
+<h4 id="2-2-2-模板解释器"><a href="#2-2-2-模板解释器" class="headerlink" title="2.2.2. 模板解释器"></a>2.2.2. 模板解释器</h4><h5 id="2-2-2-1-模板解释器概述"><a href="#2-2-2-1-模板解释器概述" class="headerlink" title="2.2.2.1. 模板解释器概述"></a>2.2.2.1. 模板解释器概述</h5><p>模板解释器是指：<code>JVM</code> 的设计团队使用汇编语言编写的解释器</p>
 <hr>
-<h5 id="1-2-2-2-模板解释器底层原理"><a href="#1-2-2-2-模板解释器底层原理" class="headerlink" title="1.2.2.2. 模板解释器底层原理"></a>1.2.2.2. 模板解释器底层原理</h5><p>模板解释器的底层原理是指：在我们启动 <code>JVM</code> 的过程中，模板解释器会为每一条 <code>JVM</code> 字节码指令生成 <code>CPU</code> 对应的机器码指令</p>
+<h5 id="2-2-2-2-模板解释器底层原理"><a href="#2-2-2-2-模板解释器底层原理" class="headerlink" title="2.2.2.2. 模板解释器底层原理"></a>2.2.2.2. 模板解释器底层原理</h5><p>模板解释器的底层原理是指：在我们启动 <code>JVM</code> 的过程中，模板解释器会为每一条 <code>JVM</code> 字节码指令生成 <code>CPU</code> 对应的机器码指令</p>
 <hr>
-<h5 id="1-2-2-3-模板解释器相关流程"><a href="#1-2-2-3-模板解释器相关流程" class="headerlink" title="1.2.2.3. 模板解释器相关流程"></a>1.2.2.3. 模板解释器相关流程</h5><p>当模板解释器解释执行 <code>JVM</code> 字节码指令时，其实就是该解释器读取当前要去执行的 <code>JVM</code> 字节码指令，然后直接跳转到该 <code>JVM</code> 字节码指令被该解释器编译后的 <code>CPU</code> 对应的机器码指令并执行</p>
+<h5 id="2-2-2-3-模板解释器相关流程"><a href="#2-2-2-3-模板解释器相关流程" class="headerlink" title="2.2.2.3. 模板解释器相关流程"></a>2.2.2.3. 模板解释器相关流程</h5><p>当模板解释器解释执行 <code>JVM</code> 字节码指令时，其实就是该解释器读取当前要去执行的 <code>JVM</code> 字节码指令，然后直接跳转到该 <code>JVM</code> 字节码指令被该解释器编译后的 <code>CPU</code> 对应的机器码指令并执行</p>
 <p>在该解释器执行完该 <code>CPU</code> 对应的机器码指令之后，该解释器会再次读取下一条要去执行的 <code>JVM</code> 字节码指令，然后再跳转到该 <code>JVM</code> 字节码指令被该解释器编译后的 <code>CPU</code> 对应的机器码指令并执行</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -394,7 +397,7 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="2-JIT-编译器"><a href="#2-JIT-编译器" class="headerlink" title="2. JIT 编译器"></a>2. JIT 编译器</h2><h3 id="2-1-JIT-编译器概述"><a href="#2-1-JIT-编译器概述" class="headerlink" title="2.1. JIT 编译器概述"></a>2.1. JIT 编译器概述</h3><p><code>JIT</code> 编译器（<code>JIT Compiler</code>）用于将热点的 <code>Java</code> 代码被 <code>javac</code> 编译器编译后的 <code>JVM</code> 字节码指令编译成 <code>CPU</code> 对应的机器码指令（需要注意的是：在后文中，我们简称为热点的 <code>Java</code> 代码），并在该代码的基础上进行了一系列的性能的优化</p>
+<h2 id="3-JIT-编译器"><a href="#3-JIT-编译器" class="headerlink" title="3. JIT 编译器"></a>3. JIT 编译器</h2><h3 id="3-1-JIT-编译器概述"><a href="#3-1-JIT-编译器概述" class="headerlink" title="3.1. JIT 编译器概述"></a>3.1. JIT 编译器概述</h3><p><code>JIT</code> 编译器（<code>JIT Compiler</code>）用于将热点的 <code>Java</code> 代码被 <code>javac</code> 编译器编译后的 <code>JVM</code> 字节码指令编译成 <code>CPU</code> 对应的机器码指令（需要注意的是：在后文中，我们简称为热点的 <code>Java</code> 代码），并在该代码的基础上进行了一系列的性能的优化</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -402,14 +405,14 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-2-JIT-编译器组成部分"><a href="#2-2-JIT-编译器组成部分" class="headerlink" title="2.2. JIT 编译器组成部分"></a>2.2. JIT 编译器组成部分</h3><ol>
+<h3 id="3-2-JIT-编译器组成部分"><a href="#3-2-JIT-编译器组成部分" class="headerlink" title="3.2. JIT 编译器组成部分"></a>3.2. JIT 编译器组成部分</h3><ol>
 <li><code>C1</code> 编译器</li>
 <li><code>C2</code> 编译器</li>
 </ol>
 <hr>
-<h3 id="2-3-JIT-编译器相关流程"><a href="#2-3-JIT-编译器相关流程" class="headerlink" title="2.3. JIT 编译器相关流程"></a>2.3. JIT 编译器相关流程</h3><p>详见下文：<code>JVM</code> 相关流程-分层编译的过程</p>
+<h3 id="3-3-JIT-编译器相关流程"><a href="#3-3-JIT-编译器相关流程" class="headerlink" title="3.3. JIT 编译器相关流程"></a>3.3. JIT 编译器相关流程</h3><p>详见下文：<code>JVM</code> 相关流程-分层编译的过程</p>
 <hr>
-<h2 id="3-垃圾回收器"><a href="#3-垃圾回收器" class="headerlink" title="3. 垃圾回收器"></a>3. 垃圾回收器</h2><h3 id="3-1-垃圾回收器前置基础"><a href="#3-1-垃圾回收器前置基础" class="headerlink" title="3.1. 垃圾回收器前置基础"></a>3.1. 垃圾回收器前置基础</h3><h4 id="3-1-1-垃圾回收概述"><a href="#3-1-1-垃圾回收概述" class="headerlink" title="3.1.1. 垃圾回收概述"></a>3.1.1. 垃圾回收概述</h4><p>垃圾回收器（<code>GC</code>、<code>Garbage Collection</code>）用于在 <code>Java</code> 程序运行的过程中，清理堆区、方法区不再使用的资源，从而达到释放内存空间的目的：</p>
+<h2 id="4-垃圾回收器"><a href="#4-垃圾回收器" class="headerlink" title="4. 垃圾回收器"></a>4. 垃圾回收器</h2><h3 id="4-1-垃圾回收器前置基础"><a href="#4-1-垃圾回收器前置基础" class="headerlink" title="4.1. 垃圾回收器前置基础"></a>4.1. 垃圾回收器前置基础</h3><h4 id="4-1-1-垃圾回收概述"><a href="#4-1-1-垃圾回收概述" class="headerlink" title="4.1.1. 垃圾回收概述"></a>4.1.1. 垃圾回收概述</h4><p>垃圾回收器（<code>GC</code>、<code>Garbage Collection</code>）用于在 <code>Java</code> 程序运行的过程中，清理堆区、方法区不再使用的资源，从而达到释放内存空间的目的：</p>
 <ol>
 <li>清理堆区不再使用的资源<ol>
 <li>清理不再被引用的实例（需要注意的是：堆区是 <code>GC</code> 工作的主要内存区域）</li>
@@ -451,7 +454,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-1-2-垃圾回收相关策略"><a href="#3-1-2-垃圾回收相关策略" class="headerlink" title="3.1.2. 垃圾回收相关策略"></a>3.1.2. 垃圾回收相关策略</h4><ol>
+<h4 id="4-1-2-垃圾回收相关策略"><a href="#4-1-2-垃圾回收相关策略" class="headerlink" title="4.1.2. 垃圾回收相关策略"></a>4.1.2. 垃圾回收相关策略</h4><ol>
 <li>串行垃圾回收策略<ol>
 <li>当垃圾回收器执行垃圾回收时，会暂停其他的所有的执行 <code>Java</code> 代码的线程（术语是：<code>STW</code>），并仅使用单个线程执行垃圾回收</li>
 </ol>
@@ -478,13 +481,13 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-1-3-垃圾回收相关事件"><a href="#3-1-3-垃圾回收相关事件" class="headerlink" title="3.1.3. 垃圾回收相关事件"></a>3.1.3. 垃圾回收相关事件</h4><h5 id="3-1-3-1-新生代回收"><a href="#3-1-3-1-新生代回收" class="headerlink" title="3.1.3.1. 新生代回收"></a>3.1.3.1. 新生代回收</h5><h6 id="3-1-3-1-1-新生代回收概述"><a href="#3-1-3-1-1-新生代回收概述" class="headerlink" title="3.1.3.1.1. 新生代回收概述"></a>3.1.3.1.1. 新生代回收概述</h6><p>新生代回收（<code>Minor GC</code>、<code>Young GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 ➔ 新生代）的内存空间</p>
+<h4 id="4-1-3-垃圾回收相关事件"><a href="#4-1-3-垃圾回收相关事件" class="headerlink" title="4.1.3. 垃圾回收相关事件"></a>4.1.3. 垃圾回收相关事件</h4><h5 id="4-1-3-1-新生代回收"><a href="#4-1-3-1-新生代回收" class="headerlink" title="4.1.3.1. 新生代回收"></a>4.1.3.1. 新生代回收</h5><h6 id="4-1-3-1-1-新生代回收概述"><a href="#4-1-3-1-1-新生代回收概述" class="headerlink" title="4.1.3.1.1. 新生代回收概述"></a>4.1.3.1.1. 新生代回收概述</h6><p>新生代回收（<code>Minor GC</code>、<code>Young GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 ➔ 新生代）的内存空间</p>
 <hr>
-<h6 id="3-1-3-1-2-新生代回收触发条件"><a href="#3-1-3-1-2-新生代回收触发条件" class="headerlink" title="3.1.3.1.2. 新生代回收触发条件"></a>3.1.3.1.2. 新生代回收触发条件</h6><ol>
+<h6 id="4-1-3-1-2-新生代回收触发条件"><a href="#4-1-3-1-2-新生代回收触发条件" class="headerlink" title="4.1.3.1.2. 新生代回收触发条件"></a>4.1.3.1.2. 新生代回收触发条件</h6><ol>
 <li>当（运行时数据区 ➔ 堆区 ➔ <code>Eden</code> 区）的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配 <code>Eden</code> 区的内存空间时，就触发让垃圾回收器执行 <code>Minor GC</code></li>
 </ol>
 <hr>
-<h5 id="3-1-3-2-老年代回收"><a href="#3-1-3-2-老年代回收" class="headerlink" title="3.1.3.2. 老年代回收"></a>3.1.3.2. 老年代回收</h5><p>老年代回收（<code>Major GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 ➔ 老年代）的内存空间</p>
+<h5 id="4-1-3-2-老年代回收"><a href="#4-1-3-2-老年代回收" class="headerlink" title="4.1.3.2. 老年代回收"></a>4.1.3.2. 老年代回收</h5><p>老年代回收（<code>Major GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 ➔ 老年代）的内存空间</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -496,7 +499,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-1-3-3-整堆回收"><a href="#3-1-3-3-整堆回收" class="headerlink" title="3.1.3.3. 整堆回收"></a>3.1.3.3. 整堆回收</h5><p>整堆回收（<code>Full GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 <code>&amp;&amp;</code> 运行时数据区 ➔ 方法区）的内存空间</p>
+<h5 id="4-1-3-3-整堆回收"><a href="#4-1-3-3-整堆回收" class="headerlink" title="4.1.3.3. 整堆回收"></a>4.1.3.3. 整堆回收</h5><p>整堆回收（<code>Full GC</code>）是指：垃圾回收器垃圾回收（运行时数据区 ➔ 堆区 <code>&amp;&amp;</code> 运行时数据区 ➔ 方法区）的内存空间</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -504,7 +507,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-1-3-4-混合回收"><a href="#3-1-3-4-混合回收" class="headerlink" title="3.1.3.4. 混合回收"></a>3.1.3.4. 混合回收</h5><p>混合回收（<code>Mixed GC</code>）是指：垃圾回收器垃圾回收（所有运行时数据区 ➔ 堆区 ➔ 新生代 <code>&amp;&amp;</code> 部分运行时数据区 ➔ 堆区 ➔ 老年代）的 <code>Region</code> 的内存空间</p>
+<h5 id="4-1-3-4-混合回收"><a href="#4-1-3-4-混合回收" class="headerlink" title="4.1.3.4. 混合回收"></a>4.1.3.4. 混合回收</h5><p>混合回收（<code>Mixed GC</code>）是指：垃圾回收器垃圾回收（所有运行时数据区 ➔ 堆区 ➔ 新生代 <code>&amp;&amp;</code> 部分运行时数据区 ➔ 堆区 ➔ 老年代）的 <code>Region</code> 的内存空间</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -512,16 +515,16 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-1-4-垃圾标记相关算法"><a href="#3-1-4-垃圾标记相关算法" class="headerlink" title="3.1.4. 垃圾标记相关算法"></a>3.1.4. 垃圾标记相关算法</h4><h5 id="3-1-4-1-垃圾标记算法概述"><a href="#3-1-4-1-垃圾标记算法概述" class="headerlink" title="3.1.4.1. 垃圾标记算法概述"></a>3.1.4.1. 垃圾标记算法概述</h5><p>在垃圾回收器执行垃圾回收之前，必须区分实例是否已经 “死亡”</p>
+<h4 id="4-1-4-垃圾标记相关算法"><a href="#4-1-4-垃圾标记相关算法" class="headerlink" title="4.1.4. 垃圾标记相关算法"></a>4.1.4. 垃圾标记相关算法</h4><h5 id="4-1-4-1-垃圾标记算法概述"><a href="#4-1-4-1-垃圾标记算法概述" class="headerlink" title="4.1.4.1. 垃圾标记算法概述"></a>4.1.4.1. 垃圾标记算法概述</h5><p>在垃圾回收器执行垃圾回收之前，必须区分实例是否已经 “死亡”</p>
 <hr>
-<h5 id="3-1-4-2-垃圾标记算法相关分类"><a href="#3-1-4-2-垃圾标记算法相关分类" class="headerlink" title="3.1.4.2. 垃圾标记算法相关分类"></a>3.1.4.2. 垃圾标记算法相关分类</h5><ol>
+<h5 id="4-1-4-2-垃圾标记算法相关分类"><a href="#4-1-4-2-垃圾标记算法相关分类" class="headerlink" title="4.1.4.2. 垃圾标记算法相关分类"></a>4.1.4.2. 垃圾标记算法相关分类</h5><ol>
 <li>引用计数算法</li>
 <li>可达性分析算法</li>
 </ol>
 <hr>
-<h5 id="3-1-4-3-引用计数算法"><a href="#3-1-4-3-引用计数算法" class="headerlink" title="3.1.4.3. 引用计数算法"></a>3.1.4.3. 引用计数算法</h5><h6 id="3-1-4-3-1-引用计数算法概述"><a href="#3-1-4-3-1-引用计数算法概述" class="headerlink" title="3.1.4.3.1. 引用计数算法概述"></a>3.1.4.3.1. 引用计数算法概述</h6><p>引用计数算法是指：每个实例维护一个 <code>int</code> 类型的属性（术语是：计数器），用于记录该实例被引用的次数（需要注意的是：当计数器为 <code>0</code> 时，说明实例已经“死亡”）</p>
+<h5 id="4-1-4-3-引用计数算法"><a href="#4-1-4-3-引用计数算法" class="headerlink" title="4.1.4.3. 引用计数算法"></a>4.1.4.3. 引用计数算法</h5><h6 id="4-1-4-3-1-引用计数算法概述"><a href="#4-1-4-3-1-引用计数算法概述" class="headerlink" title="4.1.4.3.1. 引用计数算法概述"></a>4.1.4.3.1. 引用计数算法概述</h6><p>引用计数算法是指：每个实例维护一个 <code>int</code> 类型的属性（术语是：计数器），用于记录该实例被引用的次数（需要注意的是：当计数器为 <code>0</code> 时，说明实例已经“死亡”）</p>
 <hr>
-<h6 id="3-1-4-3-2-引用计数算法优缺点"><a href="#3-1-4-3-2-引用计数算法优缺点" class="headerlink" title="3.1.4.3.2. 引用计数算法优缺点"></a>3.1.4.3.2. 引用计数算法优缺点</h6><p><font color="#92d050">1. 优点</font></p>
+<h6 id="4-1-4-3-2-引用计数算法优缺点"><a href="#4-1-4-3-2-引用计数算法优缺点" class="headerlink" title="4.1.4.3.2. 引用计数算法优缺点"></a>4.1.4.3.2. 引用计数算法优缺点</h6><p><font color="#92d050">1. 优点</font></p>
 <ol>
 <li><code>JVM</code> 实现引用计数算法相对简单</li>
 <li>垃圾回收器识别已经 “死亡” 的实例相对容易</li>
@@ -541,7 +544,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-1-4-4-可达性分析算法"><a href="#3-1-4-4-可达性分析算法" class="headerlink" title="3.1.4.4. 可达性分析算法"></a>3.1.4.4. 可达性分析算法</h5><p>可达性分析算法（根搜索算法、追踪性垃圾收集算法）是以根对象集合（<code>GC Roots</code>，一组始终处于活跃状态的引用）为起始点，自上而下地搜索与这些根对象相关联的目标对象是否可达,内存中的所有存活对象，都会被根对象集合直接或间接连接</p>
+<h5 id="4-1-4-4-可达性分析算法"><a href="#4-1-4-4-可达性分析算法" class="headerlink" title="4.1.4.4. 可达性分析算法"></a>4.1.4.4. 可达性分析算法</h5><p>可达性分析算法（根搜索算法、追踪性垃圾收集算法）是以根对象集合（<code>GC Roots</code>，一组始终处于活跃状态的引用）为起始点，自上而下地搜索与这些根对象相关联的目标对象是否可达,内存中的所有存活对象，都会被根对象集合直接或间接连接</p>
 <p>搜索过程中所经过的路径被称为引用链（<code>Reference Chain</code>），如果某个目标对象在内存中没有任何引用链与<code> GC Roots</code> 相连，那么它就是不可达的，也就意味着该对象已死亡</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -552,15 +555,15 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-1-5-垃圾清除相关算法"><a href="#3-1-5-垃圾清除相关算法" class="headerlink" title="3.1.5. 垃圾清除相关算法"></a>3.1.5. 垃圾清除相关算法</h4><ol>
+<h4 id="4-1-5-垃圾清除相关算法"><a href="#4-1-5-垃圾清除相关算法" class="headerlink" title="4.1.5. 垃圾清除相关算法"></a>4.1.5. 垃圾清除相关算法</h4><ol>
 <li>标记-清除算法</li>
 <li>标记-复制算法</li>
 <li>标记-整理算法</li>
 </ol>
-<h5 id="3-1-5-1-标记-清除算法"><a href="#3-1-5-1-标记-清除算法" class="headerlink" title="3.1.5.1. 标记-清除算法"></a>3.1.5.1. 标记-清除算法</h5><h6 id="3-1-5-1-1-标记-清除算法概述"><a href="#3-1-5-1-1-标记-清除算法概述" class="headerlink" title="3.1.5.1.1. 标记-清除算法概述"></a>3.1.5.1.1. 标记-清除算法概述</h6><p>标记-清除算法是垃圾清除算法中最基本、最古老的一种，也是许多垃圾清除算法的基础</p>
+<h5 id="4-1-5-1-标记-清除算法"><a href="#4-1-5-1-标记-清除算法" class="headerlink" title="4.1.5.1. 标记-清除算法"></a>4.1.5.1. 标记-清除算法</h5><h6 id="4-1-5-1-1-标记-清除算法概述"><a href="#4-1-5-1-1-标记-清除算法概述" class="headerlink" title="4.1.5.1.1. 标记-清除算法概述"></a>4.1.5.1.1. 标记-清除算法概述</h6><p>标记-清除算法是垃圾清除算法中最基本、最古老的一种，也是许多垃圾清除算法的基础</p>
 <hr>
-<h6 id="3-1-5-1-2-标记-清除算法相关流程"><a href="#3-1-5-1-2-标记-清除算法相关流程" class="headerlink" title="3.1.5.1.2. 标记-清除算法相关流程"></a>3.1.5.1.2. 标记-清除算法相关流程</h6><hr>
-<h6 id="3-1-5-1-3-标记-清除算法"><a href="#3-1-5-1-3-标记-清除算法" class="headerlink" title="3.1.5.1.3. 标记-清除算法"></a>3.1.5.1.3. 标记-清除算法</h6><p>标记-清除算法是垃圾回收中最基本和最古老的一种算法，也是许多现代垃圾回收算法的基础，其相关流程主要包括：</p>
+<h6 id="4-1-5-1-2-标记-清除算法相关流程"><a href="#4-1-5-1-2-标记-清除算法相关流程" class="headerlink" title="4.1.5.1.2. 标记-清除算法相关流程"></a>4.1.5.1.2. 标记-清除算法相关流程</h6><hr>
+<h6 id="4-1-5-1-3-标记-清除算法"><a href="#4-1-5-1-3-标记-清除算法" class="headerlink" title="4.1.5.1.3. 标记-清除算法"></a>4.1.5.1.3. 标记-清除算法</h6><p>标记-清除算法是垃圾回收中最基本和最古老的一种算法，也是许多现代垃圾回收算法的基础，其相关流程主要包括：</p>
 <ol>
 <li>标记阶段<ol>
 <li>垃圾回收器从一组被称为 <code>GC Roots</code> 的对象出发，遍历所有从 <code>GC Roots</code> 可达的对象，并标记这些对象为 “存活” （通常通过在对象头中设置一个标记位 <code>mark bit</code> 来实现）</li>
@@ -599,7 +602,7 @@
 </ol>
 </blockquote>
 <hr>
-<h6 id="3-1-5-1-4-标记-复制算法"><a href="#3-1-5-1-4-标记-复制算法" class="headerlink" title="3.1.5.1.4. 标记-复制算法"></a>3.1.5.1.4. 标记-复制算法</h6><p>标记-复制算法的主要流程包括：</p>
+<h6 id="4-1-5-1-4-标记-复制算法"><a href="#4-1-5-1-4-标记-复制算法" class="headerlink" title="4.1.5.1.4. 标记-复制算法"></a>4.1.5.1.4. 标记-复制算法</h6><p>标记-复制算法的主要流程包括：</p>
 <ol>
 <li>标记阶段<ol>
 <li>垃圾回收器从一组被称为 <code>GC Roots</code> 的对象出发，遍历所有从 <code>GC Roots</code> 可达的对象，并标记这些对象为 “存活” （通常通过在对象头中设置一个标记位 <code>mark bit</code> 来实现）</li>
@@ -640,7 +643,7 @@
 </ol>
 <p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-5.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h6 id="3-1-5-1-5-标记-整理算法（标记压缩算法）"><a href="#3-1-5-1-5-标记-整理算法（标记压缩算法）" class="headerlink" title="3.1.5.1.5. 标记-整理算法（标记压缩算法）"></a>3.1.5.1.5. 标记-整理算法（标记压缩算法）</h6><p>标记-整理算法是垃圾回收领域中一种重要的算法，它融合了标记-清除算法的优点，同时解决了其所带来的内存碎片问题。因此，它常被视为标记-清除算法的升级版，即 “标记-清除 <code>plus</code>”。</p>
+<h6 id="4-1-5-1-5-标记-整理算法（标记压缩算法）"><a href="#4-1-5-1-5-标记-整理算法（标记压缩算法）" class="headerlink" title="4.1.5.1.5. 标记-整理算法（标记压缩算法）"></a>4.1.5.1.5. 标记-整理算法（标记压缩算法）</h6><p>标记-整理算法是垃圾回收领域中一种重要的算法，它融合了标记-清除算法的优点，同时解决了其所带来的内存碎片问题。因此，它常被视为标记-清除算法的升级版，即 “标记-清除 <code>plus</code>”。</p>
 <p>标记-整理算法的主要流程包括：</p>
 <ol>
 <li>标记阶段<ol>
@@ -675,7 +678,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="3-2-垃圾回收器相关分类"><a href="#3-2-垃圾回收器相关分类" class="headerlink" title="3.2. 垃圾回收器相关分类"></a>3.2. 垃圾回收器相关分类</h3><ol>
+<h3 id="4-2-垃圾回收器相关分类"><a href="#4-2-垃圾回收器相关分类" class="headerlink" title="4.2. 垃圾回收器相关分类"></a>4.2. 垃圾回收器相关分类</h3><ol>
 <li>以垃圾回收器支持的垃圾回收相关事件分类：<ol>
 <li>整堆垃圾回收器<ol>
 <li><code>G1 GC</code></li>
@@ -719,7 +722,7 @@
 </ol>
 <p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-13.png" srcset="/img/loading.gif" lazyload></p>
 <hr>
-<h3 id="3-3-垃圾回收器常用组合"><a href="#3-3-垃圾回收器常用组合" class="headerlink" title="3.3. 垃圾回收器常用组合"></a>3.3. 垃圾回收器常用组合</h3><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-8.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="4-3-垃圾回收器常用组合"><a href="#4-3-垃圾回收器常用组合" class="headerlink" title="4.3. 垃圾回收器常用组合"></a>4.3. 垃圾回收器常用组合</h3><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-8.png" srcset="/img/loading.gif" lazyload></p>
 <table>
 <thead>
 <tr>
@@ -773,20 +776,20 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="3-3-1-Serial-GC-Serial-Old-GC"><a href="#3-3-1-Serial-GC-Serial-Old-GC" class="headerlink" title="3.3.1. Serial GC + Serial Old GC"></a>3.3.1. Serial GC + Serial Old GC</h4><h5 id="3-3-1-1-Serial-GC-Serial-Old-GC-支持的垃圾回收相关事件"><a href="#3-3-1-1-Serial-GC-Serial-Old-GC-支持的垃圾回收相关事件" class="headerlink" title="3.3.1.1. Serial GC + Serial Old GC 支持的垃圾回收相关事件"></a>3.3.1.1. Serial GC + Serial Old GC 支持的垃圾回收相关事件</h5><p><code>Serial GC + Serial Old GC</code> 支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
+<h4 id="4-3-1-Serial-GC-Serial-Old-GC"><a href="#4-3-1-Serial-GC-Serial-Old-GC" class="headerlink" title="4.3.1. Serial GC + Serial Old GC"></a>4.3.1. Serial GC + Serial Old GC</h4><h5 id="4-3-1-1-Serial-GC-Serial-Old-GC-支持的垃圾回收相关事件"><a href="#4-3-1-1-Serial-GC-Serial-Old-GC-支持的垃圾回收相关事件" class="headerlink" title="4.3.1.1. Serial GC + Serial Old GC 支持的垃圾回收相关事件"></a>4.3.1.1. Serial GC + Serial Old GC 支持的垃圾回收相关事件</h5><p><code>Serial GC + Serial Old GC</code> 支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>Serial GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>Serial Old GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 </ol>
 <hr>
-<h5 id="3-3-1-2-Serial-GC-Serial-Old-GC-相关流程"><a href="#3-3-1-2-Serial-GC-Serial-Old-GC-相关流程" class="headerlink" title="3.3.1.2. Serial GC + Serial Old GC 相关流程"></a>3.3.1.2. Serial GC + Serial Old GC 相关流程</h5><h6 id="3-3-1-2-1-Serial-GC-执行-Minor-GC-的过程"><a href="#3-3-1-2-1-Serial-GC-执行-Minor-GC-的过程" class="headerlink" title="3.3.1.2.1. Serial GC 执行 Minor GC 的过程"></a>3.3.1.2.1. Serial GC 执行 Minor GC 的过程</h6><p>当（运行时数据区 ➔ 堆区 ➔ <code>Eden</code> 区）的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配 <code>Eden</code> 区的内存空间时，就会触发 <code>Serial GC</code> 执行 <code>Minor GC</code></p>
+<h5 id="4-3-1-2-Serial-GC-Serial-Old-GC-相关流程"><a href="#4-3-1-2-Serial-GC-Serial-Old-GC-相关流程" class="headerlink" title="4.3.1.2. Serial GC + Serial Old GC 相关流程"></a>4.3.1.2. Serial GC + Serial Old GC 相关流程</h5><h6 id="4-3-1-2-1-Serial-GC-执行-Minor-GC-的过程"><a href="#4-3-1-2-1-Serial-GC-执行-Minor-GC-的过程" class="headerlink" title="4.3.1.2.1. Serial GC 执行 Minor GC 的过程"></a>4.3.1.2.1. Serial GC 执行 Minor GC 的过程</h6><p>当（运行时数据区 ➔ 堆区 ➔ <code>Eden</code> 区）的剩余的内存空间不足，<code>JVM</code> 不能直接为新的实例分配 <code>Eden</code> 区的内存空间时，就会触发 <code>Serial GC</code> 执行 <code>Minor GC</code></p>
 <ol>
 <li>首先，<code>Serial GC</code> 会执行 <code>STW</code></li>
 <li>然后，<code>Serial GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li>在 <code>Serial GC</code> 执行完 <code>Minor GC</code> 之后，<code>Serial GC</code> 会恢复被暂停的执行 <code>Java</code> 代码的线程</li>
 </ol>
 <hr>
-<h6 id="3-3-1-2-2-Serial-Old-GC-执行-Full-GC-的过程"><a href="#3-3-1-2-2-Serial-Old-GC-执行-Full-GC-的过程" class="headerlink" title="3.3.1.2.2. Serial Old GC 执行 Full GC 的过程"></a>3.3.1.2.2. Serial Old GC 执行 Full GC 的过程</h6><p>触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件有：</p>
+<h6 id="4-3-1-2-2-Serial-Old-GC-执行-Full-GC-的过程"><a href="#4-3-1-2-2-Serial-Old-GC-执行-Full-GC-的过程" class="headerlink" title="4.3.1.2.2. Serial Old GC 执行 Full GC 的过程"></a>4.3.1.2.2. Serial Old GC 执行 Full GC 的过程</h6><p>触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件有：</p>
 <p>1. </p>
 <ol start="2">
 <li>当堆区中的老年代的剩余的内存空间不足，垃圾回收器在执行 <code>Minor GC</code> 的过程中，堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代失败时，就会触发 <code>Serial Old GC</code> 执行 <code>Full GC</code></li>
@@ -805,7 +808,7 @@
 <li>在 <code>Serial Old GC</code> 执行完 <code>Full GC</code> 后，<code>Serial Old GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h4 id="3-3-2-Parallel-Scavenge-GC-Parallel-Old-GC"><a href="#3-3-2-Parallel-Scavenge-GC-Parallel-Old-GC" class="headerlink" title="3.3.2. Parallel Scavenge GC + Parallel Old GC"></a>3.3.2. Parallel Scavenge GC + Parallel Old GC</h4><h5 id="3-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述"><a href="#3-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述" class="headerlink" title="3.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述"></a>3.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java8</code> 的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
+<h4 id="4-3-2-Parallel-Scavenge-GC-Parallel-Old-GC"><a href="#4-3-2-Parallel-Scavenge-GC-Parallel-Old-GC" class="headerlink" title="4.3.2. Parallel Scavenge GC + Parallel Old GC"></a>4.3.2. Parallel Scavenge GC + Parallel Old GC</h4><h5 id="4-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述"><a href="#4-3-2-1-Parallel-Scavenge-GC-Parallel-Old-GC-概述" class="headerlink" title="4.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述"></a>4.3.2.1. Parallel Scavenge GC + Parallel Old GC 概述</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java8</code> 的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>Parallel Scavenge GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>Parallel Old GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
@@ -832,9 +835,9 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程"><a href="#3-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程" class="headerlink" title="3.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程"></a>3.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 的流程相似于 <code>Serial GC + Serial Old GC</code> 的流程，只不过 <code>Parallel Scavenge GC + Parallel Old GC</code> 是使用多线程执行垃圾回收，并且具备自适应的调节的能力</p>
+<h5 id="4-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程"><a href="#4-3-2-2-Parallel-Scavenge-GC-Parallel-Old-GC-相关流程" class="headerlink" title="4.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程"></a>4.3.2.2. Parallel Scavenge GC + Parallel Old GC 相关流程</h5><p><code>Parallel Scavenge GC + Parallel Old GC</code> 的流程相似于 <code>Serial GC + Serial Old GC</code> 的流程，只不过 <code>Parallel Scavenge GC + Parallel Old GC</code> 是使用多线程执行垃圾回收，并且具备自适应的调节的能力</p>
 <hr>
-<h4 id="3-3-3-ParNew-GC-CMS-GC"><a href="#3-3-3-ParNew-GC-CMS-GC" class="headerlink" title="3.3.3. ParNew GC + CMS GC"></a>3.3.3. ParNew GC + CMS GC</h4><h5 id="3-3-3-1-ParNew-GC-CMS-GC-概述"><a href="#3-3-3-1-ParNew-GC-CMS-GC-概述" class="headerlink" title="3.3.3.1. ParNew GC + CMS GC 概述"></a>3.3.3.1. ParNew GC + CMS GC 概述</h5><p><code>ParNew GC + CMS GC</code> 支持 <code>Minor GC</code>、<code>Major GC</code>、<code>Full GC</code>：</p>
+<h4 id="4-3-3-ParNew-GC-CMS-GC"><a href="#4-3-3-ParNew-GC-CMS-GC" class="headerlink" title="4.3.3. ParNew GC + CMS GC"></a>4.3.3. ParNew GC + CMS GC</h4><h5 id="4-3-3-1-ParNew-GC-CMS-GC-概述"><a href="#4-3-3-1-ParNew-GC-CMS-GC-概述" class="headerlink" title="4.3.3.1. ParNew GC + CMS GC 概述"></a>4.3.3.1. ParNew GC + CMS GC 概述</h5><p><code>ParNew GC + CMS GC</code> 支持 <code>Minor GC</code>、<code>Major GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>ParNew GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>CMS GC</code> 使用多线程，采用并行垃圾回收策略、并发垃圾回收策略，使用标记-清除算法执行 <code>Major GC</code></li>
@@ -856,9 +859,9 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-3-2-ParNew-GC-CMS-GC-相关流程"><a href="#3-3-3-2-ParNew-GC-CMS-GC-相关流程" class="headerlink" title="3.3.3.2. ParNew GC + CMS GC 相关流程"></a>3.3.3.2. ParNew GC + CMS GC 相关流程</h5><h6 id="3-3-3-2-1-Minor-GC-流程"><a href="#3-3-3-2-1-Minor-GC-流程" class="headerlink" title="3.3.3.2.1. Minor GC 流程"></a>3.3.3.2.1. Minor GC 流程</h6><p><code>ParNew GC</code> 执行 <code>Minor GC</code> 的流程相似于 <code>Parallel Scavenge GC</code> 执行 <code>Minor GC</code> 的流程，只不过 <code>ParNew GC</code> 不具备自适应调节的能力</p>
+<h5 id="4-3-3-2-ParNew-GC-CMS-GC-相关流程"><a href="#4-3-3-2-ParNew-GC-CMS-GC-相关流程" class="headerlink" title="4.3.3.2. ParNew GC + CMS GC 相关流程"></a>4.3.3.2. ParNew GC + CMS GC 相关流程</h5><h6 id="4-3-3-2-1-Minor-GC-流程"><a href="#4-3-3-2-1-Minor-GC-流程" class="headerlink" title="4.3.3.2.1. Minor GC 流程"></a>4.3.3.2.1. Minor GC 流程</h6><p><code>ParNew GC</code> 执行 <code>Minor GC</code> 的流程相似于 <code>Parallel Scavenge GC</code> 执行 <code>Minor GC</code> 的流程，只不过 <code>ParNew GC</code> 不具备自适应调节的能力</p>
 <hr>
-<h6 id="3-3-3-2-2-Major-GC-流程"><a href="#3-3-3-2-2-Major-GC-流程" class="headerlink" title="3.3.3.2.2. Major GC 流程"></a>3.3.3.2.2. Major GC 流程</h6><p>当堆区中的剩余的老年代的内存空间的使用率达到某阈值时，就会触发 <code>CMS GC</code> 执行 <code>Major GC</code>：</p>
+<h6 id="4-3-3-2-2-Major-GC-流程"><a href="#4-3-3-2-2-Major-GC-流程" class="headerlink" title="4.3.3.2.2. Major GC 流程"></a>4.3.3.2.2. Major GC 流程</h6><p>当堆区中的剩余的老年代的内存空间的使用率达到某阈值时，就会触发 <code>CMS GC</code> 执行 <code>Major GC</code>：</p>
 <ol>
 <li>初始标记阶段（<code>Initial Mark Phase</code>）<ol>
 <li>在<code>CMS GC</code> 进行初始标记阶段的过程中，<code>CMS GC</code> 使用多线程，采用并行垃圾回收策略，标记出 <code>GC Roots</code> 直接可达的实例（需要注意的是：不做深度遍历)</li>
@@ -887,10 +890,10 @@
 </li>
 </ol>
 <hr>
-<h6 id="3-3-3-2-3-Full-GC-流程"><a href="#3-3-3-2-3-Full-GC-流程" class="headerlink" title="3.3.3.2.3. Full GC 流程"></a>3.3.3.2.3. Full GC 流程</h6><p>想象这样一个问题：虽然 <code>CMS GC</code> 的策略是 “主动预防“。但是在运行 <code>Java</code> 程序的过程中，仍然可能出现一些极端的情况（例如：<code>CMS GC</code> 执行 <code>Major GC</code> 垃圾回收堆区中的老年代中的实例的速度，赶不上堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代的速度）</p>
+<h6 id="4-3-3-2-3-Full-GC-流程"><a href="#4-3-3-2-3-Full-GC-流程" class="headerlink" title="4.3.3.2.3. Full GC 流程"></a>4.3.3.2.3. Full GC 流程</h6><p>想象这样一个问题：虽然 <code>CMS GC</code> 的策略是 “主动预防“。但是在运行 <code>Java</code> 程序的过程中，仍然可能出现一些极端的情况（例如：<code>CMS GC</code> 执行 <code>Major GC</code> 垃圾回收堆区中的老年代中的实例的速度，赶不上堆区中的 <code>Survivor 0</code> 区、<code>Survivor 1</code> 区中的实例晋升到堆区中的老年代的速度）</p>
 <p>为了解决这一问题，<code>CMS GC</code> 会使用 <code>CMS GC</code> 的后备垃圾回收器（即 <code>Serial Old GC</code>）执行 <code>Full GC</code></p>
 <hr>
-<h4 id="3-3-4-G1-GC"><a href="#3-3-4-G1-GC" class="headerlink" title="3.3.4. G1 GC"></a>3.3.4. G1 GC</h4><h5 id="3-3-4-1-G1-GC-概述"><a href="#3-3-4-1-G1-GC-概述" class="headerlink" title="3.3.4.1. G1 GC 概述"></a>3.3.4.1. G1 GC 概述</h5><p><code>G1 GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java9</code> 及以后的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Mixed GC</code>、<code>Full GC</code>：</p>
+<h4 id="4-3-4-G1-GC"><a href="#4-3-4-G1-GC" class="headerlink" title="4.3.4. G1 GC"></a>4.3.4. G1 GC</h4><h5 id="4-3-4-1-G1-GC-概述"><a href="#4-3-4-1-G1-GC-概述" class="headerlink" title="4.3.4.1. G1 GC 概述"></a>4.3.4.1. G1 GC 概述</h5><p><code>G1 GC</code> 是 <code>HotSpot JVM</code> 在 <code>Java9</code> 及以后的默认的垃圾回收器，支持 <code>Minor GC</code>、<code>Mixed GC</code>、<code>Full GC</code>：</p>
 <ol>
 <li><code>G1 GC</code> 使用多线程，采用并发垃圾回收策略，使用标记-复制算法执行 <code>Minor GC</code></li>
 <li><code>G1 GC</code> 使用多线程，采用并行垃圾回收策略、并发垃圾回收策略，使用标记-清除算法、标记-复制算法执行 <code>Mixed GC</code>（需要注意的是：<code>G1 GC</code> 使用标记-清除算法垃圾回收的是 <code>Humongous</code> 区）</li>
@@ -921,7 +924,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="3-3-4-2-G1-GC-相关流程"><a href="#3-3-4-2-G1-GC-相关流程" class="headerlink" title="3.3.4.2. G1 GC 相关流程"></a>3.3.4.2. G1 GC 相关流程</h5><h6 id="3-3-4-2-1-Minor-GC-流程"><a href="#3-3-4-2-1-Minor-GC-流程" class="headerlink" title="3.3.4.2.1. Minor GC 流程"></a>3.3.4.2.1. Minor GC 流程</h6><p>当堆区中的 <code>Eden</code> 区的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>G1 GC</code> 执行 <code>Minor GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Minor GC</code> 被称之为 “<code>Yong-Only Phase</code>”）：</p>
+<h5 id="4-3-4-2-G1-GC-相关流程"><a href="#4-3-4-2-G1-GC-相关流程" class="headerlink" title="4.3.4.2. G1 GC 相关流程"></a>4.3.4.2. G1 GC 相关流程</h5><h6 id="4-3-4-2-1-Minor-GC-流程"><a href="#4-3-4-2-1-Minor-GC-流程" class="headerlink" title="4.3.4.2.1. Minor GC 流程"></a>4.3.4.2.1. Minor GC 流程</h6><p>当堆区中的 <code>Eden</code> 区的内存空间不足，<code>JVM</code> 不能直接为新的实例分配堆区中的 <code>Eden</code> 区的内存空间时，就会触发 <code>G1 GC</code> 执行 <code>Minor GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Minor GC</code> 被称之为 “<code>Yong-Only Phase</code>”）：</p>
 <ol>
 <li><code>G1 GC</code> 首先会执行 <code>STW</code></li>
 <li>然后 <code>G1 GC</code> 会将所有堆区中的新生代的 <code>Region</code> 存储到回收集合（<code>Cset</code>、<code>Collection Set</code>）</li>
@@ -929,7 +932,7 @@
 <li>在 <code>G1 GC</code> 执行完 <code>Minor GC</code> 后，<code>G1 GC</code> 会恢复运行被 “暂停” 的线程</li>
 </ol>
 <hr>
-<h6 id="3-3-4-2-2-Mixed-GC-流程"><a href="#3-3-4-2-2-Mixed-GC-流程" class="headerlink" title="3.3.4.2.2. Mixed GC 流程"></a>3.3.4.2.2. Mixed GC 流程</h6><p>当堆区中的老年代的内存空间的使用率达到阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
+<h6 id="4-3-4-2-2-Mixed-GC-流程"><a href="#4-3-4-2-2-Mixed-GC-流程" class="headerlink" title="4.3.4.2.2. Mixed GC 流程"></a>4.3.4.2.2. Mixed GC 流程</h6><p>当堆区中的老年代的内存空间的使用率达到阈值时，就会触发 <code>G1 GC</code> 执行 <code>Mixed GC</code>（需要注意的是：在 <code>G1 GC</code> 中，<code>Mixed GC</code> 被称之为 “<code>Space-Reclamation Phase</code>”）：</p>
 <ol>
 <li>初始标记阶段（<code>Initial Mark Phase</code>）<ol>
 <li>在 <code>G1 GC</code> 进行初始标记阶段的过程中，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，标记出 <code>GC Roots</code> 直接可达的实例（需要注意的是：不做深度遍历）</li>
@@ -958,14 +961,14 @@
 </li>
 </ol>
 <hr>
-<h6 id="3-3-4-2-3-Full-GC-流程"><a href="#3-3-4-2-3-Full-GC-流程" class="headerlink" title="3.3.4.2.3. Full GC 流程"></a>3.3.4.2.3. Full GC 流程</h6><p>虽然 <code>G1 GC</code> 的策略也是 “主动预防”。但是在运行 <code>Java</code> 程序的过程中，也可能出现一些极端情况。为了解决这一问题，<code>G1 GC</code> 会执行 <code>Full GC</code>：</p>
+<h6 id="4-3-4-2-3-Full-GC-流程"><a href="#4-3-4-2-3-Full-GC-流程" class="headerlink" title="4.3.4.2.3. Full GC 流程"></a>4.3.4.2.3. Full GC 流程</h6><p>虽然 <code>G1 GC</code> 的策略也是 “主动预防”。但是在运行 <code>Java</code> 程序的过程中，也可能出现一些极端情况。为了解决这一问题，<code>G1 GC</code> 会执行 <code>Full GC</code>：</p>
 <ol>
 <li><code>HotSpot JVM</code> 在 <code>Java 10</code> 之前，<code>G1 GC</code> 使用单线程，采用串行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 <li><code>HotSpot JVM</code> 在 <code>Java10</code> 及以后，<code>G1 GC</code> 使用多线程，采用并行垃圾回收策略，使用标记-整理算法执行 <code>Full GC</code></li>
 </ol>
 <p>触发 <code>G1 GC</code> 执行 <code>Full GC</code> 的条件相似于触发 <code>Serial Old GC</code> 执行 <code>Full GC</code> 的条件，只不过 <code>G1 GC</code> 并不存在传统意义上的 “空间担保分配”（因为它是基于 <code>Region</code> 的）。但是当堆区中的空闲的 <code>Region</code> 的数量不足，<code>G1 GC</code> 在执行 <code>Minor GC</code>、<code>Major GC</code> 的过程中，将 <code>Region</code> 中的实例复制到另一个 <code>Region</code> 失败时，就会触发 <code>G1 GC</code> 执行 <code>Full GC</code>（需要注意的是：这本质上也是一种 “空间担保分配”）</p>
 <hr>
-<h4 id="3-3-5-对象的-finalization-机制"><a href="#3-3-5-对象的-finalization-机制" class="headerlink" title="3.3.5. 对象的 finalization 机制"></a>3.3.5. 对象的 finalization 机制</h4><p><code>Object</code> 类提供了 <code>void finalize()</code> 方法，若某个类对其进行了重写，那么在 <code>GC</code> 该对象之前，会先调用 <code>finalize()</code>，允许对象在销毁前执行一些自定义逻辑</p>
+<h4 id="4-3-5-对象的-finalization-机制"><a href="#4-3-5-对象的-finalization-机制" class="headerlink" title="4.3.5. 对象的 finalization 机制"></a>4.3.5. 对象的 finalization 机制</h4><p><code>Object</code> 类提供了 <code>void finalize()</code> 方法，若某个类对其进行了重写，那么在 <code>GC</code> 该对象之前，会先调用 <code>finalize()</code>，允许对象在销毁前执行一些自定义逻辑</p>
 <p>然而，在调用 <code>finalize()</code> 的时候，可能导致对象 “复活”（即重新与引用链上的某个对象建立关联）。因此，<code>JVM</code> 在判断对象是否可回收时，通常需要经历两次标记过程：</p>
 <ol>
 <li>第一次标记<ol>
@@ -992,32 +995,112 @@
 </ol>
 <p>需要注意的是，从 <code>Java9</code> 开始，<code>Object</code> 类的 <code>void finalize()</code> 方法已经被正式弃用了</p>
 <hr>
-<h1 id="四、JVM-相关流程"><a href="#四、JVM-相关流程" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="类编译的过程（🐂）"><a href="#类编译的过程（🐂）" class="headerlink" title="类编译的过程（🐂）"></a>类编译的过程（🐂）</h2><p>类编译的过程（前端编译）是指：<code>javac</code> 编译器把 <code>.java</code> 文件编译成 <code>.class</code> 文件（即把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令）</p>
-<p>在类编译的过程中，<code>javac</code> 编译器会进行一系列的检查（例如：当我们使用 <code>Java</code> 泛型时，涉及到的数据类型检查），并把语法糖转化为该语法糖对应的逻辑，然后再把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令</p>
+<h2 id="2-类加载的过程"><a href="#2-类加载的过程" class="headerlink" title="2. 类加载的过程"></a>2. 类加载的过程</h2><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-20.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="2-1-加载阶段"><a href="#2-1-加载阶段" class="headerlink" title="2.1. 加载阶段"></a>2.1. 加载阶段</h3><h3 id="2-1-加载阶段-1"><a href="#2-1-加载阶段-1" class="headerlink" title="2.1. 加载阶段"></a>2.1. 加载阶段</h3><p>在加载阶段中，<code>JVM</code> 会使用类加载器进行：</p>
+<ol>
+<li>通过类的全限定名，获取定义该类的字节流（需要注意的是：在下文中，我们统称定义类的字节流为 <code>.class</code> 文件）</li>
+<li>创建类在（运行时数据区 ➔ 方法区）中的运行时数据结构（术语是：<code>Java</code> 类模型）</li>
+<li>创建类的类对象（<code>Class</code> 对象）</li>
+</ol>
+<hr>
+<p>触发加载阶段的条件有：</p>
+<p>JVM（Java 虚拟机）在运行时并不会一次性加载所有的类，而是采取<strong>按需加载</strong>的策略，这被称为<strong>动态加载</strong>。类加载的时机主要分为两种：<strong>启动时加载</strong>和<strong>运行时加载</strong>。</p>
+<ol>
+<li>启动时加载<ol>
+<li>JVM 启动时，会加载启动类，然后执行其 main 方法<ol>
+<li>不会在堆内存中创建启动类的实例对象</li>
+<li>因为 <code>main</code> 方法是一个静态方法，它不需要一个类的实例就可以被调用</li>
+</ol>
+</li>
+<li>同时，JVM 会加载运行程序所需的核心类，例如 <code>java.lang.Object</code>、<code>java.lang.String</code> 以及其他在启动过程中直接或间接被引用的类。</li>
+</ol>
+</li>
+<li>运行时加载<ol>
+<li>这是类加载最常见的场景，常见触发情况有：</li>
+<li>创建类的实例时：<ol>
+<li>当你使用 <code>new</code> 关键字创建一个类的对象时，如果这个类还没有被加载，JVM 会立即加载它。</li>
+<li>例如：<code>MyClass obj = new MyClass();</code> &#x2F;&#x2F; 第一次使用 MyClass 时，会被加载</li>
+</ol>
+</li>
+<li>访问类的静态成员时：<ol>
+<li>当你访问一个类的静态变量（<code>static field</code>）或者调用一个类的静态方法（<code>static method</code>）时，如果该类还没有被加载，JVM 会加载它</li>
+<li>例如：<code>MyClass.staticMethod();</code></li>
+</ol>
+</li>
+<li>使用反射时<ol>
+<li>当你通过 <code>java.lang.reflect</code> 包中的方法，例如 <code>Class.forName(&quot;com.example.MyClass&quot;)</code> 来获取一个类的 <code>Class</code> 对象时，会触发该类的加载</li>
+<li>例如：<code>Class&lt;?&gt; clazz = Class.forName(&quot;com.example.MyClass&quot;);</code></li>
+</ol>
+</li>
+<li>子类被加载时，父类也会被加载<ol>
+<li>当一个类的子类被初始化时，它的父类如果尚未加载，则会首先被加载</li>
+<li>这是因为子类继承了父类的成员，需要确保父类已经就绪</li>
+</ol>
+</li>
+<li>使用 ClassLoader.loadClass()<ol>
+<li>根据给定的类全名（例如 <code>java.lang.String</code> 或 <code>com.example.MyClass</code>）来加载对应的类</li>
+<li>这是更底层、更灵活的加载方式，通常在自定义类加载器时使用</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><code>JVM</code> 在运行时并不会一次性加载所有的类，而是采取按需加载的策略，这被称为动态加载。类加载的时机主要包括：</p>
+<ol>
+<li>启动时加载<ol>
+<li>JVM 在启动时，会加载启动类，并执行其 main 方法<ol>
+<li>并不会在堆内存中创建启动类的实例对象</li>
+<li>这是因为 main 方法是一个静态方法，不需要类的实例就可以被调用（这也是为什么 static 方法无法访问非 static 变量的原因）</li>
+</ol>
+</li>
+<li>同时，JVM 会加载运行程序所需的核心类，例如 java.lang.Object、java.lang.String 以及其他在启动过程中直接或间接被引用的类</li>
+</ol>
+</li>
+<li>运行时加载<ol>
+<li>这是类加载最常见的场景，常见触发情况主要包括：<ol>
+<li>创建类的实例时<ol>
+<li>当你 new 一个类的实例时，如果这个类还没有被加载，JVM 会立即加载它</li>
+</ol>
+</li>
+<li>访问类的静态成员时<ol>
+<li>当你访问一个类的静态变量，或者调用一个类的静态方法时，如果该类还没有被加载，如果这个类还没有被加载，JVM 会立即加载它</li>
+</ol>
+</li>
+<li>使用反射获取 Class 对象时<ol>
+<li>当你通过 java.lang.reflect 包中的方法，例如 Class.forName(“com.example.MyClass”) 来获取一个类的 Class 对象时，如果这个类还没有被加载，JVM 会立即加载它</li>
+</ol>
+</li>
+<li>子类被加载时，父类也会被加载<ol>
+<li>当一个类的子类被初始化时，它的父类如果尚未加载，则会首先被加载</li>
+<li>这是因为子类继承了父类的成员，需要确保父类已经就绪</li>
+</ol>
+</li>
+<li>使用 ClassLoader.loadClass() 时<ol>
+<li>根据类全名（例如 java.lang.String 或 com.example.MyClass）来手动加载对应的类</li>
+<li>这是更底层、更灵活的加载方式，通常在自定义类加载器时使用</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>当遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。在这之前，自然需要先完成加载和验证、准备阶段。</li>
+<li>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时。</li>
+<li>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</li>
+<li>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</li>
+<li>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</li>
+</ul>
+<p>在加载阶段中，类加载器会：</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
-<li>类编译的过程也被称之为前端编译，而分层编译的过程被称之为后端编译</li>
-<li>详见笔记：<code>Java</code> 语法糖<ol>
-<li><code>obsidian</code> 内部链接：<ol>
-<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E8%AF%AD%E6%B3%95%E7%B3%96.md">笔记：Java语法糖</a></li>
-</ol>
-</li>
-<li><code>Hexo</code> 链接：<ol>
-<li><a target="_blank" rel="noopener" href="https://www.notion.so/Java-2d3974fbda5e806388f1f65db943aee7?source=copy_link">https://www.notion.so/Java-2d3974fbda5e806388f1f65db943aee7?source=copy_link</a></li>
-</ol>
-</li>
-</ol>
-</li>
+<li>每一个实例都会在（该实例 ➔ 对象头 ➔ <code>Klass Word</code>）存储该实例所属类的类元数据的内存地址</li>
+<li>当我们想要访问类的类对象时，就需要先找到（该类的类元数据区 ➔ 类型信息 ➔ 类对象的内存地址），然后才能访问该类的类对象</li>
+<li>虽然我们需要先找到（该类的类元数据区 ➔ 类型信息 ➔ 类对象的内存地址），然后才能访问该类的类对象，但是类的类对象才是访问该类的类元数据区中的各种数据的访问入口</li>
 </ol>
 </blockquote>
-<hr>
-<h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-16.png" srcset="/img/loading.gif" lazyload></p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<p>1. </p>
-</blockquote>
-<h3 id="加载阶段"><a href="#加载阶段" class="headerlink" title="加载阶段"></a>加载阶段</h3><p>在加载阶段中，</p>
 <p>加载阶段是类加载过程的第一个阶段，JVM 会在该阶段完成以下三件事：</p>
 <ol>
 <li>通过类的完全限定名获取定义此类的二进制字节流<ol>
@@ -1060,6 +1143,62 @@
 </ol>
 </li>
 </ol>
+<hr>
+<h3 id="2-2-验证阶段"><a href="#2-2-验证阶段" class="headerlink" title="2.2. 验证阶段"></a>2.2. 验证阶段</h3><p>验证阶段是连接阶段的第一个子阶段，在这一阶段，<code>JVM</code> 的主要任务主要包括：</p>
+<ol>
+<li>文件格式验证<ol>
+<li>检查字节码是否符合 Class 文件格式的规范，是否以魔数 0xCAFEBABE 开头。</li>
+<li>确保主版本号和副版本号在 JVM 支持的范围内。</li>
+<li>检查文件结构，如常量池、字段表、方法表等是否符合规范。</li>
+</ol>
+</li>
+<li>元数据验证<ol>
+<li>这个类是否有父类<ol>
+<li>除了 java.lang.Object，所有类都应该有父类</li>
+</ol>
+</li>
+<li>这个类的父类是否是 final 的（final 类不允许被继承）</li>
+<li>这个类是否实现了它所声明实现的所有接口的方法</li>
+<li>类中的字段和方法是否与父类或接口的规范保持一致</li>
+<li>确保类、字段和方法访问权限的正确性（例如，不能覆盖一个 final 方法）</li>
+</ol>
+</li>
+<li>字节码验证<ol>
+<li>控制流分析<ol>
+<li>确保方法体内的控制流是合法的，例如，不会出现跳转到方法体外的指令，或者指令序列是连贯的</li>
+</ol>
+</li>
+<li>类型检查<ol>
+<li>确保在操作数栈上的操作是合法的，例如，不会将一个整数类型的值赋值给一个引用类型的变量，或者对一个非对象类型进行方法调用</li>
+</ol>
+</li>
+<li>栈帧验证<ol>
+<li>验证在方法执行过程中，栈帧（Stack Frame）的操作是正确的，例如，操作数栈的深度不会溢出，局部变量表的索引是合法的</li>
+</ol>
+</li>
+<li>方法调用验证<ol>
+<li>确保方法调用时参数的数量和类型都与目标方法的签名匹配</li>
+</ol>
+</li>
+<li>异常处理验证<ol>
+<li>确保异常处理器（exception handler）是合法的，并且能够正确处理抛出的异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>符号引用验证<ol>
+<li>符号引用中描述的全限定名是否能找到对应的类、字段或方法。</li>
+<li>符号引用中描述的类、字段或方法是否具有访问权限（例如，是否尝试访问一个 private 成员）</li>
+<li>引用的字段或方法是否与被引用的类兼容（例如，对一个接口调用其未定义的方法）</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>实际上，文件格式验证发生在加载阶段之前，而符号引用验证则是在解析阶段进行的。</li>
+</ol>
+</blockquote>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1068,7 +1207,114 @@
 <li>类对象被垃圾回收是类的方法区中的被垃圾回收的条件之一</li>
 </ol>
 </blockquote>
-<h2 id="1-分层编译的过程"><a href="#1-分层编译的过程" class="headerlink" title="1. 分层编译的过程"></a>1. 分层编译的过程</h2><p>分层编译是 <code>HotSpot JVM</code> 特有的概念，用于融合（<code>Client</code> 模式 <code>&amp;&amp;</code> <code>Server</code> 模式）的特性</p>
+<hr>
+<h3 id="2-3-准备阶段"><a href="#2-3-准备阶段" class="headerlink" title="2.3. 准备阶段"></a>2.3. 准备阶段</h3><h4 id="2-3-1-准备阶段概述"><a href="#2-3-1-准备阶段概述" class="headerlink" title="2.3.1. 准备阶段概述"></a>2.3.1. 准备阶段概述</h4><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>在准备阶段中，<code>JVM</code> 会进行：</p>
+<ol>
+<li>为类的静态变量、静态常量分配内存空间</li>
+<li>赋予默认值给类的静态变量</li>
+<li>赋予（基本数据类型的数据 <code>||</code> 根据字面量创建的 <code>String</code> 实例，其实是 符号引用 ➔ 实例）真实值给类的静态常量（因为静态常量的值在类编译的过程中就可以确定了）</li>
+</ol>
+<p>从而为静态变量、静态常量提供一个安全的初始状态，防止我们在运行 <code>Java</code> 程序的过程中出现（野指针 <code>||</code> 非法内存访问）</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>详见笔记：<code>Java</code> 数据类型<ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.md">笔记：Java数据类型</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/11/27/%E7%AC%94%E8%AE%B0%EF%BC%9AJava%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://blog.wangjia.ink/2025/11/27/笔记：Java数据类型/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>详见源码：<code>String</code><ol>
+<li><code>obsidian</code> 内部链接：<ol>
+<li><a href="%E6%BA%90%E7%A0%81%EF%BC%9AString%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md">源码：String源码解析</a></li>
+</ol>
+</li>
+<li><code>Hexo</code> 链接：<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2025/12/25/%E6%BA%90%E7%A0%81%EF%BC%9AString%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">http://blog.wangjia.ink/2025/12/25/源码：String源码解析/</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>HotSpot JVM 在 Java8 之前，静态变量、静态常量存储在方法区。HotSpot JVM 在 Java8 及以后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中）</li>
+</ol>
+</blockquote>
+<p>准备阶段是链接阶段的第二个子阶段，在这一阶段，<code>JVM</code> 的主要任务主要包括：</p>
+<ol>
+<li>为类的静态变量（static 变量）分配内存<ol>
+<li>内存空间会被分配在方法区中</li>
+</ol>
+</li>
+<li>并为类的静态变量赋予默认初始值<ol>
+<li>整型（byte、short、int、long）<ol>
+<li>0</li>
+</ol>
+</li>
+<li>浮点型（float、double）<ol>
+<li>0.0</li>
+</ol>
+</li>
+<li>char<ol>
+<li>\u0000（即 0）</li>
+</ol>
+</li>
+<li>boolean<ol>
+<li>false</li>
+</ol>
+</li>
+<li>引用类型<ol>
+<li>null</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>例如这个代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-comment">// 1. 静态基本数据类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">staticBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">50000</span>;<br>	<br>    <span class="hljs-comment">// 2. 静态字符串类型变量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticStringTypeValue1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abc&quot;</span>;<br>	<br>    <span class="hljs-comment">// 3. 静态字符串类型变量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticStringTypeValue2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;def&quot;</span>);<br>	<br>    <span class="hljs-comment">// 4. 静态字符串类型变量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticStringTypeValue3</span> <span class="hljs-operator">=</span> staticStringTypeValue2.intern();<br>	<br>    <span class="hljs-comment">// 5. 静态引用类型变量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Demo</span> <span class="hljs-variable">staticReferenceTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Demo</span>();<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	    <br>        <span class="hljs-type">Test</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Test</span>();<br>        System.out.println(<span class="hljs-string">&quot;1. staticBasicTypeValue = &quot;</span> + Test.staticBasicTypeValue); <span class="hljs-comment">// 50000</span><br>        System.out.println(<span class="hljs-string">&quot;2. staticStringTypeValue1 = &quot;</span> + Test.staticStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.out.println(<span class="hljs-string">&quot;3. staticStringTypeValue2 = &quot;</span> + Test.staticStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;4. staticStringTypeValue3 = &quot;</span> + Test.staticStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;5. staticReferenceTypeValue = &quot;</span> + Test.staticReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@58372a00</span><br>        <br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在准备阶段时为：<br><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-21.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>准备阶段的作用是为静态变量提供一个 “安全” 的初始状态，防止出现野指针或非法内存访问</li>
+<li>对于静态常量（<code>static</code> 和 <code>final</code> 同时修饰），并且是基本数据类型和字符串类型的静态常量，其值在编译期就已确定，因此在准备阶段就会被直接初始化为其编译期常量值，而不是默认值</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 静态基本数据类型常量</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">staticBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">50000</span>;<br><br><br><span class="hljs-comment">// 静态字符串类型常量 </span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticStringTypeValue1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abc&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-3-2-静态常量处理"><a href="#2-3-2-静态常量处理" class="headerlink" title="2.3.2. 静态常量处理"></a>2.3.2. 静态常量处理</h4><p>静态常量（全局常量）与静态变量的区别在于：对于基本数据类型和字符串类型的静态常量（例如 <code>1</code>、<code>2</code>），它们是<strong>编译期常量</strong>，其值在编译阶段就已确定，因此在 JVM 的<strong>准备阶段</strong>就会被直接初始化为最终值，而不是默认值</p>
+<p>以如下代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-comment">// 1. 静态基本数据类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">staticFinalBasicTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-number">50000</span>;<br>	<br>    <span class="hljs-comment">// 2. 静态字符串类型常量 1</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abc&quot;</span>;<br>	<br>    <span class="hljs-comment">// 3. 静态字符串类型常量 2</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;def&quot;</span>);<br>	<br>    <span class="hljs-comment">// 4. 静态字符串类型常量 3</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">staticFinalStringTypeValue3</span> <span class="hljs-operator">=</span> staticFinalStringTypeValue2.intern();<br>	<br>    <span class="hljs-comment">// 5. 静态引用类型常量</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Demo</span> <span class="hljs-variable">staticFinalReferenceTypeValue</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Demo</span>();<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <br>        <span class="hljs-type">Test</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Test</span>();<br>        System.out.println(<span class="hljs-string">&quot;1. staticFinalBasicTypeValue = &quot;</span> + Test.staticFinalBasicTypeValue); <span class="hljs-comment">// 50000</span><br>        System.out.println(<span class="hljs-string">&quot;2. staticFinalStringTypeValue1 = &quot;</span> + Test.staticFinalStringTypeValue1); <span class="hljs-comment">// abc</span><br>        System.out.println(<span class="hljs-string">&quot;3. staticFinalStringTypeValue2 = &quot;</span> + Test.staticFinalStringTypeValue2); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;4. staticFinalStringTypeValue3 = &quot;</span> + Test.staticFinalStringTypeValue3); <span class="hljs-comment">// def</span><br>        System.out.println(<span class="hljs-string">&quot;5. staticFinalReferenceTypeValue = &quot;</span> + Test.staticFinalReferenceTypeValue); <span class="hljs-comment">// org.example.test.Demo@58372a00</span><br>        <br>    &#125;<br>    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其 <code>clinit</code> 字节码是：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gradle"> <span class="hljs-number">0</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">45</span> &lt;java<span class="hljs-regexp">/lang/</span>String&gt;<br> <span class="hljs-number">3</span> dup<br> <span class="hljs-number">4</span> ldc #<span class="hljs-number">47</span> &lt;<span class="hljs-keyword">def</span>&gt;<br> <span class="hljs-number">6</span> invokespecial #<span class="hljs-number">49</span> &lt;java<span class="hljs-regexp">/lang/</span>String.&lt;init&gt; : (Ljava<span class="hljs-regexp">/lang/</span>String;)V&gt;<br> <span class="hljs-number">9</span> putstatic #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">12</span> getstatic #<span class="hljs-number">26</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue2 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">15</span> invokevirtual #<span class="hljs-number">51</span> &lt;java<span class="hljs-regexp">/lang/</span>String.intern : ()Ljava<span class="hljs-regexp">/lang/</span>String;&gt;<br><span class="hljs-number">18</span> putstatic #<span class="hljs-number">34</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalStringTypeValue3 : Ljava/</span>lang/String;&gt;<br><span class="hljs-number">21</span> <span class="hljs-keyword">new</span> #<span class="hljs-number">55</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo&gt;<br><span class="hljs-number">24</span> dup<br><span class="hljs-number">25</span> invokespecial #<span class="hljs-number">57</span> &lt;org<span class="hljs-regexp">/example/</span>test/Demo.&lt;init&gt; : ()V&gt;<br><span class="hljs-number">28</span> putstatic #<span class="hljs-number">38</span> &lt;org<span class="hljs-regexp">/example/</span>test<span class="hljs-regexp">/Test.staticFinalReferenceTypeValue : Lorg/</span>example<span class="hljs-regexp">/test/</span>Demo;&gt;<br><span class="hljs-number">31</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>其 <code>init</code> 字节码是：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span>aload_0<br><span class="hljs-symbol">1 </span>invokespecial #<span class="hljs-number">1</span> &lt;java/lang/Object.&lt;init&gt; : ()V&gt;<br><span class="hljs-symbol">4 </span><span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>在准备阶段的静态常量为：<br><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-22.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>在静态常量中，使用字面量创建的字符串对象，与常规的对象不同，其值会在类加载的准备阶段，就直接从运行时常量池中获取并完成赋值</li>
+<li>若此时常量池中的字符串符号引用尚未解析，会转化为指向 <code>StringTable</code> 中唯一 <code>String</code> 对象的直接引用，随后将此唯一引用赋给方法区中的 <code>staticFinalStringTypeValue1</code> 属性（不会等到解析阶段或者运行阶段）</li>
+<li>并不会指向 <code>String</code> 对象在 <code>StringTable</code> 中的哈希槽，因为<code>StringTable</code> 的作用只是辅助查找，一旦找到了对应的 <code>String</code> 对象，引用会直接指向该对象本身，而不是每次都通过 <code>StringTable</code> 重新查找</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="2-5-初始化阶段"><a href="#2-5-初始化阶段" class="headerlink" title="2.5. 初始化阶段"></a>2.5. 初始化阶段</h3><h4 id="2-5-1-初始化阶段概述"><a href="#2-5-1-初始化阶段概述" class="headerlink" title="2.5.1. 初始化阶段概述"></a>2.5.1. 初始化阶段概述</h4><h2 id="3-解释执行的流程"><a href="#3-解释执行的流程" class="headerlink" title="3. 解释执行的流程"></a>3. 解释执行的流程</h2><p>详见上文：<code>JVM</code> 架构体系-解释器</p>
+<hr>
+<h2 id="4-分层编译的过程"><a href="#4-分层编译的过程" class="headerlink" title="4. 分层编译的过程"></a>4. 分层编译的过程</h2><p>分层编译是 <code>HotSpot JVM</code> 特有的概念，用于融合（<code>Client</code> 模式 <code>&amp;&amp;</code> <code>Server</code> 模式）的特性</p>
 <blockquote>
 <p>[!NOTE] 注意事项-1</p>
 <ol>
@@ -1091,7 +1337,7 @@
 <li><code>Level 4</code> 阶段中的 <code>Java</code> 代码被 <code>JVM</code> 使用 <code>C2</code> 编译器编译成 <code>CPU</code> 对应的机器码指令</li>
 </ol>
 </blockquote>
-<h3 id="1-1-Level-0-阶段"><a href="#1-1-Level-0-阶段" class="headerlink" title="1.1. Level 0 阶段"></a>1.1. Level 0 阶段</h3><p>在 <code>Level 0</code> 阶段中，<code>JVM</code> 会使用解释器解释执行该阶段中的 <code>Java</code> 代码。与此同时，<code>JVM</code> 会通过（方法调用计数器、回边计数器）来判断哪些（方法 <code>||</code> 方法中的循环体）是热点的 <code>Java</code> 代码：</p>
+<h3 id="4-1-Level-0-阶段"><a href="#4-1-Level-0-阶段" class="headerlink" title="4.1. Level 0 阶段"></a>4.1. Level 0 阶段</h3><p>在 <code>Level 0</code> 阶段中，<code>JVM</code> 会使用解释器解释执行该阶段中的 <code>Java</code> 代码。与此同时，<code>JVM</code> 会通过（方法调用计数器、回边计数器）来判断哪些（方法 <code>||</code> 方法中的循环体）是热点的 <code>Java</code> 代码：</p>
 <ol>
 <li>方法调用计数器<ol>
 <li>用于存储方法被调用的次数</li>
@@ -1115,7 +1361,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="1-2-Level-1-阶段"><a href="#1-2-Level-1-阶段" class="headerlink" title="1.2. Level 1 阶段"></a>1.2. Level 1 阶段</h3><p>当 <code>JVM</code> 根据要晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极小，即便 <code>C2</code> 编译器介入也提升不了多少性能，反而会浪费算力资源时（例如：<code>Getter</code> 方法、<code>Setter</code> 方法），就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 1</code> 阶段</p>
+<h3 id="4-2-Level-1-阶段"><a href="#4-2-Level-1-阶段" class="headerlink" title="4.2. Level 1 阶段"></a>4.2. Level 1 阶段</h3><p>当 <code>JVM</code> 根据要晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极小，即便 <code>C2</code> 编译器介入也提升不了多少性能，反而会浪费算力资源时（例如：<code>Getter</code> 方法、<code>Setter</code> 方法），就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 1</code> 阶段</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1137,7 +1383,7 @@
 <li><code>C2</code> 编译器也进行了这四个性能优化，但是 <code>C2</code> 编译器比 <code>C1</code> 编译器做的更激进、更彻底</li>
 </ol>
 </blockquote>
-<h4 id="1-2-1-方法内联"><a href="#1-2-1-方法内联" class="headerlink" title="1.2.1. 方法内联"></a>1.2.1. 方法内联</h4><p>方法内联是指：<u><code>C2</code> 编译器</u>将被<u>调用方</u>调用的<u>方法</u>的 <u><code>Java</code> 代码</u>，直接复制到<u>调用方</u>的 <u><code>Java</code> 代码</u>中</p>
+<h4 id="4-2-1-方法内联"><a href="#4-2-1-方法内联" class="headerlink" title="4.2.1. 方法内联"></a>4.2.1. 方法内联</h4><p>方法内联是指：<u><code>C2</code> 编译器</u>将被<u>调用方</u>调用的<u>方法</u>的 <u><code>Java</code> 代码</u>，直接复制到<u>调用方</u>的 <u><code>Java</code> 代码</u>中</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 优化前</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>		<span class="hljs-keyword">return</span> a + b;<br>	&#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> Test.add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);<br>    &#125;<br>	<br>&#125;<br><br><span class="hljs-comment">// 优化后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>	<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> &#123;<br>		<span class="hljs-keyword">return</span> a + b;<br>	&#125;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> + <span class="hljs-number">2</span>;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
@@ -1148,7 +1394,7 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="1-2-2-常量折叠"><a href="#1-2-2-常量折叠" class="headerlink" title="1.2.2. 常量折叠"></a>1.2.2. 常量折叠</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 优化前</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">oneDaySeconds</span> <span class="hljs-operator">=</span> <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>;<br>    &#125;<br>	<br>&#125;<br><br><span class="hljs-comment">// 优化后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">oneDaySeconds</span> <span class="hljs-operator">=</span> <span class="hljs-number">86400</span>; <br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="4-2-2-常量折叠"><a href="#4-2-2-常量折叠" class="headerlink" title="4.2.2. 常量折叠"></a>4.2.2. 常量折叠</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 优化前</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">oneDaySeconds</span> <span class="hljs-operator">=</span> <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>;<br>    &#125;<br>	<br>&#125;<br><br><span class="hljs-comment">// 优化后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">oneDaySeconds</span> <span class="hljs-operator">=</span> <span class="hljs-number">86400</span>; <br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -1165,11 +1411,11 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="1-2-3-复写传播"><a href="#1-2-3-复写传播" class="headerlink" title="1.2.3. 复写传播"></a>1.2.3. 复写传播</h4><p>复写传播是指：如果我们把变量 x 赋值给了 y（需要注意的是：必须是 <code>y = x</code>），而且中间没有改动（需要注意的是：如果 （y || x）记录的是基本数据类型的数据，那么 y 不能再被赋值，x 不能再被赋值。如果是引用数据类型的数据，只要两者的内存地址不变，就都是可以的），那么后面凡是用到 y 的地方，C1 编译器都会直接把它替换成 x</p>
+<h4 id="4-2-3-复写传播"><a href="#4-2-3-复写传播" class="headerlink" title="4.2.3. 复写传播"></a>4.2.3. 复写传播</h4><p>复写传播是指：如果我们把变量 x 赋值给了 y（需要注意的是：必须是 <code>y = x</code>），而且中间没有改动（需要注意的是：如果 （y || x）记录的是基本数据类型的数据，那么 y 不能再被赋值，x 不能再被赋值。如果是引用数据类型的数据，只要两者的内存地址不变，就都是可以的），那么后面凡是用到 y 的地方，C1 编译器都会直接把它替换成 x</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 优化前</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> x;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> y + <span class="hljs-number">5</span>;<br>    &#125;<br>	<br>&#125;<br><br><span class="hljs-comment">// 优化后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> x + <span class="hljs-number">5</span>;<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <hr>
-<h4 id="1-2-4-冗余代码消除"><a href="#1-2-4-冗余代码消除" class="headerlink" title="1.2.4. 冗余代码消除"></a>1.2.4. 冗余代码消除</h4><p>冗余代码消除是指：消除（在后文中无用 <code>&amp;&amp;</code> 不可达路径中）的 <code>Java</code> 代码</p>
+<h4 id="4-2-4-冗余代码消除"><a href="#4-2-4-冗余代码消除" class="headerlink" title="4.2.4. 冗余代码消除"></a>4.2.4. 冗余代码消除</h4><p>冗余代码消除是指：消除（在后文中无用 <code>&amp;&amp;</code> 不可达路径中）的 <code>Java</code> 代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 优化前</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> x;<br>	    <span class="hljs-type">int</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> y + <span class="hljs-number">5</span>;<br>	    <span class="hljs-keyword">if</span> (<span class="hljs-literal">false</span>) &#123;<br>	        System.out.println(<span class="hljs-string">&quot;永远不会打印&quot;</span>);<br>	    &#125;<br>    &#125;<br>	<br>&#125;<br><br><span class="hljs-comment">// 优化后</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;<br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span> &#123;<br>		<br>    &#125;<br>	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <blockquote>
@@ -1181,7 +1427,7 @@
 </blockquote>
 <p>分支预测是预测的什么？ （if-else if-else 语句 || switch-case 语句 || while 循环语句 || 或 for 循环语句）??对吗）</p>
 <hr>
-<h3 id="1-3-Level-2-阶段"><a href="#1-3-Level-2-阶段" class="headerlink" title="1.3. Level 2 阶段"></a>1.3. Level 2 阶段</h3><p>当 <code>JVM</code> 根据要晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极大，未来可以让 C2 编译器介入，但是 <code>C2</code> 编译器的任务队列已满时，就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 2</code> 阶段</p>
+<h3 id="4-3-Level-2-阶段"><a href="#4-3-Level-2-阶段" class="headerlink" title="4.3. Level 2 阶段"></a>4.3. Level 2 阶段</h3><p>当 <code>JVM</code> 根据要晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极大，未来可以让 C2 编译器介入，但是 <code>C2</code> 编译器的任务队列已满时，就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 2</code> 阶段</p>
 <p>在 <code>Level 2</code> 阶段中，<code>JVM</code> 同样会使用 <code>C1</code> 编译器将 <code>Java</code> 代码编译成 <code>CPU</code> 对应的机器码指令，并对其进行一系列的性能优化</p>
 <p><code>C1</code> 编译器在 <code>Level 2</code> 阶段对 <code>Java</code> 代码进行的性能优化，与 <code>C1</code> 编译器在 <code>Level 1</code> 阶段对 <code>Java</code> 代码进行的性能优化一致。但是 <code>Level 2</code> 阶段的 <code>Java</code> 代码涉及到少量的性能监控的代码（需要注意的是：只是通过（方法调用器 <code>&amp;&amp;</code> 回边计数器）统计（方法被调用的次数 <code>&amp;&amp;</code> 方法中的所有循环体被调用的次数之和））</p>
 <p>当 <code>C2</code> 编译器的任务队列缓解时，<code>JVM</code> 就会将 <code>Level 2</code> 阶段中的 <code>Java</code> 代码晋升到 <code>Level 3</code> 阶段</p>
@@ -1192,7 +1438,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="1-4-Level-3-阶段"><a href="#1-4-Level-3-阶段" class="headerlink" title="1.4. Level 3 阶段"></a>1.4. Level 3 阶段</h3><p>当 <code>JVM</code> 根据晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极大，未来可以让 C2 编译器介入，而且 <code>C2</code> 编译器的任务队列空闲时，就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 3</code> 阶段（需要注意的是：不要忘了还有 <code>Level 2</code> 阶段中的 <code>Java</code> 代码可以晋升到 <code>Level 3</code> 阶段）</p>
+<h3 id="4-4-Level-3-阶段"><a href="#4-4-Level-3-阶段" class="headerlink" title="4.4. Level 3 阶段"></a>4.4. Level 3 阶段</h3><p>当 <code>JVM</code> 根据晋升的 <code>Java</code> 代码的结构，判定该 <code>Java</code> 代码的优化空间极大，未来可以让 C2 编译器介入，而且 <code>C2</code> 编译器的任务队列空闲时，就会将要晋升的 <code>Java</code> 代码晋升到 <code>Level 3</code> 阶段（需要注意的是：不要忘了还有 <code>Level 2</code> 阶段中的 <code>Java</code> 代码可以晋升到 <code>Level 3</code> 阶段）</p>
 <p>在 Level 3 阶段中，JVM 同样会使用 <code>C1</code> 编译器将 <code>Java</code> 代码编译成 <code>CPU</code> 对应的机器码指令，并对其进行一系列的性能优化</p>
 <p><code>C1</code> 编译器在 <code>Level 3</code> 阶段对 <code>Java</code> 代码进行的性能优化，与 <code>C1</code> 编译器在 <code>Level 1</code> 阶段对 <code>Java</code> 代码进行的性能优化一致，但是 <code>Level 3</code> 阶段的 <code>Java</code> 代码涉及到全量的性能监控的代码</p>
 <p>当方法对应的（方法调用计数器 <code>&amp;&amp;</code> 回边计数器）存储的值之和达到阈值时，<code>JVM</code> 就会将 Level 3 阶段中的 Java 代码晋升到 Level 4 阶段</p>
@@ -1205,7 +1451,7 @@
 </blockquote>
 <p>分支预测、类型分析、MDO</p>
 <hr>
-<h3 id="1-5-Level-4-阶段"><a href="#1-5-Level-4-阶段" class="headerlink" title="1.5. Level 4 阶段"></a>1.5. Level 4 阶段</h3><p>在 Level 4 阶段中，JVM 会使用 C2 编译器将该阶段中的 Java 代码编译成 CPU 对应的机器码指令，并对其进行一系列的性能优化：</p>
+<h3 id="4-5-Level-4-阶段"><a href="#4-5-Level-4-阶段" class="headerlink" title="4.5. Level 4 阶段"></a>4.5. Level 4 阶段</h3><p>在 Level 4 阶段中，JVM 会使用 C2 编译器将该阶段中的 Java 代码编译成 CPU 对应的机器码指令，并对其进行一系列的性能优化：</p>
 <ol>
 <li>逃逸分析</li>
 <li>循环展开</li>
@@ -1223,7 +1469,7 @@
 <li>这里我们只着重学习一下逃逸分析</li>
 </ol>
 </blockquote>
-<h4 id="1-5-1-逃逸分析"><a href="#1-5-1-逃逸分析" class="headerlink" title="1.5.1. 逃逸分析"></a>1.5.1. 逃逸分析</h4><h5 id="1-5-1-1-逃逸分析概述"><a href="#1-5-1-1-逃逸分析概述" class="headerlink" title="1.5.1.1. 逃逸分析概述"></a>1.5.1.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的那个方法之外的其他方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
+<h4 id="4-5-1-逃逸分析"><a href="#4-5-1-逃逸分析" class="headerlink" title="4.5.1. 逃逸分析"></a>4.5.1. 逃逸分析</h4><h5 id="4-5-1-1-逃逸分析概述"><a href="#4-5-1-1-逃逸分析概述" class="headerlink" title="4.5.1.1. 逃逸分析概述"></a>4.5.1.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的那个方法之外的其他方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1231,7 +1477,7 @@
 </ol>
 </blockquote>
 <hr>
-<h5 id="1-5-1-2-逃逸分析常用分类"><a href="#1-5-1-2-逃逸分析常用分类" class="headerlink" title="1.5.1.2. 逃逸分析常用分类"></a>1.5.1.2. 逃逸分析常用分类</h5><p>JIT 编译器会将对象的逃逸分析的分类主要包括：</p>
+<h5 id="4-5-1-2-逃逸分析常用分类"><a href="#4-5-1-2-逃逸分析常用分类" class="headerlink" title="4.5.1.2. 逃逸分析常用分类"></a>4.5.1.2. 逃逸分析常用分类</h5><p>JIT 编译器会将对象的逃逸分析的分类主要包括：</p>
 <ol>
 <li>全局逃逸<ol>
 <li>一个对象的引用“逃逸”出了方法或者线程。比如，对象的引用被赋值给了类的静态变量、成员变量，或者作为方法的返回值。这是最高级别的逃逸</li>
@@ -1249,6 +1495,8 @@
 </ol>
 </li>
 </ol>
+<hr>
+<h2 id="5-垃圾回收的过程"><a href="#5-垃圾回收的过程" class="headerlink" title="5. 垃圾回收的过程"></a>5. 垃圾回收的过程</h2><p>详见上文：<code>JVM</code> 架构体系-垃圾回收器</p>
 <hr>
 
                 
