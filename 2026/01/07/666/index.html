@@ -19,12 +19,12 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程1. 类编译的过程（🐂）类编译的过">
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程类编译的过程（🐂）类编译的过程（前">
 <meta property="og:type" content="article">
 <meta property="og:title" content="666">
 <meta property="og:url" content="https://wangjia5289.github.io/2026/01/07/666/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程1. 类编译的过程（🐂）类编译的过">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    四、JVM 相关流程类编译的过程（🐂）类编译的过程（前">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-4.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2026/01/07/666/666-8.png">
 <meta property="article:published_time" content="2026-01-06T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-08T13:49:40.727Z">
+<meta property="article:modified_time" content="2026-01-08T14:23:49.591Z">
 <meta property="article:author" content="Xian Yang Hou">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2026/01/07/666/666.eddx">
@@ -298,7 +298,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2026-01-08T21:49:40+08:00
+                    Last updated on 2026-01-08T22:23:49+08:00
                   
                   
 
@@ -320,7 +320,7 @@
 </li>
 </ol>
 <hr>
-<h1 id="四、JVM-相关流程"><a href="#四、JVM-相关流程" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="1-类编译的过程（🐂）"><a href="#1-类编译的过程（🐂）" class="headerlink" title="1. 类编译的过程（🐂）"></a>1. 类编译的过程（🐂）</h2><p>类编译的过程（前端编译）是指：<code>javac</code> 编译器把 <code>.java</code> 文件编译成 <code>.class</code> 文件（即把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令）</p>
+<h1 id="四、JVM-相关流程"><a href="#四、JVM-相关流程" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="类编译的过程（🐂）"><a href="#类编译的过程（🐂）" class="headerlink" title="类编译的过程（🐂）"></a>类编译的过程（🐂）</h2><p>类编译的过程（前端编译）是指：<code>javac</code> 编译器把 <code>.java</code> 文件编译成 <code>.class</code> 文件（即把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令）</p>
 <p>在类编译的过程中，<code>javac</code> 编译器会把语法糖转换为该语法糖对应的逻辑，并对 <code>Java</code> 代码进行严格的语义检查（例如：检查某类是否有父类），然后再把 <code>Java</code> 代码编译成 <code>JVM</code> 字节码指令</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -340,8 +340,8 @@
 </ol>
 </blockquote>
 <hr>
-<h2 id="2-类加载的过程"><a href="#2-类加载的过程" class="headerlink" title="2. 类加载的过程"></a>2. 类加载的过程</h2><p><img src="/2026/01/07/666/666.png" srcset="/img/loading.gif" lazyload alt="725"></p>
-<h3 id="2-2-验证阶段（🐂）"><a href="#2-2-验证阶段（🐂）" class="headerlink" title="2.2. 验证阶段（🐂）"></a>2.2. 验证阶段（🐂）</h3><p>在验证阶段中，<code>JVM</code> 会进行：</p>
+<h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><p><img src="/2026/01/07/666/666.png" srcset="/img/loading.gif" lazyload alt="725"></p>
+<h3 id="验证阶段"><a href="#验证阶段" class="headerlink" title="验证阶段"></a>验证阶段</h3><p>在验证阶段中，<code>JVM</code> 会进行：</p>
 <ol>
 <li>格式检查<ol>
 <li>检查 <code>.class</code> 文件中的开头是否为 <code>OxCAFEBABE</code></li>
@@ -361,7 +361,7 @@
 </blockquote>
 <hr>
 <h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><hr>
-<h3 id="2-3-解析阶段"><a href="#2-3-解析阶段" class="headerlink" title="2.3. 解析阶段"></a>2.3. 解析阶段</h3><p>在解析阶段中，<code>JVM</code> 会将（类的类元数据区 ➔ 运行时常量池 ➔ 符号引用）解析成直接引用（即将符号形式的文本信息转换为可被 <code>JVM</code> 直接定位的内存地址）</p>
+<h3 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h3><p>在解析阶段中，<code>JVM</code> 会将（类的类元数据区 ➔ 运行时常量池 ➔ 符号引用）解析成直接引用（即将符号形式的文本信息转换为可被 <code>JVM</code> 直接定位的内存地址）</p>
 <p><code>JVM</code> 规范规定的符号引用主要包括：</p>
 <ol>
 <li><code>CONSTANT_Class_info</code><ol>
@@ -396,22 +396,22 @@
 <blockquote>
 <p>[!NOTE] 注意事项<br>2. 不同 <code>JVM</code> 对解析阶段的处理方式可能存在差异：<br>    1. 一些 JVM 实现会在解析阶段，遍历运行时常量池中的所有符号引用，并尝试将其立即解析为直接引用<br>    2. 也有一些 JVM 实现会在解析阶段，选择只解析其中关键或高频使用的符号引用，比如 java.lang.Object 这类核心类<br>    3. 我们的 HotSpot JVM 采用的是延迟解析的策略<br>        1. 在解析阶段，HotSpot 会遍历并识别出所有类和接口的符号引用（CONSTANT_Class_info）<br>        2. 对于像 java.lang.Object 这样的基础核心类，JVM 会尝试解析它<br>        3. 而对于大多数的符号引用，通常采用按需解析，即在首次使用时才触发解析<br>        4. 例如在初始化阶段执行 clinit 方法时，或在运行 init、main 方法，甚至其他方法的字节码时，如果某个符号引用还未被解析，就会在那一刻解析<br>3. 所以符号引用将在 解析阶段 或者 程序运行时 被解析为直接引用，并不一定在解析阶段就被解析成直接引用</p>
 </blockquote>
-<h4 id="2-3-1-CONSTANT-Class-info"><a href="#2-3-1-CONSTANT-Class-info" class="headerlink" title="2.3.1. CONSTANT_Class_info"></a>2.3.1. CONSTANT_Class_info</h4><p>在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了一个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而该 <code>CONSTANT_Utf8_info</code> 又存储了类的全限定名。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了类的全限定名<br><img src="/2026/01/07/666/666-5.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="CONSTANT-Class-info"><a href="#CONSTANT-Class-info" class="headerlink" title="CONSTANT_Class_info"></a>CONSTANT_Class_info</h4><p>在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了一个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而该 <code>CONSTANT_Utf8_info</code> 又存储了类的全限定名。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了类的全限定名<br><img src="/2026/01/07/666/666-5.png" srcset="/img/loading.gif" lazyload></p>
 <p>在解析阶段之后，<code>CONSTANT_Class_info</code> 存储了一个指向该类的类元数据区的内存地址</p>
 <hr>
-<h4 id="2-3-2-CONSTANT-Utf8-info"><a href="#2-3-2-CONSTANT-Utf8-info" class="headerlink" title="2.3.2. CONSTANT_Utf8_info"></a>2.3.2. CONSTANT_Utf8_info</h4><p><code>CONSTANT_Utf8_info</code> 用于存储在 Java 程序中的各种文本信息（例如：类名）<br><img src="/2026/01/07/666/666-7.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="CONSTANT-Utf8-info"><a href="#CONSTANT-Utf8-info" class="headerlink" title="CONSTANT_Utf8_info"></a>CONSTANT_Utf8_info</h4><p><code>CONSTANT_Utf8_info</code> 用于存储在 Java 程序中的各种文本信息（例如：类名）<br><img src="/2026/01/07/666/666-7.png" srcset="/img/loading.gif" lazyload></p>
 <p>在解析阶段之后，<code>CONSTANT_Utf8_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_Utf8_info</code> 本质上只是为 Java 程序提供各种文本信息的符号引用</p>
 <hr>
-<h4 id="2-3-3-CONSTANT-NameAndType-info"><a href="#2-3-3-CONSTANT-NameAndType-info" class="headerlink" title="2.3.3. CONSTANT_NameAndType_info"></a>2.3.3. CONSTANT_NameAndType_info</h4><p>在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了两个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而这两个 <code>CONSTANT_Utf8_info</code> 又分别存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）<br><img src="/2026/01/07/666/666-6.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="CONSTANT-NameAndType-info"><a href="#CONSTANT-NameAndType-info" class="headerlink" title="CONSTANT_NameAndType_info"></a>CONSTANT_NameAndType_info</h4><p>在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了两个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而这两个 <code>CONSTANT_Utf8_info</code> 又分别存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）<br><img src="/2026/01/07/666/666-6.png" srcset="/img/loading.gif" lazyload></p>
 <p>在解析阶段之后，<code>CONSTANT_NameAndType_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_NameAndType_info</code> 本质上只是为（<code>CONSTANT_Fieldref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_Methodref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_InterfaceMethodref_info</code>）提供描述信息的符号引用）</p>
 <hr>
-<h4 id="2-3-4-CONSTANT-Fieldref-info"><a href="#2-3-4-CONSTANT-Fieldref-info" class="headerlink" title="2.3.4. CONSTANT_Fieldref_info"></a>2.3.4. CONSTANT_Fieldref_info</h4><p>在解析阶段之前，<code>CONSTANT_Fieldref_info</code> 存储了一个（<code>CONSTANT_Class_info</code> <code>&amp;&amp;</code> <code>CONSTANT_NameAndType_info</code>）的常量池索引，而该 <code>CONSTANT_Class_info</code> 存储了类的全限定名，该 <code>CONSTANT_NameAndType_info</code> 存储了字段的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-2.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="CONSTANT-Fieldref-info"><a href="#CONSTANT-Fieldref-info" class="headerlink" title="CONSTANT_Fieldref_info"></a>CONSTANT_Fieldref_info</h4><p>在解析阶段之前，<code>CONSTANT_Fieldref_info</code> 存储了一个（<code>CONSTANT_Class_info</code> <code>&amp;&amp;</code> <code>CONSTANT_NameAndType_info</code>）的常量池索引，而该 <code>CONSTANT_Class_info</code> 存储了类的全限定名，该 <code>CONSTANT_NameAndType_info</code> 存储了字段的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-2.png" srcset="/img/loading.gif" lazyload></p>
 <p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该字段对应的字段信息）的内存地址</p>
 <hr>
-<h4 id="2-3-5-CONSTANT-Methodref-info"><a href="#2-3-5-CONSTANT-Methodref-info" class="headerlink" title="2.3.5. CONSTANT_Methodref_info"></a>2.3.5. CONSTANT_Methodref_info</h4><p>在解析阶段之前，CONSTANT_Fieldref_info 存储了一个（CONSTANT_Class_info &amp;&amp; CONSTANT_NameAndType_info）的常量池索引，而 CONSTANT_Class_info 存储类的全限定名，CONSTANT_NameAndType_info 存储方法的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-4.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="CONSTANT-Methodref-info"><a href="#CONSTANT-Methodref-info" class="headerlink" title="CONSTANT_Methodref_info"></a>CONSTANT_Methodref_info</h4><p>在解析阶段之前，CONSTANT_Fieldref_info 存储了一个（CONSTANT_Class_info &amp;&amp; CONSTANT_NameAndType_info）的常量池索引，而 CONSTANT_Class_info 存储类的全限定名，CONSTANT_NameAndType_info 存储方法的（名字 &amp;&amp; 描述符）<br><img src="/2026/01/07/666/666-4.png" srcset="/img/loading.gif" lazyload></p>
 <p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该方法对应的方法信息）的内存地址</p>
 <hr>
-<h4 id="2-3-6-CONSTANT-String-info"><a href="#2-3-6-CONSTANT-String-info" class="headerlink" title="2.3.6. CONSTANT_String_info"></a>2.3.6. CONSTANT_String_info</h4><p>在解析阶段之前，CONSTANT_String_info 存储了一个 CONSTANT_Utf8_info 的常量池索引，而该 CONSTANT_Utf8_info 又存储了一个根据字面量构建 String 实例的构造方法的字面量</p>
+<h4 id="CONSTANT-String-info"><a href="#CONSTANT-String-info" class="headerlink" title="CONSTANT_String_info"></a>CONSTANT_String_info</h4><p>在解析阶段之前，CONSTANT_String_info 存储了一个 CONSTANT_Utf8_info 的常量池索引，而该 CONSTANT_Utf8_info 又存储了一个根据字面量构建 String 实例的构造方法的字面量</p>
 <p>在解析阶段之后，CONSTANT_String_info 存储了一个指向使用该构造方法构造的 String 实例的内存地址</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
@@ -422,9 +422,9 @@
 </ol>
 </blockquote>
 <hr>
-<h4 id="2-3-7-CONSTANT-InterfaceMethodref-info"><a href="#2-3-7-CONSTANT-InterfaceMethodref-info" class="headerlink" title="2.3.7. CONSTANT_InterfaceMethodref_info"></a>2.3.7. CONSTANT_InterfaceMethodref_info</h4><p><code>CONSTANT_InterfaceMethodref_info</code> 与 <code>CONSTANT_Methodref_info</code> 类似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 指向的是接口方法的描述信息</p>
+<h4 id="CONSTANT-InterfaceMethodref-info"><a href="#CONSTANT-InterfaceMethodref-info" class="headerlink" title="CONSTANT_InterfaceMethodref_info"></a>CONSTANT_InterfaceMethodref_info</h4><p><code>CONSTANT_InterfaceMethodref_info</code> 与 <code>CONSTANT_Methodref_info</code> 类似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 指向的是接口方法的描述信息</p>
 <hr>
-<h4 id="2-3-8-CONSTANT-Integer-info"><a href="#2-3-8-CONSTANT-Integer-info" class="headerlink" title="2.3.8. CONSTANT_Integer_info"></a>2.3.8. CONSTANT_Integer_info</h4><p><code>CONSTANT_Integer_info</code> 用于存储整数常量。虽然它的名字里虽然带有 <code>Integer</code>，但与 <code>Integer</code> 对象本身没有任何关系，只是单纯地用来存储一个整数常量。至于 <code>Integer</code> 对象，它和其他对象一样，依然遵循普通对象的处理方式。</p>
+<h4 id="CONSTANT-Integer-info"><a href="#CONSTANT-Integer-info" class="headerlink" title="CONSTANT_Integer_info"></a>CONSTANT_Integer_info</h4><p><code>CONSTANT_Integer_info</code> 用于存储整数常量。虽然它的名字里虽然带有 <code>Integer</code>，但与 <code>Integer</code> 对象本身没有任何关系，只是单纯地用来存储一个整数常量。至于 <code>Integer</code> 对象，它和其他对象一样，依然遵循普通对象的处理方式。</p>
 <p>我们知道，小整数常量（<code>-1 - 5</code>）会通过 <code>iconst_n</code> 字节码指令直接压入操作数栈，而不需要像前面提到的那样，在执行字节码时先去运行时常量池查找、必要时再解析，然后再取值。简单来说，这些常量可以直接获得，而无需额外解析或查找步骤。同样地，取值范围在 <code>-128 - 127</code> 的整数会使用 <code>bipush n</code> 指令，范围在 <code>-32768 ~ 32767</code> 的整数会使用 <code>sipush n</code> 指令</p>
 <p>然而，如果超出这个范围，就必须通过常量池来获取。但需要注意的是，<code>CONSTANT_Integer_info</code> 常量并不像其他符号引用那样需要解析，它本身就直接存储了数值，因此字节码在执行时只需从常量池中取出即可，无需再进行解析过程<br><img src="/2026/01/07/666/666-8.png" srcset="/img/loading.gif" lazyload></p>
 <p>与此类似的几种主要包括：</p>
