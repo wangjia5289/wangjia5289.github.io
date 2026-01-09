@@ -31,18 +31,10 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-40.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-39.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-38.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-19.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-20.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png">
-<meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-46.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-44.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-36.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-08T13:37:55.786Z">
+<meta property="article:modified_time" content="2026-01-09T08:03:16.299Z">
 <meta property="article:author" content="Xian Yang Hou">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-41.png">
@@ -239,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          11k words
+          6.9k words
         
       </span>
     
@@ -250,7 +242,7 @@
         
         
         
-          94 mins
+          58 mins
         
       </span>
     
@@ -305,7 +297,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2026-01-08T21:37:55+08:00
+                    Last updated on 2026-01-09T16:03:16+08:00
                   
                   
 
@@ -431,7 +423,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="4-2-对象的实例化过程相关流程"><a href="#4-2-对象的实例化过程相关流程" class="headerlink" title="4.2. 对象的实例化过程相关流程"></a>4.2. 对象的实例化过程相关流程</h3><ol>
+<h3 id="4-2-对象实例化的过程相关流程"><a href="#4-2-对象实例化的过程相关流程" class="headerlink" title="4.2. 对象实例化的过程相关流程"></a>4.2. 对象实例化的过程相关流程</h3><ol>
 <li><code>JVM</code> 分配实例的内存空间</li>
 <li><code>JVM</code> 赋予默认值，给该实例的实例变量、该实例的普通常量（术语是：默认初始化）</li>
 <li><code>JVM</code> 执行 <code>&lt;init&gt;</code> 块中的 <code>JVM</code> 字节码指令<ol>
@@ -527,155 +519,6 @@
 </tr>
 </tbody></table>
 <hr>
-<h2 id="6-运行时数据区"><a href="#6-运行时数据区" class="headerlink" title="6. 运行时数据区"></a>6. 运行时数据区</h2><h3 id="运行时数据区组成部分"><a href="#运行时数据区组成部分" class="headerlink" title="运行时数据区组成部分"></a>运行时数据区组成部分</h3><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-14.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h3 id="6-2-本地方法栈"><a href="#6-2-本地方法栈" class="headerlink" title="6.2. 本地方法栈"></a>6.2. 本地方法栈</h3><blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>在 <code>HotSpot JVM</code> 中，虚拟机栈、本地方法栈被合并为同一个栈</li>
-<li>并非所有 <code>JVM</code> 都实现了本地方法栈（因为在 <code>JVM</code> 规范中，如果不打算让 <code>JVM</code> 支持 <code>native</code> 方法，那么该 <code>JVM</code> 就可以不实现本地方法栈）</li>
-</ol>
-</blockquote>
-<hr>
-<h3 id="6-3-程序计数器"><a href="#6-3-程序计数器" class="headerlink" title="6.3. 程序计数器"></a>6.3. 程序计数器</h3><h4 id="6-3-1-程序计数器概述"><a href="#6-3-1-程序计数器概述" class="headerlink" title="6.3.1. 程序计数器概述"></a>6.3.1. 程序计数器概述</h4><p>程序计数器（<code>PC</code> 寄存器）用于存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>程序寄存器是线程私有的内存，每个线程都拥有独立的程序寄存器</li>
-<li><code>JVM</code> 既不会垃圾回收程序计数器，也不会因为程序计数器而抛出 <code>OutOfMemoryError</code> 错误、、<code>StackOverflowError</code> 错误</li>
-<li>程序计数器实际记录的是 <code>JVM</code> 字节码指令的偏移量</li>
-<li>执行引擎负责读取并执行 <code>JVM</code> 字节码指令。当执行引擎读取 <code>JVM</code> 字节码指令时，会将该 <code>JVM</code> 字节码指令的偏移量转换为其内存地址，然后再读取该 <code>JVM</code> 字节码指令。在执行引擎读取到 <code>JVM</code> 字节码指令后，程序计数器就会存储当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址，然后执行引擎才开始执行该 <code>JVM</code> 字节码指令（需要注意的是：这是一个非常重要的细节）</li>
-<li>如果线程执行的是 <code>native</code> 方法，那么程序计数器存储的是 <code>undefined</code>（因为 <code>native</code> 方法本质上是离开了 <code>JVM</code> 的控制范围）</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-3-2-程序计数器空间大小"><a href="#6-3-2-程序计数器空间大小" class="headerlink" title="6.3.2. 程序计数器空间大小"></a>6.3.2. 程序计数器空间大小</h4><p>我们几乎可以忽略不计程序计数器的内存空间（因为程序计数器只需要记录一个内存地址）：</p>
-<ol>
-<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>4 byte</code> 的内存空间</li>
-<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，程序计数器占用 <code>8 byte</code> 的内存空间</li>
-</ol>
-<hr>
-<h4 id="6-3-3-程序计数器组成部分"><a href="#6-3-3-程序计数器组成部分" class="headerlink" title="6.3.3. 程序计数器组成部分"></a>6.3.3. 程序计数器组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-15.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h3 id="6-4-虚拟机栈"><a href="#6-4-虚拟机栈" class="headerlink" title="6.4. 虚拟机栈"></a>6.4. 虚拟机栈</h3><h4 id="6-4-1-虚拟机栈概述"><a href="#6-4-1-虚拟机栈概述" class="headerlink" title="6.4.1. 虚拟机栈概述"></a>6.4.1. 虚拟机栈概述</h4><blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>虚拟机栈是线程私有的内存空间，每个线程都拥有独立的虚拟机栈</li>
-<li><code>JVM</code> 既会垃圾回收虚拟机栈，也会因为虚拟机栈而抛出 <code>OutOfMemoryError</code> 错误、<code>StackOverflowError</code> 错误：<ol>
-<li><code>OutOfMemoryError</code> 错误<ol>
-<li><code>OutOfMemoryError: unable to create new native thread</code><ol>
-<li>如果虚拟机栈可以动态扩展内存空间，当 <code>JVM</code> 的内存空间已满，无法再分配虚拟机栈的内存空间时，就会抛出 <code>OutOfMemoryError</code> 错误（需要注意的是：<code>HotSpot JVM</code> 并不支持虚拟机栈动态扩展内存空间）</li>
-<li>当创建本地线程，<code>JVM</code> 的内存空间已满，无法再分配该本地线程对应的程序计数器的内存空间、该本地线程对应的虚拟机栈的内存空间时，也会抛出 <code>OutOfMemoryError</code> 错误</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><code>StackOverflowError</code> 错误<ol>
-<li>当虚拟机栈的内存空间已满，无法再分配线程执行的方法对应的栈帧的内存空间时，<code>JVM</code> 就会抛出 <code>StackOverflowError</code> 错误</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-4-2-虚拟机栈组成部分"><a href="#6-4-2-虚拟机栈组成部分" class="headerlink" title="6.4.2. 虚拟机栈组成部分"></a>6.4.2. 虚拟机栈组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-1.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="6-4-2-1-局部变量表"><a href="#6-4-2-1-局部变量表" class="headerlink" title="6.4.2.1. 局部变量表"></a>6.4.2.1. 局部变量表</h5><h6 id="6-4-2-1-1-局部变量表概述"><a href="#6-4-2-1-1-局部变量表概述" class="headerlink" title="6.4.2.1.1. 局部变量表概述"></a>6.4.2.1.1. 局部变量表概述</h6><p>局部变量表用于存储方法参数、局部变量</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>局部变量表能够存储基本数据类型的元素、引用数据类型的元素（需要注意的是：局部变量表实际存储的是引用数据类型的元素的引用）、返回地址（即在 <code>Java5</code> 之前的 <code>returnAddress</code> 类型，我们知道有这个东西就行）</li>
-<li>静态变量、静态常量、实例变量、实例常量在不同阶段会被赋予默认值。但是方法参数、局部变量并不会被赋予默认值。因此我们在使用方法参数、局部变量之前，必须对其进行手动赋值，否则会导致类的编译错误</li>
-</ol>
-</blockquote>
-<hr>
-<h6 id="6-4-2-1-2-局部变量表底层实现"><a href="#6-4-2-1-2-局部变量表底层实现" class="headerlink" title="6.4.2.1.2. 局部变量表底层实现"></a>6.4.2.1.2. 局部变量表底层实现</h6><p>局部变量表的底层是：一个一维数组</p>
-<p>局部变量表使用的一维数组的基本存储单元是变量槽（<code>Slot</code>）</p>
-<ol>
-<li>在 <code>32 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>4 byte</code> 的内存空间</li>
-<li>在 <code>64 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>8 byte</code> 的内存空间</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>当线程调用某类的构造方法时，指向被构造的实例的内存地址的引用（即 <code>this</code>），就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是我们为什么能在构造方法中使用 <code>this</code> 的原因）</li>
-<li>当线程调用某实例的实例方法时，指向该方法所属实例的内存地址的引用（即 <code>this</code>），就被存储在局部变量表的数组索引为 <code>0</code> 的数组位置中（需要注意的是：这是 <code>Java</code> 中的一个语法糖，也是为什么我们能在实例方法中使用 <code>this</code> 的原因）</li>
-<li>当线程调用某类的静态方法时，根本就不存在 <code>this</code>，导致我们不能在静态方法中使用 <code>this</code></li>
-</ol>
-</blockquote>
-<hr>
-<h6 id="6-4-2-1-3-局部变量表空间大小"><a href="#6-4-2-1-3-局部变量表空间大小" class="headerlink" title="6.4.2.1.3. 局部变量表空间大小"></a>6.4.2.1.3. 局部变量表空间大小</h6><p>在类的编译过程中，<code>JVM</code> 中的解释器就已经确定了局部变量表的内存空间，在运行 <code>Java</code> 程序的过程中无法更改局部变量表的内存空间：</p>
-<ol>
-<li>占用 <code>32 bit</code> 及以下的内存空间的数据（例如 <code>byte</code>、<code>short</code>、<code>int</code>、<code>float</code>、<code>char</code>、<code>boolean</code> 类型的数据、引用数据类型的数据、返回地址）占用一个 <code>Slot</code></li>
-<li>占用 <code>64 bit</code> 的内存空间的数据（例如 <code>long</code>、<code>double</code> 类型的数据）占用两个 <code>Slot</code></li>
-</ol>
-<p>而在 <code>32 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>4 byte</code> 的内存空间。在 <code>64 bit</code> 的 <code>JVM</code> 中，一个 <code>Slot</code> 占用 <code>8 byte</code> 的内存空间。所以我们只需知道方法中的方法参数、局部变量占用几个 <code>Slot</code>，就可以知道该方法对应的栈帧中的局部变量表的内存空间</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>在 <code>JVM</code> 中，<code>byte</code> 类型的数据、<code>short</code> 类型的数据、<code>char</code> 类型的数据、<code>boolean</code> 类型的数据被 <code>JVM</code> 当作 <code>int</code> 类型的数据（因为 <code>int</code> 类型数据的范围涵盖它们，而且在 <code>JVM</code> 中其实并没有专门处理它们的 <code>JVM</code> 字节码指令（需要注意的是：如果它们被存储在堆区（例如是实例的实例变量），那么它们该占用多少内存空间，就占用多少内存空间））</li>
-<li><code>Slot</code> 是可以复用的（例如：在局部变量 <code>A</code> 的生命周期结束后，如果我们又声明了新的局部变量 <code>B</code>，那么 <code>B</code> 可能复用 <code>A</code> 的 <code>Slot</code>，从而达到节省内存空间的目的）。以如下代码为例，局部变量 <code>b</code> 会复用局部变量 <code>a</code> 的 <code>Slot</code>。因此整个 <code>main</code> 方法只需要占用两个 <code>Slot</code>，所以在 <code>32 bit</code> 的 <code>JVM</code> 中，<code>main</code> 方法对应的栈帧中的局部变量表占用 <code>8 byte</code> 的内存空间。在 <code>64 bit</code> 的 <code>JVM</code> 中，<code>main</code> 方法对应的栈帧中的局部变量表占用 <code>16 byte</code> 的内存空间</li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;  <br>	<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;  <br>	    <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;  <br>            System.out.println(a);  <br>        &#125;  <br>		  <br>        &#123;  <br>            <span class="hljs-type">int</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;  <br>            System.out.println(b);  <br>        &#125;  <br>        <br>    &#125;  <br>    <br>&#125;<br></code></pre></td></tr></table></figure>
-
-<hr>
-<h5 id="6-4-2-2-方法返回地址"><a href="#6-4-2-2-方法返回地址" class="headerlink" title="6.4.2.2. 方法返回地址"></a>6.4.2.2. 方法返回地址</h5><p>当线程调用方法时，会先把程序计数器中的内容（当前线程要去执行的下一条 <code>JVM</code> 字节码指令的内存地址）存储在被调用的方法对应的方法返回地址中，然后再开始执行该方法</p>
-<p>如果线程在执行方法的过程中未抛出异常，那么当线程执行到以下 <code>JVM</code> 字节码指令时，就会取出该方法对应的栈帧中的方法返回地址中的内容，并存储在程序计数器中（需要注意的是：这就是方法正常退出（未抛出异常））：<br>    1. <code>ireturn</code><br>        1. 返回 <code>byte</code> 类型的数据、<code>short</code> 类型的数据、<code>int</code> 类型的数据、<code>char</code> 类型的数据、<code>boolean</code>  类型的数据<br>    2. <code>lreturn</code><br>        1. 返回 <code>long</code> 类型的数据<br>    3. <code>freturn</code><br>        1. 返回 <code>float</code> 类型的数据<br>    4. <code>dreturn</code><br>        1. 返回 <code>double</code> 类型的数据<br>    5. <code>areturn</code><br>        1. 返回引用数据类型的数据<br>    6. <code>return</code><br>        1. 仅返回（需要注意的是：仅返回适用于无返回值的方法）</p>
-<p>但是如果线程在执行方法的过程中抛出了异常，那么线程就会去查该方法对应的异常处理器表（需要注意的是：异常处理器表被存储在方法区）：</p>
-<ol>
-<li>如果异常处理器表中有匹配的异常<ol>
-<li>线程就跳转到 <code>Targer</code> 处，然后执行 <code>Target</code> 处的 <code>Java</code> 代码（即线程执行 <code>catch</code> 块。需要注意的是：不会再回到抛出异常的位置，继续执行原来的代码）</li>
-</ol>
-</li>
-<li>如果异常处理器表中没有匹配的异常<ol>
-<li>线程就会弹出该方法对应的栈帧，并继续向外抛出异常（即抛出异常给调用方）</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>方法退出分为方法正常退出（发生异常、未发生异常）、方法异常退出（需要注意的是：方法正常退出（发生异常）是在 <code>catch</code> 块中，捕获并处理了异常，并且没有抛出新的异常）</li>
-<li>当我们捕获并处理异常时，抛出了一个新的异常，那么线程同样会再去查异常处理器表。但是如果我们没有使用嵌套 <code>catch</code> 块，就很可能无法捕获并处理这个新的异常</li>
-</ol>
-</blockquote>
-<hr>
-<h5 id="6-4-2-3-动态链接"><a href="#6-4-2-3-动态链接" class="headerlink" title="6.4.2.3. 动态链接"></a>6.4.2.3. 动态链接</h5><p>动态链接用于存储栈帧对应的方法对应的类的类的元数据区中的运行时常量池的内存地址</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>动态链接是一个指针，动态链接存储的是一个内存地址</li>
-</ol>
-</blockquote>
-<hr>
-<h5 id="6-4-2-4-操作数栈"><a href="#6-4-2-4-操作数栈" class="headerlink" title="6.4.2.4. 操作数栈"></a>6.4.2.4. 操作数栈</h5><p>操作数栈是 <code>JVM</code> 执行引擎的一个工作区，用于保存计算过程中的中间结果，同时作为变量的临时存储空间。<code>JVM</code> 会根据方法中的字节码指令，向操作数栈中写入数据，或从中提取数据并使用后，结果再写入操作数栈</p>
-<p>与局部变量表一样，操作数栈的最大深度在编译阶段就已经确定，运行时无法更改（栈顶缓存并不会影响最大深度）</p>
-<ol>
-<li>32 位及以内的数据类型（reference、returnAddress、byte、short、char、int、float、boolean）占用一个栈单位深度</li>
-<li>64 位的数据类型（long、double）占用两个栈单位深度</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>byte、short、char 在压入操作栈前，会被自动转换为 int 类型，对应关系主要包括：<ol>
-<li>byte ➔ int</li>
-<li>short ➔ int</li>
-<li>char ➔ int</li>
-<li>int ➔ int</li>
-<li>boolean ➔ boolean</li>
-<li>long ➔ long</li>
-<li>float ➔ float</li>
-<li>double ➔ double</li>
-</ol>
-</li>
-<li>我们常说 <code>Java</code> 虚拟机的解释引擎是基于栈的执行引擎，这里的 “栈” 指的就是操作数栈</li>
-</ol>
-</blockquote>
-<hr>
-<hr>
-<h5 id="6-4-2-5-一些附加信息"><a href="#6-4-2-5-一些附加信息" class="headerlink" title="6.4.2.5. 一些附加信息"></a>6.4.2.5. 一些附加信息</h5><p>在 <code>JVM</code> 规范中，栈帧被允许添加一些附加信息（例如：我们可以添加一些调试信息，从而达到调试的目的）</p>
-<hr>
 <h4 id="6-4-3-虚拟机栈-JVM-参数"><a href="#6-4-3-虚拟机栈-JVM-参数" class="headerlink" title="6.4.3. 虚拟机栈 JVM 参数"></a>6.4.3. 虚拟机栈 JVM 参数</h4><h5 id="6-4-3-1-Xss"><a href="#6-4-3-1-Xss" class="headerlink" title="6.4.3.1. -Xss"></a>6.4.3.1. -Xss</h5><p>该 <code>JVM</code> 参数用于配置每个线程对应的虚拟机栈的内存空间：</p>
 <figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-Xss128k</span><br></code></pre></td></tr></table></figure>
 
@@ -687,47 +530,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="6-5-堆区"><a href="#6-5-堆区" class="headerlink" title="6.5. 堆区"></a>6.5. 堆区</h3><h4 id="6-5-1-堆区概述"><a href="#6-5-1-堆区概述" class="headerlink" title="6.5.1. 堆区概述"></a>6.5.1. 堆区概述</h4><p>堆区是 <code>JVM</code> 管理内存空间的核心区域，也是整个 <code>JVM</code> 中内存空间最大的区域，几乎所有的实例都会在堆区被 <code>JVM</code> 分配内存空间（因为需要考虑逃逸分析）</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>堆区是线程共享的内存空间（但是需要考虑 <code>TLAB</code>），在单个 <code>JVM</code> 中全局唯一</li>
-<li><code>JVM</code> 既会对堆区进行 <code>GC</code>，也会因为堆区而抛出 <code>OutOfMemoryError</code> 错误：<ol>
-<li><code>OutOfMemoryError: Java heap space</code><ol>
-<li>堆区内存空间不足</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-5-2-堆区空间大小"><a href="#6-5-2-堆区空间大小" class="headerlink" title="6.5.2. 堆区空间大小"></a>6.5.2. 堆区空间大小</h4><p>堆区在运行时具有初始的内存空间（需要注意的是：堆区的初始的内存空间由 <code>-Xms512m</code> 决定），并且 <code>JVM</code> 支持动态扩展、动态缩减堆区的内存空间，但是受到堆区的最大的内存空间的限制（需要注意的是：堆区的最大的内存空间由 <code>-Xmx2048m</code> 决定）。一旦堆区的内存空间超出堆区的最大的内存空间的限制，<code>JVM</code> 就可能会抛出 <code>OutOfMemoryError</code> 错误（因为需要考虑 <code>GC</code>）</p>
-<hr>
-<h4 id="6-5-3-堆区组成部分"><a href="#6-5-3-堆区组成部分" class="headerlink" title="6.5.3. 堆区组成部分"></a>6.5.3. 堆区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-19.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h4 id="6-5-4-实例被-JVM-在堆区分配内存空间"><a href="#6-5-4-实例被-JVM-在堆区分配内存空间" class="headerlink" title="6.5.4. 实例被 JVM 在堆区分配内存空间"></a>6.5.4. 实例被 JVM 在堆区分配内存空间</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-20.png" srcset="/img/loading.gif" lazyload></p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>在 <code>JVM</code> 执行完 <code>GC</code> 之后，<code>JVM</code> 会根据堆区的内存空间的空闲比例，动态扩展、动态缩减堆区的内存空间</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-5-5-TLAB"><a href="#6-5-5-TLAB" class="headerlink" title="6.5.5. TLAB"></a>6.5.5. TLAB</h4><h5 id="6-5-5-1-TLAB-概述"><a href="#6-5-5-1-TLAB-概述" class="headerlink" title="6.5.5.1. TLAB 概述"></a>6.5.5.1. TLAB 概述</h5><p>想象这样一个问题：<code>JVM</code> 为了快速为实例在堆区分配内存空间，采用了 “指针碰撞” 技术（即使用一个指针指向 <code>Eden</code> 区已经使用的内存空间的边界，当 <code>JVM</code> 为实例分配内存空间时，只需要检查剩余的内存空间是否足够，然后按需顺序偏移指针，即可完成为实例在堆区分配内存空间）</p>
-<p>但是我们知道 “堆区是线程共享的内存空间”，在多线程并发场景下，就会出现多线程并发对堆区进行修改的情况。传统的解决方案是加锁，但这会成为一个显著的性能瓶颈</p>
-<p>为了解决这一问题，<code>JVM</code> 提供了 <code>TLAB</code>。<code>TLAB</code> 将实例在线程共享的堆区被 <code>JVM</code> 分配内存空间，变成了实例在线程私有的 <code>TLAB</code> 被 <code>JVM</code> 分配内存空间</p>
-<hr>
-<h5 id="6-5-5-2-TLAB-相关流程"><a href="#6-5-5-2-TLAB-相关流程" class="headerlink" title="6.5.5.2. TLAB 相关流程"></a>6.5.5.2. TLAB 相关流程</h5><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-5.png" srcset="/img/loading.gif" lazyload></p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>当线程申请新 <code>TLAB</code> 时，<code>JVM</code> 是通过 <code>CAS</code> 保证多线程并发安全的（需要注意的是：旧 <code>TLAB</code> 的剩余空间会使用一个 <code>int</code> 类型的数组填充，这部分空间会被 <code>GC</code>）</li>
-<li><code>JVM</code> 为了快速为实例在 <code>TLAB</code> 分配内存空间，采用了 “指针碰撞” 技术（因为 <code>TLAB</code> 是线程私有的，因此不存在多线程并发场景下的安全问题）</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-5-6-逃逸分析"><a href="#6-5-6-逃逸分析" class="headerlink" title="6.5.6. 逃逸分析"></a>6.5.6. 逃逸分析</h4><h5 id="6-5-6-1-逃逸分析概述"><a href="#6-5-6-1-逃逸分析概述" class="headerlink" title="6.5.6.1. 逃逸分析概述"></a>6.5.6.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的方法之外的方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
+<h4 id="6-5-6-逃逸分析——————–"><a href="#6-5-6-逃逸分析——————–" class="headerlink" title="6.5.6. 逃逸分析——————–"></a>6.5.6. 逃逸分析——————–</h4><h5 id="6-5-6-1-逃逸分析概述"><a href="#6-5-6-1-逃逸分析概述" class="headerlink" title="6.5.6.1. 逃逸分析概述"></a>6.5.6.1. 逃逸分析概述</h5><p>逃逸分析是指：<code>JIT</code> 在编译 <code>Java</code> 代码时，会分析一个实例在被创建后，是否被外部（即其他线程、调用对象的构造方法的方法之外的方法）引用。如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以对这个实例进行深度的底层优化，从而极大提升性能。</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -760,136 +563,8 @@
 <h6 id="6-5-6-5-2-标量替换"><a href="#6-5-6-5-2-标量替换" class="headerlink" title="6.5.6.5.2. 标量替换"></a>6.5.6.5.2. 标量替换</h6><hr>
 <h6 id="6-5-6-5-3-锁销除"><a href="#6-5-6-5-3-锁销除" class="headerlink" title="6.5.6.5.3. 锁销除"></a>6.5.6.5.3. 锁销除</h6><p>锁销除是指：如果 <code>JIT</code> 发现一个实例并没有逃逸，就可以将该实例上加的 <code>synchronized</code> 锁去掉（因为根本不存在多线程并发场景下的安全问题）</p>
 <hr>
-<h3 id="———————"><a href="#———————" class="headerlink" title="———————-"></a>———————-</h3><h3 id="6-6-方法区"><a href="#6-6-方法区" class="headerlink" title="6.6. 方法区"></a>6.6. 方法区</h3><h4 id="6-6-2-方法区概述"><a href="#6-6-2-方法区概述" class="headerlink" title="6.6.2. 方法区概述"></a>6.6.2. 方法区概述</h4><blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>方法区是线程共享的内存空间，在单个 <code>JVM</code> 中全局唯一</li>
-<li><code>JVM</code> 既会垃圾回收方法区，，也会因为方法区而抛出 <code>OutOfMemoryError</code> 错误：<ol>
-<li><code>OutOfMemoryError: Metaspace</code><ol>
-<li>元空间的内存空间不足</li>
-</ol>
-</li>
-<li><code>OutOfMemoryError: PermGen space</code><ol>
-<li>永久代的内存空间不足</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol>
-<li>每一个实例都会存储一个指向其对应的类的类元数据区的内存地址（需要注意的是：存储的位置是对象头中的 <code>Klass Word</code>）</li>
-<li>在 <code>Java8</code> 之前，静态变量、静态常量存储在方法区。但是在 <code>Java8</code> 及之后，静态变量、静态常量存储在堆区（因为静态变量、静态常量存储在类对象中，而类对象一定是在堆区被 <code>JVM</code> 分配内存空间的（因为 <code>JIT</code> 不会对类对象进行逃逸分析，因为无需也不应该对类对象进行逃逸分析，而且也无法对类对象进行逃逸分析），所以静态变量、静态常量存储在堆区）</li>
-<li>在 <code>Java8</code> 之前的永久代，在 <code>Java8</code> 及以后的元空间，都是对 <code>JVM</code> 规范中的方法区的实现。永久代与元空间的区别在于：<ol>
-<li>永久代的内存空间是堆区的内存空间的部分，内存空间往往较小（例如几十 <code>MB</code>），很容易导致 <code>JVM</code> 抛出 <code>OutOfMemoryError</code> 错误</li>
-<li>而元空间的内存空间是本地内存空间的部分，内存空间甚至可以动态扩展至整个物理内存空间的上限</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<hr>
-<h4 id="6-6-1-方法区组成部分"><a href="#6-6-1-方法区组成部分" class="headerlink" title="6.6.1. 方法区组成部分"></a>6.6.1. 方法区组成部分</h4><p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-7.png" srcset="/img/loading.gif" lazyload></p>
-<h5 id="6-6-3-类型信息"><a href="#6-6-3-类型信息" class="headerlink" title="6.6.3. 类型信息"></a>6.6.3. 类型信息</h5><ol>
-<li>类的全限定名</li>
-<li>类继承的类的全限定名</li>
-<li>类实现的接口的全限定名列表</li>
-<li>修饰类的 <code>Java</code> 修饰符<ol>
-<li>访问修饰符<ol>
-<li><code>public</code></li>
-<li><code>protected</code></li>
-<li><code>package-private</code></li>
-<li><code>private</code></li>
-</ol>
-</li>
-<li>类级别的非访问修饰符<ol>
-<li><code>final</code></li>
-<li><code>strictfp</code></li>
-<li><code>abstract</code></li>
-<li><code>sealed</code></li>
-<li><code>non-sealed</code></li>
-</ol>
-</li>
-</ol>
-</li>
-<li>类在类的加载阶段涉及到的加载器</li>
-<li>指向 Java 堆中的类对象</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<p>1. </p>
-</blockquote>
-<p><img src="/2025/12/10/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM-46.png" srcset="/img/loading.gif" lazyload></p>
-<p><code>static</code>：<strong>需修正</strong>。在 Java 中，<strong>顶级类（Top-level Class）不能使用 <code>static</code> 修饰</strong>。只有内部类（Nested Class）可以使用 <code>static</code>。</p>
-<p>类元信息是<strong>所有引用类型</strong>的元数据，主要包括：</p>
-<ol>
-<li>类的全限定名<ol>
-<li>例如 <code>java/lang/String</code></li>
-<li>注意事项<ol>
-<li>当我们日常编写时，类的全限定名是用点号，例如 <code>java.lang.String</code></li>
-<li>但是在 JVM 内部、字节码文件（.class 文件）以及 JNI 描述符中，类的全限定名是用斜杠，例如 java&#x2F;lang&#x2F;String</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>父类的全限定名<ol>
-<li>注意事项<ol>
-<li>是直接父类的全限定类名</li>
-<li>除了 <code>java.lang.Object</code>，所有类都应该有父类</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>实现接口的全限定名列表<ol>
-<li>因为一个类可能实现多个接口，所以用列表进行记录</li>
-</ol>
-</li>
-<li>类的修饰符<ol>
-<li>访问修饰符<ol>
-<li>public</li>
-<li>protected</li>
-<li>package-private（默认）</li>
-<li>private</li>
-</ol>
-</li>
-<li>非访问修饰符<ol>
-<li>final</li>
-<li>static</li>
-<li>abstract</li>
-</ol>
-</li>
-<li>注意事项<ol>
-<li>这些信息在 <code>.class</code> 文件中都包含在 <code>access_flags</code> 字段</li>
-<li>除此之外，还会记录类型本身的种类标识符，用于 JVM 判断该类到底是普通类、接口、枚举类，还是注解类型<ol>
-<li>class</li>
-<li>interface</li>
-<li>enum</li>
-<li>@interface</li>
-</ol>
-</li>
-<li>虽然我们通常认为 <code>enum</code> 是一种特殊的 <code>class</code>，<code>@interface</code> 是一种特殊的 <code>interface</code>，但本质上它们都是处于同一级别的关键字，并在字节码层面通过不同的访问标志加以区分</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>类加载器引用<ol>
-<li>加载该类的类加载器的引用</li>
-</ol>
-</li>
-</ol>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>无论是类、接口还是枚举、注解，在 JVM 的底层实现和运行层面，它们最终都被表示为 <strong>Class</strong>，因此都会在类的元数据信息中占有一席之地。</li>
-</ol>
-</blockquote>
-<hr>
-<h5 id="2-4-5-运行时常量池"><a href="#2-4-5-运行时常量池" class="headerlink" title="2.4.5. 运行时常量池"></a>2.4.5. 运行时常量池</h5><p>存储了各种 <strong>字面量（如字符串常量、数值常量）</strong> 和<strong>符号引用</strong>，符号引用将在解析阶段或者程序运行时被解析为直接引用。</p>
-<hr>
-<h3 id="———————-1"><a href="#———————-1" class="headerlink" title="———————-"></a>———————-</h3><h1 id="四、JVM-相关流程-1"><a href="#四、JVM-相关流程-1" class="headerlink" title="四、JVM 相关流程"></a>四、JVM 相关流程</h1><h2 id="实例化对象的过程"><a href="#实例化对象的过程" class="headerlink" title="实例化对象的过程"></a>实例化对象的过程</h2><hr>
+<h2 id="实例化对象的过程"><a href="#实例化对象的过程" class="headerlink" title="实例化对象的过程"></a>实例化对象的过程</h2><hr>
 <h2 id="执行方法的过程"><a href="#执行方法的过程" class="headerlink" title="执行方法的过程"></a>执行方法的过程</h2><hr>
-<p>字节码解释器优缺点</p>
-<p>缺点</p>
 <h3 id="解释器相关分类"><a href="#解释器相关分类" class="headerlink" title="解释器相关分类"></a>解释器相关分类</h3><ol>
 <li>模板解释器</li>
 <li>字节码解释器</li>
@@ -941,8 +616,7 @@
 </li>
 </ol>
 <hr>
-<hr>
-<h2 id="8-JIT-即时编译器"><a href="#8-JIT-即时编译器" class="headerlink" title="8. JIT 即时编译器"></a>8. JIT 即时编译器</h2><h2 id="10-Java-字节码指令"><a href="#10-Java-字节码指令" class="headerlink" title="10. Java 字节码指令"></a>10. Java 字节码指令</h2><p>其 <code>clinit</code> 字节码是：</p>
+<h2 id="10-Java-字节码指令"><a href="#10-Java-字节码指令" class="headerlink" title="10. Java 字节码指令"></a>10. Java 字节码指令</h2><p>其 <code>clinit</code> 字节码是：</p>
 <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-comment">// 加载运行时常量池中索引 52 处的值，并将其推入操作数栈，这里加载的是 50000</span><br><span class="hljs-number">0</span> ldc #52 &lt;<span class="hljs-number">50000</span>&gt;<br><br><span class="hljs-comment">// 将栈顶的值赋值给运行时常量池索引 16 处的静态字段，这里是将栈顶的 50000 赋值给 staticBasicTypeValue</span><br><span class="hljs-number">2</span> putstatic #16 &lt;org/example/test/Test.staticBasicTypeValue : I&gt;<br><br><span class="hljs-number">5</span> ldc #53 &lt;abc&gt;<br><span class="hljs-number">7</span> putstatic #30 &lt;org/example/test/Test.staticStringTypeValue1 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 为运行时常量池中索引 55 处的对象在堆上为其分配空间（仅分配内存空间并赋默认值，不执行接下来的对象实例化步骤）</span><br><span class="hljs-comment"> * 这里是为java/lang/String 对象分配空间</span><br><span class="hljs-comment"> */</span><br><span class="hljs-number">10</span> <span class="hljs-literal">new</span> #55 &lt;java/lang/<span class="hljs-built_in">String</span>&gt;<br><br><span class="hljs-comment">// 复制栈顶的对象引用，现在操作数栈中有两份对象引用：[ uninitRef, uninitRef ]</span><br><span class="hljs-number">13</span> dup<br><br><span class="hljs-comment">// 加载运行时常量池中索引 57 处的值，并将其推入操作数栈，这里加载的是 def 对象的引用</span><br><span class="hljs-number">14</span> ldc #57 &lt;def&gt;<br><br><span class="hljs-comment">// 调用运行时常量池中索引 59 处的方法，方法执行完操作数栈中只剩：[ initRef ]</span><br><span class="hljs-number">16</span> invokespecial #59 &lt;java/lang/<span class="hljs-built_in">String</span>.&lt;init&gt; : (Ljava/lang/<span class="hljs-built_in">String</span>;)V&gt;<br><br><span class="hljs-comment">// 将栈顶的值赋值给运行时常量池索引 37 处的静态字段，这里是将栈顶的 initRef 赋值给 staticStringTypeValue2</span><br><span class="hljs-number">19</span> putstatic #37 &lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><br><span class="hljs-number">22</span> getstatic #37 &lt;org/example/test/Test.staticStringTypeValue2 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">25</span> invokevirtual #61 &lt;java/lang/<span class="hljs-built_in">String</span>.intern : ()Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">28</span> putstatic #41 &lt;org/example/test/Test.staticStringTypeValue3 : Ljava/lang/<span class="hljs-built_in">String</span>;&gt;<br><span class="hljs-number">31</span> <span class="hljs-literal">new</span> #65 &lt;org/example/test/Demo&gt;<br><span class="hljs-number">34</span> dup<br><span class="hljs-number">35</span> invokespecial #67 &lt;org/example/test/Demo.&lt;init&gt; : ()V&gt;<br><span class="hljs-number">38</span> putstatic #45 &lt;org/example/test/Test.staticReferenceTypeValue : Lorg/example/test/Demo;&gt;<br><span class="hljs-number">41</span> <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
 
 
@@ -971,6 +645,32 @@
 
 <hr>
 <h4 id="10-1-9-dup"><a href="#10-1-9-dup" class="headerlink" title="10.1.9. dup"></a>10.1.9. dup</h4><hr>
+<ol>
+<li><code>ireturn</code><ol>
+<li>返回 <code>byte</code> 类型的数据、<code>short</code> 类型的数据、<code>int</code> 类型的数据、<code>char</code> 类型的数据、<code>boolean</code>  类型的数据</li>
+</ol>
+</li>
+<li><code>lreturn</code><ol>
+<li>返回 <code>long</code> 类型的数据</li>
+</ol>
+</li>
+<li><code>freturn</code><ol>
+<li>返回 <code>float</code> 类型的数据</li>
+</ol>
+</li>
+<li><code>dreturn</code><ol>
+<li>返回 <code>double</code> 类型的数据</li>
+</ol>
+</li>
+<li><code>areturn</code><ol>
+<li>返回引用数据类型的数据</li>
+</ol>
+</li>
+<li><code>return</code><ol>
+<li>仅返回（需要注意的是：仅返回适用于无返回值的方法）</li>
+</ol>
+</li>
+</ol>
 <h1 id="JVM-相关工具"><a href="#JVM-相关工具" class="headerlink" title="JVM 相关工具"></a>JVM 相关工具</h1><h2 id="Arthas"><a href="#Arthas" class="headerlink" title="Arthas"></a>Arthas</h2>
                 
               </div>

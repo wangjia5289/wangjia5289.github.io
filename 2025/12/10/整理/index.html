@@ -19,12 +19,12 @@
   <meta name="author" content="咸阳猴🐒">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 类加载器 2. 解释器2.1">
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系  [!NOTE] 注意事项  一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="整理">
 <meta property="og:url" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="咸阳猴🐒的博客">
-<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系 1. 类加载器 2. 解释器2.1">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo 地址👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2025&#x2F;12&#x2F;10&#x2F;笔记：JVM&#x2F;  代码洪荒（面试宝典）👉 https:&#x2F;&#x2F;www.notion.so&#x2F;JVM-2c5974fbda5e8009850fdcc845fe0424?source&#x3D;copy_link    三、JVM 架构体系  [!NOTE] 注意事项  一个">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-19.png">
@@ -42,8 +42,15 @@
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-20.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-21.png">
 <meta property="og:image" content="https://wangjia5289.github.io/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-22.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/666-8.png">
 <meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-01-08T13:41:26.994Z">
+<meta property="article:modified_time" content="2026-01-09T08:04:07.232Z">
 <meta property="article:author" content="Xian Yang Hou">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wangjia5289.github.io/%E7%AC%94%E8%AE%B0%EF%BC%9AJVM.eddx">
@@ -251,7 +258,7 @@
         
         
         
-          139 mins
+          140 mins
         
       </span>
     
@@ -306,7 +313,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    Last updated on 2026-01-08T21:41:26+08:00
+                    Last updated on 2026-01-09T16:04:07+08:00
                   
                   
 
@@ -329,89 +336,13 @@
 </ol>
 <hr>
 <h1 id="三、JVM-架构体系"><a href="#三、JVM-架构体系" class="headerlink" title="三、JVM 架构体系"></a>三、JVM 架构体系</h1><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-19.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>一个 Java 程序跑在一个 JVM 上，而不是多个 Java 程序跑在一个 JVM 上</li>
+</ol>
+</blockquote>
 <h2 id="1-类加载器"><a href="#1-类加载器" class="headerlink" title="1. 类加载器"></a>1. 类加载器</h2><hr>
-<h2 id="2-解释器"><a href="#2-解释器" class="headerlink" title="2. 解释器"></a>2. 解释器</h2><h3 id="2-1-解释器概述"><a href="#2-1-解释器概述" class="headerlink" title="2.1. 解释器概述"></a>2.1. 解释器概述</h3><p>解释器（<code>Interpreter</code>）用于解释执行 <code>JVM</code> 字节码指令</p>
-<hr>
-<h3 id="2-2-解释器相关分类"><a href="#2-2-解释器相关分类" class="headerlink" title="2.2. 解释器相关分类"></a>2.2. 解释器相关分类</h3><ol>
-<li>字节码解释器</li>
-<li>模板解释器</li>
-</ol>
-<h4 id="2-2-1-字节码解释器"><a href="#2-2-1-字节码解释器" class="headerlink" title="2.2.1. 字节码解释器"></a>2.2.1. 字节码解释器</h4><h5 id="2-2-1-1-字节码解释器概述"><a href="#2-2-1-1-字节码解释器概述" class="headerlink" title="2.2.1.1. 字节码解释器概述"></a>2.2.1.1. 字节码解释器概述</h5><p>字节码解释器（<code>C++</code> 解释器）是指：<code>JVM</code> 的设计团队使用 <code>C++</code> 语言编写的解释器</p>
-<hr>
-<h5 id="2-2-1-2-字节码解释器底层原理"><a href="#2-2-1-2-字节码解释器底层原理" class="headerlink" title="2.2.1.2. 字节码解释器底层原理"></a>2.2.1.2. 字节码解释器底层原理</h5><p>字节码解释器本质上就<strong>是</strong>一个 <code>while</code> 循环，该 <code>while</code> 循环中<strong>嵌套</strong>了一个巨大的 <code>switch-case</code> 语句</p>
-<p>当字节码解释器<strong>解释执行</strong> <code>JVM</code> 字节码指令时，其实就是该解释器<strong>进行</strong>一次 <code>while</code> 循环，然后<strong>根据</strong> <code>switch-case</code> 语句<strong>调用</strong>一次该 <code>JVM</code> 字节码指令对应的 <code>C++</code> 方法</p>
-<hr>
-<h5 id="2-2-1-3-字节码解释器利弊分析"><a href="#2-2-1-3-字节码解释器利弊分析" class="headerlink" title="2.2.1.3. 字节码解释器利弊分析"></a>2.2.1.3. 字节码解释器利弊分析</h5><h6 id="2-2-1-3-1-优势"><a href="#2-2-1-3-1-优势" class="headerlink" title="2.2.1.3.1. 优势"></a>2.2.1.3.1. 优势</h6><ol>
-<li>移植性高<ol>
-<li>由于字节码解释器是 <code>JVM</code> 的设计团队<strong>使用</strong> <code>C++</code> 语言编写的，所以只要 <code>C++</code> 语言<strong>适配</strong>了的系统（即该系统<strong>拥有</strong>兼容的 <code>C++</code> 编译器、<code>C++</code> 运行时环境），我们就可以在该系统上<strong>使用</strong>字节码解释器</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h6 id="2-2-1-3-2-劣势"><a href="#2-2-1-3-2-劣势" class="headerlink" title="2.2.1.3.2. 劣势"></a>2.2.1.3.2. 劣势</h6><ol>
-<li><hr>
-<ol>
-<li>我们知道：当字节码解释器解释执行 <code>JVM</code> 字节码指令时，其实就是该解释器进行一次 <code>while</code> 循环，然后根据 <code>switch-case</code> 语句调用一次该 <code>JVM</code> 字节码指令对应的 <code>C++</code> 方法</li>
-<li>所以，每当字节码解释器执行一条 <code>JVM</code> 字节码指令时，该解释器就会进行一次（<code>while</code> 循环 <code>&amp;&amp;</code> <code>switch-case</code> 语句的判断 <code>&amp;&amp;</code> <code>C++</code> 方法的执行 <code>&amp;&amp;</code> 控制流的跳转） </li>
-<li>但是，我们一行简单的 <code>Java</code> 代码（例如：<code>a = b + c</code>）就会被 <code>javac</code> 编译器编译成多条 <code>JVM</code> 字节码指令</li>
-<li>所以，<code>JVM</code> 哪怕只是执行一行简单的 <code>Java</code> 代码，该解释器都会重复的执行上述的流程</li>
-<li>然而，只有当该解释器执行 <code>C++</code> 方法时，该解释器才是在真正的执行实际的业务</li>
-<li>所以，当 <code>JVM</code> 使用字节码解释器解释执行 <code>JVM</code> 字节码指令时，该解释器会造成极大的算力的浪费（术语是：管理成本远远大于生产成本）</li>
-</ol>
-</li>
-<li><hr>
-<ol>
-<li>由于字节码解释器是 <code>JVM</code> 的设计团队使用 <code>C++</code> 语言编写的解释器</li>
-<li>所以，字节码解释器其实是被 <code>C++</code> 编译器编译成 <code>CPU</code> 对应的机器码指令的</li>
-<li>我们知道：如果我们使用 <code>C++</code> 语言编写一个程序，该编译器是可以在编译该程序时深度的优化该程序的（例如：该编译器可以将部分的数据存储在寄存器中。因为该编译器拥有该程序的全局视角，清楚的知道（方法的调用链 <code>&amp;&amp;</code> 变量的生命周期 <code>&amp;&amp;</code> <code>...</code>））</li>
-<li>但是，当该编译器在编译该解释器时，该编译器拥有的该解释器的全局视角会被该解释器的特性显著的削弱（因为该解释器本质上就是一个 <code>while</code> 循环 + <code>switch-case</code> 语句。在该 <code>while</code> 循环外，字节码解释器中的 <code>C++</code> 代码并不存在可供 <code>C++</code> 编译器分析的复杂的方法的调用链。而在该 <code>while</code> 循环中，尽管 <code>switch-case</code> 语句中的各个分支中包含了大量的 <code>C++</code> 方法，但是由于该编译器并不知道在 <code>JVM</code> 运行该解释器的过程中，该解释器要按照什么顺序来执行 <code>C++</code> 方法（因为该顺序要根据 <code>JVM</code> 字节码指令的顺序，而该 <code>JVM</code> 字节码指令的顺序又要根据我们编写 <code>Java</code> 代码））</li>
-<li>所以，该解释器不知道我们下一步要去执行哪一个 <code>C++</code> 方法，更不知道该解释器正在执行的 <code>C++</code> 方法中，哪些数据会被之后要去执行的 <code>C++</code> 方法继续使用</li>
-<li>所以 <code>C++</code> 编译器不得不把该解释器正在执行的 <code>C++</code> 方法中的数据写回内存空间中（需要注意的是：该数据其实是被该解释器写回到该解释器正在执行的 <code>C++</code> 方法所属的 <code>Java</code> 方法对应的栈帧中的操作数栈的内存空间中）</li>
-<li>所以，当 <code>JVM</code> 使用字节码解释器解释执行 <code>JVM</code> 字节码指令时，会产生大量的读写内存空间的行为</li>
-</ol>
-</li>
-<li><hr>
-<ol>
-<li>现代的 <code>CPU</code> 极其的依赖于复杂的（指令流水线 <code>&amp;&amp;</code> 分支预测）技术来提升执行的速度</li>
-<li>但是，字节码解释器中的 <code>switch-case</code> 语句对于 <code>CPU</code> 来说，其实就是一个间接分支</li>
-<li>所以，<code>CPU</code> 的分支预测其实是很难预测 <code>switch-cas</code>e 语句要去跳转的目标地址的</li>
-<li>可是，一旦 <code>CPU</code> 的分支预测失败，<code>CPU</code> 就必须清空已经加载到流水线中的指令，并重新加载正确的指令</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h5 id="2-2-1-4-字节码解释器相关产品"><a href="#2-2-1-4-字节码解释器相关产品" class="headerlink" title="2.2.1.4. 字节码解释器相关产品"></a>2.2.1.4. 字节码解释器相关产品</h5><ol>
-<li><code>Zero</code> 解释器</li>
-</ol>
-<hr>
-<h4 id="2-2-2-模板解释器"><a href="#2-2-2-模板解释器" class="headerlink" title="2.2.2. 模板解释器"></a>2.2.2. 模板解释器</h4><h5 id="2-2-2-1-模板解释器概述"><a href="#2-2-2-1-模板解释器概述" class="headerlink" title="2.2.2.1. 模板解释器概述"></a>2.2.2.1. 模板解释器概述</h5><p>模板解释器是指：<code>JVM</code> 的设计团队使用汇编语言编写的解释器</p>
-<hr>
-<h5 id="2-2-2-2-模板解释器底层原理"><a href="#2-2-2-2-模板解释器底层原理" class="headerlink" title="2.2.2.2. 模板解释器底层原理"></a>2.2.2.2. 模板解释器底层原理</h5><p>模板解释器的底层原理是指：在我们启动 <code>JVM</code> 的过程中，模板解释器会为每一条 <code>JVM</code> 字节码指令生成 <code>CPU</code> 对应的机器码指令</p>
-<hr>
-<h5 id="2-2-2-3-模板解释器相关流程"><a href="#2-2-2-3-模板解释器相关流程" class="headerlink" title="2.2.2.3. 模板解释器相关流程"></a>2.2.2.3. 模板解释器相关流程</h5><p>当模板解释器解释执行 <code>JVM</code> 字节码指令时，其实就是该解释器读取当前要去执行的 <code>JVM</code> 字节码指令，然后直接跳转到该 <code>JVM</code> 字节码指令被该解释器编译后的 <code>CPU</code> 对应的机器码指令并执行</p>
-<p>在该解释器执行完该 <code>CPU</code> 对应的机器码指令之后，该解释器会再次读取下一条要去执行的 <code>JVM</code> 字节码指令，然后再跳转到该 <code>JVM</code> 字节码指令被该解释器编译后的 <code>CPU</code> 对应的机器码指令并执行</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>由于模板解释器是在 <code>CPU</code> 对应的机器码指令的层面直接进行控制流的跳转，所以该解释器进行跳转的效率非常高</li>
-</ol>
-</blockquote>
-<hr>
-<h2 id="3-JIT-编译器"><a href="#3-JIT-编译器" class="headerlink" title="3. JIT 编译器"></a>3. JIT 编译器</h2><h3 id="3-1-JIT-编译器概述"><a href="#3-1-JIT-编译器概述" class="headerlink" title="3.1. JIT 编译器概述"></a>3.1. JIT 编译器概述</h3><p><code>JIT</code> 编译器（<code>JIT Compiler</code>）用于将热点的 <code>Java</code> 代码被 <code>javac</code> 编译器编译后的 <code>JVM</code> 字节码指令编译成 <code>CPU</code> 对应的机器码指令（需要注意的是：在后文中，我们简称为热点的 <code>Java</code> 代码），并在该代码的基础上进行了一系列的性能的优化</p>
-<blockquote>
-<p>[!NOTE] 注意事项</p>
-<ol>
-<li>热点的 <code>Java</code> 代码被 <code>JIT</code> 编译器编译成的 <code>CPU</code> 对应的机器码指令，被 <code>JVM</code> 存储在运行时数据区中的代码缓存中</li>
-</ol>
-</blockquote>
-<hr>
-<h3 id="3-2-JIT-编译器组成部分"><a href="#3-2-JIT-编译器组成部分" class="headerlink" title="3.2. JIT 编译器组成部分"></a>3.2. JIT 编译器组成部分</h3><ol>
-<li><code>C1</code> 编译器</li>
-<li><code>C2</code> 编译器</li>
-</ol>
-<hr>
-<h3 id="3-3-JIT-编译器相关流程"><a href="#3-3-JIT-编译器相关流程" class="headerlink" title="3.3. JIT 编译器相关流程"></a>3.3. JIT 编译器相关流程</h3><p>详见下文：<code>JVM</code> 相关流程-分层编译的过程</p>
-<hr>
 <h2 id="4-垃圾回收器"><a href="#4-垃圾回收器" class="headerlink" title="4. 垃圾回收器"></a>4. 垃圾回收器</h2><h3 id="4-1-垃圾回收器前置基础"><a href="#4-1-垃圾回收器前置基础" class="headerlink" title="4.1. 垃圾回收器前置基础"></a>4.1. 垃圾回收器前置基础</h3><h4 id="4-1-1-垃圾回收概述"><a href="#4-1-1-垃圾回收概述" class="headerlink" title="4.1.1. 垃圾回收概述"></a>4.1.1. 垃圾回收概述</h4><p>垃圾回收器（<code>GC</code>、<code>Garbage Collection</code>）用于在 <code>Java</code> 程序运行的过程中，清理堆区、方法区不再使用的资源，从而达到释放内存空间的目的：</p>
 <ol>
 <li>清理堆区不再使用的资源<ol>
@@ -996,103 +927,23 @@
 <p>需要注意的是，从 <code>Java9</code> 开始，<code>Object</code> 类的 <code>void finalize()</code> 方法已经被正式弃用了</p>
 <hr>
 <h2 id="2-类加载的过程"><a href="#2-类加载的过程" class="headerlink" title="2. 类加载的过程"></a>2. 类加载的过程</h2><p><img src="/2025/12/10/%E6%95%B4%E7%90%86/%E6%95%B4%E7%90%86-20.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2-1-加载阶段"><a href="#2-1-加载阶段" class="headerlink" title="2.1. 加载阶段"></a>2.1. 加载阶段</h3><h3 id="2-1-加载阶段-1"><a href="#2-1-加载阶段-1" class="headerlink" title="2.1. 加载阶段"></a>2.1. 加载阶段</h3><p>在加载阶段中，<code>JVM</code> 会使用类加载器进行：</p>
+<h3 id="加载阶段"><a href="#加载阶段" class="headerlink" title="加载阶段"></a>加载阶段</h3><p>触发加载阶段的条件有：</p>
+<ol>
+<li>当我们启动 <code>Java</code> 程序时，<code>JVM</code> 首先会触发 <code>Java</code> 核心类的加载阶段（即 <code>JVM</code> 使用启动类加载器加载的那些类），然后再触发启动类的加载阶段</li>
+<li>当我们创建类的实例，但该类还未被加载时</li>
+<li>当我们访问类的（静态变量 <code>||</code> 静态方法），但该类还未被加载时（需要注意的是：当我们访问类的静态常量时，不会触发该类的加载阶段）</li>
+<li>当我们通过反射获取类的类对象，但该类还未被加载时</li>
+<li>当 JVM 触发类的加载阶段时，该类的父类</li>
+<li>当子类触发加载阶段时，父类也要触发加载阶段（因为加载子类时，JVM 必须先知道父类长什么样（内存结构、字段布局等）。在对象实例化的过程中，JVM 需要先执行父类的构造方法，而且子类可能会需要继承父类的一些东西）</li>
+<li>当我们使用 ClassLoader.loadClass() 来加载类时（需要注意的是：该方法通常在我们自定义类加载器时常用）</li>
+</ol>
+<p>在加载阶段中，<code>JVM</code> 会使用类加载器进行：</p>
 <ol>
 <li>通过类的全限定名，获取定义该类的字节流（需要注意的是：在下文中，我们统称定义类的字节流为 <code>.class</code> 文件）</li>
 <li>创建类在（运行时数据区 ➔ 方法区）中的运行时数据结构（术语是：<code>Java</code> 类模型）</li>
 <li>创建类的类对象（<code>Class</code> 对象）</li>
 </ol>
 <hr>
-<p>触发加载阶段的条件有：</p>
-<p>JVM（Java 虚拟机）在运行时并不会一次性加载所有的类，而是采取<strong>按需加载</strong>的策略，这被称为<strong>动态加载</strong>。类加载的时机主要分为两种：<strong>启动时加载</strong>和<strong>运行时加载</strong>。</p>
-<ol>
-<li>启动时加载<ol>
-<li>JVM 启动时，会加载启动类，然后执行其 main 方法<ol>
-<li>不会在堆内存中创建启动类的实例对象</li>
-<li>因为 <code>main</code> 方法是一个静态方法，它不需要一个类的实例就可以被调用</li>
-</ol>
-</li>
-<li>同时，JVM 会加载运行程序所需的核心类，例如 <code>java.lang.Object</code>、<code>java.lang.String</code> 以及其他在启动过程中直接或间接被引用的类。</li>
-</ol>
-</li>
-<li>运行时加载<ol>
-<li>这是类加载最常见的场景，常见触发情况有：</li>
-<li>创建类的实例时：<ol>
-<li>当你使用 <code>new</code> 关键字创建一个类的对象时，如果这个类还没有被加载，JVM 会立即加载它。</li>
-<li>例如：<code>MyClass obj = new MyClass();</code> &#x2F;&#x2F; 第一次使用 MyClass 时，会被加载</li>
-</ol>
-</li>
-<li>访问类的静态成员时：<ol>
-<li>当你访问一个类的静态变量（<code>static field</code>）或者调用一个类的静态方法（<code>static method</code>）时，如果该类还没有被加载，JVM 会加载它</li>
-<li>例如：<code>MyClass.staticMethod();</code></li>
-</ol>
-</li>
-<li>使用反射时<ol>
-<li>当你通过 <code>java.lang.reflect</code> 包中的方法，例如 <code>Class.forName(&quot;com.example.MyClass&quot;)</code> 来获取一个类的 <code>Class</code> 对象时，会触发该类的加载</li>
-<li>例如：<code>Class&lt;?&gt; clazz = Class.forName(&quot;com.example.MyClass&quot;);</code></li>
-</ol>
-</li>
-<li>子类被加载时，父类也会被加载<ol>
-<li>当一个类的子类被初始化时，它的父类如果尚未加载，则会首先被加载</li>
-<li>这是因为子类继承了父类的成员，需要确保父类已经就绪</li>
-</ol>
-</li>
-<li>使用 ClassLoader.loadClass()<ol>
-<li>根据给定的类全名（例如 <code>java.lang.String</code> 或 <code>com.example.MyClass</code>）来加载对应的类</li>
-<li>这是更底层、更灵活的加载方式，通常在自定义类加载器时使用</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p><code>JVM</code> 在运行时并不会一次性加载所有的类，而是采取按需加载的策略，这被称为动态加载。类加载的时机主要包括：</p>
-<ol>
-<li>启动时加载<ol>
-<li>JVM 在启动时，会加载启动类，并执行其 main 方法<ol>
-<li>并不会在堆内存中创建启动类的实例对象</li>
-<li>这是因为 main 方法是一个静态方法，不需要类的实例就可以被调用（这也是为什么 static 方法无法访问非 static 变量的原因）</li>
-</ol>
-</li>
-<li>同时，JVM 会加载运行程序所需的核心类，例如 java.lang.Object、java.lang.String 以及其他在启动过程中直接或间接被引用的类</li>
-</ol>
-</li>
-<li>运行时加载<ol>
-<li>这是类加载最常见的场景，常见触发情况主要包括：<ol>
-<li>创建类的实例时<ol>
-<li>当你 new 一个类的实例时，如果这个类还没有被加载，JVM 会立即加载它</li>
-</ol>
-</li>
-<li>访问类的静态成员时<ol>
-<li>当你访问一个类的静态变量，或者调用一个类的静态方法时，如果该类还没有被加载，如果这个类还没有被加载，JVM 会立即加载它</li>
-</ol>
-</li>
-<li>使用反射获取 Class 对象时<ol>
-<li>当你通过 java.lang.reflect 包中的方法，例如 Class.forName(“com.example.MyClass”) 来获取一个类的 Class 对象时，如果这个类还没有被加载，JVM 会立即加载它</li>
-</ol>
-</li>
-<li>子类被加载时，父类也会被加载<ol>
-<li>当一个类的子类被初始化时，它的父类如果尚未加载，则会首先被加载</li>
-<li>这是因为子类继承了父类的成员，需要确保父类已经就绪</li>
-</ol>
-</li>
-<li>使用 ClassLoader.loadClass() 时<ol>
-<li>根据类全名（例如 java.lang.String 或 com.example.MyClass）来手动加载对应的类</li>
-<li>这是更底层、更灵活的加载方式，通常在自定义类加载器时使用</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>当遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。在这之前，自然需要先完成加载和验证、准备阶段。</li>
-<li>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时。</li>
-<li>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</li>
-<li>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</li>
-<li>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</li>
-</ul>
-<p>在加载阶段中，类加载器会：</p>
 <blockquote>
 <p>[!NOTE] 注意事项</p>
 <ol>
@@ -1208,7 +1059,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-3-准备阶段"><a href="#2-3-准备阶段" class="headerlink" title="2.3. 准备阶段"></a>2.3. 准备阶段</h3><h4 id="2-3-1-准备阶段概述"><a href="#2-3-1-准备阶段概述" class="headerlink" title="2.3.1. 准备阶段概述"></a>2.3.1. 准备阶段概述</h4><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>在准备阶段中，<code>JVM</code> 会进行：</p>
+<h3 id="2-3-准备阶段"><a href="#2-3-准备阶段" class="headerlink" title="2.3. 准备阶段"></a>2.3. 准备阶段</h3><h4 id="2-3-1-准备阶段概述"><a href="#2-3-1-准备阶段概述" class="headerlink" title="2.3.1. 准备阶段概述"></a>2.3.1. 准备阶段概述</h4><h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><h3 id="准备阶段-1"><a href="#准备阶段-1" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>在准备阶段中，<code>JVM</code> 会进行：</p>
 <ol>
 <li>为类的静态变量、静态常量分配内存空间</li>
 <li>赋予默认值给类的静态变量</li>
@@ -1312,7 +1163,7 @@
 </ol>
 </blockquote>
 <hr>
-<h3 id="2-5-初始化阶段"><a href="#2-5-初始化阶段" class="headerlink" title="2.5. 初始化阶段"></a>2.5. 初始化阶段</h3><h4 id="2-5-1-初始化阶段概述"><a href="#2-5-1-初始化阶段概述" class="headerlink" title="2.5.1. 初始化阶段概述"></a>2.5.1. 初始化阶段概述</h4><h2 id="3-解释执行的流程"><a href="#3-解释执行的流程" class="headerlink" title="3. 解释执行的流程"></a>3. 解释执行的流程</h2><p>详见上文：<code>JVM</code> 架构体系-解释器</p>
+<h2 id="3-解释执行的流程"><a href="#3-解释执行的流程" class="headerlink" title="3. 解释执行的流程"></a>3. 解释执行的流程</h2><p>详见上文：<code>JVM</code> 架构体系-解释器</p>
 <hr>
 <h2 id="4-分层编译的过程"><a href="#4-分层编译的过程" class="headerlink" title="4. 分层编译的过程"></a>4. 分层编译的过程</h2><p>分层编译是 <code>HotSpot JVM</code> 特有的概念，用于融合（<code>Client</code> 模式 <code>&amp;&amp;</code> <code>Server</code> 模式）的特性</p>
 <blockquote>
@@ -1497,6 +1348,208 @@
 </ol>
 <hr>
 <h2 id="5-垃圾回收的过程"><a href="#5-垃圾回收的过程" class="headerlink" title="5. 垃圾回收的过程"></a>5. 垃圾回收的过程</h2><p>详见上文：<code>JVM</code> 架构体系-垃圾回收器</p>
+<hr>
+<h2 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h2><p><img src="/666.png" srcset="/img/loading.gif" lazyload alt="725"></p>
+<h3 id="验证阶段（🐂）"><a href="#验证阶段（🐂）" class="headerlink" title="验证阶段（🐂）"></a>验证阶段（🐂）</h3><p>在验证阶段中，<code>JVM</code> 会进行：</p>
+<ol>
+<li>格式检查<ol>
+<li>检查 <code>.class</code> 文件中的开头是否为 <code>OxCAFEBABE</code></li>
+<li>检查 <code>.class</code> 文件中的（主版本号 <code>&amp;&amp;</code> 副版本号）是否在该 <code>JVM</code> 支持的范围中</li>
+<li>检查 <code>.class</code> 文件中的结构是否（完整 <code>&amp;&amp;</code> 符合 <code>JVM</code> 规范）（需要注意的是：<code>JVM</code> 会着重检查常量池）</li>
+</ol>
+</li>
+<li>语义检查</li>
+<li>字节码验证</li>
+<li>符号引用验证</li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>其实 <code>JVM</code> 是交叉进行（加载阶段 <code>&amp;&amp;</code> 验证阶段）的。<code>JVM</code> 会先进行（验证阶段 ➔ 格式检查），再进行加载阶段，然后再进行（验证阶段 ➔ 其他的（检查 <code>&amp;&amp;</code> 验证））</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="解析阶段"><a href="#解析阶段" class="headerlink" title="解析阶段"></a>解析阶段</h3><p>在解析阶段中，<code>JVM</code> 会将（类的类元数据区 ➔ 运行时常量池 ➔ 符号引用）解析成直接引用（即将符号形式的文本信息转换为可被 <code>JVM</code> 直接定位的内存地址）</p>
+<p><code>JVM</code> 规范规定的符号引用主要包括：</p>
+<ol>
+<li><code>CONSTANT_Class_info</code><ol>
+<li>在解析阶段之前，存储类的全限定名</li>
+<li>在解析阶段之后，存储一个指向该类的类元数据区的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_Fieldref_info</code><ol>
+<li>在解析阶段之前，存储（类的全限定名 <code>&amp;&amp;</code> 字段的（名词 <code>&amp;&amp;</code> 描述符））</li>
+<li>在解析阶段之后，存储一个指向（该类的类元数据区 ➔ 该字段对于的字段信息）的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_Methodref_info</code><ol>
+<li>在解析阶段之前，存储（类的全限定名 <code>&amp;&amp;</code> 方法的（名字 <code>&amp;&amp;</code> 描述符））</li>
+<li>在解析阶段之后，存储一个指向（该类的类元数据区 ➔ 该方法对于的方法信息）的内存地址</li>
+</ol>
+</li>
+<li><code>CONSTANT_InterfaceMethodref_info</code><ol>
+<li><code>CONSTANT_InterfaceMethodref_info</code> 于 <code>CONSTANT_Methodref_info</code> 相似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 针对的是接口方法</li>
+</ol>
+</li>
+<li><code>CONSTANT_MethodType_info</code></li>
+<li><code>CONSTANT_MethodHandle_info</code></li>
+<li><code>CONSTANT_InvokeDynamic_info</code></li>
+</ol>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>（<code>CONSTANT_MethodType_info</code> <code>&amp;&amp;</code> <code>CONSTANT_MethodHandle_info</code> <code>&amp;&amp;</code> <code>CONSTANT_InvokeDynamic_info</code>）是在 <code>Java 7</code> 中，<code>Java</code> 语言的设计团队为了引入 <code>invokedynamic</code> <code>JVM</code> 字节码指令，修改了 JVM 规范，将这三个符号引用引入了进来</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>[!NOTE] 注意事项<br>2. 不同 <code>JVM</code> 对解析阶段的处理方式可能存在差异：<br>    1. 一些 JVM 实现会在解析阶段，遍历运行时常量池中的所有符号引用，并尝试将其立即解析为直接引用<br>    2. 也有一些 JVM 实现会在解析阶段，选择只解析其中关键或高频使用的符号引用，比如 java.lang.Object 这类核心类<br>    3. 我们的 HotSpot JVM 采用的是延迟解析的策略<br>        1. 在解析阶段，HotSpot 会遍历并识别出所有类和接口的符号引用（CONSTANT_Class_info）<br>        2. 对于像 java.lang.Object 这样的基础核心类，JVM 会尝试解析它<br>        3. 而对于大多数的符号引用，通常采用按需解析，即在首次使用时才触发解析<br>        4. 例如在初始化阶段执行 clinit 方法时，或在运行 init、main 方法，甚至其他方法的字节码时，如果某个符号引用还未被解析，就会在那一刻解析<br>3. 所以符号引用将在 解析阶段 或者 程序运行时 被解析为直接引用，并不一定在解析阶段就被解析成直接引用</p>
+</blockquote>
+<h4 id="CONSTANT-Class-info"><a href="#CONSTANT-Class-info" class="headerlink" title="CONSTANT_Class_info"></a>CONSTANT_Class_info</h4><p>在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了一个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而该 <code>CONSTANT_Utf8_info</code> 又存储了类的全限定名。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_Class_info</code> 存储了类的全限定名<br><img src="/666-5.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Class_info</code> 存储了一个指向该类的类元数据区的内存地址</p>
+<hr>
+<h4 id="CONSTANT-Utf8-info"><a href="#CONSTANT-Utf8-info" class="headerlink" title="CONSTANT_Utf8_info"></a>CONSTANT_Utf8_info</h4><p><code>CONSTANT_Utf8_info</code> 用于存储在 Java 程序中的各种 UTF-8 编码的文本信息（例如：类名）<br><img src="/666-7.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Utf8_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_Utf8_info</code> 本质上只是为 Java 程序提供各种文本信息的符号引用</p>
+<hr>
+<h4 id="CONSTANT-NameAndType-info"><a href="#CONSTANT-NameAndType-info" class="headerlink" title="CONSTANT_NameAndType_info"></a>CONSTANT_NameAndType_info</h4><p>在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了两个 <code>CONSTANT_Utf8_info</code> 的常量池索引，而这两个 <code>CONSTANT_Utf8_info</code> 又分别存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）。我们可以简单理解为：在解析阶段之前，<code>CONSTANT_NameAndType_info</code> 存储了（方法 <code>||</code> 字段）的（名字 <code>&amp;&amp;</code> 描述符）<br><img src="/666-6.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_NameAndType_info</code> 并不会被 JVM 解析成直接引用（因为 <code>CONSTANT_NameAndType_info</code> 本质上只是为（<code>CONSTANT_Fieldref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_Methodref_info</code> <code>&amp;&amp;</code> <code>CONSTANT_InterfaceMethodref_info</code>）提供描述信息的符号引用）</p>
+<hr>
+<h4 id="CONSTANT-Fieldref-info"><a href="#CONSTANT-Fieldref-info" class="headerlink" title="CONSTANT_Fieldref_info"></a>CONSTANT_Fieldref_info</h4><p>在解析阶段之前，<code>CONSTANT_Fieldref_info</code> 存储了一个（<code>CONSTANT_Class_info</code> <code>&amp;&amp;</code> <code>CONSTANT_NameAndType_info</code>）的常量池索引，而该 <code>CONSTANT_Class_info</code> 存储了类的全限定名，该 <code>CONSTANT_NameAndType_info</code> 存储了字段的（名字 &amp;&amp; 描述符）<br><img src="/666-2.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该字段对应的字段信息）的内存地址</p>
+<hr>
+<h4 id="CONSTANT-Methodref-info"><a href="#CONSTANT-Methodref-info" class="headerlink" title="CONSTANT_Methodref_info"></a>CONSTANT_Methodref_info</h4><p>在解析阶段之前，CONSTANT_Fieldref_info 存储了一个（CONSTANT_Class_info &amp;&amp; CONSTANT_NameAndType_info）的常量池索引，而 CONSTANT_Class_info 存储类的全限定名，CONSTANT_NameAndType_info 存储方法的（名字 &amp;&amp; 描述符）<br><img src="/666-4.png" srcset="/img/loading.gif" lazyload></p>
+<p>在解析阶段之后，<code>CONSTANT_Fieldref_info</code> 存储了一个指向（类的类元数据区 ➔ 该方法对应的方法信息）的内存地址</p>
+<hr>
+<h4 id="CONSTANT-String-info"><a href="#CONSTANT-String-info" class="headerlink" title="CONSTANT_String_info"></a>CONSTANT_String_info</h4><p>在解析阶段之前，CONSTANT_String_info 存储了一个 CONSTANT_Utf8_info 的常量池索引，而该 CONSTANT_Utf8_info 又存储了一个根据字面量构建 String 实例的构造方法的字面量</p>
+<p>在解析阶段之后，CONSTANT_String_info 存储了一个指向使用该构造方法构造的 String 实例的内存地址</p>
+<blockquote>
+<p>[!NOTE] 注意事项</p>
+<ol>
+<li>对于静态常量的解析阶段，就算说，很多东西嘛，顺序肯定是不一样的</li>
+<li></li>
+<li>在解析阶段之后，CONSTANT_String_info 存储的是一个堆区的内存地址，而其他的存储的是方法区的内存地址</li>
+</ol>
+</blockquote>
+<hr>
+<h4 id="CONSTANT-InterfaceMethodref-info"><a href="#CONSTANT-InterfaceMethodref-info" class="headerlink" title="CONSTANT_InterfaceMethodref_info"></a>CONSTANT_InterfaceMethodref_info</h4><p><code>CONSTANT_InterfaceMethodref_info</code> 与 <code>CONSTANT_Methodref_info</code> 类似，只不过 <code>CONSTANT_InterfaceMethodref_info</code> 指向的是接口方法的描述信息</p>
+<hr>
+<h4 id="CONSTANT-Integer-info"><a href="#CONSTANT-Integer-info" class="headerlink" title="CONSTANT_Integer_info"></a>CONSTANT_Integer_info</h4><p><code>CONSTANT_Integer_info</code> 用于存储整数常量。虽然它的名字里虽然带有 <code>Integer</code>，但与 <code>Integer</code> 对象本身没有任何关系，只是单纯地用来存储一个整数常量。至于 <code>Integer</code> 对象，它和其他对象一样，依然遵循普通对象的处理方式。</p>
+<p>我们知道，小整数常量（<code>-1 - 5</code>）会通过 <code>iconst_n</code> 字节码指令直接压入操作数栈，而不需要像前面提到的那样，在执行字节码时先去运行时常量池查找、必要时再解析，然后再取值。简单来说，这些常量可以直接获得，而无需额外解析或查找步骤。同样地，取值范围在 <code>-128 - 127</code> 的整数会使用 <code>bipush n</code> 指令，范围在 <code>-32768 ~ 32767</code> 的整数会使用 <code>sipush n</code> 指令</p>
+<p>然而，如果超出这个范围，就必须通过常量池来获取。但需要注意的是，<code>CONSTANT_Integer_info</code> 常量并不像其他符号引用那样需要解析，它本身就直接存储了数值，因此字节码在执行时只需从常量池中取出即可，无需再进行解析过程<br><img src="/666-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>与此类似的几种主要包括：</p>
+<ol>
+<li>CONSTANT_Integer_info<ol>
+<li>整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Float_info<ol>
+<li>浮点数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Long_info<ol>
+<li>长整数常量</li>
+</ol>
+</li>
+<li>CONSTANT_Double_info<ol>
+<li>双精度浮点数常量</li>
+</ol>
+</li>
+</ol>
+<p>这些符号引用都无需经过解析，因为它们本身就直接包含了数值</p>
+<blockquote>
+<p>[!NOTE] 注意实习</p>
+<ol>
+<li><code>boolean</code>、<code>byte</code>、<code>short</code>、<code>char</code> 都是使用 <code>iconst_n</code>、<code>bipush n</code>、<code>sipush n</code> 压入操作数栈的<ol>
+<li>boolean<ol>
+<li>0 表示 false</li>
+<li>1 表示 true</li>
+</ol>
+</li>
+<li>char<ol>
+<li>不要忘记，我们存储 char 是根据 Unicode 字符集存储的，所以 ‘a’ ➔ 97</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="初始化阶段"><a href="#初始化阶段" class="headerlink" title="初始化阶段"></a>初始化阶段</h3><p>需要注意的是，类的加载过程并不一定会进入初始化阶段，例如下面几种情况就不会触发初始化，这被称为 “被动引用”：</p>
+<ol>
+<li>通过子类引用父类的静态字段<ol>
+<li>例如，System.out.println(SubClass.parentStaticField);</li>
+<li>这只会初始化父类，而不会初始化子类</li>
+</ol>
+</li>
+<li>通过数组定义来引用类<ol>
+<li>例如，MyClass［］ mcArray &#x3D; new MyClass［10］;</li>
+<li>这并不会触发 MyClass 类的初始化，它只是创建了一个 MyClass 类型的数组对象</li>
+</ol>
+</li>
+<li>引用类的常量<ol>
+<li>例如，System.out.println(MyClass.MY_CONSTANT);</li>
+<li>如果常量在编译阶段就被放入了调用类的常量池中（例如被 final 修饰的基本类型或字符串常量），那么本质上并没有直接引用定义常量的类，因此不会触发该类的初始化</li>
+</ol>
+</li>
+</ol>
+<p>但是 <code>JVM</code> 规范中规定了，在以下几种情况中，必须进行初始化：</p>
+<ol>
+<li><p>遇到 new、getstatic、putstatic 或 invokestatic 字节码指令时</p>
+<ol>
+<li>使用 new 关键字实例化对象</li>
+<li>访问类的静态字段时<ol>
+<li>被 final 修饰的静态字段，如果其值已在编译期确定，则不会触发初始化</li>
+</ol>
+</li>
+<li>访问类的静态方法时</li>
+</ol>
+</li>
+<li><p>使用 java.lang.reflect 包的方法对类型进行反射调用时</p>
+<ol>
+<li>例如，使用 Class.forName(“com.example.MyClass”) 或 MyClass.class.newInstance()</li>
+</ol>
+</li>
+<li><p>初始化一个类的子类时</p>
+<ol>
+<li>如果一个类还没有初始化，它的任何一个子类在初始化之前，父类都必须先初始化。</li>
+</ol>
+</li>
+<li><p>JVM 启动时指定的主类</p>
+<ol>
+<li>包含 main() 方法的那个类，JVM 在启动时会先初始化这个类</li>
+</ol>
+</li>
+<li><p>JDK 7 引入的动态语言支持</p>
+<ol>
+<li>当一个 java.lang.invoke.MethodHandle 实例的解析结果是 REF_getStatic、REF_putStatic、REF_invokeStatic、REF_newInvokeSpecial 四种类型的方法句柄时，并且这个方法句柄对应的类没有初始化时，需要先触发其初始化</li>
+</ol>
+</li>
+<li><p>遇到 <code>new</code>、<code>getstatic</code>、<code>putstatic</code> 或 <code>invokestatic</code> 这四条字节码指令时，如果类没有进行过初始化，则需要先触发其初始化。这四条指令分别对应：</p>
+<ul>
+<li>使用 <code>new</code> 关键字实例化对象。</li>
+<li>读取一个类的静态字段（被 <code>final</code> 修饰，已在编译期把结果放入常量池的静态字段除外）。</li>
+<li>设置一个类的静态字段。</li>
+<li>调用一个类的静态方法。</li>
+</ul>
+</li>
+<li><p>使用 <code>java.lang.reflect</code> 包的方法对类进行反射调用时，如果类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当初始化一个类时，如果其父类还没有被初始化，则需要先初始化其父类。</p>
+</li>
+<li><p>当虚拟机启动时，用户需要指定一个要执行的主类（包含 <code>main()</code> 方法的那个类），虚拟机会先加载并初始化这个主类。</p>
+</li>
+<li><p>当使用 <code>JDK 7</code> 的动态语言支持时，如果一个 <code>java.lang.invoke.MethodHandle</code> 实例最后的解析结果是 <code>REF_getStatic</code>、<code>REF_putStatic</code>、<code>REF_invokeStatic</code>、<code>REF_newInvokeSpecial</code> 四种类型的方法句柄，并且这个方法句柄对应的类没有进行过初始化，则需要先触发其初始化。</p>
+</li>
+<li><p>当一个接口中定义了 <code>JDK 8</code> 新加入的默认方法（<code>default</code> 方法）时，如果有这个接口的实现类发生了初始化，那该接口要在其之前被初始化。</p>
+</li>
+</ol>
+<p>在初始化阶段，<code>JVM</code> 会进行：</p>
+<ol>
+<li>执行 <code>&lt;clinit&gt;</code> 方法<ol>
+<li>赋予真实值给该类的静态变量（术语是：显式初始化）</li>
+<li>执行静态代码块（即 <code>static &#123;...&#125;</code>）</li>
+</ol>
+</li>
+</ol>
 <hr>
 
                 
