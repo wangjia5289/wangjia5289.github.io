@@ -1,0 +1,1431 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="知北">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo Address👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2026&#x2F;02&#x2F;01&#x2F;笔记：EncryptionAndDecryption&#x2F;  Interview Handbook Address👉    三、加密相关方法 Public-key cryptography Symmetric-key algorithm CHF（Cr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Encryption And Decryption">
+<meta property="og:url" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo Address👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2026&#x2F;02&#x2F;01&#x2F;笔记：EncryptionAndDecryption&#x2F;  Interview Handbook Address👉    三、加密相关方法 Public-key cryptography Symmetric-key algorithm CHF（Cr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption.xmind">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-16.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-17.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-18.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-19.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-10.png">
+<meta property="article:published_time" content="2026-01-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-09T02:06:45.135Z">
+<meta property="article:author" content="Xian Yang Hou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption.xmind">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Encryption And Decryption - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Encryption And Decryption"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-01 00:00" pubdate>
+          February 1, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Encryption And Decryption</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2026-02-09T10:06:45+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind<br><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption.xmind" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Edraw<br><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Hexo Address<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/">http://blog.wangjia.ink/2026/02/01/笔记：EncryptionAndDecryption/</a></p>
+</li>
+<li><p>Interview Handbook Address<br>👉</p>
+</li>
+</ol>
+<hr>
+<h1 id="三、加密相关方法"><a href="#三、加密相关方法" class="headerlink" title="三、加密相关方法"></a>三、加密相关方法</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Public-key_cryptography">Public-key cryptography</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Symmetric-key_algorithm">Symmetric-key algorithm</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">CHF（Cryptographic hash function）</a></li>
+</ol>
+<hr>
+<h1 id="四、Public-key-cryptography"><a href="#四、Public-key-cryptography" class="headerlink" title="四、Public-key cryptography"></a>四、Public-key cryptography</h1><h2 id="1-📄基本用法"><a href="#1-📄基本用法" class="headerlink" title="1. 📄基本用法"></a>1. 📄基本用法</h2><ol>
+<li>公钥上封</li>
+<li>私钥加签</li>
+<li>密钥协商</li>
+</ol>
+<h3 id="公钥上封"><a href="#公钥上封" class="headerlink" title="公钥上封"></a>公钥上封</h3><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="私钥加签"><a href="#私钥加签" class="headerlink" title="私钥加签"></a>私钥加签</h3><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-16.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="4-密钥协商"><a href="#4-密钥协商" class="headerlink" title="4. 密钥协商"></a>4. 密钥协商</h3><h4 id="4-1-📄概述"><a href="#4-1-📄概述" class="headerlink" title="4.1. 📄概述"></a>4.1. 📄概述</h4><p><strong>核心目的：安全通道建立 (Secure Channel Establishment)</strong></p>
+<p>非对称加密（公钥&#x2F;私钥）计算量大，速度慢。因此，在实际通信（如 HTTPS）中，我们通常只用它来<strong>协商</strong>出一个临时的“对称密钥”（Session Key），后续的大量数据传输都用这个对称密钥来进行，因为对称加密速度极快。</p>
+<ul>
+<li><p><strong>原理：</strong></p>
+<ul>
+<li><p>通信双方（Alice 和 Bob）在不安全的网络上交换各自的<strong>公钥</strong>及部分参数。</p>
+</li>
+<li><p>通过特定的数学算法（如 Diffie-Hellman 或 ECDH），双方结合自己的<strong>私钥</strong>和对方的<strong>公钥</strong>，能在本地独立计算出<strong>同一个</strong>数值。</p>
+</li>
+<li><p>这个数值就是双方后续通信的“共享密钥”。黑客虽然截获了所有的公钥交换信息，但在没有任意一方私钥的情况下，无法计算出这个共享密钥。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>应用场景：</strong> TLS&#x2F;SSL 握手（即浏览器访问 HTTPS 网站时的连接建立过程）、VPN 连接初始化。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>关键点：</strong> 在不安全的信道上，安全地达成共识。</p>
+</blockquote>
+<hr>
+<h4 id="4-2-📄相关流程"><a href="#4-2-📄相关流程" class="headerlink" title="4.2. 📄相关流程"></a>4.2. 📄相关流程</h4><hr>
+<h2 id="📄相关算法"><a href="#📄相关算法" class="headerlink" title="📄相关算法"></a>📄相关算法</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RSA_cryptosystem">RSA cryptosystem</a> <code>Series</code></p>
+<ol>
+<li><code>Algorithm Primitive</code></li>
+<li><code>Algorithm Scheme</code></li>
+<li></li>
+</ol>
+</li>
+<li></li>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/ElGamal_encryption">ElGamal encryption</a></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Digital_Signature_Algorithm">DSA（Digital Signature Algorithm）</a></li>
+</ol>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Elliptic-curve_cryptography">ECC（Elliptic-curve cryptography）</a></p>
+</li>
+</ol>
+<hr>
+<h1 id="————————"><a href="#————————" class="headerlink" title="————————-"></a>————————-</h1><h1 id="————————-1"><a href="#————————-1" class="headerlink" title="————————-"></a>————————-</h1><h1 id="————————-2"><a href="#————————-2" class="headerlink" title="————————-"></a>————————-</h1><h1 id="————————-3"><a href="#————————-3" class="headerlink" title="————————-"></a>————————-</h1><h1 id="四、Public-key-cryptography-1"><a href="#四、Public-key-cryptography-1" class="headerlink" title="四、Public-key cryptography"></a>四、Public-key cryptography</h1><h2 id="2-公钥上封"><a href="#2-公钥上封" class="headerlink" title="2. 公钥上封"></a>2. 公钥上封</h2><h3 id="2-1-📄相关流程"><a href="#2-1-📄相关流程" class="headerlink" title="2.1. 📄相关流程"></a>2.1. 📄相关流程</h3><hr>
+<h3 id="2-2-📄相关算法"><a href="#2-2-📄相关算法" class="headerlink" title="2.2. 📄相关算法"></a>2.2. 📄相关算法</h3><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-17.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="3-私钥加签"><a href="#3-私钥加签" class="headerlink" title="3. 私钥加签"></a>3. 私钥加签</h2><h3 id="3-1-📄相关流程"><a href="#3-1-📄相关流程" class="headerlink" title="3.1. 📄相关流程"></a>3.1. 📄相关流程</h3><hr>
+<h3 id="3-2-📄相关算法"><a href="#3-2-📄相关算法" class="headerlink" title="3.2. 📄相关算法"></a>3.2. 📄相关算法</h3><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-18.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="4-3-📄相关算法"><a href="#4-3-📄相关算法" class="headerlink" title="4.3. 📄相关算法"></a>4.3. 📄相关算法</h3><ol>
+<li><code>RSA cryptosystem</code></li>
+<li><code>ElGamal encryption</code></li>
+<li><code>DSA</code>（<code>Digital Signature Algorithm</code>）</li>
+<li><code>ECC</code>（<code>Elliptic-curve cryptography</code>）</li>
+</ol>
+<p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-19.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="五、Symmetric-key-algorithm"><a href="#五、Symmetric-key-algorithm" class="headerlink" title="五、Symmetric-key algorithm"></a>五、Symmetric-key algorithm</h1><h2 id="1-📄基本用法-1"><a href="#1-📄基本用法-1" class="headerlink" title="1. 📄基本用法"></a>1. 📄基本用法</h2><ol>
+<li>数据上封</li>
+<li>数据加签</li>
+</ol>
+<h2 id="2-数据上封"><a href="#2-数据上封" class="headerlink" title="2. 数据上封"></a>2. 数据上封</h2><h3 id="2-1-📄相关流程-1"><a href="#2-1-📄相关流程-1" class="headerlink" title="2.1. 📄相关流程"></a>2.1. 📄相关流程</h3><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h3 id="2-2-📄相关算法-1"><a href="#2-2-📄相关算法-1" class="headerlink" title="2.2. 📄相关算法"></a>2.2. 📄相关算法</h3><ol>
+<li><code>Block Cipher Family</code><ol>
+<li><code>DES Seires</code><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Data_Encryption_Standard">DES（Data Encryption Standard）</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Triple_DES">3DES（Triple DES）</a></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES（Advanced Encryption Standard）</a> <code>Series</code><ol>
+<li><code>AES-128</code></li>
+<li><code>AES-192</code></li>
+<li><code>AES-256</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>Stream Cipher Family</code><ol>
+<li><code>RC Series</code><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RC2">RC2</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RC4">RC4</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RC5">RC5</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/RC6">RC6</a></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Salsa20">Salsa20</a> <code>Series</code></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="3-数据加签"><a href="#3-数据加签" class="headerlink" title="3. 数据加签"></a>3. 数据加签</h2><h3 id="3-1-方式・壹"><a href="#3-1-方式・壹" class="headerlink" title="3.1. 方式・壹"></a>3.1. 方式・壹</h3><h4 id="3-1-1-📄相关流程"><a href="#3-1-1-📄相关流程" class="headerlink" title="3.1.1. 📄相关流程"></a>3.1.1. 📄相关流程</h4><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h4 id="3-1-2-📄相关算法"><a href="#3-1-2-📄相关算法" class="headerlink" title="3.1.2. 📄相关算法"></a>3.1.2. 📄相关算法</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HMAC">HMAC</a></li>
+</ol>
+<hr>
+<h3 id="3-2-方式・贰"><a href="#3-2-方式・贰" class="headerlink" title="3.2. 方式・贰"></a>3.2. 方式・贰</h3><h4 id="3-2-1-📄相关流程"><a href="#3-2-1-📄相关流程" class="headerlink" title="3.2.1. 📄相关流程"></a>3.2.1. 📄相关流程</h4><p><img src="/2026/02/01/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption/%E7%AC%94%E8%AE%B0%EF%BC%9AEncryptionAndDecryption-10.png" srcset="/img/loading.gif" lazyload alt="|"></p>
+<hr>
+<h4 id="3-2-2-📄相关算法"><a href="#3-2-2-📄相关算法" class="headerlink" title="3.2.2. 📄相关算法"></a>3.2.2. 📄相关算法</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/One-key_MAC">OMAC（One-key MAC）</a></li>
+</ol>
+<hr>
+<h3 id="3-3-方式・叁"><a href="#3-3-方式・叁" class="headerlink" title="3.3. 方式・叁"></a>3.3. 方式・叁</h3><h4 id="3-3-1-📄相关流程"><a href="#3-3-1-📄相关流程" class="headerlink" title="3.3.1. 📄相关流程"></a>3.3.1. 📄相关流程</h4><p>它不把数据当成一堆乱码去“搅拌”（HMAC），也不去“上锁”（CMAC）。</p>
+<p>它把你的数据看作是一个 <strong>巨大的数字</strong>（或者是多项式的系数 $x$）。</p>
+<ul>
+<li><p><strong>公式：</strong> $结果 &#x3D; (数据 \times 密钥) + 随机数$</p>
+</li>
+<li><p><strong>动作：</strong> 就是做乘法和加法。</p>
+</li>
+<li><p><strong>特点：</strong> 因为 CPU 做乘法非常快，所以它比那些复杂的位运算（异或、移位、查表）要快得多。</p>
+</li>
+</ul>
+<p>这类算法的核心思想是<strong>“将数据块视为数学多项式的系数”</strong>。</p>
+<p><strong>流程如下：</strong></p>
+<ol>
+<li><p><strong>生成一次性密钥 (Key Generation)：</strong></p>
+<p> 利用主密钥（Key）和随机数（Nonce），生成这一轮对话专用的认证密钥，通常记为 $r$（求值点）和 $s$（掩码）。</p>
+</li>
+<li><p><strong>数据映射 (Mapping)：</strong></p>
+<p> 将要发送的消息切分成固定长度的块（比如 128位）。把这些数据块看作是一个巨大多项式的<strong>系数</strong> ($m_1, m_2, m_3…$)。</p>
+</li>
+<li><p><strong>多项式求值 (Evaluation)：</strong></p>
+<p> 构造多项式 $P(x) &#x3D; m_1 x^n + m_2 x^{n-1} + … + m_n$。</p>
+<p> 将刚才生成的密钥 $r$ 代入 $x$ 进行计算。这个过程就是不断的乘法和加法运算（在特定的有限域 $GF(2^{128})$ 或模素数 $2^{130}-5$ 下进行）。</p>
+</li>
+<li><p><strong>加密掩码 (Masking)：</strong></p>
+<p> 将计算结果加上密钥 $s$（或者对结果进行加密），得到最终的 <strong>Tag（认证标签）</strong>。</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>通俗理解：</strong> HMAC 是把数据搅拌成糊（Hash）；而 GMAC&#x2F;Poly1305 是把数据画成一条数学曲线，算出曲线上的一个点。</p>
+</blockquote>
+<hr>
+<h4 id="3-3-2-📄相关算法"><a href="#3-3-2-📄相关算法" class="headerlink" title="3.3.2. 📄相关算法"></a>3.3.2. 📄相关算法</h4><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Poly1305">Poly1305</a></li>
+<li>GMAC</li>
+<li>VMAC</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/UMAC_(cryptography)">UMAC (cryptography)</a></li>
+</ol>
+<hr>
+<h1 id="六、CHF"><a href="#六、CHF" class="headerlink" title="六、CHF"></a>六、CHF</h1><h2 id="1-📄基本用法-2"><a href="#1-📄基本用法-2" class="headerlink" title="1. 📄基本用法"></a>1. 📄基本用法</h2><ol>
+<li>辅助加签</li>
+<li>密码封存</li>
+<li>公密钥派生</li>
+<li>数据完整性校验</li>
+</ol>
+<h3 id="1-1-辅助加签"><a href="#1-1-辅助加签" class="headerlink" title="1.1. 辅助加签"></a>1.1. 辅助加签</h3><p>我们知道：（Symmetric-key algorithm ➔ 数据加签、Public-key cryptography ➔ 私钥加签）都是对明文被哈希函数处理之后的哈希加签</p>
+<p>你可能疑惑：为什么不直接对明文加签？答案是：因为如果直接对明文加签，速度太慢了</p>
+<p>为了解决这个问题，我们通常会先使用哈希函数处理明文，再对明文进行加签</p>
+<hr>
+<h3 id="1-2-密码封存"><a href="#1-2-密码封存" class="headerlink" title="1.2. 密码封存"></a>1.2. 密码封存</h3><p>密码封存是指：使用哈希函数将用户的密码转换为哈希（需要注意的是：由于哈希函数都是单向的，即便黑客窃取密码，也无法还原出明文）</p>
+<hr>
+<h3 id="1-3-根密钥派生"><a href="#1-3-根密钥派生" class="headerlink" title="1.3. 根密钥派生"></a>1.3. 根密钥派生</h3><h4 id="1-3-1-📄概述"><a href="#1-3-1-📄概述" class="headerlink" title="1.3.1. 📄概述"></a>1.3.1. 📄概述</h4><p>我们知道：（Symmetric-key algorithm ➔ 数据上封、Public-key cryptography ➔ 公钥上封）往往对（密钥、公钥）要求很严格（例如：密钥必须是 <code>128 bit</code>）</p>
+<p>想象这个问题：我们平常的密码可能就是很短的（例如：123456），我们如何转换成它们要求的格式的的</p>
+<p>为了解决这个问题，我们可以使用哈希函数派生密钥</p>
+<hr>
+<h4 id="1-3-2-📄主要方式"><a href="#1-3-2-📄主要方式" class="headerlink" title="1.3.2. 📄主要方式"></a>1.3.2. 📄主要方式</h4><h5 id="1-3-2-1-方式・壹"><a href="#1-3-2-1-方式・壹" class="headerlink" title="1.3.2.1. 方式・壹"></a>1.3.2.1. 方式・壹</h5><p>从密钥派生密钥</p>
+<hr>
+<h5 id="1-3-2-2-方式・贰"><a href="#1-3-2-2-方式・贰" class="headerlink" title="1.3.2.2. 方式・贰"></a>1.3.2.2. 方式・贰</h5><p>从密码派生密钥</p>
+<hr>
+<h3 id="1-4-数据完整性校验"><a href="#1-4-数据完整性校验" class="headerlink" title="1.4. 数据完整性校验"></a>1.4. 数据完整性校验</h3><p>数据完整性校验是指：证明数据没有被意外损坏（例如：网络传输丢包）</p>
+<hr>
+<h2 id="2-📄相关算法"><a href="#2-📄相关算法" class="headerlink" title="2. 📄相关算法"></a>2. 📄相关算法</h2><ol>
+<li><code>MD Series</code><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MD2_(hash_function)">MD2（hash function）</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MD4">MD4</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MD5">MD5</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MD6">MD6</a></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Secure_Hash_Algorithms">Secure Hash Algorithms</a> <code>Series</code><ol>
+<li><code>SHA-0</code></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-1">SHA-1</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-2">SHA-2</a><ol>
+<li><code>SHA-224</code></li>
+<li><code>SHA-256</code></li>
+<li><code>SHA-384</code></li>
+<li><code>SHA-512</code></li>
+<li><code>SHA-512/224</code></li>
+<li><code>SHA-512/256</code></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SHA-3">SHA-3</a><ol>
+<li><code>SHA3-224</code></li>
+<li><code>SHA3-256</code></li>
+<li><code>SHA3-384</code></li>
+<li><code>SHA3-512</code></li>
+<li><code>SHAKE128</code></li>
+<li><code>SHAKE256</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><code>BLAKE Series</code><ol>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/BLAKE_(hash_function)">BLAKE（hash function）</a></li>
+<li>BLAKE2</li>
+<li>BLAKE3</li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Argon2">Argon2</a> <code>Series</code><ol>
+<li><code>Argon2i</code></li>
+<li><code>Argon2d</code></li>
+<li><code>Argon2id</code></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a> <code>Series</code><ol>
+<li><code>bcrypt-$2$</code></li>
+<li><code>bcrypt-$2a$</code></li>
+<li><code>bcrypt-$2x$</code></li>
+<li><code>bcrypt-$2y$</code></li>
+<li><code>bcrypt-$2b$</code></li>
+</ol>
+</li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Scrypt">scrypt</a></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>辅助加签</th>
+<th>密码封存</th>
+<th>根密钥派生（方式・壹）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>scrypt</strong></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>MD Series</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>MD2（hash function）</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD4</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD5</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD6</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>BLAKE Series</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>BLAKE（hash function）</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>BLAKE2</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>BLAKE3</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>bcrypt Series</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>bcrypt-$2$</code></td>
+<td>❌</td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2a$</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2x$</code></td>
+<td>❌</td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2y$</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2b$</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Argon2 Series</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Argon2i</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>Argon2d</code></td>
+<td>❌</td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>Argon2id</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Secure Hash Algorithms Series</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SHA-0</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>SHA-1</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-224</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-256</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-384</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512/224</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512/256</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-224</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-256</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-384</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-512</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHAKE128</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHAKE256</code></td>
+<td>✅</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>根密钥派生（方式・贰）</th>
+<th>数据完整性校验</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>scrypt</strong></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>MD Series</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>MD2（hash function）</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD4</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD5</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>MD6</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>BLAKE Series</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>BLAKE（hash function）</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>BLAKE2</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>BLAKE3</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>bcrypt Series</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>bcrypt-$2$</code></td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2a$</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2x$</code></td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2y$</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>bcrypt-$2b$</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Argon2 Series</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Argon2i</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>Argon2d</code></td>
+<td>⚠️</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>Argon2id</code></td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Secure Hash Algorithms Series</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SHA-0</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>SHA-1</code></td>
+<td>⚠️</td>
+<td>⚠️</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-224</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-256</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-384</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512/224</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-2//SHA-512/256</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-224</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-256</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-384</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHA3-512</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHAKE128</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>SHA-3//SHAKE256</code></td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Basic-Literacy/" class="category-chain-item">Basic Literacy</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Basic-Literacy/Encryption-And-Decryption/" class="category-chain-item">Encryption And Decryption</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Encryption And Decryption</div>
+      <div>https://wangjia5289.github.io/2026/02/01/笔记：EncryptionAndDecryption/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>知北</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 1, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/02/03/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9AEdrawMax/" title="笔记：Edraw Max">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">笔记：Edraw Max</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/02/01/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9AEncoding%20And%20Decoding/" title="笔记：Encoding and Decoding">
+                        <span class="hidden-mobile">笔记：Encoding and Decoding</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

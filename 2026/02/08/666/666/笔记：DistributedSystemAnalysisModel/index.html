@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ico.png">
+  <link rel="icon" href="/img/ico.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#373737">
+  <meta name="author" content="知北">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo Address👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2026&#x2F;02&#x2F;08&#x2F;笔记：DistributedSystemAnalysisModel&#x2F;  Interview Handbook Address👉    三、集群管控模型 12345678910111213141516171819202122232425262728">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记：Distributed System Analysis Model">
+<meta property="og:url" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/index.html">
+<meta property="og:site_name" content="咸阳猴🐒的博客">
+<meta property="og:description" content="一、TODO 二、脑图 Xmind  Edraw  Hexo Address👉 http:&#x2F;&#x2F;blog.wangjia.ink&#x2F;2026&#x2F;02&#x2F;08&#x2F;笔记：DistributedSystemAnalysisModel&#x2F;  Interview Handbook Address👉    三、集群管控模型 12345678910111213141516171819202122232425262728">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel.eddx">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-4.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-5.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-7.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-8.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-6.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-9.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-1.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-10.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-11.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-14.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-3.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-13.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-12.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-2.png">
+<meta property="og:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-15.png">
+<meta property="article:published_time" content="2026-02-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-08T13:51:18.066Z">
+<meta property="article:author" content="Xian Yang Hou">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wangjia5289.github.io/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel.eddx">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>笔记：Distributed System Analysis Model - 咸阳猴🐒的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"wangjia5289.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.1)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="笔记：Distributed System Analysis Model"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-08 00:00" pubdate>
+          February 8, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          72 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> views
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">笔记：Distributed System Analysis Model</h1>
+            
+              <p id="updated-time" class="note note-info" style="display: none">
+                
+                  
+                    Last updated on 2026-02-08T21:51:18+08:00
+                  
+                  
+
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr>
+<h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol>
+<li><p>Xmind</p>
+</li>
+<li><p>Edraw<br><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel.eddx" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p>Hexo Address<br>👉 <a target="_blank" rel="noopener" href="http://blog.wangjia.ink/2026/02/08/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/">http://blog.wangjia.ink/2026/02/08/笔记：DistributedSystemAnalysisModel/</a></p>
+</li>
+<li><p>Interview Handbook Address<br>👉</p>
+</li>
+</ol>
+<hr>
+<h1 id="三、集群管控模型"><a href="#三、集群管控模型" class="headerlink" title="三、集群管控模型"></a>三、集群管控模型</h1><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-3.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs markdown">这是一个非常深刻且直击本质的问题。<br><br>你的直觉没错：<span class="hljs-strong">**对于用户来说，核心确实只有数据。**</span> 我们存数据、取数据，谁关心集群怎么管？<br><br>但是，<span class="hljs-strong">**对于系统本身来说，如果不管理“集群的状态”，数据就会变成一堆垃圾。**</span><br><br>我们可以把集群想象成一个<span class="hljs-strong">**“大型现代化仓库”**</span>，来区分这两者：<br><br><span class="hljs-section">### 1. 数据 (Data) vs. 元数据 (Metadata/Cluster State)</span><br><br>在分布式系统中，所谓的“集群架构管理”，管理的其实是<span class="hljs-strong">**元数据（Metadata）**</span>和<span class="hljs-strong">**集群状态（Cluster State）**</span>。<br><br>|<span class="hljs-strong">**维度**</span>|<span class="hljs-strong">**数据 (Data)**</span>|<span class="hljs-strong">**集群管理 (Cluster Management)**</span>|<br>|---|---|---|<br>|<span class="hljs-strong">**比喻**</span>|<span class="hljs-strong">**仓库里的货物**</span>|<span class="hljs-strong">**仓库的账本与调度员**</span>|<br>|<span class="hljs-strong">**内容**</span>|用户的订单、日志、文档、用户信息|谁是主节点？哪个节点挂了？分片 1 在哪台机器？|<br>|<span class="hljs-strong">**归属**</span>|属于<span class="hljs-strong">**用户**</span>|属于<span class="hljs-strong">**系统**</span>|<br>|<span class="hljs-strong">**量级**</span>|巨大（TB/PB 级）|很小（MB/KB 级）|<br>|<span class="hljs-strong">**作用**</span>|业务的核心价值|<span class="hljs-strong">**维持系统活着，让数据能被找到**</span>|<br><br>---<br><br><span class="hljs-section">### 2. 具体管什么？（管理的四大核心）</span><br><br>“集群架构管理”具体在忙活什么？主要有四件事，只要有一件没管好，你的数据就废了：<br><br><span class="hljs-section">#### A. 成员管理 (Membership) —— &quot;谁是我们的人？&quot;</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-strong">**任务：**</span> 只有在这个名单里的节点，才能参与数据读写。<br><span class="hljs-code">    </span><br><span class="hljs-code">- **为什么重要？** 如果没有管理，一个坏掉的节点可能还在假装正常接收数据，或者一个未授权的节点偷偷混进来同步数据。</span><br><span class="hljs-code">    </span><br><span class="hljs-code">- **例子：** ES 的 Master 节点维护一份 `nodes` 列表，谁上线了、谁断网了，它必须第一时间知道。</span><br><span class="hljs-code">    </span><br><span class="hljs-code"></span><br><span class="hljs-section">#### B. 拓扑与路由 (Topology &amp; Routing) —— &quot;货放在哪个货架？&quot;</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-strong">**任务：**</span> 决定数据分片（Shard）分布在哪台机器上。<br><span class="hljs-code">    </span><br><span class="hljs-code">- **为什么重要？** 比如你要写 `id=100` 的数据。</span><br><span class="hljs-code">    </span><br><span class="hljs-code">    - **有管理：** 系统查表说：“去 3 号机器的 2 号分片。” $\rightarrow$ **精准写入**。</span><br><span class="hljs-code">        </span><br><span class="hljs-code">    - **没管理：** 系统一脸懵逼，随便找台机器写了。等你下次来读，根本找不到刚才写哪儿了。</span><br><span class="hljs-code">        </span><br><span class="hljs-code"></span><br><span class="hljs-section">#### C. 故障检测与恢复 (Failure Detection) —— &quot;保安巡逻&quot;</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-strong">**任务：**</span> 也就是心跳机制（Heartbeat）。<br><span class="hljs-code">    </span><br><span class="hljs-code">- **为什么重要？** 机器是会挂的。</span><br><span class="hljs-code">    </span><br><span class="hljs-code">    - **管理的作用：** 发现 A 机器挂了 $\rightarrow$ 马上把 A 机器上的“主分片”废除 $\rightarrow$ 提拔 B 机器上的“副本”为主分片。</span><br><span class="hljs-code">        </span><br><span class="hljs-code">    - **没管理的结果：** 客户端还在傻傻地往死掉的 A 机器发请求，所有业务全部超时报错。</span><br><span class="hljs-code">        </span><br><span class="hljs-code"></span><br><span class="hljs-section">#### D. 一致性协调 (Consistency Coordination) —— &quot;避免脑裂&quot;</span><br><br><span class="hljs-bullet">-</span> <span class="hljs-strong">**任务：**</span> 也就是防止“双主”冲突。<br><span class="hljs-code">    </span><br><span class="hljs-code">- **为什么重要？** 假如网络断了，机房分成了两半。</span><br><span class="hljs-code">    </span><br><span class="hljs-code">    - **管理的作用：** 只有拥有多数派（Quorum）的那一半能工作，另一半强制停机（Fencing）。</span><br><span class="hljs-code">        </span><br><span class="hljs-code">    - **没管理的结果：** 两边都觉得自己是老大，都接受写入。等网络恢复，你有两份不一样的数据，且无法合并，数据彻底损坏（脑裂）。</span><br><span class="hljs-code">        </span><br><span class="hljs-code"></span><br>---<br><br><span class="hljs-section">### 3. 回到 Elasticsearch 的例子</span><br><br>你之前提到 ES，用 ES 来看“数据”与“管理”的分离最清晰：<br><br><span class="hljs-bullet">-</span> <span class="hljs-strong">**数据节点 (Data Node)：**</span><br><span class="hljs-code">    </span><br><span class="hljs-code">    - 这也是你说的“核心”。它们也就是干苦力的，负责存储 Lucene 索引，执行搜索、聚合。它们不关心集群里有几个人，只管干活。</span><br><span class="hljs-code">        </span><br><span class="hljs-code">- **主节点 (Master Node) —— 管理者：**</span><br><span class="hljs-code">    </span><br><span class="hljs-code">    - 它**不存业务数据**（或者说尽量不让它存）。</span><br><span class="hljs-code">        </span><br><span class="hljs-code">    - 它只存 **Cluster State**（集群状态）：</span><br><span class="hljs-code">        </span><br><span class="hljs-code">        - _index_metadata_：有哪些索引？</span><br><span class="hljs-code">            </span><br><span class="hljs-code">        - _shard_routing_：分片都在哪？</span><br><span class="hljs-code">            </span><br><span class="hljs-code">        - _nodes_：还有谁活着？</span><br><span class="hljs-code">            </span><br><span class="hljs-code">    - **关键点：** 如果 Master 挂了且选不出新的，整个集群**停止写入**。虽然 Data Node 里数据还在，但因为没人指挥（无法分配新的分片，无法确认节点状态），集群就瘫痪了。</span><br><span class="hljs-code">        </span><br><span class="hljs-code"></span><br><span class="hljs-section">### 总结</span><br><br><span class="hljs-strong">**集群架构管理，管理的不是“货物”，而是“仓库的秩序”。**</span><br><br>如果只有数据而没有管理，那不是一个集群，那只是一堆<span class="hljs-strong">**互相不认识的、存着死数据的硬盘**</span>。它们无法协同，无法容错，也无法对外提供统一的服务。<br></code></pre></td></tr></table></figure>
+
+<h2 id="1-节点身份治理"><a href="#1-节点身份治理" class="headerlink" title="1. 节点身份治理"></a>1. 节点身份治理</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-4.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="2-共识仲裁决策"><a href="#2-共识仲裁决策" class="headerlink" title="2. 共识仲裁决策"></a>2. 共识仲裁决策</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-5.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="3-故障探活感知"><a href="#3-故障探活感知" class="headerlink" title="3. 故障探活感知"></a>3. 故障探活感知</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-7.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="4-资源均衡调度"><a href="#4-资源均衡调度" class="headerlink" title="4. 资源均衡调度"></a>4. 资源均衡调度</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-8.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="5-全局状态维护"><a href="#5-全局状态维护" class="headerlink" title="5. 全局状态维护"></a>5. 全局状态维护</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-6.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-9.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h1 id="四、数据协同模型"><a href="#四、数据协同模型" class="headerlink" title="四、数据协同模型"></a>四、数据协同模型</h1><h2 id="1-数据分布策略"><a href="#1-数据分布策略" class="headerlink" title="1. 数据分布策略"></a>1. 数据分布策略</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>该维度决定了数据是作为整体存放在某一位置内，还是被拆分后分布在多个位置</li>
+<li>全量镜像<ol>
+<li>是指：数据全量的存储在某一位置（例如：节点、驱动）</li>
+<li>例如：<code>MySQL</code> 的业务数据，完整地存储在主节点中，并由主节点同步到从节点，因此每个节点（无论主从）都持有一份完整的数据副本</li>
+<li>需要注意的是：可能在多个节点存储多份，不是只在这个位置存储一份</li>
+</ol>
+</li>
+<li>分片离散<ol>
+<li>是指：数据被拆分后分布在多个位置</li>
+<li>例如：<code>Minio</code> 的业务数据，虽说是存储在某一分区，但会将其切割成若干块，并在多个驱动上进行分布</li>
+<li>需要注意的是：被拆分后分布在多个位置，是指一个数据可能就有多个位置，但是还会有备份呢，不只是这几个位置存储一份<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 这个维度决定了数据是作为整体存放在某一位置内，还是被拆分后分布在多个位置<br><span class="hljs-bullet">2.</span> 整体存储<br><span class="hljs-bullet">	1.</span> 数据完整地存储在某一位置<br><span class="hljs-bullet">	2.</span> 例如 <span class="hljs-code">`MySQL`</span> 的业务数据，完整地存储在主节点中，并由主节点同步到从节点，因此每个节点（无论主从）都持有一份完整的数据副本<br><span class="hljs-bullet">3.</span> 数据拆分<br><span class="hljs-bullet">	1.</span> 数据被拆分后分布在多个位置<br><span class="hljs-bullet">	2.</span> 例如 <span class="hljs-code">`Minio`</span> 的业务数据，虽说是存储在某一分区，但会将其切割成若干块，并在多个驱动上进行分布<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="2-数据复制拓扑"><a href="#2-数据复制拓扑" class="headerlink" title="2. 数据复制拓扑"></a>2. 数据复制拓扑</h2><ol>
+<li>该维度决定了数据流动的方向，也就是哪个节点负责写入，哪个节点负责同步</li>
+<li>主从复制（单主复制 或 分区主从）<ol>
+<li>系统中只有一个主节点，但具有多个从节点</li>
+<li>客户端所有写请求必须发送到主节点，并由多个从节点负责同步数据</li>
+<li>在复杂系统中，可以对整个集群进行分区，使得不同分区拥有各自的主节点以及对应的从节点（例如 <code>Elasticsearch</code>），这也被称之为分区主从。需要注意的是，对集群进行分区，并不一定采用主从模式，例如 <code>MinIO</code> 就是分区无主的架构</li>
+</ol>
+</li>
+<li>多主复制<ol>
+<li>在主从复制模式下，所有写操作必须经由主节点完成，一旦主节点出现问题，整个写操作就会受阻</li>
+<li>为了突破这一瓶颈，又提出了多主复制的方案。简单来说，在同一个系统中允许存在多个主节点，这些主节点可以同时执行写操作，其他节点（主节点、从节点）负责同步数据</li>
+<li>但是当多个主节点同时执行写操作时，势必会面临写入冲突的问题：<ol>
+<li>例如，你在在线文档中输入 “项目将在本周五发布”，而同事几乎同时写下 “项目将在下周一发布”</li>
+<li>这类冲突必须通过机制来检测、处理或避免，才能保证数据一致性</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>无主复制<ol>
+<li>集群中不存在 “主从” 之分，所有节点地位对等、功能相同，每个节点都可直接执行写入操作，其他节点负责同步数据</li>
+<li>无主复制本质上并不强制依赖 <code>Quorum NWR</code> 模型，但在工程实践中，为了保证读写结果的正确性和可预期性，几乎都会配合 <code>Quorum NWR</code> 来控制一致性</li>
+<li>无主复制同样面临写入冲突的问题</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 这个维度决定了数据流动的方向，也就是谁负责写入，谁负责同步<br><span class="hljs-bullet">2.</span> 主从复制（单主复制）<br><span class="hljs-bullet">	1.</span> 系统中只有一个主节点，但具有多个从节点<br><span class="hljs-bullet">	2.</span> 客户端所有写请求必须发送到主节点，并由多个从节点负责同步数据<br><span class="hljs-bullet">	3.</span> 在复杂系统中，可以对整个集群进行分区，使得不同分区拥有各自的主节点以及对应的从节点（例如 <span class="hljs-code">`Elasticsearch`</span>），这也被称之为分区主从。需要注意的是，对集群进行分区，并不一定采用主从模式，例如 <span class="hljs-code">`MinIO`</span> 就是分区无主的架构<br><span class="hljs-bullet">3.</span> 多主复制<br><span class="hljs-bullet">	1.</span> 在主从复制模式下，所有写入操作必须经由主节点完成，一旦主节点因故障或网络原因不可访问，写入就会受阻。为了解决这一瓶颈，又提出了多主复制的方案，即允许多个主节点同时承担写入任务<br><span class="hljs-bullet">	2.</span> 根据节点间数据 “复制模式”（维度一）的不同，多主复制又可分为异步多主和同步多主。<br><span class="hljs-bullet">		1.</span> 异步多主<br><span class="hljs-bullet">			1.</span> 异步多主通常应用于多个数据中心场景。每个数据中心内部依旧采用常规的主从复制，但在不同数据中心的主节点上，可以同时写入同一份数据。随后，各个数据中心之间再进行异步的数据同步<br><span class="hljs-bullet">			2.</span> 之所以称为 “异步多主”，是因为跨数据中心的数据传播大多依赖异步复制（例如 MySQL 环状复制）<br><span class="hljs-bullet">		2.</span> 同步多主<br><span class="hljs-bullet">			1.</span> 常用于单数据中心内的集群，每个节点彼此平等，都可以同时执行读写请求，不再需要永远固定的 “老大哥主节点”，这样能减少单点故障风险，实现较高的可用性或更严格的分布式事务<br><span class="hljs-bullet">			2.</span> 之所以称为 “同步多主”，是因为一般通过同步复制来保证节点间的数据一致性<br><span class="hljs-bullet">			3.</span> 例如 RabbitMQ 的所有节点在架构上是对等的，在元数据写入时，执行写入的那个节点会临时充当 “主节点”（事务协调者，进行事务协调），启动一个分布式事务来确保所有节点一致。因此，RabbitMQ 在元数据写入方面，实际上符合同步多主的模式<br><span class="hljs-bullet">			4.</span> 之所以不将这种方式归类为主从复制，是因为：<br><span class="hljs-bullet">				1.</span> 它不符合典型的 “主—从” 角色划分，不存在一个始终固定的主节点<br><span class="hljs-bullet">				2.</span> 它不依赖单一主节点作为统一访问入口，而是允许任何节点在需要时接收请求<br><span class="hljs-bullet">				3.</span> 每个节点都有可能在特定时刻临时充当主节点，本质上更接近“多个主节点”的模式<br><span class="hljs-bullet">			5.</span> 之所以不讲这种方式归类未无主复制，是因为：<br><span class="hljs-bullet">				1.</span> 无主复制的核心是 Quorum NWR 模型<br><span class="hljs-bullet">	3.</span> 多主复制面临的核心挑战在于写入冲突<br><span class="hljs-bullet">		1.</span> 由于系统中存在多个写入入口，就可能同时产生彼此矛盾的更新。<br><span class="hljs-bullet">		2.</span> 例如，你在在线文档中输入 “项目将在本周五发布”，而同事几乎同时写下 “项目将在下周一发布”。<br><span class="hljs-bullet">		3.</span> 这类冲突必须通过机制来检测、处理或避免，才能保证数据一致性。<br><span class="hljs-bullet">4.</span> 无主复制<br><span class="hljs-bullet">	1.</span> 集群中不存在 “主从” 之分，所有节点地位对等、功能相同，每个节点都可直接执行写入操作，其他节点负责同步数据<br><span class="hljs-bullet">	2.</span> 无主复制本质上不强制依赖 Quorum NWR 模型，但在工程实践中，为了保证读写结果的正确性和可预期性，几乎都会配合 Quorum NWR 来控制一致性<br><span class="hljs-bullet">		1.</span> 若满足 <span class="hljs-code">`R + W &gt; N`</span>，则读操作必然会命中至少一个包含最新写入的副本<br><span class="hljs-bullet">		2.</span> N = 副本总数<br><span class="hljs-bullet">		3.</span> W = 写请求需要确认的副本数<br><span class="hljs-bullet">		4.</span> R = 读请求需要确认的副本数<br><span class="hljs-bullet">	3.</span> 无主复制面临的核心挑战同样在于写入冲突<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-数据同步模式"><a href="#3-数据同步模式" class="headerlink" title="3. 数据同步模式"></a>3. 数据同步模式</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-1.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>该维度决定了我们的分布式系统，是强一致性还是最终一致性</li>
+<li>同步复制（强一致性）<ol>
+<li>主节点和所有 或 大多数（超过半数）从节点都成功复制数据后，才能向客户端返回成功响应</li>
+<li>需要注意的是，复制数据后，是写入硬盘还是暂存内存，不同系统有不同的设计</li>
+</ol>
+</li>
+<li>异步复制（最终一致性）<ol>
+<li>主节点复制数据后，立即向客户端返回成功响应，然后再异步地将数据复制给从节点</li>
+</ol>
+</li>
+<li>半同步复制（最终一致性）<ol>
+<li>同步复制和异步复制的折中方案，主节点和至少一个从节点都成功复制了数据，才能向客户端返回成功响应</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 这个维度直接决定了我们的分布式系统提供强一致性还是最终一致性<br><span class="hljs-bullet">2.</span> 同步复制：提供强一致性<br><span class="hljs-bullet">	1.</span> 当主节点收到一个写入请求后，它必须等待<span class="hljs-strong">**所有/大多数（超过半数）**</span> 从节点都成功复制了数据，才能向客户端返回成功响应<br><span class="hljs-bullet">3.</span> 异步复制：提供最终一致性<br><span class="hljs-bullet">	1.</span> 当主节点收到一个写入请求后，它立即向客户端返回成功响应，然后在后台异步地将数据同步给从节点<br><span class="hljs-bullet">4.</span> 半同步复制：折中方案<br><span class="hljs-bullet">	1.</span> 强一致性和最终一致性的折中方案，主节点在提交事务后，只等待<span class="hljs-strong">**至少一个从节点**</span>确认收到数据，就向客户端返回成功<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-数据传播范式"><a href="#4-数据传播范式" class="headerlink" title="4. 数据传播范式"></a>4. 数据传播范式</h2><ol start="5">
+<li>请求转发<ol>
+<li>直接将客户端发来的原始请求 (<code>Raw Request</code>)，原封不动地复制 <code>N</code> 份，转发给所有副本节点，然后大家同时执行，期望执行后能得到相同的结果</li>
+<li>然而，如果请求中包含诸如 <code>timestamp()</code> 或 <code>random()</code> 这种非确定性操作，各节点独立执行时就可能得到不同结果，从而产生状态分歧，存在一致性风险</li>
+<li>此外，如果请求的执行逻辑依赖于节点当前已有的状态，而这些状态在不同节点上并不完全相同，那么也可能得出不同结果，依旧存在一致性风险</li>
+<li>该方式可能会出现在设计非常简陋的分布式系统 或 早期不成熟的分布式系统，现代分布式系统很少会使用该方式</li>
+</ol>
+</li>
+<li>状态同步<ol>
+<li>状态转移<ol>
+<li>直接把 “最终状态” 发送给副本节点，用新的状态整体覆盖旧内容（可能是全部状态，也可能仅是需要被覆盖的部分状态）</li>
+<li>例如字符串从 <code>Hello ➔ Hello World</code>，不会发送 “请在 <code>Hello</code> 后面追加 <code>World</code>”，而是直接把完整的 “<code>Hello World</code>” 状态传输过去</li>
+<li>状态转移与快照稍有不同：状态转移是每一轮同步的基本方式，而快照更像是一种辅助优化（例如每隔 <code>5</code> 秒才做一次），并非每次都用</li>
+</ol>
+</li>
+<li>状态合并<ol>
+<li>例如在 <code>A</code> 节点上点了 <code>5</code> 次赞（结果为 <code>105</code>），在 <code>B</code> 节点上又点了 <code>8</code> 次赞（结果为 <code>108</code>）</li>
+<li>如果用状态转移的方式，<code>A</code> 把 <code>105</code> 发给 <code>B</code>，<code>B</code> 把 <code>108</code> 发给 <code>A</code>，会造成冲突，导致增量信息丢失</li>
+<li>如果使用状态合并的方式，<code>A</code> 记录并发送 “我增加了 <code>5</code> 个赞”，<code>B</code> 记录并发送 “我增加了 <code>8</code> 个赞”。这样合并后，大家都得到正确的结果 <code>113</code></li>
+<li>状态合并的优势在于与同步顺序无关，只要变更被正确传播，最终状态就是一致的</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>日志传递<ol>
+<li>把要传递的内容记录到日志中，常用形式包括：<ol>
+<li>原始请求<ol>
+<li>例如 <code>UPDATE users SET age = age + 1 WHERE id = 10;</code></li>
+<li>需要注意的是，这种情况虽然看起来与请求转发相同，但实际上还是略有区别：<ol>
+<li>请求转发是在执行前，就将请求转发出去，大家一起执行</li>
+<li>日志传递则是先执行完成，尘埃落定后，再写入到日志，让副本节点再去执行</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>数据更改<ol>
+<li>例如 <code>对 &#39;products&#39; 表，主键为 88 的行，更新前的数据 (前镜像): &#123;id: 88, name: &#39;T-Shirt&#39;, stock: 10&#125;，更新后的数据 (后镜像): &#123;id: 88, name: &#39;T-Shirt&#39;, stock: 9&#125;</code></li>
+</ol>
+</li>
+<li>两者结合<ol>
+<li>原始请求 + 数据更改</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>需要注意的是，副本节点拉取到的日志条目是否需要写入硬盘，不同系统有不同的设计</li>
+</ol>
+</li>
+<li>快照 + 增量同步<ol>
+<li>快照是把某个时间点之前所有历史操作执行后的最终状态记录下来</li>
+<li>增量同步可以基于前面提到的请求转发、状态同步、日志传递等方式来实现</li>
+<li>因此，“快照 + 增量同步” 可以看作其他方式的增强机制：快照负责 “快速赶上旧账”，增量负责 “实时保持跟进”，两者结合既提高了效率，又兼顾了可靠性</li>
+<li>需要注意的是，使用快照的典型场景主要包括：<ol>
+<li>新节点首次加入时，直接加载快照，再拉取最新增量；</li>
+<li>节点宕机过久，错过了太多日志，并且这些日志已被清理，只能重新加载快照恢复</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 日志推送<br><span class="hljs-bullet">	1.</span> 不直接同步数据本身，而是同步引起数据变化的、确定性的<span class="hljs-strong">**操作指令 (Command/Operation)**</span><br><span class="hljs-bullet">	2.</span> 所有副本都以完全相同的顺序执行这些指令，从而达到一致的状态。基于日志是状态机复制理论的直接体现<br><span class="hljs-bullet">	3.</span> 主节点在执行写入操作时，会将变更顺序地记录到日志中<br><span class="hljs-bullet">	4.</span> 从节点通过拉取这些日志条目并按顺序回放，来重建数据状态（从哪里开始缺失就从哪里开始拉取）<br><span class="hljs-bullet">	5.</span> 需要注意的是，拉取到的日志条目是否需要保存，取决于系统的设计目标。<br><span class="hljs-bullet">		1.</span> 在某些场景中，日志条目只需被立即执行，并不要求落盘持久化<br><span class="hljs-bullet">		2.</span> 而在另一些场景中，日志需要持久化保存，通常的做法是将其追加写入某个日志文件。这个文件并不一定是 WAL，例如在 MySQL 中，拉取到的日志会写入 <span class="hljs-strong">**Relay Log**</span>，用于复制重放<br><span class="hljs-bullet">2.</span> 状态同步<br><span class="hljs-bullet">	1.</span> 状态转移<br><span class="hljs-bullet">		1.</span> 主节点直接把 “最终状态” 发送给从节点，用新的状态整体覆盖旧内容（可能是全部状态，也可能仅是需要被覆盖的部分状态）<br><span class="hljs-bullet">		2.</span> 例如字符串从 Hello ➔ Hello World，主节点不会发 “请追加 World”，而是直接把完整的 Hello World 状态传输过去。<br><span class="hljs-bullet">		3.</span> 再例如 MySQL 中，修改后的数据页会替换掉硬盘上的旧数据页，这就是最纯粹的状态转移。<br><span class="hljs-bullet">		4.</span> 与快照不同的是，状态转移是每一轮同步的基本方式，而快照更像是一种辅助优化（例如每隔 5 秒才做一次），并非每次都用。<br><span class="hljs-bullet">	2.</span> 状态合并<br><span class="hljs-bullet">		1.</span> 例如在 A 节点上点了 5 次赞（结果 105），在 B 节点上又点了 8 次赞（结果 108）。<br><span class="hljs-bullet">		2.</span> 如果用状态转移方式，A 把 105 发给 B，B 把 108 发给 A，会造成冲突，导致增量信息丢失<br><span class="hljs-bullet">		3.</span> 改为传递 “状态合并”，即 A 记录并发送“我增加了 5 个赞”，B 记录并发送“我增加了 8 个赞”。这样合并后，大家都得到正确的 113<br><span class="hljs-bullet">		4.</span> 状态合并的优势在于与同步顺序无关，只要变更被正确传播，最终状态就是一致的<br><span class="hljs-bullet">3.</span> 请求转发<br><span class="hljs-bullet">	1.</span> 这是最简单也最危险的方式，直接将客户端发来的<span class="hljs-strong">**原始请求 (Raw Request)**</span>，原封不动地转发给所有副本，期望大家独立执行后能得到相同的结果<br><span class="hljs-bullet">	2.</span> 然而，如果请求中包含诸如 <span class="hljs-code">`timestamp()`</span> 或 <span class="hljs-code">`random()`</span> 这样的非确定性操作，各节点独立执行时就可能得到不同结果，从而产生状态分歧，直接破坏强一致性。<br><span class="hljs-bullet">	3.</span> 此外，如果请求的执行逻辑依赖于节点当前已有的状态，而这些状态在不同节点上并不完全相同，那么即使是同一个请求，也可能得出不同结果，依旧存在一致性风险<br><span class="hljs-bullet">4.</span> 快照 + 增量<br><span class="hljs-bullet">	1.</span> 快照，简单来说，就是把某个时间点之前<span class="hljs-strong">**所有历史操作执行后的最终状态**</span>记录下来<br><span class="hljs-bullet">	2.</span> 增量同步则相对简单，可以基于前面提到的日志复制、状态同步、请求转发等方式来实现<br><span class="hljs-bullet">	3.</span> 因此，“快照 + 增量同步” 可以看作其他方式的<span class="hljs-strong">**增强机制**</span>：快照负责 “快速赶上旧账”，增量负责 “实时保持跟进”，两者结合既提高了效率，又兼顾了可靠性<br><span class="hljs-bullet">	4.</span> 使用快照的典型场景：<br><span class="hljs-bullet">		1.</span> 新节点首次加入时，直接加载快照，再拉取最新增量；<br><span class="hljs-bullet">		2.</span> 节点宕机过久，错过了太多日志，且这些日志已被清理，只能重新加载快照恢复<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-数据协调机制"><a href="#5-数据协调机制" class="headerlink" title="5. 数据协调机制"></a>5. 数据协调机制</h2><ol start="4">
+<li>该维度决定了数据在多个节点之间流动时，系统如何确保数据一致性</li>
+<li>常用的协调机制主要包括：<ol>
+<li><code>CRDT</code></li>
+<li>共识协议</li>
+<li>分布式事务</li>
+<li><code>Gossip</code> 协议</li>
+<li><code>ACK</code> 确认机制</li>
+<li><code>Quorum NWR</code> 模型</li>
+<li>单点写入（无协调机制）</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 单点写入（无协调机制）<br><span class="hljs-bullet">2.</span> CRDT<br><span class="hljs-bullet">3.</span> 共识协议<br><span class="hljs-bullet">4.</span> 分布式事务<br><span class="hljs-bullet">5.</span> Gossip 协议<br><span class="hljs-bullet">6.</span> ACK 确认机制<br><span class="hljs-bullet">7.</span> Quorum NWR 模型<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="五、存储引擎模型"><a href="#五、存储引擎模型" class="headerlink" title="五、存储引擎模型"></a>五、存储引擎模型</h1><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-10.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-11.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="1-落盘持久保障"><a href="#1-落盘持久保障" class="headerlink" title="1. 落盘持久保障"></a>1. 落盘持久保障</h2><ol>
+<li>该维度决定了数据是如何保存在硬盘上的<br><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-14.png" srcset="/img/loading.gif" lazyload></li>
+</ol>
+<p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-3.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 持久化逻辑<br><span class="hljs-bullet">	1.</span> 状态持久化（基于快照的持久化）<br><span class="hljs-bullet">		1.</span> 可能是完整 dump，也可能是脏页<br><span class="hljs-bullet">		2.</span> 可能是在某个特定时间点，将完整数据状态一次性地写入磁盘，例如 Redis<br><span class="hljs-bullet">		3.</span> 也可能是修改的脏页刷到磁盘中，这个也是快照，例如 MySQL 的 Buffer Pool 被刷到磁盘，其实和操作系统的 OS Page Cache 不太一样，Page Cache 不是快照，但是脏页是快照，我们可以理解为 Buffer Pool ➔ Page Cache ➔ 磁盘，Buffer Pool 的脏页有 16KB，但是 Page Cache 只有 4KB，这里认为是快照的理由是因为当脏页被写入磁盘时，它代表了 <span class="hljs-strong">**某个时刻数据库逻辑数据结构的完整状态**</span>，并且和 redo log 一起构成了可恢复的“一致性点”。虽然它不是全量“全局快照”，但它确实固定了<span class="hljs-strong">**数据库内部某一部分数据的确定版本**</span><br><span class="hljs-bullet">			1.</span> 事务修改的数据首先落在 <span class="hljs-strong">**Buffer Pool**</span>，修改后的内存页称为“脏页”。当这些脏页被刷回到磁盘文件时，就固定下来了那个时间点的数据状态。这一动作并不是全量 dump，而是基于页的 <span class="hljs-strong">**一致性写入**</span>，它与 redo log 配合，确保数据库在异常后仍然可以恢复到某个一致性点。<span class="hljs-strong">**从数据库内部视角，这就是一种“小范围、增量式的快照**</span><br><span class="hljs-bullet">			2.</span> OS Page Cache 缓存的是文件的字节块（通常 4KB）。它完全不关心数据库事务，也不保证整体一致性，仅仅是一个通用的 I/O 缓冲区。即使 OS Page Cache 把 4KB block 刷盘，数据库也未必能恢复一致状态。<span class="hljs-strong">**因此把 OS Page Cache 刷盘称为“快照”是不合适的**</span><br><span class="hljs-bullet">			3.</span> 说人话就是，崩溃的时候，你依赖 Redo log 恢复对吧，Redo log 只需要看看你有哪些 16KB 的脏页没有刷到磁盘上，就重放哪些操作，所以我们说可以依赖 Redo log 实现可恢复的一致性点，那你可能会问，为什么要用 16KB 呢？而不是8KB，32KB呢？都可以，只不过，这个 16KB 页里装的是完整的数据结构（索引、行记录、事务指针…），刚刚好<br><span class="hljs-bullet">			4.</span> 那为什么不用 OS PAGE CACHE呢，因为它只懂字节块，不懂事务 / 页逻辑，我们无法知道这个 Page Cache 是干了什么，是 Innodb 的第几个 Page，是第几个事务的修改？Redo log 根本无法定位，也无法获得回馈，所以 MySQL 自己搞了个缓冲区，能知道，奥，这个 16KB 是哪些指令所在的，如果崩溃了只需要执行那几个指令就能恢复了<br><span class="hljs-bullet">			5.</span> 使用这个的通常都是原地更新模型，这也是为什么原地更新模型高度依赖 WAL<br><span class="hljs-bullet">			6.</span> 必须保证“写的时候要么全写，要么不写”。如果部分写进去，部分没写进去，这就是撕裂页<br><span class="hljs-bullet">	2.</span> 操作持久化（基于日志的持久化）<br><span class="hljs-bullet">		1.</span> 不直接记录数据本身，而是将所有导致数据变化的写操作指令按照顺序追加到日志文件中<br><span class="hljs-bullet">		2.</span> 恢复时，可以通过重放所有操作来重建最终的数据状态<br><span class="hljs-bullet">		3.</span> 为防止日志无限增长挤满磁盘，系统可能会定期清理/压缩/转移/重写旧日志文件<br><span class="hljs-bullet">	3.</span> 混合持久化（基于 快照 + 日志 的持久化）<br><span class="hljs-bullet">		1.</span> 结合快照和日志的优点，取长补短，系统定期生成快照，并在两次快照之间，以日志形式记录增量操作<br><span class="hljs-bullet">2.</span> 存储引擎实现<br><span class="hljs-bullet">	1.</span> 原地更新模型<br><span class="hljs-bullet">		1.</span> 数据以高度结构化的形式（如 B+ 树）存储在磁盘页（Page）中<br><span class="hljs-bullet">		2.</span> 当数据更新时，系统直接定位到磁盘对应页，将其读入内存修改，再写回原来的位置<br><span class="hljs-bullet">		3.</span> 这种模型高度依赖 预写日志（WAL，Write-Ahead Log），任何磁盘页的修改必须先记录到 WAL 并持久化，如果系统发生故障，可以通过重放 WAL 来恢复未完成的操作（操作先更新内存页，再写入 WAL 日志，最后再想办法把脏页持久化到磁盘数据文件）<br><span class="hljs-bullet">	2.</span> 写时复制模型<br><span class="hljs-bullet">		1.</span> 不直接修改已写入的数据，而是将修改写入 新的数据块或新文件<br><span class="hljs-bullet">		2.</span> 在写入新数据时，同时记录 WAL，保证崩溃恢复的完整性（可以不依赖 WAL，但大部分会使用）<br><span class="hljs-bullet">		3.</span> 数据写入完成后，再通过 替换/合并 的方式更新原来的文件或数据结构<br><span class="hljs-bullet">	3.</span> 需要注意的是<br><span class="hljs-bullet">		1.</span> undo log 不是 WAL，因为 undo log如果事务中途失败，需要撤销修改，用 undo log 把旧值写回去。不是用来崩溃恢复的<br><span class="hljs-bullet">		2.</span> WAL 是指：在对数据页进行修改之前（内存中的数据写到磁盘数据页之前），先将相应的操作以日志形式写入 WAL 并持久化。随后，数据页本身的修改可以在后台异步根据 WAL 刷写到磁盘。如果系统在此过程中崩溃，则可通过重放 WAL 中的记录，将数据库恢复到一致状态。<br><span class="hljs-bullet">		3.</span> 写 WAL 本身也会带来性能开销，因此并不是所有数据操作都必须依赖 WAL。<br><span class="hljs-bullet">			1.</span> 对于核心数据更新，一旦丢失将造成严重问题，自然必须通过 WAL 来保障持久性与一致性<br><span class="hljs-bullet">			2.</span> 而对于可容忍丢失/能自动恢复的数据，就没必要承担 WAL 带来的额外成本。<br><span class="hljs-bullet">				1.</span> 例如在 MySQL 主从复制中，从节点拉取到的日志条目会追加到 <span class="hljs-strong">**Relay Log**</span>，而这一步没有必要使用 WAL，因为即使日志条目丢失，也能通过重新向主库请求来恢复<br><span class="hljs-bullet">				2.</span> 再如 <span class="hljs-strong">**Redis**</span> 的 RDB 快照机制。快照之间的更新丢失是可接受的，因此写快照时无需依赖 WAL 来保证每个写入都崩溃安全<br><span class="hljs-bullet">		4.</span> 即便采用了 WAL 机制，也并不意味着每次写入 WAL 日志都必须马上 <span class="hljs-code">`fsync`</span> 到磁盘。InnoDB 将这一权衡交给用户，通过参数 <span class="hljs-strong">**`innodb<span class="hljs-emphasis">_flush_</span>log<span class="hljs-emphasis">_at_</span>trx<span class="hljs-emphasis">_commit`** 控制 Redo Log 的刷新策略：</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">			1. innodb_</span>flush<span class="hljs-emphasis">_log_</span>at<span class="hljs-emphasis">_trx_</span>commit = 1</span><br><span class="hljs-strong">				1. 每个事务提交时，必须将该事务的 Redo Log 先写入 WAL 缓冲区，并立即调用 `fsync` 将其刷到磁盘</span><br><span class="hljs-strong">				2. log buffer ➔ Page Cache ➔ fsync ➔ 磁盘</span><br><span class="hljs-strong">			2. innodb<span class="hljs-emphasis">_flush_</span>log<span class="hljs-emphasis">_at_</span>trx<span class="hljs-emphasis">_commit = 2</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">				1. 事务提交时，只把 Redo Log 写入操作系统的文件系统缓存（Page Cache），但不立刻 `fsync`</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">				2. 操作系统或 InnoDB 的后台线程会大约**每秒**统一执行一次 `fsync`</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">				3. log buffer ➔ Page Cache ➔ 磁盘</span></span><br><span class="hljs-emphasis"><span class="hljs-strong">			3. innodb_</span>flush<span class="hljs-emphasis">_log_</span>at<span class="hljs-emphasis">_trx_</span>commit = 0</span><br><span class="hljs-strong">				1. 事务提交时甚至不写入操作系统缓存，而是直接返回成功</span><br><span class="hljs-strong">				2. Redo Log 的写入与 `fsync` 都由 InnoDB 的后台线程每秒统一完成</span><br><span class="hljs-strong">			4. 所以一定要有一个思想，我们通常会自己维护一个缓冲区，这里是用户缓冲区，然后是内核缓冲区，内核缓冲区不容易控制，而且写一次内存缓冲区要进入内核态，频繁写开销大到爆，我们先在自己的缓冲区写写写，汇总再一起写到内核态，所以你写一个什么东西，强制刷盘，也得从用户内存区 ➔ 核心内存区 ➔ fsync ➔ 磁盘</span><br><span class="hljs-strong">		5. 在学习数据库系统时，通常会遇到 “事务日志” 这一概念。数据库的事务日志机制普遍是基于 WAL（Write-Ahead Logging） 来实现的。</span><br><span class="hljs-strong">			1. 例如 PostgreSQL 就是最经典的 直接写 WAL 的系统（执行完操作后，将相应的操作以日志形式写入 WAL）</span><br><span class="hljs-strong">			2. 需要注意的是，即使在非数据库系统中，我们也常常会遇到直接将操作写入 WAL 的做法，本质上与此并无不同</span><br><span class="hljs-strong">		6. 但是并非所有数据库系统都采用 WAL 即事务日志 的模式。很多系统将 WAL 与事务日志分离，由此形成了著名的 “双日志机制”。</span><br><span class="hljs-strong">			1. MySQL 就是其中的典型代表</span><br><span class="hljs-strong">			2. WAL （Redo Log、Undo Log）负责存储引擎自身的一致性与崩溃恢复</span><br><span class="hljs-strong">			3. 事务日志（Binary Log）由 Server 层维护，记录逻辑变更（SQL 语句或行级更新），并包含事务边界信息，用于主从复制、增量备份、审计与时间点恢复等功能</span><br><span class="hljs-strong">			4. 所以 MySQL 通常是先写入 Redo Log，再写入 Binlog，最后将 Redo Log 标记为 Commit，数据页的更新可延迟、异步地写入磁盘</span><br><span class="hljs-strong">3. 操作系统交互</span><br><span class="hljs-strong">	1. 无论采用哪种持久化逻辑思想和存储引擎层模型，最终都必须通过操作系统将数据写入物理磁盘。</span><br><span class="hljs-strong">	2. 然而为了提高性能，操作系统引入了页缓存（Page Cache），这意味着应用程序的 `write` 调用默认并不保证数据立即落盘。</span><br><span class="hljs-strong">	3. 因此，必须采用特定机制来确保数据真正写入磁盘，从而保证持久化的可靠性。</span><br><span class="hljs-strong">	4. 得先 write 再 fsync，其实 fsync 就是刷盘，得操作系统调用 fsync，或者我们在某个时刻要求执行 fsync，我们经常说是什么强制，其实就是简单的落盘</span><br><span class="hljs-strong">		1. 强制刷盘（fsync 系统调用）</span><br><span class="hljs-strong">			1. 当需要确保关键数据绝对可靠时（例如 WAL），就要在 `write` 之后调用 `fsync`，将内存中的数据强制写入磁盘。</span><br><span class="hljs-strong">			2. 根据调用 `fsync` 的时机，强制刷盘可分为三类：</span><br><span class="hljs-strong">				1. 同步刷盘</span><br><span class="hljs-strong">					1. 每次写入操作完成后立即调用 `fsync`，确保数据即时落盘</span><br><span class="hljs-strong">				2. 间隔刷盘</span><br><span class="hljs-strong">					1. 定期调用 `fsync`，在一定时间间隔内批量刷盘，以兼顾性能和可靠性</span><br><span class="hljs-strong">				3. 操作系统自由安排</span><br><span class="hljs-strong">					1. 完全依赖操作系统决定何时刷盘，应用程序不显式调用 `fsync`</span><br><span class="hljs-strong">				4. 条件刷盘</span><br><span class="hljs-strong">					1. 根据特定条件刷盘，例如积累 5 个事务后刷盘</span><br><span class="hljs-strong">			3. 需要注意的是：</span><br><span class="hljs-strong">				1. 强制刷盘通常只针对 WAL，而不是数据文件本身。</span><br><span class="hljs-strong">				2. 因为直接强制数据页写盘的代价过高，数据库一般都是先确保 WAL 日志持久化，从而保证数据安全，再由后续机制负责将数据页异步地刷新到磁盘。</span><br><span class="hljs-strong">				3. 所以，以后若提到 “状态持久化” 的 “操作系统交互” 是 “强制刷盘”，默认指的是快照的保存过程采用 “强制刷盘” 策略。</span><br><span class="hljs-strong">				4. 若提到 “操作持久化” 的 “操作系统交互” 是 “强制刷盘”，默认指的是 WAL 的保存过程采用 “强制刷盘” 策略，而不是指数据的刷盘策略</span><br><span class="hljs-strong">		2. 绕过缓存（直接 IO）</span><br><span class="hljs-strong">			1. 这是一种更底层的优化手段，允许应用程序绕过操作系统的页缓存，直接在自身的内存缓冲区和磁盘之间传输数据</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-内存缓冲交互"><a href="#2-内存缓冲交互" class="headerlink" title="2. 内存缓冲交互"></a>2. 内存缓冲交互</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-13.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+<h2 id="3-逻辑组织结构"><a href="#3-逻辑组织结构" class="headerlink" title="3. 逻辑组织结构"></a>3. 逻辑组织结构</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-12.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-2.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>该维度决定了数据在硬盘和内存中的组织形式</li>
+<li>常用组织形式主要包括：<ol>
+<li>树状结构<ol>
+<li>类似于文件系统的树状结构</li>
+</ol>
+</li>
+<li><code>Key-Value</code> 结构<ol>
+<li>分层 <code>Key-Value</code><ol>
+<li><code>Key</code> 具备上下级目录关系，可按照层级进行分组与管理</li>
+</ol>
+</li>
+<li>扁平化 <code>Key-Value</code><ol>
+<li>所有 <code>Key</code> 处在同一层级，不存在目录或层次区分</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 这个维度决定了数据在逻辑上的组织形式<br><span class="hljs-bullet">2.</span> 树状结构<br><span class="hljs-bullet">	1.</span> 类似于文件系统的树状结构<br><span class="hljs-bullet">3.</span> Key-Value 结构<br><span class="hljs-bullet">	1.</span> 分层 Key-Value<br><span class="hljs-bullet">		1.</span> Key 具备上下级目录关系，可按照层级进行分组与管理<br><span class="hljs-bullet">	2.</span> 扁平化 Key-Value<br><span class="hljs-bullet">		1.</span> 所有 Key 处在同一层级，不存在目录或层次区分<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-物理文件管控"><a href="#4-物理文件管控" class="headerlink" title="4. 物理文件管控"></a>4. 物理文件管控</h2><p><img src="/2026/02/08/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemAnalysisModel-15.png" srcset="/img/loading.gif" lazyload></p>
+<hr>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Technology/" class="category-chain-item">Technology</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Basic-Literacy/" class="category-chain-item">Basic Literacy</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Basic-Literacy/Distributed-System-Architecture/" class="category-chain-item">Distributed System Architecture</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Technology/Basic-Literacy/Distributed-System-Architecture/Distributed-System-Analysis-Model/" class="category-chain-item">Distributed System Analysis Model</a>
+  
+  
+
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>笔记：Distributed System Analysis Model</div>
+      <div>https://wangjia5289.github.io/2026/02/08/666/666/笔记：DistributedSystemAnalysisModel/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>知北</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 8, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/02/04/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ADistributedSystemConsistency/" title="笔记：Distributed System Consistency">
+                        <span class="hidden-mobile">笔记：Distributed System Consistency</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  var relativeDate = function() {
+    var updatedTime = document.getElementById('updated-time');
+    if (updatedTime) {
+      var text = updatedTime.textContent;
+      var reg = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2})/;
+      var matchs = text.match(reg);
+      if (matchs) {
+        var relativeTime = moment(matchs[0]).fromNow();
+        updatedTime.textContent = text.replace(reg, relativeTime);
+      }
+      updatedTime.style.display = '';
+    }
+  };
+  Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/moment.min.js', function() {
+    if (!'en'.startsWith('en')) {
+      Fluid.utils.createScript('https://lib.baomitu.com/moment.js/2.29.4/locale/en.min.js', function() {
+        relativeDate();
+      });
+    } else {
+      relativeDate();
+    }
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
