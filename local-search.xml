@@ -254,31 +254,6 @@
   
   
   <entry>
-    <title>笔记：Glob Pattern</title>
-    <link href="/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/"/>
-    <url>/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/30/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/">http://blog.wangjia.ink/2026/01/30/笔记：GlobPattern/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、Glob-Pattern-概述"><a href="#三、Glob-Pattern-概述" class="headerlink" title="三、Glob Pattern 概述"></a>三、Glob Pattern 概述</h1><blockquote><p>[!NOTE] 注意事项</p><ol><li>由于（现在、很多）的厂商已经不再严格的区分（<code>Glob Pattern</code>、<code>Ant-Style Path Pattern</code>）了。所以我们可以简单的理解为：<code>Ant-Style Path Pattern</code> 就是广义上的 <code>Glob Pattern</code></li></ol></blockquote><hr><h1 id="四、Glob-Pattern-匹配规则"><a href="#四、Glob-Pattern-匹配规则" class="headerlink" title="四、Glob Pattern 匹配规则"></a>四、Glob Pattern 匹配规则</h1><ol><li><code>？</code><ol><li>用于匹配单个路径段中的单个字符</li><li>例如：<code>/d?mo/test ➔ /demo/test</code></li><li>需要注意的是：<ol><li>路径段是指：<code>/.../</code></li></ol></li></ol></li><li><code>*</code><ol><li>用于匹配单个路径段中的（零 <code>||</code> 单 <code>||</code> 多）个字符</li><li>例如：<code>/demo/* ➔ /demo/test</code></li></ol></li></ol><hr>]]></content>
-    
-    
-    <categories>
-      
-      <category>Technology</category>
-      
-      <category>Basic Literacy</category>
-      
-      <category>Pattern Matching</category>
-      
-      <category>Glob Pattern</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>笔记：JSON Language Specification</title>
     <link href="/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AJSONLanguageSpecification/"/>
     <url>/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AJSONLanguageSpecification/</url>
@@ -295,6 +270,31 @@
       <category>Language Specification</category>
       
       <category>JSON Language Specification</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>笔记：Glob Pattern</title>
+    <link href="/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/"/>
+    <url>/2026/01/30/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/30/%E7%AC%94%E8%AE%B0%EF%BC%9AGlobPattern/">http://blog.wangjia.ink/2026/01/30/笔记：GlobPattern/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、Glob-Pattern-概述"><a href="#三、Glob-Pattern-概述" class="headerlink" title="三、Glob Pattern 概述"></a>三、Glob Pattern 概述</h1><blockquote><p>[!NOTE] 注意事项</p><ol><li>由于（现在、很多）的厂商已经不再严格的区分（<code>Glob Pattern</code>、<code>Ant-Style Path Pattern</code>）了。所以我们可以简单的理解为：<code>Ant-Style Path Pattern</code> 就是广义上的 <code>Glob Pattern</code></li></ol></blockquote><hr><h1 id="四、Glob-Pattern-匹配规则"><a href="#四、Glob-Pattern-匹配规则" class="headerlink" title="四、Glob Pattern 匹配规则"></a>四、Glob Pattern 匹配规则</h1><ol><li><code>？</code><ol><li>用于匹配单个路径段中的单个字符</li><li>例如：<code>/d?mo/test ➔ /demo/test</code></li><li>需要注意的是：<ol><li>路径段是指：<code>/.../</code></li></ol></li></ol></li><li><code>*</code><ol><li>用于匹配单个路径段中的（零 <code>||</code> 单 <code>||</code> 多）个字符</li><li>例如：<code>/demo/* ➔ /demo/test</code></li></ol></li></ol><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>Technology</category>
+      
+      <category>Basic Literacy</category>
+      
+      <category>Pattern Matching</category>
+      
+      <category>Glob Pattern</category>
       
     </categories>
     
@@ -379,35 +379,6 @@
   
   
   <entry>
-    <title>笔记：Spring Data Reactive Redis</title>
-    <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/"/>
-    <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis/">http://blog.wangjia.ink/2026/01/29/笔记：SpringDataReactiveRedis/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、正文"><a href="#三、正文" class="headerlink" title="三、正文"></a>三、正文</h1><p>详见笔记：<code>REmote DIctionary Server</code></p><ol><li><code>Obsidian</code> 内部链接：<ol><li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer.md">笔记：REmoteDIctionaryServer</a></li></ol></li><li><code>Hexo Blog</code> 链接：<ol><li><a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/">http://blog.wangjia.ink/2026/01/29/笔记：REmoteDIctionaryServer/</a></li></ol></li></ol><hr>]]></content>
-    
-    
-    <categories>
-      
-      <category>Java Ecosystem</category>
-      
-      <category>Java Application Framework</category>
-      
-      <category>Spring Framework</category>
-      
-      <category>Spring Boot Starter</category>
-      
-      <category>NoSQL</category>
-      
-      <category>Spring Data Reactive Redis</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>笔记：Spring Data Redis</title>
     <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataRedis%EF%BC%88SBS%EF%BC%89/"/>
     <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataRedis%EF%BC%88SBS%EF%BC%89/</url>
@@ -428,6 +399,35 @@
       <category>NoSQL</category>
       
       <category>Spring Data Redis</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>笔记：Spring Data Reactive Redis</title>
+    <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/"/>
+    <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis/">http://blog.wangjia.ink/2026/01/29/笔记：SpringDataReactiveRedis/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、正文"><a href="#三、正文" class="headerlink" title="三、正文"></a>三、正文</h1><p>详见笔记：<code>REmote DIctionary Server</code></p><ol><li><code>Obsidian</code> 内部链接：<ol><li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer.md">笔记：REmoteDIctionaryServer</a></li></ol></li><li><code>Hexo Blog</code> 链接：<ol><li><a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/">http://blog.wangjia.ink/2026/01/29/笔记：REmoteDIctionaryServer/</a></li></ol></li></ol><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java Ecosystem</category>
+      
+      <category>Java Application Framework</category>
+      
+      <category>Spring Framework</category>
+      
+      <category>Spring Boot Starter</category>
+      
+      <category>NoSQL</category>
+      
+      <category>Spring Data Reactive Redis</category>
       
     </categories>
     
