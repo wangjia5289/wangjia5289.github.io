@@ -225,6 +225,31 @@
   
   
   <entry>
+    <title>笔记：Ant-Style Path Pattern</title>
+    <link href="/2026/01/31/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/"/>
+    <url>/2026/01/31/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/31/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/">http://blog.wangjia.ink/2026/01/31/笔记：Ant-StylePathPattern/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、Ant-Style-Path-Pattern-匹配规则"><a href="#三、Ant-Style-Path-Pattern-匹配规则" class="headerlink" title="三、Ant-Style Path Pattern 匹配规则"></a>三、Ant-Style Path Pattern 匹配规则</h1><ol><li><code>？</code><ol><li>用于匹配单个路径段中的单个字符</li><li>例如：<code>/d?mo/test ➔ /demo/test</code><ol><li>需要注意的是：<ol><li>路径段是指：<code>/.../</code></li></ol></li></ol></li></ol></li><li><code>*</code><ol><li>用于匹配单个路径段中的（零 <code>||</code> 单 <code>||</code> 多）个字符</li><li>例如：<code>/demo/* ➔ /demo/test</code></li></ol></li><li><code>**</code><ol><li>用于匹配（零 <code>||</code> 多）个路径段</li><li>例如：<code>/demo/** ➔ /demo/test/xyz</code></li><li>需要注意的是：<ol><li><code>/demo/tes** ≈ /demo/tes* ➔ /demo/test</code></li></ol></li></ol></li></ol><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>Technology</category>
+      
+      <category>Basic Literacy</category>
+      
+      <category>Pattern Matching</category>
+      
+      <category>Ant-Style Path Pattern</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>笔记：SOLID</title>
     <link href="/2026/01/31/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ASOLID/"/>
     <url>/2026/01/31/666/666/%E7%AC%94%E8%AE%B0%EF%BC%9ASOLID/</url>
@@ -245,31 +270,6 @@
       <category>Software Design Principle</category>
       
       <category>SOLID</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>笔记：Ant-Style Path Pattern</title>
-    <link href="/2026/01/31/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/"/>
-    <url>/2026/01/31/666/%E7%AC%94%E8%AE%B0%EF%BC%9AGangofFourDesignPattern/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/31/%E7%AC%94%E8%AE%B0%EF%BC%9AAnt-StylePathPattern/">http://blog.wangjia.ink/2026/01/31/笔记：Ant-StylePathPattern/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、Ant-Style-Path-Pattern-匹配规则"><a href="#三、Ant-Style-Path-Pattern-匹配规则" class="headerlink" title="三、Ant-Style Path Pattern 匹配规则"></a>三、Ant-Style Path Pattern 匹配规则</h1><ol><li><code>？</code><ol><li>用于匹配单个路径段中的单个字符</li><li>例如：<code>/d?mo/test ➔ /demo/test</code><ol><li>需要注意的是：<ol><li>路径段是指：<code>/.../</code></li></ol></li></ol></li></ol></li><li><code>*</code><ol><li>用于匹配单个路径段中的（零 <code>||</code> 单 <code>||</code> 多）个字符</li><li>例如：<code>/demo/* ➔ /demo/test</code></li></ol></li><li><code>**</code><ol><li>用于匹配（零 <code>||</code> 多）个路径段</li><li>例如：<code>/demo/** ➔ /demo/test/xyz</code></li><li>需要注意的是：<ol><li><code>/demo/tes** ≈ /demo/tes* ➔ /demo/test</code></li></ol></li></ol></li></ol><hr>]]></content>
-    
-    
-    <categories>
-      
-      <category>Technology</category>
-      
-      <category>Basic Literacy</category>
-      
-      <category>Pattern Matching</category>
-      
-      <category>Ant-Style Path Pattern</category>
       
     </categories>
     
@@ -400,35 +400,6 @@
   
   
   <entry>
-    <title>笔记：REmote DIctionary Server</title>
-    <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/"/>
-    <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/">http://blog.wangjia.ink/2026/01/29/笔记：REmoteDIctionaryServer/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、REmote-DIctionary-Server-基础知识"><a href="#三、REmote-DIctionary-Server-基础知识" class="headerlink" title="三、REmote DIctionary Server 基础知识"></a>三、REmote DIctionary Server 基础知识</h1><hr><h1 id="四、REmote-DIctionary-Server-环境搭建"><a href="#四、REmote-DIctionary-Server-环境搭建" class="headerlink" title="四、REmote DIctionary Server 环境搭建"></a>四、REmote DIctionary Server 环境搭建</h1><hr><h1 id="五、REmote-DIctionary-Server-相关配置"><a href="#五、REmote-DIctionary-Server-相关配置" class="headerlink" title="五、REmote DIctionary Server 相关配置"></a>五、REmote DIctionary Server 相关配置</h1><hr><h1 id="六、REmote-DIctionary-Server-相关工具"><a href="#六、REmote-DIctionary-Server-相关工具" class="headerlink" title="六、REmote DIctionary Server 相关工具"></a>六、REmote DIctionary Server 相关工具</h1><hr><h1 id="七、REmote-DIctionary-Server-业务处理"><a href="#七、REmote-DIctionary-Server-业务处理" class="headerlink" title="七、REmote DIctionary Server 业务处理"></a>七、REmote DIctionary Server 业务处理</h1><hr><h1 id="八、Jedis"><a href="#八、Jedis" class="headerlink" title="八、Jedis"></a>八、Jedis</h1><h2 id="Jedis-IO-工作模式"><a href="#Jedis-IO-工作模式" class="headerlink" title="Jedis IO 工作模式"></a>Jedis IO 工作模式</h2><p><code>Jedis</code> 的 <code>IO</code> 工作模式是：同步阻塞 <code>IO</code> 工作模式</p><hr><h2 id="Jedis-底层原理"><a href="#Jedis-底层原理" class="headerlink" title="Jedis 底层原理"></a>Jedis 底层原理</h2><p><code>Jedis</code> 的底层原理是：</p><ol><li>基于 <code>Java BIO</code> 库</li></ol><hr><h1 id="九、Lettuce"><a href="#九、Lettuce" class="headerlink" title="九、Lettuce"></a>九、Lettuce</h1><h2 id="Lettuce-IO-工作模式"><a href="#Lettuce-IO-工作模式" class="headerlink" title="Lettuce IO 工作模式"></a>Lettuce IO 工作模式</h2><p><code>Lettuce</code> 的 <code>IO</code> 工作模式是：同步非阻塞 <code>IO</code> 工作模式</p><hr><h2 id="Lettuce-底层原理"><a href="#Lettuce-底层原理" class="headerlink" title="Lettuce 底层原理"></a>Lettuce 底层原理</h2><p><code>Lettuce</code> 的底层原理是：</p><ol><li>使用 <code>Reactor</code> 设计模式</li><li>遵循 <code>Reactive Streams</code> 规范</li><li>基于 （<code>Java NIO</code>、<code>Project Reactor</code>）库</li></ol><hr><h1 id="十、Redisson"><a href="#十、Redisson" class="headerlink" title="十、Redisson"></a>十、Redisson</h1><hr><h1 id="十一、Redisson-Spring"><a href="#十一、Redisson-Spring" class="headerlink" title="十一、Redisson Spring"></a>十一、Redisson Spring</h1><hr><h1 id="十二、Spring-Data-Redis"><a href="#十二、Spring-Data-Redis" class="headerlink" title="十二、Spring Data Redis"></a>十二、Spring Data Redis</h1><hr><h1 id="十三、Spring-Data-Redis-Reactive"><a href="#十三、Spring-Data-Redis-Reactive" class="headerlink" title="十三、Spring Data Redis Reactive"></a>十三、Spring Data Redis Reactive</h1><hr>]]></content>
-    
-    
-    <categories>
-      
-      <category>Technology</category>
-      
-      <category>Middleware</category>
-      
-      <category>Database Management System</category>
-      
-      <category>Database Management System Implementation</category>
-      
-      <category>Non-Relational Database Management System</category>
-      
-      <category>REmote DIctionary Server</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>笔记：Spring Data Reactive Redis</title>
     <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/"/>
     <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ASpringDataReactiveRedis%EF%BC%88SBS%EF%BC%89/</url>
@@ -449,6 +420,35 @@
       <category>NoSQL</category>
       
       <category>Spring Data Reactive Redis</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>笔记：REmote DIctionary Server</title>
+    <link href="/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/"/>
+    <url>/2026/01/29/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind</p></li><li><p>Edraw</p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/29/%E7%AC%94%E8%AE%B0%EF%BC%9AREmoteDIctionaryServer/">http://blog.wangjia.ink/2026/01/29/笔记：REmoteDIctionaryServer/</a></p></li><li><p>Interview Handbook Address<br>👉</p></li></ol><hr><h1 id="三、REmote-DIctionary-Server-基础知识"><a href="#三、REmote-DIctionary-Server-基础知识" class="headerlink" title="三、REmote DIctionary Server 基础知识"></a>三、REmote DIctionary Server 基础知识</h1><hr><h1 id="四、REmote-DIctionary-Server-环境搭建"><a href="#四、REmote-DIctionary-Server-环境搭建" class="headerlink" title="四、REmote DIctionary Server 环境搭建"></a>四、REmote DIctionary Server 环境搭建</h1><hr><h1 id="五、REmote-DIctionary-Server-相关配置"><a href="#五、REmote-DIctionary-Server-相关配置" class="headerlink" title="五、REmote DIctionary Server 相关配置"></a>五、REmote DIctionary Server 相关配置</h1><hr><h1 id="六、REmote-DIctionary-Server-相关工具"><a href="#六、REmote-DIctionary-Server-相关工具" class="headerlink" title="六、REmote DIctionary Server 相关工具"></a>六、REmote DIctionary Server 相关工具</h1><hr><h1 id="七、REmote-DIctionary-Server-业务处理"><a href="#七、REmote-DIctionary-Server-业务处理" class="headerlink" title="七、REmote DIctionary Server 业务处理"></a>七、REmote DIctionary Server 业务处理</h1><hr><h1 id="八、Jedis"><a href="#八、Jedis" class="headerlink" title="八、Jedis"></a>八、Jedis</h1><h2 id="Jedis-IO-工作模式"><a href="#Jedis-IO-工作模式" class="headerlink" title="Jedis IO 工作模式"></a>Jedis IO 工作模式</h2><p><code>Jedis</code> 的 <code>IO</code> 工作模式是：同步阻塞 <code>IO</code> 工作模式</p><hr><h2 id="Jedis-底层原理"><a href="#Jedis-底层原理" class="headerlink" title="Jedis 底层原理"></a>Jedis 底层原理</h2><p><code>Jedis</code> 的底层原理是：</p><ol><li>基于 <code>Java BIO</code> 库</li></ol><hr><h1 id="九、Lettuce"><a href="#九、Lettuce" class="headerlink" title="九、Lettuce"></a>九、Lettuce</h1><h2 id="Lettuce-IO-工作模式"><a href="#Lettuce-IO-工作模式" class="headerlink" title="Lettuce IO 工作模式"></a>Lettuce IO 工作模式</h2><p><code>Lettuce</code> 的 <code>IO</code> 工作模式是：同步非阻塞 <code>IO</code> 工作模式</p><hr><h2 id="Lettuce-底层原理"><a href="#Lettuce-底层原理" class="headerlink" title="Lettuce 底层原理"></a>Lettuce 底层原理</h2><p><code>Lettuce</code> 的底层原理是：</p><ol><li>使用 <code>Reactor</code> 设计模式</li><li>遵循 <code>Reactive Streams</code> 规范</li><li>基于 （<code>Java NIO</code>、<code>Project Reactor</code>）库</li></ol><hr><h1 id="十、Redisson"><a href="#十、Redisson" class="headerlink" title="十、Redisson"></a>十、Redisson</h1><hr><h1 id="十一、Redisson-Spring"><a href="#十一、Redisson-Spring" class="headerlink" title="十一、Redisson Spring"></a>十一、Redisson Spring</h1><hr><h1 id="十二、Spring-Data-Redis"><a href="#十二、Spring-Data-Redis" class="headerlink" title="十二、Spring Data Redis"></a>十二、Spring Data Redis</h1><hr><h1 id="十三、Spring-Data-Redis-Reactive"><a href="#十三、Spring-Data-Redis-Reactive" class="headerlink" title="十三、Spring Data Redis Reactive"></a>十三、Spring Data Redis Reactive</h1><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>Technology</category>
+      
+      <category>Middleware</category>
+      
+      <category>Database Management System</category>
+      
+      <category>Database Management System Implementation</category>
+      
+      <category>Non-Relational Database Management System</category>
+      
+      <category>REmote DIctionary Server</category>
       
     </categories>
     
@@ -487,31 +487,6 @@
   
   
   <entry>
-    <title>笔记：Java IO</title>
-    <link href="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/"/>
-    <url>/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/</url>
-    
-    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind<br><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO.xmind"></p></li><li><p>Edraw<br><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO.eddx"></p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/">http://blog.wangjia.ink/2026/01/23/笔记：JavaIO/</a></p></li><li><p>Interview Handbook Address<br>👉 <a href="https://www.notion.so/Java-IO-2f1974fbda5e801e8ec6e3e036f24717?source=copy_link">https://www.notion.so/Java-IO-2f1974fbda5e801e8ec6e3e036f24717?source=copy_link</a></p></li></ol><hr><h1 id="三、IO"><a href="#三、IO" class="headerlink" title="三、IO"></a>三、IO</h1><h2 id="1-前置基础：用户空间与内核空间"><a href="#1-前置基础：用户空间与内核空间" class="headerlink" title="1. 前置基础：用户空间与内核空间"></a>1. 前置基础：用户空间与内核空间</h2><hr><h2 id="2-IO-概述"><a href="#2-IO-概述" class="headerlink" title="2. IO 概述"></a>2. IO 概述</h2><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-4.png"></p><hr><h2 id="3-IO-工作模式"><a href="#3-IO-工作模式" class="headerlink" title="3. IO 工作模式"></a>3. IO 工作模式</h2><ol><li>同步阻塞 <code>IO</code> 工作模式</li><li>同步非阻塞 <code>IO</code> 工作模式</li><li>异步非阻塞 <code>IO</code> 工作模式</li></ol><h3 id="3-1-同步阻塞-IO-工作模式"><a href="#3-1-同步阻塞-IO-工作模式" class="headerlink" title="3.1. 同步阻塞 IO 工作模式"></a>3.1. 同步阻塞 IO 工作模式</h3><h4 id="3-1-1-📄相关流程"><a href="#3-1-1-📄相关流程" class="headerlink" title="3.1.1. 📄相关流程"></a>3.1.1. 📄相关流程</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-1.png"></p><hr><h4 id="3-1-2-📄的客户端的实现思路"><a href="#3-1-2-📄的客户端的实现思路" class="headerlink" title="3.1.2. 📄的客户端的实现思路"></a>3.1.2. 📄的客户端的实现思路</h4><hr><h4 id="3-1-3-📄的服务端的实现思路"><a href="#3-1-3-📄的服务端的实现思路" class="headerlink" title="3.1.3. 📄的服务端的实现思路"></a>3.1.3. 📄的服务端的实现思路</h4><hr><h3 id="3-2-同步非阻塞-IO-工作模式"><a href="#3-2-同步非阻塞-IO-工作模式" class="headerlink" title="3.2. 同步非阻塞 IO 工作模式"></a>3.2. 同步非阻塞 IO 工作模式</h3><h4 id="3-2-1-📄相关流程"><a href="#3-2-1-📄相关流程" class="headerlink" title="3.2.1. 📄相关流程"></a>3.2.1. 📄相关流程</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-2.png"></p><hr><h4 id="3-2-2-📄的客户端的实现思路"><a href="#3-2-2-📄的客户端的实现思路" class="headerlink" title="3.2.2. 📄的客户端的实现思路"></a>3.2.2. 📄的客户端的实现思路</h4><hr><h4 id="3-2-3-📄的服务端的实现思路"><a href="#3-2-3-📄的服务端的实现思路" class="headerlink" title="3.2.3. 📄的服务端的实现思路"></a>3.2.3. 📄的服务端的实现思路</h4><h5 id="实现思路一"><a href="#实现思路一" class="headerlink" title="实现思路一"></a>实现思路一</h5><hr><h4 id="3-2-4-补充相关：IO-多路复用"><a href="#3-2-4-补充相关：IO-多路复用" class="headerlink" title="3.2.4. 补充相关：IO 多路复用"></a>3.2.4. 补充相关：IO 多路复用</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-3.png"></p><hr><h3 id="3-3-异步非阻塞-IO-工作模式"><a href="#3-3-异步非阻塞-IO-工作模式" class="headerlink" title="3.3. 异步非阻塞 IO 工作模式"></a>3.3. 异步非阻塞 IO 工作模式</h3><h4 id="3-3-1-📄相关流程"><a href="#3-3-1-📄相关流程" class="headerlink" title="3.3.1. 📄相关流程"></a>3.3.1. 📄相关流程</h4><hr><h2 id="4-IO-设计模式"><a href="#4-IO-设计模式" class="headerlink" title="4. IO 设计模式"></a>4. IO 设计模式</h2><p>详见笔记：<code>IO Design Pattern</code></p><ol><li><code>Obsidian</code> 内部链接：<ol><li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ADesignPattern.md">笔记：DesignPattern</a></li></ol></li><li><code>Hexo Blog</code> 链接：<ol><li><a href="http://blog.wangjia.ink/2026/01/23/%E7%AC%94%E8%AE%B0%EF%BC%9AIODesignPattern/">http://blog.wangjia.ink/2026/01/23/笔记：IODesignPattern/</a></li></ol></li></ol><hr><h1 id="四、Java-IO"><a href="#四、Java-IO" class="headerlink" title="四、Java IO"></a>四、Java IO</h1><h2 id="1-Java-IO-概述"><a href="#1-Java-IO-概述" class="headerlink" title="1. Java IO 概述"></a>1. Java IO 概述</h2><hr><h2 id="2-Java-IO-相关分类"><a href="#2-Java-IO-相关分类" class="headerlink" title="2. Java IO 相关分类"></a>2. Java IO 相关分类</h2><ol><li><code>Java BIO</code></li><li><code>Java NIO</code></li><li><code>Java AIO</code></li></ol><h3 id="2-1-Java-BIO"><a href="#2-1-Java-BIO" class="headerlink" title="2.1. Java BIO"></a>2.1. Java BIO</h3><hr><h3 id="2-2-Java-NIO"><a href="#2-2-Java-NIO" class="headerlink" title="2.2. Java NIO"></a>2.2. Java NIO</h3><hr><h3 id="2-3-Java-AIO"><a href="#2-3-Java-AIO" class="headerlink" title="2.3. Java AIO"></a>2.3. Java AIO</h3><hr>]]></content>
-    
-    
-    <categories>
-      
-      <category>Technology</category>
-      
-      <category>Java Ecosystem</category>
-      
-      <category>Java Fundamental</category>
-      
-      <category>Java IO</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>笔记：Design Pattern</title>
     <link href="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ADesignPattern/"/>
     <url>/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9ADesignPattern/</url>
@@ -528,6 +503,31 @@
       <category>Design Pattern</category>
       
       <category>Design Pattern</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>笔记：Java IO</title>
+    <link href="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/"/>
+    <url>/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/</url>
+    
+    <content type="html"><![CDATA[<h1 id="一、TODO"><a href="#一、TODO" class="headerlink" title="一、TODO"></a>一、TODO</h1><hr><h1 id="二、脑图"><a href="#二、脑图" class="headerlink" title="二、脑图"></a>二、脑图</h1><ol><li><p>Xmind<br><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO.xmind"></p></li><li><p>Edraw<br><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO.eddx"></p></li><li><p>Hexo Address<br>👉 <a href="http://blog.wangjia.ink/2026/01/23/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/">http://blog.wangjia.ink/2026/01/23/笔记：JavaIO/</a></p></li><li><p>Interview Handbook Address<br>👉 <a href="https://www.notion.so/Java-IO-2f1974fbda5e801e8ec6e3e036f24717?source=copy_link">https://www.notion.so/Java-IO-2f1974fbda5e801e8ec6e3e036f24717?source=copy_link</a></p></li></ol><hr><h1 id="三、IO"><a href="#三、IO" class="headerlink" title="三、IO"></a>三、IO</h1><h2 id="1-前置基础：用户空间与内核空间"><a href="#1-前置基础：用户空间与内核空间" class="headerlink" title="1. 前置基础：用户空间与内核空间"></a>1. 前置基础：用户空间与内核空间</h2><hr><h2 id="2-IO-概述"><a href="#2-IO-概述" class="headerlink" title="2. IO 概述"></a>2. IO 概述</h2><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-4.png"></p><hr><h2 id="3-IO-工作模式"><a href="#3-IO-工作模式" class="headerlink" title="3. IO 工作模式"></a>3. IO 工作模式</h2><ol><li>同步阻塞 <code>IO</code> 工作模式</li><li>同步非阻塞 <code>IO</code> 工作模式</li><li>异步非阻塞 <code>IO</code> 工作模式</li></ol><h3 id="3-1-同步阻塞-IO-工作模式"><a href="#3-1-同步阻塞-IO-工作模式" class="headerlink" title="3.1. 同步阻塞 IO 工作模式"></a>3.1. 同步阻塞 IO 工作模式</h3><h4 id="3-1-1-📄相关流程"><a href="#3-1-1-📄相关流程" class="headerlink" title="3.1.1. 📄相关流程"></a>3.1.1. 📄相关流程</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-1.png"></p><hr><h4 id="3-1-2-📄的客户端的实现思路"><a href="#3-1-2-📄的客户端的实现思路" class="headerlink" title="3.1.2. 📄的客户端的实现思路"></a>3.1.2. 📄的客户端的实现思路</h4><hr><h4 id="3-1-3-📄的服务端的实现思路"><a href="#3-1-3-📄的服务端的实现思路" class="headerlink" title="3.1.3. 📄的服务端的实现思路"></a>3.1.3. 📄的服务端的实现思路</h4><hr><h3 id="3-2-同步非阻塞-IO-工作模式"><a href="#3-2-同步非阻塞-IO-工作模式" class="headerlink" title="3.2. 同步非阻塞 IO 工作模式"></a>3.2. 同步非阻塞 IO 工作模式</h3><h4 id="3-2-1-📄相关流程"><a href="#3-2-1-📄相关流程" class="headerlink" title="3.2.1. 📄相关流程"></a>3.2.1. 📄相关流程</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-2.png"></p><hr><h4 id="3-2-2-📄的客户端的实现思路"><a href="#3-2-2-📄的客户端的实现思路" class="headerlink" title="3.2.2. 📄的客户端的实现思路"></a>3.2.2. 📄的客户端的实现思路</h4><hr><h4 id="3-2-3-📄的服务端的实现思路"><a href="#3-2-3-📄的服务端的实现思路" class="headerlink" title="3.2.3. 📄的服务端的实现思路"></a>3.2.3. 📄的服务端的实现思路</h4><h5 id="实现思路一"><a href="#实现思路一" class="headerlink" title="实现思路一"></a>实现思路一</h5><hr><h4 id="3-2-4-补充相关：IO-多路复用"><a href="#3-2-4-补充相关：IO-多路复用" class="headerlink" title="3.2.4. 补充相关：IO 多路复用"></a>3.2.4. 补充相关：IO 多路复用</h4><p><img src="/2026/01/23/666/%E7%AC%94%E8%AE%B0%EF%BC%9AIdentityAndAccessManagement/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO/%E7%AC%94%E8%AE%B0%EF%BC%9AJavaIO-3.png"></p><hr><h3 id="3-3-异步非阻塞-IO-工作模式"><a href="#3-3-异步非阻塞-IO-工作模式" class="headerlink" title="3.3. 异步非阻塞 IO 工作模式"></a>3.3. 异步非阻塞 IO 工作模式</h3><h4 id="3-3-1-📄相关流程"><a href="#3-3-1-📄相关流程" class="headerlink" title="3.3.1. 📄相关流程"></a>3.3.1. 📄相关流程</h4><hr><h2 id="4-IO-设计模式"><a href="#4-IO-设计模式" class="headerlink" title="4. IO 设计模式"></a>4. IO 设计模式</h2><p>详见笔记：<code>IO Design Pattern</code></p><ol><li><code>Obsidian</code> 内部链接：<ol><li><a href="%E7%AC%94%E8%AE%B0%EF%BC%9ADesignPattern.md">笔记：DesignPattern</a></li></ol></li><li><code>Hexo Blog</code> 链接：<ol><li><a href="http://blog.wangjia.ink/2026/01/23/%E7%AC%94%E8%AE%B0%EF%BC%9AIODesignPattern/">http://blog.wangjia.ink/2026/01/23/笔记：IODesignPattern/</a></li></ol></li></ol><hr><h1 id="四、Java-IO"><a href="#四、Java-IO" class="headerlink" title="四、Java IO"></a>四、Java IO</h1><h2 id="1-Java-IO-概述"><a href="#1-Java-IO-概述" class="headerlink" title="1. Java IO 概述"></a>1. Java IO 概述</h2><hr><h2 id="2-Java-IO-相关分类"><a href="#2-Java-IO-相关分类" class="headerlink" title="2. Java IO 相关分类"></a>2. Java IO 相关分类</h2><ol><li><code>Java BIO</code></li><li><code>Java NIO</code></li><li><code>Java AIO</code></li></ol><h3 id="2-1-Java-BIO"><a href="#2-1-Java-BIO" class="headerlink" title="2.1. Java BIO"></a>2.1. Java BIO</h3><hr><h3 id="2-2-Java-NIO"><a href="#2-2-Java-NIO" class="headerlink" title="2.2. Java NIO"></a>2.2. Java NIO</h3><hr><h3 id="2-3-Java-AIO"><a href="#2-3-Java-AIO" class="headerlink" title="2.3. Java AIO"></a>2.3. Java AIO</h3><hr>]]></content>
+    
+    
+    <categories>
+      
+      <category>Technology</category>
+      
+      <category>Java Ecosystem</category>
+      
+      <category>Java Fundamental</category>
+      
+      <category>Java IO</category>
       
     </categories>
     
